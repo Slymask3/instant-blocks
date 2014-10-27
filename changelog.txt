@@ -63,13 +63,13 @@ v1.3.4 (13/05/2013)
 v1.3.3 (10/05/2013)
 - Made the mod universal.
 - Changed properties file with a more advanced config file.
-- Added ability for the InstantBlocks to be generated into bonus chest, dungeon chests, mineshaft chests, stronghold chests, temple chests, and village chests.
+- Added ability for the InstantBlocks to be generated into the bonus chest, dungeon chests, mineshaft chests, stronghold chests, temple chests, and village chests.
 
 v1.3.2 (04/05/2013)
 - Updated to Minecraft 1.5.2.
 
 v1.3.1 (30/04/2013)
-- Added an InstantHouse creative tab.
+- Added an InstantBlocks creative tab.
 - Fixed all the shapeless recipes to shaped.
 
 v1.3 (27/04/2013)
@@ -77,7 +77,7 @@ v1.3 (27/04/2013)
 - Re-coded with Forge.
 - Removed all previous InstantHouses.
 - Added 7 new InstantBlocks.
-- Changed name to "InstantBlocks".
+- Changed the name of the mod from "InstantHouse" to "InstantBlocks".
 
 v1.2.1 (09/03/2012)
 - Fixed crafting bug.
@@ -106,7 +106,7 @@ v0.9 (25/09/2011)
 
 v0.8 (19/09/2011)
 - Changed Glass Blocks to Glass Panes.
-- Added Instant Stone Brick House.
+- Added Instant Stonebrick House.
 
 v0.7 (18/08/2011)
 - Updated to Minecraft Beta 1.8.1.
@@ -120,14 +120,16 @@ v0.5 (30/07/2011)
 - Every InstantHouse Block is now Explosion Proof.
 
 v0.4 (22/07/2011)
-- Added Sandstone and Cobblestone Houses.
+- Added Instant Sandstone House.
+- Added Instant Cobblesone House.
 
 v0.3 (20/07/2011)
 - Added Textures for each of the InstantHouses.
 - Made it reversible by breaking the block.
 
 v0.2 (10/07/2011)
-- Added Stone House, and Brick House.
+- Added Instant Stone House
+- Added Instant Brick House.
 
 v0.1 (09/07/2011)
 - Mod created.
