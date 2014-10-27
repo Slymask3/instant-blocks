@@ -1,9 +1,9 @@
 Instant Blocks
 =============
-Description: Instant Blocks mod for Minecraft.
+<b>Description:</b> Instant Blocks mod for Minecraft.
 
-Mod Version: 1.5
+<b>Author:</b> Slymask3
 
-Minecraft Version 1.7.10
+<b>Mod Version:</b> 1.5
 
-Author: Slymask3
+<b>Minecraft Version:</b> 1.7.10
