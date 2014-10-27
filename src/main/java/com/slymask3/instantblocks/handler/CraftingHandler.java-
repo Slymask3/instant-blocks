@@ -1,0 +1,44 @@
+package instantblocks;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import cpw.mods.fml.common.ICraftingHandler;
+
+public class CraftingHandler implements ICraftingHandler {
+	InstantBlocks ib = new InstantBlocks();
+	
+	@Override
+	public void onCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix) {
+		/*if (item.itemID == ib.ibWandWood.itemID) {
+			player.triggerAchievement(ib.achWand);
+		}
+		
+		if (item.itemID == ib.ibWandStone.itemID) {
+			player.triggerAchievement(ib.achWand);
+		}
+		
+		if (item.itemID == ib.ibWandIron.itemID) {
+			player.triggerAchievement(ib.achWand);
+		}
+		
+		if (item.itemID == ib.ibWandGold.itemID) {
+			player.triggerAchievement(ib.achWand);
+		}
+		
+		if (item.itemID == ib.ibWandDiamond.itemID) {
+			player.triggerAchievement(ib.achWand);
+		}*/
+	}
+
+	@Override
+	public void onSmelting(EntityPlayer player, ItemStack item) {
+		/*
+		 * if (item.itemID == Item.ingotGold.itemID)
+		 * {
+		 * 		player.addStat(AchievementMod.Tutorial, 1);
+		 * }
+		 */
+	}
+}
