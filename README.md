@@ -1,8 +1,8 @@
-Instant Blocks
+Instant Blocks Mod
 =============
-<b>Description:</b> Instant Blocks mod for Minecraft.
+<b>Description:</b> Adds blocks that generate certain structures when activated.
 
-<b>Author:</b> Slymask3
+<b>Forum Post:</b> http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1289100
 
 <b>Mod Version:</b> 1.5
 
