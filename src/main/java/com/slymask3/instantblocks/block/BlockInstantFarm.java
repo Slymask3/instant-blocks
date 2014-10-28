@@ -24,6 +24,7 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantFarm extends BlockDirectionalIB {
@@ -72,7 +73,7 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			} else {
-				BuildHelper.msg(player, BuildHelper.wandReq, Colors.c);
+				BuildHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}
@@ -87,13 +88,13 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 		BuildHelper.effectFull(world, "reddust", x, y, z);
 		
 		if (r == 0) {
-			BuildHelper.msg(player, BuildHelper.farmCreateP, Colors.a);
+			BuildHelper.msg(player, Strings.farmCreateP, Colors.a);
 			//player.triggerAchievement(ib.achFarm3);
 		} else if (r == 1) {
-			BuildHelper.msg(player, BuildHelper.farmCreateC, Colors.a);
+			BuildHelper.msg(player, Strings.farmCreateC, Colors.a);
 			//player.triggerAchievement(ib.achFarm2);
 		} else {
-			BuildHelper.msg(player, BuildHelper.farmCreateW, Colors.a);
+			BuildHelper.msg(player, Strings.farmCreateW, Colors.a);
 			//player.triggerAchievement(ib.achFarm);
 		}
 		

@@ -1,6 +1,5 @@
 package com.slymask3.instantblocks.block;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -11,7 +10,6 @@ import javax.imageio.ImageIO;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -31,18 +29,12 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.tileentity.TileEntityColor;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
-import com.slymask3.instantblocks.utility.ColorHelper;
 import com.slymask3.instantblocks.utility.BuildHelper;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 public class BlockInstantStatue extends BlockContainer {
-	private static BuildHelper ibf = new BuildHelper();
-	private static ConfigurationHandler config = new ConfigurationHandler();
-	private InstantBlocks ib = new InstantBlocks();
-	private static ModBlocks mb = new ModBlocks();
-	private static ModItems mi = new ModItems();
 	
 	public static String username = "";
 	public static EntityPlayer player;
@@ -168,16 +160,16 @@ public class BlockInstantStatue extends BlockContainer {
 		
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (config.useWands == true) {
-			if (is != null && (is.getItem() == mi.ibWandWood || is.getItem() == mi.ibWandStone || is.getItem() == mi.ibWandIron || is.getItem() == mi.ibWandGold || is.getItem() == mi.ibWandDiamond)) {
+		if (ConfigurationHandler.useWands == true) {
+			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
-				ibf.msg(player, ibf.wandReq, Colors.c);
+				BuildHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}
 		
-		player.openGui(ib.instance, GuiID.STATUE.ordinal(), world, x, y, z);
+		player.openGui(InstantBlocks.instance, GuiID.STATUE.ordinal(), world, x, y, z);
 		
 		//build(world, x, y, z, player, meta);
 		
@@ -203,24 +195,24 @@ public class BlockInstantStatue extends BlockContainer {
 	        
 	        //LogHelper.info(ColorHelper.getColorAt(img, 0, 0));
 	        
-	        ibf.keepBlocks(world, x, y, z, mb.ibStatue);
-			ibf.xp(world, player, config.xp);
-			ibf.sound(world, config.sound, x, y, z);
-			ibf.effectFull(world, "reddust", x, y, z);
-			ibf.msg(player, "\u00a7aInstant Statue created of the player '" + username + "'.", Colors.a);
+	        BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
+			BuildHelper.xp(world, player, ConfigurationHandler.xp);
+			BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+			BuildHelper.effectFull(world, "reddust", x, y, z);
+			BuildHelper.msg(player, "\u00a7aInstant Statue created of the player '" + username + "'.", Colors.a);
 			
 			ItemStack is = player.getCurrentEquippedItem();
 			
-			if (is != null && (is.getItem() == mi.ibWandWood || is.getItem() == mi.ibWandStone || is.getItem() == mi.ibWandIron || is.getItem() == mi.ibWandGold || is.getItem() == mi.ibWandDiamond)) {
+			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			}
 			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-			ibf.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
+			BuildHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
 		} catch (IOException e) {
 			e.printStackTrace();
-			ibf.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
+			BuildHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
 		}
 	}
 
@@ -244,44 +236,44 @@ public class BlockInstantStatue extends BlockContainer {
 		//TOP
 		for(int xtimes=0; xtimes<8; xtimes++) {
 			for(int ytimes=0; ytimes<8; ytimes++) {
-				//ibf.setColorBlockComplex(world, x-4+xtimes, y+31, z-5+ytimes, img, 8+xtimes, 0+ytimes);
-				ibf.setColorBlockComplex(world, x, y+31, z, img, 8+xtimes, 0+ytimes, meta, -5+ytimes, -4+xtimes);
+				//BuildHelper.setColorBlockComplex(world, x-4+xtimes, y+31, z-5+ytimes, img, 8+xtimes, 0+ytimes);
+				BuildHelper.setColorBlockComplex(world, x, y+31, z, img, 8+xtimes, 0+ytimes, meta, -5+ytimes, -4+xtimes);
 			}
 		}
 
 		//BOTTOM
 		for(int xtimes=0; xtimes<8; xtimes++) {
 			for(int ytimes=0; ytimes<8; ytimes++) {
-				//ibf.setColorBlockComplex(world, x-4+xtimes, y+24, z-5+ytimes, img, 16+xtimes, 0+ytimes);
-				ibf.setColorBlockComplex(world, x, y+24, z, img, 16+xtimes, 0+ytimes, meta, -5+ytimes, -4+xtimes);
+				//BuildHelper.setColorBlockComplex(world, x-4+xtimes, y+24, z-5+ytimes, img, 16+xtimes, 0+ytimes);
+				BuildHelper.setColorBlockComplex(world, x, y+24, z, img, 16+xtimes, 0+ytimes, meta, -5+ytimes, -4+xtimes);
 			}
 		}
 		
 		//RIGHT
 		for(int xtimes=0; xtimes<8; xtimes++) {
 			for(int ytimes=0; ytimes<8; ytimes++) {
-				ibf.setColorBlockComplex(world, x, y+31-ytimes, z, img, 0+xtimes, 8+ytimes, meta, -5+xtimes, -4);
+				BuildHelper.setColorBlockComplex(world, x, y+31-ytimes, z, img, 0+xtimes, 8+ytimes, meta, -5+xtimes, -4);
 			}
 		}
 		
 		//LEFT
 		for(int xtimes=0; xtimes<8; xtimes++) {
 			for(int ytimes=0; ytimes<8; ytimes++) {
-				ibf.setColorBlockComplex(world, x, y+31-ytimes, z, img, 16+xtimes, 8+ytimes, meta, +2-xtimes, +3);
+				BuildHelper.setColorBlockComplex(world, x, y+31-ytimes, z, img, 16+xtimes, 8+ytimes, meta, +2-xtimes, +3);
 			}
 		}
 
 		//FRONT
 		for(int xtimes=0; xtimes<8; xtimes++) {
 			for(int ytimes=0; ytimes<8; ytimes++) { //face is 8x8, so 8 total times
-				ibf.setColorBlockComplex(world, x, y+31-ytimes, z, img, 8+xtimes, 8+ytimes, meta, +2, -4+xtimes); //face starts at 8, 8
+				BuildHelper.setColorBlockComplex(world, x, y+31-ytimes, z, img, 8+xtimes, 8+ytimes, meta, +2, -4+xtimes); //face starts at 8, 8
 			} //face starts x-4, y+31, z+2
 		}
 		
 		//BACK
 		for(int xtimes=0; xtimes<8; xtimes++) {
 			for(int ytimes=0; ytimes<8; ytimes++) {
-				ibf.setColorBlockComplex(world, x, y+31-ytimes, z, img, 24+xtimes, 8+ytimes, meta, -5, +3-xtimes);
+				BuildHelper.setColorBlockComplex(world, x, y+31-ytimes, z, img, 24+xtimes, 8+ytimes, meta, -5, +3-xtimes);
 			}
 		}
 		}
@@ -293,48 +285,48 @@ public class BlockInstantStatue extends BlockContainer {
 		//TOP
 		for(int xtimes=0; xtimes<8; xtimes++) {
 			for(int ytimes=0; ytimes<4; ytimes++) { //topbody is 8x4
-				//ibf.setColorBlockComplex(world, x-4+xtimes, y+23, z-3+ytimes, img, 20+xtimes, 16+ytimes); //topbody starts at 20, 16
-				ibf.setColorBlockComplex(world, x, y+23, z, img, 20+xtimes, 16+ytimes, meta, -3+ytimes, -4+xtimes); //topbody starts at 20, 16
+				//BuildHelper.setColorBlockComplex(world, x-4+xtimes, y+23, z-3+ytimes, img, 20+xtimes, 16+ytimes); //topbody starts at 20, 16
+				BuildHelper.setColorBlockComplex(world, x, y+23, z, img, 20+xtimes, 16+ytimes, meta, -3+ytimes, -4+xtimes); //topbody starts at 20, 16
 			} //topbody starts at x-4, y+23, z+3
 		}
 
 		//BOTTOM
 		for(int xtimes=0; xtimes<8; xtimes++) {
 			for(int ytimes=0; ytimes<4; ytimes++) { //botbody is 8x4
-				//ibf.setColorBlockComplex(world, x-4+xtimes, y+12, z-ytimes, img, 28+xtimes, 16+ytimes); //botbody starts at 28, 16
-				ibf.setColorBlockComplex(world, x, y+12, z, img, 28+xtimes, 16+ytimes, meta, -ytimes, -4+xtimes); //botbody starts at 28, 16
+				//BuildHelper.setColorBlockComplex(world, x-4+xtimes, y+12, z-ytimes, img, 28+xtimes, 16+ytimes); //botbody starts at 28, 16
+				BuildHelper.setColorBlockComplex(world, x, y+12, z, img, 28+xtimes, 16+ytimes, meta, -ytimes, -4+xtimes); //botbody starts at 28, 16
 			} //botbody starts at x-4, y+12, z
 		}
 		
 		//RIGHT
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<12; ytimes++) { //rightbody is 4x12
-				//ibf.setColorBlockComplex(world, x-4, y+23-ytimes, z-3+xtimes, img, 16+xtimes, 20+ytimes); //rightbody starts at 16, 20
-				ibf.setColorBlockComplex(world, x, y+23-ytimes, z, img, 16+xtimes, 20+ytimes, meta, -3+xtimes, -4); //rightbody starts at 16, 20
+				//BuildHelper.setColorBlockComplex(world, x-4, y+23-ytimes, z-3+xtimes, img, 16+xtimes, 20+ytimes); //rightbody starts at 16, 20
+				BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 16+xtimes, 20+ytimes, meta, -3+xtimes, -4); //rightbody starts at 16, 20
 			} //rightbody starts at x-4, y+23, z-3
 		}
 
 		//LEFT
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<12; ytimes++) { //leftbody is 4x12
-				//ibf.setColorBlockComplex(world, x+3, y+23-ytimes, z-xtimes, img, 28+xtimes, 20+ytimes); //leftbody starts at 28, 20
-				ibf.setColorBlockComplex(world, x, y+23-ytimes, z, img, 28+xtimes, 20+ytimes, meta, -xtimes, +3); //leftbody starts at 28, 20
+				//BuildHelper.setColorBlockComplex(world, x+3, y+23-ytimes, z-xtimes, img, 28+xtimes, 20+ytimes); //leftbody starts at 28, 20
+				BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 28+xtimes, 20+ytimes, meta, -xtimes, +3); //leftbody starts at 28, 20
 			} //rightbody starts at x+3, y+23, z
 		}
 		
 		//FRONT
 		for(int xtimes=0; xtimes<8; xtimes++) {
 			for(int ytimes=0; ytimes<12; ytimes++) { //body is 8x12
-				//ibf.setColorBlockComplex(world, x-4+xtimes, y+23-ytimes, z, img, 20+xtimes, 20+ytimes); //body starts at 20, 20
-				ibf.setColorBlockComplex(world, x, y+23-ytimes, z, img, 20+xtimes, 20+ytimes, meta, 0, -4+xtimes); //body starts at 20, 20
+				//BuildHelper.setColorBlockComplex(world, x-4+xtimes, y+23-ytimes, z, img, 20+xtimes, 20+ytimes); //body starts at 20, 20
+				BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 20+xtimes, 20+ytimes, meta, 0, -4+xtimes); //body starts at 20, 20
 			} //body starts at x-4, y+23, z
 		}
 
 		//BACK
 		for(int xtimes=0; xtimes<8; xtimes++) {
 			for(int ytimes=0; ytimes<12; ytimes++) { //back is 8x12
-				//ibf.setColorBlockComplex(world, x+3-xtimes, y+23-ytimes, z-3, img, 32+xtimes, 20+ytimes); //back starts at 32, 20
-				ibf.setColorBlockComplex(world, x, y+23-ytimes, z, img, 32+xtimes, 20+ytimes, meta, -3, +3-xtimes); //back starts at 32, 20
+				//BuildHelper.setColorBlockComplex(world, x+3-xtimes, y+23-ytimes, z-3, img, 32+xtimes, 20+ytimes); //back starts at 32, 20
+				BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 32+xtimes, 20+ytimes, meta, -3, +3-xtimes); //back starts at 32, 20
 			} //back starts at x+3, y+23, z-3
 		}
 		}
@@ -347,48 +339,48 @@ public class BlockInstantStatue extends BlockContainer {
 			//LEFT
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //rightarmleft is 4x12
-					//ibf.setColorBlockComplex(world, x+4, y+23-ytimes, z-xtimes, img, 48+xtimes, 20+ytimes); //rightarmleft starts at 48, 20
-					ibf.setColorBlockComplex(world, x, y+23-ytimes, z, img, 48+xtimes, 20+ytimes, meta, -xtimes, +4); //rightarmleft starts at 48, 20
+					//BuildHelper.setColorBlockComplex(world, x+4, y+23-ytimes, z-xtimes, img, 48+xtimes, 20+ytimes); //rightarmleft starts at 48, 20
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 48+xtimes, 20+ytimes, meta, -xtimes, +4); //rightarmleft starts at 48, 20
 				} //rightarmleft starts
 			}
 
 			//RIGHT
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //rightarmright is 4x12
-					//ibf.setColorBlockComplex(world, x+7, y+23-ytimes, z-3+xtimes, img, 40+xtimes, 20+ytimes); //rightarmright starts at 40, 20
-					ibf.setColorBlockComplex(world, x, y+23-ytimes, z, img, 40+xtimes, 20+ytimes, meta, -3+xtimes, +7); //rightarmright starts at 40, 20
+					//BuildHelper.setColorBlockComplex(world, x+7, y+23-ytimes, z-3+xtimes, img, 40+xtimes, 20+ytimes); //rightarmright starts at 40, 20
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 40+xtimes, 20+ytimes, meta, -3+xtimes, +7); //rightarmright starts at 40, 20
 				} //rightarmright starts
 			}
 		
 			//TOP
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<4; ytimes++) { //shoulderleft is 4x4
-					//ibf.setColorBlockComplex(world, x+4+xtimes, y+23, z-3+ytimes, img, 44+xtimes, 16+ytimes); //shoulderleft starts at 44, 16
-					ibf.setColorBlockComplex(world, x, y+23, z, img, 44+xtimes, 16+ytimes, meta, -3+ytimes, +4+xtimes); //shoulderleft starts at 44, 16
+					//BuildHelper.setColorBlockComplex(world, x+4+xtimes, y+23, z-3+ytimes, img, 44+xtimes, 16+ytimes); //shoulderleft starts at 44, 16
+					BuildHelper.setColorBlockComplex(world, x, y+23, z, img, 44+xtimes, 16+ytimes, meta, -3+ytimes, +4+xtimes); //shoulderleft starts at 44, 16
 				} //shoulderleft starts
 			}
 	
 			//BOTTOM
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<4; ytimes++) { //fistleft is 4x4
-					//ibf.setColorBlockComplex(world, x+4+xtimes, y+12, z-3+ytimes, img, 48+xtimes, 16+ytimes); //fistleft starts at 44, 16
-					ibf.setColorBlockComplex(world, x, y+12, z, img, 48+xtimes, 16+ytimes, meta, -3+ytimes, +4+xtimes); //fistleft starts at 44, 16
+					//BuildHelper.setColorBlockComplex(world, x+4+xtimes, y+12, z-3+ytimes, img, 48+xtimes, 16+ytimes); //fistleft starts at 44, 16
+					BuildHelper.setColorBlockComplex(world, x, y+12, z, img, 48+xtimes, 16+ytimes, meta, -3+ytimes, +4+xtimes); //fistleft starts at 44, 16
 				} //fistleft starts
 			}
 			
 			//FRONT
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //rightarmfront is 4x12
-					//ibf.setColorBlockComplex(world, x+7-xtimes, y+23-ytimes, z, img, 44+xtimes, 20+ytimes); //rightarmfront starts at 44, 20 DONE?
-					ibf.setColorBlockComplex(world, x, y+23-ytimes, z, img, 44+xtimes, 20+ytimes, meta, 0, +7-xtimes); //rightarmfront starts at 44, 20 DONE?
+					//BuildHelper.setColorBlockComplex(world, x+7-xtimes, y+23-ytimes, z, img, 44+xtimes, 20+ytimes); //rightarmfront starts at 44, 20 DONE?
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 44+xtimes, 20+ytimes, meta, 0, +7-xtimes); //rightarmfront starts at 44, 20 DONE?
 				} //rightarmfront starts
 			}
 
 			//BACK
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //rightarmback is 4x12
-					//ibf.setColorBlockComplex(world, x+4+xtimes, y+23-ytimes, z-3, img, 52+xtimes, 20+ytimes); //rightarmback starts at 52, 20
-					ibf.setColorBlockComplex(world, x, y+23-ytimes, z, img, 52+xtimes, 20+ytimes, meta, -3, +4+xtimes); //rightarmback starts at 52, 20
+					//BuildHelper.setColorBlockComplex(world, x+4+xtimes, y+23-ytimes, z-3, img, 52+xtimes, 20+ytimes); //rightarmback starts at 52, 20
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 52+xtimes, 20+ytimes, meta, -3, +4+xtimes); //rightarmback starts at 52, 20
 				} //rightarmback starts 
 			}
 		}
@@ -399,16 +391,16 @@ public class BlockInstantStatue extends BlockContainer {
 			//LEFT
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //leftarmleft is 4x12
-					//ibf.setColorBlockComplex(world, x-5, y+23-ytimes, z-xtimes, img, 48+xtimes, 20+ytimes); //leftarmleft starts at 48, 20
-					ibf.setColorBlockComplex(world, x, y+23-ytimes, z, img, 48+xtimes, 20+ytimes, meta, -xtimes, -5); //leftarmleft starts at 48, 20
+					//BuildHelper.setColorBlockComplex(world, x-5, y+23-ytimes, z-xtimes, img, 48+xtimes, 20+ytimes); //leftarmleft starts at 48, 20
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 48+xtimes, 20+ytimes, meta, -xtimes, -5); //leftarmleft starts at 48, 20
 				} //leftarmleft starts
 			}
 
 			//RIGHT
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //leftarmright is 4x12
-					//ibf.setColorBlockComplex(world, x-8, y+23-ytimes, z-3+xtimes, img, 40+xtimes, 20+ytimes); //leftarmright starts at 40, 20
-					ibf.setColorBlockComplex(world, x, y+23-ytimes, z, img, 40+xtimes, 20+ytimes, meta, -3+xtimes, -8); //leftarmright starts at 40, 20
+					//BuildHelper.setColorBlockComplex(world, x-8, y+23-ytimes, z-3+xtimes, img, 40+xtimes, 20+ytimes); //leftarmright starts at 40, 20
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 40+xtimes, 20+ytimes, meta, -3+xtimes, -8); //leftarmright starts at 40, 20
 				} //leftarmright starts
 			}
 			
@@ -417,32 +409,32 @@ public class BlockInstantStatue extends BlockContainer {
 			//TOP
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<4; ytimes++) { //shoulderright is 4x4
-					//ibf.setColorBlockComplex(world, x-5-xtimes, y+23, z-3+ytimes, img, 44+xtimes, 16+ytimes); //shoulderright starts at 44, 16
-					ibf.setColorBlockComplex(world, x, y+23, z, img, 44+xtimes, 16+ytimes, meta, -3+ytimes, -5-xtimes); //shoulderright starts at 44, 16
+					//BuildHelper.setColorBlockComplex(world, x-5-xtimes, y+23, z-3+ytimes, img, 44+xtimes, 16+ytimes); //shoulderright starts at 44, 16
+					BuildHelper.setColorBlockComplex(world, x, y+23, z, img, 44+xtimes, 16+ytimes, meta, -3+ytimes, -5-xtimes); //shoulderright starts at 44, 16
 				} //shoulderright starts
 			}
 	
 			//BOTTOM
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<4; ytimes++) { //fistright is 4x4
-					//ibf.setColorBlockComplex(world, x-5-xtimes, y+12, z-3+ytimes, img, 48+xtimes, 16+ytimes); //fistright starts at 44, 16
-					ibf.setColorBlockComplex(world, x, y+12, z, img, 48+xtimes, 16+ytimes, meta, -3+ytimes, -5-xtimes); //fistright starts at 44, 16
+					//BuildHelper.setColorBlockComplex(world, x-5-xtimes, y+12, z-3+ytimes, img, 48+xtimes, 16+ytimes); //fistright starts at 44, 16
+					BuildHelper.setColorBlockComplex(world, x, y+12, z, img, 48+xtimes, 16+ytimes, meta, -3+ytimes, -5-xtimes); //fistright starts at 44, 16
 				} //fistright starts
 			}
 			
 			//FRONT
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //leftarmfront is 4x12
-					//ibf.setColorBlockComplex(world, x-8+xtimes, y+23-ytimes, z, img, 44+xtimes, 20+ytimes); //leftarmfront starts at 44, 20
-					ibf.setColorBlockComplex(world, x, y+23-ytimes, z, img, 44+xtimes, 20+ytimes, meta, 0, -8+xtimes); //leftarmfront starts at 44, 20
+					//BuildHelper.setColorBlockComplex(world, x-8+xtimes, y+23-ytimes, z, img, 44+xtimes, 20+ytimes); //leftarmfront starts at 44, 20
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 44+xtimes, 20+ytimes, meta, 0, -8+xtimes); //leftarmfront starts at 44, 20
 				} //leftarmfront starts
 			}
 
 			//BACK
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //leftarmback is 4x12
-					//ibf.setColorBlockComplex(world, x-5-xtimes, y+23-ytimes, z-3, img, 52+xtimes, 20+ytimes); //leftarmback starts at 52, 20
-					ibf.setColorBlockComplex(world, x, y+23-ytimes, z, img, 52+xtimes, 20+ytimes, meta, -3, -5-xtimes); //leftarmback starts at 52, 20
+					//BuildHelper.setColorBlockComplex(world, x-5-xtimes, y+23-ytimes, z-3, img, 52+xtimes, 20+ytimes); //leftarmback starts at 52, 20
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 52+xtimes, 20+ytimes, meta, -3, -5-xtimes); //leftarmback starts at 52, 20
 				} //leftarmback starts 
 			}
 		}
@@ -455,48 +447,48 @@ public class BlockInstantStatue extends BlockContainer {
 		//TOP
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<4; ytimes++) { //leftlegtop is 4x4
-//					ibf.setColorBlockComplex(world, x+xtimes, y+11, z-3+ytimes, img, 4+xtimes, 16+ytimes); //leftlegtop starts at 4, 16
-				ibf.setColorBlockComplex(world, x, y+11, z, img, 4+xtimes, 16+ytimes, meta, -3+ytimes, +xtimes); //leftlegtop starts at 4, 16
+//					BuildHelper.setColorBlockComplex(world, x+xtimes, y+11, z-3+ytimes, img, 4+xtimes, 16+ytimes); //leftlegtop starts at 4, 16
+				BuildHelper.setColorBlockComplex(world, x, y+11, z, img, 4+xtimes, 16+ytimes, meta, -3+ytimes, +xtimes); //leftlegtop starts at 4, 16
 			} //leftlegtop starts at x, y+11, z-3
 		}
 
 		//BOTTOM
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<4; ytimes++) { //leftlegtop is 4x4
-//					ibf.setColorBlockComplex(world, x+xtimes, y, z-3+ytimes, img, 8+xtimes, 16+ytimes); //leftlegbot starts at 8, 16
-				ibf.setColorBlockComplex(world, x, y, z, img, 8+xtimes, 16+ytimes, meta, -3+ytimes, +xtimes); //leftlegbot starts at 8, 16
+//					BuildHelper.setColorBlockComplex(world, x+xtimes, y, z-3+ytimes, img, 8+xtimes, 16+ytimes); //leftlegbot starts at 8, 16
+				BuildHelper.setColorBlockComplex(world, x, y, z, img, 8+xtimes, 16+ytimes, meta, -3+ytimes, +xtimes); //leftlegbot starts at 8, 16
 			} //leftlegbot starts at x, y, z-3
 		}
 
 		//LEFT
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<12; ytimes++) { //leftlegleft is 4x12
-//					ibf.setColorBlockComplex(world, x+3, y+11-ytimes, z-xtimes, img, 8+xtimes, 20+ytimes); //leftlegleft starts at 8, 20
-				ibf.setColorBlockComplex(world, x, y+11-ytimes, z, img, 8+xtimes, 20+ytimes, meta, -xtimes, +3); //leftlegleft starts at 8, 20
+//					BuildHelper.setColorBlockComplex(world, x+3, y+11-ytimes, z-xtimes, img, 8+xtimes, 20+ytimes); //leftlegleft starts at 8, 20
+				BuildHelper.setColorBlockComplex(world, x, y+11-ytimes, z, img, 8+xtimes, 20+ytimes, meta, -xtimes, +3); //leftlegleft starts at 8, 20
 			} //leftlegleft starts at x+3, y+11, z
 		}
 
 		//RIGHT
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<12; ytimes++) { //leftlegright is 4x12
-//					ibf.setColorBlockComplex(world, x, y+11-ytimes, z-3+xtimes, img, 0+xtimes, 20+ytimes); //leftlegright starts at 0, 20
-				ibf.setColorBlockComplex(world, x, y+11-ytimes, z, img, 0+xtimes, 20+ytimes, meta, -3+xtimes, 0); //leftlegright starts at 0, 20
+//					BuildHelper.setColorBlockComplex(world, x, y+11-ytimes, z-3+xtimes, img, 0+xtimes, 20+ytimes); //leftlegright starts at 0, 20
+				BuildHelper.setColorBlockComplex(world, x, y+11-ytimes, z, img, 0+xtimes, 20+ytimes, meta, -3+xtimes, 0); //leftlegright starts at 0, 20
 			} //leftlegright starts at x, y+11, z-3
 		}
 		
 		//FRONT
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<12; ytimes++) { //leftlegfront is 4x12
-//					ibf.setColorBlockComplex(world, x+xtimes, y+11-ytimes, z, img, 4+xtimes, 20+ytimes); //leftlegfront starts at 4, 20 blaze it
-				ibf.setColorBlockComplex(world, x, y+11-ytimes, z, img, 4+xtimes, 20+ytimes, meta, 0, +xtimes); //leftlegfront starts at 4, 20 blaze it
+//					BuildHelper.setColorBlockComplex(world, x+xtimes, y+11-ytimes, z, img, 4+xtimes, 20+ytimes); //leftlegfront starts at 4, 20 blaze it
+				BuildHelper.setColorBlockComplex(world, x, y+11-ytimes, z, img, 4+xtimes, 20+ytimes, meta, 0, +xtimes); //leftlegfront starts at 4, 20 blaze it
 			} //leftlegfront starts at x, y+11, z
 		}
 
 		//BACK
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<12; ytimes++) { //leftlegback is 4x12
-//					ibf.setColorBlockComplex(world, x+3-xtimes, y+11-ytimes, z-3, img, 12+xtimes, 20+ytimes); //leftlegback starts at 12, 20
-				ibf.setColorBlockComplex(world, x, y+11-ytimes, z, img, 12+xtimes, 20+ytimes, meta, -3, +3-xtimes); //leftlegback starts at 12, 20
+//					BuildHelper.setColorBlockComplex(world, x+3-xtimes, y+11-ytimes, z-3, img, 12+xtimes, 20+ytimes); //leftlegback starts at 12, 20
+				BuildHelper.setColorBlockComplex(world, x, y+11-ytimes, z, img, 12+xtimes, 20+ytimes, meta, -3, +3-xtimes); //leftlegback starts at 12, 20
 			} //leftlegback starts at x+3, y+11, z+3
 		}
 		}
@@ -507,48 +499,48 @@ public class BlockInstantStatue extends BlockContainer {
 		//TOP
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<4; ytimes++) { //rightlegtop is 4x4
-//					ibf.setColorBlockComplex(world, x-4+xtimes, y+11, z-3+ytimes, img, 4+xtimes, 16+ytimes); //rightlegtop starts at 4, 16
-				ibf.setColorBlockComplex(world, x, y+11, z, img, 4+xtimes, 16+ytimes, meta, -3+ytimes, -4+xtimes); //rightlegtop starts at 4, 16
+//					BuildHelper.setColorBlockComplex(world, x-4+xtimes, y+11, z-3+ytimes, img, 4+xtimes, 16+ytimes); //rightlegtop starts at 4, 16
+				BuildHelper.setColorBlockComplex(world, x, y+11, z, img, 4+xtimes, 16+ytimes, meta, -3+ytimes, -4+xtimes); //rightlegtop starts at 4, 16
 			} //rightlegtop starts at x-4, y+11, z-3
 		}
 
 		//BOTTOM
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<4; ytimes++) { //rightlegbot is 4x4
-//					ibf.setColorBlockComplex(world, x-4+xtimes, y, z-3+ytimes, img, 8+xtimes, 16+ytimes); //rightlegbot starts at 8, 16
-				ibf.setColorBlockComplex(world, x, y, z, img, 8+xtimes, 16+ytimes, meta, -3+ytimes, -4+xtimes); //rightlegbot starts at 8, 16
+//					BuildHelper.setColorBlockComplex(world, x-4+xtimes, y, z-3+ytimes, img, 8+xtimes, 16+ytimes); //rightlegbot starts at 8, 16
+				BuildHelper.setColorBlockComplex(world, x, y, z, img, 8+xtimes, 16+ytimes, meta, -3+ytimes, -4+xtimes); //rightlegbot starts at 8, 16
 			} //rightlegbot starts at x-4, y, z-3
 		}
 
 		//LEFT
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<12; ytimes++) { //rightlegleft is 4x12
-//					ibf.setColorBlockComplex(world, x-1, y+11-ytimes, z-xtimes, img, 8+xtimes, 20+ytimes); //rightlegleft starts at 8, 20
-				ibf.setColorBlockComplex(world, x, y+11-ytimes, z, img, 8+xtimes, 20+ytimes, meta, -xtimes, -1); //rightlegleft starts at 8, 20
+//					BuildHelper.setColorBlockComplex(world, x-1, y+11-ytimes, z-xtimes, img, 8+xtimes, 20+ytimes); //rightlegleft starts at 8, 20
+				BuildHelper.setColorBlockComplex(world, x, y+11-ytimes, z, img, 8+xtimes, 20+ytimes, meta, -xtimes, -1); //rightlegleft starts at 8, 20
 			} //rightlegleft starts at x+3, y+11, z
 		}
 
 		//RIGHT
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<12; ytimes++) { //rightlegright is 4x12
-//					ibf.setColorBlockComplex(world, x-4, y+11-ytimes, z-3+xtimes, img, 0+xtimes, 20+ytimes); //rightlegright starts at 0, 20
-				ibf.setColorBlockComplex(world, x, y+11-ytimes, z, img, 0+xtimes, 20+ytimes, meta, -3+xtimes, -4); //rightlegright starts at 0, 20
+//					BuildHelper.setColorBlockComplex(world, x-4, y+11-ytimes, z-3+xtimes, img, 0+xtimes, 20+ytimes); //rightlegright starts at 0, 20
+				BuildHelper.setColorBlockComplex(world, x, y+11-ytimes, z, img, 0+xtimes, 20+ytimes, meta, -3+xtimes, -4); //rightlegright starts at 0, 20
 			} //rightlegright starts at x, y+11, z-3
 		}
 		
 		//FRONT
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<12; ytimes++) { //rightlegfront is 4x12
-//					ibf.setColorBlockComplex(world, x-1-xtimes, y+11-ytimes, z, img, 4+xtimes, 20+ytimes); //rightlegfront starts at 4, 20 blaze it
-				ibf.setColorBlockComplex(world, x, y+11-ytimes, z, img, 4+xtimes, 20+ytimes, meta, 0, -1-xtimes); //rightlegfront starts at 4, 20 blaze it
+//					BuildHelper.setColorBlockComplex(world, x-1-xtimes, y+11-ytimes, z, img, 4+xtimes, 20+ytimes); //rightlegfront starts at 4, 20 blaze it
+				BuildHelper.setColorBlockComplex(world, x, y+11-ytimes, z, img, 4+xtimes, 20+ytimes, meta, 0, -1-xtimes); //rightlegfront starts at 4, 20 blaze it
 			} //rightlegfront starts at x, y+11, z
 		}
  
 		//BACK
 		for(int xtimes=0; xtimes<4; xtimes++) {
 			for(int ytimes=0; ytimes<12; ytimes++) { //rightlegback is 4x12
-//					ibf.setColorBlockComplex(world, x-4+xtimes, y+11-ytimes, z-3, img, 12+xtimes, 20+ytimes); //rightlegback starts at 12, 20
-				ibf.setColorBlockComplex(world, x, y+11-ytimes, z, img, 12+xtimes, 20+ytimes, meta, -3, -4+xtimes); //rightlegback starts at 12, 20
+//					BuildHelper.setColorBlockComplex(world, x-4+xtimes, y+11-ytimes, z-3, img, 12+xtimes, 20+ytimes); //rightlegback starts at 12, 20
+				BuildHelper.setColorBlockComplex(world, x, y+11-ytimes, z, img, 12+xtimes, 20+ytimes, meta, -3, -4+xtimes); //rightlegback starts at 12, 20
 			} //rightlegback starts at x+3, y+11, z+3
 		}
 		}

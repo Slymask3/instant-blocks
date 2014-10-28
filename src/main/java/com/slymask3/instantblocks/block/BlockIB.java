@@ -8,6 +8,7 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 import net.minecraft.block.Block;
@@ -352,7 +353,7 @@ public class BlockIB extends Block {
 					is.damageItem(1, player);
 				}
 			} else {
-				BuildHelper.msg(player, BuildHelper.wandReq, Colors.c);
+				BuildHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}

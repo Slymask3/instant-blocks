@@ -20,6 +20,7 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.sound.SoundTypeLiquid;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
@@ -99,7 +100,7 @@ public class BlockInstantWater extends BlockIB {
 				BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibWater);
 				BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
 				BuildHelper.effectFull(world, "reddust", x, y, z);
-				BuildHelper.msg(player, BuildHelper.waterCreate1, Colors.a);
+				BuildHelper.msg(player, Strings.waterCreate1, Colors.a);
 				BuildHelper.xp(world, player, ConfigurationHandler.xp);
 				if (ConfigurationHandler.useWands == true) {
 					player.getCurrentEquippedItem().damageItem(1, player);

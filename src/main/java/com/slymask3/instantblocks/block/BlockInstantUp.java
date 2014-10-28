@@ -1,32 +1,21 @@
 package com.slymask3.instantblocks.block;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLadder;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantUp extends BlockLadderIB {
-	private BuildHelper ibf = new BuildHelper();
-	private ConfigurationHandler config = new ConfigurationHandler();
-	private InstantBlocks ib = new InstantBlocks();
-	private ModBlocks mb = new ModBlocks();
-	private ModItems mi = new ModItems();
 	
 	public boolean canSeeSky;
 	public int side = 0;
@@ -63,18 +52,18 @@ public class BlockInstantUp extends BlockLadderIB {
 	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
     	if (world.canBlockSeeTheSky(x, y+1, z) == true) {
-			ibf.msg(player, ibf.upError, Colors.c);
+			BuildHelper.msg(player, Strings.upError, Colors.c);
 			return true;
 		}
     	
     	ItemStack is = player.getCurrentEquippedItem();
     	
-		if (config.useWands == true) {
-			if (is != null && (is.getItem() == mi.ibWandWood || is.getItem() == mi.ibWandStone || is.getItem() == mi.ibWandIron || is.getItem() == mi.ibWandGold || is.getItem() == mi.ibWandDiamond)) {
+		if (ConfigurationHandler.useWands == true) {
+			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 				//player.triggerAchievement(ib.achUp);
 			} else {
-				ibf.msg(player, ibf.wandReq, Colors.c);
+				BuildHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}
@@ -88,8 +77,8 @@ public class BlockInstantUp extends BlockLadderIB {
 		int n = 0;
 		while(world.canBlockSeeTheSky(x, i+1, z) == false) {
 			i++;
-			ibf.build(world, x-1, y-1, z-1, stone, 3, 1, 3);
-			ibf.build(world, x-1, i, z-1, stone, 3, 1, 3);
+			BuildHelper.build(world, x-1, y-1, z-1, stone, 3, 1, 3);
+			BuildHelper.build(world, x-1, i, z-1, stone, 3, 1, 3);
 			world.setBlock(x, i, z, air);
 			
 			if (side == 2) {
@@ -132,11 +121,11 @@ public class BlockInstantUp extends BlockLadderIB {
 		}
 		
 		/************************ Functions ************************/
-		ibf.keepBlocks(world, x, y, z, mb.ibUp);
-		ibf.xp(world, player, config.xp);
-		ibf.sound(world, config.sound, x, y, z);
-		ibf.effectFull(world, "reddust", x, y, z);
-		ibf.msg(player, "\u00a7aInstant Escape Ladder created " + (i - y) + " blocks up.", Colors.a);
+		BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibUp);
+		BuildHelper.xp(world, player, ConfigurationHandler.xp);
+		BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		BuildHelper.effectFull(world, "reddust", x, y, z);
+		BuildHelper.msg(player, "\u00a7aInstant Escape Ladder created " + (i - y) + " blocks up.", Colors.a);
 		
 		return true;
     }

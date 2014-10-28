@@ -11,6 +11,7 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 
@@ -33,7 +34,7 @@ public class BlockInstantFall extends BlockDirectionalIB {
     public BlockInstantFall() {
         super(ModBlocks.ibFall, Names.Blocks.IB_RAINBOW_SKYDIVE, Material.cloth, Block.soundTypeCloth, 1.5F);
         setTextures("instantblocks:skydive_bottom", "instantblocks:skydive_top", "instantblocks:skydive_");
-        setCreateMsg(BuildHelper.fallCreate);
+        setCreateMsg(Strings.fallCreate);
     }
     
     public static IIcon bottom;

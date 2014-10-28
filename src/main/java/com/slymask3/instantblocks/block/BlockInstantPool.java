@@ -22,13 +22,14 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantPool extends BlockDirectionalIB {
 	
     public BlockInstantPool() {
         super(ModBlocks.ibPool, Names.Blocks.IB_POOL, Material.rock, Block.soundTypeStone, 1.5F);
-        setCreateMsg(BuildHelper.poolCreate);
+        setCreateMsg(Strings.poolCreate);
     }
 	
     public static IIcon[] textures = new IIcon[6];

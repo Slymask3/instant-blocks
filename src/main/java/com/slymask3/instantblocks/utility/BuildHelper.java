@@ -32,24 +32,6 @@ public class BuildHelper {
 	public static int checkTick = 0;
 	public static int checkParticle = 0;
 	
-	public static String wandReq = "\u00a7cYou must use an Instant Wand.";
-	public static String woodCreate = "\u00a7aInstant Wooden House created.";
-	public static String woodPack = "\u00a7aInstant Wooden House packed up.";
-	public static String woodError = "\u00a7cInstant Wooden House cannot be re-created. You must pack up this house first.";
-	public static String fallCreate = "\u00a7aInstant \u00a7cR\u00a76a\u00a7ei\u00a7an\u00a72b\u00a73o\u00a7bw \u00a7aSkydive created.";
-	public static String farmCreateW = "\u00a7aInstant Farm created with wheat.";
-	public static String farmCreateC = "\u00a7aInstant Farm created with carrots.";
-	public static String farmCreateP = "\u00a7aInstant Farm created with potatos.";
-	public static String domeCreate = "\u00a7aInstant Glass Dome created.";
-	public static String grinderCreate = "\u00a7aInstant Grinder created.";
-	public static String grinderError = "\u00a7cYou must place this above a ZoModBlocksie/Skeleton spawner.";
-	public static String ladderCreate = "\u00a7aInstant Mining Ladder created.";
-	public static String ladderError = "\u00a7cInstant Mining Ladder cannot be created below layer 16.";
-	public static String lavaCreate1 = "\u00a7aInstant Lava created with 1 lava block.";
-	public static String poolCreate = "\u00a7aInstant Pool created.";
-	public static String upError = "\u00a7cThis block only works underground.";
-	public static String waterCreate1 = "\u00a7aInstant Water created with 1 water block.";
-	
 	/***************
 	 * @INFO	   *
 	 * x+# = EAST  *
@@ -782,13 +764,13 @@ public class BuildHelper {
 	}
 
 	
-	private boolean isPositive(int i) {
+	private static boolean isPositive(int i) {
 		if (i == 0) return true;
 	    if (i >> 31 != 0) return false;
 	    return true;
 	}
 	
-	public int toPositive(int i) {
+	public static int toPositive(int i) {
 		if (i < 0) {
 			return -i;
 		}
@@ -844,7 +826,7 @@ public class BuildHelper {
 		}
     }
     
-    public void setColorBlockComplex(World world, int x, int y, int z, BufferedImage img, int imgx, int imgy, int metaDirection, int forwardBack, int leftRight) {
+    public static void setColorBlockComplex(World world, int x, int y, int z, BufferedImage img, int imgx, int imgy, int metaDirection, int forwardBack, int leftRight) {
     	if (ConfigurationHandler.rgbMode) {
     		int forward;
     		int back;

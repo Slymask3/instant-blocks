@@ -10,7 +10,6 @@ import com.slymask3.instantblocks.gui.GuiHandler;
 import com.slymask3.instantblocks.handler.ClientTickHandler;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.handler.ConnectionHandler;
-import com.slymask3.instantblocks.handler.ServerHandler;
 import com.slymask3.instantblocks.init.Loot;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
