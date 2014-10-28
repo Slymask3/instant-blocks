@@ -23,15 +23,10 @@ public class BlockInstantLava extends BlockIB {
 	
     public BlockInstantLava() {
         super(ModBlocks.ibLava, Names.Blocks.IB_LAVA, Material.lava, new SoundTypeLiquid("random.fizz", 1.0F, 1.0F), 0.5F);
-        //setTextures("minecraft:lava");
-        //setTextures(Blocks.lava.getIcon(1, 0));
-        //setTextureBooleans(false, false, false, false, false, false);
+        setTextures(Blocks.lava);
+        setTextureBooleans(false, false, false, false, false, false);
         setLightLevel(1.0F);
     }
-    
-	public IIcon getIcon(int side, int meta) {
-		return Blocks.lava.getIcon(1, 0);
-	}
     
 	public static int checkLava = 0;
 	

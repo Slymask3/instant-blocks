@@ -10,6 +10,7 @@ import com.slymask3.instantblocks.gui.GuiHandler;
 import com.slymask3.instantblocks.handler.ClientTickHandler;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.handler.ConnectionHandler;
+import com.slymask3.instantblocks.handler.ServerHandler;
 import com.slymask3.instantblocks.init.Loot;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
@@ -43,9 +44,11 @@ public class InstantBlocks {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+		
 		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
 		FMLCommonHandler.instance().bus().register(new ConnectionHandler());
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+		FMLCommonHandler.instance().bus().register(new ServerHandler());
 
 		TileEntity.addMapping(TileEntityColor.class, "TileEntityColor");
 		TileEntity.addMapping(TileEntityInstantStatue.class, "TileEntityInstantStatue");
@@ -80,14 +83,5 @@ public class InstantBlocks {
 		LogHelper.info("color1 (lightblue?): " + ColorHelper.getWoolColor(color1));		
 		LogHelper.info("color2 (yellow?): " + ColorHelper.getWoolColor(color2));		
 		LogHelper.info("color3 (green?): " + ColorHelper.getWoolColor(color3));*/
-	}
-	
-	@Mod.EventHandler
-	public void serverStart(FMLServerStartingEvent event) {
-		MinecraftServer server = MinecraftServer.getServer();
-		ICommandManager command = server.getCommandManager();
-		ServerCommandManager serverCommand = ((ServerCommandManager) command);
-		
-		serverCommand.registerCommand(new CommandInstantBlocks());
 	}
 }

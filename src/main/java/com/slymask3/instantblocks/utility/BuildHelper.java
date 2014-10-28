@@ -591,13 +591,13 @@ public class BuildHelper {
 	/******************************************************************************************************/
 	
 	/**************************************** SUCTION ************************************************/
-	public int cs = 0;
-	public int cs2 = 0;
-	public int liq = 0;
-	public int c3 = 0;
-	public boolean sucked = false;
+	public static int cs = 0;
+	public static int cs2 = 0;
+	public static int liq = 0;
+	public static int c3 = 0;
+	public static boolean sucked = false;
 	
-	public void checkSuck(World world, int x, int y, int z) {
+	public static void checkSuck(World world, int x, int y, int z) {
 		cs++;
 		if (cs < ConfigurationHandler.maxSuck) {
 			if ((world.getBlock(x+1, y, z) == Blocks.water || world.getBlock(x+1, y, z) == Blocks.lava) && world.getBlockMetadata(x+1, y, z) != 15 && cs < ConfigurationHandler.maxSuck) {
@@ -621,14 +621,14 @@ public class BuildHelper {
 		}
 	}
 	
-	public void checkSucka(World world, int x, int y, int z) {
+	public static void checkSucka(World world, int x, int y, int z) {
 		counter++;
 		liq = -1;
 		world.setBlockMetadataWithNotify(x, y, z, 15, 2);
 		checkSuck(world, x, y, z);
 	}
 	
-	public void checkSuckUndo(World world, int x, int y, int z) {
+	public static void checkSuckUndo(World world, int x, int y, int z) {
 		cs2++;
 		if (cs2 < ConfigurationHandler.maxSuck) {
 			if ((world.getBlock(x+1, y, z) == Blocks.water || world.getBlock(x+1, y, z) == Blocks.lava) && world.getBlockMetadata(x+1, y, z) == 15 && cs2 < ConfigurationHandler.maxSuck) {
@@ -652,12 +652,12 @@ public class BuildHelper {
 		}
 	}
 	
-	public void checkSuckaUndo(World world, int x, int y, int z) {
+	public static void checkSuckaUndo(World world, int x, int y, int z) {
 		world.setBlockMetadataWithNotify(x, y, z, 0, 2);
 		checkSuckUndo(world, x, y, z);
 	}
 	
-	public void buildSuck(World world, int x, int y, int z) {
+	public static void buildSuck(World world, int x, int y, int z) {
 		if (cs < ConfigurationHandler.maxSuck) {
 		if (world.getBlock(x+1, y, z) == Blocks.water) {
 			buildSucka(world, x+1, y, z, 1);
@@ -699,7 +699,7 @@ public class BuildHelper {
 		}
 	}
 	
-	public void buildSucka(World world, int x, int y, int z, int liqP) {
+	public static void buildSucka(World world, int x, int y, int z, int liqP) {
 		setBlockIfNoBedrock(world, x, y, z, Blocks.air, 0, 2);
 		sucked = true;
 		liq = liqP;

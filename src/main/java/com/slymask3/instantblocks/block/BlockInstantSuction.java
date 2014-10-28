@@ -19,59 +19,19 @@ import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
-public class BlockInstantSuction extends Block {
-	private BuildHelper ibf = new BuildHelper();
-	private ConfigurationHandler config = new ConfigurationHandler();
-	private InstantBlocks ib = new InstantBlocks();
-	private ModBlocks mb = new ModBlocks();
-	private ModItems mi = new ModItems();
+public class BlockInstantSuction extends BlockIB {
 	
     public BlockInstantSuction() {
-        super(Material.rock);
-        setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-        setBlockName("instantblocks:" + Names.Blocks.IB_SUCTION);
-        setHardness(1.5F);
-        setResistance(2000F);
-        setStepSound(Block.soundTypeStone);
-        //setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
+        super(ModBlocks.ibSucker, Names.Blocks.IB_SUCTION, Material.rock, Block.soundTypeStone, 1.5F);
+        setTextures("instantblocks:absorb_0");
     }
     
-    public int quantityDropped(Random random) {
-        return 1;
-    }
-	
-    public static IIcon[] textures = new IIcon[6];
-    
-	public void registerBlockIcons(IIconRegister ir) {
-		textures[0] = ir.registerIcon("instantblocks:absorb_0");
-		textures[1] = ir.registerIcon("instantblocks:absorb_0");
-		textures[2] = ir.registerIcon("instantblocks:absorb_0");
-		textures[3] = ir.registerIcon("instantblocks:absorb_0");
-		textures[4] = ir.registerIcon("instantblocks:absorb_0");
-		textures[5] = ir.registerIcon("instantblocks:absorb_0");
-	}
-    
-	public IIcon getIcon(int side, int meta) {
-		return textures[side];
-	}
-	
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-    	ItemStack is = player.getCurrentEquippedItem();
-    	
-		if (config.useWands == true) {
-			if (is != null && (is.getItem() == mi.ibWandWood || is.getItem() == mi.ibWandStone || is.getItem() == mi.ibWandIron || is.getItem() == mi.ibWandGold || is.getItem() == mi.ibWandDiamond)) {
-				//NO DMG ITEM? 1.7.10
-			} else {
-				ibf.msg(player, ibf.wandReq, Colors.c);
-				return true;
-			}
-		}
+    public void build(World world, int x, int y, int z, EntityPlayer player) {
+    	BuildHelper.checkSuck(world, x, y, z);
+		BuildHelper.buildSuck(world, x, y, z);
+		BuildHelper.checkSuckUndo(world, x, y, z);
 		
-		ibf.checkSuck(world, x, y, z);
-		ibf.buildSuck(world, x, y, z);
-		ibf.checkSuckUndo(world, x, y, z);
-		
-		if (config.effect == true) {
+		if (ConfigurationHandler.effect == true) {
 			world.spawnParticle("cloud", (double)x + 0.5D, (double)y + 1.2D, (double)z + 0.5D, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("cloud", (double)x + 1.2D, (double)y + 0.5D, (double)z + 0.5D, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("cloud", (double)x + 0.5D, (double)y + 0.5D, (double)z + 1.2D, 0.0D, 0.0D, 0.0D);
@@ -80,54 +40,52 @@ public class BlockInstantSuction extends Block {
 			world.spawnParticle("cloud", (double)x + 0.5D, (double)y + 0.5D, (double)z - 0.2D, 0.0D, 0.0D, 0.0D);
 		}
 		
-		if (ibf.sucked == true) {
-			if (ibf.liq == 1) {
-				world.setBlock(x, y, z, mb.ibWater);
-				ibf.keepBlocks(world, x, y, z, mb.ibSucker);
-				ibf.sound(world, config.sound, x, y, z);
-				ibf.effectFull(world, "reddust", x, y, z);
-				if (ibf.counter == 1) {
-					ibf.msg(player, "\u00a7aSucked in " + (ibf.counter) + " Water Block.", Colors.a);
+		if (BuildHelper.sucked == true) {
+			if (BuildHelper.liq == 1) {
+				world.setBlock(x, y, z, ModBlocks.ibWater);
+				BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibSucker);
+				BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+				BuildHelper.effectFull(world, "reddust", x, y, z);
+				if (BuildHelper.counter == 1) {
+					BuildHelper.msg(player, "\u00a7aSucked in " + (BuildHelper.counter) + " Water Block.", Colors.a);
 				} else {
-					ibf.msg(player, "\u00a7aSucked in " + (ibf.counter) + " Water Blocks.", Colors.a);
+					BuildHelper.msg(player, "\u00a7aSucked in " + (BuildHelper.counter) + " Water Blocks.", Colors.a);
 				}
-				ibf.xp(world, player, config.xp);
+				BuildHelper.xp(world, player, ConfigurationHandler.xp);
 				
-				if (config.useWands == true) {
-					is.damageItem(1, player);
+				if (ConfigurationHandler.useWands == true) {
+					player.getCurrentEquippedItem().damageItem(1, player);
 				}
 				
 				//player.triggerAchievement(ib.achSuckerW);
-			} else if (ibf.liq == 2) {
-				world.setBlock(x, y, z, mb.ibLava);
-				ibf.keepBlocks(world, x, y, z, mb.ibSucker);
-				ibf.sound(world, config.sound, x, y, z);
-				ibf.effectFull(world, "reddust", x, y, z);
-				if (ibf.counter == 1) {
-					ibf.msg(player, "\u00a7aSucked in " + (ibf.counter) + " Lava Block.", Colors.a);
+			} else if (BuildHelper.liq == 2) {
+				world.setBlock(x, y, z, ModBlocks.ibLava);
+				BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibSucker);
+				BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+				BuildHelper.effectFull(world, "reddust", x, y, z);
+				if (BuildHelper.counter == 1) {
+					BuildHelper.msg(player, "\u00a7aSucked in " + (BuildHelper.counter) + " Lava Block.", Colors.a);
 				} else {
-					ibf.msg(player, "\u00a7aSucked in " + (ibf.counter) + " Lava Blocks.", Colors.a);
+					BuildHelper.msg(player, "\u00a7aSucked in " + (BuildHelper.counter) + " Lava Blocks.", Colors.a);
 				}
-				ibf.xp(world, player, config.xp);
+				BuildHelper.xp(world, player, ConfigurationHandler.xp);
 				
-				is.damageItem(1, player);
+				player.getCurrentEquippedItem().damageItem(1, player);
 
 				//player.triggerAchievement(ib.achSuckerL);
 			}
 		} else {
-			if (ibf.liq == 0) {
-				ibf.msg(player, "\u00a7cNo liquids found.", Colors.c);
-			} else if (ibf.liq == -1) {
-				ibf.msg(player, "\u00a7cPrevented from sucking in over " + config.maxSuck + " Water/Lava Blocks.", Colors.c);
+			if (BuildHelper.liq == 0) {
+				BuildHelper.msg(player, "\u00a7cNo liquids found.", Colors.c);
+			} else if (BuildHelper.liq == -1) {
+				BuildHelper.msg(player, "\u00a7cPrevented from sucking in over " + ConfigurationHandler.maxSuck + " Water/Lava Blocks.", Colors.c);
 			}
 		}
 		
-		ibf.counter = 0;
-		ibf.liq = 0;
-		ibf.cs = 0;
-		ibf.cs2 = 0;
-		ibf.sucked = false;
-		
-		return true;
+		BuildHelper.counter = 0;
+		BuildHelper.liq = 0;
+		BuildHelper.cs = 0;
+		BuildHelper.cs2 = 0;
+		BuildHelper.sucked = false;
     }
 }
