@@ -25,7 +25,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class ModBlocks {
 	public static Block ibWood = new BlockInstantHouseWood();
 	public static Block ibLadder = new BlockInstantLadder();
-	public static Block ibGlassDome = new BlockInstantGlassDome(false);
+	public static Block ibGlassDome = new BlockInstantGlassDome();
 	public static Block ibFarm = new BlockInstantFarm();
 	public static Block ibFall = new BlockInstantFall();
 	public static Block ibGrinder = new BlockInstantGrinder();

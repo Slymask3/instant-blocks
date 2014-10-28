@@ -18,26 +18,15 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.utility.InstantBlocksFunctions;
+import com.slymask3.instantblocks.utility.BuildHelper;
 
-public class BlockInstantGlassDome extends Block {
-	private InstantBlocksFunctions ibf = new InstantBlocksFunctions();
-	private ConfigurationHandler config = new ConfigurationHandler();
-	public static InstantBlocks ib = new InstantBlocks();
-	private ModBlocks mb = new ModBlocks();
-	private ModItems mi = new ModItems();
+public class BlockInstantGlassDome extends BlockIB {
 	
-    public BlockInstantGlassDome(boolean b) {
-        super(Material.glass);
-        setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-        setBlockName("instantblocks:" + Names.Blocks.IB_GLASS_DOME);
-        setHardness(0.5F);
-        setResistance(2000F);
-        setStepSound(Block.soundTypeGlass);
-    }
-    
-    public int quantityDropped(Random random) {
-        return 1;
+    public BlockInstantGlassDome() {
+        super(ModBlocks.ibGlassDome, Names.Blocks.IB_GLASS_DOME, Material.glass, Block.soundTypeGlass, 0.5F);
+        setTextures(Blocks.stone, Blocks.glass, "instantblocks:glassdome_side");
+        setTextureBooleans(false, false, true, true, true, true);
+        setCreateMsg(BuildHelper.domeCreate);
     }
 	
     public int getRenderBlockPass() {
@@ -52,55 +41,7 @@ public class BlockInstantGlassDome extends Block {
         return false;
     }
     
-    public static IIcon side;
-    
-	public void registerBlockIcons(IIconRegister ir) {
-		side = ir.registerIcon("instantblocks:glassdome_side");
-	}
-    
-	public IIcon getIcon(int side, int meta) {
-		if (side == 0) {
-			return Blocks.stone.getIcon(0, 0);
-		} else if (side == 1) {
-			return Blocks.glass.getIcon(0, 0);
-		} else if (side>=2 && side<=5) {
-			return this.side;
-		}
-		return blockIcon;
-	}
-    
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		ItemStack is = player.getCurrentEquippedItem();
-    	
-		if (config.useWands == true) {
-			if (is != null && (is.getItem() == mi.ibWandWood || is.getItem() == mi.ibWandStone || is.getItem() == mi.ibWandIron || is.getItem() == mi.ibWandGold || is.getItem() == mi.ibWandDiamond)) {
-				is.damageItem(1, player);
-				//player.triggerAchievement(ib.achGlassDome);
-			} else {
-				ibf.msg(player, ibf.wandReq, Colors.c);
-				return true;
-			}
-		}
-		
-		build(world, x, y, z);
-			
-		//world.setBlock(x, y, z, ib.ibGlassDome.blockID);
-		
-		ibf.keepBlocks(world, x, y, z, mb.ibGlassDome);
-		ibf.xp(world, player, config.xp);
-			
-		ibf.sound(world, config.sound, x, y, z);
-    	ibf.effectFull(world, "reddust", x, y, z);
-    	ibf.msg(player, ibf.domeCreate, Colors.a);
-    		
-    	return true;
-    }
-
-	private void build(World world, int x, int y, int z) {
-		/*int glass = Block.glass.blockID;
-		int stone = Block.stone.blockID;
-		int torch = Block.torchWood.blockID;*/
-		
+	public void build(World world, int x, int y, int z) {
 		Block glass = Blocks.glass;
 		Block stone = Blocks.stone;
 		Block torch = Blocks.torch;

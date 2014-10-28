@@ -11,7 +11,7 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.utility.InstantBlocksFunctions;
+import com.slymask3.instantblocks.utility.BuildHelper;
 
 
 import net.minecraft.block.*;
@@ -29,7 +29,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.*;
 
 public class BlockInstantFall extends BlockDirectional {
-	private InstantBlocksFunctions ibf = new InstantBlocksFunctions();
+	private BuildHelper ibf = new BuildHelper();
 	private ConfigurationHandler config = new ConfigurationHandler();
 	private InstantBlocks ib = new InstantBlocks();
 	private ModBlocks mb = new ModBlocks();

@@ -5,11 +5,11 @@ import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 
 import com.slymask3.instantblocks.block.BlockInstantLava;
 import com.slymask3.instantblocks.block.BlockInstantWater;
-import com.slymask3.instantblocks.utility.InstantBlocksFunctions;
+import com.slymask3.instantblocks.utility.BuildHelper;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 public class ClientTickHandler {
-    public InstantBlocksFunctions ibf = new InstantBlocksFunctions();
+    public BuildHelper ibf = new BuildHelper();
 
     @SubscribeEvent
     public void onTickInGame(ClientTickEvent event) {

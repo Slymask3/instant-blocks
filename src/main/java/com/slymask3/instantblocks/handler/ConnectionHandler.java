@@ -9,14 +9,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Reference;
-import com.slymask3.instantblocks.utility.InstantBlocksFunctions;
+import com.slymask3.instantblocks.utility.BuildHelper;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
 public class ConnectionHandler {
 	public InstantBlocks ib = new InstantBlocks();
-	public InstantBlocksFunctions ibf = new InstantBlocksFunctions();
+	public BuildHelper ibf = new BuildHelper();
 	private ConfigurationHandler config = new ConfigurationHandler();
 	
 	@SubscribeEvent

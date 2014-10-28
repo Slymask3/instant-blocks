@@ -11,7 +11,7 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.utility.ColorHelper;
-import com.slymask3.instantblocks.utility.InstantBlocksFunctions;
+import com.slymask3.instantblocks.utility.BuildHelper;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -25,7 +25,7 @@ import net.minecraftforge.common.config.Property;
 public class CommandInstantBlocks extends CommandBase {
 	private InstantBlocks ib = new InstantBlocks();
 	private ConfigurationHandler config = new ConfigurationHandler();
-	private InstantBlocksFunctions ibf = new InstantBlocksFunctions();
+	private BuildHelper ibf = new BuildHelper();
 	private ModBlocks mb = new ModBlocks();
 	private ModItems mi = new ModItems();
 	//private IChatComponent icc;

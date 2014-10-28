@@ -14,7 +14,7 @@ import org.lwjgl.input.Keyboard;
 import com.slymask3.instantblocks.block.BlockInstantStatue;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
-import com.slymask3.instantblocks.utility.InstantBlocksFunctions;
+import com.slymask3.instantblocks.utility.BuildHelper;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 import cpw.mods.fml.client.config.GuiButtonExt;
@@ -25,7 +25,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiInstantStatue extends GuiScreen {
-	private static InstantBlocksFunctions ibf = new InstantBlocksFunctions();
+	private static BuildHelper ibf = new BuildHelper();
 	private static ConfigurationHandler config = new ConfigurationHandler();
 	
 	private EntityPlayer player;

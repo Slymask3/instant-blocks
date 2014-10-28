@@ -8,13 +8,13 @@ import net.minecraft.item.ItemStack;
 
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.utility.InstantBlocksFunctions;
+import com.slymask3.instantblocks.utility.BuildHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemInstantWand extends ItemIB {
-	private InstantBlocksFunctions ibf = new InstantBlocksFunctions();
+	private BuildHelper ibf = new BuildHelper();
 	private ConfigurationHandler config = new ConfigurationHandler();
 	private InstantBlocks ib = new InstantBlocks();
 	public Item material;

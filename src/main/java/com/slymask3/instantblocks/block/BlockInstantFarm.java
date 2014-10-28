@@ -23,10 +23,10 @@ import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.utility.InstantBlocksFunctions;
+import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantFarm extends BlockDirectional {
-	private InstantBlocksFunctions ibf = new InstantBlocksFunctions();
+	private BuildHelper ibf = new BuildHelper();
 	private ConfigurationHandler config = new ConfigurationHandler();
 	private InstantBlocks ib = new InstantBlocks();
 	private ModBlocks mb = new ModBlocks();

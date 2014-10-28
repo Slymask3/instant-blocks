@@ -18,7 +18,7 @@ import com.slymask3.instantblocks.proxy.IProxy;
 import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
-import com.slymask3.instantblocks.utility.InstantBlocksFunctions;
+import com.slymask3.instantblocks.utility.BuildHelper;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -37,7 +37,7 @@ public class InstantBlocks {
 	@Instance(Reference.MOD_ID)
 	public static InstantBlocks instance = new InstantBlocks();
 	
-	public static InstantBlocksFunctions ibf = new InstantBlocksFunctions();
+	public static BuildHelper ibf = new BuildHelper();
 	public static ConfigurationHandler config = new ConfigurationHandler();
 	
 	@SidedProxy(clientSide=Reference.CLIENT_PROXY_CLASS, serverSide=Reference.SERVER_PROXY_CLASS)

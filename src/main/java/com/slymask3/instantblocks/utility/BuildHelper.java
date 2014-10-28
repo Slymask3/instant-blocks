@@ -23,32 +23,32 @@ import com.slymask3.instantblocks.tileentity.TileEntityColor;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class InstantBlocksFunctions {
-	private static ConfigurationHandler config = new ConfigurationHandler();
-	private static InstantBlocks ib = new InstantBlocks();
-	private ModBlocks mb = new ModBlocks();
-	private ModItems mi = new ModItems();
+public class BuildHelper {
+	//private static ConfigurationHandlerurationHandler ConfigurationHandler = new ConfigurationHandlerurationHandler();
+	//private static InstantBlocks ib = new InstantBlocks();
+	//private ModBlocks ModBlocks = new ModBlocks();
+	//private ModItems mi = new ModItems();
 	
 	public static int checkTick = 0;
 	public static int checkParticle = 0;
 	
-	public String wandReq = "\u00a7cYou must use an Instant Wand.";
-	public String woodCreate = "\u00a7aInstant Wooden House created.";
-	public String woodPack = "\u00a7aInstant Wooden House packed up.";
-	public String woodError = "\u00a7cInstant Wooden House cannot be re-created. You must pack up this house first.";
-	public String fallCreate = "\u00a7aInstant \u00a7cR\u00a76a\u00a7ei\u00a7an\u00a72b\u00a73o\u00a7bw \u00a7aSkydive created.";
-	public String farmCreateW = "\u00a7aInstant Farm created with wheat.";
-	public String farmCreateC = "\u00a7aInstant Farm created with carrots.";
-	public String farmCreateP = "\u00a7aInstant Farm created with potatos.";
-	public String domeCreate = "\u00a7aInstant Glass Dome created.";
-	public String grinderCreate = "\u00a7aInstant Grinder created.";
-	public String grinderError = "\u00a7cYou must place this above a Zombie/Skeleton spawner.";
-	public String ladderCreate = "\u00a7aInstant Mining Ladder created.";
-	public String ladderError = "\u00a7cInstant Mining Ladder cannot be created below layer 16.";
-	public String lavaCreate1 = "\u00a7aInstant Lava created with 1 lava block.";
-	public String poolCreate = "\u00a7aInstant Pool created.";
-	public String upError = "\u00a7cThis block only works underground.";
-	public String waterCreate1 = "\u00a7aInstant Water created with 1 water block.";
+	public static String wandReq = "\u00a7cYou must use an Instant Wand.";
+	public static String woodCreate = "\u00a7aInstant Wooden House created.";
+	public static String woodPack = "\u00a7aInstant Wooden House packed up.";
+	public static String woodError = "\u00a7cInstant Wooden House cannot be re-created. You must pack up this house first.";
+	public static String fallCreate = "\u00a7aInstant \u00a7cR\u00a76a\u00a7ei\u00a7an\u00a72b\u00a73o\u00a7bw \u00a7aSkydive created.";
+	public static String farmCreateW = "\u00a7aInstant Farm created with wheat.";
+	public static String farmCreateC = "\u00a7aInstant Farm created with carrots.";
+	public static String farmCreateP = "\u00a7aInstant Farm created with potatos.";
+	public static String domeCreate = "\u00a7aInstant Glass Dome created.";
+	public static String grinderCreate = "\u00a7aInstant Grinder created.";
+	public static String grinderError = "\u00a7cYou must place this above a ZoModBlocksie/Skeleton spawner.";
+	public static String ladderCreate = "\u00a7aInstant Mining Ladder created.";
+	public static String ladderError = "\u00a7cInstant Mining Ladder cannot be created below layer 16.";
+	public static String lavaCreate1 = "\u00a7aInstant Lava created with 1 lava block.";
+	public static String poolCreate = "\u00a7aInstant Pool created.";
+	public static String upError = "\u00a7cThis block only works underground.";
+	public static String waterCreate1 = "\u00a7aInstant Water created with 1 water block.";
 	
 	/***************
 	 * @INFO	   *
@@ -210,7 +210,7 @@ public class InstantBlocksFunctions {
 	public static boolean b = false;
 	
 	public static void msg(EntityPlayer player, String msg, String color) {
-		if (config.msg == true) {
+		if (ConfigurationHandler.msg == true) {
 			World world = player.worldObj;
 		
 			if (world.isRemote) { //IF CLIENT	
@@ -237,7 +237,7 @@ public class InstantBlocksFunctions {
 	
 	//@SideOnly(Side.CLIENT)
 	public static void msgClean(EntityPlayer player, String msg, String color) {
-		//if (config.msg == true) {
+		//if (ConfigurationHandler.msg == true) {
 			player.addChatMessage(new ChatComponentText("\u00a78[\u00a73Instant Blocks v" + Reference.VERSION + "\u00a78] " + ColorHelper.colorEveryWord(msg, color)));
 		//}
     }
@@ -260,7 +260,7 @@ public class InstantBlocksFunctions {
 	}*/
 	
 	/*public static void effectFull(World world, String particle, int x, int y, int z) {
-		if (config.effect.getBoolean(true)) {
+		if (ConfigurationHandler.effect.getBoolean(true)) {
 			for (double i = 0; i <= 1; i = i + 0.1) {
 				for (double n = 0; n <= 1; n = n + 0.1) {
 					for (double v = 0; v <= 1; v = v + 0.1) {
@@ -272,7 +272,7 @@ public class InstantBlocksFunctions {
 	}*/
 	
 	public static void effectFull(World world, String particle, int x, int y, int z) {
-		if (config.effect == true) {
+		if (ConfigurationHandler.effect == true) {
 			//if (checkParticle > 0) {
 				for (double i = 0; i <= 1; i = i + 0.1) {
 					for (double n = 0; n <= 1; n = n + 0.1) {
@@ -286,9 +286,9 @@ public class InstantBlocksFunctions {
 		}
 	}
 	
-	public int counter = 0;
-	public int c2 = 0;
-	public int c5 = 0;
+	public static int counter = 0;
+	public static int c2 = 0;
+	public static int c5 = 0;
 	
 	public void buildLiquid(World world, int x, int y, int z, Block block) {
 		c2++;
@@ -415,28 +415,28 @@ public class InstantBlocksFunctions {
 		}
 	}
 	
-	public boolean built = false;
+	public static boolean built = false;
 	
-	public void checkLiquid5(World world, int x, int y, int z, Block block) {
+	public static void checkLiquid5(World world, int x, int y, int z, Block block) {
 		c2++;
-		if (c2 < config.max) {
-			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) != 15 && c2 < config.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
+		if (c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) != 15 && c2 < ConfigurationHandler.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
 				counter++;
 				checkLiquid5a(world, x+1, y, z, block);
 			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) != 15 && c2 < config.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
+			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) != 15 && c2 < ConfigurationHandler.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
 				counter++;
 				checkLiquid5a(world, x-1, y, z, block);
 			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) != 15 && c2 < config.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
+			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) != 15 && c2 < ConfigurationHandler.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
 				counter++;
 				checkLiquid5a(world, x, y, z+1, block);
 			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) != 15 && c2 < config.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
+			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) != 15 && c2 < ConfigurationHandler.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
 				counter++;
 				checkLiquid5a(world, x, y, z-1, block);
 			}
-			if (world.getBlock(x, y-1, z) == Blocks.air && world.getBlockMetadata(x, y-1, z) != 15 && c2 < config.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
+			if (world.getBlock(x, y-1, z) == Blocks.air && world.getBlockMetadata(x, y-1, z) != 15 && c2 < ConfigurationHandler.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
 				counter++;
 				checkLiquid5a(world, x, y-1, z, block);
 			}
@@ -445,145 +445,145 @@ public class InstantBlocksFunctions {
 	
 	public int[] checkLiquid5aC = new int[25000];
 	
-	public void checkLiquid5a(World world, int x, int y, int z, Block block) {
+	public static void checkLiquid5a(World world, int x, int y, int z, Block block) {
 			world.setBlockMetadataWithNotify(x, y, z, 15, 2);
 			checkLiquid5(world, x, y, z, block);
 	}
 	
-	public void checkLiquid5Undo(World world, int x, int y, int z, Block block) {
+	public static void checkLiquid5Undo(World world, int x, int y, int z, Block block) {
 		c5++;
-		if (c5 < config.max) {
-			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) == 15 && c5 < config.max) {
+		if (c5 < ConfigurationHandler.max) {
+			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) == 15 && c5 < ConfigurationHandler.max) {
 				checkLiquid5aUndo(world, x+1, y, z, block);
 			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) == 15 && c5 < config.max) {
+			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) == 15 && c5 < ConfigurationHandler.max) {
 				checkLiquid5aUndo(world, x-1, y, z, block);
 			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) == 15 && c5 < config.max) {
+			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) == 15 && c5 < ConfigurationHandler.max) {
 				checkLiquid5aUndo(world, x, y, z+1, block);
 			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) == 15 && c5 < config.max) {
+			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) == 15 && c5 < ConfigurationHandler.max) {
 				checkLiquid5aUndo(world, x, y, z-1, block);
 			}
-			if (world.getBlock(x, y-1, z) == Blocks.air && world.getBlockMetadata(x, y-1, z) == 15 && c5 < config.max) {
+			if (world.getBlock(x, y-1, z) == Blocks.air && world.getBlockMetadata(x, y-1, z) == 15 && c5 < ConfigurationHandler.max) {
 				checkLiquid5aUndo(world, x, y-1, z, block);
 			}
 		}
 	}
 	
-	public void checkLiquid5aUndo(World world, int x, int y, int z, Block block) {
+	public static void checkLiquid5aUndo(World world, int x, int y, int z, Block block) {
 		world.setBlockMetadataWithNotify(x, y, z, 0, 2);
 		checkLiquid5Undo(world, x, y, z, block);
 	}
 	
-	public void buildLiquid4(World world, int x, int y, int z, Block block) {
-		if (c2 < config.max) {
-			if (world.getBlock(x+1, y, z) == Blocks.air && c2 < config.max) {
+	public static void buildLiquid4(World world, int x, int y, int z, Block block) {
+		if (c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x+1, y, z) == Blocks.air && c2 < ConfigurationHandler.max) {
 				buildLiquid4a(world, x+1, y, z, block);
 				built = true;
 			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && c2 < config.max) {
+			if (world.getBlock(x-1, y, z) == Blocks.air && c2 < ConfigurationHandler.max) {
 				buildLiquid4a(world, x-1, y, z, block);
 				built = true;
 			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && c2 < config.max) {
+			if (world.getBlock(x, y, z+1) == Blocks.air && c2 < ConfigurationHandler.max) {
 				buildLiquid4a(world, x, y, z+1, block);
 				built = true;
 			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && c2 < config.max) {
+			if (world.getBlock(x, y, z-1) == Blocks.air && c2 < ConfigurationHandler.max) {
 				buildLiquid4a(world, x, y, z-1, block);
 				built = true;
 			}
-			if (world.getBlock(x, y-1, z) == Blocks.air && c2 < config.max) {
+			if (world.getBlock(x, y-1, z) == Blocks.air && c2 < ConfigurationHandler.max) {
 				buildLiquid4a(world, x, y-1, z, block);
 				built = true;
 			}
 		}
 	}
 	
-	public void buildLiquid4a(World world, int x, int y, int z, Block block) {
+	public static void buildLiquid4a(World world, int x, int y, int z, Block block) {
 		setBlockIfNoBedrock(world, x, y, z, block, 0, 2);
-		if (c2 < config.max) {
+		if (c2 < ConfigurationHandler.max) {
 			buildLiquid4(world, x, y, z, block);
 		}
 	}
 	
 	/**************************************** SIMPLE VERSION ************************************************/
 	
-	public void checkLiquid5S(World world, int x, int y, int z, Block block) {
+	public static void checkLiquid5S(World world, int x, int y, int z, Block block) {
 		c2++;
-		if (c2 < config.max) {
-			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) != 15 && c2 < config.max) {
+		if (c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) != 15 && c2 < ConfigurationHandler.max) {
 				counter++;
 				checkLiquid5aS(world, x+1, y, z, block);
 			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) != 15 && c2 < config.max) {
+			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) != 15 && c2 < ConfigurationHandler.max) {
 				counter++;
 				checkLiquid5aS(world, x-1, y, z, block);
 			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) != 15 && c2 < config.max) {
+			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) != 15 && c2 < ConfigurationHandler.max) {
 				counter++;
 				checkLiquid5aS(world, x, y, z+1, block);
 			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) != 15 && c2 < config.max) {
+			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) != 15 && c2 < ConfigurationHandler.max) {
 				counter++;
 				checkLiquid5aS(world, x, y, z-1, block);
 			}
 		}
 	}
 	
-	public void checkLiquid5aS(World world, int x, int y, int z, Block block) {
+	public static void checkLiquid5aS(World world, int x, int y, int z, Block block) {
 		world.setBlockMetadataWithNotify(x, y, z, 15, 2);
 		checkLiquid5S(world, x, y, z, block);
 	}
 	
-	public void checkLiquid5UndoS(World world, int x, int y, int z, Block block) {
+	public static void checkLiquid5UndoS(World world, int x, int y, int z, Block block) {
 		c5++;
-		if (c5 < config.max) {
-			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) == 15 && c5 < config.max) {
+		if (c5 < ConfigurationHandler.max) {
+			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) == 15 && c5 < ConfigurationHandler.max) {
 				checkLiquid5aUndoS(world, x+1, y, z, block);
 			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) == 15 && c5 < config.max) {
+			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) == 15 && c5 < ConfigurationHandler.max) {
 				checkLiquid5aUndoS(world, x-1, y, z, block);
 			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) == 15 && c5 < config.max) {
+			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) == 15 && c5 < ConfigurationHandler.max) {
 				checkLiquid5aUndoS(world, x, y, z+1, block);
 			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) == 15 && c5 < config.max) {
+			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) == 15 && c5 < ConfigurationHandler.max) {
 				checkLiquid5aUndoS(world, x, y, z-1, block);
 			}
 		}
 	}
 	
-	public void checkLiquid5aUndoS(World world, int x, int y, int z, Block block) {
+	public static void checkLiquid5aUndoS(World world, int x, int y, int z, Block block) {
 		world.setBlockMetadataWithNotify(x, y, z, 0, 2);
 		checkLiquid5UndoS(world, x, y, z, block);
 	}
 	
-	public void buildLiquid4S(World world, int x, int y, int z, Block block) {
-		if (c2 < config.max) {
-			if (world.getBlock(x+1, y, z) == Blocks.air && c2 < config.max) {
+	public static void buildLiquid4S(World world, int x, int y, int z, Block block) {
+		if (c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x+1, y, z) == Blocks.air && c2 < ConfigurationHandler.max) {
 				buildLiquid4aS(world, x+1, y, z, block);
 				built = true;
 			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && c2 < config.max) {
+			if (world.getBlock(x-1, y, z) == Blocks.air && c2 < ConfigurationHandler.max) {
 				buildLiquid4aS(world, x-1, y, z, block);
 				built = true;
 			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && c2 < config.max) {
+			if (world.getBlock(x, y, z+1) == Blocks.air && c2 < ConfigurationHandler.max) {
 				buildLiquid4aS(world, x, y, z+1, block);
 				built = true;
 			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && c2 < config.max) {
+			if (world.getBlock(x, y, z-1) == Blocks.air && c2 < ConfigurationHandler.max) {
 				buildLiquid4aS(world, x, y, z-1, block);
 				built = true;
 			}
 		}
 	}
 	
-	public void buildLiquid4aS(World world, int x, int y, int z, Block block) {
+	public static void buildLiquid4aS(World world, int x, int y, int z, Block block) {
 		setBlockIfNoBedrock(world, x, y, z, block, 0, 2);
-		if (c2 < config.max) {
+		if (c2 < ConfigurationHandler.max) {
 			buildLiquid4S(world, x, y, z, block);
 		}
 	}
@@ -599,23 +599,23 @@ public class InstantBlocksFunctions {
 	
 	public void checkSuck(World world, int x, int y, int z) {
 		cs++;
-		if (cs < config.maxSuck) {
-			if ((world.getBlock(x+1, y, z) == Blocks.water || world.getBlock(x+1, y, z) == Blocks.lava) && world.getBlockMetadata(x+1, y, z) != 15 && cs < config.maxSuck) {
+		if (cs < ConfigurationHandler.maxSuck) {
+			if ((world.getBlock(x+1, y, z) == Blocks.water || world.getBlock(x+1, y, z) == Blocks.lava) && world.getBlockMetadata(x+1, y, z) != 15 && cs < ConfigurationHandler.maxSuck) {
 				checkSucka(world, x+1, y, z);
 			}
-			if ((world.getBlock(x-1, y, z) == Blocks.water || world.getBlock(x-1, y, z) == Blocks.lava) && world.getBlockMetadata(x-1, y, z) != 15 && cs < config.maxSuck) {
+			if ((world.getBlock(x-1, y, z) == Blocks.water || world.getBlock(x-1, y, z) == Blocks.lava) && world.getBlockMetadata(x-1, y, z) != 15 && cs < ConfigurationHandler.maxSuck) {
 				checkSucka(world, x-1, y, z);
 			}
-			if ((world.getBlock(x, y, z+1) == Blocks.water || world.getBlock(x, y, z+1) == Blocks.lava) && world.getBlockMetadata(x, y, z+1) != 15 && cs < config.maxSuck) {
+			if ((world.getBlock(x, y, z+1) == Blocks.water || world.getBlock(x, y, z+1) == Blocks.lava) && world.getBlockMetadata(x, y, z+1) != 15 && cs < ConfigurationHandler.maxSuck) {
 				checkSucka(world, x, y, z+1);
 			}
-			if ((world.getBlock(x, y, z-1) == Blocks.water || world.getBlock(x, y, z-1) == Blocks.lava) && world.getBlockMetadata(x, y, z-1) != 15 && cs < config.maxSuck) {
+			if ((world.getBlock(x, y, z-1) == Blocks.water || world.getBlock(x, y, z-1) == Blocks.lava) && world.getBlockMetadata(x, y, z-1) != 15 && cs < ConfigurationHandler.maxSuck) {
 				checkSucka(world, x, y, z-1);
 			}
-			if ((world.getBlock(x, y+1, z) == Blocks.water || world.getBlock(x, y+1, z) == Blocks.lava) && world.getBlockMetadata(x, y+1, z) != 15 && cs < config.maxSuck) {
+			if ((world.getBlock(x, y+1, z) == Blocks.water || world.getBlock(x, y+1, z) == Blocks.lava) && world.getBlockMetadata(x, y+1, z) != 15 && cs < ConfigurationHandler.maxSuck) {
 				checkSucka(world, x, y+1, z);
 			}
-			if ((world.getBlock(x, y-1, z) == Blocks.water || world.getBlock(x, y-1, z) == Blocks.lava) && world.getBlockMetadata(x, y-1, z) != 15 && cs < config.maxSuck) {
+			if ((world.getBlock(x, y-1, z) == Blocks.water || world.getBlock(x, y-1, z) == Blocks.lava) && world.getBlockMetadata(x, y-1, z) != 15 && cs < ConfigurationHandler.maxSuck) {
 				checkSucka(world, x, y-1, z);
 			}
 		}
@@ -630,23 +630,23 @@ public class InstantBlocksFunctions {
 	
 	public void checkSuckUndo(World world, int x, int y, int z) {
 		cs2++;
-		if (cs2 < config.maxSuck) {
-			if ((world.getBlock(x+1, y, z) == Blocks.water || world.getBlock(x+1, y, z) == Blocks.lava) && world.getBlockMetadata(x+1, y, z) == 15 && cs2 < config.maxSuck) {
+		if (cs2 < ConfigurationHandler.maxSuck) {
+			if ((world.getBlock(x+1, y, z) == Blocks.water || world.getBlock(x+1, y, z) == Blocks.lava) && world.getBlockMetadata(x+1, y, z) == 15 && cs2 < ConfigurationHandler.maxSuck) {
 				checkSuckaUndo(world, x+1, y, z);
 			}
-			if ((world.getBlock(x-1, y, z) == Blocks.water || world.getBlock(x-1, y, z) == Blocks.lava) && world.getBlockMetadata(x-1, y, z) == 15 && cs2 < config.maxSuck) {
+			if ((world.getBlock(x-1, y, z) == Blocks.water || world.getBlock(x-1, y, z) == Blocks.lava) && world.getBlockMetadata(x-1, y, z) == 15 && cs2 < ConfigurationHandler.maxSuck) {
 				checkSuckaUndo(world, x-1, y, z);
 			}
-			if ((world.getBlock(x, y, z+1) == Blocks.water || world.getBlock(x, y, z+1) == Blocks.lava) && world.getBlockMetadata(x, y, z+1) == 15 && cs2 < config.maxSuck) {
+			if ((world.getBlock(x, y, z+1) == Blocks.water || world.getBlock(x, y, z+1) == Blocks.lava) && world.getBlockMetadata(x, y, z+1) == 15 && cs2 < ConfigurationHandler.maxSuck) {
 				checkSuckaUndo(world, x, y, z+1);
 			}
-			if ((world.getBlock(x, y, z-1) == Blocks.water || world.getBlock(x, y, z-1) == Blocks.lava) && world.getBlockMetadata(x, y, z-1) == 15 && cs2 < config.maxSuck) {
+			if ((world.getBlock(x, y, z-1) == Blocks.water || world.getBlock(x, y, z-1) == Blocks.lava) && world.getBlockMetadata(x, y, z-1) == 15 && cs2 < ConfigurationHandler.maxSuck) {
 				checkSuckaUndo(world, x, y, z-1);
 			}
-			if ((world.getBlock(x, y+1, z) == Blocks.water || world.getBlock(x, y+1, z) == Blocks.lava) && world.getBlockMetadata(x, y+1, z) == 15 && cs2 < config.maxSuck) {
+			if ((world.getBlock(x, y+1, z) == Blocks.water || world.getBlock(x, y+1, z) == Blocks.lava) && world.getBlockMetadata(x, y+1, z) == 15 && cs2 < ConfigurationHandler.maxSuck) {
 				checkSuckaUndo(world, x, y+1, z);
 			}
-			if ((world.getBlock(x, y-1, z) == Blocks.water || world.getBlock(x, y-1, z) == Blocks.lava) && world.getBlockMetadata(x, y-1, z) == 15 && cs2 < config.maxSuck) {
+			if ((world.getBlock(x, y-1, z) == Blocks.water || world.getBlock(x, y-1, z) == Blocks.lava) && world.getBlockMetadata(x, y-1, z) == 15 && cs2 < ConfigurationHandler.maxSuck) {
 				checkSuckaUndo(world, x, y-1, z);
 			}
 		}
@@ -658,7 +658,7 @@ public class InstantBlocksFunctions {
 	}
 	
 	public void buildSuck(World world, int x, int y, int z) {
-		if (cs < config.maxSuck) {
+		if (cs < ConfigurationHandler.maxSuck) {
 		if (world.getBlock(x+1, y, z) == Blocks.water) {
 			buildSucka(world, x+1, y, z, 1);
 		}
@@ -703,7 +703,7 @@ public class InstantBlocksFunctions {
 		setBlockIfNoBedrock(world, x, y, z, Blocks.air, 0, 2);
 		sucked = true;
 		liq = liqP;
-		if (cs < config.maxSuck) {
+		if (cs < ConfigurationHandler.maxSuck) {
 			buildSuck(world, x, y, z);
 		}
 	}
@@ -711,30 +711,30 @@ public class InstantBlocksFunctions {
 	/******************************************************************************************************/
 	
 	public void buildLiquid2(World world, int x, int y, int z, Block block, Block block2, int counter, int max) {
-		if (counter < config.max) {
+		if (counter < ConfigurationHandler.max) {
 		if (world.getBlock(x+1, y, z) == Blocks.air /*|| world.getBlockId(x+1, y, z) == block2*/) {
 			setBlockIfNoBedrock(world, x+1, y, z, block);
-			buildLiquid2(world, x+1, y, z, block, block2, counter, config.max);
+			buildLiquid2(world, x+1, y, z, block, block2, counter, ConfigurationHandler.max);
 			counter++;
 		}
 		if (world.getBlock(x-1, y, z) == Blocks.air /*|| world.getBlockId(x-1, y, z) == block2*/) {
 			setBlockIfNoBedrock(world, x-1, y, z, block);
-			buildLiquid2(world, x-1, y, z, block, block2, counter, config.max);
+			buildLiquid2(world, x-1, y, z, block, block2, counter, ConfigurationHandler.max);
 			counter++;
 		}
 		if (world.getBlock(x, y, z+1) == Blocks.air /*|| world.getBlockId(x, y, z+1) == block2*/) {
 			setBlockIfNoBedrock(world, x, y, z+1, block);
-			buildLiquid2(world, x, y, z+1, block, block2, counter, config.max);
+			buildLiquid2(world, x, y, z+1, block, block2, counter, ConfigurationHandler.max);
 			counter++;
 		}
 		if (world.getBlock(x, y, z-1) == Blocks.air /*|| world.getBlockId(x, y, z-1) == block2*/) {
 			setBlockIfNoBedrock(world, x, y, z-1, block);
-			buildLiquid2(world, x, y, z-1, block, block2, counter, config.max);
+			buildLiquid2(world, x, y, z-1, block, block2, counter, ConfigurationHandler.max);
 			counter++;
 		}
 		if (world.getBlock(x, y-1, z) == Blocks.air /*|| world.getBlockId(x, y-1, z) == block2*/) {
 			setBlockIfNoBedrock(world, x, y-1, z, block);
-			buildLiquid2(world, x, y-1, z, block, block2, counter, config.max);
+			buildLiquid2(world, x, y-1, z, block, block2, counter, ConfigurationHandler.max);
 			counter++;
 		}
 		} else {
@@ -742,8 +742,8 @@ public class InstantBlocksFunctions {
 		}
 	}
 	
-	public void keepBlocks(World world, int x, int y, int z, Block block) {
-		if (config.keepBlocks == true) {
+	public static void keepBlocks(World world, int x, int y, int z, Block block) {
+		if (ConfigurationHandler.keepBlocks == true) {
 			setBlockIfNoBedrock(world, x, y, z, block);
 		} else {
 			//Do not keep block.
@@ -753,7 +753,7 @@ public class InstantBlocksFunctions {
 	public void tp(World world, EntityPlayer player, int x, int y, int z, boolean property) {
 		if (!world.isRemote) { //IF SERVER
 			if (property) {
-				sound(world, config.sound, x, y, z);
+				sound(world, ConfigurationHandler.sound, x, y, z);
 				player.setPositionAndUpdate(x + 0.5, y + 0.5, z + 0.5);
 			}
 		}
@@ -762,8 +762,8 @@ public class InstantBlocksFunctions {
 
 	
 	public void setColorBlock(World world, int x, int y, int z, BufferedImage img, int imgx, int imgy) {
-		if (config.rgbMode) {
-			setBlockIfNoBedrock(world, x, y, z, mb.color);
+		if (ConfigurationHandler.rgbMode) {
+			setBlockIfNoBedrock(world, x, y, z, ModBlocks.color);
 			((TileEntityColor) world.getTileEntity(x, y, z)).color = img.getRGB(imgx, imgy);
 			world.markBlockForUpdate(x, y, z);
 		} else {
@@ -772,8 +772,8 @@ public class InstantBlocksFunctions {
 	}
 	
 	public void setColorBlock(World world, int x, int y, int z, BufferedImage img, int imgx, int imgy, int metaDirection, int forwardBack, int leftRight) {
-		if (config.rgbMode) {
-			setBlockDirectionalSimple(world, x, y, z, mb.color, metaDirection, forwardBack, leftRight);
+		if (ConfigurationHandler.rgbMode) {
+			setBlockDirectionalSimple(world, x, y, z, ModBlocks.color, metaDirection, forwardBack, leftRight);
 			((TileEntityColor) world.getTileEntity(x, y, z)).color = img.getRGB(imgx, imgy);
 			world.markBlockForUpdate(x, y, z);
 		} else {
@@ -845,7 +845,7 @@ public class InstantBlocksFunctions {
     }
     
     public void setColorBlockComplex(World world, int x, int y, int z, BufferedImage img, int imgx, int imgy, int metaDirection, int forwardBack, int leftRight) {
-    	if (config.rgbMode) {
+    	if (ConfigurationHandler.rgbMode) {
     		int forward;
     		int back;
     		int left;
@@ -868,19 +868,19 @@ public class InstantBlocksFunctions {
     		}
     		
     		if(metaDirection==0) {
-        		setBlockIfNoBedrock(world, x+left-right, y, z-forward+back, mb.color, 0, 2);
+        		setBlockIfNoBedrock(world, x+left-right, y, z-forward+back, ModBlocks.color, 0, 2);
         		((TileEntityColor) world.getTileEntity(x+left-right, y, z-forward+back)).color = img.getRGB(imgx, imgy);
     			world.markBlockForUpdate(x+left-right, y, z-forward+back);
     		} else if(metaDirection==1) {
-    			setBlockIfNoBedrock(world, x+forward-back, y, z+left-right, mb.color, 0, 2);
+    			setBlockIfNoBedrock(world, x+forward-back, y, z+left-right, ModBlocks.color, 0, 2);
     			((TileEntityColor) world.getTileEntity(x+forward-back, y, z+left-right)).color = img.getRGB(imgx, imgy);
     			world.markBlockForUpdate(x+forward-back, y, z+left-right);
     		} else if(metaDirection==2) {
-    			setBlockIfNoBedrock(world, x-left+right, y, z+forward-back, mb.color, 0, 2);
+    			setBlockIfNoBedrock(world, x-left+right, y, z+forward-back, ModBlocks.color, 0, 2);
     			((TileEntityColor) world.getTileEntity(x-left+right, y, z+forward-back)).color = img.getRGB(imgx, imgy);
     			world.markBlockForUpdate(x-left+right, y, z+forward-back);
     		} else if(metaDirection==3) {
-    			setBlockIfNoBedrock(world, x-forward+back, y, z-left+right, mb.color, 0, 2);
+    			setBlockIfNoBedrock(world, x-forward+back, y, z-left+right, ModBlocks.color, 0, 2);
     			((TileEntityColor) world.getTileEntity(x-forward+back, y, z-left+right)).color = img.getRGB(imgx, imgy);
     			world.markBlockForUpdate(x-forward+back, y, z-left+right);
     		}

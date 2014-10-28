@@ -34,11 +34,11 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
 import com.slymask3.instantblocks.utility.ColorHelper;
-import com.slymask3.instantblocks.utility.InstantBlocksFunctions;
+import com.slymask3.instantblocks.utility.BuildHelper;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 public class BlockInstantStatue extends BlockContainer {
-	private static InstantBlocksFunctions ibf = new InstantBlocksFunctions();
+	private static BuildHelper ibf = new BuildHelper();
 	private static ConfigurationHandler config = new ConfigurationHandler();
 	private InstantBlocks ib = new InstantBlocks();
 	private static ModBlocks mb = new ModBlocks();
