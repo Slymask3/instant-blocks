@@ -37,16 +37,8 @@ public class InstantBlocks {
 	@Instance(Reference.MOD_ID)
 	public static InstantBlocks instance = new InstantBlocks();
 	
-	public static BuildHelper ibf = new BuildHelper();
-	public static ConfigurationHandler config = new ConfigurationHandler();
-	
 	@SidedProxy(clientSide=Reference.CLIENT_PROXY_CLASS, serverSide=Reference.SERVER_PROXY_CLASS)
 	public static IProxy proxy;
-	
-    //public static Block.SoundType soundWaterFootstep = new SoundType("random.splash", 1.0F, 1.0F);
-    //public static Block.SoundType soundLavaFootstep = new SoundType("random.fizz", 1.0F, 1.0F);
-	
-	//public static String ver = "v1.4.8";
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -92,9 +84,9 @@ public class InstantBlocks {
 	
 	@Mod.EventHandler
 	public void serverStart(FMLServerStartingEvent event) {
-		MinecraftServer server = MinecraftServer.getServer(); //Gets current server
-		ICommandManager command = server.getCommandManager(); //Gets the command manager to use for server
-		ServerCommandManager serverCommand = ((ServerCommandManager) command); //Turns it into another form to use
+		MinecraftServer server = MinecraftServer.getServer();
+		ICommandManager command = server.getCommandManager();
+		ServerCommandManager serverCommand = ((ServerCommandManager) command);
 		
 		serverCommand.registerCommand(new CommandInstantBlocks());
 	}
