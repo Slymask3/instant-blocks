@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLadder;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -20,7 +21,7 @@ import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
-public class BlockInstantUp extends BlockLadder {
+public class BlockInstantUp extends BlockLadderIB {
 	private BuildHelper ibf = new BuildHelper();
 	private ConfigurationHandler config = new ConfigurationHandler();
 	private InstantBlocks ib = new InstantBlocks();
@@ -31,43 +32,11 @@ public class BlockInstantUp extends BlockLadder {
 	public int side = 0;
 	
     public BlockInstantUp() {
-        super();
-        setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-        setBlockName("instantblocks:" + Names.Blocks.IB_ESCAPE_LADDER);
-        setHardness(0.4F);
-        setResistance(2000F);
-        setStepSound(Block.soundTypeLadder);
+        super(ModBlocks.ibUp, Names.Blocks.IB_ESCAPE_LADDER, Material.circuits, Block.soundTypeLadder, 0.4F);
+        setTextures("instantblocks:escape_ladder");
         setTickRandomly(true);
     }
     
-    public int quantityDropped(Random random) {
-        return 1;
-    }
-	
-    public static IIcon[] textures = new IIcon[6];
-    
-	public void registerBlockIcons(IIconRegister ir) {
-		if (config.animated.getBoolean(true)) {
-			textures[0] = ir.registerIcon("instantblocks:escape_ladder");
-			textures[1] = ir.registerIcon("instantblocks:escape_ladder");
-			textures[2] = ir.registerIcon("instantblocks:escape_ladder");
-			textures[3] = ir.registerIcon("instantblocks:escape_ladder");
-			textures[4] = ir.registerIcon("instantblocks:escape_ladder");
-			textures[5] = ir.registerIcon("instantblocks:escape_ladder");
-		} else {
-			textures[0] = ir.registerIcon("ladder");
-			textures[1] = ir.registerIcon("ladder");
-			textures[2] = ir.registerIcon("ladder");
-			textures[3] = ir.registerIcon("ladder");
-			textures[4] = ir.registerIcon("ladder");
-			textures[5] = ir.registerIcon("ladder");
-		}
-	}
-    
-	public IIcon getIcon(int side, int meta) {
-		return textures[side];
-	}
-	
 	public void func_149797_b(int par1) {
         float f = 0.125F;
 
@@ -92,26 +61,6 @@ public class BlockInstantUp extends BlockLadder {
         }
     }
 	
-	/*public void func_149797_b(int par1) {
-        float f = 0.125F;
-
-        if (par1 == 2) {
-            this.setBlockBounds(0.0F, 0.0F, 1.0F - f, 1.0F, 1.0F, 1.0F);
-        }
-
-        if (par1 == 3) {
-            this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
-        }
-
-        if (par1 == 4) {
-            this.setBlockBounds(1.0F - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-        }
-
-        if (par1 == 5) {
-            this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
-        }
-    }*/
-	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
     	if (world.canBlockSeeTheSky(x, y+1, z) == true) {
 			ibf.msg(player, ibf.upError, Colors.c);
@@ -129,10 +78,6 @@ public class BlockInstantUp extends BlockLadder {
 				return true;
 			}
 		}
-		
-		/*int stone = Block.stone.blockID;
-		int ladder = Block.ladder.blockID;
-		int torch = Block.torchWood.blockID;*/
 		
 		Block stone = Blocks.stone;
 		Block ladder = Blocks.ladder;

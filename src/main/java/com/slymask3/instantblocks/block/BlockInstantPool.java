@@ -24,24 +24,11 @@ import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
-public class BlockInstantPool extends BlockDirectional {
-	private BuildHelper ibf = new BuildHelper();
-	private ConfigurationHandler config = new ConfigurationHandler();
-	private InstantBlocks ib = new InstantBlocks();
-	private ModBlocks mb = new ModBlocks();
-	private ModItems mi = new ModItems();
+public class BlockInstantPool extends BlockDirectionalIB {
 	
     public BlockInstantPool() {
-        super(Material.rock);
-        setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-        setBlockName("instantblocks:" + Names.Blocks.IB_POOL);
-        setHardness(1.5F);
-        setResistance(2000F);
-        setStepSound(Block.soundTypeStone);
-    }
-    
-    public int quantityDropped(Random r) {
-        return 1;
+        super(ModBlocks.ibPool, Names.Blocks.IB_POOL, Material.rock, Block.soundTypeStone, 1.5F);
+        setCreateMsg(BuildHelper.poolCreate);
     }
 	
     public static IIcon[] textures = new IIcon[6];
@@ -52,13 +39,6 @@ public class BlockInstantPool extends BlockDirectional {
     public static IIcon side;
     
 	public void registerBlockIcons(IIconRegister ir) {
-		/*textures[0] = ir.registerIcon("stoneslab_top");
-		textures[1] = ir.registerIcon("instantblocks:pool_top_0");
-		textures[2] = ir.registerIcon("stoneslab_top");
-		textures[3] = ir.registerIcon("stoneslab_top");
-		textures[4] = ir.registerIcon("stoneslab_top");
-		textures[5] = ir.registerIcon("stoneslab_top");*/
-		
 		side = ir.registerIcon("stone_slab_top");
 		
 		top0 = ir.registerIcon("instantblocks:pool_top_0"); //NORTH
@@ -69,7 +49,7 @@ public class BlockInstantPool extends BlockDirectional {
     
 	public IIcon getIcon(int side, int meta) {
 		if (side == 0) {
-			return this.side;
+			return Blocks.stone_slab.getIcon(1, 0);
 		} else if (side == 1) {
 			if (meta == 0) {
 				return top0;
@@ -83,110 +63,24 @@ public class BlockInstantPool extends BlockDirectional {
 				return top0;
 			}
 		} else if (side == 2) {
-			return this.side;
+			return Blocks.stone_slab.getIcon(1, 0);
 		} else if (side == 3) {
-			return this.side;
+			return Blocks.stone_slab.getIcon(1, 0);
 		} else if (side == 4) {
-			return this.side;
+			return Blocks.stone_slab.getIcon(1, 0);
 		} else if (side == 5) {
-			return this.side;
+			return Blocks.stone_slab.getIcon(1, 0);
 		} else {
 			return blockIcon;
 		}
 	}
-    
-    /*public static IIcon bottom;
-	public static IIcon top;
-	public static IIcon side;
-	public static IIcon front;
-
-	public void registerBlockIcons(IIconRegister ir) {
-		bottom = ir.registerIcon("wood_spruce");
-		top = ir.registerIcon("instantblocks:pool_top_0");
-		side = ir.registerIcon("instantblocks:woodhouse_side");
-		front = ir.registerIcon("instantblocks:woodhouse_front");
-	}
-
-	public IIcon getIcon(int side, int meta) {
-		if (side == 0) {
-			return bottom;
-		} else if (side == 1) {
-			return top;
-		} else if (side == 2) {
-			if (meta == 2 || meta == 6) {
-				return front;
-			} else {
-				return this.side;
-			}
-		} else if (side == 3) {
-			if (meta == 0 || meta == 4) {
-				return front;
-			} else {
-				return this.side;
-			}
-		} else if (side == 4) {
-			if (meta == 1 || meta == 5) {
-				return front;
-			} else {
-				return this.side;
-			}
-		} else if (side == 5) {
-			if (meta == 3 || meta == 7) {
-				return front;
-			} else {
-				return this.side;
-			}
-		} else {
-			return blockIcon;
-		}
-	}*/
-
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack) {
-        int meta = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-        par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 2);
-    }
 	
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-    	ItemStack is = player.getCurrentEquippedItem();
-    	
-		if (config.useWands == true) {
-			if (is != null && (is.getItem() == mi.ibWandWood || is.getItem() == mi.ibWandStone || is.getItem() == mi.ibWandIron || is.getItem() == mi.ibWandGold || is.getItem() == mi.ibWandDiamond)) {
-				is.damageItem(1, player);
-				//player.triggerAchievement(ib.achPool);
-			} else {
-				ibf.msg(player, ibf.wandReq, Colors.c);
-				return true;
-			}
-		}
-		
-		build(world, x, y, z);
-    	
-		ibf.keepBlocks(world, x, y, z, mb.ibPool);
-		ibf.xp(world, player, config.xp);
-		
-		ibf.sound(world, config.sound, x, y, z);
-		ibf.effectFull(world, "reddust", x, y, z);
-		ibf.msg(player, ibf.poolCreate, Colors.a);
-    	
-		return true;
-    }
-
-	private void build(World world, int x, int y, int z) {
-		/*int stone = Block.stoneDoubleSlab.blockID;
-		int water = Block.waterMoving.blockID;
-		int slab = Block.stoneSingleSlab.blockID;
-		int glow = Block.glowStone.blockID;
-		int slabD = Block.stoneDoubleSlab.blockID;
-		int ladder = Block.ladder.blockID;
-		int wood = Block.planks.blockID;
-		int fence = Block.fence.blockID;
-		int air = 0;*/
-		
-		Block stone = Blocks.double_stone_slab; //FIX THIS INTO DOUBLE STONE SLAB
+	public void build(World world, int x, int y, int z) {
+		Block stone = Blocks.double_stone_slab;
 		Block water = Blocks.water;
 		Block slab = Blocks.stone_slab;
 		Block glow = Blocks.glowstone;
-		Block slabD = Blocks.double_stone_slab; //FIX THIS INTO DOUBLE STONE SLAB
+		Block slabD = Blocks.double_stone_slab;
 		Block ladder = Blocks.ladder;
 		Block wood = Blocks.planks;
 		Block fence = Blocks.fence;
@@ -195,19 +89,19 @@ public class BlockInstantPool extends BlockDirectional {
 		int meta = world.getBlockMetadata(x, y, z);
 		
 		/************************ Layer -5 to 5 : Air ************************/
-		ibf.build(world, x-6, y-5, z-6, air, 13, 11, 13);
+		BuildHelper.build(world, x-6, y-5, z-6, air, 13, 11, 13);
 		
 		/************************ Layer -5 to 0 : Stone ************************/
-		ibf.build(world, x-6, y-5, z-6, stone, 13, 6, 13);
+		BuildHelper.build(world, x-6, y-5, z-6, stone, 13, 6, 13);
 		
 		/************************ Layer -4 to 0 : Water ************************/
-		ibf.build(world, x-5, y-4, z-5, water, 11, 5, 11);
+		BuildHelper.build(world, x-5, y-4, z-5, water, 11, 5, 11);
 		
 		/************************ Layer 1 : Stone Slab ************************/
-		ibf.build(world, x-6, y+1, z-6, slab, 13, 1, 1);
-		ibf.build(world, x+6, y+1, z-6, slab, 13, 1, 1);
-		ibf.build(world, x-5, y+1, z-6, slab, 1, 1, 11);
-		ibf.build(world, x-5, y+1, z+6, slab, 1, 1, 11);
+		BuildHelper.build(world, x-6, y+1, z-6, slab, 13, 1, 1);
+		BuildHelper.build(world, x+6, y+1, z-6, slab, 13, 1, 1);
+		BuildHelper.build(world, x-5, y+1, z-6, slab, 1, 1, 11);
+		BuildHelper.build(world, x-5, y+1, z+6, slab, 1, 1, 11);
 		
 		/************************ Layer -2 : Glowstone ************************/
 		world.setBlock(x-6, y-2, z-4, glow);

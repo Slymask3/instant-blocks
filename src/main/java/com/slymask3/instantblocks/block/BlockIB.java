@@ -22,7 +22,6 @@ import net.minecraft.world.World;
 public class BlockIB extends Block {
 
 	Block block;
-	String create;
 	
 	boolean bottomB = true;
 	boolean topB = true;
@@ -366,7 +365,7 @@ public class BlockIB extends Block {
 			
 		BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
 		BuildHelper.effectFull(world, "reddust", x, y, z);
-		BuildHelper.msg(player, this.create, Colors.a);
+		BuildHelper.msg(player, this.createMsg, Colors.a);
     		
     	return true;
     }
