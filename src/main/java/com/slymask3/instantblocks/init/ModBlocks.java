@@ -12,6 +12,7 @@ import com.slymask3.instantblocks.block.BlockInstantHouseWood;
 import com.slymask3.instantblocks.block.BlockInstantLadder;
 import com.slymask3.instantblocks.block.BlockInstantLava;
 import com.slymask3.instantblocks.block.BlockInstantPool;
+import com.slymask3.instantblocks.block.BlockInstantRail;
 import com.slymask3.instantblocks.block.BlockInstantStatue;
 import com.slymask3.instantblocks.block.BlockInstantSuction;
 import com.slymask3.instantblocks.block.BlockInstantUp;
@@ -34,6 +35,7 @@ public class ModBlocks {
 	public static Block ibWater = new BlockInstantWater();
 	public static Block ibLava = new BlockInstantLava();
 	public static Block ibSucker = new BlockInstantSuction();
+	public static Block ibRail = new BlockInstantRail();
 	public static Block ibStatue = new BlockInstantStatue();
 	public static Block color = new BlockColor();
 	
@@ -49,6 +51,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(ibWater, ItemBlockInstantBlocks.class, Names.Blocks.IB_WATER);
 		GameRegistry.registerBlock(ibLava, ItemBlockInstantBlocks.class, Names.Blocks.IB_LAVA);
 		GameRegistry.registerBlock(ibSucker, ItemBlockInstantBlocks.class, Names.Blocks.IB_SUCTION);
+		GameRegistry.registerBlock(ibRail, ItemBlockInstantBlocks.class, Names.Blocks.IB_RAIL);
 		GameRegistry.registerBlock(ibStatue, ItemBlockInstantBlocks.class, Names.Blocks.IB_STATUE);
 		GameRegistry.registerBlock(color, ItemBlockInstantBlocks.class, Names.Blocks.COLOR);
 	}
