@@ -36,7 +36,7 @@ public class GuiHandler implements IGuiHandler {
     	
         if (ID == GuiID.STATUE.ordinal()) {
             //return new GuiCraftingTablet(new ContainerCraftingTablet(player.inventory, world, x, y, z));
-        	return new GuiInstantStatue(player, (TileEntityInstantStatue) e);
+        	return new GuiInstantStatue(player, (TileEntityInstantStatue) e, world, x, y, z);
         }// else if (ID == GuiIds.DISENCHANTER.ordinal()) {
         //    return new GuiDisenchanter(new ContainerDisenchanter(player.inventory, (TileEntityDisenchanter) world.getTileEntity(x, y, z)));
         //}

@@ -9,6 +9,7 @@ tile.instantblocks:ibUp.name=§3Instant Escape Ladder§f
 tile.instantblocks:ibWater.name=§3Instant Water Block§f
 tile.instantblocks:ibLava.name=§3Instant Lava Block§f
 tile.instantblocks:ibSucker.name=§3Instant Suction Block§f
+tile.instantblocks:ibRail.name=§3Instant Rail Block§f
 tile.instantblocks:ibStatue.name=§3Instant Statue Block§f
 tile.instantblocks:color.name=Color Block
 

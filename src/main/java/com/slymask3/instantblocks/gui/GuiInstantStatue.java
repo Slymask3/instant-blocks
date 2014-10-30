@@ -13,6 +13,7 @@ import org.lwjgl.input.Keyboard;
 
 import com.slymask3.instantblocks.block.BlockInstantStatue;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
 import com.slymask3.instantblocks.utility.BuildHelper;
 import com.slymask3.instantblocks.utility.LogHelper;
@@ -43,10 +44,19 @@ public class GuiInstantStatue extends GuiScreen {
 	private GuiCheckBox legRight;
 	
 	private GuiCheckBox rgbMode;
+	
+	private World world;
+	private int x;
+	private int y;
+	private int z;
 
-	public GuiInstantStatue(EntityPlayer player, TileEntityInstantStatue entity/*, World world, int x, int y, int z*/) {
+	public GuiInstantStatue(EntityPlayer player, TileEntityInstantStatue entity, World world, int x, int y, int z) {
 		this.player = player;
 		this.tileEntity = entity;
+		this.world = world;
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
 
 	@Override
@@ -144,6 +154,18 @@ public class GuiInstantStatue extends GuiScreen {
 		//TileEntityInstantStatue.y = this.y;
 		//TileEntityInstantStatue.z = this.z;
 		//TileEntityInstantStatue.tile = this.tileEntity;
+		
+		
+		
+		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).username = input.getText();
+		
+		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).head = head.isChecked();
+		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).body = body.isChecked();
+		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).armLeft = armLeft.isChecked();
+		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).armRight = armRight.isChecked();
+		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).legLeft = legLeft.isChecked();
+		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).legRight = legRight.isChecked();
+		
 		
 		config.rgbMode = rgbMode.isChecked();
 		

@@ -26,16 +26,32 @@ import net.minecraft.world.World;
 public class TileEntityInstantStatue extends TileEntity { //implements ISidedInventory {
 	//private String username = "";
 	//public EntityPlayer player;
-	public int color = 0x00000000;
+	//public int color = 0x00000000;
 	
 	//public static World world;
 	//public static int x;
 	//public static int y;
 	//public static int z;
 	//public static TileEntityInstantStatue tile;
+	
+	public String username;
+	public EntityPlayer player;
+	public boolean head;
+	public boolean body;
+	public boolean armLeft;
+	public boolean armRight;
+	public boolean legLeft;
+	public boolean legRight;
 
 	public TileEntityInstantStatue() {
 		super();
+		this.username="";
+		this.head=true;
+		this.body=true;
+		this.armLeft=true;
+		this.armRight=true;
+		this.legLeft=true;
+		this.legRight=true;
 	}
 
 	@Override
@@ -81,10 +97,37 @@ public class TileEntityInstantStatue extends TileEntity { //implements ISidedInv
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
+		username = nbt.getString("Username");
+		//player = EntityPlayer.getName(nbt.getString("Player"));
+		head = nbt.getBoolean("Head");
+		body = nbt.getBoolean("Body");
+		armLeft = nbt.getBoolean("ArmLeft");
+		armRight = nbt.getBoolean("ArmRight");
+		legLeft = nbt.getBoolean("LegLeft");
+		legRight = nbt.getBoolean("LegRight");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
+		nbt.setString("Username", username);
+		nbt.setBoolean("Head", head);
+		nbt.setBoolean("Body", body);
+		nbt.setBoolean("ArmLeft", armLeft);
+		nbt.setBoolean("ArmRight", armRight);
+		nbt.setBoolean("LegLeft", legLeft);
+		nbt.setBoolean("LegRight", legRight);
 	}
+
+	@Override
+	public Packet getDescriptionPacket() {
+		NBTTagCompound tag = new NBTTagCompound();
+		writeToNBT(tag);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, tag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+		readFromNBT(pkt.func_148857_g());
+    }
 }
