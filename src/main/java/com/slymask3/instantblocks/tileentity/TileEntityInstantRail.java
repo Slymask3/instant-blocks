@@ -57,5 +57,6 @@ public class TileEntityInstantRail extends TileEntity {
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
 		readFromNBT(pkt.func_148857_g());
+		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 }

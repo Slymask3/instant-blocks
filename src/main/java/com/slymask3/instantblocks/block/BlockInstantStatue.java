@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -35,7 +36,7 @@ import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
 import com.slymask3.instantblocks.utility.BuildHelper;
 import com.slymask3.instantblocks.utility.LogHelper;
 
-public class BlockInstantStatue extends BlockContainer {
+public class BlockInstantStatue extends BlockContainer implements ITileEntityProvider {
 	
 //	public static String username = "";
 //	public static EntityPlayer player;
