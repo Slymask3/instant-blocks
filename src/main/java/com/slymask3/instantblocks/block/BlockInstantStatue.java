@@ -30,20 +30,21 @@ import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
 import com.slymask3.instantblocks.utility.BuildHelper;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 public class BlockInstantStatue extends BlockContainer {
 	
-	public static String username = "";
-	public static EntityPlayer player;
-	public static boolean head = true;
-	public static boolean body = true;
-	public static boolean armLeft = true;
-	public static boolean armRight = true;
-	public static boolean legLeft = true;
-	public static boolean legRight = true;
+//	public static String username = "";
+//	public static EntityPlayer player;
+//	public static boolean head = true;
+//	public static boolean body = true;
+//	public static boolean armLeft = true;
+//	public static boolean armRight = true;
+//	public static boolean legLeft = true;
+//	public static boolean legRight = true;
 	
 	//public static boolean inProgress = false;
 
@@ -152,6 +153,15 @@ public class BlockInstantStatue extends BlockContainer {
 	//BlockCommandBlock block;
 	//GuiCommandBlock gui;
 	
+//	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+//		if (((TileEntityInstantStatue) world.getTileEntity(x, y, z)).username != "" && !world.isRemote) {
+//			build(world, x, y, z, world.getBlockMetadata(x, y, z), ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).username, ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).head, ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).body, ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).armLeft, ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).armRight, ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).legLeft, ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).legRight);
+//		}
+//		
+//		//LogHelper.info(((TileEntityInstantStatue) world.getTileEntity(x, y, z)).username);
+//		LogHelper.info(world.isRemote);
+//	}
+	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		//TileEntityInstantStatue.tile = (TileEntityInstantStatue) world.getTileEntity(x, y, z);
 		
@@ -176,43 +186,45 @@ public class BlockInstantStatue extends BlockContainer {
 		return true;
 	}
 
-	public static void build(World world, int x, int y, int z, EntityPlayer player, int meta, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight) {
+	public static void build(World world, int x, int y, int z, /*EntityPlayer player,*/ int meta, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight) {
 		URL imageURL;
 		BufferedImage img = null;
 		
 		//String playerName = player.getDisplayName();
 		
-		try {
-			imageURL = new URL("http://skins.minecraft.net/MinecraftSkins/"+username+".png");
-	        img = ImageIO.read(imageURL);
-	        
-	        world.setBlock(x, y, z, Blocks.air);
-	        
-	        buildHead(world, x, y, z, img, meta, head);
-	        buildBody(world, x, y, z, img, meta, body);
-	        buildArms(world, x, y, z, img, meta, armLeft, armRight);
-	        buildLegs(world, x, y, z, img, meta, legLeft, legRight);
-	        
-	        //LogHelper.info(ColorHelper.getColorAt(img, 0, 0));
-	        
-	        BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
-			BuildHelper.xp(world, player, ConfigurationHandler.xp);
-			BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-			BuildHelper.effectFull(world, "reddust", x, y, z);
-			BuildHelper.msg(player, "\u00a7aInstant Statue created of the player '" + username + "'.", Colors.a);
-			
-			ItemStack is = player.getCurrentEquippedItem();
-			
-			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
-				is.damageItem(1, player);
+		if (username != "") {
+			try {
+				imageURL = new URL("http://skins.minecraft.net/MinecraftSkins/"+username+".png");
+		        img = ImageIO.read(imageURL);
+		        
+		        world.setBlock(x, y, z, Blocks.air);
+		        
+		        buildHead(world, x, y, z, img, meta, head);
+		        buildBody(world, x, y, z, img, meta, body);
+		        buildArms(world, x, y, z, img, meta, armLeft, armRight);
+		        buildLegs(world, x, y, z, img, meta, legLeft, legRight);
+		        
+		        //LogHelper.info(ColorHelper.getColorAt(img, 0, 0));
+		        
+		        BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
+				//BuildHelper.xp(world, player, ConfigurationHandler.xp);
+				BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+				BuildHelper.effectFull(world, "reddust", x, y, z);
+				//BuildHelper.msg(player, "\u00a7aInstant Statue created of the player '" + username + "'.", Colors.a);
+				
+				//ItemStack is = player.getCurrentEquippedItem();
+				
+				//if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+					//is.damageItem(1, player);
+				//}
+				
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+				//BuildHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
+			} catch (IOException e) {
+				e.printStackTrace();
+				//BuildHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
 			}
-			
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			BuildHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
-		} catch (IOException e) {
-			e.printStackTrace();
-			BuildHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
 		}
 	}
 

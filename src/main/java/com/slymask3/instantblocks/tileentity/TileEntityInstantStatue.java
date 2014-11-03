@@ -1,5 +1,9 @@
 package com.slymask3.instantblocks.tileentity;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.ByteBufUtil;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -11,6 +15,7 @@ import com.slymask3.instantblocks.block.BlockInstantStatue;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -34,8 +39,8 @@ public class TileEntityInstantStatue extends TileEntity { //implements ISidedInv
 	//public static int z;
 	//public static TileEntityInstantStatue tile;
 	
-	public String username;
-	public EntityPlayer player;
+	public String username="";
+	//public EntityPlayer player;
 	public boolean head;
 	public boolean body;
 	public boolean armLeft;
@@ -54,28 +59,40 @@ public class TileEntityInstantStatue extends TileEntity { //implements ISidedInv
 		this.legRight=true;
 	}
 
-	@Override
-	public void updateEntity() {
-		if (BlockInstantStatue.username != "" && BlockInstantStatue.player != null && !this.getWorldObj().isRemote) {
-			BlockInstantStatue.build(this.getWorldObj(), this.xCoord, this.yCoord, this.zCoord, BlockInstantStatue.player, this.getBlockMetadata(), BlockInstantStatue.username, BlockInstantStatue.head, BlockInstantStatue.body, BlockInstantStatue.armLeft, BlockInstantStatue.armRight, BlockInstantStatue.legLeft, BlockInstantStatue.legRight);
-			BlockInstantStatue.username = "";
-			BlockInstantStatue.player = null;
-			//this.tile = null;
-			//setPlayer(null);
-			//setUsername("");
-			//LogHelper.info("isRemote == " + this.getWorldObj().isRemote);
-			//LogHelper.info("updateEntity(): "+head+" "+body+" "+armLeft+" "+armRight+" "+legLeft+" "+legRight);
-			/*if (!this.getWorldObj().isRemote) {
-				BlockInstantStatue.username = "";
-				BlockInstantStatue.player = null;
-			}*/
-		
-		}
-		
-		//LogHelper.info("isRemote == " + this.getWorldObj().isRemote + " username == " + BlockInstantStatue.username);
+//	public void updateEntity() {
+//		if (this.username != "" && !this.getWorldObj().isRemote) {
+//			//sendChangeToServer();
+//			((BlockInstantStatue) this.getBlockType()).build(this.getWorldObj(), this.xCoord, this.yCoord, this.zCoord, this.getBlockMetadata(), this.username, this.head, this.body, this.armLeft, this.armRight, this.legLeft, this.legRight);
+//		}
+//		LogHelper.info("updateEntity(): username = " + this.username);
+//	}
+	
+//	@Override
+//	public void updateEntity() {
+//		if (BlockInstantStatue.username != "" && BlockInstantStatue.player != null && !this.getWorldObj().isRemote) {
+//			BlockInstantStatue.build(this.getWorldObj(), this.xCoord, this.yCoord, this.zCoord, BlockInstantStatue.player, this.getBlockMetadata(), BlockInstantStatue.username, BlockInstantStatue.head, BlockInstantStatue.body, BlockInstantStatue.armLeft, BlockInstantStatue.armRight, BlockInstantStatue.legLeft, BlockInstantStatue.legRight);
+//			BlockInstantStatue.username = "";
+//			BlockInstantStatue.player = null;
+//			//this.tile = null;
+//			//setPlayer(null);
+//			//setUsername("");
+//			//LogHelper.info("isRemote == " + this.getWorldObj().isRemote);
+//			//LogHelper.info("updateEntity(): "+head+" "+body+" "+armLeft+" "+armRight+" "+legLeft+" "+legRight);
+//			/*if (!this.getWorldObj().isRemote) {
+//				BlockInstantStatue.username = "";
+//				BlockInstantStatue.player = null;
+//			}*/
+//		
+//		}
+//		
+//		//LogHelper.info("isRemote == " + this.getWorldObj().isRemote + " username == " + BlockInstantStatue.username);
+//	}
+	
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
-	/*public void setParts(boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight) {
+	public void setParts(boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight) {
 		this.head = head;
 		this.body = body;
 		this.armLeft = armLeft;
@@ -83,12 +100,8 @@ public class TileEntityInstantStatue extends TileEntity { //implements ISidedInv
 		this.legLeft = legLeft;
 		this.legRight = legRight;
 
-		LogHelper.info("setParts(): "+head+" "+body+" "+armLeft+" "+armRight+" "+legLeft+" "+legRight);
-	}*/
-	
-	//public void setUsername(String username) {
-	//	this.username = username;
-	//}
+		//LogHelper.info("setParts(): "+head+" "+body+" "+armLeft+" "+armRight+" "+legLeft+" "+legRight);
+	}
 	
 	//public void setPlayer(EntityPlayer player) {
 	//	this.player = player;
@@ -130,4 +143,32 @@ public class TileEntityInstantStatue extends TileEntity { //implements ISidedInv
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
 		readFromNBT(pkt.func_148857_g());
     }
+	
+//	public void sendChangeToServer(){
+//	    //ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+//	    //DataOutputStream outputStream = new DataOutputStream(bos);
+//	    
+//	    ByteBuf buf = new ByteBuf();
+//	    ByteBufUtil buff = new ByteBufUtil();
+//	    //buf.capacity(8);
+//	    buf.writeInt(this.xCoord);
+//	    buf.writeInt(this.yCoord);
+//	    buf.writeInt(this.zCoord);
+//	    buf.writeBytes(this.username.getBytes());
+////	    try {
+////	        outputStream.writeInt(this.xCoord);
+////	        outputStream.writeInt(this.yCoord);
+////	        outputStream.writeInt(this.zCoord);
+////	        outputStream.writeUTF(this.username);
+////	    } catch (Exception ex) {
+////	        ex.printStackTrace();
+////	    }
+//	               
+//	    //S3FPacketCustomPayload packet = new S3FPacketCustomPayload("InstantBlocks", bos.toByteArray());
+//	    
+//	    IMessage msg = null;
+//	    msg.toBytes(buf);
+//
+//	    PacketDispatcher.sendToServer(msg);
+//	}
 }

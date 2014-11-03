@@ -2,17 +2,21 @@ package com.slymask3.instantblocks.gui;
 
 import java.awt.Color;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.Packet;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
+import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.BlockInstantStatue;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.network.PacketInstantStatue;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
 import com.slymask3.instantblocks.utility.BuildHelper;
@@ -66,12 +70,12 @@ public class GuiInstantStatue extends GuiScreen {
         this.buttonList.add(this.doneBtn = new GuiButtonExt(0, this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.done", new Object[0])));
         this.buttonList.add(this.cancelBtn = new GuiButtonExt(1, this.width / 2 + 4, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.cancel", new Object[0])));
         
-        this.buttonList.add(this.head = new GuiCheckBox(2, this.width / 2 - 4 - 150, this.height / 4 + 20 + 12, "Head", BlockInstantStatue.head));
-        this.buttonList.add(this.body = new GuiCheckBox(3, this.width / 2 - 4 - 150, this.height / 4 + 30 + 12, "Body", BlockInstantStatue.body));
-        this.buttonList.add(this.armLeft = new GuiCheckBox(4, this.width / 2 - 4 - 150, this.height / 4 + 40 + 12, "Arm (Left)", BlockInstantStatue.armLeft));
-        this.buttonList.add(this.armRight = new GuiCheckBox(5, this.width / 2 + 4, this.height / 4 + 40 + 12, "Arm (Right)", BlockInstantStatue.armRight));
-        this.buttonList.add(this.legLeft = new GuiCheckBox(6, this.width / 2 - 4 - 150, this.height / 4 + 50 + 12, "Leg (Left)", BlockInstantStatue.legLeft));
-        this.buttonList.add(this.legRight = new GuiCheckBox(7, this.width / 2 + 4, this.height / 4 + 50 + 12, "Leg (Right)", BlockInstantStatue.legRight));
+        this.buttonList.add(this.head = new GuiCheckBox(2, this.width / 2 - 4 - 150, this.height / 4 + 20 + 12, "Head", true));//BlockInstantStatue.head));
+        this.buttonList.add(this.body = new GuiCheckBox(3, this.width / 2 - 4 - 150, this.height / 4 + 30 + 12, "Body", true));//BlockInstantStatue.body));
+        this.buttonList.add(this.armLeft = new GuiCheckBox(4, this.width / 2 - 4 - 150, this.height / 4 + 40 + 12, "Arm (Left)", true));//BlockInstantStatue.armLeft));
+        this.buttonList.add(this.armRight = new GuiCheckBox(5, this.width / 2 + 4, this.height / 4 + 40 + 12, "Arm (Right)", true));//BlockInstantStatue.armRight));
+        this.buttonList.add(this.legLeft = new GuiCheckBox(6, this.width / 2 - 4 - 150, this.height / 4 + 50 + 12, "Leg (Left)", true));//BlockInstantStatue.legLeft));
+        this.buttonList.add(this.legRight = new GuiCheckBox(7, this.width / 2 + 4, this.height / 4 + 50 + 12, "Leg (Right)", true));//BlockInstantStatue.legRight));
         
         this.buttonList.add(this.rgbMode = new GuiCheckBox(8, this.width / 2 - 4 - 150, this.height / 4 + 70 + 12, "RGB Mode", config.rgbMode));
 		
@@ -91,7 +95,7 @@ public class GuiInstantStatue extends GuiScreen {
 	protected void actionPerformed(final GuiButton btn) {
 		if (btn.enabled) {
 			if (btn.id == doneBtn.id) {
-				close();
+				sendInfoAndClose();
 			} else if (btn.id == cancelBtn.id) {
 				Keyboard.enableRepeatEvents(false);
 				mc.displayGuiScreen(null);
@@ -127,48 +131,14 @@ public class GuiInstantStatue extends GuiScreen {
         this.drawString(this.fontRendererObj, "Select parts to generate:", this.width / 2 - 3 - 150, this.height / 4 + 8 + 12, 10526880);
         this.drawString(this.fontRendererObj, "Unchecking RGB Mode will use vanilla minecraft wool colorssss.", this.width / 2 - 3 - 150, this.height / 4 + 83 + 12, 10526880);
         
-        //this.drawRect(this.width / 2, this.height / 2, this.width / 2 + 50, this.height / 2 + 50, 1);
-        
 		this.input.drawTextBox();
 		super.drawScreen(par1, par2, par3);
 	}
 	
-	public void close() {
-
-		LogHelper.info("Gui(): "+head.isChecked() + " " + body.isChecked() + " " + armLeft.isChecked()+" "+armRight.isChecked()+" "+legLeft.isChecked()+" "+legRight.isChecked());
-		
-		//tileEntity.setParts(head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked());
-		
-		BlockInstantStatue.head = head.isChecked();
-		BlockInstantStatue.body = body.isChecked();
-		BlockInstantStatue.armLeft = armLeft.isChecked();
-		BlockInstantStatue.armRight = armRight.isChecked();
-		BlockInstantStatue.legLeft = legLeft.isChecked();
-		BlockInstantStatue.legRight = legRight.isChecked();
-		
-		
-		BlockInstantStatue.username = input.getText();
-		BlockInstantStatue.player = this.player;
-		//TileEntityInstantStatue.world = this.world;
-		//TileEntityInstantStatue.x = this.x;
-		//TileEntityInstantStatue.y = this.y;
-		//TileEntityInstantStatue.z = this.z;
-		//TileEntityInstantStatue.tile = this.tileEntity;
-		
-		
-		
-		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).username = input.getText();
-		
-		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).head = head.isChecked();
-		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).body = body.isChecked();
-		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).armLeft = armLeft.isChecked();
-		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).armRight = armRight.isChecked();
-		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).legLeft = legLeft.isChecked();
-		((TileEntityInstantStatue) world.getTileEntity(x, y, z)).legRight = legRight.isChecked();
-		
+	public void sendInfoAndClose() {
+		InstantBlocks.packetPipeline.sendToServer(new PacketInstantStatue(this.world, this.x, this.y, this.z, input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked()));
 		
 		config.rgbMode = rgbMode.isChecked();
-		
 		
 		Keyboard.enableRepeatEvents(false);
 		mc.displayGuiScreen(null);

@@ -14,6 +14,7 @@ import com.slymask3.instantblocks.init.Loot;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.init.Recipes;
+import com.slymask3.instantblocks.network.PacketPipeline;
 import com.slymask3.instantblocks.proxy.IProxy;
 import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
@@ -37,6 +38,8 @@ public class InstantBlocks {
 	@Instance(Reference.MOD_ID)
 	public static InstantBlocks instance = new InstantBlocks();
 	
+	public static final PacketPipeline packetPipeline = new PacketPipeline(); 
+	
 	@SidedProxy(clientSide=Reference.CLIENT_PROXY_CLASS, serverSide=Reference.SERVER_PROXY_CLASS)
 	public static IProxy proxy;
 	
@@ -53,6 +56,10 @@ public class InstantBlocks {
 		TileEntity.addMapping(TileEntityInstantStatue.class, "TileEntityInstantStatue");
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+		
+		packetPipeline.initialise();
+		
+		//NetworkRegistry.INSTANCE.newEventDrivenChannel("InstantBlocks").register(new PacketHandler());
 		
 		ModItems.init();
 		ModBlocks.init();
