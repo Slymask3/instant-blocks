@@ -46,6 +46,7 @@ public class BuildHelper {
 	public static void setBlockIfNoBedrock(World world, int x, int y, int z, Block block, int meta, int flag) {
 		if (world.getBlock(x, y, z) != Blocks.bedrock) {
 			world.setBlock(x, y, z, block, meta, flag);
+			world.markBlockForUpdate(x, y, z);
 		}
 	}
 	
@@ -810,11 +811,11 @@ public class BuildHelper {
 		setBlockDirectional(world, x, y, z, block, metaDirection, forward, back, left, right, meta, flag);
     }
 	
-    public void setBlockDirectional(World world, int x, int y, int z, Block block, int metaDirection, int forward, int back, int left, int right) {
+    public static void setBlockDirectional(World world, int x, int y, int z, Block block, int metaDirection, int forward, int back, int left, int right) {
     	setBlockDirectional(world, x, y, z, block, metaDirection, forward, back, left, right, 0, 1);
     }
     
-    public void setBlockDirectional(World world, int x, int y, int z, Block block, int metaDirection, int forward, int back, int left, int right, int meta, int flag) {
+    public static void setBlockDirectional(World world, int x, int y, int z, Block block, int metaDirection, int forward, int back, int left, int right, int meta, int flag) {
     	if(metaDirection==0) {
     		setBlockIfNoBedrock(world, x-left+right, y, z-forward+back, block, meta, flag);
 		} else if(metaDirection==1) {
