@@ -17,19 +17,22 @@ import net.minecraftforge.common.DimensionManager;
 public class PacketInstantStatue extends AbstractPacket {
 	int _dim, _x, _y, _z;
 	//double _range;
+	String _player;
 	String _username;
 	boolean _head, _body, _armLeft, _armRight, _legLeft, _legRight;
+	boolean _rgb;
 	
 
 	public PacketInstantStatue() {
 		
 	}
 
-	public PacketInstantStatue(World world, int x, int y, int z, /*double range*/ String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight) {
+	public PacketInstantStatue(World world, int x, int y, int z, String player, /*double range*/ String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
 		_dim = world.provider.dimensionId;
 		_x = x;
 		_y = y;
 		_z = z;
+		_player = player;
 		//_range = range;
 		_username = username;
 		_head = head;
@@ -38,6 +41,7 @@ public class PacketInstantStatue extends AbstractPacket {
 		_armRight = armRight;
 		_legLeft = legLeft;
 		_legRight = legRight;
+		_rgb = rgb;
 	}
 
 	@Override
@@ -46,6 +50,7 @@ public class PacketInstantStatue extends AbstractPacket {
 		buffer.writeInt(_x);
 		buffer.writeInt(_y);
 		buffer.writeInt(_z);
+		ByteBufUtils.writeUTF8String(buffer, _player);
 		//buffer.writeDouble(_range);
 		//buffer.writeBytes(_username.getBytes());
 		ByteBufUtils.writeUTF8String(buffer, _username);
@@ -55,6 +60,7 @@ public class PacketInstantStatue extends AbstractPacket {
 		buffer.writeBoolean(_armRight);
 		buffer.writeBoolean(_legLeft);
 		buffer.writeBoolean(_legRight);
+		buffer.writeBoolean(_rgb);
 	}
 
 	@Override
@@ -63,6 +69,7 @@ public class PacketInstantStatue extends AbstractPacket {
 		_x = buffer.readInt();
 		_y = buffer.readInt();
 		_z = buffer.readInt();
+		_player = ByteBufUtils.readUTF8String(buffer);
 		//_range = buffer.readDouble();
 		_username = ByteBufUtils.readUTF8String(buffer);
 		_head = buffer.readBoolean();
@@ -71,6 +78,7 @@ public class PacketInstantStatue extends AbstractPacket {
 		_armRight = buffer.readBoolean();
 		_legLeft = buffer.readBoolean();
 		_legRight = buffer.readBoolean();
+		_rgb = buffer.readBoolean();
 	}
 
 	@Override
@@ -83,7 +91,7 @@ public class PacketInstantStatue extends AbstractPacket {
 
 		BlockInstantStatue block = (BlockInstantStatue)world.getBlock(_x, _y, _z);
 		
-		block.build(world, _x, _y, _z, tileentity.getBlockMetadata(), this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight);
+		block.build(world, _x, _y, _z, _player, tileentity.getBlockMetadata(), this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight, this._rgb);
 
 		LogHelper.info("handleClientSide(): username = " + this._username);
 	}
@@ -104,7 +112,7 @@ public class PacketInstantStatue extends AbstractPacket {
 			
 			//if (this._username != "" && !world.isRemote) {
 				//sendChangeToServer();
-			block.build(world, _x, _y, _z, world.getTileEntity(_x, _y, _z).getBlockMetadata(), this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight);
+			block.build(world, _x, _y, _z, _player, world.getTileEntity(_x, _y, _z).getBlockMetadata(), this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight, this._rgb);
 			//}
 			LogHelper.info("handleServerSide(): username = " + this._username);
 		//}

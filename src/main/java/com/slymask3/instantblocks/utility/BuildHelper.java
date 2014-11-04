@@ -744,8 +744,8 @@ public class BuildHelper {
 	
 
 	
-	public void setColorBlock(World world, int x, int y, int z, BufferedImage img, int imgx, int imgy) {
-		if (ConfigurationHandler.rgbMode) {
+	public void setColorBlock(World world, int x, int y, int z, BufferedImage img, int imgx, int imgy, boolean rgb) {
+		if (rgb) {
 			setBlockIfNoBedrock(world, x, y, z, ModBlocks.color);
 			((TileEntityColor) world.getTileEntity(x, y, z)).color = img.getRGB(imgx, imgy);
 			world.markBlockForUpdate(x, y, z);
@@ -754,8 +754,8 @@ public class BuildHelper {
 		}
 	}
 	
-	public void setColorBlock(World world, int x, int y, int z, BufferedImage img, int imgx, int imgy, int metaDirection, int forwardBack, int leftRight) {
-		if (ConfigurationHandler.rgbMode) {
+	public void setColorBlock(World world, int x, int y, int z, BufferedImage img, int imgx, int imgy, int metaDirection, int forwardBack, int leftRight, boolean rgb) {
+		if (rgb) {
 			setBlockDirectionalSimple(world, x, y, z, ModBlocks.color, metaDirection, forwardBack, leftRight);
 			((TileEntityColor) world.getTileEntity(x, y, z)).color = img.getRGB(imgx, imgy);
 			world.markBlockForUpdate(x, y, z);
@@ -827,8 +827,8 @@ public class BuildHelper {
 		}
     }
     
-    public static void setColorBlockComplex(World world, int x, int y, int z, BufferedImage img, int imgx, int imgy, int metaDirection, int forwardBack, int leftRight) {
-    	if (ConfigurationHandler.rgbMode) {
+    public static void setColorBlockComplex(World world, int x, int y, int z, BufferedImage img, int imgx, int imgy, int metaDirection, int forwardBack, int leftRight, boolean rgb) {
+    	if (rgb) {
     		int forward;
     		int back;
     		int left;

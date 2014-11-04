@@ -38,7 +38,7 @@ public class TileEntityInstantStatue extends TileEntity { //implements ISidedInv
 	//public static int y;
 	//public static int z;
 	//public static TileEntityInstantStatue tile;
-	
+
 	public String username="";
 	//public EntityPlayer player;
 	public boolean head;
@@ -47,6 +47,7 @@ public class TileEntityInstantStatue extends TileEntity { //implements ISidedInv
 	public boolean armRight;
 	public boolean legLeft;
 	public boolean legRight;
+	public boolean rgb;
 
 	public TileEntityInstantStatue() {
 		super();
@@ -57,6 +58,7 @@ public class TileEntityInstantStatue extends TileEntity { //implements ISidedInv
 		this.armRight=true;
 		this.legLeft=true;
 		this.legRight=true;
+		this.rgb=true;
 	}
 
 //	public void updateEntity() {
@@ -118,6 +120,7 @@ public class TileEntityInstantStatue extends TileEntity { //implements ISidedInv
 		armRight = nbt.getBoolean("ArmRight");
 		legLeft = nbt.getBoolean("LegLeft");
 		legRight = nbt.getBoolean("LegRight");
+		rgb = nbt.getBoolean("RGB");
 	}
 
 	@Override
@@ -130,6 +133,7 @@ public class TileEntityInstantStatue extends TileEntity { //implements ISidedInv
 		nbt.setBoolean("ArmRight", armRight);
 		nbt.setBoolean("LegLeft", legLeft);
 		nbt.setBoolean("LegRight", legRight);
+		nbt.setBoolean("RGB", rgb);
 	}
 
 	@Override

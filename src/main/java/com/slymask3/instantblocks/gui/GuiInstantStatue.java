@@ -77,7 +77,7 @@ public class GuiInstantStatue extends GuiScreen {
         this.buttonList.add(this.legLeft = new GuiCheckBox(6, this.width / 2 - 4 - 150, this.height / 4 + 50 + 12, "Leg (Left)", true));//BlockInstantStatue.legLeft));
         this.buttonList.add(this.legRight = new GuiCheckBox(7, this.width / 2 + 4, this.height / 4 + 50 + 12, "Leg (Right)", true));//BlockInstantStatue.legRight));
         
-        this.buttonList.add(this.rgbMode = new GuiCheckBox(8, this.width / 2 - 4 - 150, this.height / 4 + 70 + 12, "RGB Mode", config.rgbMode));
+        this.buttonList.add(this.rgbMode = new GuiCheckBox(8, this.width / 2 - 4 - 150, this.height / 4 + 70 + 12, "RGB Mode", true));
 		
 		this.input = new GuiTextField(this.fontRendererObj, this.width / 2 - 4 - 150, 50, 300+8, 20);
 		this.input.setText("");
@@ -136,9 +136,12 @@ public class GuiInstantStatue extends GuiScreen {
 	}
 	
 	public void sendInfoAndClose() {
-		InstantBlocks.packetPipeline.sendToServer(new PacketInstantStatue(this.world, this.x, this.y, this.z, input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked()));
+		InstantBlocks.packetPipeline.sendToServer(new PacketInstantStatue(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
+		//InstantBlocks.packetPipeline.sendToAll(new PacketInstantStatue(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
+
+		LogHelper.info(this.player.getDisplayName());
 		
-		config.rgbMode = rgbMode.isChecked();
+		//config.rgbMode = rgbMode.isChecked();
 		
 		Keyboard.enableRepeatEvents(false);
 		mc.displayGuiScreen(null);

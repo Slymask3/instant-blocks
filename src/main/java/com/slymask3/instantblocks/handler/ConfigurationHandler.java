@@ -25,10 +25,10 @@ public class ConfigurationHandler
 	public static boolean effect;
 	public static String sound;
 	public static boolean tpFall;
-	public static Property animated;
+	//public static Property animated;
 	public static boolean tpGrinder;
 	public static int[] wool = new int[11];
-	public static String checkURL;
+	//public static String checkURL;
 	public static int max;
 	public static int maxSuck;
 	public static boolean simpleWL;
@@ -36,8 +36,8 @@ public class ConfigurationHandler
 	public static boolean packWood;
 	public static boolean keepBlocks;
 	public static int xp;
-	public static String colorBlock;
-	public static boolean rgbMode;
+	//public static String colorBlock;
+	//public static boolean rgbMode;
 
     public static void init(File configFile)
     {
@@ -75,8 +75,8 @@ public class ConfigurationHandler
 		simpleWL = configuration.get(options, "[Option] Simple Water/Lava Blocks", false, "Only create water/lava source blocks on the block's layer, instead of the whole area.\n(Default = false)").getBoolean();
 		useWands = configuration.get(options, "[Option] Use Wands", true, "Whether to use wands to create Instant Blocks.\n(Default = true)").getBoolean();
 		packWood = configuration.get(options, "[Option] Pack Up House", true, "Whether to be able to pack up an Instant Wooden House.\n(Default = false)").getBoolean();
-		colorBlock = configuration.get(options, "[Option] Color Block Texture", "wool", "The texture of the block that is being recolored in InstantStatue.").getString();
-		rgbMode = configuration.get(options, "[Option] RGB Color Mode", true, "Whether to use rgb colors for statues. If false, it will use vanilla wool colors.\n(Default = true)").getBoolean();
+		//colorBlock = configuration.get(options, "[Option] Color Block Texture", "wool", "The texture of the block that is being recolored in InstantStatue.").getString();
+		//rgbMode = configuration.get(options, "[Option] RGB Color Mode", true, "Whether to use rgb colors for statues. If false, it will use vanilla wool colors.\n(Default = true)").getBoolean();
 		
 		keepBlocks = configuration.get(cheats, "[Cheat] Keep Instant Blocks", false, "Whether to keep Instant Blocks after right-clicking or not.\n(Default = false)").getBoolean();
 		xp = configuration.get(cheats, "[Cheat] XP From Instant Blocks", 0, "How much experience from right-clicking Instant Blocks give you.\n(Default = 0)").getInt();
@@ -93,12 +93,12 @@ public class ConfigurationHandler
 		wool[9] = configuration.get(woolColors, "[Rainbow Skydive] Color #10", 2, "Metadata value of the tenth color in the Rainbow Skydive pattern.\n(Default = 2)").getInt();
 		wool[10] = configuration.get(woolColors, "[Rainbow Skydive] Color #11", 6, "Metadata value of the eleventh color in the Rainbow Skydive pattern.\n(Default = 6)").getInt();
 
-		checkURL = configuration.get(other, "[Other] Update Checker URL", "https://dl.dropboxusercontent.com/u/23446861/Mods/InstantBlocks/check.txt", "The text document that InstantBlocks will check updates in.\nDO NOT CHANGE THIS UNLESS YOU HAVE MY CONSENT.").getString();
+		//checkURL = configuration.get(other, "[Other] Update Checker URL", "https://dl.dropboxusercontent.com/u/23446861/Mods/InstantBlocks/check.txt", "The text document that InstantBlocks will check updates in.\nDO NOT CHANGE THIS UNLESS YOU HAVE MY CONSENT.").getString();
 
 		msg = configuration.get(options, "[Option] Messages", true, "Whether to show InstantBlock messages or not.\n(Default = true)").getBoolean(true);
 		effect = configuration.get(options, "[Option] Effect", true, "Whether to show red particle effects on right-click of Instant Blocks or not.\n(Default = true)").getBoolean(true);
 		sound = configuration.get(options, "[Option] Sound", "random.levelup", "Which sound to play on right-click of Instant Blocks.\nThe directory is .minecarft\\resources\\sound3\\.\nFor example, the default sound is .minecarft\\resources\\sound3\\random\\levelup.ogg\n(Default = random.levelup)").getString();
-		animated = configuration.get(options, "[Option] Animated Textures", true, "Whether to use animated textures or not.\n(Default = true)");
+		//animated = configuration.get(options, "[Option] Animated Textures", true, "Whether to use animated textures or not.\n(Default = true)");
 		
         if (configuration.hasChanged())
         {
