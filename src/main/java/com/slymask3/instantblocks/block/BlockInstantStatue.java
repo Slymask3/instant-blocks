@@ -31,6 +31,7 @@ import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
 import com.slymask3.instantblocks.utility.BuildHelper;
@@ -70,12 +71,12 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 	public static IIcon back;
 
 	public void registerBlockIcons(IIconRegister ir) {
-		bottom = ir.registerIcon("instantblocks:statue_bottom");
-		top = ir.registerIcon("instantblocks:statue_top");
-		sidel = ir.registerIcon("instantblocks:statue_side_l");
-		sider = ir.registerIcon("instantblocks:statue_side_r");
-		front = ir.registerIcon("instantblocks:statue_front");
-		back = ir.registerIcon("instantblocks:statue_back");
+		bottom = ir.registerIcon(Textures.Statue.BOTTOM);
+		top = ir.registerIcon(Textures.Statue.TOP);
+		sidel = ir.registerIcon(Textures.Statue.SIDE_LEFT);
+		sider = ir.registerIcon(Textures.Statue.SIDE_RIGHT);
+		front = ir.registerIcon(Textures.Statue.FRONT);
+		back = ir.registerIcon(Textures.Statue.BACK);
 	}
 
 	public IIcon getIcon(int side, int meta) {

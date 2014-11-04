@@ -25,6 +25,7 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantFarm extends BlockDirectionalIB {
@@ -39,10 +40,10 @@ public class BlockInstantFarm extends BlockDirectionalIB {
     public static IIcon top3;
     
 	public void registerBlockIcons(IIconRegister ir) {
-		top0 = ir.registerIcon("instantblocks:farm_top_0"); //NORTH
-		top1 = ir.registerIcon("instantblocks:farm_top_1"); //EAST
-		top2 = ir.registerIcon("instantblocks:farm_top_0"); //SOUTH
-		top3 = ir.registerIcon("instantblocks:farm_top_1"); //WEST
+		top0 = ir.registerIcon(Textures.Farm.TOP0); //NORTH
+		top1 = ir.registerIcon(Textures.Farm.TOP1); //EAST
+		top2 = ir.registerIcon(Textures.Farm.TOP0); //SOUTH
+		top3 = ir.registerIcon(Textures.Farm.TOP1); //WEST
 	}
     
 	public IIcon getIcon(int side, int meta) {

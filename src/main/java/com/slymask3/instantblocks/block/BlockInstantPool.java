@@ -23,6 +23,7 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantPool extends BlockDirectionalIB {
@@ -32,20 +33,16 @@ public class BlockInstantPool extends BlockDirectionalIB {
         setCreateMsg(Strings.poolCreate);
     }
 	
-    public static IIcon[] textures = new IIcon[6];
     public static IIcon top0;
     public static IIcon top1;
     public static IIcon top2;
     public static IIcon top3;
-    public static IIcon side;
     
 	public void registerBlockIcons(IIconRegister ir) {
-		side = ir.registerIcon("stone_slab_top");
-		
-		top0 = ir.registerIcon("instantblocks:pool_top_0"); //NORTH
-		top1 = ir.registerIcon("instantblocks:pool_top_1"); //EAST
-		top2 = ir.registerIcon("instantblocks:pool_top_2"); //SOUTH
-		top3 = ir.registerIcon("instantblocks:pool_top_3"); //WEST
+		top0 = ir.registerIcon(Textures.Pool.TOP0); //NORTH
+		top1 = ir.registerIcon(Textures.Pool.TOP1); //EAST
+		top2 = ir.registerIcon(Textures.Pool.TOP2); //SOUTH
+		top3 = ir.registerIcon(Textures.Pool.TOP3); //WEST
 	}
     
 	public IIcon getIcon(int side, int meta) {

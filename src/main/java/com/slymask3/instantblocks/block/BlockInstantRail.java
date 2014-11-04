@@ -1,33 +1,24 @@
 package com.slymask3.instantblocks.block;
 
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.tileentity.TileEntityColor;
-import com.slymask3.instantblocks.tileentity.TileEntityInstantRail;
-import com.slymask3.instantblocks.utility.BuildHelper;
-import com.slymask3.instantblocks.utility.LogHelper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirectional;
-import net.minecraft.block.BlockRailBase;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
+import com.slymask3.instantblocks.utility.BuildHelper;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockInstantRail extends BlockIB {
 
@@ -44,11 +35,11 @@ public class BlockInstantRail extends BlockIB {
     public static IIcon blank;
     
 	public void registerBlockIcons(IIconRegister ir) {
-		top0 = ir.registerIcon("instantblocks:rail_0"); //NORTH
-		top1 = ir.registerIcon("instantblocks:rail_1"); //EAST
-		top2 = ir.registerIcon("instantblocks:rail_2"); //SOUTH
-		top3 = ir.registerIcon("instantblocks:rail_3"); //WEST
-		blank = ir.registerIcon("instantblocks:blank");
+		top0 = ir.registerIcon(Textures.Rail.TOP0); //NORTH
+		top1 = ir.registerIcon(Textures.Rail.TOP1); //EAST
+		top2 = ir.registerIcon(Textures.Rail.TOP2); //SOUTH
+		top3 = ir.registerIcon(Textures.Rail.TOP3); //WEST
+		blank = ir.registerIcon(Textures.Rail.BLANK);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -97,7 +88,7 @@ public class BlockInstantRail extends BlockIB {
     @SideOnly(Side.CLIENT)
     public String getItemIconName()
     {
-        return "instantblocks:rail_0";
+        return Textures.Rail.ITEM;
     }
     
     public void build(World world, int x, int y, int z) {

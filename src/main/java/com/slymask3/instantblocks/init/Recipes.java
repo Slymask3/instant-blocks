@@ -126,6 +126,32 @@ public class Recipes {
 				Character.valueOf('I'), Items.iron_ingot
 			});
 			
+			GameRegistry.addRecipe(new ItemStack(mb.ibRail, 1), new Object[] {
+				"I I",
+				"ISI", //Rail
+				"IBI",
+				Character.valueOf('I'), Items.iron_ingot,
+				Character.valueOf('B'), Blocks.iron_block,
+				Character.valueOf('S'), Items.stick
+			});
+			
+			GameRegistry.addRecipe(new ItemStack(Items.skull, 1, 3), new Object[] {
+				"LFL",
+				"FBF", //Steve Head
+				"LFL",
+				Character.valueOf('L'), Items.leather,
+				Character.valueOf('F'), Items.rotten_flesh,
+				Character.valueOf('B'), Items.bone
+			});
+			
+			GameRegistry.addRecipe(new ItemStack(mb.ibStatue, 1), new Object[] {
+				"WWW",
+				"WHW", //Statue
+				"WWW",
+				Character.valueOf('H'), new ItemStack(Items.skull, 1, 3),
+				Character.valueOf('W'), Blocks.wool
+			});
+			
 			////////////////// WANDS ////////////////////
 			
 			GameRegistry.addRecipe(new ItemStack(mi.ibWandWood, 1), new Object[] {

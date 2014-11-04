@@ -12,6 +12,7 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 
@@ -44,11 +45,11 @@ public class BlockInstantFall extends BlockDirectionalIB {
     
 	public void registerBlockIcons(IIconRegister ir) {
 		if (ConfigurationHandler.animated.getBoolean(true)) {
-			bottom = ir.registerIcon("instantblocks:skydive_bottom");
-			top = ir.registerIcon("instantblocks:skydive_top");
-			side = ir.registerIcon("instantblocks:skydive_side");
+			bottom = ir.registerIcon(Textures.Skydive.BOTTOM_A);
+			top = ir.registerIcon(Textures.Skydive.TOP_A);
+			side = ir.registerIcon(Textures.Skydive.SIDE_A);
 		} else {
-			side0 = ir.registerIcon("instantblocks:skydive_side_0");
+			side0 = ir.registerIcon(Textures.Skydive.SIDE);
 		}
 	}
     

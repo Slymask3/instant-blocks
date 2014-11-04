@@ -19,13 +19,14 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantGlassDome extends BlockIB {
 	
     public BlockInstantGlassDome() {
         super(ModBlocks.ibGlassDome, Names.Blocks.IB_GLASS_DOME, Material.glass, Block.soundTypeGlass, 0.5F);
-        setTextures(Blocks.stone, Blocks.glass, "instantblocks:glassdome_side");
+        setTextures(Blocks.stone, Blocks.glass, Textures.GlassDome.SIDE);
         setTextureBooleans(false, false, true, true, true, true);
         setCreateMsg(Strings.domeCreate);
     }

@@ -3,6 +3,7 @@ package com.slymask3.instantblocks.tileentity;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 import org.apache.logging.log4j.Level;
 
@@ -19,11 +20,21 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityColor extends TileEntity {
 	
-	public int color = 0x00000000;
+	public int color;// = 0x00000000;
 
 	public TileEntityColor() {
 		super();
-		color = 0x00000000;
+		int r = 0;
+		int g = 0;
+		int b = 0;
+		
+		Random rand = new Random();
+		r = rand.nextInt(255);
+		g = rand.nextInt(255);
+		b = rand.nextInt(255);
+		
+		color = ((r & 0xFF) << 16) + ((g & 0xFF) << 8) + (b & 0xFF);
+		//color = 0x00000000;
 	}
 
 	public void setColor(final int red, final int green, final int blue) {

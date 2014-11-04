@@ -27,6 +27,7 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantHouseWood extends BlockDirectionalIB {
@@ -47,10 +48,9 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 	public static IIcon front;
 
 	public void registerBlockIcons(IIconRegister ir) {
-		//bottom = ir.registerIcon("planks_spruce");
-		top = ir.registerIcon("instantblocks:woodhouse_top");
-		side = ir.registerIcon("instantblocks:woodhouse_side");
-		front = ir.registerIcon("instantblocks:woodhouse_front");
+		top = ir.registerIcon(Textures.WoodHouse.TOP);
+		side = ir.registerIcon(Textures.WoodHouse.SIDE);
+		front = ir.registerIcon(Textures.WoodHouse.FRONT);
 	}
 
 	public IIcon getIcon(int side, int meta) {

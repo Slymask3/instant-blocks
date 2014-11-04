@@ -19,13 +19,14 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantGrinder extends BlockIB {
 	
 	public BlockInstantGrinder() {
         super(ModBlocks.ibGrinder, Names.Blocks.IB_GRINDER, Material.rock, Block.soundTypeMetal, 1.5F);
-        setTextures("instantblocks:grinder");
+        setTextures(Textures.Grinder.SIDE);
         setCreateMsg(Strings.grinderCreate);
         setErrorMsg(Strings.grinderError);
     }

@@ -75,23 +75,24 @@ public class BlockColor extends Block implements ITileEntityProvider {
 	}*/
 	
 	//@SideOnly(Side.CLIENT)
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
-		int r = 0;
-		int g = 0;
-		int b = 0;
-		
-		//if(!world.isRemote) {
-			Random rand = new Random();
-			r = rand.nextInt(255);
-			g = rand.nextInt(255);
-			b = rand.nextInt(255);
-		//}
-			
-			int rgb = ((r & 0xFF) << 16) + ((g & 0xFF) << 8) + (b & 0xFF);
-			
-			((TileEntityColor) world.getTileEntity(x, y, z)).color = rgb;
-			world.markBlockForUpdate(x, y, z);
-	
-	}
+//	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
+//		int r = 0;
+//		int g = 0;
+//		int b = 0;
+//		
+//		//if(!world.isRemote) {
+//			Random rand = new Random();
+//			r = rand.nextInt(255);
+//			g = rand.nextInt(255);
+//			b = rand.nextInt(255);
+//		//}
+//			
+//			int rgb = ((r & 0xFF) << 16) + ((g & 0xFF) << 8) + (b & 0xFF);
+//		
+//		if(!world.isRemote) {
+//			((TileEntityColor) world.getTileEntity(x, y, z)).color = rgb;
+//			world.markBlockForUpdate(x, y, z);
+//		}
+//	}
 	
 }

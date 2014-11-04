@@ -22,6 +22,7 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantLadder extends BlockDirectionalIB {
@@ -36,10 +37,10 @@ public class BlockInstantLadder extends BlockDirectionalIB {
     public static IIcon top3;
     
 	public void registerBlockIcons(IIconRegister ir) {
-		top0 = ir.registerIcon("instantblocks:ladder_top_0"); //NORTH
-		top1 = ir.registerIcon("instantblocks:ladder_top_1"); //EAST
-		top2 = ir.registerIcon("instantblocks:ladder_top_2"); //SOUTH
-		top3 = ir.registerIcon("instantblocks:ladder_top_3"); //WEST
+		top0 = ir.registerIcon(Textures.MiningLadder.TOP0); //NORTH
+		top1 = ir.registerIcon(Textures.MiningLadder.TOP1); //EAST
+		top2 = ir.registerIcon(Textures.MiningLadder.TOP2); //SOUTH
+		top3 = ir.registerIcon(Textures.MiningLadder.TOP3); //WEST
 	}
     
 	public IIcon getIcon(int side, int meta) {

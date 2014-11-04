@@ -17,13 +17,14 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantSuction extends BlockIB {
 	
     public BlockInstantSuction() {
         super(ModBlocks.ibSucker, Names.Blocks.IB_SUCTION, Material.rock, Block.soundTypeStone, 1.5F);
-        setTextures("instantblocks:absorb_0");
+        setTextures(Textures.Suction.SIDE);
     }
     
     public void build(World world, int x, int y, int z, EntityPlayer player) {

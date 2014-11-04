@@ -13,6 +13,7 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantUp extends BlockLadderIB {
@@ -22,7 +23,7 @@ public class BlockInstantUp extends BlockLadderIB {
 	
     public BlockInstantUp() {
         super(ModBlocks.ibUp, Names.Blocks.IB_ESCAPE_LADDER, Material.circuits, Block.soundTypeLadder, 0.4F);
-        setTextures("instantblocks:escape_ladder");
+        setTextures(Textures.EscapeLadder.SIDE);
         setTickRandomly(true);
     }
     
