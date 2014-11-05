@@ -36,25 +36,26 @@ public class BlockInstantFall extends BlockDirectionalIB {
         super(ModBlocks.ibFall, Names.Blocks.IB_RAINBOW_SKYDIVE, Material.cloth, Block.soundTypeCloth, 1.5F);
         setTextures("instantblocks:skydive_bottom", "instantblocks:skydive_top", "instantblocks:skydive_");
         setCreateMsg(Strings.fallCreate);
+        setBlockTextureName(Textures.Skydive.SIDE_A);
     }
     
     public static IIcon bottom;
     public static IIcon top;
     public static IIcon side;
-    public static IIcon side0;
+    //public static IIcon side0;
     
 	public void registerBlockIcons(IIconRegister ir) {
-		if (ConfigurationHandler.animated.getBoolean(true)) {
+		//if (ConfigurationHandler.animated.getBoolean(true)) {
 			bottom = ir.registerIcon(Textures.Skydive.BOTTOM_A);
 			top = ir.registerIcon(Textures.Skydive.TOP_A);
 			side = ir.registerIcon(Textures.Skydive.SIDE_A);
-		} else {
-			side0 = ir.registerIcon(Textures.Skydive.SIDE);
-		}
+		//} else {
+		//	side0 = ir.registerIcon(Textures.Skydive.SIDE);
+		//}
 	}
     
 	public IIcon getIcon(int side, int meta) {
-		if (ConfigurationHandler.animated.getBoolean(true)) {
+		//if (ConfigurationHandler.animated.getBoolean(true)) {
 			if (side == 0) {
 				return bottom;
 			} else if (side == 1) {
@@ -62,15 +63,15 @@ public class BlockInstantFall extends BlockDirectionalIB {
 			} else if (side>=2 && side<=5) {
 				return this.side;
 			}
-		} else {
-			if (side == 0) {
-				return Blocks.wool.getIcon(0, 13);
-			} else if (side == 1) {
-				return Blocks.wool.getIcon(0, 14);
-			} else if (side>=2 && side<=5) {
-				return this.side0;
-			}
-		}
+		//} else {
+		//	if (side == 0) {
+		//		return Blocks.wool.getIcon(0, 13);
+		//	} else if (side == 1) {
+		//		return Blocks.wool.getIcon(0, 14);
+		//	} else if (side>=2 && side<=5) {
+		//		return this.side0;
+		//	}
+		//}
 		return blockIcon;
 	}
     

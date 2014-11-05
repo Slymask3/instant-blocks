@@ -9,42 +9,30 @@ import net.minecraft.entity.player.EntityPlayer;
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Reference;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
 public class ConnectionHandler {
-	public InstantBlocks ib = new InstantBlocks();
-	public BuildHelper ibf = new BuildHelper();
-	private ConfigurationHandler config = new ConfigurationHandler();
-	
 	@SubscribeEvent
-	//public void playerLoggedIn(Player player, NetHandler netHandler, INetworkManager manager) {
 	public void onClientConnection(PlayerLoggedInEvent event) {
 		EntityPlayer play = event.player;
-		//EntityPlayer play = (EntityPlayer)player;
-		ibf.msgClean(play, "\u00a7aLoaded successfully.", Colors.a);
 		
-		System.out.println("LOADED SUCCESSFULLY");
+		BuildHelper.msgClean(play, "\u00a7aLoaded successfully.", Colors.a);
 		
 		try {
-			URL url = new URL(config.checkURL);
-			//@SuppressWarnings("resource")
+			URL url = new URL(Strings.checkURL);
 			Scanner s = new Scanner(url.openStream());
 			
 			String ver = s.nextLine();
 			String mc = s.nextLine();
 			
 			if (!ver.equalsIgnoreCase(Reference.VERSION)) {
-				ibf.msgCleanBypass(play, "\u00a7cUpdate avaliable: \u00a7lv" + ver + " \u00a7r\u00a7c(For MC " + mc + ")!", Colors.c);
-				ibf.msgCleanBypass(play, "\u00a7cLink: \u00a7b\u00a7nhttp://tinyurl.com/instantblocks", Colors.c);
-				//System.out.println("\u00a7cNew version avaliable: " + ver + "!");
+				BuildHelper.msgCleanBypass(play, "\u00a7cUpdate avaliable: \u00a7lv" + ver + " \u00a7r\u00a7c(For MC " + mc + ")!", Colors.c);
+				BuildHelper.msgCleanBypass(play, "\u00a7cLink: \u00a7b\u00a7nhttp://tinyurl.com/instantblocks", Colors.c);
 			}
-			
-			//System.out.println(ver);
-			//System.out.println("###################################");
-			//System.out.println(mc);
 			
 			s.close();
 		} catch(IOException ex) {

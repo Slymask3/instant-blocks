@@ -129,7 +129,7 @@ public class GuiInstantStatue extends GuiScreen {
         this.drawCenteredString(this.fontRendererObj, "Instant Statue Block", this.width / 2, 20, 16777215);
         this.drawString(this.fontRendererObj, "Enter a Minecraft Username:", this.width / 2 - 4 - 150, 37, 10526880);
         this.drawString(this.fontRendererObj, "Select parts to generate:", this.width / 2 - 3 - 150, this.height / 4 + 8 + 12, 10526880);
-        this.drawString(this.fontRendererObj, "Unchecking RGB Mode will use vanilla minecraft wool colorssss.", this.width / 2 - 3 - 150, this.height / 4 + 83 + 12, 10526880);
+        this.drawString(this.fontRendererObj, "Unchecking RGB Mode will use vanilla minecraft wool colors.", this.width / 2 - 3 - 150, this.height / 4 + 83 + 12, 10526880);
         
 		this.input.drawTextBox();
 		super.drawScreen(par1, par2, par3);

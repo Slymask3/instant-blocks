@@ -2,10 +2,10 @@
 {
 	"modid": "instantblocks",
 	"name": "Instant Blocks",
-	"description": "This mod adds 12 new 'Instant Blocks' to the game. These blocks could be obtained by crafting, from the creative Instant Blocks tab, or from dungeon chests, village chests, etc. Each block generates a different structure upon right-clicking on the block with an Instant Wand.",
+	"description": "This mod adds 13 new 'Instant Blocks' to the game. These blocks could be obtained by crafting, from the creative Instant Blocks tab, or from dungeon chests, village chests, etc. Each block generates a different structure upon right-clicking on the block with an Instant Wand.",
 	"version": "1.5",
 	"credits": "Created by Slymask3",
-	"logoFile": "/logo_ib.png",
+	"logoFile": "/logo_1.5.png",
 	"mcversion": "1.7.10",
 	"url": "http://www.minecraftforum.net/topic/1802788-instantblocks/",
 	"updateUrl": "",

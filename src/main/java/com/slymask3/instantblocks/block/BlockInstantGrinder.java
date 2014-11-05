@@ -29,6 +29,7 @@ public class BlockInstantGrinder extends BlockIB {
         setTextures(Textures.Grinder.SIDE);
         setCreateMsg(Strings.grinderCreate);
         setErrorMsg(Strings.grinderError);
+        setBlockTextureName(Textures.Grinder.SIDE);
     }
 
 	public void build(World world, int x, int y, int z, EntityPlayer player) {

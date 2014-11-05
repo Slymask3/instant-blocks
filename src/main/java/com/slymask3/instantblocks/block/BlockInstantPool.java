@@ -31,6 +31,7 @@ public class BlockInstantPool extends BlockDirectionalIB {
     public BlockInstantPool() {
         super(ModBlocks.ibPool, Names.Blocks.IB_POOL, Material.rock, Block.soundTypeStone, 1.5F);
         setCreateMsg(Strings.poolCreate);
+        setBlockTextureName(Textures.Pool.TOP0);
     }
 	
     public static IIcon top0;

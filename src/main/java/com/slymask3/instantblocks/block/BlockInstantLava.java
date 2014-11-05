@@ -17,6 +17,7 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.sound.SoundTypeLiquid;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
@@ -27,6 +28,7 @@ public class BlockInstantLava extends BlockIB {
         setTextures(Blocks.lava);
         setTextureBooleans(false, false, false, false, false, false);
         setLightLevel(1.0F);
+        setBlockTextureName(Textures.Lava.SIDE);
     }
     
 	public static int checkLava = 0;

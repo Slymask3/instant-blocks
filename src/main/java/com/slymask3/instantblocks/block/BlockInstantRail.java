@@ -26,6 +26,7 @@ public class BlockInstantRail extends BlockIB {
 		super(ModBlocks.ibRail, Names.Blocks.IB_RAIL, Material.circuits, Block.soundTypeMetal, 0.5F);
         setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
         setCreateMsg(Strings.railCreate);
+        setBlockTextureName(Textures.Rail.TOP0);
 	}
 	
 	public static IIcon top0;

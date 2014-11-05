@@ -29,6 +29,7 @@ public class BlockInstantLadder extends BlockDirectionalIB {
 	
     public BlockInstantLadder() {
         super(ModBlocks.ibLadder, Names.Blocks.IB_MINING_LADDER, Material.rock, Block.soundTypeStone, 1.5F);
+        setBlockTextureName(Textures.MiningLadder.TOP0);
     }
 	
     public static IIcon top0;

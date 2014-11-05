@@ -52,8 +52,8 @@ public class BlockIB extends Block {
 	IIcon frontI;
 	IIcon backI;
 	
-	String createMsg;
-	String errorMsg;
+	String createMsg="";
+	String errorMsg="";
 	
 	protected BlockIB(Block block, String name, Material material, SoundType soundType, float hardness) {
 		super(material);

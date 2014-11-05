@@ -50,9 +50,6 @@ public class InstantBlocks {
 		FMLCommonHandler.instance().bus().register(new ConnectionHandler());
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 		//FMLCommonHandler.instance().bus().register(new ServerHandler());
-
-		TileEntity.addMapping(TileEntityColor.class, "TileEntityColor");
-		TileEntity.addMapping(TileEntityInstantStatue.class, "TileEntityInstantStatue");
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		
@@ -73,6 +70,9 @@ public class InstantBlocks {
 		
 		Recipes.init();
 		Loot.init();
+
+		TileEntity.addMapping(TileEntityColor.class, "TileEntityColor");
+		TileEntity.addMapping(TileEntityInstantStatue.class, "TileEntityInstantStatue");
 		
 		LogHelper.info("Initialization Complete!");
 	}

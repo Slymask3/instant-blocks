@@ -34,6 +34,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 	
 	public BlockInstantHouseWood() {
 		super(ModBlocks.ibWood, Names.Blocks.IB_WOOD_HOUSE, Material.wood, Block.soundTypeWood, 1.5F);
+        setBlockTextureName(Textures.WoodHouse.FRONT);
 	}
 
 	public int drop = 1;

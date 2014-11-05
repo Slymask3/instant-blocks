@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.utility.LogHelper;
 
@@ -36,6 +37,7 @@ public class BlockColor extends Block implements ITileEntityProvider {
         setHardness(1.5F);
         setResistance(2000F);
         setStepSound(Block.soundTypeCloth);
+        setBlockTextureName(Textures.Color.SIDE);
 	}
 
 	public int quantityDropped(Random random) {

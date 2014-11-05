@@ -221,24 +221,26 @@ public class CommandInstantBlocks extends CommandBase {
         player.addChatMessage(new ChatComponentText("\u00a78\u00a7l============================================="));
     	player.addChatMessage(new ChatComponentText("\u00a73\u00a7lInstant Blocks v" + Reference.VERSION + " - Info"));
     	
+    	//INSTANT BLOCKS
+    	
     	if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibWood)) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Wooden House Block \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Wooden House Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aCreates a simple house with a bed, chests, furnaces, etc."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibLadder)) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Mining Ladder Block \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Mining Ladder Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aCreates a ladder down to layer 12, which is the 'diamond' area."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibGlassDome)) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Glass Dome Block \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Glass Dome Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aCreates a small 9x9 glass dome. Useful for underwater."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibFarm)) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Farm Block \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Farm Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aCreates a simple farm with 56 seeds. You also have a 5% chance that the farm will have carrots planted instead of wheat, and another 5% chance that the farm will have potatoes planted instead of wheat."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibFall)) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Rainbow Skydive Block \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Rainbow Skydive Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aCreates a structure from layer 1 to 256 out of coloured wool."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
     		player.addChatMessage(new ChatComponentText("\u00a72Pattern: \u00a7a"));
@@ -254,19 +256,19 @@ public class CommandInstantBlocks extends CommandBase {
     		player.addChatMessage(new ChatComponentText("\u00a7210) " + ColorHelper.toColor2(config.wool[9])));
     		player.addChatMessage(new ChatComponentText("\u00a7211) " + ColorHelper.toColor2(config.wool[10])));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibGrinder)) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Grinder Block \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Grinder Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aCreates a simple experience orbs grinder. Only works for zombies and skeletons. The zombies/skeletons will be dragged by the current up, then dropped down into the collecting room, where you hit them once or twice with your fist."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7cNo."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibPool)) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Pool Block \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Pool Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aCreates a simple pool with two diving boards."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibUp)) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Escape Ladder Block \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Escape Ladder Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aPlace on a wall underground, and it will create a ladder going all the way up to the surface."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibWater)) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Water Block \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Water Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aFills an area with water source blocks. 'Simple' mode only fills one layer that the core block is on. 'Full' mode fills the layer that the core block is on, and all the layers below it. (Change to 'Simple' in the config file for 'not-so-good' computers.)"));
     		player.addChatMessage(new ChatComponentText("\u00a72Maximum: \u00a7a" + config.max + " Water Source Blocks."));
     		if (config.simpleWL == true) {
@@ -276,7 +278,7 @@ public class CommandInstantBlocks extends CommandBase {
 			}
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a77N/A."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibLava)) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Lava Block \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Lava Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aFills an area with lava source blocks. 'Simple' mode only fills one layer that the core block is on. 'Full' mode fills the layer that the core block is on, and all the layers below it. (Change to 'Simple' in the config file for 'not-so-good' computers.)"));
     		player.addChatMessage(new ChatComponentText("\u00a72Maximum: \u00a7a" + config.max + " Lava Source Blocks."));
     		if (config.simpleWL == true) {
@@ -286,32 +288,51 @@ public class CommandInstantBlocks extends CommandBase {
 			}
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a77N/A."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibSucker)) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Suction Block \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Suction Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aSucks in all water/lava around it."));
     		player.addChatMessage(new ChatComponentText("\u00a72Maximum: \u00a7a" + config.maxSuck + "."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a77N/A."));
-    	} else if (held != null && held.getItem() == mi.ibWandWood) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Item: \u00a7aInstant Wooden Wand \u00a7b(ID: " + held.getItem() + ")"));
+    	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibRail)) {
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Rail Block"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aCreates a simple railway path going forward 37 blocks."));
+    		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
+    	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibStatue)) {
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Statue Block"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aCreates a statue of any Minecraft player's skin."));
+    		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
+    	}
+    	
+    	//COLOR
+    	
+    	else if (held != null && held.getItem() == Item.getItemFromBlock(mb.color)) {
+     		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aColor Block"));
+     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aA block only avaliable in creative, used for Instant Statue."));
+     	}
+    	
+    	//ITEMS
+    	
+    	else if (held != null && held.getItem() == mi.ibWandWood) {
+    		player.addChatMessage(new ChatComponentText("\u00a72Item: \u00a7aInstant Wooden Wand"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aUsed to activate Instant Blocks."));
     		player.addChatMessage(new ChatComponentText("\u00a72Uses: \u00a7a" + (held.getMaxDamage() - held.getItemDamage() + 1) + "/" + (held.getMaxDamage() + 1) + "."));
     		player.addChatMessage(new ChatComponentText("\u00a72Required: \u00a7a" + wandReq + "."));
     	} else if (held != null && held.getItem() == mi.ibWandStone) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Item: \u00a7aInstant Stone Wand \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Item: \u00a7aInstant Stone Wand"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aUsed to activate Instant Blocks."));
     		player.addChatMessage(new ChatComponentText("\u00a72Uses: \u00a7a" + (held.getMaxDamage() - held.getItemDamage() + 1) + "/" + (held.getMaxDamage() + 1) + "."));
     		player.addChatMessage(new ChatComponentText("\u00a72Required: \u00a7a" + wandReq + "."));
     	} else if (held != null && held.getItem() == mi.ibWandIron) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Item: \u00a7aInstant Iron Wand \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Item: \u00a7aInstant Iron Wand"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aUsed to activate Instant Blocks."));
     		player.addChatMessage(new ChatComponentText("\u00a72Uses: \u00a7a" + (held.getMaxDamage() - held.getItemDamage() + 1) + "/" + (held.getMaxDamage() + 1) + "."));
     		player.addChatMessage(new ChatComponentText("\u00a72Required: \u00a7a" + wandReq + "."));
     	} else if (held != null && held.getItem() == mi.ibWandGold) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Item: \u00a7aInstant Golden Wand \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Item: \u00a7aInstant Golden Wand"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aUsed to activate Instant Blocks."));
     		player.addChatMessage(new ChatComponentText("\u00a72Uses: \u00a7a" + (held.getMaxDamage() - held.getItemDamage() + 1) + "/" + (held.getMaxDamage() + 1) + "."));
     		player.addChatMessage(new ChatComponentText("\u00a72Required: \u00a7a" + wandReq + "."));
     	} else if (held != null && held.getItem() == mi.ibWandDiamond) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Item: \u00a7aInstant Diamond Wand \u00a7b(ID: " + held.getItem() + ")"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Item: \u00a7aInstant Diamond Wand"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aUsed to activate Instant Blocks."));
     		player.addChatMessage(new ChatComponentText("\u00a72Uses: \u00a7a" + (held.getMaxDamage() - held.getItemDamage() + 1) + "/" + (held.getMaxDamage() + 1) + "."));
     		player.addChatMessage(new ChatComponentText("\u00a72Required: \u00a7a" + wandReq + "."));
@@ -328,9 +349,12 @@ public class CommandInstantBlocks extends CommandBase {
 	public void changelog(EntityPlayer player) {
 		player.addChatMessage(new ChatComponentText("\u00a78\u00a7l============================================="));
     	player.addChatMessage(new ChatComponentText("\u00a73\u00a7lInstant Blocks v" + Reference.VERSION + " - Changelog"));
-		player.addChatMessage(new ChatComponentText("\u00a72- Removed Achievements."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Improved /instantblocks."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Fixed a couple of bugs."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Updated to Minecraft 1.7.10."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Added Instant Rail Block."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Added Instant Statue Block."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Added 'Color Block' only avaliable in creative."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Added Mod Gui Options."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Changed Instant Golden Wand uses from 2 to 16."));
 		player.addChatMessage(new ChatComponentText("\u00a78\u00a7l============================================="));
 	}
 	

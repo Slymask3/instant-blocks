@@ -25,6 +25,7 @@ public class BlockInstantUp extends BlockLadderIB {
         super(ModBlocks.ibUp, Names.Blocks.IB_ESCAPE_LADDER, Material.circuits, Block.soundTypeLadder, 0.4F);
         setTextures(Textures.EscapeLadder.SIDE);
         setTickRandomly(true);
+        setBlockTextureName(Textures.EscapeLadder.SIDE);
     }
     
 	public void func_149797_b(int par1) {

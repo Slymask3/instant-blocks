@@ -21,6 +21,7 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.sound.SoundTypeLiquid;
 import com.slymask3.instantblocks.utility.BuildHelper;
 
@@ -31,6 +32,7 @@ public class BlockInstantWater extends BlockIB {
         setTextures(Blocks.water);
         setTextureBooleans(false, false, false, false, false, false);
         setLightOpacity(3);
+        setBlockTextureName(Textures.Water.SIDE);
     }
 	
 	public static int checkWater = 0;

@@ -22,7 +22,7 @@ group= "com.slymask3.instantblocks" // http://maven.apache.org/guides/mini/guide
 archivesBaseName = "instantblocks"
 
 minecraft {
-    version = "1.7.10-10.13.2.1230"
+    version = "1.7.10-10.13.2.1232"
     runDir = "eclipse"
 }
 

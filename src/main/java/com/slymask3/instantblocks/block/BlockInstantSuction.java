@@ -25,6 +25,7 @@ public class BlockInstantSuction extends BlockIB {
     public BlockInstantSuction() {
         super(ModBlocks.ibSucker, Names.Blocks.IB_SUCTION, Material.rock, Block.soundTypeStone, 1.5F);
         setTextures(Textures.Suction.SIDE);
+        setBlockTextureName(Textures.Suction.SIDE);
     }
     
     public void build(World world, int x, int y, int z, EntityPlayer player) {

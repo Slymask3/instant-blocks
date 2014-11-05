@@ -48,15 +48,15 @@ public class Textures {
     }
     
     public static final class Water {
-        public static final String SIDE = FOLDER + "ibWater";
+        public static final String SIDE = "water_still";
     }
     
     public static final class Lava {
-        public static final String SIDE = FOLDER + "ibLava";
+        public static final String SIDE = "lava_still";
     }
     
     public static final class Suction {
-        public static final String SIDE = FOLDER + "absorb_0";
+        public static final String SIDE = FOLDER + "absorb";
     }
     
     public static final class Rail {
@@ -75,5 +75,9 @@ public class Textures {
         public static final String SIDE_RIGHT = FOLDER + "statue_side_r";
         public static final String BACK = FOLDER + "statue_back";
         public static final String FRONT = FOLDER + "statue_front";
+    }
+
+    public static final class Color {
+        public static final String SIDE = "wool_colored_white";
     }
 }

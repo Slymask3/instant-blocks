@@ -29,6 +29,7 @@ public class BlockInstantGlassDome extends BlockIB {
         setTextures(Blocks.stone, Blocks.glass, Textures.GlassDome.SIDE);
         setTextureBooleans(false, false, true, true, true, true);
         setCreateMsg(Strings.domeCreate);
+        setBlockTextureName(Textures.GlassDome.SIDE);
     }
 	
     public int getRenderBlockPass() {

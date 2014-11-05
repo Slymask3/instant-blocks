@@ -1,6 +1,8 @@
 package com.slymask3.instantblocks.reference;
 
 public class Strings {
+	public static final String checkURL = "https://dl.dropboxusercontent.com/u/23446861/Mods/InstantBlocks/check.txt";
+	
 	public static final String wandReq = "\u00a7cYou must use an Instant Wand.";
 	public static final String woodCreate = "\u00a7aInstant Wooden House created.";
 	public static final String woodPack = "\u00a7aInstant Wooden House packed up.";

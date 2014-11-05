@@ -76,6 +76,9 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Sucks in water/lava.");
 			list.add("Maximum: " + config.maxSuck + ".");
 			list.add("Right-click to activate.");
+		} else if (block == mb.ibRail) {
+			list.add("Creates a railway going forward 37 blocks.");
+			list.add("Right-click to activate.");
 		} else if (block == mb.ibStatue) {
 			list.add("Creates a statue of any Minecraft player.");
 			list.add("Right-click to activate.");

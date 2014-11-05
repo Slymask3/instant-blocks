@@ -32,6 +32,7 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 	
     public BlockInstantFarm() {
         super(ModBlocks.ibFarm, Names.Blocks.IB_FARM, Material.rock, Block.soundTypeStone, 1.5F);
+        setBlockTextureName(Textures.Farm.TOP0);
     }
 	
     public static IIcon top0;
