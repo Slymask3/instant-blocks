@@ -1,4 +1,4 @@
-package com.slymask3.instantblocks.block;
+package com.slymask3.instantblocks.block.instant;
 
 import java.util.Random;
 
@@ -14,6 +14,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.block.BlockIB;
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;
@@ -69,6 +70,23 @@ public class BlockInstantWater extends BlockIB {
     
     public int getRenderBlockPass() {
         return this.blockMaterial == Material.water ? 1 : 0;
+    }
+    
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+		ItemStack is = player.getCurrentEquippedItem();
+    	
+		if (ConfigurationHandler.useWands == true) {
+			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+				//do not dmg yet
+			} else {
+				BuildHelper.msg(player, Strings.wandReq, Colors.c);
+				return true;
+			}
+		}
+
+		build(world, x, y, z, player);
+    		
+    	return true;
     }
     
     public void build(World world, int x, int y, int z, EntityPlayer player) {

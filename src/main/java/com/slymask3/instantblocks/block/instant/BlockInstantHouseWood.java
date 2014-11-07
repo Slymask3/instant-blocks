@@ -1,4 +1,4 @@
-package com.slymask3.instantblocks.block;
+package com.slymask3.instantblocks.block.instant;
 
 import java.awt.Image;
 import java.util.Random;
@@ -20,6 +20,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.block.BlockDirectionalIB;
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;

@@ -349,12 +349,9 @@ public class CommandInstantBlocks extends CommandBase {
 	public void changelog(EntityPlayer player) {
 		player.addChatMessage(new ChatComponentText("\u00a78\u00a7l============================================="));
     	player.addChatMessage(new ChatComponentText("\u00a73\u00a7lInstant Blocks v" + Reference.VERSION + " - Changelog"));
-		player.addChatMessage(new ChatComponentText("\u00a72- Updated to Minecraft 1.7.10."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Added Instant Rail Block."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Added Instant Statue Block."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Added 'Color Block' only avaliable in creative."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Added Mod Gui Options."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Changed Instant Golden Wand uses from 2 to 16."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Fixed Instant Farm Block to actually generate."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Fixed Instant Water/Lava/Suction Blocks to remove wand durability correctly."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Fixed error message with Instant Grinder Block."));
 		player.addChatMessage(new ChatComponentText("\u00a78\u00a7l============================================="));
 	}
 	

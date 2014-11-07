@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 
 import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.block.BlockInstantStatue;
+import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.network.PacketInstantStatue;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;

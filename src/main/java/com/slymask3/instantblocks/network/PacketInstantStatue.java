@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.network;
 
-import com.slymask3.instantblocks.block.BlockInstantStatue;
+import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
 import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
 import com.slymask3.instantblocks.utility.LogHelper;
 

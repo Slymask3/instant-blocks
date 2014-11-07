@@ -1,10 +1,11 @@
-package com.slymask3.instantblocks.block;
+package com.slymask3.instantblocks.block.instant;
 
 import java.io.*;
 import java.util.Map;
 import java.util.Random;
 
 import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.block.BlockDirectionalIB;
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;

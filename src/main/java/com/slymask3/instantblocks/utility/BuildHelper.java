@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
 import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.block.BlockInstantHouseWood;
+import com.slymask3.instantblocks.block.instant.BlockInstantHouseWood;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;

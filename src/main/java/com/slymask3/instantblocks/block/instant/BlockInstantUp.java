@@ -1,4 +1,4 @@
-package com.slymask3.instantblocks.block;
+package com.slymask3.instantblocks.block.instant;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.slymask3.instantblocks.block.BlockLadderIB;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;

@@ -1,4 +1,4 @@
-package com.slymask3.instantblocks.block;
+package com.slymask3.instantblocks.block.instant;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

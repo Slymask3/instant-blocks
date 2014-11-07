@@ -14,7 +14,7 @@ public class Strings {
 	public static final String farmCreate = "\u00a7aInstant Farm created.";
 	public static final String domeCreate = "\u00a7aInstant Glass Dome created.";
 	public static final String grinderCreate = "\u00a7aInstant Grinder created.";
-	public static final String grinderError = "\u00a7cYou must place this above a ZoModBlocksie/Skeleton spawner.";
+	public static final String grinderError = "\u00a7cYou must place this above a Zombie/Skeleton spawner.";
 	public static final String ladderCreate = "\u00a7aInstant Mining Ladder created.";
 	public static final String ladderError = "\u00a7cInstant Mining Ladder cannot be created below layer 16.";
 	public static final String lavaCreate1 = "\u00a7aInstant Lava created with 1 lava block.";

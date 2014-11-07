@@ -11,7 +11,7 @@ import java.io.IOException;
 import org.apache.logging.log4j.Level;
 
 import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.block.BlockInstantStatue;
+import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 import cpw.mods.fml.common.FMLLog;
