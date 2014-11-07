@@ -64,8 +64,8 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 		return blockIcon;
 	}
 	
-	public Block crop = Blocks.wheat;
-	public int r = 1;
+	//public Block crop = Blocks.wheat;
+	//public int r = 1;
 	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
     	
@@ -80,33 +80,11 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			}
 		}
 
-		build(world, x, y, z);
-		
-
-		BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibFarm);
-		BuildHelper.xp(world, player, ConfigurationHandler.xp);
-		
-		BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-		BuildHelper.effectFull(world, "reddust", x, y, z);
-		
-		if (r == 0) {
-			BuildHelper.msg(player, Strings.farmCreateP, Colors.a);
-			//player.triggerAchievement(ib.achFarm3);
-		} else if (r == 1) {
-			BuildHelper.msg(player, Strings.farmCreateC, Colors.a);
-			//player.triggerAchievement(ib.achFarm2);
-		} else {
-			BuildHelper.msg(player, Strings.farmCreateW, Colors.a);
-			//player.triggerAchievement(ib.achFarm);
-		}
-		
-		return true;
-    }
-
-	public void build(World world, int x, int y, int z, Block crop) {
 		Random ran = new Random();
+		Block crop = Blocks.wheat;
+		int r = 0;
 		
-		if (world.isRemote) { //IF CLIENT
+		if (!world.isRemote) { //IF SERVER
 			r = ran.nextInt(20);
 			if (r == 0) {
 				crop = Blocks.potatoes;
@@ -115,11 +93,34 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			} else {
 				crop = Blocks.wheat;
 			}
-			System.out.println("r == " + r);
-			
-			//return true;
 		}
 		
+		build(world, x, y, z, crop);
+		
+
+		BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibFarm);
+		BuildHelper.xp(world, player, ConfigurationHandler.xp);
+		
+		BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		BuildHelper.effectFull(world, "reddust", x, y, z);
+		
+//		if (r == 0) {
+//			BuildHelper.msg(player, Strings.farmCreateP, Colors.a);
+//			//player.triggerAchievement(ib.achFarm3);
+//		} else if (r == 1) {
+//			BuildHelper.msg(player, Strings.farmCreateC, Colors.a);
+//			//player.triggerAchievement(ib.achFarm2);
+//		} else {
+//			BuildHelper.msg(player, Strings.farmCreateW, Colors.a);
+//			//player.triggerAchievement(ib.achFarm);
+//		}
+		
+		BuildHelper.msg(player, Strings.farmCreate, Colors.a);
+		
+		return true;
+    }
+
+	public void build(World world, int x, int y, int z, Block crop) {
 		Block stone = Blocks.stonebrick;
 		Block farm = Blocks.farmland;
 		Block water = Blocks.water;

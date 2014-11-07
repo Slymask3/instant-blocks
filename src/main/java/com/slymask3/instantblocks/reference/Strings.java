@@ -11,6 +11,7 @@ public class Strings {
 	public static final String farmCreateW = "\u00a7aInstant Farm created with wheat.";
 	public static final String farmCreateC = "\u00a7aInstant Farm created with carrots.";
 	public static final String farmCreateP = "\u00a7aInstant Farm created with potatos.";
+	public static final String farmCreate = "\u00a7aInstant Farm created.";
 	public static final String domeCreate = "\u00a7aInstant Glass Dome created.";
 	public static final String grinderCreate = "\u00a7aInstant Grinder created.";
 	public static final String grinderError = "\u00a7cYou must place this above a ZoModBlocksie/Skeleton spawner.";
