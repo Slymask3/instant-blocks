@@ -1,4 +1,9 @@
-v1.5 (n/a)
+v1.5.1 (07/11/2014)
+- Fixed Instant Farm Block to actually generate.
+- Fixed Instant Water/Lava/Suction Blocks to remove wand durability correctly.
+- Fixed error message with Instant Grinder Block.
+
+v1.5 (05/11/2014)
 - Updated to Minecraft 1.7.10.
 - Added Instant Rail Block.
 - Added Instant Statue Block.
