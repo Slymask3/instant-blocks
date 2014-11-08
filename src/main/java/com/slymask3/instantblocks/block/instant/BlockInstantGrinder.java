@@ -35,7 +35,7 @@ public class BlockInstantGrinder extends BlockIB {
 
 	public void build(World world, int x, int y, int z, EntityPlayer player) {
 		Block stone = Blocks.stone;
-		Block water = Blocks.water;
+		Block water = Blocks.flowing_water;
 		Block torch = Blocks.torch;
 		Block chest = Blocks.chest;
 		Block craft = Blocks.crafting_table;
@@ -121,7 +121,7 @@ public class BlockInstantGrinder extends BlockIB {
 		//world.setBlock(x+7, y-3, z, door, 11, 0); //DOOR
 		world.setBlock(x+8, y-3, z, air);
 		world.setBlock(x+9, y-3, z, door, 9, 0); //DOOR
-		world.setBlock(x+6, y-3, z, water);
+		world.setBlock(x+6, y-3, z, water, 0, 2);
 
 		/************************ Layer -2 to 2 : Stone (Spawn Room Walls) ************************/
 		BuildHelper.build(world, x-5, y-2, z-5, stone, 11, 5, 1);
@@ -137,8 +137,8 @@ public class BlockInstantGrinder extends BlockIB {
 		BuildHelper.build(world, x+10, y-2, z+3, stone, 1, 1, 6);
 		BuildHelper.build(world, x+16, y-2, z-3, stone, 7, 1, 1);
 
-		world.setBlock(x-4, y-2, z-4, water);
-		world.setBlock(x-4, y-2, z+4, water);
+		world.setBlock(x-4, y-2, z-4, water, 0, 2);
+		world.setBlock(x-4, y-2, z+4, water, 0, 2);
 		world.setBlock(x+10, y-2, z-1, pane);
 		world.setBlock(x+10, y-2, z+1, pane);
 		world.setBlock(x+11, y-2, z-2, pane);
@@ -187,33 +187,33 @@ public class BlockInstantGrinder extends BlockIB {
 
 		/************************ Layer 19 (Top Room) ************************/
 		world.setBlock(x+8, y+19, z, sign, 4, 0);
-		world.setBlock(x+8, y+19, z-1, water);
-		world.setBlock(x+8, y+19, z+1, water);
+		world.setBlock(x+8, y+19, z-1, water, 0, 2);
+		world.setBlock(x+8, y+19, z+1, water, 0, 2);
 		world.setBlock(x+10, y+19, z-2, sign, 4, 0);
 		world.setBlock(x+10, y+19, z+2, sign, 4, 0);
 
 		/************************ Layer -1 to 19 (Input Tube) ************************/
-		world.setBlock(x+6, y-1, z, water);
+		world.setBlock(x+6, y-1, z, water, 0, 2);
 		world.setBlock(x+6, y, z, sign, 3, 0);
-		world.setBlock(x+6, y+1, z, water);
+		world.setBlock(x+6, y+1, z, water, 0, 2);
 		world.setBlock(x+6, y+2, z, sign, 3, 0);
-		world.setBlock(x+6, y+3, z, water);
+		world.setBlock(x+6, y+3, z, water, 0, 2);
 		world.setBlock(x+6, y+4, z, sign, 3, 0);
-		world.setBlock(x+6, y+5, z, water);
+		world.setBlock(x+6, y+5, z, water, 0, 2);
 		world.setBlock(x+6, y+6, z, sign, 3, 0);
-		world.setBlock(x+6, y+7, z, water);
+		world.setBlock(x+6, y+7, z, water, 0, 2);
 		world.setBlock(x+6, y+8, z, sign, 3, 0);
-		world.setBlock(x+6, y+9, z, water);
+		world.setBlock(x+6, y+9, z, water, 0, 2);
 		world.setBlock(x+6, y+10, z, sign, 3, 0);
-		world.setBlock(x+6, y+11, z, water);
+		world.setBlock(x+6, y+11, z, water, 0, 2);
 		world.setBlock(x+6, y+12, z, sign, 3, 0);
-		world.setBlock(x+6, y+13, z, water);
+		world.setBlock(x+6, y+13, z, water, 0, 2);
 		world.setBlock(x+6, y+14, z, sign, 3, 0);
-		world.setBlock(x+6, y+15, z, water);
+		world.setBlock(x+6, y+15, z, water, 0, 2);
 		world.setBlock(x+6, y+16, z, sign, 3, 0);
-		world.setBlock(x+6, y+17, z, water);
+		world.setBlock(x+6, y+17, z, water, 0, 2);
 		world.setBlock(x+6, y+18, z, sign, 3, 0);
-		world.setBlock(x+6, y+19, z, water);
+		world.setBlock(x+6, y+19, z, water, 0, 2);
 		
 		world.setBlock(x, y, z, air);
 		

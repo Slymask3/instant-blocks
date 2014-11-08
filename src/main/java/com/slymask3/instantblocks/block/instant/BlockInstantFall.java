@@ -1,35 +1,20 @@
 package com.slymask3.instantblocks.block.instant;
 
-import java.io.*;
-import java.util.Map;
-import java.util.Random;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.BlockDirectionalIB;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
-
-
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.client.*;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.*;
-import net.minecraft.src.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.*;
 
 public class BlockInstantFall extends BlockDirectionalIB {
 	
@@ -86,234 +71,234 @@ public class BlockInstantFall extends BlockDirectionalIB {
 		
 		/************************ 0 : Red (14) ************************/
 		for (int c = 286; c >= 1; c =  c - 33) {
-			BuildHelper.buildMeta(world, x-5, c, z-2, wool, ConfigurationHandler.wool[0], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x+5, c, z-2, wool, ConfigurationHandler.wool[0], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z+5, wool, ConfigurationHandler.wool[0], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z-5, wool, ConfigurationHandler.wool[0], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x+3, c, z+4, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+3, c, z-4, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z+3, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z-3, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z+4, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z-4, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z+3, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z-3, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-5, c, z-2, wool, ConfigurationHandler.wool[0], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x+5, c, z-2, wool, ConfigurationHandler.wool[0], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z+5, wool, ConfigurationHandler.wool[0], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z-5, wool, ConfigurationHandler.wool[0], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x+3, c, z+4, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+3, c, z-4, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z+3, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z-3, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z+4, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z-4, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z+3, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z-3, wool, ConfigurationHandler.wool[0], 0, 1, 3, 1); //CORNER
 		}
 		
 		/************************ 1 : Orange (1) ************************/
 		for (int c = 283; c >= 1; c =  c - 33) {
-			BuildHelper.buildMeta(world, x-5, c, z-2, wool, ConfigurationHandler.wool[1], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x+5, c, z-2, wool, ConfigurationHandler.wool[1], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z+5, wool, ConfigurationHandler.wool[1], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z-5, wool, ConfigurationHandler.wool[1], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x+3, c, z+4, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+3, c, z-4, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z+3, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z-3, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z+4, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z-4, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z+3, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z-3, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-5, c, z-2, wool, ConfigurationHandler.wool[1], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x+5, c, z-2, wool, ConfigurationHandler.wool[1], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z+5, wool, ConfigurationHandler.wool[1], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z-5, wool, ConfigurationHandler.wool[1], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x+3, c, z+4, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+3, c, z-4, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z+3, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z-3, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z+4, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z-4, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z+3, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z-3, wool, ConfigurationHandler.wool[1], 0, 1, 3, 1); //CORNER
 		}
 		
 		/************************ 2 : Yellow (4) ************************/
 		for (int c = 280; c >= 1; c =  c - 33) {
-			BuildHelper.buildMeta(world, x-5, c, z-2, wool, ConfigurationHandler.wool[2], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x+5, c, z-2, wool, ConfigurationHandler.wool[2], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z+5, wool, ConfigurationHandler.wool[2], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z-5, wool, ConfigurationHandler.wool[2], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x+3, c, z+4, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+3, c, z-4, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z+3, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z-3, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z+4, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z-4, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z+3, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z-3, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-5, c, z-2, wool, ConfigurationHandler.wool[2], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x+5, c, z-2, wool, ConfigurationHandler.wool[2], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z+5, wool, ConfigurationHandler.wool[2], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z-5, wool, ConfigurationHandler.wool[2], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x+3, c, z+4, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+3, c, z-4, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z+3, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z-3, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z+4, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z-4, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z+3, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z-3, wool, ConfigurationHandler.wool[2], 0, 1, 3, 1); //CORNER
 		}
 		
 		/************************ 3 : Lime (5) ************************/
 		for (int c = 277; c >= 1; c =  c - 33) {
-			BuildHelper.buildMeta(world, x-5, c, z-2, wool, ConfigurationHandler.wool[3], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x+5, c, z-2, wool, ConfigurationHandler.wool[3], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z+5, wool, ConfigurationHandler.wool[3], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z-5, wool, ConfigurationHandler.wool[3], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x+3, c, z+4, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+3, c, z-4, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z+3, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z-3, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z+4, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z-4, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z+3, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z-3, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-5, c, z-2, wool, ConfigurationHandler.wool[3], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x+5, c, z-2, wool, ConfigurationHandler.wool[3], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z+5, wool, ConfigurationHandler.wool[3], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z-5, wool, ConfigurationHandler.wool[3], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x+3, c, z+4, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+3, c, z-4, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z+3, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z-3, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z+4, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z-4, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z+3, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z-3, wool, ConfigurationHandler.wool[3], 0, 1, 3, 1); //CORNER
 		}
 		
 		/************************ 4 : Green (13) ************************/
 		for (int c = 274; c >= 1; c =  c - 33) {
-			BuildHelper.buildMeta(world, x-5, c, z-2, wool, ConfigurationHandler.wool[4], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x+5, c, z-2, wool, ConfigurationHandler.wool[4], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z+5, wool, ConfigurationHandler.wool[4], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z-5, wool, ConfigurationHandler.wool[4], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x+3, c, z+4, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+3, c, z-4, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z+3, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z-3, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z+4, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z-4, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z+3, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z-3, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-5, c, z-2, wool, ConfigurationHandler.wool[4], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x+5, c, z-2, wool, ConfigurationHandler.wool[4], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z+5, wool, ConfigurationHandler.wool[4], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z-5, wool, ConfigurationHandler.wool[4], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x+3, c, z+4, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+3, c, z-4, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z+3, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z-3, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z+4, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z-4, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z+3, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z-3, wool, ConfigurationHandler.wool[4], 0, 1, 3, 1); //CORNER
 		}
 		
 		/************************ 5 : Cyan (9) ************************/
 		for (int c = 271; c >= 1; c =  c - 33) {
-			BuildHelper.buildMeta(world, x-5, c, z-2, wool, ConfigurationHandler.wool[5], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x+5, c, z-2, wool, ConfigurationHandler.wool[5], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z+5, wool, ConfigurationHandler.wool[5], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z-5, wool, ConfigurationHandler.wool[5], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x+3, c, z+4, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+3, c, z-4, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z+3, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z-3, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z+4, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z-4, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z+3, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z-3, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-5, c, z-2, wool, ConfigurationHandler.wool[5], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x+5, c, z-2, wool, ConfigurationHandler.wool[5], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z+5, wool, ConfigurationHandler.wool[5], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z-5, wool, ConfigurationHandler.wool[5], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x+3, c, z+4, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+3, c, z-4, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z+3, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z-3, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z+4, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z-4, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z+3, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z-3, wool, ConfigurationHandler.wool[5], 0, 1, 3, 1); //CORNER
 		}
 		
 		/************************ 6 : Light Blue (3) ************************/
 		for (int c = 268; c >= 1; c =  c - 33) {
-			BuildHelper.buildMeta(world, x-5, c, z-2, wool, ConfigurationHandler.wool[6], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x+5, c, z-2, wool, ConfigurationHandler.wool[6], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z+5, wool, ConfigurationHandler.wool[6], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z-5, wool, ConfigurationHandler.wool[6], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x+3, c, z+4, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+3, c, z-4, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z+3, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z-3, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z+4, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z-4, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z+3, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z-3, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-5, c, z-2, wool, ConfigurationHandler.wool[6], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x+5, c, z-2, wool, ConfigurationHandler.wool[6], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z+5, wool, ConfigurationHandler.wool[6], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z-5, wool, ConfigurationHandler.wool[6], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x+3, c, z+4, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+3, c, z-4, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z+3, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z-3, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z+4, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z-4, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z+3, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z-3, wool, ConfigurationHandler.wool[6], 0, 1, 3, 1); //CORNER
 		}
 		
 		/************************ 7 : Blue (11) ************************/
 		for (int c = 265; c >= 1; c =  c - 33) {
-			BuildHelper.buildMeta(world, x-5, c, z-2, wool, ConfigurationHandler.wool[7], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x+5, c, z-2, wool, ConfigurationHandler.wool[7], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z+5, wool, ConfigurationHandler.wool[7], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z-5, wool, ConfigurationHandler.wool[7], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x+3, c, z+4, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+3, c, z-4, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z+3, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z-3, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z+4, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z-4, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z+3, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z-3, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-5, c, z-2, wool, ConfigurationHandler.wool[7], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x+5, c, z-2, wool, ConfigurationHandler.wool[7], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z+5, wool, ConfigurationHandler.wool[7], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z-5, wool, ConfigurationHandler.wool[7], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x+3, c, z+4, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+3, c, z-4, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z+3, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z-3, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z+4, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z-4, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z+3, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z-3, wool, ConfigurationHandler.wool[7], 0, 1, 3, 1); //CORNER
 		}
 		
 		/************************ 8 : Purple (10) ************************/
 		for (int c = 262; c >= 1; c =  c - 33) {
-			BuildHelper.buildMeta(world, x-5, c, z-2, wool, ConfigurationHandler.wool[8], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x+5, c, z-2, wool, ConfigurationHandler.wool[8], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z+5, wool, ConfigurationHandler.wool[8], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z-5, wool, ConfigurationHandler.wool[8], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x+3, c, z+4, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+3, c, z-4, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z+3, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z-3, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z+4, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z-4, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z+3, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z-3, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-5, c, z-2, wool, ConfigurationHandler.wool[8], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x+5, c, z-2, wool, ConfigurationHandler.wool[8], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z+5, wool, ConfigurationHandler.wool[8], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z-5, wool, ConfigurationHandler.wool[8], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x+3, c, z+4, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+3, c, z-4, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z+3, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z-3, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z+4, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z-4, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z+3, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z-3, wool, ConfigurationHandler.wool[8], 0, 1, 3, 1); //CORNER
 		}
 		
 		/************************ 9 : Light Purple (2) ************************/
 		for (int c = 259; c >= 1; c =  c - 33) {
-			BuildHelper.buildMeta(world, x-5, c, z-2, wool, ConfigurationHandler.wool[9], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x+5, c, z-2, wool, ConfigurationHandler.wool[9], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z+5, wool, ConfigurationHandler.wool[9], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z-5, wool, ConfigurationHandler.wool[9], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x+3, c, z+4, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+3, c, z-4, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z+3, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z-3, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z+4, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z-4, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z+3, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z-3, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-5, c, z-2, wool, ConfigurationHandler.wool[9], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x+5, c, z-2, wool, ConfigurationHandler.wool[9], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z+5, wool, ConfigurationHandler.wool[9], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z-5, wool, ConfigurationHandler.wool[9], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x+3, c, z+4, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+3, c, z-4, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z+3, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z-3, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z+4, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z-4, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z+3, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z-3, wool, ConfigurationHandler.wool[9], 0, 1, 3, 1); //CORNER
 		}
 		
 		/************************ 10 : Pink (6) ************************/
 		for (int c = 256; c >= 1; c =  c - 33) {
-			BuildHelper.buildMeta(world, x-5, c, z-2, wool, ConfigurationHandler.wool[10], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x+5, c, z-2, wool, ConfigurationHandler.wool[10], 0, 5, 3, 1); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z+5, wool, ConfigurationHandler.wool[10], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x-2, c, z-5, wool, ConfigurationHandler.wool[10], 0, 1, 3, 5); //WALL
-			BuildHelper.buildMeta(world, x+3, c, z+4, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+3, c, z-4, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z+3, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x+4, c, z-3, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z+4, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-3, c, z-4, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z+3, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
-			BuildHelper.buildMeta(world, x-4, c, z-3, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-5, c, z-2, wool, ConfigurationHandler.wool[10], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x+5, c, z-2, wool, ConfigurationHandler.wool[10], 0, 5, 3, 1); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z+5, wool, ConfigurationHandler.wool[10], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x-2, c, z-5, wool, ConfigurationHandler.wool[10], 0, 1, 3, 5); //WALL
+			BuildHelper.buildMetaClean(world, x+3, c, z+4, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+3, c, z-4, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z+3, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x+4, c, z-3, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z+4, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-3, c, z-4, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z+3, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
+			BuildHelper.buildMetaClean(world, x-4, c, z-3, wool, ConfigurationHandler.wool[10], 0, 1, 3, 1); //CORNER
 		}
 
 		/************************ Air ************************/
 		for (int c = 256; c >= 1; c--) {
-			BuildHelper.build(world, x-3, c, z-3, Blocks.air, 7, 1, 7); //CENTER
-			BuildHelper.build(world, x-4, c, z-2, Blocks.air, 5, 1, 1); //WALL
-			BuildHelper.build(world, x+4, c, z-2, Blocks.air, 5, 1, 1); //WALL
-			BuildHelper.build(world, x-2, c, z+4, Blocks.air, 1, 1, 5); //WALL
-			BuildHelper.build(world, x-2, c, z-4, Blocks.air, 1, 1, 5); //WALL
+			BuildHelper.buildClean(world, x-3, c, z-3, Blocks.air, 7, 1, 7); //CENTER
+			BuildHelper.buildClean(world, x-4, c, z-2, Blocks.air, 5, 1, 1); //WALL
+			BuildHelper.buildClean(world, x+4, c, z-2, Blocks.air, 5, 1, 1); //WALL
+			BuildHelper.buildClean(world, x-2, c, z+4, Blocks.air, 1, 1, 5); //WALL
+			BuildHelper.buildClean(world, x-2, c, z-4, Blocks.air, 1, 1, 5); //WALL
 		}
 
 		/************************ Stone (Prevent Lava Burning) ************************/
 		for (int c = 50; c >= 1; c--) {
-			BuildHelper.build(world, x-6, c, z-3, stone, 7, 1, 1); //WALL
-			BuildHelper.build(world, x+6, c, z-3, stone, 7, 1, 1); //WALL
-			BuildHelper.build(world, x-3, c, z+6, stone, 1, 1, 7); //WALL
-			BuildHelper.build(world, x-3, c, z-6, stone, 1, 1, 7); //WALL
+			BuildHelper.buildClean(world, x-6, c, z-3, stone, 7, 1, 1); //WALL
+			BuildHelper.buildClean(world, x+6, c, z-3, stone, 7, 1, 1); //WALL
+			BuildHelper.buildClean(world, x-3, c, z+6, stone, 1, 1, 7); //WALL
+			BuildHelper.buildClean(world, x-3, c, z-6, stone, 1, 1, 7); //WALL
 			
-			BuildHelper.build(world, x-5, c, z-4, stone, 2, 1, 1); //PRE-CORNER
-			BuildHelper.build(world, x-5, c, z+3, stone, 2, 1, 1); //PRE-CORNER
+			BuildHelper.buildClean(world, x-5, c, z-4, stone, 2, 1, 1); //PRE-CORNER
+			BuildHelper.buildClean(world, x-5, c, z+3, stone, 2, 1, 1); //PRE-CORNER
 
-			BuildHelper.build(world, x+5, c, z-4, stone, 2, 1, 1); //PRE-CORNER
-			BuildHelper.build(world, x+5, c, z+3, stone, 2, 1, 1); //PRE-CORNER
+			BuildHelper.buildClean(world, x+5, c, z-4, stone, 2, 1, 1); //PRE-CORNER
+			BuildHelper.buildClean(world, x+5, c, z+3, stone, 2, 1, 1); //PRE-CORNER
 			
-			BuildHelper.build(world, x-4, c, z-5, stone, 1, 1, 2); //PRE-CORNER
-			BuildHelper.build(world, x+3, c, z-5, stone, 1, 1, 2); //PRE-CORNER
+			BuildHelper.buildClean(world, x-4, c, z-5, stone, 1, 1, 2); //PRE-CORNER
+			BuildHelper.buildClean(world, x+3, c, z-5, stone, 1, 1, 2); //PRE-CORNER
 
-			BuildHelper.build(world, x-4, c, z+5, stone, 1, 1, 2); //PRE-CORNER
-			BuildHelper.build(world, x+3, c, z+5, stone, 1, 1, 2); //PRE-CORNER
+			BuildHelper.buildClean(world, x-4, c, z+5, stone, 1, 1, 2); //PRE-CORNER
+			BuildHelper.buildClean(world, x+3, c, z+5, stone, 1, 1, 2); //PRE-CORNER
 
-			BuildHelper.build(world, x+4, c, z+4, stone, 1, 1, 1); //CORNER
-			BuildHelper.build(world, x+4, c, z-4, stone, 1, 1, 1); //CORNER
-			BuildHelper.build(world, x-4, c, z+4, stone, 1, 1, 1); //CORNER
-			BuildHelper.build(world, x-4, c, z-4, stone, 1, 1, 1); //CORNER
+			BuildHelper.buildClean(world, x+4, c, z+4, stone, 1, 1, 1); //CORNER
+			BuildHelper.buildClean(world, x+4, c, z-4, stone, 1, 1, 1); //CORNER
+			BuildHelper.buildClean(world, x-4, c, z+4, stone, 1, 1, 1); //CORNER
+			BuildHelper.buildClean(world, x-4, c, z-4, stone, 1, 1, 1); //CORNER
 		}
 
 		/************************ Water ************************/
 		for (int c = 4; c > 1; c--) {
-			BuildHelper.build(world, x-3, c, z-3, water, 7, 1, 7); //CENTER
-			BuildHelper.build(world, x-4, c, z-2, water, 5, 1, 1); //WALL
-			BuildHelper.build(world, x+4, c, z-2, water, 5, 1, 1); //WALL
-			BuildHelper.build(world, x-2, c, z+4, water, 1, 1, 5); //WALL
-			BuildHelper.build(world, x-2, c, z-4, water, 1, 1, 5); //WALL
+			BuildHelper.buildClean(world, x-3, c, z-3, water, 7, 1, 7); //CENTER
+			BuildHelper.buildClean(world, x-4, c, z-2, water, 5, 1, 1); //WALL
+			BuildHelper.buildClean(world, x+4, c, z-2, water, 5, 1, 1); //WALL
+			BuildHelper.buildClean(world, x-2, c, z+4, water, 1, 1, 5); //WALL
+			BuildHelper.buildClean(world, x-2, c, z-4, water, 1, 1, 5); //WALL
 		}
 		
 		/************************ Floor ************************/
-		BuildHelper.buildMeta(world, x-3, 1, z-3, wool, ConfigurationHandler.wool[7], 0, 7, 1, 7); //CENTER
-		BuildHelper.buildMeta(world, x-4, 1, z-2, wool, ConfigurationHandler.wool[7], 0, 5, 1, 1); //WALL
-		BuildHelper.buildMeta(world, x+4, 1, z-2, wool, ConfigurationHandler.wool[7], 0, 5, 1, 1); //WALL
-		BuildHelper.buildMeta(world, x-2, 1, z+4, wool, ConfigurationHandler.wool[7], 0, 1, 1, 5); //WALL
-		BuildHelper.buildMeta(world, x-2, 1, z-4, wool, ConfigurationHandler.wool[7], 0, 1, 1, 5); //WALL
+		BuildHelper.buildMetaClean(world, x-3, 1, z-3, wool, ConfigurationHandler.wool[7], 0, 7, 1, 7); //CENTER
+		BuildHelper.buildMetaClean(world, x-4, 1, z-2, wool, ConfigurationHandler.wool[7], 0, 5, 1, 1); //WALL
+		BuildHelper.buildMetaClean(world, x+4, 1, z-2, wool, ConfigurationHandler.wool[7], 0, 5, 1, 1); //WALL
+		BuildHelper.buildMetaClean(world, x-2, 1, z+4, wool, ConfigurationHandler.wool[7], 0, 1, 1, 5); //WALL
+		BuildHelper.buildMetaClean(world, x-2, 1, z-4, wool, ConfigurationHandler.wool[7], 0, 1, 1, 5); //WALL
 
 		/************************ Ladder ************************/
 		if (meta == 0) {
 			for (int c = 256; c >= 5; c--) {
-				BuildHelper.buildMeta(world, x-2, c, z-4, ladder, 3, 0, 1, 1, 5);
+				BuildHelper.buildMetaClean(world, x-2, c, z-4, ladder, 3, 0, 1, 1, 5);
 			}
 		
 			if (ConfigurationHandler.tpFall == true) {
@@ -324,7 +309,7 @@ public class BlockInstantFall extends BlockDirectionalIB {
 			}
 		} else if (meta == 1) {
 			for (int c = 256; c >= 5; c--) {
-				BuildHelper.buildMeta(world, x+4, c, z-2, ladder, 4, 0, 5, 1, 1);
+				BuildHelper.buildMetaClean(world, x+4, c, z-2, ladder, 4, 0, 5, 1, 1);
 			}
 		
 			if (ConfigurationHandler.tpFall == true) {
@@ -335,7 +320,7 @@ public class BlockInstantFall extends BlockDirectionalIB {
 			}
 		} else if (meta == 2) {
 			for (int c = 256; c >= 5; c--) {
-				BuildHelper.buildMeta(world, x-2, c, z+4, ladder, 2, 0, 1, 1, 5);
+				BuildHelper.buildMetaClean(world, x-2, c, z+4, ladder, 2, 0, 1, 1, 5);
 			}
 		
 			if (ConfigurationHandler.tpFall == true) {
@@ -346,7 +331,7 @@ public class BlockInstantFall extends BlockDirectionalIB {
 			}
 		} else if (meta == 3) {
 			for (int c = 256; c >= 5; c--) {
-				BuildHelper.buildMeta(world, x-4, c, z-2, ladder, 5, 0, 5, 1, 1);
+				BuildHelper.buildMetaClean(world, x-4, c, z-2, ladder, 5, 0, 5, 1, 1);
 			}
 		
 			if (ConfigurationHandler.tpFall == true) {
