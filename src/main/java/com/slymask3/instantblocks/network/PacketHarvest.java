@@ -3,12 +3,10 @@ package com.slymask3.instantblocks.network;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
 import com.slymask3.instantblocks.block.instant.BlockInstantHarvest;
-import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 
@@ -105,22 +103,23 @@ public class PacketHarvest extends AbstractPacket {
 
 	@Override
 	public void handleClientSide(EntityPlayer player) {
-		World world = DimensionManager.getWorld(_dim);
-		TileEntity tileentity = world.getTileEntity(_x, _y, _z);
-		((TileEntityHarvest)tileentity).setLogs(_logOak, _logSpruce, _logBirch, _logJungle, _logAcacia, _logDark);
-		((TileEntityHarvest)tileentity).setOther(_wheat, _carrot, _potato, _cactus, _pumpkin, _melon, _sugarcane, _cocoa, _mushroom, _netherwart);
-		((TileEntityHarvest)tileentity).setReplant(_replant);
+		//World world = DimensionManager.getWorld(_dim);
+		//TileEntity tileentity = world.getTileEntity(_x, _y, _z);
+		//((TileEntityHarvest)tileentity).setLogs(_logOak, _logSpruce, _logBirch, _logJungle, _logAcacia, _logDark);
+		//((TileEntityHarvest)tileentity).setOther(_wheat, _carrot, _potato, _cactus, _pumpkin, _melon, _sugarcane, _cocoa, _mushroom, _netherwart);
+		//((TileEntityHarvest)tileentity).setReplant(_replant);
 
-		BlockInstantHarvest block = (BlockInstantHarvest)world.getBlock(_x, _y, _z);
-		
-		block.build(world, _x, _y, _z, _player, _logOak, _logSpruce, _logBirch, _logJungle, _logAcacia, _logDark, _wheat, _carrot, _potato, _cactus, _pumpkin, _melon, _sugarcane, _cocoa, _mushroom, _netherwart, _replant);
+		//BlockInstantHarvest block = (BlockInstantHarvest)world.getBlock(_x, _y, _z);
+		//LogHelper.info("handleClientSide()");
+		//block.build(world, _x, _y, _z, _player, _logOak, _logSpruce, _logBirch, _logJungle, _logAcacia, _logDark, _wheat, _carrot, _potato, _cactus, _pumpkin, _melon, _sugarcane, _cocoa, _mushroom, _netherwart, _replant);
+		//block.handleClientSide(world, _x, _y, _z, _player);
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
 		BlockInstantHarvest block = (BlockInstantHarvest)world.getBlock(_x, _y, _z);
-		
+		//LogHelper.info("handleServerSide()");
 		block.build(world, _x, _y, _z, _player, _logOak, _logSpruce, _logBirch, _logJungle, _logAcacia, _logDark, _wheat, _carrot, _potato, _cactus, _pumpkin, _melon, _sugarcane, _cocoa, _mushroom, _netherwart, _replant);
 	}
 }

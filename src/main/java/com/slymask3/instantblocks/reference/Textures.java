@@ -76,6 +76,10 @@ public class Textures {
         public static final String BACK = FOLDER + "statue_back";
         public static final String FRONT = FOLDER + "statue_front";
     }
+    
+    public static final class Harvest {
+        public static final String SIDE = FOLDER + "harvest_side";
+    }
 
     public static final class Color {
         public static final String SIDE = "wool_colored_white";

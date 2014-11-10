@@ -1,4 +1,5 @@
 package com.slymask3.instantblocks.item;
+
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -81,6 +82,10 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Right-click to activate.");
 		} else if (block == mb.ibStatue) {
 			list.add("Creates a statue of any Minecraft player.");
+			list.add("Right-click to activate.");
+		} else if (block == mb.ibHarvest) {
+			list.add("Harvests renewable resources in a radius.");
+			list.add("Radius: " + config.radiusHarvest);
 			list.add("Right-click to activate.");
 		} else if (block == mb.color) {
 			list.add("CREATIVE ONLY");

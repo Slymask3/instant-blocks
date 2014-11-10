@@ -6,7 +6,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityInstantStatue extends TileEntity { //implements ISidedInventory {
+public class TileEntityStatue extends TileEntity { //implements ISidedInventory {
 	//private String username = "";
 	//public EntityPlayer player;
 	//public int color = 0x00000000;
@@ -27,7 +27,7 @@ public class TileEntityInstantStatue extends TileEntity { //implements ISidedInv
 	public boolean legRight;
 	public boolean rgb;
 
-	public TileEntityInstantStatue() {
+	public TileEntityStatue() {
 		super();
 		this.username="";
 		this.head=true;

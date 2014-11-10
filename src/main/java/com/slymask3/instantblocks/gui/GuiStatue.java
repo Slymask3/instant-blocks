@@ -16,10 +16,12 @@ import org.lwjgl.input.Keyboard;
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.network.PacketInstantStatue;
+import com.slymask3.instantblocks.network.PacketStatue;
+import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
-import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
+import com.slymask3.instantblocks.tileentity.TileEntityStatue;
 import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 import cpw.mods.fml.client.config.GuiButtonExt;
@@ -29,12 +31,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiInstantStatue extends GuiScreen {
+public class GuiStatue extends GuiScreen {
 	private static BuildHelper ibf = new BuildHelper();
 	private static ConfigurationHandler config = new ConfigurationHandler();
 	
 	private EntityPlayer player;
-	private TileEntityInstantStatue tileEntity;
+	private TileEntityStatue tileEntity;
 	
     private GuiButtonExt doneBtn;
     private GuiButtonExt cancelBtn;
@@ -54,7 +56,7 @@ public class GuiInstantStatue extends GuiScreen {
 	private int y;
 	private int z;
 
-	public GuiInstantStatue(EntityPlayer player, TileEntityInstantStatue entity, World world, int x, int y, int z) {
+	public GuiStatue(EntityPlayer player, TileEntityStatue entity, World world, int x, int y, int z) {
 		this.player = player;
 		this.tileEntity = entity;
 		this.world = world;
@@ -95,7 +97,9 @@ public class GuiInstantStatue extends GuiScreen {
 	protected void actionPerformed(final GuiButton btn) {
 		if (btn.enabled) {
 			if (btn.id == doneBtn.id) {
-				sendInfoAndClose();
+				sendInfo();
+				Keyboard.enableRepeatEvents(false);
+				mc.displayGuiScreen(null);
 			} else if (btn.id == cancelBtn.id) {
 				Keyboard.enableRepeatEvents(false);
 				mc.displayGuiScreen(null);
@@ -135,18 +139,21 @@ public class GuiInstantStatue extends GuiScreen {
 		super.drawScreen(par1, par2, par3);
 	}
 	
-	public void sendInfoAndClose() {
-		InstantBlocks.packetPipeline.sendToServer(new PacketInstantStatue(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
+	public void sendInfo() {
+		InstantBlocks.packetPipeline.sendToServer(new PacketStatue(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
 		//InstantBlocks.packetPipeline.sendToAll(new PacketInstantStatue(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
 
-		LogHelper.info(this.player.getDisplayName());
+		//LogHelper.info(this.player.getDisplayName());
 		
 		//config.rgbMode = rgbMode.isChecked();
 		
-		Keyboard.enableRepeatEvents(false);
-		mc.displayGuiScreen(null);
+		IBHelper.xp(world, player, ConfigurationHandler.xp);
+        IBHelper.effectFull(world, "reddust", x, y, z);
+        IBHelper.msg(player, "\u00a7aInstant Statue created of the player '" + input.getText() + "'.", Colors.a);
 		
-		LogHelper.info(input.getText());
+		
+		
+		//LogHelper.info(input.getText());
 	}
 	
 }

@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -27,6 +28,7 @@ import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
 import com.slymask3.instantblocks.utility.IBHelper;
+import com.slymask3.instantblocks.utility.LogHelper;
 
 public class BlockInstantHarvest extends BlockContainer implements ITileEntityProvider {
 	
@@ -37,7 +39,7 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 		setHardness(1.5F);
 		setResistance(2000F);
 		setStepSound(Block.soundTypeWood);
-        setBlockTextureName(Textures.Statue.FRONT);
+        setBlockTextureName(Textures.Harvest.SIDE);
 	}
 	
 	public int quantityDropped(Random random) {
@@ -47,11 +49,15 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 	public static IIcon side;
 
 	public void registerBlockIcons(IIconRegister ir) {
-		side = ir.registerIcon(Textures.Statue.FRONT);
+		side = ir.registerIcon(Textures.Harvest.SIDE);
 	}
 
 	public IIcon getIcon(int side, int meta) {
-		return this.side;
+		if (side == 0 || side == 1) {
+			return Blocks.log.getIcon(side, 0);
+		} else {
+			return this.side;
+		}
 	}
 	
 	@Override
@@ -71,21 +77,38 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 			}
 		}
 		
+		LogHelper.info("player == " + player);
+		
 		player.openGui(InstantBlocks.instance, GuiID.HARVEST.ordinal(), world, x, y, z);
 		
 		return true;
 	}
 	
+	/*public void handleClientSide(World world, int x, int y, int z, String playerS) {
+		//EntityClientPlayerMP player = (EntityClientPlayerMP) world.getPlayerEntityByName(playerS);
+		
+		//EntityPlayer player = world.getPlayerEntityByName(playerS);
+		
+		//player.
+
+		LogHelper.info("playerS == " + playerS);
+		LogHelper.info("player == " + player);
+		
+		IBHelper.xp(world, player, ConfigurationHandler.xp);
+        IBHelper.effectFull(world, "reddust", x, y, z);
+        IBHelper.msg(player, Strings.harvestCreate, Colors.a);
+	}*/
+	
 	public void build(World world, int x, int y, int z, String playerS, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
 		EntityPlayer player = world.getPlayerEntityByName(playerS);
 		
-		harvest(world, x, y, z, 30, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant);
+		harvest(world, x, y, z, ConfigurationHandler.radiusHarvest, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant);
 		
 		//IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
-        IBHelper.xp(world, player, ConfigurationHandler.xp);
+        //IBHelper.xp(world, player, ConfigurationHandler.xp);
         IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-        IBHelper.effectFull(world, "reddust", x, y, z);
-        IBHelper.msg(player, Strings.harvestCreate, Colors.a);
+        //IBHelper.effectFull(world, "reddust", x, y, z);
+        //IBHelper.msg(player, Strings.harvestCreate, Colors.a);
 		
 		ItemStack is = player.getCurrentEquippedItem();
 		
@@ -101,7 +124,7 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 		Random rand = new Random();
     	
         int x = (int) (X -radius);
-        int y = (int) (Y -radius);
+        int y = (int) (Y +radius);
         int z = (int) (Z -radius);
    
         int bx = x;
@@ -206,7 +229,7 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
                     	IBHelper.addItemsToChest(chest, Blocks.brown_mushroom, 1, 0);
                     	world.setBlock(x, y, z, Blocks.air);
                     } else if (block == Blocks.nether_wart && meta == 3 && netherwart) { //NETHERWART
-                    	IBHelper.addItemsToChest(chest, Items.nether_wart, 1, 0);
+                    	IBHelper.addItemsToChest(chest, Items.nether_wart, rand.nextInt(3)+2, 0);
                     	if (replant) {
                     		world.setBlock(x, y, z, Blocks.nether_wart, 0, 2);
                     	} else {
@@ -214,6 +237,8 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
                     	}
                     }
                 	
+                    //world.setBlock(x, y, z, Blocks.air);
+                    
                     x++;
                 }
                 z++;
@@ -221,7 +246,7 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
             }
             z = bz;
             x = bx;
-            y++;
+            y--;
         }
     }
 }

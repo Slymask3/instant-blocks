@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.network;
 
 import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
-import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
+import com.slymask3.instantblocks.tileentity.TileEntityStatue;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
@@ -14,7 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
-public class PacketInstantStatue extends AbstractPacket {
+public class PacketStatue extends AbstractPacket {
 	int _dim, _x, _y, _z;
 	//double _range;
 	String _player;
@@ -23,11 +23,11 @@ public class PacketInstantStatue extends AbstractPacket {
 	boolean _rgb;
 	
 
-	public PacketInstantStatue() {
+	public PacketStatue() {
 		
 	}
 
-	public PacketInstantStatue(World world, int x, int y, int z, String player, /*double range*/ String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
+	public PacketStatue(World world, int x, int y, int z, String player, /*double range*/ String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
 		_dim = world.provider.dimensionId;
 		_x = x;
 		_y = y;
@@ -83,17 +83,17 @@ public class PacketInstantStatue extends AbstractPacket {
 
 	@Override
 	public void handleClientSide(EntityPlayer player) {
-		World world = DimensionManager.getWorld(_dim);
-		TileEntity tileentity = world.getTileEntity(_x, _y, _z);
-		((TileEntityInstantStatue)tileentity).setUsername(_username);
-		((TileEntityInstantStatue)tileentity).setParts(_head, _body, _armLeft, _armRight, _legLeft, _legRight);
-		LogHelper.info("handleCientSide(): CLIENT");
-
-		BlockInstantStatue block = (BlockInstantStatue)world.getBlock(_x, _y, _z);
-		
-		block.build(world, _x, _y, _z, _player, tileentity.getBlockMetadata(), this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight, this._rgb);
-
-		LogHelper.info("handleClientSide(): username = " + this._username);
+//		World world = DimensionManager.getWorld(_dim);
+//		TileEntity tileentity = world.getTileEntity(_x, _y, _z);
+//		((TileEntityStatue)tileentity).setUsername(_username);
+//		((TileEntityStatue)tileentity).setParts(_head, _body, _armLeft, _armRight, _legLeft, _legRight);
+//		LogHelper.info("handleCientSide(): CLIENT");
+//
+//		BlockInstantStatue block = (BlockInstantStatue)world.getBlock(_x, _y, _z);
+//		
+//		block.build(world, _x, _y, _z, _player, tileentity.getBlockMetadata(), this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight, this._rgb);
+//
+//		LogHelper.info("handleClientSide(): username = " + this._username);
 	}
 
 	@Override
@@ -108,13 +108,13 @@ public class PacketInstantStatue extends AbstractPacket {
 			//((TileEntityInstantStatue)tileentity).setDetectionRange(_range);
 			//((TileEntityInstantStatue)tileentity).setUsername(_username);
 			//((TileEntityInstantStatue)tileentity).setParts(_head, _body, _armLeft, _armRight, _legLeft, _legRight);
-			LogHelper.info("handleServerSide(): SERVER");
+			//LogHelper.info("handleServerSide(): SERVER");
 			
 			//if (this._username != "" && !world.isRemote) {
 				//sendChangeToServer();
 			block.build(world, _x, _y, _z, _player, world.getTileEntity(_x, _y, _z).getBlockMetadata(), this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight, this._rgb);
 			//}
-			LogHelper.info("handleServerSide(): username = " + this._username);
+			//LogHelper.info("handleServerSide(): username = " + this._username);
 		//}
 	}
 }

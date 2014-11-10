@@ -38,6 +38,7 @@ public class ConfigurationHandler
 	public static int xp;
 	//public static String colorBlock;
 	//public static boolean rgbMode;
+	public static int radiusHarvest;
 
     public static void init(File configFile)
     {
@@ -99,6 +100,9 @@ public class ConfigurationHandler
 		effect = configuration.get(options, "[Option] Effect", true, "Whether to show red particle effects on right-click of Instant Blocks or not.\n(Default = true)").getBoolean(true);
 		sound = configuration.get(options, "[Option] Sound", "random.levelup", "Which sound to play on right-click of Instant Blocks.\nThe directory is .minecarft\\resources\\sound3\\.\nFor example, the default sound is .minecarft\\resources\\sound3\\random\\levelup.ogg\n(Default = random.levelup)").getString();
 		//animated = configuration.get(options, "[Option] Animated Textures", true, "Whether to use animated textures or not.\n(Default = true)");
+		
+		radiusHarvest = configuration.get(options, "[Option] Instant Harvester Radius.", 50, "Radius to Harvest blocks around Instant Harvester.\n(Default = 50)").getInt();
+		
 		
         if (configuration.hasChanged())
         {

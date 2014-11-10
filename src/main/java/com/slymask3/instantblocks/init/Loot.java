@@ -34,6 +34,7 @@ public class Loot {
 			ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibSucker), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibRail), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibStatue), 1, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibHarvest), 1, 1, 1));
 		}
 
 		if (config.villageChests.getBoolean(true)) {
@@ -50,6 +51,7 @@ public class Loot {
 			ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(mb.ibSucker), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(mb.ibRail), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(mb.ibStatue), 1, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(mb.ibHarvest), 1, 1, 1));
 		}
 
 		if (config.mineshaftChests.getBoolean(true)) {
@@ -66,6 +68,7 @@ public class Loot {
 			ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(mb.ibSucker), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(mb.ibRail), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(mb.ibStatue), 1, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(mb.ibHarvest), 1, 1, 1));
 		}
 
 		if (config.strongholdChests.getBoolean(true)) {
@@ -82,6 +85,7 @@ public class Loot {
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(mb.ibSucker), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(mb.ibRail), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(mb.ibStatue), 1, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(mb.ibHarvest), 1, 1, 1));
 
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(mb.ibWood), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(mb.ibLadder), 1, 1, 1));
@@ -96,6 +100,7 @@ public class Loot {
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(mb.ibSucker), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(mb.ibRail), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(mb.ibStatue), 1, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(mb.ibHarvest), 1, 1, 1));
 
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(new ItemStack(mb.ibWood), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(new ItemStack(mb.ibLadder), 1, 1, 1));
@@ -110,6 +115,7 @@ public class Loot {
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(new ItemStack(mb.ibSucker), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(new ItemStack(mb.ibRail), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(new ItemStack(mb.ibStatue), 1, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(new ItemStack(mb.ibHarvest), 1, 1, 1));
 		}
 
 		if (config.templeChests.getBoolean(true)) {
@@ -126,6 +132,7 @@ public class Loot {
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibSucker), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibRail), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibStatue), 1, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibHarvest), 1, 1, 1));
 
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibWood), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibLadder), 1, 1, 1));
@@ -140,6 +147,7 @@ public class Loot {
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibSucker), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibRail), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibStatue), 1, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(mb.ibHarvest), 1, 1, 1));
 
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_DISPENSER, new WeightedRandomChestContent(new ItemStack(mb.ibWood), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_DISPENSER, new WeightedRandomChestContent(new ItemStack(mb.ibLadder), 1, 1, 1));
@@ -154,6 +162,7 @@ public class Loot {
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_DISPENSER, new WeightedRandomChestContent(new ItemStack(mb.ibSucker), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_DISPENSER, new WeightedRandomChestContent(new ItemStack(mb.ibRail), 1, 1, 1));
 			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_DISPENSER, new WeightedRandomChestContent(new ItemStack(mb.ibStatue), 1, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_DISPENSER, new WeightedRandomChestContent(new ItemStack(mb.ibHarvest), 1, 1, 1));
 		}
 	}
 }
