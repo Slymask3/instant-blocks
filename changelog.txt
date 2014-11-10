@@ -1,4 +1,5 @@
 v1.5.2 (n/a)
+- Added Instant Harvester Block.
 - Fixed Instant Rainbow Skydive Block to replace bedrock with water.
 - Fixed Instant Grinder Block to generate flowing water instead of still water.
 
