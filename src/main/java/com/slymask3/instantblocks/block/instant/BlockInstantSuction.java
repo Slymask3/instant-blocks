@@ -21,6 +21,7 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 
 public class BlockInstantSuction extends BlockIB {
 	
@@ -37,7 +38,7 @@ public class BlockInstantSuction extends BlockIB {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//do not dmg yet
 			} else {
-				BuildHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}
@@ -64,15 +65,15 @@ public class BlockInstantSuction extends BlockIB {
 		if (BuildHelper.sucked == true) {
 			if (BuildHelper.liq == 1) {
 				world.setBlock(x, y, z, ModBlocks.ibWater);
-				BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibSucker);
-				BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-				BuildHelper.effectFull(world, "reddust", x, y, z);
+				IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibSucker);
+				IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+				IBHelper.effectFull(world, "reddust", x, y, z);
 				if (BuildHelper.counter == 1) {
-					BuildHelper.msg(player, "\u00a7aSucked in " + (BuildHelper.counter) + " Water Block.", Colors.a);
+					IBHelper.msg(player, "\u00a7aSucked in " + (BuildHelper.counter) + " Water Block.", Colors.a);
 				} else {
-					BuildHelper.msg(player, "\u00a7aSucked in " + (BuildHelper.counter) + " Water Blocks.", Colors.a);
+					IBHelper.msg(player, "\u00a7aSucked in " + (BuildHelper.counter) + " Water Blocks.", Colors.a);
 				}
-				BuildHelper.xp(world, player, ConfigurationHandler.xp);
+				IBHelper.xp(world, player, ConfigurationHandler.xp);
 				
 				if (ConfigurationHandler.useWands == true) {
 					player.getCurrentEquippedItem().damageItem(1, player);
@@ -81,15 +82,15 @@ public class BlockInstantSuction extends BlockIB {
 				//player.triggerAchievement(ib.achSuckerW);
 			} else if (BuildHelper.liq == 2) {
 				world.setBlock(x, y, z, ModBlocks.ibLava);
-				BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibSucker);
-				BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-				BuildHelper.effectFull(world, "reddust", x, y, z);
+				IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibSucker);
+				IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+				IBHelper.effectFull(world, "reddust", x, y, z);
 				if (BuildHelper.counter == 1) {
-					BuildHelper.msg(player, "\u00a7aSucked in " + (BuildHelper.counter) + " Lava Block.", Colors.a);
+					IBHelper.msg(player, "\u00a7aSucked in " + (BuildHelper.counter) + " Lava Block.", Colors.a);
 				} else {
-					BuildHelper.msg(player, "\u00a7aSucked in " + (BuildHelper.counter) + " Lava Blocks.", Colors.a);
+					IBHelper.msg(player, "\u00a7aSucked in " + (BuildHelper.counter) + " Lava Blocks.", Colors.a);
 				}
-				BuildHelper.xp(world, player, ConfigurationHandler.xp);
+				IBHelper.xp(world, player, ConfigurationHandler.xp);
 				
 				if (ConfigurationHandler.useWands == true) {
 					player.getCurrentEquippedItem().damageItem(1, player);
@@ -99,9 +100,9 @@ public class BlockInstantSuction extends BlockIB {
 			}
 		} else {
 			if (BuildHelper.liq == 0) {
-				BuildHelper.msg(player, "\u00a7cNo liquids found.", Colors.c);
+				IBHelper.msg(player, "\u00a7cNo liquids found.", Colors.c);
 			} else if (BuildHelper.liq == -1) {
-				BuildHelper.msg(player, "\u00a7cPrevented from sucking in over " + ConfigurationHandler.maxSuck + " Water/Lava Blocks.", Colors.c);
+				IBHelper.msg(player, "\u00a7cPrevented from sucking in over " + ConfigurationHandler.maxSuck + " Water/Lava Blocks.", Colors.c);
 			}
 		}
 		

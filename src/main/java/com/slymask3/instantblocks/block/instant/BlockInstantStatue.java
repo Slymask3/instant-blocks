@@ -35,6 +35,7 @@ import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
 import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 public class BlockInstantStatue extends BlockContainer implements ITileEntityProvider {
@@ -177,7 +178,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
-				BuildHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}
@@ -213,11 +214,11 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		        
 		        //LogHelper.info(ColorHelper.getColorAt(img, 0, 0));
 		        
-		        BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
-				BuildHelper.xp(world, player, ConfigurationHandler.xp);
-				BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-				BuildHelper.effectFull(world, "reddust", x, y, z);
-				BuildHelper.msg(player, "\u00a7aInstant Statue created of the player '" + username + "'.", Colors.a);
+		        IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
+		        IBHelper.xp(world, player, ConfigurationHandler.xp);
+		        IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		        IBHelper.effectFull(world, "reddust", x, y, z);
+		        IBHelper.msg(player, "\u00a7aInstant Statue created of the player '" + username + "'.", Colors.a);
 				
 				ItemStack is = player.getCurrentEquippedItem();
 				
@@ -227,10 +228,10 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 				
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
-				BuildHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
+				IBHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
 			} catch (IOException e) {
 				e.printStackTrace();
-				BuildHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
+				IBHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
 			}
 		}
 	}

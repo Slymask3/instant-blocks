@@ -30,6 +30,7 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 
 public class BlockInstantHouseWood extends BlockDirectionalIB {
 	
@@ -91,7 +92,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		if (world.getBlockMetadata(x, y, z) >= 4 && world.getBlockMetadata(x, y, z) <= 7) {
-			BuildHelper.msg(player, Strings.woodError, Colors.c);
+			IBHelper.msg(player, Strings.woodError, Colors.c);
 			return true;
 		}
 		
@@ -102,7 +103,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 				is.damageItem(1, player);
 				//player.triggerAchievement(ib.achWood);
 			} else {
-				BuildHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}
@@ -111,12 +112,12 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		
 		build(world, x, y, z);
 			
-		BuildHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.xp(world, player, ConfigurationHandler.xp);
 		//BuildHelper.keepBlocks(world, x, y, z, InstantBlocks.ibWood.blockID);
 				
-		BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-		BuildHelper.effectFull(world, "reddust", x, y, z);
-		BuildHelper.msg(player, Strings.woodCreate, Colors.a);
+		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		IBHelper.effectFull(world, "reddust", x, y, z);
+		IBHelper.msg(player, Strings.woodCreate, Colors.a);
 		
 		//System.out.println("meta = " + meta);
 		
@@ -740,8 +741,8 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 
 			//player.triggerAchievement(ib.achWoodPack);
 			
-			BuildHelper.msg(player, Strings.woodPack, Colors.a);
-			BuildHelper.sound(world, "step.ladder", x, y, z);
+			IBHelper.msg(player, Strings.woodPack, Colors.a);
+			IBHelper.sound(world, "step.ladder", x, y, z);
 		} else if (meta == 5) {
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z+4, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z-2, chest, player, "Chest");
@@ -764,8 +765,8 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 
 			//player.triggerAchievement(ib.achWoodPack);
 			
-			BuildHelper.msg(player, Strings.woodPack, Colors.a);
-			BuildHelper.sound(world, "step.ladder", x, y, z);
+			IBHelper.msg(player, Strings.woodPack, Colors.a);
+			IBHelper.sound(world, "step.ladder", x, y, z);
 		} else if (meta == 6) {
 			BuildHelper.ifNoBlockThenStop(world, x-3, y+1, z+4, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x+2, y+1, z+4, chest, player, "Chest");
@@ -788,8 +789,8 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 
 			//player.triggerAchievement(ib.achWoodPack);
 
-			BuildHelper.msg(player, Strings.woodPack, Colors.a);
-			BuildHelper.sound(world, "step.ladder", x, y, z);
+			IBHelper.msg(player, Strings.woodPack, Colors.a);
+			IBHelper.sound(world, "step.ladder", x, y, z);
 		} else if (meta == 7) {
 			BuildHelper.ifNoBlockThenStop(world, x-4, y+1, z-3, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x-4, y+1, z+2, chest, player, "Chest");
@@ -812,8 +813,8 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 
 			//player.triggerAchievement(ib.achWoodPack);
 			
-			BuildHelper.msg(player, Strings.woodPack, Colors.a);
-			BuildHelper.sound(world, "step.ladder", x, y, z);
+			IBHelper.msg(player, Strings.woodPack, Colors.a);
+			IBHelper.sound(world, "step.ladder", x, y, z);
 		}
 		return true;
 	}

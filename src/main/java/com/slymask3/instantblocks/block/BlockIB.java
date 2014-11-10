@@ -2,15 +2,6 @@ package com.slymask3.instantblocks.block;
 
 import java.util.Random;
 
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.utility.BuildHelper;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -19,6 +10,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 
 public class BlockIB extends Block {
 
@@ -340,7 +340,7 @@ public class BlockIB extends Block {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		if (world.getBlock(x, y, z) == ModBlocks.ibGrinder) {
 			if (world.getBlock(x, y-1, z) != Blocks.mob_spawner) {
-	    		BuildHelper.msg(player, errorMsg, Colors.c);
+				IBHelper.msg(player, errorMsg, Colors.c);
 				return true;
 	    	}
 		}
@@ -353,7 +353,7 @@ public class BlockIB extends Block {
 					is.damageItem(1, player);
 				}
 			} else {
-				BuildHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}
@@ -361,12 +361,12 @@ public class BlockIB extends Block {
 		build(world, x, y, z);
 		build(world, x, y, z, player);
 		
-		BuildHelper.keepBlocks(world, x, y, z, this.block);
-		BuildHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.keepBlocks(world, x, y, z, this.block);
+		IBHelper.xp(world, player, ConfigurationHandler.xp);
 			
-		BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-		BuildHelper.effectFull(world, "reddust", x, y, z);
-		BuildHelper.msg(player, this.createMsg, Colors.a);
+		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		IBHelper.effectFull(world, "reddust", x, y, z);
+		IBHelper.msg(player, this.createMsg, Colors.a);
     		
     	return true;
     }

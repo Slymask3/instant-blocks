@@ -25,6 +25,7 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 
 public class BlockInstantLadder extends BlockDirectionalIB {
 	
@@ -65,7 +66,7 @@ public class BlockInstantLadder extends BlockDirectionalIB {
 	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
     	if (y <= 15) {
-			BuildHelper.msg(player, Strings.ladderError, Colors.c);
+    		IBHelper.msg(player, Strings.ladderError, Colors.c);
 			return true;
 		}
     	
@@ -76,19 +77,19 @@ public class BlockInstantLadder extends BlockDirectionalIB {
 				is.damageItem(1, player);
 				//player.triggerAchievement(ib.achLadder);
 			} else {
-				BuildHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}
 		
 		build(world, x, y, z);
 				
-		BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibLadder);
-		BuildHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLadder);
+		IBHelper.xp(world, player, ConfigurationHandler.xp);
 			
-		BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-		BuildHelper.effectFull(world, "reddust", x, y, z);
-		BuildHelper.msg(player, Strings.ladderCreate, Colors.a);
+		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		IBHelper.effectFull(world, "reddust", x, y, z);
+		IBHelper.msg(player, Strings.ladderCreate, Colors.a);
     	
     	//ComponentVillageWell.buildComponent(null, null, null) {
     	//	

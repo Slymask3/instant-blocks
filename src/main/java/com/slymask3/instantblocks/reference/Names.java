@@ -15,6 +15,7 @@ public class Names {
         public static final String IB_SUCTION = "ibSucker";
         public static final String IB_RAIL = "ibRail";
         public static final String IB_STATUE = "ibStatue";
+        public static final String IB_HARVEST = "ibHarvest";
         public static final String COLOR = "color";
     }
 

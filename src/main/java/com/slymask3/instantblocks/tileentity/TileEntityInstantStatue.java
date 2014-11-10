@@ -1,32 +1,10 @@
 package com.slymask3.instantblocks.tileentity;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
-import io.netty.buffer.ByteBufUtil;
-
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import org.apache.logging.log4j.Level;
-
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
-import com.slymask3.instantblocks.utility.LogHelper;
-
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.network.play.server.S3FPacketCustomPayload;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
 public class TileEntityInstantStatue extends TileEntity { //implements ISidedInventory {
 	//private String username = "";

@@ -67,7 +67,7 @@ public class GuiInstantStatue extends GuiScreen {
 	public void initGui() {
 		Keyboard.enableRepeatEvents(true);
 		this.buttonList.clear();
-        this.buttonList.add(this.doneBtn = new GuiButtonExt(0, this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(this.doneBtn = new GuiButtonExt(0, this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, "Generate"));
         this.buttonList.add(this.cancelBtn = new GuiButtonExt(1, this.width / 2 + 4, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.cancel", new Object[0])));
         
         this.buttonList.add(this.head = new GuiCheckBox(2, this.width / 2 - 4 - 150, this.height / 4 + 20 + 12, "Head", true));//BlockInstantStatue.head));

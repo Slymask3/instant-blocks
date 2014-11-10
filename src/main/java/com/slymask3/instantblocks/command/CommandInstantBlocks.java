@@ -1,17 +1,8 @@
 package com.slymask3.instantblocks.command;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Reference;
-import com.slymask3.instantblocks.utility.ColorHelper;
-import com.slymask3.instantblocks.utility.BuildHelper;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -19,8 +10,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
-import net.minecraftforge.common.config.Property;
+
+import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.reference.Reference;
+import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.ColorHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 
 public class CommandInstantBlocks extends CommandBase {
 	private InstantBlocks ib = new InstantBlocks();
@@ -104,7 +102,7 @@ public class CommandInstantBlocks extends CommandBase {
         		config.maxSuck = configInt(arg, player, config.maxSuck, "Max Suction");
         	} else if (arg[0].equalsIgnoreCase("sound")) {
         		config.sound = configString(arg, player, config.sound, "Sound");
-        		ibf.sound(player.worldObj, config.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
+        		IBHelper.sound(player.worldObj, config.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
         	}
         	
         	else if (arg[0].equalsIgnoreCase("wool1") || arg[0].equalsIgnoreCase("wool01")) {

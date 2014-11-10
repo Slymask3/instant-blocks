@@ -24,21 +24,17 @@ public class TileEntityColor extends TileEntity {
 
 	public TileEntityColor() {
 		super();
-		int r = 0;
-		int g = 0;
-		int b = 0;
-		
-		Random rand = new Random();
-		r = rand.nextInt(255);
-		g = rand.nextInt(255);
-		b = rand.nextInt(255);
-		
-		color = ((r & 0xFF) << 16) + ((g & 0xFF) << 8) + (b & 0xFF);
-		//color = 0x00000000;
-	}
-
-	public void setColor(final int red, final int green, final int blue) {
-		color = ((red & 0xFF) << 16) + ((green & 0xFF) << 8) + (blue & 0xFF);
+//		int r = 0;
+//		int g = 0;
+//		int b = 0;
+//		
+//		Random rand = new Random();
+//		r = rand.nextInt(255);
+//		g = rand.nextInt(255);
+//		b = rand.nextInt(255);
+//		
+//		color = ((r & 0xFF) << 16) + ((g & 0xFF) << 8) + (b & 0xFF);
+		color = 0x00FFFFFF;
 	}
 
 	@Override

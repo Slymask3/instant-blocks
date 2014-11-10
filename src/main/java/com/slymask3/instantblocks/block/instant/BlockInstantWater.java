@@ -4,18 +4,14 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.BlockIB;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
@@ -25,6 +21,7 @@ import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.sound.SoundTypeLiquid;
 import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 
 public class BlockInstantWater extends BlockIB {
 	
@@ -79,7 +76,7 @@ public class BlockInstantWater extends BlockIB {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//do not dmg yet
 			} else {
-				BuildHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}
@@ -106,27 +103,27 @@ public class BlockInstantWater extends BlockIB {
 		
 		if (BuildHelper.built == true) {
 			world.setBlock(x, y, z, liquid);
-			BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibWater);
-			BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-			BuildHelper.effectFull(world, "reddust", x, y, z);
-			BuildHelper.msg(player, "\u00a7aInstant Water created with " + (BuildHelper.counter + 1) + " water blocks.", Colors.a);
-			BuildHelper.xp(world, player, ConfigurationHandler.xp);
+			IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibWater);
+			IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+			IBHelper.effectFull(world, "reddust", x, y, z);
+			IBHelper.msg(player, "\u00a7aInstant Water created with " + (BuildHelper.counter + 1) + " water blocks.", Colors.a);
+			IBHelper.xp(world, player, ConfigurationHandler.xp);
 			if (ConfigurationHandler.useWands == true) {
 				player.getCurrentEquippedItem().damageItem(1, player);
 			}
 		} else {
 			if (world.getBlock(x+1, y, z) != Blocks.air && world.getBlock(x-1, y, z) != Blocks.air && world.getBlock(x, y, z+1) != Blocks.air && world.getBlock(x, y, z-1) != Blocks.air && world.getBlock(x, y-1, z) != Blocks.air) {
 				world.setBlock(x, y, z, liquid);
-				BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibWater);
-				BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-				BuildHelper.effectFull(world, "reddust", x, y, z);
-				BuildHelper.msg(player, Strings.waterCreate1, Colors.a);
-				BuildHelper.xp(world, player, ConfigurationHandler.xp);
+				IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibWater);
+				IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+				IBHelper.effectFull(world, "reddust", x, y, z);
+				IBHelper.msg(player, Strings.waterCreate1, Colors.a);
+				IBHelper.xp(world, player, ConfigurationHandler.xp);
 				if (ConfigurationHandler.useWands == true) {
 					player.getCurrentEquippedItem().damageItem(1, player);
 				}
 			} else {
-				BuildHelper.msg(player, "\u00a7cPrevented from creating over " + ConfigurationHandler.max + " water blocks.", Colors.c);
+				IBHelper.msg(player, "\u00a7cPrevented from creating over " + ConfigurationHandler.max + " water blocks.", Colors.c);
 			}
 		}
 		

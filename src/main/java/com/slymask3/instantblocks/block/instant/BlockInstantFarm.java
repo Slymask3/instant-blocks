@@ -28,6 +28,7 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 
 public class BlockInstantFarm extends BlockDirectionalIB {
 	
@@ -76,7 +77,7 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			} else {
-				BuildHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}
@@ -99,11 +100,11 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 		build(world, x, y, z, crop);
 		
 
-		BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibFarm);
-		BuildHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibFarm);
+		IBHelper.xp(world, player, ConfigurationHandler.xp);
 		
-		BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-		BuildHelper.effectFull(world, "reddust", x, y, z);
+		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		IBHelper.effectFull(world, "reddust", x, y, z);
 		
 //		if (r == 0) {
 //			BuildHelper.msg(player, Strings.farmCreateP, Colors.a);
@@ -116,7 +117,7 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 //			//player.triggerAchievement(ib.achFarm);
 //		}
 		
-		BuildHelper.msg(player, Strings.farmCreate, Colors.a);
+		IBHelper.msg(player, Strings.farmCreate, Colors.a);
 		
 		return true;
     }

@@ -8,6 +8,7 @@ import com.slymask3.instantblocks.block.instant.BlockInstantFall;
 import com.slymask3.instantblocks.block.instant.BlockInstantFarm;
 import com.slymask3.instantblocks.block.instant.BlockInstantGlassDome;
 import com.slymask3.instantblocks.block.instant.BlockInstantGrinder;
+import com.slymask3.instantblocks.block.instant.BlockInstantHarvest;
 import com.slymask3.instantblocks.block.instant.BlockInstantHouseWood;
 import com.slymask3.instantblocks.block.instant.BlockInstantLadder;
 import com.slymask3.instantblocks.block.instant.BlockInstantLava;
@@ -37,6 +38,7 @@ public class ModBlocks {
 	public static Block ibSucker = new BlockInstantSuction();
 	public static Block ibRail = new BlockInstantRail();
 	public static Block ibStatue = new BlockInstantStatue();
+	public static Block ibHarvest = new BlockInstantHarvest();
 	public static Block color = new BlockColor();
 	
 	public static void init() {
@@ -53,6 +55,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(ibSucker, ItemBlockInstantBlocks.class, Names.Blocks.IB_SUCTION);
 		GameRegistry.registerBlock(ibRail, ItemBlockInstantBlocks.class, Names.Blocks.IB_RAIL);
 		GameRegistry.registerBlock(ibStatue, ItemBlockInstantBlocks.class, Names.Blocks.IB_STATUE);
+		GameRegistry.registerBlock(ibHarvest, ItemBlockInstantBlocks.class, Names.Blocks.IB_HARVEST);
 		GameRegistry.registerBlock(color, ItemBlockInstantBlocks.class, Names.Blocks.COLOR);
 	}
 }

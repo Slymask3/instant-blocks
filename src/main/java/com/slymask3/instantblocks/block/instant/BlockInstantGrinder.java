@@ -12,6 +12,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.block.BlockDirectionalIB;
 import com.slymask3.instantblocks.block.BlockIB;
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
@@ -22,8 +23,9 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 
-public class BlockInstantGrinder extends BlockIB {
+public class BlockInstantGrinder extends BlockDirectionalIB {
 	
 	public BlockInstantGrinder() {
         super(ModBlocks.ibGrinder, Names.Blocks.IB_GRINDER, Material.rock, Block.soundTypeMetal, 1.5F);
@@ -34,6 +36,8 @@ public class BlockInstantGrinder extends BlockIB {
     }
 
 	public void build(World world, int x, int y, int z, EntityPlayer player) {
+		//int dir = world.getBlockMetadata(x, y, z);
+		
 		Block stone = Blocks.stone;
 		Block water = Blocks.flowing_water;
 		Block torch = Blocks.torch;
@@ -49,6 +53,14 @@ public class BlockInstantGrinder extends BlockIB {
 		BuildHelper.build(world, x-5, y-5, z-5, stone, 11, 1, 11);
 		BuildHelper.build(world, x+6, y-5, z-1, stone, 3, 1, 3);
 		BuildHelper.build(world, x+9, y-5, z-3, stone, 7, 1, 8);
+
+		//BuildHelper.buildMulti2(world, x, y, z, -5, -5, -5, stone, 11, 1, 11);
+		//BuildHelper.buildMulti2(world, x, y, z, +6, -5, -1, stone, 3, 1, 3);
+		//BuildHelper.buildMulti2(world, x, y, z, +9, -5, -3, stone, 7, 1, 8);
+
+		//BuildHelper.buildDirectionalSimple(world, x, y-5, z, stone, dir, -5, -5, 11, 1, 11);
+		//BuildHelper.buildDirectionalSimple(world, x, y-5, z, stone, dir, +6, -1, 3, 1, 3);
+		//BuildHelper.buildDirectionalSimple(world, x, y-5, z, stone, dir, +9, -3, 7, 1, 8);
 
 		/************************ Layer -4 to -2 : Air (Spawn Room) ************************/
 		BuildHelper.build(world, x-4, y-4, z-4, air, 9, 3, 9);
@@ -220,8 +232,8 @@ public class BlockInstantGrinder extends BlockIB {
 		/************************ Teleport ************************/
 		if (ConfigurationHandler.tpGrinder == true) {
 			//BuildHelper.sound(world, config.sound, x+13, y-4, z);
-			player.setPositionAndUpdate(x+13 + 0.5, y-4 + 0.5, z + 0.5);
-    		BuildHelper.sound(world, ConfigurationHandler.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
+			//player.setPositionAndUpdate(x+13 + 0.5, y-4 + 0.5, z + 0.5);                                          ----------UNCOMMENT LATER
+    		IBHelper.sound(world, ConfigurationHandler.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
 			world.setBlock(x+7, y-4, z, glass);
 			world.setBlock(x+7, y-3, z, glass);
 		}

@@ -15,6 +15,7 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 
 public class BlockInstantFall extends BlockDirectionalIB {
 	
@@ -302,7 +303,7 @@ public class BlockInstantFall extends BlockDirectionalIB {
 			}
 		
 			if (ConfigurationHandler.tpFall == true) {
-				BuildHelper.sound(world, ConfigurationHandler.sound, x, 256, z+5);
+				IBHelper.sound(world, ConfigurationHandler.sound, x, 256, z+5);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z+5 + 0.5);
 				}
@@ -313,7 +314,7 @@ public class BlockInstantFall extends BlockDirectionalIB {
 			}
 		
 			if (ConfigurationHandler.tpFall == true) {
-				BuildHelper.sound(world, ConfigurationHandler.sound, x-5, 256, z);
+				IBHelper.sound(world, ConfigurationHandler.sound, x-5, 256, z);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x-5 + 0.5, 257 + 0.5, z + 0.5);
 				}
@@ -324,7 +325,7 @@ public class BlockInstantFall extends BlockDirectionalIB {
 			}
 		
 			if (ConfigurationHandler.tpFall == true) {
-				BuildHelper.sound(world, ConfigurationHandler.sound, x, 256, z-5);
+				IBHelper.sound(world, ConfigurationHandler.sound, x, 256, z-5);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z-5 + 0.5);
 				}
@@ -335,10 +336,10 @@ public class BlockInstantFall extends BlockDirectionalIB {
 			}
 		
 			if (ConfigurationHandler.tpFall == true) {
-				BuildHelper.sound(world, ConfigurationHandler.sound, x+5, 256, z);
+				IBHelper.sound(world, ConfigurationHandler.sound, x+5, 256, z);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x+5 + 0.5, 257 + 0.5, z + 0.5);
-	        		BuildHelper.sound(world, ConfigurationHandler.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
+					IBHelper.sound(world, ConfigurationHandler.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
 				}
 			}
 		}

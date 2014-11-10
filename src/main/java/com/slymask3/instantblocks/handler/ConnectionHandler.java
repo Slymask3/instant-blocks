@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -20,7 +20,7 @@ public class ConnectionHandler {
 	public void onClientConnection(PlayerLoggedInEvent event) {
 		EntityPlayer play = event.player;
 		
-		BuildHelper.msgClean(play, "\u00a7aLoaded successfully.", Colors.a);
+		IBHelper.msgClean(play, "\u00a7aLoaded successfully.", Colors.a);
 		
 		try {
 			URL url = new URL(Strings.checkURL);
@@ -30,8 +30,8 @@ public class ConnectionHandler {
 			String mc = s.nextLine();
 			
 			if (!ver.equalsIgnoreCase(Reference.VERSION)) {
-				BuildHelper.msgCleanBypass(play, "\u00a7cUpdate avaliable: \u00a7lv" + ver + " \u00a7r\u00a7c(For MC " + mc + ")!", Colors.c);
-				BuildHelper.msgCleanBypass(play, "\u00a7cLink: \u00a7b\u00a7nhttp://tinyurl.com/instantblocks", Colors.c);
+				IBHelper.msgCleanBypass(play, "\u00a7cUpdate avaliable: \u00a7lv" + ver + " \u00a7r\u00a7c(For MC " + mc + ")!", Colors.c);
+				IBHelper.msgCleanBypass(play, "\u00a7cLink: \u00a7b\u00a7nhttp://tinyurl.com/instantblocks", Colors.c);
 			}
 			
 			s.close();

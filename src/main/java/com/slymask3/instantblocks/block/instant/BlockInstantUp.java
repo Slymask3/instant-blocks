@@ -16,6 +16,7 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 
 public class BlockInstantUp extends BlockLadderIB {
 	
@@ -55,7 +56,7 @@ public class BlockInstantUp extends BlockLadderIB {
 	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
     	if (world.canBlockSeeTheSky(x, y+1, z) == true) {
-			BuildHelper.msg(player, Strings.upError, Colors.c);
+    		IBHelper.msg(player, Strings.upError, Colors.c);
 			return true;
 		}
     	
@@ -66,7 +67,7 @@ public class BlockInstantUp extends BlockLadderIB {
 				is.damageItem(1, player);
 				//player.triggerAchievement(ib.achUp);
 			} else {
-				BuildHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}
@@ -124,11 +125,11 @@ public class BlockInstantUp extends BlockLadderIB {
 		}
 		
 		/************************ Functions ************************/
-		BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibUp);
-		BuildHelper.xp(world, player, ConfigurationHandler.xp);
-		BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-		BuildHelper.effectFull(world, "reddust", x, y, z);
-		BuildHelper.msg(player, "\u00a7aInstant Escape Ladder created " + (i - y) + " blocks up.", Colors.a);
+		IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibUp);
+		IBHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		IBHelper.effectFull(world, "reddust", x, y, z);
+		IBHelper.msg(player, "\u00a7aInstant Escape Ladder created " + (i - y) + " blocks up.", Colors.a);
 		
 		return true;
     }

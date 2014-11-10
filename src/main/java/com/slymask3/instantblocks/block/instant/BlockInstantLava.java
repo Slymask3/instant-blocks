@@ -23,6 +23,7 @@ import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.sound.SoundTypeLiquid;
 import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
 
 public class BlockInstantLava extends BlockIB {
 	
@@ -44,7 +45,7 @@ public class BlockInstantLava extends BlockIB {
 	}
 	
 	protected void triggerLavaMixEffects(World world, int x, int y, int z, Random rand) {
-        BuildHelper.sound(world, "random.fizz", x, y, z);
+		IBHelper.sound(world, "random.fizz", x, y, z);
         
         for (int l = 0; l < 8; ++l) {
             world.spawnParticle("largesmoke", (double)x + Math.random(), (double)y + 1.2D, (double)z + Math.random(), 0.0D, 0.0D, 0.0D);
@@ -76,7 +77,7 @@ public class BlockInstantLava extends BlockIB {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//do not dmg yet
 			} else {
-				BuildHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.wandReq, Colors.c);
 				return true;
 			}
 		}
@@ -105,27 +106,27 @@ public class BlockInstantLava extends BlockIB {
 		
 		if (BuildHelper.built == true) {
 			world.setBlock(x, y, z, liquid);
-			BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibLava);
-			BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-			BuildHelper.effectFull(world, "reddust", x, y, z);
-			BuildHelper.msg(player, "\u00a7aInstant Lava created with " + (BuildHelper.counter + 1) + " lava blocks.", Colors.a);
-			BuildHelper.xp(world, player, ConfigurationHandler.xp);
+			IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLava);
+			IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+			IBHelper.effectFull(world, "reddust", x, y, z);
+			IBHelper.msg(player, "\u00a7aInstant Lava created with " + (BuildHelper.counter + 1) + " lava blocks.", Colors.a);
+			IBHelper.xp(world, player, ConfigurationHandler.xp);
 			if (ConfigurationHandler.useWands == true) {
 				player.getCurrentEquippedItem().damageItem(1, player);
 			}
 		} else {
 			if (world.getBlock(x+1, y, z) != Blocks.air && world.getBlock(x-1, y, z) != Blocks.air && world.getBlock(x, y, z+1) != Blocks.air && world.getBlock(x, y, z-1) != Blocks.air && world.getBlock(x, y-1, z) != Blocks.air) {
 				world.setBlock(x, y, z, liquid);
-				BuildHelper.keepBlocks(world, x, y, z, ModBlocks.ibLava);
-				BuildHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-				BuildHelper.effectFull(world, "reddust", x, y, z);
-				BuildHelper.msg(player, Strings.lavaCreate1, Colors.a);
-				BuildHelper.xp(world, player, ConfigurationHandler.xp);
+				IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLava);
+				IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+				IBHelper.effectFull(world, "reddust", x, y, z);
+				IBHelper.msg(player, Strings.lavaCreate1, Colors.a);
+				IBHelper.xp(world, player, ConfigurationHandler.xp);
 				if (ConfigurationHandler.useWands == true) {
 					player.getCurrentEquippedItem().damageItem(1, player);
 				}
 			} else {
-				BuildHelper.msg(player, "\u00a7cPrevented from creating over " + ConfigurationHandler.max + " lava blocks.", Colors.c);
+				IBHelper.msg(player, "\u00a7cPrevented from creating over " + ConfigurationHandler.max + " lava blocks.", Colors.c);
 			}
 		}
 		

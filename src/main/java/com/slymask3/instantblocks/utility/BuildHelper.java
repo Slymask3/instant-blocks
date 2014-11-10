@@ -3,25 +3,14 @@ package com.slymask3.instantblocks.utility;
 import java.awt.image.BufferedImage;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ChestGenHooks;
 
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.instant.BlockInstantHouseWood;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BuildHelper {
 	//private static ConfigurationHandlerurationHandler ConfigurationHandler = new ConfigurationHandlerurationHandler();
@@ -221,89 +210,18 @@ public class BuildHelper {
 	
 	public static void ifNoBlockThenStop(World world, int x, int y, int z, Block block, EntityPlayer player, String blockName) {
 		if (world.getBlock(x, y, z) != block) {
-			msg(player, "Missing Block: " + blockName + " at x=" + (x) + ", y=" + (y) + ", z=" + (z) + ".", "\u00a7c");
+			IBHelper.msg(player, "Missing Block: " + blockName + " at x=" + (x) + ", y=" + (y) + ", z=" + (z) + ".", "\u00a7c");
 			BlockInstantHouseWood.notThere = true;
 		}
 	}
 	
 	public static boolean b = false;
 	
-	public static void msg(EntityPlayer player, String msg, String color) {
-		if (ConfigurationHandler.msg == true) {
-			World world = player.worldObj;
-		
-			if (world.isRemote) { //IF CLIENT	
-				player.addChatMessage(new ChatComponentText("\u00a78[\u00a73Instant Blocks v" + Reference.VERSION + "\u00a78] " + ColorHelper.colorEveryWord(msg, color)));
-			}
-		}
-	}
+	
 	
 	public static boolean b2 = false;
 	
-	public static void xp(World world, EntityPlayer player, int xpAmount) {
-		if (!world.isRemote) { //IF SERVER
-			if  (xpAmount > 0) {
-				EntityXPOrb xp = new EntityXPOrb(world, player.posX, player.posY, player.posZ, xpAmount);
-				world.spawnEntityInWorld(xp);
-				
-				//EntityCow cow = new EntityCow(world);
-				//cow.setPosition(player.posX, player.posY+5, player.posZ);
-				//world.spawnEntityInWorld(cow);
-			}
-		}
-	}
 	
-	
-	//@SideOnly(Side.CLIENT)
-	public static void msgClean(EntityPlayer player, String msg, String color) {
-		//if (ConfigurationHandler.msg == true) {
-			player.addChatMessage(new ChatComponentText("\u00a78[\u00a73Instant Blocks v" + Reference.VERSION + "\u00a78] " + ColorHelper.colorEveryWord(msg, color)));
-		//}
-    }
-	
-	public static void msgCleanBypass(EntityPlayer player, String msg, String color) {
-		player.addChatMessage(new ChatComponentText("\u00a78[\u00a73Instant Blocks v" + Reference.VERSION + "\u00a78] " + ColorHelper.colorEveryWord(msg, color)));
-    }
-    
-	public static void sound(World world, String sound, int x, int y, int z) {
-		world.playSoundEffect((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), sound, 2.0F, 1.0F);
-	}
-	
-	/*public static void effect(World world, String particle, int x, int y, int z) {
-		for (double i = 0; i <= 1; i = i + 0.1) {
-			for (double n = 0; n <= 1; n = n + 0.1) {
-				//world.spawnParticle("instantSpell", x+i, y+1, z+n, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle(particle, x+i, y+1, z+n, 0.0D, 0.0D, 0.0D);
-			}
-		}
-	}*/
-	
-	/*public static void effectFull(World world, String particle, int x, int y, int z) {
-		if (ConfigurationHandler.effect.getBoolean(true)) {
-			for (double i = 0; i <= 1; i = i + 0.1) {
-				for (double n = 0; n <= 1; n = n + 0.1) {
-					for (double v = 0; v <= 1; v = v + 0.1) {
-						world.spawnParticle(particle, x+i, y+v, z+n, 0.0D, 0.0D, 0.0D);
-					}
-				}
-			}
-		}
-	}*/
-	
-	public static void effectFull(World world, String particle, int x, int y, int z) {
-		if (ConfigurationHandler.effect == true) {
-			//if (checkParticle > 0) {
-				for (double i = 0; i <= 1; i = i + 0.1) {
-					for (double n = 0; n <= 1; n = n + 0.1) {
-						for (double v = 0; v <= 1; v = v + 0.1) {
-							world.spawnParticle(particle, x+i, y+v, z+n, 0.0D, 0.0D, 0.0D);
-							//System.out.println("PARTICLE");
-						}
-					}
-				}
-			//}
-		}
-	}
 	
 	public static int counter = 0;
 	public static int c2 = 0;
@@ -761,22 +679,7 @@ public class BuildHelper {
 		}
 	}
 	
-	public static void keepBlocks(World world, int x, int y, int z, Block block) {
-		if (ConfigurationHandler.keepBlocks == true) {
-			setBlockIfNoBedrock(world, x, y, z, block);
-		} else {
-			//Do not keep block.
-		}
-	}
 	
-	public void tp(World world, EntityPlayer player, int x, int y, int z, boolean property) {
-		if (!world.isRemote) { //IF SERVER
-			if (property) {
-				sound(world, ConfigurationHandler.sound, x, y, z);
-				player.setPositionAndUpdate(x + 0.5, y + 0.5, z + 0.5);
-			}
-		}
-	}
 	
 
 	
@@ -814,11 +717,11 @@ public class BuildHelper {
 		return i;
 	}
 	
-	public void setBlockDirectionalSimple(World world, int x, int y, int z, Block block, int metaDirection, int forwardBack, int leftRight) {
+	public static void setBlockDirectionalSimple(World world, int x, int y, int z, Block block, int metaDirection, int forwardBack, int leftRight) {
 		setBlockDirectionalSimple(world, x, y, z, block, metaDirection, forwardBack, leftRight, 0, 1);
     }
 	
-	public void setBlockDirectionalSimple(World world, int x, int y, int z, Block block, int metaDirection, int forwardBack, int leftRight, int meta, int flag) {
+	public static void setBlockDirectionalSimple(World world, int x, int y, int z, Block block, int metaDirection, int forwardBack, int leftRight, int meta, int flag) {
     	// +forwardBack == forward
     	// -forwardBack == back
     	// +leftRight == right
@@ -860,6 +763,27 @@ public class BuildHelper {
 			setBlockIfNoBedrock(world, x+left-right, y, z+forward-back, block, meta, flag);
 		} else if(metaDirection==3) {
 			setBlockIfNoBedrock(world, x-forward+back, y, z-left+right, block, meta, flag);
+		}
+    }
+    
+    public static void buildDirectionalSimple(World world, int x, int y, int z, Block block, int metaDirection, int forwardBack, int leftRight, int forwardBackT, int yT, int leftRightT) {
+    	//setBlockDirectional(world, x, y, z, block, metaDirection, forward, back, left, right);
+    	//setBlockDirectionalSimple(world, x, y, z, block, metaDirection, forwardBack, leftRight);
+    	
+    	int z2 = z;
+		int x2 = x;
+		for (int yTimes = 0; yTimes < yT; yTimes++) {
+			for (int zTimes = 0; zTimes < forwardBackT; zTimes++) {
+				for (int xTimes = 0; xTimes < leftRightT; xTimes++) {
+					//setBlockIfNoBedrock(world, x2, y, z2, block);
+					setBlockDirectionalSimple(world, x, y, z, block, metaDirection, z2, x2);
+					z2++;
+				}
+				z2 = z;
+				x2++;
+			}
+			x2 = x;
+			y++;
 		}
     }
     

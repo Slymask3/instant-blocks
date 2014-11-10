@@ -22,4 +22,5 @@ public class Strings {
 	public static final String upError = "\u00a7cThis block only works underground.";
 	public static final String waterCreate1 = "\u00a7aInstant Water created with 1 water block.";
 	public static final String railCreate = "\u00a7aInstant Rail created.";
+	public static final String harvestCreate = "\u00a7aHarvested all blocks around.";
 }
