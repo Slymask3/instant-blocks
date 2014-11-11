@@ -33,7 +33,7 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
-import com.slymask3.instantblocks.tileentity.TileEntityInstantStatue;
+import com.slymask3.instantblocks.tileentity.TileEntityStatue;
 import com.slymask3.instantblocks.utility.BuildHelper;
 import com.slymask3.instantblocks.utility.IBHelper;
 import com.slymask3.instantblocks.utility.LogHelper;
@@ -144,7 +144,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 	
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
-		return new TileEntityInstantStatue();
+		return new TileEntityStatue();
 	}
 	
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack) {
@@ -215,10 +215,10 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		        //LogHelper.info(ColorHelper.getColorAt(img, 0, 0));
 		        
 		        IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
-		        IBHelper.xp(world, player, ConfigurationHandler.xp);
+		        //IBHelper.xp(world, player, ConfigurationHandler.xp);
 		        IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-		        IBHelper.effectFull(world, "reddust", x, y, z);
-		        IBHelper.msg(player, "\u00a7aInstant Statue created of the player '" + username + "'.", Colors.a);
+		        //IBHelper.effectFull(world, "reddust", x, y, z);
+		        //IBHelper.msg(player, "\u00a7aInstant Statue created of the player '" + username + "'.", Colors.a);
 				
 				ItemStack is = player.getCurrentEquippedItem();
 				

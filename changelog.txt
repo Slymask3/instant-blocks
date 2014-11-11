@@ -1,7 +1,8 @@
-v1.5.2 (n/a)
+v1.5.2 (11/11/2014)
 - Added Instant Harvester Block.
 - Fixed Instant Rainbow Skydive Block to replace bedrock with water.
 - Fixed Instant Grinder Block to generate flowing water instead of still water.
+- Fixed Instant Statue Block generate message, effect, and xp.
 
 v1.5.1 (07/11/2014)
 - Fixed Instant Farm Block to actually generate.

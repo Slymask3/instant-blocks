@@ -39,24 +39,32 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 		setHardness(1.5F);
 		setResistance(2000F);
 		setStepSound(Block.soundTypeWood);
-        setBlockTextureName(Textures.Harvest.SIDE);
+        setBlockTextureName(Textures.Harvest.SIDE0);
 	}
 	
 	public int quantityDropped(Random random) {
 		return 1;
 	}
 
-	public static IIcon side;
+	public static IIcon top;
+	public static IIcon side0;
+	public static IIcon side1;
 
 	public void registerBlockIcons(IIconRegister ir) {
-		side = ir.registerIcon(Textures.Harvest.SIDE);
+		top = ir.registerIcon(Textures.Harvest.TOP);
+		side0 = ir.registerIcon(Textures.Harvest.SIDE0);
+		side1 = ir.registerIcon(Textures.Harvest.SIDE1);
 	}
 
 	public IIcon getIcon(int side, int meta) {
-		if (side == 0 || side == 1) {
-			return Blocks.log.getIcon(side, 0);
+		if (side == 0) {
+			return Blocks.planks.getIcon(side, 0);
+		} else if (side == 1) {
+			return top;
+		} else if (side == 3 || side == 5) {
+			return side0;
 		} else {
-			return this.side;
+			return side1;
 		}
 	}
 	
@@ -136,43 +144,43 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
                     Block block = world.getBlock(x, y, z);
                     int meta = world.getBlockMetadata(x, y, z);
                     
-                    if (block == Blocks.log && meta == 0 && logOak) { //OAK
-                    	IBHelper.addItemsToChest(chest, block, 1, meta);
+                    if ((block == Blocks.log && logOak) && (meta == 0 || meta == 4 || meta == 8 || meta == 12)) { //OAK
+                    	IBHelper.addItemsToChest(chest, block, 1, 0);
                     	if ((world.getBlock(x, y-1, z) == Blocks.dirt || world.getBlock(x, y-1, z) == Blocks.grass) && replant) {
                     		world.setBlock(x, y, z, Blocks.sapling, 0, 2);
                     	} else {
                     		world.setBlock(x, y, z, Blocks.air);
                     	}
-                    } else if (block == Blocks.log && meta == 1 && logSpruce) { //SPRUCE
-                    	IBHelper.addItemsToChest(chest, block, 1, meta);
+                    } else if ((block == Blocks.log && logSpruce) && (meta == 1 || meta == 5 || meta == 9 || meta == 13)) { //SPRUCE
+                    	IBHelper.addItemsToChest(chest, block, 1, 1);
                     	if ((world.getBlock(x, y-1, z) == Blocks.dirt || world.getBlock(x, y-1, z) == Blocks.grass) && replant) {
                     		world.setBlock(x, y, z, Blocks.sapling, 1, 2);
                     	} else {
                     		world.setBlock(x, y, z, Blocks.air);
                     	}
-                    } else if (block == Blocks.log && meta == 2 && logBirch) { //BIRCH
-                    	IBHelper.addItemsToChest(chest, block, 1, meta);
+                    } else if ((block == Blocks.log && logBirch) && (meta == 2 || meta == 6 || meta == 10 || meta == 14)) { //BIRCH
+                    	IBHelper.addItemsToChest(chest, block, 1, 2);
                     	if ((world.getBlock(x, y-1, z) == Blocks.dirt || world.getBlock(x, y-1, z) == Blocks.grass) && replant) {
                     		world.setBlock(x, y, z, Blocks.sapling, 2, 2);
                     	} else {
                     		world.setBlock(x, y, z, Blocks.air);
                     	}
-                    } else if (block == Blocks.log && meta == 3 && logJungle) { //JUNGLE
-                    	IBHelper.addItemsToChest(chest, block, 1, meta);
+                    } else if ((block == Blocks.log && logJungle) && (meta == 3 || meta == 7 || meta == 11 || meta == 15)) { //JUNGLE
+                    	IBHelper.addItemsToChest(chest, block, 1, 3);
                     	if ((world.getBlock(x, y-1, z) == Blocks.dirt || world.getBlock(x, y-1, z) == Blocks.grass) && replant) {
                     		world.setBlock(x, y, z, Blocks.sapling, 3, 2);
                     	} else {
                     		world.setBlock(x, y, z, Blocks.air);
                     	}
-                    } else if (block == Blocks.log2 && meta == 0 && logAcacia) { //ACACIA
-                    	IBHelper.addItemsToChest(chest, block, 1, meta);
+                    } else if ((block == Blocks.log2 && logAcacia) && (meta == 0 || meta == 4 || meta == 8 || meta == 12)) { //ACACIA
+                    	IBHelper.addItemsToChest(chest, block, 1, 0);
                     	if ((world.getBlock(x, y-1, z) == Blocks.dirt || world.getBlock(x, y-1, z) == Blocks.grass) && replant) {
                     		world.setBlock(x, y, z, Blocks.sapling, 4, 2);
                     	} else {
                     		world.setBlock(x, y, z, Blocks.air);
                     	}
-                    } else if (block == Blocks.log2 && meta == 1 && logDark) { //DARK OAK
-                    	IBHelper.addItemsToChest(chest, block, 1, meta);
+                    } else if ((block == Blocks.log2 && logDark) && (meta == 1 || meta == 5 || meta == 9 || meta == 13)) { //DARK OAK
+                    	IBHelper.addItemsToChest(chest, block, 1, 1);
                     	if ((world.getBlock(x, y-1, z) == Blocks.dirt || world.getBlock(x, y-1, z) == Blocks.grass) && replant) {
                     		world.setBlock(x, y, z, Blocks.sapling, 5, 2);
                     	} else {
@@ -236,8 +244,26 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
                     		world.setBlock(x, y, z, Blocks.air);
                     	}
                     }
-                	
-                    //world.setBlock(x, y, z, Blocks.air);
+                    
+                    /**
+                     * Quick test code for Instant Light Up / Torch Block
+                     *
+                    //LogHelper.info("getAmbientOcclusionLightValue() == "+block.getAmbientOcclusionLightValue());
+                    LogHelper.info("getBlockLightValue() == "+world.getBlockLightValue(x, y, z));
+
+                    Block block1 = world.getBlock(x+1, y, z);
+                    Block block2 = world.getBlock(x-1, y, z);
+                    //Block block3 = world.getBlock(x, y+1, z);
+                    Block block4 = world.getBlock(x, y-1, z);
+                    Block block5 = world.getBlock(x, y, z+1);
+                    Block block6 = world.getBlock(x, y, z-1);
+                    
+                    Block air = Blocks.air;
+                    
+                    if((world.getBlockLightValue(x, y, z) < 10) && (block == air) && (block1 != air || block2 != air || block4 != air || block5 != air || block6 != air)) {
+                    	world.setBlock(x, y, z, Blocks.torch);
+                    }
+                    */
                     
                     x++;
                 }

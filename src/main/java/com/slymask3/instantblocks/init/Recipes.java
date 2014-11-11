@@ -152,6 +152,24 @@ public class Recipes {
 				Character.valueOf('W'), Blocks.wool
 			});
 			
+			GameRegistry.addRecipe(new ItemStack(mb.ibHarvest, 1), new Object[] {
+				" H ",
+				"AWA", //Harvest
+				" H ",
+				Character.valueOf('H'), new ItemStack(Items.iron_hoe, 1, 0),
+				Character.valueOf('A'), new ItemStack(Items.iron_axe, 1, 0),
+				Character.valueOf('W'), Blocks.crafting_table
+			});
+			
+			GameRegistry.addRecipe(new ItemStack(mb.ibHarvest, 1), new Object[] {
+				" A ",
+				"HWH", //Harvest
+				" A ",
+				Character.valueOf('H'), new ItemStack(Items.iron_hoe, 1, 0),
+				Character.valueOf('A'), new ItemStack(Items.iron_axe, 1, 0),
+				Character.valueOf('W'), Blocks.crafting_table
+			});
+			
 			////////////////// WANDS ////////////////////
 			
 			GameRegistry.addRecipe(new ItemStack(mi.ibWandWood, 1), new Object[] {

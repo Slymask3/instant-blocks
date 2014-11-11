@@ -298,6 +298,11 @@ public class CommandInstantBlocks extends CommandBase {
     		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Statue Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aCreates a statue of any Minecraft player's skin."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
+    	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibHarvest)) {
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Harvester Block"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aHarvests renewable resources in a radius configurable in the config."));
+    		player.addChatMessage(new ChatComponentText("\u00a72Radius: \u00a7a" + config.radiusHarvest + "."));
+    		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
     	}
     	
     	//COLOR
@@ -347,9 +352,10 @@ public class CommandInstantBlocks extends CommandBase {
 	public void changelog(EntityPlayer player) {
 		player.addChatMessage(new ChatComponentText("\u00a78\u00a7l============================================="));
     	player.addChatMessage(new ChatComponentText("\u00a73\u00a7lInstant Blocks v" + Reference.VERSION + " - Changelog"));
-		player.addChatMessage(new ChatComponentText("\u00a72- Fixed Instant Farm Block to actually generate."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Fixed Instant Water/Lava/Suction Blocks to remove wand durability correctly."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Fixed error message with Instant Grinder Block."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Added Instant Harvester Block."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Fixed Instant Rainbow Skydive Block to replace bedrock with water."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Fixed Instant Grinder Block to generate flowing water instead of still water."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Fixed Instant Statue Block generate message, effect, and xp."));
 		player.addChatMessage(new ChatComponentText("\u00a78\u00a7l============================================="));
 	}
 	
