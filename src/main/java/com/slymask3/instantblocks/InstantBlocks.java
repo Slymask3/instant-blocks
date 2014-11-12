@@ -19,6 +19,7 @@ import com.slymask3.instantblocks.proxy.IProxy;
 import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
+import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
 import com.slymask3.instantblocks.utility.LogHelper;
 
@@ -55,6 +56,7 @@ public class InstantBlocks {
 		TileEntity.addMapping(TileEntityColor.class, "TileEntityColor");
 		TileEntity.addMapping(TileEntityStatue.class, "TileEntityStatue");
 		TileEntity.addMapping(TileEntityHarvest.class, "TileEntityHarvest");
+		TileEntity.addMapping(TileEntitySkydive.class, "TileEntitySkydive");
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		

@@ -202,6 +202,27 @@ public class BuildHelper {
 		}
 	}
 	
+	public static void buildColorBlock(World world, int x, int y, int z, int xTimesTotal, int yTimesTotal, int zTimesTotal, int color) {
+		int z2 = z;
+		int x2 = x;
+		for (int yTimes = 0; yTimes < yTimesTotal; yTimes++) {
+			for (int zTimes = 0; zTimes < zTimesTotal; zTimes++) {
+				for (int xTimes = 0; xTimes < xTimesTotal; xTimes++) {
+					//setBlockIfNoBedrock(world, x2, y, z2, block, meta, i);
+					world.setBlock(x2, y, z2, ModBlocks.color, 0, 2);
+					//((TileEntityColor) world.getTileEntity(x2, y, z2)).color = color;
+					((TileEntityColor) world.getTileEntity(x2, y, z2)).color = 16711680;
+					world.markBlockForUpdate(x2, y, z2);
+					z2++;
+				}
+				z2 = z;
+				x2++;
+			}
+			x2 = x;
+			y++;
+		}
+	}
+	
 	public static void buildIfAir(World world, int x, int y, int z, Block block) {
 		if (world.isAirBlock(x, y, z) == true) {
 			setBlockIfNoBedrock(world, x, y, z, block);
