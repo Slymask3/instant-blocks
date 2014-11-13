@@ -222,7 +222,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 	        buildArms(world, x, y, z, img, meta, armLeft, armRight, rgb);
 	        buildLegs(world, x, y, z, img, meta, legLeft, legRight, rgb);
 	        
-	        BuildHelper.buildColorBlock(world, x-5, y, z-2, 5, 3, 1, 0xFF0000); //WALL
+	        //BuildHelper.buildColorBlock(world, x-5, y, z-2, 5, 3, 1, 0xFF0000); //WALL
 	        
 	        //LogHelper.info(ColorHelper.getColorAt(img, 0, 0));
 	        

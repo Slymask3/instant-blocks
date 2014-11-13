@@ -203,7 +203,7 @@ public class BuildHelper {
 	}
 	
 	public static void buildColorBlock(World world, int x, int y, int z, int xTimesTotal, int yTimesTotal, int zTimesTotal, int c) {
-		LogHelper.info("c == "+c);
+		//LogHelper.info("c == "+c);
 		int z2 = z;
 		int x2 = x;
 		for (int yTimes = 0; yTimes < yTimesTotal; yTimes++) {
@@ -836,23 +836,23 @@ public class BuildHelper {
     		
     		if(metaDirection==0) {
         		setBlockIfNoBedrock(world, x+left-right, y, z-forward+back, ModBlocks.color, 0, 2);
-        		((TileEntityColor) world.getTileEntity(x+left-right, y, z-forward+back)).color = 0xFF0000;
-        		//((TileEntityColor) world.getTileEntity(x+left-right, y, z-forward+back)).color = img.getRGB(imgx, imgy);
+        		((TileEntityColor) world.getTileEntity(x+left-right, y, z-forward+back)).color = img.getRGB(imgx, imgy);
+        		//((TileEntityColor) world.getTileEntity(x+left-right, y, z-forward+back)).color = 0xFF0000;
     			world.markBlockForUpdate(x+left-right, y, z-forward+back);
     		} else if(metaDirection==1) {
     			setBlockIfNoBedrock(world, x+forward-back, y, z+left-right, ModBlocks.color, 0, 2);
-    			//((TileEntityColor) world.getTileEntity(x+forward-back, y, z+left-right)).color = img.getRGB(imgx, imgy);
-    			((TileEntityColor) world.getTileEntity(x+forward-back, y, z+left-right)).color = 0x00FF00;
+    			((TileEntityColor) world.getTileEntity(x+forward-back, y, z+left-right)).color = img.getRGB(imgx, imgy);
+    			//((TileEntityColor) world.getTileEntity(x+forward-back, y, z+left-right)).color = 0x00FF00;
     			world.markBlockForUpdate(x+forward-back, y, z+left-right);
     		} else if(metaDirection==2) {
     			setBlockIfNoBedrock(world, x-left+right, y, z+forward-back, ModBlocks.color, 0, 2);
-    			//((TileEntityColor) world.getTileEntity(x-left+right, y, z+forward-back)).color = img.getRGB(imgx, imgy);
-    			((TileEntityColor) world.getTileEntity(x-left+right, y, z+forward-back)).color = 0x0000FF;
+    			((TileEntityColor) world.getTileEntity(x-left+right, y, z+forward-back)).color = img.getRGB(imgx, imgy);
+    			//((TileEntityColor) world.getTileEntity(x-left+right, y, z+forward-back)).color = 0x0000FF;
     			world.markBlockForUpdate(x-left+right, y, z+forward-back);
     		} else if(metaDirection==3) {
     			setBlockIfNoBedrock(world, x-forward+back, y, z-left+right, ModBlocks.color, 0, 2);
-    			//((TileEntityColor) world.getTileEntity(x-forward+back, y, z-left+right)).color = img.getRGB(imgx, imgy);
-    			((TileEntityColor) world.getTileEntity(x-forward+back, y, z-left+right)).color = 0xFFFF00;
+    			((TileEntityColor) world.getTileEntity(x-forward+back, y, z-left+right)).color = img.getRGB(imgx, imgy);
+    			//((TileEntityColor) world.getTileEntity(x-forward+back, y, z-left+right)).color = 0xFFFF00;
     			world.markBlockForUpdate(x-forward+back, y, z-left+right);
     		}
 		} else {

@@ -31,6 +31,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockColor extends Block implements ITileEntityProvider {
 
+	public static Block blockTexture = Blocks.wool;
+	
 	public BlockColor() {
 		super(Material.cloth);
         setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
@@ -45,10 +47,22 @@ public class BlockColor extends Block implements ITileEntityProvider {
 		return 0;
 	}
 	
+	public int getRenderBlockPass() {
+        return 0;
+    }
+
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int par1, int par2) {
-		return Blocks.wool.getIcon(par1, par2);
+		return blockTexture.getIcon(par1, par2);
 	}
 
 	@Override

@@ -15,23 +15,14 @@ public class PacketSkydive extends AbstractPacket {
 	int _dim, _x, _y, _z;
 	String _player;
 	
-	int _color0;
-	int _color1;
-	int _color2;
-	int _color3;
-	int _color4;
-	int _color5;
-	int _color6;
-	int _color7;
-	int _color8;
-	int _color9;
-	int _color10;
+	int _color0 , _color1, _color2, _color3, _color4, _color5, _color6, _color7, _color8, _color9, _color10;
+	boolean _tp;
 
 	public PacketSkydive() {
 		
 	}
 
-	public PacketSkydive(World world, int x, int y, int z, String player, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10) {
+	public PacketSkydive(World world, int x, int y, int z, String player, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10, boolean tp) {
 		_dim = world.provider.dimensionId;
 		_x = x;
 		_y = y;
@@ -48,6 +39,7 @@ public class PacketSkydive extends AbstractPacket {
 		_color8 = c8;
 		_color9 = c9;
 		_color10 = c10;
+		_tp = tp;
 	}
 
 	@Override
@@ -68,6 +60,7 @@ public class PacketSkydive extends AbstractPacket {
 		buffer.writeInt(_color8);
 		buffer.writeInt(_color9);
 		buffer.writeInt(_color10);
+		buffer.writeBoolean(_tp);
 	}
 
 	@Override
@@ -88,6 +81,7 @@ public class PacketSkydive extends AbstractPacket {
 		_color8 = buffer.readInt();
 		_color9 = buffer.readInt();
 		_color10 = buffer.readInt();
+		_tp = buffer.readBoolean();
 	}
 
 	@Override
@@ -110,8 +104,8 @@ public class PacketSkydive extends AbstractPacket {
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
 		BlockInstantFall block = (BlockInstantFall)world.getBlock(_x, _y, _z);
-		LogHelper.info("handleServerSide()");
-		block.build(world, _x, _y, _z, _player, _color0, _color1, _color2, _color3, _color4, _color5, _color6, _color7, _color8, _color9, _color10);
+		//LogHelper.info("handleServerSide()");
+		block.build(world, _x, _y, _z, _player, _color0, _color1, _color2, _color3, _color4, _color5, _color6, _color7, _color8, _color9, _color10, _tp);
 		//int c = 0xFF0000;
 		//block.build(world, _x, _y, _z, _player, c, c, c, c, c, c, c, c, c, c, c);
 	}

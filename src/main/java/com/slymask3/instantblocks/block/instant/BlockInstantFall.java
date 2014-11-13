@@ -5,11 +5,13 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.slymask3.instantblocks.InstantBlocks;
@@ -81,6 +83,11 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		return blockIcon;
 	}
     
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack) {
+        int meta = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+        par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 2);
+    }
+	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
@@ -93,8 +100,8 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			}
 		}
 		
-		world.setBlock(x, y+1, z, ModBlocks.color, 0, 2);
-		((TileEntityColor) world.getTileEntity(x, y+1, z)).color = 0xFF0000;
+		//world.setBlock(x, y+1, z, ModBlocks.color, 0, 2);
+		//((TileEntityColor) world.getTileEntity(x, y+1, z)).color = 0xFF0000;
 		
 		//LogHelper.info("player == " + player);
 		
@@ -103,9 +110,9 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		return true;
 	}
 	
-    public void build(World world, int x, int y, int z, String playerS, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10) {
-    	LogHelper.info("build()");
-    	LogHelper.info("c0 == "+c0);
+    public void build(World world, int x, int y, int z, String playerS, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10, boolean tp) {
+    	//LogHelper.info("build()");
+    	//LogHelper.info("c0 == "+c0);
     	
     	EntityPlayer player = world.getPlayerEntityByName(playerS);
     	
@@ -120,7 +127,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		
 //		try {
 			/************************ 0 : Red (14) ************************/
-			for (int c = 286; c >= 1; c =  c - 33) {
+			for (int c = 253; c >= 1; c =  c - 33) {
 				BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c0); //WALL
 				BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c0); //WALL
 				BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c0); //WALL
@@ -141,7 +148,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 //		}
 		
 		/************************ 1 : Orange (1) ************************/
-		for (int c = 283; c >= 1; c =  c - 33) {
+		for (int c = 250; c >= 1; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c1); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c1); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c1); //WALL
@@ -157,7 +164,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		}
 		
 		/************************ 2 : Yellow (4) ************************/
-		for (int c = 280; c >= 1; c =  c - 33) {
+		for (int c = 247; c >= 1; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c2); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c2); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c2); //WALL
@@ -173,7 +180,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		}
 		
 		/************************ 3 : Lime (5) ************************/
-		for (int c = 277; c >= 1; c =  c - 33) {
+		for (int c = 244; c >= 1; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c3); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c3); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c3); //WALL
@@ -189,7 +196,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		}
 		
 		/************************ 4 : Green (13) ************************/
-		for (int c = 274; c >= 1; c =  c - 33) {
+		for (int c = 241; c >= 1; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c4); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c4); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c4); //WALL
@@ -205,7 +212,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		}
 		
 		/************************ 5 : Cyan (9) ************************/
-		for (int c = 271; c >= 1; c =  c - 33) {
+		for (int c = 238; c >= 1; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c5); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c5); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c5); //WALL
@@ -221,7 +228,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		}
 		
 		/************************ 6 : Light Blue (3) ************************/
-		for (int c = 268; c >= 1; c =  c - 33) {
+		for (int c = 235; c >= 1; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c6); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c6); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c6); //WALL
@@ -237,7 +244,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		}
 		
 		/************************ 7 : Blue (11) ************************/
-		for (int c = 265; c >= 1; c =  c - 33) {
+		for (int c = 232; c >= 1; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c7); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c7); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c7); //WALL
@@ -253,7 +260,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		}
 		
 		/************************ 8 : Purple (10) ************************/
-		for (int c = 262; c >= 1; c =  c - 33) {
+		for (int c = 229; c >= 1; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c8); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c8); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c8); //WALL
@@ -269,7 +276,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		}
 		
 		/************************ 9 : Light Purple (2) ************************/
-		for (int c = 259; c >= 1; c =  c - 33) {
+		for (int c = 226; c >= 1; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c9); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c9); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c9); //WALL
@@ -285,7 +292,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		}
 		
 		/************************ 10 : Pink (6) ************************/
-		for (int c = 256; c >= 1; c =  c - 33) {
+		for (int c = 223; c >= 1; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c10); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c10); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c10); //WALL
@@ -353,10 +360,10 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		/************************ Ladder ************************/
 		if (meta == 0) {
 			for (int c = 256; c >= 5; c--) {
-				BuildHelper.buildMetaClean(world, x-2, c, z-4, ladder, 3, 0, 1, 1, 5);
+				BuildHelper.buildMetaClean(world, x-2, c, z-4, ladder, 3, 2, 1, 1, 5);
 			}
 		
-			if (ConfigurationHandler.tpFall == true) {
+			if (tp == true) {
 				IBHelper.sound(world, ConfigurationHandler.sound, x, 256, z+5);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z+5 + 0.5);
@@ -364,10 +371,10 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			}
 		} else if (meta == 1) {
 			for (int c = 256; c >= 5; c--) {
-				BuildHelper.buildMetaClean(world, x+4, c, z-2, ladder, 4, 0, 5, 1, 1);
+				BuildHelper.buildMetaClean(world, x+4, c, z-2, ladder, 4, 2, 5, 1, 1);
 			}
 		
-			if (ConfigurationHandler.tpFall == true) {
+			if (tp == true) {
 				IBHelper.sound(world, ConfigurationHandler.sound, x-5, 256, z);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x-5 + 0.5, 257 + 0.5, z + 0.5);
@@ -375,10 +382,10 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			}
 		} else if (meta == 2) {
 			for (int c = 256; c >= 5; c--) {
-				BuildHelper.buildMetaClean(world, x-2, c, z+4, ladder, 2, 0, 1, 1, 5);
+				BuildHelper.buildMetaClean(world, x-2, c, z+4, ladder, 2, 2, 1, 1, 5);
 			}
 		
-			if (ConfigurationHandler.tpFall == true) {
+			if (tp == true) {
 				IBHelper.sound(world, ConfigurationHandler.sound, x, 256, z-5);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z-5 + 0.5);
@@ -386,10 +393,10 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			}
 		} else if (meta == 3) {
 			for (int c = 256; c >= 5; c--) {
-				BuildHelper.buildMetaClean(world, x-4, c, z-2, ladder, 5, 0, 5, 1, 1);
+				BuildHelper.buildMetaClean(world, x-4, c, z-2, ladder, 5, 2, 5, 1, 1);
 			}
 		
-			if (ConfigurationHandler.tpFall == true) {
+			if (tp == true) {
 				IBHelper.sound(world, ConfigurationHandler.sound, x+5, 256, z);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x+5 + 0.5, 257 + 0.5, z + 0.5);

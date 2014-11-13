@@ -24,10 +24,10 @@ public class ConfigurationHandler
 	public static Property templeChests;
 	public static boolean effect;
 	public static String sound;
-	public static boolean tpFall;
+	//public static boolean tpFall;
 	//public static Property animated;
 	public static boolean tpGrinder;
-	public static int[] wool = new int[11];
+	//public static int[] wool = new int[11];
 	//public static String checkURL;
 	public static int max;
 	public static int maxSuck;
@@ -69,7 +69,7 @@ public class ConfigurationHandler
 		mineshaftChests = configuration.get(options, "[Option] Mineshaft Chests", true, "Whether to generate Instant Blocks in Mineshaft Chests or not.\n(Default = true)");
 		strongholdChests = configuration.get(options, "[Option] Stronghold Chests", true, "Whether to generate Instant Blocks in  Stronghold Chests or not.\n(Default = true)");
 		templeChests = configuration.get(options, "[Option] Temple Chests", true, "Whether to generate Instant Blocks in Desert/Jungle Temple Chests or not.\n(Default = true)");
-		tpFall = configuration.get(options, "[Option] Rainbow Skydive Teleport", true, "Whether to teleport the player to the top of the Instant Rainbow Skydive upon right-click.\n(Default = true)").getBoolean();
+		//tpFall = configuration.get(options, "[Option] Rainbow Skydive Teleport", true, "Whether to teleport the player to the top of the Instant Rainbow Skydive upon right-click.\n(Default = true)").getBoolean();
 		tpGrinder = configuration.get(options, "[Option] Grinder Teleport", true, "Whether to teleport the player to the collection room of the Instant Grinder upon right-click.\n(Default = true)").getBoolean();
 		max = configuration.get(options, "[Option] Maximum Water/Lava Blocks", 1000, "Maximum amount of water/lava blocks to create.\n(Default = 1000)").getInt();
 		maxSuck = configuration.get(options, "[Option] Maximum Suction", 1000, "Maximum amount of water/lava blocks to suck in.\n(Default = 1000)").getInt();
@@ -82,17 +82,17 @@ public class ConfigurationHandler
 		keepBlocks = configuration.get(cheats, "[Cheat] Keep Instant Blocks", false, "Whether to keep Instant Blocks after right-clicking or not.\n(Default = false)").getBoolean();
 		xp = configuration.get(cheats, "[Cheat] XP From Instant Blocks", 0, "How much experience from right-clicking Instant Blocks give you.\n(Default = 0)").getInt();
 		
-		wool[0] = configuration.get(woolColors, "[Rainbow Skydive] Color #01", 14, "Metadata value of the first color in the Rainbow Skydive pattern.\n(Default = 14)").getInt();
-		wool[1] = configuration.get(woolColors, "[Rainbow Skydive] Color #02", 1, "Metadata value of the second color in the Rainbow Skydive pattern.\n(Default = 1)").getInt();
-		wool[2] = configuration.get(woolColors, "[Rainbow Skydive] Color #03", 4, "Metadata value of the third color in the Rainbow Skydive pattern.\n(Default = 4)").getInt();
-		wool[3] = configuration.get(woolColors, "[Rainbow Skydive] Color #04", 5, "Metadata value of the fourth color in the Rainbow Skydive pattern.\n(Default = 5)").getInt();
-		wool[4] = configuration.get(woolColors, "[Rainbow Skydive] Color #05", 13, "Metadata value of the fifth color in the Rainbow Skydive pattern.\n(Default = 13)").getInt();
-		wool[5] = configuration.get(woolColors, "[Rainbow Skydive] Color #06", 9, "Metadata value of the sixth color in the Rainbow Skydive pattern.\n(Default = 9)").getInt();
-		wool[6] = configuration.get(woolColors, "[Rainbow Skydive] Color #07", 3, "Metadata value of the seventh color in the Rainbow Skydive pattern.\n(Default = 3)").getInt();
-		wool[7] = configuration.get(woolColors, "[Rainbow Skydive] Color #08", 11, "Metadata value of the eighth color in the Rainbow Skydive pattern.\n(Default = 11)").getInt();
-		wool[8] = configuration.get(woolColors, "[Rainbow Skydive] Color #09", 10, "Metadata value of the ninth color in the Rainbow Skydive pattern.\n(Default = 10)").getInt();
-		wool[9] = configuration.get(woolColors, "[Rainbow Skydive] Color #10", 2, "Metadata value of the tenth color in the Rainbow Skydive pattern.\n(Default = 2)").getInt();
-		wool[10] = configuration.get(woolColors, "[Rainbow Skydive] Color #11", 6, "Metadata value of the eleventh color in the Rainbow Skydive pattern.\n(Default = 6)").getInt();
+		//wool[0] = configuration.get(woolColors, "[Rainbow Skydive] Color #01", 14, "Metadata value of the first color in the Rainbow Skydive pattern.\n(Default = 14)").getInt();
+		//wool[1] = configuration.get(woolColors, "[Rainbow Skydive] Color #02", 1, "Metadata value of the second color in the Rainbow Skydive pattern.\n(Default = 1)").getInt();
+		//wool[2] = configuration.get(woolColors, "[Rainbow Skydive] Color #03", 4, "Metadata value of the third color in the Rainbow Skydive pattern.\n(Default = 4)").getInt();
+		//wool[3] = configuration.get(woolColors, "[Rainbow Skydive] Color #04", 5, "Metadata value of the fourth color in the Rainbow Skydive pattern.\n(Default = 5)").getInt();
+		//wool[4] = configuration.get(woolColors, "[Rainbow Skydive] Color #05", 13, "Metadata value of the fifth color in the Rainbow Skydive pattern.\n(Default = 13)").getInt();
+		//wool[5] = configuration.get(woolColors, "[Rainbow Skydive] Color #06", 9, "Metadata value of the sixth color in the Rainbow Skydive pattern.\n(Default = 9)").getInt();
+		//wool[6] = configuration.get(woolColors, "[Rainbow Skydive] Color #07", 3, "Metadata value of the seventh color in the Rainbow Skydive pattern.\n(Default = 3)").getInt();
+		//wool[7] = configuration.get(woolColors, "[Rainbow Skydive] Color #08", 11, "Metadata value of the eighth color in the Rainbow Skydive pattern.\n(Default = 11)").getInt();
+		//wool[8] = configuration.get(woolColors, "[Rainbow Skydive] Color #09", 10, "Metadata value of the ninth color in the Rainbow Skydive pattern.\n(Default = 10)").getInt();
+		//wool[9] = configuration.get(woolColors, "[Rainbow Skydive] Color #10", 2, "Metadata value of the tenth color in the Rainbow Skydive pattern.\n(Default = 2)").getInt();
+		//wool[10] = configuration.get(woolColors, "[Rainbow Skydive] Color #11", 6, "Metadata value of the eleventh color in the Rainbow Skydive pattern.\n(Default = 6)").getInt();
 
 		//checkURL = configuration.get(other, "[Other] Update Checker URL", "https://dl.dropboxusercontent.com/u/23446861/Mods/InstantBlocks/check.txt", "The text document that InstantBlocks will check updates in.\nDO NOT CHANGE THIS UNLESS YOU HAVE MY CONSENT.").getString();
 
