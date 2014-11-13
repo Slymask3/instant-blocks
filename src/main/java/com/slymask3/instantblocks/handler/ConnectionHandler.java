@@ -30,7 +30,7 @@ public class ConnectionHandler {
 			String mc = s.nextLine();
 			
 			if (!ver.equalsIgnoreCase(Reference.VERSION)) {
-				IBHelper.msgCleanBypass(play, "\u00a7cUpdate avaliable: \u00a7lv" + ver + " \u00a7r\u00a7c(For MC " + mc + ")!", Colors.c);
+				IBHelper.msgCleanBypass(play, "\u00a7cUpdate avaliable: v" + ver + " \u00a7c(MC " + mc + ")!", Colors.c);
 				IBHelper.msgCleanBypass(play, "\u00a7cLink: \u00a7b\u00a7nhttp://tinyurl.com/instantblocks", Colors.c);
 			}
 			

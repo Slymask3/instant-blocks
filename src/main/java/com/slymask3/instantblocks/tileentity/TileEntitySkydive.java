@@ -7,33 +7,6 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntitySkydive extends TileEntity {
-//	public String[] color = {
-//			"red",
-//			"orange",
-//			"yellow",
-//			"lime",
-//			"green",
-//			"cyan",
-//			"light blue",
-//			"blue",
-//			"purple",
-//			"magenta",
-//			"pink"
-//	};
-//	
-//	public int[] colorCode = {
-//			getColor(150, 52, 48),
-//			getColor(219, 125, 62),
-//			getColor(177, 166, 39),
-//			getColor(65, 174, 56),
-//			getColor(53, 70, 27),
-//			getColor(46, 110, 137),
-//			getColor(107, 138, 201),
-//			getColor(46, 56, 141),
-//			getColor(126, 61, 181),
-//			getColor(179, 80, 188),
-//			getColor(208, 132, 153)
-//	};
 
 	public String[] color = new String[11];
 	public int[] colorCode = new int[11];
@@ -67,10 +40,6 @@ public class TileEntitySkydive extends TileEntity {
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-//		for(int i=0; i<11; i++) {
-//			color[i] = nbt.getString("Color"+i);
-//			colorCode[i] = nbt.getInteger("ColorCode"+i);
-//		}
 		this.color[0] = nbt.getString("Color0");
 		this.color[1] = nbt.getString("Color1");
 		this.color[2] = nbt.getString("Color2");
@@ -98,10 +67,6 @@ public class TileEntitySkydive extends TileEntity {
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-//		for(int i=0; i<11; i++) {
-//			nbt.setString("Color"+i, color[i]);
-//			nbt.setInteger("ColorCode"+i, colorCode[i]);
-//		}
 		nbt.setString("Color0", color[0]);
 		nbt.setString("Color1", color[1]);
 		nbt.setString("Color2", color[2]);
@@ -138,35 +103,6 @@ public class TileEntitySkydive extends TileEntity {
 		readFromNBT(pkt.func_148857_g());
     }
 	
-	public int getAARRGGBB(int id) {
-		switch(id) {
-			case 0:
-				return getColor(150, 52, 48);
-			case 1:
-				return getColor(219, 125, 62);
-			case 2:
-				return getColor(177, 166, 39);
-			case 3:
-				return getColor(65, 174, 56);
-			case 4:
-				return getColor(53, 70, 27);
-			case 5:
-				return getColor(46, 110, 137);
-			case 6:
-				return getColor(107, 138, 201);
-			case 7:
-				return getColor(46, 56, 141);
-			case 8:
-				return getColor(126, 61, 181);
-			case 9:
-				return getColor(179, 80, 188);
-			case 10:
-				return getColor(208, 132, 153);
-			default:
-				return getColor(255, 255, 255);
-		}
-	}
-	
 	public int getColor(int r, int g, int b) {
 		return (r * 65536) + (g * 256) + b;
 	}
@@ -175,27 +111,37 @@ public class TileEntitySkydive extends TileEntity {
 		int color = 16777215;
 		
 		if(input.equalsIgnoreCase("red")) {
-			color = getAARRGGBB(0);
+			color = getColor(150, 52, 48);
 		} else if(input.equalsIgnoreCase("orange")) {
-			color = getAARRGGBB(1);
+			color = getColor(219, 125, 62);
 		} else if(input.equalsIgnoreCase("yellow")) {
-			color = getAARRGGBB(2);
+			color = getColor(177, 166, 39);
 		} else if(input.equalsIgnoreCase("lime")) {
-			color = getAARRGGBB(3);
+			color = getColor(65, 174, 56);
 		} else if(input.equalsIgnoreCase("green")) {
-			color = getAARRGGBB(4);
+			color = getColor(53, 70, 27);
 		} else if(input.equalsIgnoreCase("cyan")) {
-			color = getAARRGGBB(5);
+			color = getColor(46, 110, 137);
 		} else if(input.equalsIgnoreCase("light blue") || input.equalsIgnoreCase("lightblue")) {
-			color = getAARRGGBB(6);
+			color = getColor(107, 138, 201);
 		} else if(input.equalsIgnoreCase("blue")) {
-			color = getAARRGGBB(7);
+			color = getColor(46, 56, 141);
 		} else if(input.equalsIgnoreCase("purple")) {
-			color = getAARRGGBB(8);
+			color = getColor(126, 61, 181);
 		} else if(input.equalsIgnoreCase("magenta")) {
-			color = getAARRGGBB(9);
+			color = getColor(179, 80, 188);
 		} else if(input.equalsIgnoreCase("pink")) {
-			color = getAARRGGBB(10);
+			color = getColor(208, 132, 153);
+		} else if(input.equalsIgnoreCase("white")) {
+			color = getColor(221, 221, 221);
+		} else if(input.equalsIgnoreCase("gray") || input.equalsIgnoreCase("grey")) {
+			color = getColor(64, 64, 64);
+		} else if(input.equalsIgnoreCase("light gray") || input.equalsIgnoreCase("lightgray") || input.equalsIgnoreCase("light grey") || input.equalsIgnoreCase("lightgrey")) {
+			color = getColor(154, 161, 161);
+		} else if(input.equalsIgnoreCase("brown")) {
+			color = getColor(79, 50, 31);
+		} else if(input.equalsIgnoreCase("black")) {
+			color = getColor(25, 22, 22);
 		} else {
 			try {
 				color = Integer.parseInt(input, 16);

@@ -144,6 +144,31 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
                     Block block = world.getBlock(x, y, z);
                     int meta = world.getBlockMetadata(x, y, z);
                     
+                    if (chest.getStackInSlot(26) != null) {
+                    	if(world.getBlock(X+1, Y, Z) == Blocks.air) {
+                    		world.setBlock(X+1, Y, Z, Blocks.chest);
+                    		chest = (TileEntityChest)world.getTileEntity(X+1, Y, Z);
+                    		X++;
+                    	} else if(world.getBlock(X-1, Y, Z) == Blocks.air) {
+                    		world.setBlock(X-1, Y, Z, Blocks.chest);
+                    		chest = (TileEntityChest)world.getTileEntity(X-1, Y, Z);
+                    		X--;
+                    	} else if(world.getBlock(X, Y, Z+1) == Blocks.air) {
+                    		world.setBlock(X, Y, Z+1, Blocks.chest);
+                    		chest = (TileEntityChest)world.getTileEntity(X, Y, Z+1);
+                    		Z++;
+                    	} else if(world.getBlock(X, Y, Z-1) == Blocks.air) {
+                    		world.setBlock(X, Y, Z-1, Blocks.chest);
+                    		chest = (TileEntityChest)world.getTileEntity(X, Y, Z-1);
+                    		Z--;
+                    	} else {
+                    		world.setBlock(X+1, Y, Z, Blocks.chest);
+                    		chest = (TileEntityChest)world.getTileEntity(X+1, Y, Z);
+                    		X++;
+                    	}
+                    	LogHelper.info("had to create another chest");
+                    }
+                    
                     if ((block == Blocks.log && logOak) && (meta == 0 || meta == 4 || meta == 8 || meta == 12)) { //OAK
                     	IBHelper.addItemsToChest(chest, block, 1, 0);
                     	if ((world.getBlock(x, y-1, z) == Blocks.dirt || world.getBlock(x, y-1, z) == Blocks.grass) && replant) {
