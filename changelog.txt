@@ -1,3 +1,8 @@
+v1.5.3 (n/a)
+- Added Instant Skydive Gui.
+- Added color block command (/ib colorblock).
+- Removed Skydive Tp and Skydive wool color config options.
+
 v1.5.2 (11/11/2014)
 - Added Instant Harvester Block.
 - Fixed Instant Rainbow Skydive Block to replace bedrock with water.
