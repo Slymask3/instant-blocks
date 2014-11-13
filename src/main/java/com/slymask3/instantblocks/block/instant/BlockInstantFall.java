@@ -22,6 +22,7 @@ import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
+import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
 import com.slymask3.instantblocks.utility.BuildHelper;
 import com.slymask3.instantblocks.utility.IBHelper;
@@ -92,6 +93,9 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			}
 		}
 		
+		world.setBlock(x, y+1, z, ModBlocks.color, 0, 2);
+		((TileEntityColor) world.getTileEntity(x, y+1, z)).color = 0xFF0000;
+		
 		//LogHelper.info("player == " + player);
 		
 		player.openGui(InstantBlocks.instance, GuiID.SKYDIVE.ordinal(), world, x, y, z);
@@ -112,181 +116,189 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		
 		int meta = world.getBlockMetadata(x, y, z);
 		
-//		/************************ 0 : Red (14) ************************/
-//		for (int c = 286; c >= 1; c =  c - 33) {
-//			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c0); //WALL
-//			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c0); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c0); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c0); //WALL
-//			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c0); //CORNER
-//			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c0); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c0); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c0); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c0); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c0); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c0); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c0); //CORNER
+		
+		
+//		try {
+			/************************ 0 : Red (14) ************************/
+			for (int c = 286; c >= 1; c =  c - 33) {
+				BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c0); //WALL
+				BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c0); //WALL
+				BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c0); //WALL
+				BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c0); //WALL
+				BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c0); //CORNER
+				BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c0); //CORNER
+				BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c0); //CORNER
+				BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c0); //CORNER
+				BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c0); //CORNER
+				BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c0); //CORNER
+				BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c0); //CORNER
+				BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c0); //CORNER
+//				world.setBlock(x-5, c, z, ModBlocks.color, 0, 2);
+//				((TileEntityColor) world.getTileEntity(x-5, c, z)).color = c0;
+			}
+//		} catch(Exception e) {
+//			
 //		}
-//		
-//		/************************ 1 : Orange (1) ************************/
-//		for (int c = 283; c >= 1; c =  c - 33) {
-//			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c1); //WALL
-//			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c1); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c1); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c1); //WALL
-//			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c1); //CORNER
-//			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c1); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c1); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c1); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c1); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c1); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c1); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c1); //CORNER
-//		}
-//		
-//		/************************ 2 : Yellow (4) ************************/
-//		for (int c = 280; c >= 1; c =  c - 33) {
-//			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c2); //WALL
-//			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c2); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c2); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c2); //WALL
-//			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c2); //CORNER
-//			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c2); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c2); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c2); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c2); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c2); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c2); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c2); //CORNER
-//		}
-//		
-//		/************************ 3 : Lime (5) ************************/
-//		for (int c = 277; c >= 1; c =  c - 33) {
-//			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c3); //WALL
-//			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c3); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c3); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c3); //WALL
-//			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c3); //CORNER
-//			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c3); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c3); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c3); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c3); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c3); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c3); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c3); //CORNER
-//		}
-//		
-//		/************************ 4 : Green (13) ************************/
-//		for (int c = 274; c >= 1; c =  c - 33) {
-//			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c4); //WALL
-//			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c4); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c4); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c4); //WALL
-//			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c4); //CORNER
-//			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c4); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c4); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c4); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c4); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c4); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c4); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c4); //CORNER
-//		}
-//		
-//		/************************ 5 : Cyan (9) ************************/
-//		for (int c = 271; c >= 1; c =  c - 33) {
-//			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c5); //WALL
-//			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c5); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c5); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c5); //WALL
-//			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c5); //CORNER
-//			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c5); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c5); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c5); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c5); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c5); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c5); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c5); //CORNER
-//		}
-//		
-//		/************************ 6 : Light Blue (3) ************************/
-//		for (int c = 268; c >= 1; c =  c - 33) {
-//			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c6); //WALL
-//			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c6); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c6); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c6); //WALL
-//			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c6); //CORNER
-//			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c6); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c6); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c6); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c6); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c6); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c6); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c6); //CORNER
-//		}
-//		
-//		/************************ 7 : Blue (11) ************************/
-//		for (int c = 265; c >= 1; c =  c - 33) {
-//			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c7); //WALL
-//			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c7); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c7); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c7); //WALL
-//			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c7); //CORNER
-//			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c7); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c7); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c7); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c7); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c7); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c7); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c7); //CORNER
-//		}
-//		
-//		/************************ 8 : Purple (10) ************************/
-//		for (int c = 262; c >= 1; c =  c - 33) {
-//			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c8); //WALL
-//			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c8); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c8); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c8); //WALL
-//			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c8); //CORNER
-//			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c8); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c8); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c8); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c8); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c8); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c8); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c8); //CORNER
-//		}
-//		
-//		/************************ 9 : Light Purple (2) ************************/
-//		for (int c = 259; c >= 1; c =  c - 33) {
-//			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c9); //WALL
-//			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c9); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c9); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c9); //WALL
-//			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c9); //CORNER
-//			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c9); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c9); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c9); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c9); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c9); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c9); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c9); //CORNER
-//		}
-//		
-//		/************************ 10 : Pink (6) ************************/
-//		for (int c = 256; c >= 1; c =  c - 33) {
-//			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c10); //WALL
-//			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c10); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c10); //WALL
-//			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c10); //WALL
-//			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c10); //CORNER
-//			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c10); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c10); //CORNER
-//			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c10); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c10); //CORNER
-//			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c10); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c10); //CORNER
-//			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c10); //CORNER
-//		}
+		
+		/************************ 1 : Orange (1) ************************/
+		for (int c = 283; c >= 1; c =  c - 33) {
+			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c1); //WALL
+			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c1); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c1); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c1); //WALL
+			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c1); //CORNER
+			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c1); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c1); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c1); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c1); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c1); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c1); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c1); //CORNER
+		}
+		
+		/************************ 2 : Yellow (4) ************************/
+		for (int c = 280; c >= 1; c =  c - 33) {
+			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c2); //WALL
+			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c2); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c2); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c2); //WALL
+			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c2); //CORNER
+			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c2); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c2); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c2); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c2); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c2); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c2); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c2); //CORNER
+		}
+		
+		/************************ 3 : Lime (5) ************************/
+		for (int c = 277; c >= 1; c =  c - 33) {
+			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c3); //WALL
+			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c3); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c3); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c3); //WALL
+			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c3); //CORNER
+			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c3); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c3); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c3); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c3); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c3); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c3); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c3); //CORNER
+		}
+		
+		/************************ 4 : Green (13) ************************/
+		for (int c = 274; c >= 1; c =  c - 33) {
+			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c4); //WALL
+			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c4); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c4); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c4); //WALL
+			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c4); //CORNER
+			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c4); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c4); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c4); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c4); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c4); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c4); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c4); //CORNER
+		}
+		
+		/************************ 5 : Cyan (9) ************************/
+		for (int c = 271; c >= 1; c =  c - 33) {
+			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c5); //WALL
+			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c5); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c5); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c5); //WALL
+			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c5); //CORNER
+			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c5); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c5); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c5); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c5); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c5); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c5); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c5); //CORNER
+		}
+		
+		/************************ 6 : Light Blue (3) ************************/
+		for (int c = 268; c >= 1; c =  c - 33) {
+			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c6); //WALL
+			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c6); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c6); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c6); //WALL
+			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c6); //CORNER
+			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c6); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c6); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c6); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c6); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c6); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c6); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c6); //CORNER
+		}
+		
+		/************************ 7 : Blue (11) ************************/
+		for (int c = 265; c >= 1; c =  c - 33) {
+			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c7); //WALL
+			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c7); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c7); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c7); //WALL
+			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c7); //CORNER
+			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c7); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c7); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c7); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c7); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c7); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c7); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c7); //CORNER
+		}
+		
+		/************************ 8 : Purple (10) ************************/
+		for (int c = 262; c >= 1; c =  c - 33) {
+			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c8); //WALL
+			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c8); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c8); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c8); //WALL
+			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c8); //CORNER
+			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c8); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c8); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c8); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c8); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c8); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c8); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c8); //CORNER
+		}
+		
+		/************************ 9 : Light Purple (2) ************************/
+		for (int c = 259; c >= 1; c =  c - 33) {
+			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c9); //WALL
+			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c9); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c9); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c9); //WALL
+			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c9); //CORNER
+			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c9); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c9); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c9); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c9); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c9); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c9); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c9); //CORNER
+		}
+		
+		/************************ 10 : Pink (6) ************************/
+		for (int c = 256; c >= 1; c =  c - 33) {
+			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c10); //WALL
+			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c10); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c10); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c10); //WALL
+			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c10); //CORNER
+			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c10); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c10); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c10); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c10); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c10); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c10); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c10); //CORNER
+		}
 
 		/************************ Air ************************/
 		for (int c = 256; c >= 1; c--) {
@@ -331,12 +343,12 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			BuildHelper.buildClean(world, x-2, c, z-4, water, 1, 1, 5); //WALL
 		}
 		
-//		/************************ Floor (c7) ************************/
-//		BuildHelper.buildColorBlock(world, x-3, 1, z-3, 7, 1, 7, c7); //CENTER
-//		BuildHelper.buildColorBlock(world, x-4, 1, z-2, 5, 1, 1, c7); //WALL
-//		BuildHelper.buildColorBlock(world, x+4, 1, z-2, 5, 1, 1, c7); //WALL
-//		BuildHelper.buildColorBlock(world, x-2, 1, z+4, 1, 1, 5, c7); //WALL
-//		BuildHelper.buildColorBlock(world, x-2, 1, z-4, 1, 1, 5, c7); //WALL
+		/************************ Floor (c7) ************************/
+		BuildHelper.buildColorBlock(world, x-3, 1, z-3, 7, 1, 7, c7); //CENTER
+		BuildHelper.buildColorBlock(world, x-4, 1, z-2, 5, 1, 1, c7); //WALL
+		BuildHelper.buildColorBlock(world, x+4, 1, z-2, 5, 1, 1, c7); //WALL
+		BuildHelper.buildColorBlock(world, x-2, 1, z+4, 1, 1, 5, c7); //WALL
+		BuildHelper.buildColorBlock(world, x-2, 1, z-4, 1, 1, 5, c7); //WALL
 
 		/************************ Ladder ************************/
 		if (meta == 0) {
@@ -385,6 +397,8 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 				}
 			}
 		}
+		
+		
 	}
 
     @Override

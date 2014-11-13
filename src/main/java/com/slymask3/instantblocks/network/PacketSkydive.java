@@ -112,5 +112,7 @@ public class PacketSkydive extends AbstractPacket {
 		BlockInstantFall block = (BlockInstantFall)world.getBlock(_x, _y, _z);
 		LogHelper.info("handleServerSide()");
 		block.build(world, _x, _y, _z, _player, _color0, _color1, _color2, _color3, _color4, _color5, _color6, _color7, _color8, _color9, _color10);
+		//int c = 0xFF0000;
+		//block.build(world, _x, _y, _z, _player, c, c, c, c, c, c, c, c, c, c, c);
 	}
 }

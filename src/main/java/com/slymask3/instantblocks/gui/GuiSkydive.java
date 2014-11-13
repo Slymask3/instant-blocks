@@ -10,8 +10,12 @@ import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 
 import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.network.PacketSkydive;
+import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
+import com.slymask3.instantblocks.utility.IBHelper;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 import cpw.mods.fml.client.config.GuiButtonExt;
@@ -253,9 +257,9 @@ public class GuiSkydive extends GuiScreen {
 		
 		InstantBlocks.packetPipeline.sendToServer(new PacketSkydive(this.world, this.x, this.y, this.z, this.player.getDisplayName(), getHex(color[0].getText()), getHex(color[1].getText()), getHex(color[2].getText()), getHex(color[3].getText()), getHex(color[4].getText()), getHex(color[5].getText()), getHex(color[6].getText()), getHex(color[7].getText()), getHex(color[8].getText()), getHex(color[9].getText()), getHex(color[10].getText())));
 		
-		//IBHelper.xp(world, player, ConfigurationHandler.xp);
-        //IBHelper.effectFull(world, "reddust", x, y, z);
-        //IBHelper.msg(player, Strings.harvestCreate, Colors.a);
+		IBHelper.xp(world, player, ConfigurationHandler.xp);
+        IBHelper.effectFull(world, "reddust", x, y, z);
+        IBHelper.msg(player, Strings.fallCreate, Colors.a);
 	}
 	
 	public int getHex(String input) {

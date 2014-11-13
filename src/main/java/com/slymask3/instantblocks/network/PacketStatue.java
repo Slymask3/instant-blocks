@@ -1,18 +1,14 @@
 package com.slymask3.instantblocks.network;
 
-import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
-import com.slymask3.instantblocks.tileentity.TileEntityStatue;
-import com.slymask3.instantblocks.utility.LogHelper;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+
+import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
+
+import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class PacketStatue extends AbstractPacket {
 	int _dim, _x, _y, _z;
@@ -116,5 +112,10 @@ public class PacketStatue extends AbstractPacket {
 			//}
 			//LogHelper.info("handleServerSide(): username = " + this._username);
 		//}
+//		int c = 0xFF0000;
+//		BlockInstantSkydive block = (BlockInstantSkydive)world.getBlock(_x, _y, _z);
+//		LogHelper.info("handleServerSide()");
+//		block.build(world, _x, _y, _z, _player, c, c, c, c, c, c, c, c, c, c, c);
+	
 	}
 }

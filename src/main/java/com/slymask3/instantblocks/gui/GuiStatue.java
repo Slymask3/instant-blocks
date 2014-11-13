@@ -16,6 +16,7 @@ import org.lwjgl.input.Keyboard;
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.network.PacketSkydive;
 import com.slymask3.instantblocks.network.PacketStatue;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
@@ -142,7 +143,9 @@ public class GuiStatue extends GuiScreen {
 	public void sendInfo() {
 		InstantBlocks.packetPipeline.sendToServer(new PacketStatue(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
 		//InstantBlocks.packetPipeline.sendToAll(new PacketInstantStatue(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
-
+		//int c = 0xFF0000;
+		//InstantBlocks.packetPipeline.sendToServer(new PacketSkydive(this.world, this.x, this.y, this.z, this.player.getDisplayName(), c,c,c,c,c,c,c,c,c,c,c));
+		
 		//LogHelper.info(this.player.getDisplayName());
 		
 		//config.rgbMode = rgbMode.isChecked();
