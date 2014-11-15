@@ -41,3 +41,6 @@ local.properties
 
 gradlew
 gradlew.bat
+
+.gitattributes
+.gitignore
