@@ -18,6 +18,8 @@ public class Names {
         public static final String IB_HARVEST = "ibHarvest";
         public static final String IB_LIGHT = "ibLight";
         public static final String COLOR = "color";
+        public static final String COLOR_LADDER = "colorLadder";
+        public static final String SKYDIVE_TP = "skydiveTP";
     }
 
     public static final class Items {

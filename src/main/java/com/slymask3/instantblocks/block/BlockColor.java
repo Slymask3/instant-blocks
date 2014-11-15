@@ -1,15 +1,11 @@
 package com.slymask3.instantblocks.block;
 
-import java.awt.Color;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -17,14 +13,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
-import com.slymask3.instantblocks.utility.LogHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -51,13 +43,13 @@ public class BlockColor extends Block implements ITileEntityProvider {
         return 0;
     }
 
-    public boolean isOpaqueCube() {
-        return false;
-    }
+//    public boolean isOpaqueCube() {
+//        return false;
+//    }
 
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+//    public boolean renderAsNormalBlock() {
+//        return false;
+//    }
 	
 	@SideOnly(Side.CLIENT)
 	@Override

@@ -11,6 +11,7 @@ import com.slymask3.instantblocks.block.instant.BlockInstantHouseWood;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
+import com.slymask3.instantblocks.tileentity.TileEntityColorLadder;
 
 public class BuildHelper {
 	//private static ConfigurationHandlerurationHandler ConfigurationHandler = new ConfigurationHandlerurationHandler();
@@ -215,6 +216,27 @@ public class BuildHelper {
 						((TileEntityColor) world.getTileEntity(x2, y, z2)).color = c;
 					} catch(Exception e) {LogHelper.info(e);}
 					//((TileEntityColor) world.getTileEntity(x2, y, z2)).color = 16711680;
+					world.markBlockForUpdate(x2, y, z2);
+					z2++;
+				}
+				z2 = z;
+				x2++;
+			}
+			x2 = x;
+			y++;
+		}
+	}
+	
+	public static void buildColorLadder(World world, int x, int y, int z, int xTimesTotal, int yTimesTotal, int zTimesTotal, int meta, int c) {
+		int z2 = z;
+		int x2 = x;
+		for (int yTimes = 0; yTimes < yTimesTotal; yTimes++) {
+			for (int zTimes = 0; zTimes < zTimesTotal; zTimes++) {
+				for (int xTimes = 0; xTimes < xTimesTotal; xTimes++) {
+					world.setBlock(x2, y, z2, ModBlocks.colorLadder, meta, 2);
+					try {
+						((TileEntityColorLadder) world.getTileEntity(x2, y, z2)).color = c;
+					} catch(Exception e) {LogHelper.info(e);}
 					world.markBlockForUpdate(x2, y, z2);
 					z2++;
 				}

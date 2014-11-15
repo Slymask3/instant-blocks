@@ -1,0 +1,65 @@
+package com.slymask3.instantblocks.block;
+
+import java.util.Random;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+
+import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Textures;
+import com.slymask3.instantblocks.utility.IBHelper;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class BlockSkydiveTP extends Block {
+	public BlockSkydiveTP() {
+		super(Material.iron);
+        setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
+        setBlockName("instantblocks:" + Names.Blocks.COLOR);
+        setHardness(1.5F);
+        setResistance(2000F);
+        setStepSound(Block.soundTypeMetal);
+        setBlockTextureName(Textures.SkydiveTP.SIDE);
+	}
+
+	public int quantityDropped(Random random) {
+		return 0;
+	}
+
+	public static IIcon side;
+	public static IIcon other;
+    
+	public void registerBlockIcons(IIconRegister ir) {
+		side = ir.registerIcon(Textures.SkydiveTP.SIDE);
+		other = ir.registerIcon(Textures.SkydiveTP.OTHER);
+	}
+	
+	@SideOnly(Side.CLIENT)
+    public IIcon getIcon(int side, int meta) {
+        if (side==0 || side==1) {
+        	return other;
+        } else {
+        	return this.side;
+        }
+    }
+	
+
+	@Override
+	public boolean onBlockActivated(World world,int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+		IBHelper.sound(world, "portal.trigger", x, 257, z);
+		if (!world.isRemote) { //IF SERVER
+			player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z + 0.5);
+		}
+		
+		return true;
+	}
+}

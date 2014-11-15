@@ -123,29 +123,41 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		
 		int meta = world.getBlockMetadata(x, y, z);
 		
+
+		/************************ Air ************************/
+		for (int c = 256; c >= 1; c--) {
+			BuildHelper.buildClean(world, x-3, c, z-3, Blocks.air, 7, 1, 7); //CENTER
+			BuildHelper.buildClean(world, x-4, c, z-2, Blocks.air, 5, 1, 1); //WALL
+			BuildHelper.buildClean(world, x+4, c, z-2, Blocks.air, 5, 1, 1); //WALL
+			BuildHelper.buildClean(world, x-2, c, z+4, Blocks.air, 1, 1, 5); //WALL
+			BuildHelper.buildClean(world, x-2, c, z-4, Blocks.air, 1, 1, 5); //WALL
+		}
 		
-		
-//		try {
-			/************************ 0 : Red (14) ************************/
-			for (int c = 253; c >= 1; c =  c - 33) {
-				BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c0); //WALL
-				BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c0); //WALL
-				BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c0); //WALL
-				BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c0); //WALL
-				BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c0); //CORNER
-				BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c0); //CORNER
-				BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c0); //CORNER
-				BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c0); //CORNER
-				BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c0); //CORNER
-				BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c0); //CORNER
-				BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c0); //CORNER
-				BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c0); //CORNER
-//				world.setBlock(x-5, c, z, ModBlocks.color, 0, 2);
-//				((TileEntityColor) world.getTileEntity(x-5, c, z)).color = c0;
+		/************************ 0 : Red (14) ************************/
+		for (int c = 253; c >= 1; c =  c - 33) {
+			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c0); //WALL
+			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c0); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c0); //WALL
+			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c0); //WALL
+			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c0); //CORNER
+			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c0); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c0); //CORNER
+			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c0); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c0); //CORNER
+			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c0); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c0); //CORNER
+			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c0); //CORNER
+			
+			if (meta==0) {
+				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c0);
+			} else if (meta == 1) {
+				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c0);
+			} else if (meta == 2) {
+				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c0);
+			} else if (meta == 3) {
+				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c0);
 			}
-//		} catch(Exception e) {
-//			
-//		}
+		}
 		
 		/************************ 1 : Orange (1) ************************/
 		for (int c = 250; c >= 1; c =  c - 33) {
@@ -161,6 +173,16 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c1); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c1); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c1); //CORNER
+			
+			if (meta==0) {
+				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c1);
+			} else if (meta == 1) {
+				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c1);
+			} else if (meta == 2) {
+				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c1);
+			} else if (meta == 3) {
+				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c1);
+			}
 		}
 		
 		/************************ 2 : Yellow (4) ************************/
@@ -177,6 +199,16 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c2); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c2); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c2); //CORNER
+			
+			if (meta==0) {
+				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c2);
+			} else if (meta == 1) {
+				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c2);
+			} else if (meta == 2) {
+				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c2);
+			} else if (meta == 3) {
+				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c2);
+			}
 		}
 		
 		/************************ 3 : Lime (5) ************************/
@@ -193,6 +225,16 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c3); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c3); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c3); //CORNER
+			
+			if (meta==0) {
+				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c3);
+			} else if (meta == 1) {
+				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c3);
+			} else if (meta == 2) {
+				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c3);
+			} else if (meta == 3) {
+				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c3);
+			}
 		}
 		
 		/************************ 4 : Green (13) ************************/
@@ -209,6 +251,16 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c4); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c4); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c4); //CORNER
+			
+			if (meta==0) {
+				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c4);
+			} else if (meta == 1) {
+				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c4);
+			} else if (meta == 2) {
+				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c4);
+			} else if (meta == 3) {
+				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c4);
+			}
 		}
 		
 		/************************ 5 : Cyan (9) ************************/
@@ -225,6 +277,16 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c5); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c5); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c5); //CORNER
+			
+			if (meta==0) {
+				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c5);
+			} else if (meta == 1) {
+				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c5);
+			} else if (meta == 2) {
+				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c5);
+			} else if (meta == 3) {
+				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c5);
+			}
 		}
 		
 		/************************ 6 : Light Blue (3) ************************/
@@ -241,6 +303,16 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c6); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c6); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c6); //CORNER
+			
+			if (meta==0) {
+				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c6);
+			} else if (meta == 1) {
+				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c6);
+			} else if (meta == 2) {
+				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c6);
+			} else if (meta == 3) {
+				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c6);
+			}
 		}
 		
 		/************************ 7 : Blue (11) ************************/
@@ -257,6 +329,16 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c7); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c7); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c7); //CORNER
+			
+			if (meta==0) {
+				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c7);
+			} else if (meta == 1) {
+				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c7);
+			} else if (meta == 2) {
+				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c7);
+			} else if (meta == 3) {
+				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c7);
+			}
 		}
 		
 		/************************ 8 : Purple (10) ************************/
@@ -273,6 +355,16 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c8); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c8); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c8); //CORNER
+			
+			if (meta==0) {
+				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c8);
+			} else if (meta == 1) {
+				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c8);
+			} else if (meta == 2) {
+				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c8);
+			} else if (meta == 3) {
+				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c8);
+			}
 		}
 		
 		/************************ 9 : Light Purple (2) ************************/
@@ -289,6 +381,16 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c9); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c9); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c9); //CORNER
+			
+			if (meta==0) {
+				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c9);
+			} else if (meta == 1) {
+				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c9);
+			} else if (meta == 2) {
+				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c9);
+			} else if (meta == 3) {
+				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c9);
+			}
 		}
 		
 		/************************ 10 : Pink (6) ************************/
@@ -305,15 +407,16 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c10); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c10); //CORNER
 			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c10); //CORNER
-		}
-
-		/************************ Air ************************/
-		for (int c = 256; c >= 1; c--) {
-			BuildHelper.buildClean(world, x-3, c, z-3, Blocks.air, 7, 1, 7); //CENTER
-			BuildHelper.buildClean(world, x-4, c, z-2, Blocks.air, 5, 1, 1); //WALL
-			BuildHelper.buildClean(world, x+4, c, z-2, Blocks.air, 5, 1, 1); //WALL
-			BuildHelper.buildClean(world, x-2, c, z+4, Blocks.air, 1, 1, 5); //WALL
-			BuildHelper.buildClean(world, x-2, c, z-4, Blocks.air, 1, 1, 5); //WALL
+			
+			if (meta==0) {
+				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c10);
+			} else if (meta == 1) {
+				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c10);
+			} else if (meta == 2) {
+				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c10);
+			} else if (meta == 3) {
+				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c10);
+			}
 		}
 
 		/************************ Stone (Prevent Lava Burning) ************************/
@@ -359,9 +462,9 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 
 		/************************ Ladder ************************/
 		if (meta == 0) {
-			for (int c = 256; c >= 5; c--) {
-				BuildHelper.buildMetaClean(world, x-2, c, z-4, ladder, 3, 2, 1, 1, 5);
-			}
+			world.setBlock(x, 5, z+5, ModBlocks.skydiveTP);
+			world.setBlock(x+5, 5, z, ModBlocks.skydiveTP);
+			world.setBlock(x-5, 5, z, ModBlocks.skydiveTP);
 		
 			if (tp == true) {
 				IBHelper.sound(world, ConfigurationHandler.sound, x, 256, z+5);
@@ -370,9 +473,9 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 				}
 			}
 		} else if (meta == 1) {
-			for (int c = 256; c >= 5; c--) {
-				BuildHelper.buildMetaClean(world, x+4, c, z-2, ladder, 4, 2, 5, 1, 1);
-			}
+			world.setBlock(x-5, 5, z, ModBlocks.skydiveTP);
+			world.setBlock(x, 5, z+5, ModBlocks.skydiveTP);
+			world.setBlock(x, 5, z-5, ModBlocks.skydiveTP);
 		
 			if (tp == true) {
 				IBHelper.sound(world, ConfigurationHandler.sound, x-5, 256, z);
@@ -381,9 +484,9 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 				}
 			}
 		} else if (meta == 2) {
-			for (int c = 256; c >= 5; c--) {
-				BuildHelper.buildMetaClean(world, x-2, c, z+4, ladder, 2, 2, 1, 1, 5);
-			}
+			world.setBlock(x, 5, z-5, ModBlocks.skydiveTP);
+			world.setBlock(x+5, 5, z, ModBlocks.skydiveTP);
+			world.setBlock(x-5, 5, z, ModBlocks.skydiveTP);
 		
 			if (tp == true) {
 				IBHelper.sound(world, ConfigurationHandler.sound, x, 256, z-5);
@@ -392,9 +495,9 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 				}
 			}
 		} else if (meta == 3) {
-			for (int c = 256; c >= 5; c--) {
-				BuildHelper.buildMetaClean(world, x-4, c, z-2, ladder, 5, 2, 5, 1, 1);
-			}
+			world.setBlock(x+5, 5, z, ModBlocks.skydiveTP);
+			world.setBlock(x, 5, z+5, ModBlocks.skydiveTP);
+			world.setBlock(x, 5, z-5, ModBlocks.skydiveTP);
 		
 			if (tp == true) {
 				IBHelper.sound(world, ConfigurationHandler.sound, x+5, 256, z);
@@ -412,4 +515,8 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
 		return new TileEntitySkydive();
 	}
+    
+//    public int getColorFromY(int y, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10) {
+//    	
+//    }
 }

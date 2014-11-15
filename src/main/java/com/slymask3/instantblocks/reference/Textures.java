@@ -91,4 +91,16 @@ public class Textures {
     public static final class Color {
         public static final String SIDE = "wool_colored_white";
     }
+
+    public static final class ColorLadder {
+        //public static final String SIDE = FOLDER + "colorLadder";
+        public static final String SIDE = "ladder";
+        public static final String ITEM = FOLDER + "colorLadderItem";
+        public static final String BLANK = FOLDER + "blank";
+    }
+
+    public static final class SkydiveTP {
+        public static final String SIDE = FOLDER + "skydiveTP_side";
+        public static final String OTHER = FOLDER + "skydiveTP_other";
+    }
 }
