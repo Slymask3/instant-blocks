@@ -215,7 +215,12 @@ public class CommandInstantBlocks extends CommandBase {
     		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Harvester Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aHarvests renewable resources in a radius configurable in the config."));
     		player.addChatMessage(new ChatComponentText("\u00a72Radius: \u00a7a" + config.radiusHarvest + "."));
-    		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
+    		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a77N/A."));
+    	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibLight)) {
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Light Block"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aLights up dark areas in a radius configurable in the config."));
+    		player.addChatMessage(new ChatComponentText("\u00a72Radius: \u00a7a" + config.radiusLight + "."));
+    		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a77N/A."));
     	}
     	
     	//COLOR

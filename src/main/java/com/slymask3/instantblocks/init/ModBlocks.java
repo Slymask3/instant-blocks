@@ -12,6 +12,7 @@ import com.slymask3.instantblocks.block.instant.BlockInstantHarvest;
 import com.slymask3.instantblocks.block.instant.BlockInstantHouseWood;
 import com.slymask3.instantblocks.block.instant.BlockInstantLadder;
 import com.slymask3.instantblocks.block.instant.BlockInstantLava;
+import com.slymask3.instantblocks.block.instant.BlockInstantLight;
 import com.slymask3.instantblocks.block.instant.BlockInstantPool;
 import com.slymask3.instantblocks.block.instant.BlockInstantRail;
 import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
@@ -39,6 +40,7 @@ public class ModBlocks {
 	public static Block ibRail = new BlockInstantRail();
 	public static Block ibStatue = new BlockInstantStatue();
 	public static Block ibHarvest = new BlockInstantHarvest();
+	public static Block ibLight = new BlockInstantLight();
 	public static Block color = new BlockColor();
 	
 	public static void init() {
@@ -46,7 +48,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(ibLadder, ItemBlockInstantBlocks.class, Names.Blocks.IB_MINING_LADDER);
 		GameRegistry.registerBlock(ibGlassDome, ItemBlockInstantBlocks.class, Names.Blocks.IB_GLASS_DOME);
 		GameRegistry.registerBlock(ibFarm, ItemBlockInstantBlocks.class, Names.Blocks.IB_FARM);
-		GameRegistry.registerBlock(ibFall, ItemBlockInstantBlocks.class, Names.Blocks.IB_RAINBOW_SKYDIVE);
+		GameRegistry.registerBlock(ibFall, ItemBlockInstantBlocks.class, Names.Blocks.IB_SKYDIVE);
 		GameRegistry.registerBlock(ibGrinder, ItemBlockInstantBlocks.class, Names.Blocks.IB_GRINDER);
 		GameRegistry.registerBlock(ibPool, ItemBlockInstantBlocks.class, Names.Blocks.IB_POOL);
 		GameRegistry.registerBlock(ibUp, ItemBlockInstantBlocks.class, Names.Blocks.IB_ESCAPE_LADDER);
@@ -56,6 +58,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(ibRail, ItemBlockInstantBlocks.class, Names.Blocks.IB_RAIL);
 		GameRegistry.registerBlock(ibStatue, ItemBlockInstantBlocks.class, Names.Blocks.IB_STATUE);
 		GameRegistry.registerBlock(ibHarvest, ItemBlockInstantBlocks.class, Names.Blocks.IB_HARVEST);
+		GameRegistry.registerBlock(ibLight, ItemBlockInstantBlocks.class, Names.Blocks.IB_LIGHT);
 		GameRegistry.registerBlock(color, ItemBlockInstantBlocks.class, Names.Blocks.COLOR);
 	}
 }

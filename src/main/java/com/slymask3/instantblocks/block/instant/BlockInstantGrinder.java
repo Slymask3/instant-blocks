@@ -232,7 +232,7 @@ public class BlockInstantGrinder extends BlockDirectionalIB {
 		/************************ Teleport ************************/
 		if (ConfigurationHandler.tpGrinder == true) {
 			//BuildHelper.sound(world, config.sound, x+13, y-4, z);
-			//player.setPositionAndUpdate(x+13 + 0.5, y-4 + 0.5, z + 0.5);                                          ----------UNCOMMENT LATER
+			player.setPositionAndUpdate(x+13 + 0.5, y-4 + 0.5, z + 0.5);                                         // ----------UNCOMMENT LATER
     		IBHelper.sound(world, ConfigurationHandler.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
 			world.setBlock(x+7, y-4, z, glass);
 			world.setBlock(x+7, y-3, z, glass);

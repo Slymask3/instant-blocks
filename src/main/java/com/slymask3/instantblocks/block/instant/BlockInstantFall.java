@@ -40,7 +40,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
         
         super(Material.cloth);
 		setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-		setBlockName("instantblocks:" + Names.Blocks.IB_STATUE);
+		setBlockName("instantblocks:" + Names.Blocks.IB_SKYDIVE);
 		setHardness(1.5F);
 		setResistance(2000F);
 		setStepSound(Block.soundTypeCloth);

@@ -39,6 +39,7 @@ public class ConfigurationHandler
 	//public static String colorBlock;
 	//public static boolean rgbMode;
 	public static int radiusHarvest;
+	public static int radiusLight;
 
     public static void init(File configFile)
     {
@@ -102,6 +103,7 @@ public class ConfigurationHandler
 		//animated = configuration.get(options, "[Option] Animated Textures", true, "Whether to use animated textures or not.\n(Default = true)");
 		
 		radiusHarvest = configuration.get(options, "[Option] Instant Harvester Radius.", 50, "Radius to Harvest blocks around Instant Harvester.\n(Default = 50)").getInt();
+		radiusLight = configuration.get(options, "[Option] Instant Light Radius.", 50, "Radius to light up dark areas around Instant Light Block.\n(Default = 50)").getInt();
 		
 		
         if (configuration.hasChanged())

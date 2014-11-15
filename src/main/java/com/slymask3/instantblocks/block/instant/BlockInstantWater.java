@@ -33,20 +33,17 @@ public class BlockInstantWater extends BlockIB {
         setBlockTextureName(Textures.Water.SIDE);
     }
 	
-	public static int checkWater = 0;
-	
 	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+		int checkWater = 0;
 		if (checkWater == 0) {
-			triggerWaterBubbles(world, x, y ,z);
+			for (int l = 0; l < 8; ++l) {
+	            world.spawnParticle("bubble", (double)x + Math.random(), (double)y + 1.2D, (double)z + Math.random(), 0.0D, 0.0D, 0.0D);
+	        }
 			checkWater = 30;
-		}
-	}
-	
-	protected void triggerWaterBubbles(World world, int x, int y, int z) {
-        for (int l = 0; l < 8; ++l) {
-            world.spawnParticle("bubble", (double)x + Math.random(), (double)y + 1.2D, (double)z + Math.random(), 0.0D, 0.0D, 0.0D);
+		} else if (checkWater > 0) {
+        	checkWater--;
         }
-    }
+	}
 	
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int x, int y, int z) {
         float f = 0.0625F;

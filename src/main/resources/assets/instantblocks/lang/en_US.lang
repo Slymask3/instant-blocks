@@ -12,6 +12,7 @@ tile.instantblocks:ibSucker.name=§3Instant Suction Block§f
 tile.instantblocks:ibRail.name=§3Instant Rail Block§f
 tile.instantblocks:ibStatue.name=§3Instant Statue Block§f
 tile.instantblocks:ibHarvest.name=§3Instant Harvester Block§f
+tile.instantblocks:ibLight.name=§3Instant Light Block§f
 tile.instantblocks:color.name=Color Block
 
 item.instantblocks:wandWood.name=Instant Wooden Wand

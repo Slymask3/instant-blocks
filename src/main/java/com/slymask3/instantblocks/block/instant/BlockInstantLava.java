@@ -34,23 +34,20 @@ public class BlockInstantLava extends BlockIB {
         setLightLevel(1.0F);
         setBlockTextureName(Textures.Lava.SIDE);
     }
-    
-	public static int checkLava = 0;
 	
 	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+		int checkLava = 0;
 		if (checkLava == 0) {
-			triggerLavaMixEffects(world, x, y ,z, random);
+			IBHelper.sound(world, "random.fizz", x, y, z);
+	        
+	        for (int l = 0; l < 8; ++l) {
+	            world.spawnParticle("largesmoke", (double)x + Math.random(), (double)y + 1.2D, (double)z + Math.random(), 0.0D, 0.0D, 0.0D);
+	        }
 			checkLava = 30;
-		}
-	}
-	
-	protected void triggerLavaMixEffects(World world, int x, int y, int z, Random rand) {
-		IBHelper.sound(world, "random.fizz", x, y, z);
-        
-        for (int l = 0; l < 8; ++l) {
-            world.spawnParticle("largesmoke", (double)x + Math.random(), (double)y + 1.2D, (double)z + Math.random(), 0.0D, 0.0D, 0.0D);
+		} else if (checkLava > 0) {
+        	checkLava--;
         }
-    }
+	}
 	
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int x, int y, int z) {
         float f = 0.0625F;

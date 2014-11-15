@@ -16,13 +16,5 @@ public class ClientTickHandler {
         if (ibf.checkTick > 0) {
     		ibf.checkTick--;
     	}
-        
-        if (BlockInstantLava.checkLava > 0) {
-        	BlockInstantLava.checkLava--;
-        }
-        
-        if (BlockInstantWater.checkWater > 0) {
-        	BlockInstantWater.checkWater--;
-        }
     }
 }

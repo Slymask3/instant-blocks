@@ -79,6 +79,10 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Harvests renewable resources in a radius.");
 			list.add("Radius: " + ConfigurationHandler.radiusHarvest);
 			list.add("Right-click to activate.");
+		} else if (block == ModBlocks.ibLight) {
+			list.add("Lights up dark areas in a radius.");
+			list.add("Radius: " + ConfigurationHandler.radiusLight);
+			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.color) {
 			list.add("CREATIVE ONLY");
 		} else {
