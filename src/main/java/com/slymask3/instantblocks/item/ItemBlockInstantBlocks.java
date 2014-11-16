@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.reference.Colors;
 
 public class ItemBlockInstantBlocks extends ItemBlock {
 	public Block block;
@@ -84,7 +85,17 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Radius: " + ConfigurationHandler.radiusLight);
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.color) {
-			list.add("CREATIVE ONLY");
+			list.add("This block is used by Instant Skydive and Statue.");
+			list.add("When placed, will generate with a random color.");
+			list.add(Colors.c+"CREATIVE MODE ONLY");
+		} else if (block == ModBlocks.colorLadder) {
+			list.add("This block is used by Instant Skydive.");
+			list.add("When placed, will generate with a random color.");
+			list.add(Colors.c+"CREATIVE MODE ONLY");
+		} else if (block == ModBlocks.skydiveTP) {
+			list.add("This block is used by Instant Skydive.");
+			list.add("It simply teleports you up to layer 256.");
+			list.add(Colors.c+"CREATIVE MODE ONLY");
 		} else {
 			list.add("Error loading description.");
 		}

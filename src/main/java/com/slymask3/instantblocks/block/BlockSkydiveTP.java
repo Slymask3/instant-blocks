@@ -5,14 +5,11 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.utility.IBHelper;
@@ -24,9 +21,9 @@ public class BlockSkydiveTP extends Block {
 	public BlockSkydiveTP() {
 		super(Material.iron);
         setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-        setBlockName("instantblocks:" + Names.Blocks.COLOR);
+        setBlockName("instantblocks:" + Names.Blocks.SKYDIVE_TP);
         setHardness(1.5F);
-        setResistance(2000F);
+        //setResistance(2000F);
         setStepSound(Block.soundTypeMetal);
         setBlockTextureName(Textures.SkydiveTP.SIDE);
 	}

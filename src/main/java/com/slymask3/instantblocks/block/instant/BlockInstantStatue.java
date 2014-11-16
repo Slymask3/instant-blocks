@@ -32,7 +32,6 @@ import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
 import com.slymask3.instantblocks.utility.BuildHelper;
 import com.slymask3.instantblocks.utility.IBHelper;
@@ -151,7 +150,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		int meta = MathHelper.floor_double((double) (par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 2);
 
-		System.out.println("meta = " + meta);
+		//System.out.println("meta = " + meta);
 	}
 	
 	//BlockCommandBlock block;
@@ -170,7 +169,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		//TileEntityInstantStatue.tile = (TileEntityInstantStatue) world.getTileEntity(x, y, z);
 		
 		int meta = world.getBlockMetadata(x, y, z);
-		LogHelper.info("meta == "+meta);
+		//LogHelper.info("meta == "+meta);
 		
 		ItemStack is = player.getCurrentEquippedItem();
     	

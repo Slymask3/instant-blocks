@@ -32,6 +32,8 @@ import com.slymask3.instantblocks.utility.LogHelper;
 
 public class BlockInstantHarvest extends BlockContainer implements ITileEntityProvider {
 	
+	//public EntityPlayer mainPlayer;
+	
 	public BlockInstantHarvest() {
 		super(Material.wood);
 		setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
@@ -85,7 +87,9 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 			}
 		}
 		
-		LogHelper.info("player == " + player);
+		//LogHelper.info("player == " + player);
+		
+		//mainPlayer = player;
 		
 		player.openGui(InstantBlocks.instance, GuiID.HARVEST.ordinal(), world, x, y, z);
 		
@@ -110,19 +114,23 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 	public void build(World world, int x, int y, int z, String playerS, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
 		EntityPlayer player = world.getPlayerEntityByName(playerS);
 		
-		harvest(world, x, y, z, ConfigurationHandler.radiusHarvest, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant);
-		
-		//IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
-        //IBHelper.xp(world, player, ConfigurationHandler.xp);
-        IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-        //IBHelper.effectFull(world, "reddust", x, y, z);
-        //IBHelper.msg(player, Strings.harvestCreate, Colors.a);
-		
-		ItemStack is = player.getCurrentEquippedItem();
-		
-		if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
-			is.damageItem(1, player);
-		}
+		//if (canHarvest(world, x, y, z, ConfigurationHandler.radiusHarvest, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant)) {
+			harvest(world, x, y, z, ConfigurationHandler.radiusHarvest, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant);
+			
+	        IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+			
+			ItemStack is = player.getCurrentEquippedItem();
+			
+			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+				is.damageItem(1, player);
+			}
+			
+//			IBHelper.xp(world, mainPlayer, ConfigurationHandler.xp);
+//	        IBHelper.effectFull(world, "reddust", x, y, z);
+//	        IBHelper.msg(mainPlayer, Strings.harvestCreate, Colors.a);
+//		} else {
+//			IBHelper.msg(mainPlayer, "\u00c7aThere are no renewable resources to harvest in a radius of " + ConfigurationHandler.radiusLight + ".", Colors.c);
+//		}
 	}
 	
 	public void harvest(World world, int X, int Y, int Z, int radius, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
@@ -300,4 +308,72 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
             y--;
         }
     }
+	
+//	public boolean canHarvest(World world, int X, int Y, int Z, int radius, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
+//		int amount = 0;
+//		
+//		int x = (int) (X -radius);
+//        int y = (int) (Y +radius);
+//        int z = (int) (Z -radius);
+//   
+//        int bx = x;
+//        int bz = z;
+// 
+//        for (int i=0; i<radius*2+1; i++) {
+//            for (int j=0; j<radius*2+1; j++) {
+//                for (int k=0; k<radius*2+1; k++) {
+//                    Block block = world.getBlock(x, y, z);
+//                    int meta = world.getBlockMetadata(x, y, z);
+//                    
+//                    if ((block == Blocks.log && logOak) && (meta == 0 || meta == 4 || meta == 8 || meta == 12)) { //OAK
+//                    	amount++;
+//                    } else if ((block == Blocks.log && logSpruce) && (meta == 1 || meta == 5 || meta == 9 || meta == 13)) { //SPRUCE
+//                    	amount++;
+//                    } else if ((block == Blocks.log && logBirch) && (meta == 2 || meta == 6 || meta == 10 || meta == 14)) { //BIRCH
+//                    	amount++;
+//                    } else if ((block == Blocks.log && logJungle) && (meta == 3 || meta == 7 || meta == 11 || meta == 15)) { //JUNGLE
+//                    	amount++;
+//                    } else if ((block == Blocks.log2 && logAcacia) && (meta == 0 || meta == 4 || meta == 8 || meta == 12)) { //ACACIA
+//                    	amount++;
+//                    } else if ((block == Blocks.log2 && logDark) && (meta == 1 || meta == 5 || meta == 9 || meta == 13)) { //DARK OAK
+//                    	amount++;
+//                    } else if (block == Blocks.wheat && meta == 7 && wheat) { //WHEAT
+//                    	amount++;
+//                    } else if (block == Blocks.carrots && meta == 7 && carrot) { //CARROT
+//                    	amount++;
+//                    } else if (block == Blocks.potatoes && meta == 7 && potato) { //POTATO
+//                    	amount++;
+//                    } else if (block == Blocks.cactus && cactus) { //CACTUS
+//                    	amount++;
+//                    } else if (block == Blocks.pumpkin && pumpkin) { //PUMPKIN
+//                    	amount++;
+//                    } else if (block == Blocks.melon_block && melon) { //MELON
+//                    	amount++;
+//                    } else if (block == Blocks.reeds && sugarcane) { //SUGARCANE
+//                    	amount++;
+//                    } else if (block == Blocks.cocoa && meta == 6 && cocoa) { //COCOA
+//                    	amount++;
+//                    } else if ((block == Blocks.red_mushroom_block || block == Blocks.red_mushroom) && mushroom) { //MUSHROOM RED
+//                    	amount++;
+//                    } else if ((block == Blocks.brown_mushroom_block || block == Blocks.brown_mushroom) && mushroom) { //MUSHROOM BROWN
+//                    	amount++;
+//                    } else if (block == Blocks.nether_wart && meta == 3 && netherwart) { //NETHERWART
+//                    	amount++;
+//                    }
+//                    x++;
+//                }
+//                z++;
+//                x = bx;
+//            }
+//            z = bz;
+//            x = bx;
+//            y--;
+//        }
+//        
+//        if (amount > 0) {
+//        	return true;
+//        } else {
+//        	return false;
+//        }
+//    }
 }

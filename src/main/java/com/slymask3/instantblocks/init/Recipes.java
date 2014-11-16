@@ -59,18 +59,23 @@ public class Recipes {
 			});
 			
 			GameRegistry.addRecipe(new ItemStack(mb.ibFall, 1), new Object[] {
-				"123",
-				"4D5", //Rainbow Skydive
-				"678",
-				Character.valueOf('1'), new ItemStack(Blocks.wool, 1, 14),
-				Character.valueOf('2'), new ItemStack(Blocks.wool, 1, 1),
-				Character.valueOf('3'), new ItemStack(Blocks.wool, 1, 4),
-				Character.valueOf('4'), new ItemStack(Blocks.wool, 1, 5),
-				Character.valueOf('D'), Items.diamond, 
-				Character.valueOf('5'), new ItemStack(Blocks.wool, 1, 13),
-				Character.valueOf('6'), new ItemStack(Blocks.wool, 1, 9),
-				Character.valueOf('7'), new ItemStack(Blocks.wool, 1, 3),
-				Character.valueOf('8'), new ItemStack(Blocks.wool, 1, 11)
+//				"123",
+//				"4D5", //Rainbow Skydive
+//				"678",
+//				Character.valueOf('1'), new ItemStack(Blocks.wool, 1, 14),
+//				Character.valueOf('2'), new ItemStack(Blocks.wool, 1, 1),
+//				Character.valueOf('3'), new ItemStack(Blocks.wool, 1, 4),
+//				Character.valueOf('4'), new ItemStack(Blocks.wool, 1, 5),
+//				Character.valueOf('D'), Items.diamond, 
+//				Character.valueOf('5'), new ItemStack(Blocks.wool, 1, 13),
+//				Character.valueOf('6'), new ItemStack(Blocks.wool, 1, 9),
+//				Character.valueOf('7'), new ItemStack(Blocks.wool, 1, 3),
+//				Character.valueOf('8'), new ItemStack(Blocks.wool, 1, 11)
+				"WWW",
+				"WDW", //Rainbow Skydive
+				"WWW",
+				Character.valueOf('W'), Blocks.wool,
+				Character.valueOf('D'), Items.diamond
 			});
 			
 			GameRegistry.addRecipe(new ItemStack(mb.ibGrinder, 1), new Object[] {
@@ -168,6 +173,14 @@ public class Recipes {
 				Character.valueOf('H'), new ItemStack(Items.iron_hoe, 1, 0),
 				Character.valueOf('A'), new ItemStack(Items.iron_axe, 1, 0),
 				Character.valueOf('W'), Blocks.crafting_table
+			});
+			
+			GameRegistry.addRecipe(new ItemStack(mb.ibLight, 1), new Object[] {
+				"TTT",
+				"TCT", //Harvest
+				"TTT",
+				Character.valueOf('T'), Blocks.torch,
+				Character.valueOf('C'), Blocks.coal_block
 			});
 			
 			////////////////// WANDS ////////////////////

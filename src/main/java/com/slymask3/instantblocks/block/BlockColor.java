@@ -29,8 +29,8 @@ public class BlockColor extends Block implements ITileEntityProvider {
 		super(Material.cloth);
         setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
         setBlockName("instantblocks:" + Names.Blocks.COLOR);
-        setHardness(1.5F);
-        setResistance(2000F);
+        setHardness(0.5F);
+        //setResistance(2000F);
         setStepSound(Block.soundTypeCloth);
         setBlockTextureName(Textures.Color.SIDE);
 	}

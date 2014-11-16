@@ -18,6 +18,7 @@ import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityColorLadder;
+import com.slymask3.instantblocks.utility.LogHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -28,7 +29,7 @@ public class BlockColorLadder extends BlockLadder implements ITileEntityProvider
         setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
         setBlockName("instantblocks:" + Names.Blocks.COLOR_LADDER);
         setHardness(0.5F);
-        setResistance(2000F);
+        //setResistance(2000F);
         setStepSound(Block.soundTypeLadder);
         setBlockTextureName(Textures.ColorLadder.SIDE);
 	}
@@ -43,11 +44,34 @@ public class BlockColorLadder extends BlockLadder implements ITileEntityProvider
 	
 	@SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
-        if (side==2 || side==3 || side==4 || side==5) {
-			return this.side;
+        if (side==2) {
+			if (meta==2) {
+	        	return this.side;
+			} else {
+	        	return blank;
+			}
+        } else if (side==3) {
+			if (meta==3) {
+	        	return this.side;
+			} else {
+	        	return blank;
+			}
+        } else if (side==4) {
+        	if (meta==4) {
+	        	return this.side;
+			} else {
+	        	return blank;
+			}
+        }  else if (side==5) {
+        	if (meta==5) {
+	        	return this.side;
+			} else {
+	        	return blank;
+			}
         } else {
         	return blank;
         }
+        
     }
 	
 	public int getRenderType()
@@ -127,5 +151,7 @@ public class BlockColorLadder extends BlockLadder implements ITileEntityProvider
 			((TileEntityColorLadder) world.getTileEntity(x, y, z)).color = rgb;
 			world.markBlockForUpdate(x, y, z);
 		}
+		
+		LogHelper.info("meta == "+world.getBlockMetadata(x, y, z));
 	}
 }

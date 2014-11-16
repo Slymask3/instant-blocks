@@ -35,7 +35,6 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid=Reference.MOD_ID, name=Reference.MOD_NAME, version=Reference.VERSION, guiFactory=Reference.GUI_FACTORY_CLASS)
-//@NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class InstantBlocks {
 	@Instance(Reference.MOD_ID)
 	public static InstantBlocks instance = new InstantBlocks();
@@ -52,7 +51,6 @@ public class InstantBlocks {
 		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
 		FMLCommonHandler.instance().bus().register(new ConnectionHandler());
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
-		//FMLCommonHandler.instance().bus().register(new ServerHandler());
 
 		TileEntity.addMapping(TileEntityColor.class, "TileEntityColor");
 		TileEntity.addMapping(TileEntityStatue.class, "TileEntityStatue");
@@ -64,11 +62,8 @@ public class InstantBlocks {
 		
 		packetPipeline.initialise();
 		
-		//NetworkRegistry.INSTANCE.newEventDrivenChannel("InstantBlocks").register(new PacketHandler());
-		
 		ModItems.init();
 		ModBlocks.init();
-		//ModSounds.init();
 		
 		LogHelper.info("Pre Initialization Complete!");
 	}
@@ -86,14 +81,6 @@ public class InstantBlocks {
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		LogHelper.info("Post Initialization Complete!");
-		
-		/*Color color1 = new Color(122, 255, 240);
-		Color color2 = new Color(196, 207, 81);
-		Color color3 = new Color(48, 156, 50);
-		
-		LogHelper.info("color1 (lightblue?): " + ColorHelper.getWoolColor(color1));		
-		LogHelper.info("color2 (yellow?): " + ColorHelper.getWoolColor(color2));		
-		LogHelper.info("color3 (green?): " + ColorHelper.getWoolColor(color3));*/
 	}
 	
 	@Mod.EventHandler

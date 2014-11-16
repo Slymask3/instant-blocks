@@ -171,7 +171,7 @@ public class CommandInstantBlocks extends CommandBase {
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aCreates a simple farm with 56 seeds. You also have a 5% chance that the farm will have carrots planted instead of wheat, and another 5% chance that the farm will have potatoes planted instead of wheat."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibFall)) {
-    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Rainbow Skydive Block"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Skydive Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aCreates a structure from layer 1 to 256 out of coloured wool."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7aYes."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibGrinder)) {
@@ -223,11 +223,20 @@ public class CommandInstantBlocks extends CommandBase {
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a77N/A."));
     	}
     	
-    	//COLOR
+    	//OTHER
     	
     	else if (held != null && held.getItem() == Item.getItemFromBlock(mb.color)) {
      		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aColor Block"));
      		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aA block only avaliable in creative, used for Instant Statue and Instant Skydive."));
+     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aWhen placed, will generate a random color."));
+     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.colorLadder)) {
+     		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aColor Ladder Block"));
+     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aA block only avaliable in creative, used for Instant Skydive."));
+     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aWhen placed, will generate a random color."));
+     	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.skydiveTP)) {
+     		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aSkydive TP Block"));
+     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aA block only avaliable in creative, used for Instant Skydive."));
+     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aSimply teleports the player up 256 blocks."));
      	}
     	
     	//ITEMS
@@ -270,10 +279,11 @@ public class CommandInstantBlocks extends CommandBase {
 	public void changelog(EntityPlayer player) {
 		player.addChatMessage(new ChatComponentText("\u00a78\u00a7l============================================="));
     	player.addChatMessage(new ChatComponentText("\u00a73\u00a7lInstant Blocks v" + Reference.VERSION + " - Changelog"));
-		player.addChatMessage(new ChatComponentText("\u00a72- Added Instant Harvester Block."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Fixed Instant Rainbow Skydive Block to replace bedrock with water."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Fixed Instant Grinder Block to generate flowing water instead of still water."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Fixed Instant Statue Block generate message, effect, and xp."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Added Instant Light Block."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Added Color Ladder block to be generated with color with the skydive."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Added Skydive TP block."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Added color block command (/ib colorblock)."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Removed Skydive Tp and Skydive wool color config options."));
 		player.addChatMessage(new ChatComponentText("\u00a78\u00a7l============================================="));
 	}
 	

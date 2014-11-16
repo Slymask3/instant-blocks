@@ -2,7 +2,7 @@ tile.instantblocks:ibWood.name=§3Instant Wooden House Block§f
 tile.instantblocks:ibLadder.name=§3Instant Mining Ladder Block§f
 tile.instantblocks:ibGlassDome.name=§3Instant Glass Dome Block§f
 tile.instantblocks:ibFarm.name=§3Instant Farm Block§f
-tile.instantblocks:ibFall.name=§3Instant §cR§6a§ei§an§2b§3o§bw §3Skydive Block§f
+tile.instantblocks:ibFall.name=§3Instant Skydive Block§f
 tile.instantblocks:ibGrinder.name=§3Instant Grinder Block§f
 tile.instantblocks:ibPool.name=§3Instant Pool Block§f
 tile.instantblocks:ibUp.name=§3Instant Escape Ladder§f
@@ -14,6 +14,8 @@ tile.instantblocks:ibStatue.name=§3Instant Statue Block§f
 tile.instantblocks:ibHarvest.name=§3Instant Harvester Block§f
 tile.instantblocks:ibLight.name=§3Instant Light Block§f
 tile.instantblocks:color.name=Color Block
+tile.instantblocks:colorLadder.name=Color Ladder Block
+tile.instantblocks:skydiveTP.name=Skydive TP Block
 
 item.instantblocks:wandWood.name=Instant Wooden Wand
 item.instantblocks:wandStone.name=Instant Stone Wand

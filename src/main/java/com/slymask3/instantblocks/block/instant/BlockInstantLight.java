@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -27,7 +28,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockInstantLight extends BlockIB {
 	
     public BlockInstantLight() {
-        super(ModBlocks.ibLight, Names.Blocks.IB_LIGHT, Material.circuits, Block.soundTypeWood, 1.5F);
+        super(ModBlocks.ibLight, Names.Blocks.IB_LIGHT, Material.wood, Block.soundTypeWood, 0.5F);
         setCreateMsg(Strings.lightCreate);
         setBlockTextureName(Textures.Light.SIDE);
         //setTextures(Textures.Light.SIDE);
@@ -93,6 +94,10 @@ public class BlockInstantLight extends BlockIB {
         return false;
     }
     
+    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+        return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z);
+    }
+    
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
@@ -106,13 +111,6 @@ public class BlockInstantLight extends BlockIB {
 		}
 
 		build(world, x, y, z, player);
-		
-		IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLight);
-		IBHelper.xp(world, player, ConfigurationHandler.xp);
-			
-		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-		IBHelper.effectFull(world, "reddust", x, y, z);
-		//IBHelper.msg(player, this.createMsg, Colors.a);
     		
     	return true;
     }
@@ -189,6 +187,59 @@ public class BlockInstantLight extends BlockIB {
             y--;
         }
         
-        IBHelper.msg(player, "\u00a7aLit up the area with " + amount + " torches.", Colors.a);
+        if(amount > 0) {
+        	IBHelper.msg(player, "\u00a7aLit up the area with " + amount + " torches.", Colors.a);
+            
+            IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLight);
+    		IBHelper.xp(world, player, ConfigurationHandler.xp);
+    		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+    		IBHelper.effectFull(world, "reddust", x, y, z);
+        } else {
+    		world.setBlock(X, Y, Z, ModBlocks.ibLight);
+	        IBHelper.msg(player, "\u00a7aThere are no dark areas to light up in a radius of " + ConfigurationHandler.radiusLight + ".", Colors.c);
+    		
+        }
     }
+	
+//	public boolean canLightUp(World world, int X, int Y, int Z, int radius) {
+//		int amount = 0;
+//		
+//		int x = (int) (X -radius);
+//        int y = (int) (Y +radius);
+//        int z = (int) (Z -radius);
+//   
+//        int bx = x;
+//        int bz = z;
+// 
+//        for (int i=0; i<radius*2+1; i++) {
+//            for (int j=0; j<radius*2+1; j++) {
+//                for (int k=0; k<radius*2+1; k++) {
+//                    Block block = world.getBlock(x, y, z);
+//                    
+//                    Block block1 = world.getBlock(x+1, y, z);
+//                    Block block2 = world.getBlock(x-1, y, z);
+//                    Block block4 = world.getBlock(x, y-1, z);
+//                    Block block5 = world.getBlock(x, y, z+1);
+//                    Block block6 = world.getBlock(x, y, z-1);
+//                    
+//                    if((world.getBlockLightValue(x, y, z) < 10) && (block == Blocks.air) && (block1.isOpaqueCube() || block2.isOpaqueCube() || block4.isOpaqueCube() || block5.isOpaqueCube() || block6.isOpaqueCube())) {
+//                    	amount++;
+//                    }
+//                    
+//                    x++;
+//                }
+//                z++;
+//                x = bx;
+//            }
+//            z = bz;
+//            x = bx;
+//            y--;
+//        }
+//        
+//        if (amount > 0) {
+//        	return true;
+//        } else {
+//        	return false;
+//        }
+//    }
 }

@@ -1,6 +1,8 @@
-v1.5.3 (n/a)
+v1.5.3 (16/11/2014)
 - Added Instant Light Block.
 - Added Instant Skydive Gui.
+- Added Color Ladder block to be generated with color with the skydive.
+- Added Skydive TP block.
 - Added color block command (/ib colorblock).
 - Removed Skydive Tp and Skydive wool color config options.
 
