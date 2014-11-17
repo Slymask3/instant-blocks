@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
+import com.slymask3.instantblocks.tileentity.TileEntitySchematic;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
 
@@ -44,6 +45,8 @@ public class GuiHandler implements IGuiHandler {
         	return new GuiHarvest(player, (TileEntityHarvest) e, world, x, y, z);
         } else if (ID == GuiID.SKYDIVE.ordinal()) {
         	return new GuiSkydive(player, (TileEntitySkydive) e, world, x, y, z);
+        } else if (ID == GuiID.SCHEMATIC.ordinal()) {
+        	return new GuiSchematic(player, (TileEntitySchematic) e, world, x, y, z);
         }
 
         return null;

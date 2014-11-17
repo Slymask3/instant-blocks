@@ -12,14 +12,15 @@ import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.slymask3.instantblocks.reference.Reference;
-import com.slymask3.instantblocks.utility.LogHelper;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
+
+import com.slymask3.instantblocks.reference.Reference;
+import com.slymask3.instantblocks.utility.LogHelper;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
@@ -131,6 +132,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
         registerPacket(PacketStatue.class);
         registerPacket(PacketHarvest.class);
         registerPacket(PacketSkydive.class);
+        registerPacket(PacketSchematic.class);
     }
  
     // Method to call from FMLPostInitializationEvent

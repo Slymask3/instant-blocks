@@ -17,6 +17,7 @@ public class Names {
         public static final String IB_STATUE = "ibStatue";
         public static final String IB_HARVEST = "ibHarvest";
         public static final String IB_LIGHT = "ibLight";
+        public static final String IB_SCHEMATIC = "ibSchematic";
         public static final String COLOR = "color";
         public static final String COLOR_LADDER = "colorLadder";
         public static final String SKYDIVE_TP = "skydiveTP";

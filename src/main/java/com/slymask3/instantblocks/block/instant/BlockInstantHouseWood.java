@@ -176,77 +176,77 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		/************************ meta == 0 ************************/
 		if (meta == 0 || meta == 4) {
 			/************************ Layer 0 to 7 : AIR ************************/ //DONE
-			BuildHelper.buildMeta(world, x-5, y, z-5, air, 0, 2, 8, 6, 11); //HOUSE ROOM
-			BuildHelper.buildMeta(world, x-4, y+5, z-4, air, 0, 2, 6, 1, 9); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-3, y+6, z-3, air, 0, 2, 4, 1, 7); //HOUSE ROOF 2
+			BuildHelper.build(world, x-5, y, z-5, air, 0, 2, 8, 6, 11); //HOUSE ROOM
+			BuildHelper.build(world, x-4, y+5, z-4, air, 0, 2, 6, 1, 9); //HOUSE ROOF 1
+			BuildHelper.build(world, x-3, y+6, z-3, air, 0, 2, 4, 1, 7); //HOUSE ROOF 2
 
-			BuildHelper.buildMeta(world, x-4, y, z+3, air, 0, 2, 4, 5, 9); //PORCH
+			BuildHelper.build(world, x-4, y, z+3, air, 0, 2, 4, 5, 9); //PORCH
 
 			/************************ Layer 0 : FLOOR ************************/ //DONE
-			BuildHelper.buildMeta(world, x-5, y, z-5, dark, 1, 2, 8, 1, 11); //HOME FLOOR 1
-			BuildHelper.buildMeta(world, x-4, y, z-4, light, 2, 2, 6, 1, 9); //HOME FLOOR 2
-			BuildHelper.buildMeta(world, x-3, y, z-3, dark, 1, 2, 4, 1, 7); //HOME FLOOR 3
-			BuildHelper.buildMeta(world, x-2, y, z-2, light, 2, 2, 2, 1, 5); //HOME FLOOR 4
+			BuildHelper.build(world, x-5, y, z-5, dark, 1, 2, 8, 1, 11); //HOME FLOOR 1
+			BuildHelper.build(world, x-4, y, z-4, light, 2, 2, 6, 1, 9); //HOME FLOOR 2
+			BuildHelper.build(world, x-3, y, z-3, dark, 1, 2, 4, 1, 7); //HOME FLOOR 3
+			BuildHelper.build(world, x-2, y, z-2, light, 2, 2, 2, 1, 5); //HOME FLOOR 4
 
-			BuildHelper.buildMeta(world, x-4, y, z+3, dark, 1, 2, 4, 1, 9); //PORCH FLOOR 1
-			BuildHelper.buildMeta(world, x-3, y, z+4, light, 2, 2, 2, 1, 7); //PORCH FLOOR 2
+			BuildHelper.build(world, x-4, y, z+3, dark, 1, 2, 4, 1, 9); //PORCH FLOOR 1
+			BuildHelper.build(world, x-3, y, z+4, light, 2, 2, 2, 1, 7); //PORCH FLOOR 2
 
 			/************************ Layer 1 to 4 : HOUSE ************************/ //DONE
-			BuildHelper.buildMeta(world, x-5, y+1, z-5, log, 2, 2, 1, 4, 1); //LOG CORNER 1
-			BuildHelper.buildMeta(world, x+5, y+1, z-5, log, 2, 2, 1, 4, 1); //LOG CORNER 2
-			BuildHelper.buildMeta(world, x-5, y+1, z+2, log, 2, 2, 1, 4, 1); //LOG CORNER 3
-			BuildHelper.buildMeta(world, x+5, y+1, z+2, log, 2, 2, 1, 4, 1); //LOG CORNER 4
-			BuildHelper.buildMeta(world, x-4, y+1, z-5, light, 2, 2, 1, 4, 9); //WOOD WALL 1
-			BuildHelper.buildMeta(world, x-4, y+1, z+2, light, 2, 2, 1, 4, 9); //WOOD WALL 2
-			BuildHelper.buildMeta(world, x-5, y+1, z-4, light, 2, 2, 6, 4, 1); //WOOD WALL 3
-			BuildHelper.buildMeta(world, x+5, y+1, z-4, light, 2, 2, 6, 4, 1); //WOOD WALL 4
+			BuildHelper.build(world, x-5, y+1, z-5, log, 2, 2, 1, 4, 1); //LOG CORNER 1
+			BuildHelper.build(world, x+5, y+1, z-5, log, 2, 2, 1, 4, 1); //LOG CORNER 2
+			BuildHelper.build(world, x-5, y+1, z+2, log, 2, 2, 1, 4, 1); //LOG CORNER 3
+			BuildHelper.build(world, x+5, y+1, z+2, log, 2, 2, 1, 4, 1); //LOG CORNER 4
+			BuildHelper.build(world, x-4, y+1, z-5, light, 2, 2, 1, 4, 9); //WOOD WALL 1
+			BuildHelper.build(world, x-4, y+1, z+2, light, 2, 2, 1, 4, 9); //WOOD WALL 2
+			BuildHelper.build(world, x-5, y+1, z-4, light, 2, 2, 6, 4, 1); //WOOD WALL 3
+			BuildHelper.build(world, x+5, y+1, z-4, light, 2, 2, 6, 4, 1); //WOOD WALL 4
 			
-			BuildHelper.buildMeta(world, x-3, y+2, z-5, pane, 0, 2, 1, 2, 7); //PANE WALL 1
-			BuildHelper.buildMeta(world, x-3, y+2, z+2, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (1)
-			BuildHelper.buildMeta(world, x+3, y+2, z+2, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (2)
-			BuildHelper.buildMeta(world, x-5, y+2, z-3, pane, 0, 2, 4, 2, 1); //PANE WALL 3
-			BuildHelper.buildMeta(world, x+5, y+2, z-3, pane, 0, 2, 4, 2, 1); //PANE WALL 4
+			BuildHelper.build(world, x-3, y+2, z-5, pane, 0, 2, 1, 2, 7); //PANE WALL 1
+			BuildHelper.build(world, x-3, y+2, z+2, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (1)
+			BuildHelper.build(world, x+3, y+2, z+2, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (2)
+			BuildHelper.build(world, x-5, y+2, z-3, pane, 0, 2, 4, 2, 1); //PANE WALL 3
+			BuildHelper.build(world, x+5, y+2, z-3, pane, 0, 2, 4, 2, 1); //PANE WALL 4
 
-			BuildHelper.buildMeta(world, x-1, y+1, z+2, log, 2, 2, 1, 3, 3); //LOG ENTRANCE
+			BuildHelper.build(world, x-1, y+1, z+2, log, 2, 2, 1, 3, 3); //LOG ENTRANCE
 
 			ItemDoor.placeDoorBlock(world, x, y+1, z+2, 3, Blocks.wooden_door); //DOOR
 
 			/************************ Layer 1 to 4 : PORCH ************************/ //DONE
-			BuildHelper.buildMeta(world, x-4, y+4, z+3, slabD, 9, 2, 4, 1, 9); //PORCH ROOF 1
-			BuildHelper.buildMeta(world, x-3, y+4, z+4, slabD, 10, 2, 2, 1, 7); //PORCH ROOF 2
+			BuildHelper.build(world, x-4, y+4, z+3, slabD, 9, 2, 4, 1, 9); //PORCH ROOF 1
+			BuildHelper.build(world, x-3, y+4, z+4, slabD, 10, 2, 2, 1, 7); //PORCH ROOF 2
 
-			BuildHelper.buildMeta(world, x-4, y+1, z+3, dark, 1, 2, 1, 4, 1); //PORCH CORNER 1
-			BuildHelper.buildMeta(world, x+4, y+1, z+3, dark, 1, 2, 1, 4, 1); //PORCH CORNER 2
-			BuildHelper.buildMeta(world, x-4, y+1, z+6, dark, 1, 2, 1, 4, 1); //PORCH CORNER 3
-			BuildHelper.buildMeta(world, x+4, y+1, z+6, dark, 1, 2, 1, 4, 1); //PORCH CORNER 4
+			BuildHelper.build(world, x-4, y+1, z+3, dark, 1, 2, 1, 4, 1); //PORCH CORNER 1
+			BuildHelper.build(world, x+4, y+1, z+3, dark, 1, 2, 1, 4, 1); //PORCH CORNER 2
+			BuildHelper.build(world, x-4, y+1, z+6, dark, 1, 2, 1, 4, 1); //PORCH CORNER 3
+			BuildHelper.build(world, x+4, y+1, z+6, dark, 1, 2, 1, 4, 1); //PORCH CORNER 4
 			
-			BuildHelper.buildMeta(world, x-4, y+2, z+3, fence, 0, 2, 1, 2, 1); //PORCH CORNER 1 (FENCE)
-			BuildHelper.buildMeta(world, x+4, y+2, z+3, fence, 0, 2, 1, 2, 1); //PORCH CORNER 2 (FENCE)
-			BuildHelper.buildMeta(world, x-4, y+2, z+6, fence, 0, 2, 1, 2, 1); //PORCH CORNER 3 (FENCE)
-			BuildHelper.buildMeta(world, x+4, y+2, z+6, fence, 0, 2, 1, 2, 1); //PORCH CORNER 4 (FENCE)
+			BuildHelper.build(world, x-4, y+2, z+3, fence, 0, 2, 1, 2, 1); //PORCH CORNER 1 (FENCE)
+			BuildHelper.build(world, x+4, y+2, z+3, fence, 0, 2, 1, 2, 1); //PORCH CORNER 2 (FENCE)
+			BuildHelper.build(world, x-4, y+2, z+6, fence, 0, 2, 1, 2, 1); //PORCH CORNER 3 (FENCE)
+			BuildHelper.build(world, x+4, y+2, z+6, fence, 0, 2, 1, 2, 1); //PORCH CORNER 4 (FENCE)
 			
-			BuildHelper.buildMeta(world, x-4, y+1, z+4, fence, 0, 2, 2, 1, 1); //PORCH SIDE 1
-			BuildHelper.buildMeta(world, x+4, y+1, z+4, fence, 0, 2, 2, 1, 1); //PORCH SIDE 2
-			BuildHelper.buildMeta(world, x-3, y+1, z+6, fence, 0, 2, 1, 1, 7); //PORCH SIDE 3 (FRONT)
+			BuildHelper.build(world, x-4, y+1, z+4, fence, 0, 2, 2, 1, 1); //PORCH SIDE 1
+			BuildHelper.build(world, x+4, y+1, z+4, fence, 0, 2, 2, 1, 1); //PORCH SIDE 2
+			BuildHelper.build(world, x-3, y+1, z+6, fence, 0, 2, 1, 1, 7); //PORCH SIDE 3 (FRONT)
 			world.setBlock(x, y+1, z+6, gate, 0, 0); //PORCH GATE
 			
 			/************************ Layer 5 to 6 : ROOF ************************/
-			BuildHelper.buildMeta(world, x-5, y+5, z-5, slabD, 1, 2, 1, 1, 11); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-5, y+5, z+2, slabD, 1, 2, 1, 1, 11); //HOUSE ROOF 2
-			BuildHelper.buildMeta(world, x-5, y+5, z-4, slabD, 1, 2, 6, 1, 1); //HOUSE ROOF 3
-			BuildHelper.buildMeta(world, x+5, y+5, z-4, slabD, 1, 2, 6, 1, 1); //HOUSE ROOF 4
+			BuildHelper.build(world, x-5, y+5, z-5, slabD, 1, 2, 1, 1, 11); //HOUSE ROOF 1
+			BuildHelper.build(world, x-5, y+5, z+2, slabD, 1, 2, 1, 1, 11); //HOUSE ROOF 2
+			BuildHelper.build(world, x-5, y+5, z-4, slabD, 1, 2, 6, 1, 1); //HOUSE ROOF 3
+			BuildHelper.build(world, x+5, y+5, z-4, slabD, 1, 2, 6, 1, 1); //HOUSE ROOF 4
 
-			BuildHelper.buildMeta(world, x-4, y+5, z-4, light, 2, 2, 1, 1, 9); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-4, y+5, z+1, light, 2, 2, 1, 1, 9); //HOUSE ROOF 2
-			BuildHelper.buildMeta(world, x-4, y+5, z-3, light, 2, 2, 4, 1, 1); //HOUSE ROOF 3
-			BuildHelper.buildMeta(world, x+4, y+5, z-3, light, 2, 2, 4, 1, 1); //HOUSE ROOF 4
+			BuildHelper.build(world, x-4, y+5, z-4, light, 2, 2, 1, 1, 9); //HOUSE ROOF 1
+			BuildHelper.build(world, x-4, y+5, z+1, light, 2, 2, 1, 1, 9); //HOUSE ROOF 2
+			BuildHelper.build(world, x-4, y+5, z-3, light, 2, 2, 4, 1, 1); //HOUSE ROOF 3
+			BuildHelper.build(world, x+4, y+5, z-3, light, 2, 2, 4, 1, 1); //HOUSE ROOF 4
 
-			BuildHelper.buildMeta(world, x-3, y+6, z-3, slabD, 1, 2, 1, 1, 7); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-3, y+6, z, slabD, 1, 2, 1, 1, 7); //HOUSE ROOF 2
-			BuildHelper.buildMeta(world, x-3, y+6, z-2, slabD, 1, 2, 2, 1, 1); //HOUSE ROOF 3
-			BuildHelper.buildMeta(world, x+3, y+6, z-2, slabD, 1, 2, 2, 1, 1); //HOUSE ROOF 4
+			BuildHelper.build(world, x-3, y+6, z-3, slabD, 1, 2, 1, 1, 7); //HOUSE ROOF 1
+			BuildHelper.build(world, x-3, y+6, z, slabD, 1, 2, 1, 1, 7); //HOUSE ROOF 2
+			BuildHelper.build(world, x-3, y+6, z-2, slabD, 1, 2, 2, 1, 1); //HOUSE ROOF 3
+			BuildHelper.build(world, x+3, y+6, z-2, slabD, 1, 2, 2, 1, 1); //HOUSE ROOF 4
 
-			BuildHelper.buildMeta(world, x-2, y+6, z-2, light, 2, 2, 2, 1, 5); //HOUSE ROOF TOP
+			BuildHelper.build(world, x-2, y+6, z-2, light, 2, 2, 2, 1, 5); //HOUSE ROOF TOP
 			
 			/************************ Layer 1 to 4 : INSIDE ************************/
 			world.setBlock(x + 4, y + 1, z - 4, bed, 11, 0); //BED //NOT 10 //GOOD
@@ -305,77 +305,77 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		/************************ meta == 1 ************************/
 		else if (meta == 1 || meta == 5) {
 			/************************ Layer 0 to 7 : AIR ************************/
-			BuildHelper.buildMeta(world, x-2, y, z-5, air, 0, 2, 11, 6, 8); //HOUSE ROOM
-			BuildHelper.buildMeta(world, x-1, y+5, z-4, air, 0, 2, 9, 1, 6); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x, y+6, z-3, air, 0, 2, 7, 1, 4); //HOUSE ROOF 2
+			BuildHelper.build(world, x-2, y, z-5, air, 0, 2, 11, 6, 8); //HOUSE ROOM
+			BuildHelper.build(world, x-1, y+5, z-4, air, 0, 2, 9, 1, 6); //HOUSE ROOF 1
+			BuildHelper.build(world, x, y+6, z-3, air, 0, 2, 7, 1, 4); //HOUSE ROOF 2
 
-			BuildHelper.buildMeta(world, x-6, y, z-4, air, 0, 2, 9, 5, 4); //PORCH
+			BuildHelper.build(world, x-6, y, z-4, air, 0, 2, 9, 5, 4); //PORCH
 
 			/************************ Layer 0 : FLOOR ************************/ //GOOD
-			BuildHelper.buildMeta(world, x-2, y, z-5, dark, 1, 2, 11, 1, 8); //HOME FLOOR 1
-			BuildHelper.buildMeta(world, x-1, y, z-4, light, 2, 2, 9, 1, 6); //HOME FLOOR 2
-			BuildHelper.buildMeta(world, x, y, z-3, dark, 1, 2, 7, 1, 4); //HOME FLOOR 3
-			BuildHelper.buildMeta(world, x+1, y, z-2, light, 2, 2, 5, 1, 2); //HOME FLOOR 4
+			BuildHelper.build(world, x-2, y, z-5, dark, 1, 2, 11, 1, 8); //HOME FLOOR 1
+			BuildHelper.build(world, x-1, y, z-4, light, 2, 2, 9, 1, 6); //HOME FLOOR 2
+			BuildHelper.build(world, x, y, z-3, dark, 1, 2, 7, 1, 4); //HOME FLOOR 3
+			BuildHelper.build(world, x+1, y, z-2, light, 2, 2, 5, 1, 2); //HOME FLOOR 4
 
-			BuildHelper.buildMeta(world, x-6, y, z-4, dark, 1, 2, 9, 1, 4); //PORCH FLOOR 1
-			BuildHelper.buildMeta(world, x-5, y, z-3, light, 2, 2, 7, 1, 2); //PORCH FLOOR 2
+			BuildHelper.build(world, x-6, y, z-4, dark, 1, 2, 9, 1, 4); //PORCH FLOOR 1
+			BuildHelper.build(world, x-5, y, z-3, light, 2, 2, 7, 1, 2); //PORCH FLOOR 2
 
 			/************************ Layer 1 to 4 : HOUSE ************************/
-			BuildHelper.buildMeta(world, x+5, y+1, z-5, log, 2, 2, 1, 4, 1); //LOG CORNER 1
-			BuildHelper.buildMeta(world, x+5, y+1, z+5, log, 2, 2, 1, 4, 1); //LOG CORNER 2
-			BuildHelper.buildMeta(world, x-2, y+1, z-5, log, 2, 2, 1, 4, 1); //LOG CORNER 3
-			BuildHelper.buildMeta(world, x-2, y+1, z+5, log, 2, 2, 1, 4, 1); //LOG CORNER 4
-			BuildHelper.buildMeta(world, x+5, y+1, z-4, light, 2, 2, 9, 4, 1); //WOOD WALL 1
-			BuildHelper.buildMeta(world, x-2, y+1, z-4, light, 2, 2, 9, 4, 1); //WOOD WALL 2
-			BuildHelper.buildMeta(world, x-1, y+1, z-5, light, 2, 2, 1, 4, 6); //WOOD WALL 3 //GOOD
-			BuildHelper.buildMeta(world, x-1, y+1, z+5, light, 2, 2, 1, 4, 6); //WOOD WALL 4 //GOOD
+			BuildHelper.build(world, x+5, y+1, z-5, log, 2, 2, 1, 4, 1); //LOG CORNER 1
+			BuildHelper.build(world, x+5, y+1, z+5, log, 2, 2, 1, 4, 1); //LOG CORNER 2
+			BuildHelper.build(world, x-2, y+1, z-5, log, 2, 2, 1, 4, 1); //LOG CORNER 3
+			BuildHelper.build(world, x-2, y+1, z+5, log, 2, 2, 1, 4, 1); //LOG CORNER 4
+			BuildHelper.build(world, x+5, y+1, z-4, light, 2, 2, 9, 4, 1); //WOOD WALL 1
+			BuildHelper.build(world, x-2, y+1, z-4, light, 2, 2, 9, 4, 1); //WOOD WALL 2
+			BuildHelper.build(world, x-1, y+1, z-5, light, 2, 2, 1, 4, 6); //WOOD WALL 3 //GOOD
+			BuildHelper.build(world, x-1, y+1, z+5, light, 2, 2, 1, 4, 6); //WOOD WALL 4 //GOOD
 			
-			BuildHelper.buildMeta(world, x+5, y+2, z-3, pane, 0, 2, 7, 2, 1); //PANE WALL 1
-			BuildHelper.buildMeta(world, x-2, y+2, z-3, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (1)
-			BuildHelper.buildMeta(world, x-2, y+2, z+3, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (2)
-			BuildHelper.buildMeta(world, x, y+2, z-5, pane, 0, 2, 1, 2, 4); //PANE WALL 3 //GOOD
-			BuildHelper.buildMeta(world, x, y+2, z+5, pane, 0, 2, 1, 2, 4); //PANE WALL 4 //GOOD
+			BuildHelper.build(world, x+5, y+2, z-3, pane, 0, 2, 7, 2, 1); //PANE WALL 1
+			BuildHelper.build(world, x-2, y+2, z-3, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (1)
+			BuildHelper.build(world, x-2, y+2, z+3, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (2)
+			BuildHelper.build(world, x, y+2, z-5, pane, 0, 2, 1, 2, 4); //PANE WALL 3 //GOOD
+			BuildHelper.build(world, x, y+2, z+5, pane, 0, 2, 1, 2, 4); //PANE WALL 4 //GOOD
 
-			BuildHelper.buildMeta(world, x-2, y+1, z-1, log, 2, 2, 3, 3, 1); //LOG ENTRANCE
+			BuildHelper.build(world, x-2, y+1, z-1, log, 2, 2, 3, 3, 1); //LOG ENTRANCE
 
 			ItemDoor.placeDoorBlock(world, x-2, y+1, z, 0, Blocks.wooden_door);
 
 			/************************ Layer 1 to 4 : PORCH ************************/
-			BuildHelper.buildMeta(world, x-6, y+4, z-4, slabD, 9, 2, 9, 1, 4); //PORCH ROOF 1
-			BuildHelper.buildMeta(world, x-5, y+4, z-3, slabD, 10, 2, 7, 1, 2); //PORCH ROOF 2
+			BuildHelper.build(world, x-6, y+4, z-4, slabD, 9, 2, 9, 1, 4); //PORCH ROOF 1
+			BuildHelper.build(world, x-5, y+4, z-3, slabD, 10, 2, 7, 1, 2); //PORCH ROOF 2
 
-			BuildHelper.buildMeta(world, x-3, y+1, z-4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 1
-			BuildHelper.buildMeta(world, x-3, y+1, z+4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 2
-			BuildHelper.buildMeta(world, x-6, y+1, z-4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 3
-			BuildHelper.buildMeta(world, x-6, y+1, z+4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 4
+			BuildHelper.build(world, x-3, y+1, z-4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 1
+			BuildHelper.build(world, x-3, y+1, z+4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 2
+			BuildHelper.build(world, x-6, y+1, z-4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 3
+			BuildHelper.build(world, x-6, y+1, z+4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 4
 			
-			BuildHelper.buildMeta(world, x-3, y+2, z-4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 1 (FENCE)
-			BuildHelper.buildMeta(world, x-3, y+2, z+4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 2 (FENCE)
-			BuildHelper.buildMeta(world, x-6, y+2, z-4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 3 (FENCE)
-			BuildHelper.buildMeta(world, x-6, y+2, z+4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 4 (FENCE)
+			BuildHelper.build(world, x-3, y+2, z-4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 1 (FENCE)
+			BuildHelper.build(world, x-3, y+2, z+4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 2 (FENCE)
+			BuildHelper.build(world, x-6, y+2, z-4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 3 (FENCE)
+			BuildHelper.build(world, x-6, y+2, z+4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 4 (FENCE)
 			
-			BuildHelper.buildMeta(world, x-5, y+1, z-4, fence, 0, 2, 1, 1, 2); //PORCH SIDE 1
-			BuildHelper.buildMeta(world, x-5, y+1, z+4, fence, 0, 2, 1, 1, 2); //PORCH SIDE 2
-			BuildHelper.buildMeta(world, x-6, y+1, z-3, fence, 0, 2, 7, 1, 1); //PORCH SIDE 3 (FRONT)
+			BuildHelper.build(world, x-5, y+1, z-4, fence, 0, 2, 1, 1, 2); //PORCH SIDE 1
+			BuildHelper.build(world, x-5, y+1, z+4, fence, 0, 2, 1, 1, 2); //PORCH SIDE 2
+			BuildHelper.build(world, x-6, y+1, z-3, fence, 0, 2, 7, 1, 1); //PORCH SIDE 3 (FRONT)
 			world.setBlock(x-6, y+1, z, gate, 1, 0); //PORCH GATE
 			
 			/************************ Layer 5 to 6 : ROOF ************************/ //GOOD
-			BuildHelper.buildMeta(world, x+5, y+5, z-5, slabD, 1, 2, 11, 1, 1); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-2, y+5, z-5, slabD, 1, 2, 11, 1, 1); //HOUSE ROOF 2
-			BuildHelper.buildMeta(world, x-1, y+5, z-5, slabD, 1, 2, 1, 1, 6); //HOUSE ROOF 3 //GOOD
-			BuildHelper.buildMeta(world, x-1, y+5, z+5, slabD, 1, 2, 1, 1, 6); //HOUSE ROOF 4 //GOOD
+			BuildHelper.build(world, x+5, y+5, z-5, slabD, 1, 2, 11, 1, 1); //HOUSE ROOF 1
+			BuildHelper.build(world, x-2, y+5, z-5, slabD, 1, 2, 11, 1, 1); //HOUSE ROOF 2
+			BuildHelper.build(world, x-1, y+5, z-5, slabD, 1, 2, 1, 1, 6); //HOUSE ROOF 3 //GOOD
+			BuildHelper.build(world, x-1, y+5, z+5, slabD, 1, 2, 1, 1, 6); //HOUSE ROOF 4 //GOOD
 
-			BuildHelper.buildMeta(world, x+4, y+5, z-4, light, 2, 2, 9, 1, 1); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-1, y+5, z-4, light, 2, 2, 9, 1, 1); //HOUSE ROOF 2
-			BuildHelper.buildMeta(world, x, y+5, z-4, light, 2, 2, 1, 1, 4); //HOUSE ROOF 3
-			BuildHelper.buildMeta(world, x, y+5, z+4, light, 2, 2, 1, 1, 4); //HOUSE ROOF 4
+			BuildHelper.build(world, x+4, y+5, z-4, light, 2, 2, 9, 1, 1); //HOUSE ROOF 1
+			BuildHelper.build(world, x-1, y+5, z-4, light, 2, 2, 9, 1, 1); //HOUSE ROOF 2
+			BuildHelper.build(world, x, y+5, z-4, light, 2, 2, 1, 1, 4); //HOUSE ROOF 3
+			BuildHelper.build(world, x, y+5, z+4, light, 2, 2, 1, 1, 4); //HOUSE ROOF 4
 
-			BuildHelper.buildMeta(world, x+3, y+6, z-3, slabD, 1, 2, 7, 1, 1); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x, y+6, z-3, slabD, 1, 2, 7, 1, 1); //HOUSE ROOF 2
-			BuildHelper.buildMeta(world, x+1, y+6, z-3, slabD, 1, 2, 1, 1, 2); //HOUSE ROOF 3
-			BuildHelper.buildMeta(world, x+1, y+6, z+3, slabD, 1, 2, 1, 1, 2); //HOUSE ROOF 4
+			BuildHelper.build(world, x+3, y+6, z-3, slabD, 1, 2, 7, 1, 1); //HOUSE ROOF 1
+			BuildHelper.build(world, x, y+6, z-3, slabD, 1, 2, 7, 1, 1); //HOUSE ROOF 2
+			BuildHelper.build(world, x+1, y+6, z-3, slabD, 1, 2, 1, 1, 2); //HOUSE ROOF 3
+			BuildHelper.build(world, x+1, y+6, z+3, slabD, 1, 2, 1, 1, 2); //HOUSE ROOF 4
 
-			BuildHelper.buildMeta(world, x+1, y+6, z-2, light, 2, 2, 5, 1, 2); //HOUSE ROOF TOP
+			BuildHelper.build(world, x+1, y+6, z-2, light, 2, 2, 5, 1, 2); //HOUSE ROOF TOP
 			
 			/************************ Layer 1 to 4 : INSIDE ************************/
 			world.setBlock(x + 4, y + 1, z + 4, bed, 8, 0); //BED //NOT 10, 9, 11 //GOD
@@ -425,77 +425,77 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		/************************ meta == 2 ************************/
 		else if (meta == 2 || meta == 6) {
 			/************************ Layer 0 to 7 : AIR ************************/ //DONE
-			BuildHelper.buildMeta(world, x-5, y, z-2, air, 0, 2, 8, 6, 11); //HOUSE ROOM
-			BuildHelper.buildMeta(world, x-4, y+5, z-1, air, 0, 2, 6, 1, 9); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-3, y+6, z, air, 0, 2, 4, 1, 7); //HOUSE ROOF 2
+			BuildHelper.build(world, x-5, y, z-2, air, 0, 2, 8, 6, 11); //HOUSE ROOM
+			BuildHelper.build(world, x-4, y+5, z-1, air, 0, 2, 6, 1, 9); //HOUSE ROOF 1
+			BuildHelper.build(world, x-3, y+6, z, air, 0, 2, 4, 1, 7); //HOUSE ROOF 2
 
-			BuildHelper.buildMeta(world, x-4, y, z-6, air, 0, 2, 4, 5, 9); //PORCH
+			BuildHelper.build(world, x-4, y, z-6, air, 0, 2, 4, 5, 9); //PORCH
 
 			/************************ Layer 0 : FLOOR ************************/ //DONE
-			BuildHelper.buildMeta(world, x-5, y, z-2, dark, 1, 2, 8, 1, 11); //HOME FLOOR 1
-			BuildHelper.buildMeta(world, x-4, y, z-1, light, 2, 2, 6, 1, 9); //HOME FLOOR 2
-			BuildHelper.buildMeta(world, x-3, y, z, dark, 1, 2, 4, 1, 7); //HOME FLOOR 3
-			BuildHelper.buildMeta(world, x-2, y, z+1, light, 2, 2, 2, 1, 5); //HOME FLOOR 4
+			BuildHelper.build(world, x-5, y, z-2, dark, 1, 2, 8, 1, 11); //HOME FLOOR 1
+			BuildHelper.build(world, x-4, y, z-1, light, 2, 2, 6, 1, 9); //HOME FLOOR 2
+			BuildHelper.build(world, x-3, y, z, dark, 1, 2, 4, 1, 7); //HOME FLOOR 3
+			BuildHelper.build(world, x-2, y, z+1, light, 2, 2, 2, 1, 5); //HOME FLOOR 4
 
-			BuildHelper.buildMeta(world, x-4, y, z-6, dark, 1, 2, 4, 1, 9); //PORCH FLOOR 1
-			BuildHelper.buildMeta(world, x-3, y, z-5, light, 2, 2, 2, 1, 7); //PORCH FLOOR 2
+			BuildHelper.build(world, x-4, y, z-6, dark, 1, 2, 4, 1, 9); //PORCH FLOOR 1
+			BuildHelper.build(world, x-3, y, z-5, light, 2, 2, 2, 1, 7); //PORCH FLOOR 2
 
 			/************************ Layer 1 to 4 : HOUSE ************************/ //DONE
-			BuildHelper.buildMeta(world, x-5, y+1, z+5, log, 2, 2, 1, 4, 1); //LOG CORNER 1
-			BuildHelper.buildMeta(world, x+5, y+1, z+5, log, 2, 2, 1, 4, 1); //LOG CORNER 2
-			BuildHelper.buildMeta(world, x-5, y+1, z-2, log, 2, 2, 1, 4, 1); //LOG CORNER 3
-			BuildHelper.buildMeta(world, x+5, y+1, z-2, log, 2, 2, 1, 4, 1); //LOG CORNER 4
-			BuildHelper.buildMeta(world, x-4, y+1, z+5, light, 2, 2, 1, 4, 9); //WOOD WALL 1
-			BuildHelper.buildMeta(world, x-4, y+1, z-2, light, 2, 2, 1, 4, 9); //WOOD WALL 2
-			BuildHelper.buildMeta(world, x-5, y+1, z-1, light, 2, 2, 6, 4, 1); //WOOD WALL 3 //GOOD
-			BuildHelper.buildMeta(world, x+5, y+1, z-1, light, 2, 2, 6, 4, 1); //WOOD WALL 4 //GOOD
+			BuildHelper.build(world, x-5, y+1, z+5, log, 2, 2, 1, 4, 1); //LOG CORNER 1
+			BuildHelper.build(world, x+5, y+1, z+5, log, 2, 2, 1, 4, 1); //LOG CORNER 2
+			BuildHelper.build(world, x-5, y+1, z-2, log, 2, 2, 1, 4, 1); //LOG CORNER 3
+			BuildHelper.build(world, x+5, y+1, z-2, log, 2, 2, 1, 4, 1); //LOG CORNER 4
+			BuildHelper.build(world, x-4, y+1, z+5, light, 2, 2, 1, 4, 9); //WOOD WALL 1
+			BuildHelper.build(world, x-4, y+1, z-2, light, 2, 2, 1, 4, 9); //WOOD WALL 2
+			BuildHelper.build(world, x-5, y+1, z-1, light, 2, 2, 6, 4, 1); //WOOD WALL 3 //GOOD
+			BuildHelper.build(world, x+5, y+1, z-1, light, 2, 2, 6, 4, 1); //WOOD WALL 4 //GOOD
 			
-			BuildHelper.buildMeta(world, x-3, y+2, z+5, pane, 0, 2, 1, 2, 7); //PANE WALL 1
-			BuildHelper.buildMeta(world, x-3, y+2, z-2, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (1)
-			BuildHelper.buildMeta(world, x+3, y+2, z-2, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (2)
-			BuildHelper.buildMeta(world, x-5, y+2, z, pane, 0, 2, 4, 2, 1); //PANE WALL 3 //GOOD
-			BuildHelper.buildMeta(world, x+5, y+2, z, pane, 0, 2, 4, 2, 1); //PANE WALL 4 //GOOD
+			BuildHelper.build(world, x-3, y+2, z+5, pane, 0, 2, 1, 2, 7); //PANE WALL 1
+			BuildHelper.build(world, x-3, y+2, z-2, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (1)
+			BuildHelper.build(world, x+3, y+2, z-2, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (2)
+			BuildHelper.build(world, x-5, y+2, z, pane, 0, 2, 4, 2, 1); //PANE WALL 3 //GOOD
+			BuildHelper.build(world, x+5, y+2, z, pane, 0, 2, 4, 2, 1); //PANE WALL 4 //GOOD
 
-			BuildHelper.buildMeta(world, x-1, y+1, z-2, log, 2, 2, 1, 3, 3); //LOG ENTRANCE
+			BuildHelper.build(world, x-1, y+1, z-2, log, 2, 2, 1, 3, 3); //LOG ENTRANCE
 
 			ItemDoor.placeDoorBlock(world, x, y+1, z-2, 1, Blocks.wooden_door); //DOOR //NOT 0 //GOOD
 
 			/************************ Layer 1 to 4 : PORCH ************************/ //DONE
-			BuildHelper.buildMeta(world, x-4, y+4, z-6, slabD, 9, 2, 4, 1, 9); //PORCH ROOF 1
-			BuildHelper.buildMeta(world, x-3, y+4, z-5, slabD, 10, 2, 2, 1, 7); //PORCH ROOF 2
+			BuildHelper.build(world, x-4, y+4, z-6, slabD, 9, 2, 4, 1, 9); //PORCH ROOF 1
+			BuildHelper.build(world, x-3, y+4, z-5, slabD, 10, 2, 2, 1, 7); //PORCH ROOF 2
 
-			BuildHelper.buildMeta(world, x-4, y+1, z-3, dark, 1, 2, 1, 4, 1); //PORCH CORNER 1
-			BuildHelper.buildMeta(world, x+4, y+1, z-3, dark, 1, 2, 1, 4, 1); //PORCH CORNER 2
-			BuildHelper.buildMeta(world, x-4, y+1, z-6, dark, 1, 2, 1, 4, 1); //PORCH CORNER 3
-			BuildHelper.buildMeta(world, x+4, y+1, z-6, dark, 1, 2, 1, 4, 1); //PORCH CORNER 4
+			BuildHelper.build(world, x-4, y+1, z-3, dark, 1, 2, 1, 4, 1); //PORCH CORNER 1
+			BuildHelper.build(world, x+4, y+1, z-3, dark, 1, 2, 1, 4, 1); //PORCH CORNER 2
+			BuildHelper.build(world, x-4, y+1, z-6, dark, 1, 2, 1, 4, 1); //PORCH CORNER 3
+			BuildHelper.build(world, x+4, y+1, z-6, dark, 1, 2, 1, 4, 1); //PORCH CORNER 4
 			
-			BuildHelper.buildMeta(world, x-4, y+2, z-3, fence, 0, 2, 1, 2, 1); //PORCH CORNER 1 (FENCE)
-			BuildHelper.buildMeta(world, x+4, y+2, z-3, fence, 0, 2, 1, 2, 1); //PORCH CORNER 2 (FENCE)
-			BuildHelper.buildMeta(world, x-4, y+2, z-6, fence, 0, 2, 1, 2, 1); //PORCH CORNER 3 (FENCE)
-			BuildHelper.buildMeta(world, x+4, y+2, z-6, fence, 0, 2, 1, 2, 1); //PORCH CORNER 4 (FENCE)
+			BuildHelper.build(world, x-4, y+2, z-3, fence, 0, 2, 1, 2, 1); //PORCH CORNER 1 (FENCE)
+			BuildHelper.build(world, x+4, y+2, z-3, fence, 0, 2, 1, 2, 1); //PORCH CORNER 2 (FENCE)
+			BuildHelper.build(world, x-4, y+2, z-6, fence, 0, 2, 1, 2, 1); //PORCH CORNER 3 (FENCE)
+			BuildHelper.build(world, x+4, y+2, z-6, fence, 0, 2, 1, 2, 1); //PORCH CORNER 4 (FENCE)
 			
-			BuildHelper.buildMeta(world, x-4, y+1, z-5, fence, 0, 2, 2, 1, 1); //PORCH SIDE 1
-			BuildHelper.buildMeta(world, x+4, y+1, z-5, fence, 0, 2, 2, 1, 1); //PORCH SIDE 2
-			BuildHelper.buildMeta(world, x-3, y+1, z-6, fence, 0, 2, 1, 1, 7); //PORCH SIDE 3 (FRONT)
+			BuildHelper.build(world, x-4, y+1, z-5, fence, 0, 2, 2, 1, 1); //PORCH SIDE 1
+			BuildHelper.build(world, x+4, y+1, z-5, fence, 0, 2, 2, 1, 1); //PORCH SIDE 2
+			BuildHelper.build(world, x-3, y+1, z-6, fence, 0, 2, 1, 1, 7); //PORCH SIDE 3 (FRONT)
 			world.setBlock(x, y+1, z-6, gate, 0, 0); //PORCH GATE
 			
 			/************************ Layer 5 to 6 : ROOF ************************/ //DONE
-			BuildHelper.buildMeta(world, x-5, y+5, z+5, slabD, 1, 2, 1, 1, 11); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-5, y+5, z-2, slabD, 1, 2, 1, 1, 11); //HOUSE ROOF 2
-			BuildHelper.buildMeta(world, x-5, y+5, z-1, slabD, 1, 2, 6, 1, 1); //HOUSE ROOF 3 //GOOD
-			BuildHelper.buildMeta(world, x+5, y+5, z-1, slabD, 1, 2, 6, 1, 1); //HOUSE ROOF 4 //GOOD
+			BuildHelper.build(world, x-5, y+5, z+5, slabD, 1, 2, 1, 1, 11); //HOUSE ROOF 1
+			BuildHelper.build(world, x-5, y+5, z-2, slabD, 1, 2, 1, 1, 11); //HOUSE ROOF 2
+			BuildHelper.build(world, x-5, y+5, z-1, slabD, 1, 2, 6, 1, 1); //HOUSE ROOF 3 //GOOD
+			BuildHelper.build(world, x+5, y+5, z-1, slabD, 1, 2, 6, 1, 1); //HOUSE ROOF 4 //GOOD
 
-			BuildHelper.buildMeta(world, x-4, y+5, z+4, light, 2, 2, 1, 1, 9); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-4, y+5, z-1, light, 2, 2, 1, 1, 9); //HOUSE ROOF 2
-			BuildHelper.buildMeta(world, x-4, y+5, z, light, 2, 2, 4, 1, 1); //HOUSE ROOF 3
-			BuildHelper.buildMeta(world, x+4, y+5, z, light, 2, 2, 4, 1, 1); //HOUSE ROOF 4
+			BuildHelper.build(world, x-4, y+5, z+4, light, 2, 2, 1, 1, 9); //HOUSE ROOF 1
+			BuildHelper.build(world, x-4, y+5, z-1, light, 2, 2, 1, 1, 9); //HOUSE ROOF 2
+			BuildHelper.build(world, x-4, y+5, z, light, 2, 2, 4, 1, 1); //HOUSE ROOF 3
+			BuildHelper.build(world, x+4, y+5, z, light, 2, 2, 4, 1, 1); //HOUSE ROOF 4
 
-			BuildHelper.buildMeta(world, x-3, y+6, z+3, slabD, 1, 2, 1, 1, 7); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-3, y+6, z, slabD, 1, 2, 1, 1, 7); //HOUSE ROOF 2
-			BuildHelper.buildMeta(world, x-3, y+6, z+1, slabD, 1, 2, 2, 1, 1); //HOUSE ROOF 3
-			BuildHelper.buildMeta(world, x+3, y+6, z+1, slabD, 1, 2, 2, 1, 1); //HOUSE ROOF 4
+			BuildHelper.build(world, x-3, y+6, z+3, slabD, 1, 2, 1, 1, 7); //HOUSE ROOF 1
+			BuildHelper.build(world, x-3, y+6, z, slabD, 1, 2, 1, 1, 7); //HOUSE ROOF 2
+			BuildHelper.build(world, x-3, y+6, z+1, slabD, 1, 2, 2, 1, 1); //HOUSE ROOF 3
+			BuildHelper.build(world, x+3, y+6, z+1, slabD, 1, 2, 2, 1, 1); //HOUSE ROOF 4
 
-			BuildHelper.buildMeta(world, x-2, y+6, z+1, light, 2, 2, 2, 1, 5); //HOUSE ROOF TOP
+			BuildHelper.build(world, x-2, y+6, z+1, light, 2, 2, 2, 1, 5); //HOUSE ROOF TOP
 			
 			/************************ Layer 1 to 4 : INSIDE ************************/
 			world.setBlock(x - 4, y + 1, z + 4, bed, 9, 0); //BED //NOT 10, 9, 11, 8
@@ -545,77 +545,77 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		/************************ meta == 3 ************************/
 		else if (meta == 3 || meta == 7) {
 			/************************ Layer 0 to 7 : AIR ************************/
-			BuildHelper.buildMeta(world, x-5, y, z-5, air, 0, 2, 11, 6, 8); //HOUSE ROOM
-			BuildHelper.buildMeta(world, x-4, y+5, z-4, air, 0, 2, 9, 1, 6); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-3, y+6, z-3, air, 0, 2, 7, 1, 4); //HOUSE ROOF 2
+			BuildHelper.build(world, x-5, y, z-5, air, 0, 2, 11, 6, 8); //HOUSE ROOM
+			BuildHelper.build(world, x-4, y+5, z-4, air, 0, 2, 9, 1, 6); //HOUSE ROOF 1
+			BuildHelper.build(world, x-3, y+6, z-3, air, 0, 2, 7, 1, 4); //HOUSE ROOF 2
 
-			BuildHelper.buildMeta(world, x+3, y, z-4, air, 0, 2, 9, 5, 4); //PORCH
+			BuildHelper.build(world, x+3, y, z-4, air, 0, 2, 9, 5, 4); //PORCH
 
 			/************************ Layer 0 : FLOOR ************************/
-			BuildHelper.buildMeta(world, x-5, y, z-5, dark, 1, 2, 11, 1, 8); //HOME FLOOR 1
-			BuildHelper.buildMeta(world, x-4, y, z-4, light, 2, 2, 9, 1, 6); //HOME FLOOR 2
-			BuildHelper.buildMeta(world, x-3, y, z-3, dark, 1, 2, 7, 1, 4); //HOME FLOOR 3
-			BuildHelper.buildMeta(world, x-2, y, z-2, light, 2, 2, 5, 1, 2); //HOME FLOOR 4
+			BuildHelper.build(world, x-5, y, z-5, dark, 1, 2, 11, 1, 8); //HOME FLOOR 1
+			BuildHelper.build(world, x-4, y, z-4, light, 2, 2, 9, 1, 6); //HOME FLOOR 2
+			BuildHelper.build(world, x-3, y, z-3, dark, 1, 2, 7, 1, 4); //HOME FLOOR 3
+			BuildHelper.build(world, x-2, y, z-2, light, 2, 2, 5, 1, 2); //HOME FLOOR 4
 
-			BuildHelper.buildMeta(world, x+3, y, z-4, dark, 1, 2, 9, 1, 4); //PORCH FLOOR 1
-			BuildHelper.buildMeta(world, x+4, y, z-3, light, 2, 2, 7, 1, 2); //PORCH FLOOR 2
+			BuildHelper.build(world, x+3, y, z-4, dark, 1, 2, 9, 1, 4); //PORCH FLOOR 1
+			BuildHelper.build(world, x+4, y, z-3, light, 2, 2, 7, 1, 2); //PORCH FLOOR 2
 
 			/************************ Layer 1 to 4 : HOUSE ************************/
-			BuildHelper.buildMeta(world, x-5, y+1, z-5, log, 2, 2, 1, 4, 1); //LOG CORNER 1
-			BuildHelper.buildMeta(world, x-5, y+1, z+5, log, 2, 2, 1, 4, 1); //LOG CORNER 2
-			BuildHelper.buildMeta(world, x+2, y+1, z-5, log, 2, 2, 1, 4, 1); //LOG CORNER 3
-			BuildHelper.buildMeta(world, x+2, y+1, z+5, log, 2, 2, 1, 4, 1); //LOG CORNER 4
-			BuildHelper.buildMeta(world, x-5, y+1, z-4, light, 2, 2, 9, 4, 1); //WOOD WALL 1
-			BuildHelper.buildMeta(world, x+2, y+1, z-4, light, 2, 2, 9, 4, 1); //WOOD WALL 2
-			BuildHelper.buildMeta(world, x-4, y+1, z-5, light, 2, 2, 1, 4, 6); //WOOD WALL 3
-			BuildHelper.buildMeta(world, x-4, y+1, z+5, light, 2, 2, 1, 4, 6); //WOOD WALL 4
+			BuildHelper.build(world, x-5, y+1, z-5, log, 2, 2, 1, 4, 1); //LOG CORNER 1
+			BuildHelper.build(world, x-5, y+1, z+5, log, 2, 2, 1, 4, 1); //LOG CORNER 2
+			BuildHelper.build(world, x+2, y+1, z-5, log, 2, 2, 1, 4, 1); //LOG CORNER 3
+			BuildHelper.build(world, x+2, y+1, z+5, log, 2, 2, 1, 4, 1); //LOG CORNER 4
+			BuildHelper.build(world, x-5, y+1, z-4, light, 2, 2, 9, 4, 1); //WOOD WALL 1
+			BuildHelper.build(world, x+2, y+1, z-4, light, 2, 2, 9, 4, 1); //WOOD WALL 2
+			BuildHelper.build(world, x-4, y+1, z-5, light, 2, 2, 1, 4, 6); //WOOD WALL 3
+			BuildHelper.build(world, x-4, y+1, z+5, light, 2, 2, 1, 4, 6); //WOOD WALL 4
 			
-			BuildHelper.buildMeta(world, x-5, y+2, z-3, pane, 0, 2, 7, 2, 1); //PANE WALL 1
-			BuildHelper.buildMeta(world, x+2, y+2, z-3, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (1)
-			BuildHelper.buildMeta(world, x+2, y+2, z+3, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (2)
-			BuildHelper.buildMeta(world, x-3, y+2, z-5, pane, 0, 2, 1, 2, 4); //PANE WALL 3
-			BuildHelper.buildMeta(world, x-3, y+2, z+5, pane, 0, 2, 1, 2, 4); //PANE WALL 4
+			BuildHelper.build(world, x-5, y+2, z-3, pane, 0, 2, 7, 2, 1); //PANE WALL 1
+			BuildHelper.build(world, x+2, y+2, z-3, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (1)
+			BuildHelper.build(world, x+2, y+2, z+3, pane, 0, 2, 1, 2, 1); //PANE WALL 2 (2)
+			BuildHelper.build(world, x-3, y+2, z-5, pane, 0, 2, 1, 2, 4); //PANE WALL 3
+			BuildHelper.build(world, x-3, y+2, z+5, pane, 0, 2, 1, 2, 4); //PANE WALL 4
 
-			BuildHelper.buildMeta(world, x+2, y+1, z-1, log, 2, 2, 3, 3, 1); //LOG ENTRANCE
+			BuildHelper.build(world, x+2, y+1, z-1, log, 2, 2, 3, 3, 1); //LOG ENTRANCE
 
 			ItemDoor.placeDoorBlock(world, x+2, y+1, z, 2, Blocks.wooden_door); //DOOR
 
 			/************************ Layer 1 to 4 : PORCH ************************/
-			BuildHelper.buildMeta(world, x+3, y+4, z-4, slabD, 9, 2, 9, 1, 4); //PORCH ROOF 1
-			BuildHelper.buildMeta(world, x+4, y+4, z-3, slabD, 10, 2, 7, 1, 2); //PORCH ROOF 2
+			BuildHelper.build(world, x+3, y+4, z-4, slabD, 9, 2, 9, 1, 4); //PORCH ROOF 1
+			BuildHelper.build(world, x+4, y+4, z-3, slabD, 10, 2, 7, 1, 2); //PORCH ROOF 2
 
-			BuildHelper.buildMeta(world, x+3, y+1, z-4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 1
-			BuildHelper.buildMeta(world, x+3, y+1, z+4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 2
-			BuildHelper.buildMeta(world, x+6, y+1, z-4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 3
-			BuildHelper.buildMeta(world, x+6, y+1, z+4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 4
+			BuildHelper.build(world, x+3, y+1, z-4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 1
+			BuildHelper.build(world, x+3, y+1, z+4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 2
+			BuildHelper.build(world, x+6, y+1, z-4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 3
+			BuildHelper.build(world, x+6, y+1, z+4, dark, 1, 2, 1, 4, 1); //PORCH CORNER 4
 			
-			BuildHelper.buildMeta(world, x+3, y+2, z-4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 1 (FENCE)
-			BuildHelper.buildMeta(world, x+3, y+2, z+4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 2 (FENCE)
-			BuildHelper.buildMeta(world, x+6, y+2, z-4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 3 (FENCE)
-			BuildHelper.buildMeta(world, x+6, y+2, z+4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 4 (FENCE)
+			BuildHelper.build(world, x+3, y+2, z-4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 1 (FENCE)
+			BuildHelper.build(world, x+3, y+2, z+4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 2 (FENCE)
+			BuildHelper.build(world, x+6, y+2, z-4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 3 (FENCE)
+			BuildHelper.build(world, x+6, y+2, z+4, fence, 0, 2, 1, 2, 1); //PORCH CORNER 4 (FENCE)
 			
-			BuildHelper.buildMeta(world, x+4, y+1, z-4, fence, 0, 2, 1, 1, 2); //PORCH SIDE 1
-			BuildHelper.buildMeta(world, x+4, y+1, z+4, fence, 0, 2, 1, 1, 2); //PORCH SIDE 2
-			BuildHelper.buildMeta(world, x+6, y+1, z-3, fence, 0, 2, 7, 1, 1); //PORCH SIDE 3 (FRONT)
+			BuildHelper.build(world, x+4, y+1, z-4, fence, 0, 2, 1, 1, 2); //PORCH SIDE 1
+			BuildHelper.build(world, x+4, y+1, z+4, fence, 0, 2, 1, 1, 2); //PORCH SIDE 2
+			BuildHelper.build(world, x+6, y+1, z-3, fence, 0, 2, 7, 1, 1); //PORCH SIDE 3 (FRONT)
 			world.setBlock(x+6, y+1, z, gate, 1, 0); //PORCH GATE
 			
 			/************************ Layer 5 tp 6 : ROOF ************************/
-			BuildHelper.buildMeta(world, x-5, y+5, z-5, slabD, 1, 2, 11, 1, 1); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x+2, y+5, z-5, slabD, 1, 2, 11, 1, 1); //HOUSE ROOF 2
-			BuildHelper.buildMeta(world, x-4, y+5, z-5, slabD, 1, 2, 1, 1, 6); //HOUSE ROOF 3
-			BuildHelper.buildMeta(world, x-4, y+5, z+5, slabD, 1, 2, 1, 1, 6); //HOUSE ROOF 4
+			BuildHelper.build(world, x-5, y+5, z-5, slabD, 1, 2, 11, 1, 1); //HOUSE ROOF 1
+			BuildHelper.build(world, x+2, y+5, z-5, slabD, 1, 2, 11, 1, 1); //HOUSE ROOF 2
+			BuildHelper.build(world, x-4, y+5, z-5, slabD, 1, 2, 1, 1, 6); //HOUSE ROOF 3
+			BuildHelper.build(world, x-4, y+5, z+5, slabD, 1, 2, 1, 1, 6); //HOUSE ROOF 4
 
-			BuildHelper.buildMeta(world, x-4, y+5, z-4, light, 2, 2, 9, 1, 1); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x+1, y+5, z-4, light, 2, 2, 9, 1, 1); //HOUSE ROOF 2
-			BuildHelper.buildMeta(world, x-3, y+5, z-4, light, 2, 2, 1, 1, 4); //HOUSE ROOF 3
-			BuildHelper.buildMeta(world, x-3, y+5, z+4, light, 2, 2, 1, 1, 4); //HOUSE ROOF 4
+			BuildHelper.build(world, x-4, y+5, z-4, light, 2, 2, 9, 1, 1); //HOUSE ROOF 1
+			BuildHelper.build(world, x+1, y+5, z-4, light, 2, 2, 9, 1, 1); //HOUSE ROOF 2
+			BuildHelper.build(world, x-3, y+5, z-4, light, 2, 2, 1, 1, 4); //HOUSE ROOF 3
+			BuildHelper.build(world, x-3, y+5, z+4, light, 2, 2, 1, 1, 4); //HOUSE ROOF 4
 
-			BuildHelper.buildMeta(world, x-3, y+6, z-3, slabD, 1, 2, 7, 1, 1); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x, y+6, z-3, slabD, 1, 2, 7, 1, 1); //HOUSE ROOF 2
-			BuildHelper.buildMeta(world, x-2, y+6, z-3, slabD, 1, 2, 1, 1, 2); //HOUSE ROOF 3
-			BuildHelper.buildMeta(world, x-2, y+6, z+3, slabD, 1, 2, 1, 1, 2); //HOUSE ROOF 4
+			BuildHelper.build(world, x-3, y+6, z-3, slabD, 1, 2, 7, 1, 1); //HOUSE ROOF 1
+			BuildHelper.build(world, x, y+6, z-3, slabD, 1, 2, 7, 1, 1); //HOUSE ROOF 2
+			BuildHelper.build(world, x-2, y+6, z-3, slabD, 1, 2, 1, 1, 2); //HOUSE ROOF 3
+			BuildHelper.build(world, x-2, y+6, z+3, slabD, 1, 2, 1, 1, 2); //HOUSE ROOF 4
 
-			BuildHelper.buildMeta(world, x-2, y+6, z-2, light, 2, 2, 5, 1, 2); //HOUSE ROOF TOP
+			BuildHelper.build(world, x-2, y+6, z-2, light, 2, 2, 5, 1, 2); //HOUSE ROOF TOP
 			
 			/************************ Layer 1 to 4 : INSIDE ************************/
 			world.setBlock(x - 4, y + 1, z - 4, bed, 10, 0); //BED
@@ -819,11 +819,11 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		/************************ meta == 0 ************************/
 		if (meta == 0 || meta == 4) {
 			/************************ Layer 0 to 7 : AIR ************************/ //DONE
-			BuildHelper.buildMeta(world, x-5, y, z-5, air, 0, 2, 8, 6, 11); //HOUSE ROOM
-			BuildHelper.buildMeta(world, x-4, y+5, z-4, air, 0, 2, 6, 1, 9); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-3, y+6, z-3, air, 0, 2, 4, 1, 7); //HOUSE ROOF 2
+			BuildHelper.build(world, x-5, y, z-5, air, 0, 2, 8, 6, 11); //HOUSE ROOM
+			BuildHelper.build(world, x-4, y+5, z-4, air, 0, 2, 6, 1, 9); //HOUSE ROOF 1
+			BuildHelper.build(world, x-3, y+6, z-3, air, 0, 2, 4, 1, 7); //HOUSE ROOF 2
 
-			BuildHelper.buildMeta(world, x-4, y, z+3, air, 0, 2, 4, 5, 9); //PORCH
+			BuildHelper.build(world, x-4, y, z+3, air, 0, 2, 4, 5, 9); //PORCH
 			
 			world.setBlock(x + 5, y + 4, z + 6, air, 0, 2);
 			world.setBlock(x-5, y + 4, z+6, air, 0, 2);
@@ -836,11 +836,11 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		/************************ meta == 1 ************************/
 		else if (meta == 1 || meta == 5) {
 			/************************ Layer 0 to 7 : AIR ************************/
-			BuildHelper.buildMeta(world, x-2, y, z-5, air, 0, 2, 11, 6, 8); //HOUSE ROOM
-			BuildHelper.buildMeta(world, x-1, y+5, z-4, air, 0, 2, 9, 1, 6); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x, y+6, z-3, air, 0, 2, 7, 1, 4); //HOUSE ROOF 2
+			BuildHelper.build(world, x-2, y, z-5, air, 0, 2, 11, 6, 8); //HOUSE ROOM
+			BuildHelper.build(world, x-1, y+5, z-4, air, 0, 2, 9, 1, 6); //HOUSE ROOF 1
+			BuildHelper.build(world, x, y+6, z-3, air, 0, 2, 7, 1, 4); //HOUSE ROOF 2
 
-			BuildHelper.buildMeta(world, x-6, y, z-4, air, 0, 2, 9, 5, 4); //PORCH
+			BuildHelper.build(world, x-6, y, z-4, air, 0, 2, 9, 5, 4); //PORCH
 
 			world.setBlock(x - 6, y + 4, z + 5, air, 0, 2);
 			world.setBlock(x - 6, y + 4, z - 5, air, 0, 2);
@@ -853,11 +853,11 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		/************************ meta == 2 ************************/
 		else if (meta == 2 || meta == 6) {
 			/************************ Layer 0 to 7 : AIR ************************/ //DONE
-			BuildHelper.buildMeta(world, x-5, y, z-2, air, 0, 2, 8, 6, 11); //HOUSE ROOM
-			BuildHelper.buildMeta(world, x-4, y+5, z-1, air, 0, 2, 6, 1, 9); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-3, y+6, z, air, 0, 2, 4, 1, 7); //HOUSE ROOF 2
+			BuildHelper.build(world, x-5, y, z-2, air, 0, 2, 8, 6, 11); //HOUSE ROOM
+			BuildHelper.build(world, x-4, y+5, z-1, air, 0, 2, 6, 1, 9); //HOUSE ROOF 1
+			BuildHelper.build(world, x-3, y+6, z, air, 0, 2, 4, 1, 7); //HOUSE ROOF 2
 
-			BuildHelper.buildMeta(world, x-4, y, z-6, air, 0, 2, 4, 5, 9); //PORCH
+			BuildHelper.build(world, x-4, y, z-6, air, 0, 2, 4, 5, 9); //PORCH
 
 			world.setBlock(x+5, y + 4, z-6, air, 0, 2);
 			world.setBlock(x - 5, y + 4, z - 6, air, 0, 2);
@@ -870,11 +870,11 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		/************************ meta == 3 ************************/
 		else if (meta == 3 || meta == 7) {
 			/************************ Layer 0 to 7 : AIR ************************/
-			BuildHelper.buildMeta(world, x-5, y, z-5, air, 0, 2, 11, 6, 8); //HOUSE ROOM
-			BuildHelper.buildMeta(world, x-4, y+5, z-4, air, 0, 2, 9, 1, 6); //HOUSE ROOF 1
-			BuildHelper.buildMeta(world, x-3, y+6, z-3, air, 0, 2, 7, 1, 4); //HOUSE ROOF 2
+			BuildHelper.build(world, x-5, y, z-5, air, 0, 2, 11, 6, 8); //HOUSE ROOM
+			BuildHelper.build(world, x-4, y+5, z-4, air, 0, 2, 9, 1, 6); //HOUSE ROOF 1
+			BuildHelper.build(world, x-3, y+6, z-3, air, 0, 2, 7, 1, 4); //HOUSE ROOF 2
 
-			BuildHelper.buildMeta(world, x+3, y, z-4, air, 0, 2, 9, 5, 4); //PORCH
+			BuildHelper.build(world, x+3, y, z-4, air, 0, 2, 9, 5, 4); //PORCH
 
 			world.setBlock(x + 6, y + 4, z + 5, air, 0, 2);
 			world.setBlock(x + 6, y + 4, z - 5, air, 0, 2);

@@ -1,3 +1,6 @@
+v1.5.4 (n/a)
+- Added Instant Schematic Block.
+
 v1.5.3 (16/11/2014)
 - Added Instant Light Block.
 - Added Instant Skydive Gui.

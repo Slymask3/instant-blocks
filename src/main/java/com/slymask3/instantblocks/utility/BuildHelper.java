@@ -19,8 +19,8 @@ public class BuildHelper {
 	//private ModBlocks ModBlocks = new ModBlocks();
 	//private ModItems mi = new ModItems();
 	
-	public static int checkTick = 0;
-	public static int checkParticle = 0;
+	//public static int checkTick = 0;
+	//public static int checkParticle = 0;
 	
 	/***************
 	 * @INFO	   *
@@ -33,16 +33,13 @@ public class BuildHelper {
 	 * y-# = DOWN  *
 	 ***************/
 	
+	public static void setBlockIfNoBedrock(World world, int x, int y, int z, Block block) {
+		setBlockIfNoBedrock(world, x, y, z, block, 0, 2);
+	}
+	
 	public static void setBlockIfNoBedrock(World world, int x, int y, int z, Block block, int meta, int flag) {
 		if (world.getBlock(x, y, z) != Blocks.bedrock) {
 			world.setBlock(x, y, z, block, meta, flag);
-			world.markBlockForUpdate(x, y, z);
-		}
-	}
-	
-	public static void setBlockIfNoBedrock(World world, int x, int y, int z, Block block) {
-		if (world.getBlock(x, y, z) != Blocks.bedrock) {
-			world.setBlock(x, y, z, block);
 		}
 	}
 	
@@ -134,29 +131,16 @@ public class BuildHelper {
 	}
 	
 	public static void build(World world, int x, int y, int z, Block block, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
-		int z2 = z;
-		int x2 = x;
-		for (int yTimes = 0; yTimes < yTimesTotal; yTimes++) {
-			for (int zTimes = 0; zTimes < zTimesTotal; zTimes++) {
-				for (int xTimes = 0; xTimes < xTimesTotal; xTimes++) {
-					setBlockIfNoBedrock(world, x2, y, z2, block);
-					z2++;
-				}
-				z2 = z;
-				x2++;
-			}
-			x2 = x;
-			y++;
-		}
+		build(world, x, y, z, block, 0, 2, xTimesTotal, yTimesTotal, zTimesTotal);
 	}
 	
-	public static void buildMeta(World world, int x, int y, int z, Block block, int meta, int i, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
+	public static void build(World world, int x, int y, int z, Block block, int meta, int flag, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
 		int z2 = z;
 		int x2 = x;
 		for (int yTimes = 0; yTimes < yTimesTotal; yTimes++) {
 			for (int zTimes = 0; zTimes < zTimesTotal; zTimes++) {
 				for (int xTimes = 0; xTimes < xTimesTotal; xTimes++) {
-					setBlockIfNoBedrock(world, x2, y, z2, block, meta, i);
+					setBlockIfNoBedrock(world, x2, y, z2, block, meta, flag);
 					z2++;
 				}
 				z2 = z;
@@ -168,31 +152,16 @@ public class BuildHelper {
 	}
 	
 	public static void buildClean(World world, int x, int y, int z, Block block, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
-		int z2 = z;
-		int x2 = x;
-		for (int yTimes = 0; yTimes < yTimesTotal; yTimes++) {
-			for (int zTimes = 0; zTimes < zTimesTotal; zTimes++) {
-				for (int xTimes = 0; xTimes < xTimesTotal; xTimes++) {
-					//setBlockIfNoBedrock(world, x2, y, z2, block);
-					world.setBlock(x2, y, z2, block);
-					z2++;
-				}
-				z2 = z;
-				x2++;
-			}
-			x2 = x;
-			y++;
-		}
+		buildClean(world, x, y, z, block, 0, 2, xTimesTotal, yTimesTotal, zTimesTotal);
 	}
 	
-	public static void buildMetaClean(World world, int x, int y, int z, Block block, int meta, int i, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
+	public static void buildClean(World world, int x, int y, int z, Block block, int meta, int flag, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
 		int z2 = z;
 		int x2 = x;
 		for (int yTimes = 0; yTimes < yTimesTotal; yTimes++) {
 			for (int zTimes = 0; zTimes < zTimesTotal; zTimes++) {
 				for (int xTimes = 0; xTimes < xTimesTotal; xTimes++) {
-					//setBlockIfNoBedrock(world, x2, y, z2, block, meta, i);
-					world.setBlock(x2, y, z2, block, meta, i);
+					world.setBlock(x2, y, z2, block, meta, flag);
 					z2++;
 				}
 				z2 = z;
@@ -204,18 +173,15 @@ public class BuildHelper {
 	}
 	
 	public static void buildColorBlock(World world, int x, int y, int z, int xTimesTotal, int yTimesTotal, int zTimesTotal, int c) {
-		//LogHelper.info("c == "+c);
 		int z2 = z;
 		int x2 = x;
 		for (int yTimes = 0; yTimes < yTimesTotal; yTimes++) {
 			for (int zTimes = 0; zTimes < zTimesTotal; zTimes++) {
 				for (int xTimes = 0; xTimes < xTimesTotal; xTimes++) {
-					//setBlockIfNoBedrock(world, x2, y, z2, block, meta, i);
 					world.setBlock(x2, y, z2, ModBlocks.color, 0, 2);
 					try {
 						((TileEntityColor) world.getTileEntity(x2, y, z2)).color = c;
 					} catch(Exception e) {LogHelper.info(e);}
-					//((TileEntityColor) world.getTileEntity(x2, y, z2)).color = 16711680;
 					world.markBlockForUpdate(x2, y, z2);
 					z2++;
 				}
@@ -261,142 +227,11 @@ public class BuildHelper {
 		}
 	}
 	
-	public static boolean b = false;
-	
-	
-	
-	public static boolean b2 = false;
-	
-	
+	/**************************************** WATER/LAVA ************************************************/
 	
 	public static int counter = 0;
 	public static int c2 = 0;
 	public static int c5 = 0;
-	
-	public void buildLiquid(World world, int x, int y, int z, Block block) {
-		c2++;
-		if (c2 < 5000) {
-			System.out.println("went through | counter == " + counter + " | c2 == " + c2);
-		if (world.getBlock(x+1, y, z) == Blocks.air /*|| world.getBlockId(x+1, y, z) == block2*/) {
-			setBlockIfNoBedrock(world, x+1, y, z, block, 0, 2);
-			buildLiquid(world, x+1, y, z, block);
-			counter++;
-			System.out.println("counter == " + counter);
-		}
-		if (world.getBlock(x-1, y, z) == Blocks.air /*|| world.getBlockId(x-1, y, z) == block2*/) {
-			setBlockIfNoBedrock(world, x-1, y, z, block, 0, 2);
-			buildLiquid(world, x-1, y, z, block);
-			counter++;
-			System.out.println("counter == " + counter);
-		}
-		if (world.getBlock(x, y, z+1) == Blocks.air /*|| world.getBlockId(x, y, z+1) == block2*/) {
-			setBlockIfNoBedrock(world, x, y, z+1, block, 0, 2);
-			buildLiquid(world, x, y, z+1, block);
-			counter++;
-			System.out.println("counter == " + counter);
-		}
-		if (world.getBlock(x, y, z-1) == Blocks.air /*|| world.getBlockId(x, y, z-1) == block2*/) {
-			setBlockIfNoBedrock(world, x, y, z-1, block, 0, 2);
-			buildLiquid(world, x, y, z-1, block);
-			counter++;
-			System.out.println("counter == " + counter);
-		}
-		if (world.getBlock(x, y-1, z) == Blocks.air /*|| world.getBlockId(x, y-1, z) == block2*/) {
-			setBlockIfNoBedrock(world, x, y-1, z, block, 0, 2);
-			buildLiquid(world, x, y-1, z, block);
-			counter++;
-			System.out.println("counter == " + counter);
-		}
-		}
-	}
-	
-	public void buildLiquid3(World world, int x, int y, int z, Block block) {
-		c2++;
-		if (c2 < 5000) {
-			System.out.println("went through | counter == " + counter + " | c2 == " + c2);
-		if (world.getBlock(x+1, y, z) == Blocks.air /*|| world.getBlockId(x+1, y, z) == block2*/) {
-			buildLiquid3a(world, x+1, y, z, block);
-		}
-		if (world.getBlock(x-1, y, z) == Blocks.air /*|| world.getBlockId(x-1, y, z) == block2*/) {
-			buildLiquid3a(world, x-1, y, z, block);
-		}
-		if (world.getBlock(x, y, z+1) == Blocks.air /*|| world.getBlockId(x, y, z+1) == block2*/) {
-			buildLiquid3a(world, x, y, z+1, block);
-		}
-		if (world.getBlock(x, y, z-1) == Blocks.air /*|| world.getBlockId(x, y, z-1) == block2*/) {
-			buildLiquid3a(world, x, y, z-1, block);
-		}
-		if (world.getBlock(x, y-1, z) == Blocks.air /*|| world.getBlockId(x, y-1, z) == block2*/) {
-			buildLiquid3a(world, x, y-1, z, block);
-		}
-		}
-	}
-	
-	public void buildLiquid3a(World world, int x, int y, int z, Block block) {
-		setBlockIfNoBedrock(world, x, y, z, block, 0, 2);
-		buildLiquid3(world, x, y, z, block);
-		counter++;
-		System.out.println("counter == " + counter);
-	}
-	
-	public int[] xDone = new int[25000];
-	public int[] yDone = new int[25000];
-	public int[] zDone = new int[25000];
-	public boolean[] checked = new boolean[25000];
-	
-	public boolean checkLiquid4a(int x, int y, int z) {
-		if (xDone[counter] == x && yDone[counter] == y && zDone[counter] == z) {
-			return true;
-		}
-		return false;
-	}
-	
-	public void checkLiquid4(World world, int x, int y, int z, Block block) {
-		c2++;
-		if (c2 < 5000) {
-			System.out.println("went through | counter == " + counter + " | c2 == " + c2);
-			if (world.getBlock(x+1, y, z) == Blocks.air && checkLiquid4a(x+1, y, z) == false/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
-				counter++;
-				System.out.println("counter == " + counter);
-				xDone[counter] = x+1;
-				yDone[counter] = y;
-				zDone[counter] = z;
-				checkLiquid4(world, x+1, y, z, block);
-			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && checkLiquid4a(x-1, y, z) == false/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
-				counter++;
-				System.out.println("counter == " + counter);
-				xDone[counter] = x-1;
-				yDone[counter] = y;
-				zDone[counter] = z;
-				checkLiquid4(world, x-1, y, z, block);
-			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && checkLiquid4a(x, y, z+1) == false/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
-				counter++;
-				System.out.println("counter == " + counter);
-				xDone[counter] = x;
-				yDone[counter] = y;
-				zDone[counter] = z+1;
-				checkLiquid4(world, x, y, z+1, block);
-			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && checkLiquid4a(x, y, z-1) == false/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
-				counter++;
-				System.out.println("counter == " + counter);
-				xDone[counter] = x;
-				yDone[counter] = y;
-				zDone[counter] = z-1;
-				checkLiquid4(world, x, y, z-1, block);
-			}
-			if (world.getBlock(x, y-1, z) == Blocks.air && checkLiquid4a(x, y-1, z) == false/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
-				counter++;
-				System.out.println("counter == " + counter);
-				xDone[counter] = x;
-				yDone[counter] = y-1;
-				zDone[counter] = z;
-				checkLiquid4(world, x, y-1, z, block);
-			}
-		}
-	}
 	
 	public static boolean built = false;
 	

@@ -17,12 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.5.3"
+version = "1.5.4"
 group= "com.slymask3.instantblocks" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "instantblocks"
 
 minecraft {
-    version = "1.7.10-10.13.2.1232"
+    version = "1.7.10-10.13.2.1230"
     runDir = "eclipse"
 }
 
