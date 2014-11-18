@@ -1,5 +1,7 @@
 package com.slymask3.instantblocks;
 
+import java.io.File;
+
 import net.minecraft.command.ICommandManager;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.server.MinecraftServer;
@@ -67,9 +69,11 @@ public class InstantBlocks {
 		ModItems.init();
 		ModBlocks.init();
 		
+		createSchematicsFolder();
+		
 		LogHelper.info("Pre Initialization Complete!");
 	}
-	
+
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.registerInformation();
@@ -92,5 +96,23 @@ public class InstantBlocks {
 		ServerCommandManager serverCommand = ((ServerCommandManager) command);
 		
 		serverCommand.registerCommand(new CommandInstantBlocks());
+	}
+	
+	private void createSchematicsFolder() {
+		File theDir = new File("schematics");
+
+		if (!theDir.exists()) {
+		    LogHelper.info("Creating /schematics/ directory.");
+		    boolean result = false;
+
+		    try{
+		    	theDir.mkdir();
+		        result = true;
+		    } catch(SecurityException se){}  
+		    
+		    if(result) { 
+		    	LogHelper.info("/schematics/ directory created.");
+		    }
+		}
 	}
 }

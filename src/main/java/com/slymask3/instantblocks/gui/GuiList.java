@@ -40,9 +40,19 @@ public class GuiList extends Gui
     /** True if this textbox is visible */
     private boolean visible = true;
     //private static final String __OBFID = "CL_00000670";
-    
+
+    private int xScrollOriginal;
+    private int yScrollOriginal;
     private int xScroll;
     private int yScroll;
+
+    private int xText;
+    private int yText;
+    
+    private int colorScroll = getColor(0, 255, 255)*-1;
+    
+    private boolean drag;
+    private float dragY;
     
     private ArrayList<String> contents = new ArrayList<String>();
 
@@ -53,10 +63,18 @@ public class GuiList extends Gui
         this.yPosition = y;
         this.width = width;
         this.height = height;
+        this.xScrollOriginal = x + width - 12;
+        this.yScrollOriginal = y;
         this.xScroll = x + width - 12;
         this.yScroll = y;
+        this.xText = x+2;
+        this.yText = y+2;
     }
 
+    public int getColor(int r, int g, int b) {
+		return (r * 65536) + (g * 256) + b;
+	}
+    
 //    /**
 //     * Increments the cursor counter ????
 //     */
@@ -85,13 +103,61 @@ public class GuiList extends Gui
      * Args: x, y, buttonClicked
      */
     public void mouseClicked(int x, int y, int clicked) {
-        boolean flag = x >= this.xPosition && x < this.xPosition + this.width && y >= this.yPosition && y < this.yPosition + this.height;
+        boolean onScroll = x >= this.xScroll && x <= this.xPosition + this.xScroll+12 && y >= this.yScrollOriginal && y <= this.yScrollOriginal + height;
 
+        if (onScroll) {
+        	this.colorScroll = getColor(0, 255, 0)*-1;
+        	this.yScroll=y-6;
+        	
+        	this.yText = y+6;
+        } else {
+        	this.colorScroll = getColor(0, 255, 255)*-1;
+        	
+        	
+        }
         
+        if(this.yScroll < this.yScrollOriginal) {
+        	this.yScroll = this.yScrollOriginal;
+        }
+        
+        if(this.yScroll+15 > this.yScrollOriginal+height) {
+        	this.yScroll = this.yScrollOriginal+width-15;
+        }
+        
+        if (y >= this.yScroll && y <= this.yScroll + 15){
+			//drag = true;
+			//dragY = y;
+			
+			this.yScroll=y-6;
+			
+//			int listRight = width / 2 + 124;
+//			int scrollRight = listRight + 6;
+//			if(mouseX >= listRight && mouseX <= scrollRight) {
+//				scrollMultiplier = -1F;
+//				int contentHeight = getContentHeight() - (bottom - top - 4);
+//				if(contentHeight < 1) {
+//					contentHeight = 1;
+//				}
+//				int i4 = (int)((float)((bottom - top) * (bottom - top)) / (float)getContentHeight());
+//				if(i4 < 32) {
+//					i4 = 32;
+//				}
+//				if(i4 > bottom - top - 8) {
+//					i4 = bottom - top - 8;
+//				}
+//				scrollMultiplier /= (float)(bottom - top - i4) / (float)contentHeight;
+			//} else {
+				//scrollMultiplier = 1F;
+			//}
+		}
+    }
+    
+    public void mouseMovedOrUp(int mouseX, int mouseY, int button){
+    	
     }
 
     public void drawString(String text, int x, int y, int color) {
-    	if(y < this.yPosition + this.height) {
+    	if(y+8 < this.yPosition + this.height && y > this.yPosition) {
     		this.font.drawStringWithShadow(text, x, y, color);
     	} else {
     		//do not print
@@ -106,7 +172,6 @@ public class GuiList extends Gui
     	//this.drawTexturedModelRectFromIcon(p_94065_1_, p_94065_2_, p_94065_3_, p_94065_4_, p_94065_5_)
     }
     
-    
     public void drawList()
     {
         if (this.getVisible())
@@ -114,21 +179,23 @@ public class GuiList extends Gui
 
             drawRect(this.xPosition - 1, this.yPosition - 1, this.xPosition + this.width + 1, this.yPosition + this.height + 1, -6250336);
             drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, -16777216);
+            
+            drawRect(this.xPosition+width-12-1, this.yPosition-1, this.xPosition+this.width+1, this.yPosition + this.height+1, getColor(0, 0, 200)*-1); //scrollbar backgroudn border
+            drawRect(this.xPosition+width-12, this.yPosition, this.xPosition+width, this.yPosition + this.height, getColor(200, 0, 0)*-1); //scrollbar background
+            drawRect(this.xScroll, this.yScroll, this.xScroll + 12, this.yScroll + 15, this.colorScroll); //scrollbar
 
-            int x1 = this.xPosition + 2;
-            int y1 = this.yPosition + 2;
+            //int x1 = this.xPosition + 2;
+            //int y1 = this.yPosition + 2;
             
             if(!contents.isEmpty()) {
 	            for(int i=0; i<contents.size(); i++) {
-	            	drawString(getLine(i), x1, y1+(i*10), this.color);
+	            	drawString(getLine(i), xText, yText+(i*10), this.color);
 	            }
             }
             
             //this.drawTexturedModelRectFromIcon(p_94065_1_, p_94065_2_, p_94065_3_, p_94065_4_, p_94065_5_)
 
-            drawRect(this.xPosition+width-12-1, this.yPosition-1, this.xPosition+this.width+1, this.yPosition + this.height+1, 0x000099); //scrollbar backgroudn border
-            drawRect(this.xPosition+width-12, this.yPosition, this.xPosition+width, this.yPosition + this.height, 0x990000); //scrollbar background
-            drawRect(this.xScroll, this.yScroll, this.xScroll + 12, this.yScroll + 15, 0x00FFFF); //scrollbar
+            
             
             //LogHelper.info(contents.size());
             
