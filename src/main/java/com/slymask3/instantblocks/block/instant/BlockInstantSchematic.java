@@ -7,9 +7,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.slymask3.instantblocks.InstantBlocks;
@@ -38,6 +41,24 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
         setBlockTextureName(Textures.Harvest.SIDE0);
 	}
 
+	public static IIcon top;
+	public static IIcon side;
+    
+	public void registerBlockIcons(IIconRegister ir) {
+		top = ir.registerIcon(Textures.Schematic.TOP);
+		side = ir.registerIcon(Textures.Schematic.SIDE);
+	}
+    
+	public IIcon getIcon(int side, int meta) {
+		if (side == 0) {
+			return Blocks.planks.getIcon(0, 5);
+		} else if (side == 1) {
+			return top;
+		} else {
+			return this.side;
+		}
+	}
+	
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
 		return new TileEntitySchematic();
@@ -62,13 +83,13 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 		return true;
 	}
 	
-	public void build(World world, int x, int y, int z, int meta, String playerS, String schematic, boolean center) {
+	public void build(World world, int x, int y, int z, int meta, String playerS, String schematic, boolean center, boolean ignoreAir) {
 		EntityPlayer player = world.getPlayerEntityByName(playerS);
 		
 		try{
 			File f = new File("schematics/"+schematic+".schematic");
 			
-			SchematicHelper.loadSchematic(world, x, y ,z, f, center);
+			SchematicHelper.loadSchematic(world, x, y ,z, f, center, ignoreAir);
 			
 			ItemStack is = player.getCurrentEquippedItem();
 	    	

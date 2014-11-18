@@ -14,14 +14,14 @@ public class PacketSchematic extends AbstractPacket {
 	int _dim, _x, _y, _z;
 	String _player;
 	String _schematic;
-	boolean _center;
+	boolean _center, _air;
 	
 
 	public PacketSchematic() {
 		
 	}
 
-	public PacketSchematic(World world, int x, int y, int z, String player, String schematic, boolean center) {
+	public PacketSchematic(World world, int x, int y, int z, String player, String schematic, boolean center, boolean air) {
 		_dim = world.provider.dimensionId;
 		_x = x;
 		_y = y;
@@ -29,6 +29,7 @@ public class PacketSchematic extends AbstractPacket {
 		_player = player;
 		_schematic = schematic;
 		_center = center;
+		_air = air;
 	}
 
 	@Override
@@ -40,6 +41,7 @@ public class PacketSchematic extends AbstractPacket {
 		ByteBufUtils.writeUTF8String(buffer, _player);
 		ByteBufUtils.writeUTF8String(buffer, _schematic);
 		buffer.writeBoolean(_center);
+		buffer.writeBoolean(_air);
 	}
 
 	@Override
@@ -51,6 +53,7 @@ public class PacketSchematic extends AbstractPacket {
 		_player = ByteBufUtils.readUTF8String(buffer);
 		_schematic = ByteBufUtils.readUTF8String(buffer);
 		_center = buffer.readBoolean();
+		_air = buffer.readBoolean();
 	}
 
 	@Override
@@ -62,6 +65,6 @@ public class PacketSchematic extends AbstractPacket {
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
 		BlockInstantSchematic block = (BlockInstantSchematic)world.getBlock(_x, _y, _z);
-		block.build(world, _x, _y, _z, world.getTileEntity(_x, _y, _z).getBlockMetadata(), _player, this._schematic, this._center);
+		block.build(world, _x, _y, _z, world.getTileEntity(_x, _y, _z).getBlockMetadata(), _player, this._schematic, this._center, this._air);
 	}
 }

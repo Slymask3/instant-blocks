@@ -204,7 +204,35 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 				imageURL = new URL("http://skins.minecraft.net/MinecraftSkins/"+username+".png");
 		        img = ImageIO.read(imageURL);
 		        
+//		        IIcon test = Blocks.crafting_table.getIcon(1, 0);
+//
+//		        LogHelper.info(test.getIconName());
+//		        LogHelper.info(test.getIconWidth());
+//		        LogHelper.info(test.getIconHeight());
+//		        
+
+				world.setBlock(x, y, z, Blocks.air);
 		        
+		        buildHead(world, x, y, z, img, meta, head, rgb);
+		        buildBody(world, x, y, z, img, meta, body, rgb);
+		        buildArms(world, x, y, z, img, meta, armLeft, armRight, rgb);
+		        buildLegs(world, x, y, z, img, meta, legLeft, legRight, rgb);
+		        
+		        //BuildHelper.buildColorBlock(world, x-5, y, z-2, 5, 3, 1, 0xFF0000); //WALL
+		        
+		        //LogHelper.info(ColorHelper.getColorAt(img, 0, 0));
+		        
+		        IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
+		        //IBHelper.xp(world, player, ConfigurationHandler.xp);
+		        IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		        //IBHelper.effectFull(world, "reddust", x, y, z);
+		        //IBHelper.msg(player, "\u00a7aInstant Statue created of the player '" + username + "'.", Colors.a);
+				
+				ItemStack is = player.getCurrentEquippedItem();
+				
+				if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+					is.damageItem(1, player);
+				}
 				
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
@@ -212,29 +240,6 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 			} catch (IOException e) {
 				e.printStackTrace();
 				IBHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
-			}
-			
-			world.setBlock(x, y, z, Blocks.air);
-	        
-	        buildHead(world, x, y, z, img, meta, head, rgb);
-	        buildBody(world, x, y, z, img, meta, body, rgb);
-	        buildArms(world, x, y, z, img, meta, armLeft, armRight, rgb);
-	        buildLegs(world, x, y, z, img, meta, legLeft, legRight, rgb);
-	        
-	        //BuildHelper.buildColorBlock(world, x-5, y, z-2, 5, 3, 1, 0xFF0000); //WALL
-	        
-	        //LogHelper.info(ColorHelper.getColorAt(img, 0, 0));
-	        
-	        IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
-	        //IBHelper.xp(world, player, ConfigurationHandler.xp);
-	        IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
-	        //IBHelper.effectFull(world, "reddust", x, y, z);
-	        //IBHelper.msg(player, "\u00a7aInstant Statue created of the player '" + username + "'.", Colors.a);
-			
-			ItemStack is = player.getCurrentEquippedItem();
-			
-			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
-				is.damageItem(1, player);
 			}
 		}
 	}
