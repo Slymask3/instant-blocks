@@ -9,6 +9,7 @@ import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
 import com.slymask3.instantblocks.tileentity.TileEntitySchematic;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
+import com.slymask3.instantblocks.tileentity.TileEntityTree;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
@@ -47,6 +48,8 @@ public class GuiHandler implements IGuiHandler {
         	return new GuiSkydive(player, (TileEntitySkydive) e, world, x, y, z);
         } else if (ID == GuiID.SCHEMATIC.ordinal()) {
         	return new GuiSchematic(player, (TileEntitySchematic) e, world, x, y, z);
+        } else if (ID == GuiID.TREE.ordinal()) {
+        	return new GuiTree(player, (TileEntityTree) e, world, x, y, z);
         }
 
         return null;

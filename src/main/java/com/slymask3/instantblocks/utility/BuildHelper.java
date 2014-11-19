@@ -134,6 +134,10 @@ public class BuildHelper {
 		build(world, x, y, z, block, 0, 2, xTimesTotal, yTimesTotal, zTimesTotal);
 	}
 	
+	public static void build(World world, int x, int y, int z, Block block, int meta, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
+		build(world, x, y, z, block, meta, 2, xTimesTotal, yTimesTotal, zTimesTotal);
+	}
+	
 	public static void build(World world, int x, int y, int z, Block block, int meta, int flag, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
 		int z2 = z;
 		int x2 = x;

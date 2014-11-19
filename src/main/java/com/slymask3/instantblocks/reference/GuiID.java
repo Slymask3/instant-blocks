@@ -4,5 +4,6 @@ public enum GuiID {
     STATUE,
     HARVEST,
     SKYDIVE,
-    SCHEMATIC;
+    SCHEMATIC,
+    TREE;
 }

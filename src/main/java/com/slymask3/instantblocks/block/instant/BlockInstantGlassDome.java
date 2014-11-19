@@ -1,27 +1,15 @@
 package com.slymask3.instantblocks.block.instant;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.BlockIB;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.utility.BuildHelper;
 
 public class BlockInstantGlassDome extends BlockIB {
 	

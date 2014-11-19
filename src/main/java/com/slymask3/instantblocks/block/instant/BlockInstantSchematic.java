@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.GuiID;
@@ -98,6 +99,14 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 					is.damageItem(1, player);
 				}
 			}
+			
+			world.setBlock(x, y, z, Blocks.air);
+			
+			IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibSchematic);
+    		IBHelper.xp(world, player, ConfigurationHandler.xp);
+    		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+    		IBHelper.effectFull(world, "reddust", x, y, z);
+			
 		} catch(Exception e) {}
 		
 	}

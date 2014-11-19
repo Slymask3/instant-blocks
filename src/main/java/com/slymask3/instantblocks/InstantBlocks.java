@@ -25,6 +25,7 @@ import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
 import com.slymask3.instantblocks.tileentity.TileEntitySchematic;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
+import com.slymask3.instantblocks.tileentity.TileEntityTree;
 import com.slymask3.instantblocks.utility.LogHelper;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -61,6 +62,7 @@ public class InstantBlocks {
 		TileEntity.addMapping(TileEntitySkydive.class, "TileEntitySkydive");
 		TileEntity.addMapping(TileEntityColorLadder.class, "TileEntityColorLadder");
 		TileEntity.addMapping(TileEntitySchematic.class, "TileEntitySchematic");
+		TileEntity.addMapping(TileEntityTree.class, "TileEntityTree");
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		

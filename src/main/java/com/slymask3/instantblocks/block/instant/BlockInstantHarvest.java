@@ -2,6 +2,8 @@ package com.slymask3.instantblocks.block.instant;
 
 import java.util.Random;
 
+import scala.actors.threadpool.Arrays;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
@@ -116,6 +118,8 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 		
 		//if (canHarvest(world, x, y, z, ConfigurationHandler.radiusHarvest, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant)) {
 			harvest(world, x, y, z, ConfigurationHandler.radiusHarvest, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant);
+			
+			//organizeChest(world, x, y, z);
 			
 	        IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
 			
@@ -308,6 +312,40 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
             y--;
         }
     }
+	
+//	public void organizeChest(World world, int x, int y, int z) {
+//		TileEntityChest chest = (TileEntityChest)world.getTileEntity(x, y, z);
+//		
+//		ItemStack is[] = new ItemStack[chest.getSizeInventory()];
+//		
+//		for(int i=0; i<is.length; i++) {
+//			is[i] = chest.getStackInSlot(i);
+//		}
+//		
+//		LogHelper.info(is.toString());
+//		
+//		//Arrays.sort(is);
+//		
+//		//is = sort(is);
+//		
+//		//chest.
+//		
+//		
+//		
+//		is[0].getDisplayName();
+//		is[0].getItem().
+//		
+//		
+//		for(int i=0; i<is.length; i++) {
+//			chest.setInventorySlotContents(i, is[i]);
+//		}
+//
+//		LogHelper.info(is.toString());
+//	}
+	
+//	public ItemStack[] sort(ItemStack[] is) {
+//		
+//	}
 	
 //	public boolean canHarvest(World world, int X, int Y, int Z, int radius, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
 //		int amount = 0;

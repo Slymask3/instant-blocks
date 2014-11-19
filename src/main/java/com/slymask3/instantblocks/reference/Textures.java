@@ -92,6 +92,10 @@ public class Textures {
         public static final String TOP = FOLDER + "schematic_top";
         public static final String SIDE = FOLDER + "schematic_side";
     }
+    
+    public static final class Tree {
+        public static final String SIDE = FOLDER + "tree";
+    }
 
     public static final class Color {
         public static final String SIDE = "wool_colored_white";
