@@ -221,6 +221,10 @@ public class CommandInstantBlocks extends CommandBase {
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aLights up dark areas in a radius configurable in the config."));
     		player.addChatMessage(new ChatComponentText("\u00a72Radius: \u00a7a" + config.radiusLight + "."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a77N/A."));
+    	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibSchematic)) {
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Schematic Block"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aGenerates any .schematic file from the /schematics/ folder."));
+    		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7cNo."));
     	}
     	
     	//OTHER

@@ -24,7 +24,8 @@ public class Loot {
 		ModBlocks.ibRail,
 		ModBlocks.ibStatue,
 		ModBlocks.ibHarvest,
-		ModBlocks.ibLight
+		ModBlocks.ibLight,
+		ModBlocks.ibSchematic
 	};
 	
 	public static void init() {

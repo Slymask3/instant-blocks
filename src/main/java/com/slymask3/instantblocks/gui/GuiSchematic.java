@@ -74,8 +74,6 @@ public class GuiSchematic extends GuiScreen {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		
-		
 	}
 
 	@Override

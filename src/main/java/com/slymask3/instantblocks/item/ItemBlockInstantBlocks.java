@@ -84,6 +84,9 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Lights up dark areas in a radius.");
 			list.add("Radius: " + ConfigurationHandler.radiusLight);
 			list.add("Right-click to activate.");
+		} else if (block == ModBlocks.ibSchematic) {
+			list.add("Creates a structure from any schematic file.");
+			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.color) {
 			list.add("This block is used by Instant Skydive and Statue.");
 			list.add("When placed, will generate with a random color.");

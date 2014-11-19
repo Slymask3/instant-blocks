@@ -177,10 +177,20 @@ public class Recipes {
 			
 			GameRegistry.addRecipe(new ItemStack(mb.ibLight, 1), new Object[] {
 				"TTT",
-				"TCT", //Harvest
+				"TCT", //Light
 				"TTT",
 				Character.valueOf('T'), Blocks.torch,
 				Character.valueOf('C'), Blocks.coal_block
+			});
+			
+			GameRegistry.addRecipe(new ItemStack(mb.ibSchematic, 1), new Object[] {
+				"LDL",
+				"LPL", //Schematic
+				"WWW",
+				Character.valueOf('L'), new ItemStack(Items.dye, 1, 4),
+				Character.valueOf('D'), Items.diamond,
+				Character.valueOf('P'), Items.paper,
+				Character.valueOf('W'), new ItemStack(Blocks.planks, 1, 5),
 			});
 			
 			////////////////// WANDS ////////////////////

@@ -46,7 +46,6 @@ public class GuiHandler implements IGuiHandler {
         } else if (ID == GuiID.SKYDIVE.ordinal()) {
         	return new GuiSkydive(player, (TileEntitySkydive) e, world, x, y, z);
         } else if (ID == GuiID.SCHEMATIC.ordinal()) {
-        	//return new GuiListTest();
         	return new GuiSchematic(player, (TileEntitySchematic) e, world, x, y, z);
         }
 

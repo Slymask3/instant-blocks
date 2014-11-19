@@ -23,8 +23,8 @@ public class SchematicHelper {
             byte[] blocks = nbtdata.getByteArray("Blocks");
             byte[] data = nbtdata.getByteArray("Data");
  
-            NBTTagList entities = nbtdata.getTagList("Entities", 0);
-            NBTTagList tileentities = nbtdata.getTagList("TileEntities", 0);
+            //NBTTagList entities = nbtdata.getTagList("Entities", 0);
+            //NBTTagList tileentities = nbtdata.getTagList("TileEntities", 0);
             
             fis.close();
             
@@ -40,14 +40,14 @@ public class SchematicHelper {
 //                System.out.println("Block "+i+" - ID: "+blocks[i]+", Meta: "+data[i]);
 //            }
             
-            buildSchematic(world, x, y, z, width, height, length, blocks, data, entities, tileentities, center, ignoreAir);
+            buildSchematic(world, x, y, z, width, height, length, blocks, data, center, ignoreAir);
             
         } catch (Exception e) {
         	LogHelper.info("Couldn't load schematic.");
         }
     }
     
-    public static void buildSchematic(World world, int X, int Y, int Z, short width, short height, short length, byte[] block, byte meta[], NBTTagList entities, NBTTagList tileentities, boolean center, boolean ignoreAir) {
+    public static void buildSchematic(World world, int X, int Y, int Z, short width, short height, short length, byte[] block, byte meta[], boolean center, boolean ignoreAir) {
     	for (int x = 0; x < width; ++x) {
 	        for (int y = 0; y < height; ++y) {
 	            for (int z = 0; z < length; ++z) {
