@@ -214,6 +214,9 @@ public class GuiTree extends GuiScreen {
     	case 4: return "Big Jungle Tree";
     	case 5: return "Acacia Tree";
     	case 6: return "Dark Oak Tree";
+    	case 7: return "Reverse Tree";
+    	case 8: return "Glass Tree";
+    	case 9: return "Error";
 	    default: return "Error";
     	}
     }
@@ -240,28 +243,11 @@ public class GuiTree extends GuiScreen {
         /** The FontRenderer used by GuiScreen */
         return fontRendererObj;
     }
-
-
-    private void setGenerate(int tree) {
-    	switch(tree) {
-    	case 0: this.done.enabled = true;
-    	case 1: this.done.enabled = true;
-    	case 2: this.done.enabled = true;
-    	case 3: this.done.enabled = true;
-    	case 4: this.done.enabled = false;
-    	case 5: this.done.enabled = true;
-    	case 6: this.done.enabled = true;
-    	case 7: this.done.enabled = false;
-    	case 8: this.done.enabled = false;
-    	case 9: this.done.enabled = false;
-	    default: this.done.enabled = false;
-    	}
-    }
     
     public void selectSchematicIndex(int var1)
     {
         this.selected=var1;
-        if ((var1>=0 && var1<=3) || (var1>=5 && var1<=6)) {
+        if ((var1>=0 && var1<=3) || (var1>=5 && var1<=8)) {
             this.selectedTree=trees[selected];
             this.done.enabled = true;
         } else {

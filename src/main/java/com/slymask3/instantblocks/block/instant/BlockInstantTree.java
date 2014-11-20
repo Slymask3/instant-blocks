@@ -112,6 +112,10 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
 			buildAcacia(world, x, y, z, fullLog, fullLeaves, air);
 		} else if (type == 6) { //IF DARK OAK
 			buildDarkOak(world, x, y, z, fullLog, fullLeaves, air);
+		} else if (type == 7) { //IF REVERSE
+			buildReverse(world, x, y, z, fullLog, fullLeaves, air);
+		} else if (type == 8) { //IF GLASS
+			buildGlass(world, x, y, z, fullLog, fullLeaves, air);
 		}
 		
 		
@@ -323,6 +327,173 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
 	
 	public void buildDarkOak(World world, int x, int y, int z, boolean fullLog, boolean fullLeaves, boolean air) {
 		
+	}
+	
+	
+	
+	
+	public void buildReverse(World world, int x, int y, int z, boolean fullLog, boolean fullLeaves, boolean air) {
+		/************************************************************* up   down  north south east  west */
+		buildLog(world, x+4*0, y+4*0, z+4*0, Blocks.leaves, 4, fullLog, air, false, true, true, true, true, true);
+		buildLog(world, x+4*0, y+4*1, z+4*0, Blocks.leaves, 4, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+4*0, y+4*2, z+4*0, Blocks.leaves, 4, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+4*0, y+4*3, z+4*0, Blocks.leaves, 4, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+4*0, y+4*4, z+4*0, Blocks.leaves, 4, fullLog, air, true, false, true, true, true, true);
+		
+		/** first layer **/
+		buildLeaves(world, x+4*2, y+4*2, z+4*1, Blocks.log, 0, fullLeaves, air, false, true, false, true, true, false);
+		buildLeaves(world, x+4*2, y+4*2, z+4*0, Blocks.log, 0, fullLeaves, air, false, true, false, false, true, false);
+		buildLeaves(world, x+4*2, y+4*2, z-4*1, Blocks.log, 0, fullLeaves, air, false, true, true, false, true, false);
+		
+		buildLeaves(world, x+4*1, y+4*2, z+4*2, Blocks.log, 0, fullLeaves, air, false, true, false, true, true, false);
+		buildLeaves(world, x+4*1, y+4*2, z+4*1, Blocks.log, 0, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+4*1, y+4*2, z+4*0, Blocks.log, 0, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+4*1, y+4*2, z-4*1, Blocks.log, 0, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+4*1, y+4*2, z-4*2, Blocks.log, 0, fullLeaves, air, false, true, true, false, true, false);
+		
+		buildLeaves(world, x+4*0, y+4*2, z+4*2, Blocks.log, 0, fullLeaves, air, false, true, false, true, false, false);
+		buildLeaves(world, x+4*0, y+4*2, z+4*1, Blocks.log, 0, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+4*0, y+4*2, z-4*1, Blocks.log, 0, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+4*0, y+4*2, z-4*2, Blocks.log, 0, fullLeaves, air, false, true, true, false, false, false);
+
+		buildLeaves(world, x-4*1, y+4*2, z+4*2, Blocks.log, 0, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x-4*1, y+4*2, z+4*1, Blocks.log, 0, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-4*1, y+4*2, z+4*0, Blocks.log, 0, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-4*1, y+4*2, z-4*1, Blocks.log, 0, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-4*1, y+4*2, z-4*2, Blocks.log, 0, fullLeaves, air, false, true, true, false, false, false);
+
+		buildLeaves(world, x-4*2, y+4*2, z+4*1, Blocks.log, 0, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x-4*2, y+4*2, z+4*0, Blocks.log, 0, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-4*2, y+4*2, z-4*1, Blocks.log, 0, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-4*2, y+4*2, z-4*2, Blocks.log, 0, fullLeaves, air, true, true, true, false, false, true);
+		
+		/** second layer **/
+		buildLeaves(world, x+4*2, y+4*3, z+4*1, Blocks.log, 0, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+4*2, y+4*3, z+4*0, Blocks.log, 0, fullLeaves, air, true, false, false, false, true, false);
+		buildLeaves(world, x+4*2, y+4*3, z-4*1, Blocks.log, 0, fullLeaves, air, true, false, true, false, true, false);
+		
+		buildLeaves(world, x+4*1, y+4*3, z+4*2, Blocks.log, 0, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+4*1, y+4*3, z+4*1, Blocks.log, 0, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+4*1, y+4*3, z+4*0, Blocks.log, 0, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+4*1, y+4*3, z-4*1, Blocks.log, 0, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+4*1, y+4*3, z-4*2, Blocks.log, 0, fullLeaves, air, true, false, true, false, true, false);
+		
+		buildLeaves(world, x+4*0, y+4*3, z+4*2, Blocks.log, 0, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x+4*0, y+4*3, z+4*1, Blocks.log, 0, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+4*0, y+4*3, z-4*1, Blocks.log, 0, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+4*0, y+4*3, z-4*2, Blocks.log, 0, fullLeaves, air, true, false, true, false, false, false);
+
+		buildLeaves(world, x-4*1, y+4*3, z+4*2, Blocks.log, 0, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x-4*1, y+4*3, z+4*1, Blocks.log, 0, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-4*1, y+4*3, z+4*0, Blocks.log, 0, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-4*1, y+4*3, z-4*1, Blocks.log, 0, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-4*1, y+4*3, z-4*2, Blocks.log, 0, fullLeaves, air, true, false, true, false, false, true);
+
+		buildLeaves(world, x-4*2, y+4*3, z+4*2, Blocks.log, 0, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-4*2, y+4*3, z+4*1, Blocks.log, 0, fullLeaves, air, true, false, false, false, false, true);
+		buildLeaves(world, x-4*2, y+4*3, z+4*0, Blocks.log, 0, fullLeaves, air, true, false, false, false, false, true);
+		buildLeaves(world, x-4*2, y+4*3, z-4*1, Blocks.log, 0, fullLeaves, air, true, false, true, false, false, true);
+		
+		/** third layer **/
+		buildLeaves(world, x+4*1, y+4*4, z+4*0, Blocks.log, 0, fullLeaves, air, false, false, true, true, true, false);
+
+		buildLeaves(world, x+4*0, y+4*4, z+4*1, Blocks.log, 0, fullLeaves, air, false, false, false, true, true, false);
+		buildLeaves(world, x+4*0, y+4*4, z-4*1, Blocks.log, 0, fullLeaves, air, false, false, true, false, true, false);
+
+		buildLeaves(world, x-4*1, y+4*4, z+4*1, Blocks.log, 0, fullLeaves, air, true, false, false, true, false, true);
+		buildLeaves(world, x-4*1, y+4*4, z+4*0, Blocks.log, 0, fullLeaves, air, false, false, false, false, false, true);
+		buildLeaves(world, x-4*1, y+4*4, z-4*1, Blocks.log, 0, fullLeaves, air, true, false, true, false, false, true);
+		
+		/** fourth layer **/
+		buildLeaves(world, x+4*1, y+4*5, z+4*0, Blocks.log, 0, fullLeaves, air, true, false, true, true, true, false);
+
+		buildLeaves(world, x+4*0, y+4*5, z+4*1, Blocks.log, 0, fullLeaves, air, true, false, false, true, true, true);
+		buildLeaves(world, x+4*0, y+4*5, z+4*0, Blocks.log, 0, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+4*0, y+4*5, z-4*1, Blocks.log, 0, fullLeaves, air, true, false, true, false, true, true);
+
+		buildLeaves(world, x-4*1, y+4*5, z+4*0, Blocks.log, 0, fullLeaves, air, true, false, true, true, false, true);
+	}
+	
+	public void buildGlass(World world, int x, int y, int z, boolean fullLog, boolean fullLeaves, boolean air) {
+		/************************************************************* up   down  north south east  west */
+		buildLog(world, x+4*0, y+4*0, z+4*0, Blocks.stained_glass, 12, fullLog, air, false, true, true, true, true, true);
+		buildLog(world, x+4*0, y+4*1, z+4*0, Blocks.stained_glass, 12, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+4*0, y+4*2, z+4*0, Blocks.stained_glass, 12, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+4*0, y+4*3, z+4*0, Blocks.stained_glass, 12, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+4*0, y+4*4, z+4*0, Blocks.stained_glass, 12, fullLog, air, true, false, true, true, true, true);
+		
+		/** first layer **/
+		buildLeaves(world, x+4*2, y+4*2, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, true, true, false);
+		buildLeaves(world, x+4*2, y+4*2, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, false, true, false);
+		buildLeaves(world, x+4*2, y+4*2, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, false, true, true, false, true, false);
+		
+		buildLeaves(world, x+4*1, y+4*2, z+4*2, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, true, true, false);
+		buildLeaves(world, x+4*1, y+4*2, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+4*1, y+4*2, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+4*1, y+4*2, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+4*1, y+4*2, z-4*2, Blocks.stained_glass, 13, fullLeaves, air, false, true, true, false, true, false);
+		
+		buildLeaves(world, x+4*0, y+4*2, z+4*2, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, true, false, false);
+		buildLeaves(world, x+4*0, y+4*2, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+4*0, y+4*2, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+4*0, y+4*2, z-4*2, Blocks.stained_glass, 13, fullLeaves, air, false, true, true, false, false, false);
+
+		buildLeaves(world, x-4*1, y+4*2, z+4*2, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x-4*1, y+4*2, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-4*1, y+4*2, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-4*1, y+4*2, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-4*1, y+4*2, z-4*2, Blocks.stained_glass, 13, fullLeaves, air, false, true, true, false, false, false);
+
+		buildLeaves(world, x-4*2, y+4*2, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x-4*2, y+4*2, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-4*2, y+4*2, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-4*2, y+4*2, z-4*2, Blocks.stained_glass, 13, fullLeaves, air, true, true, true, false, false, true);
+		
+		/** second layer **/
+		buildLeaves(world, x+4*2, y+4*3, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+4*2, y+4*3, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, true, false, false, false, true, false);
+		buildLeaves(world, x+4*2, y+4*3, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, true, false, true, false, true, false);
+		
+		buildLeaves(world, x+4*1, y+4*3, z+4*2, Blocks.stained_glass, 13, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+4*1, y+4*3, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+4*1, y+4*3, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+4*1, y+4*3, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+4*1, y+4*3, z-4*2, Blocks.stained_glass, 13, fullLeaves, air, true, false, true, false, true, false);
+		
+		buildLeaves(world, x+4*0, y+4*3, z+4*2, Blocks.stained_glass, 13, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x+4*0, y+4*3, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+4*0, y+4*3, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+4*0, y+4*3, z-4*2, Blocks.stained_glass, 13, fullLeaves, air, true, false, true, false, false, false);
+
+		buildLeaves(world, x-4*1, y+4*3, z+4*2, Blocks.stained_glass, 13, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x-4*1, y+4*3, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-4*1, y+4*3, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-4*1, y+4*3, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-4*1, y+4*3, z-4*2, Blocks.stained_glass, 13, fullLeaves, air, true, false, true, false, false, true);
+
+		buildLeaves(world, x-4*2, y+4*3, z+4*2, Blocks.stained_glass, 13, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-4*2, y+4*3, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, true, false, false, false, false, true);
+		buildLeaves(world, x-4*2, y+4*3, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, true, false, false, false, false, true);
+		buildLeaves(world, x-4*2, y+4*3, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, true, false, true, false, false, true);
+		
+		/** third layer **/
+		buildLeaves(world, x+4*1, y+4*4, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, false, false, true, true, true, false);
+
+		buildLeaves(world, x+4*0, y+4*4, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, false, false, false, true, true, false);
+		buildLeaves(world, x+4*0, y+4*4, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, false, false, true, false, true, false);
+
+		buildLeaves(world, x-4*1, y+4*4, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, true, false, false, true, false, true);
+		buildLeaves(world, x-4*1, y+4*4, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, false, false, false, false, false, true);
+		buildLeaves(world, x-4*1, y+4*4, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, true, false, true, false, false, true);
+		
+		/** fourth layer **/
+		buildLeaves(world, x+4*1, y+4*5, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, true, false, true, true, true, false);
+
+		buildLeaves(world, x+4*0, y+4*5, z+4*1, Blocks.stained_glass, 13, fullLeaves, air, true, false, false, true, true, true);
+		buildLeaves(world, x+4*0, y+4*5, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+4*0, y+4*5, z-4*1, Blocks.stained_glass, 13, fullLeaves, air, true, false, true, false, true, true);
+
+		buildLeaves(world, x-4*1, y+4*5, z+4*0, Blocks.stained_glass, 13, fullLeaves, air, true, false, true, true, false, true);
 	}
 	
 	

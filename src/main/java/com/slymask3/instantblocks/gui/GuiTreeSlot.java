@@ -62,8 +62,8 @@ public class GuiTreeSlot extends GuiScrollingList {
     	case 4: return "Big Jungle Tree - Coming Soon";
     	case 5: return "Acacia Tree";
     	case 6: return "Dark Oak Tree";
-    	case 7: return "Coming Soon";
-    	case 8: return "Coming Soon";
+    	case 7: return "Reverse Tree";
+    	case 8: return "Glass Tree";
     	case 9: return "Coming Soon";
 	    default: return "Error";
     	}
@@ -78,8 +78,8 @@ public class GuiTreeSlot extends GuiScrollingList {
     	case 4: return 0xAA0000;
     	case 5: return 0xFFFFFF;
     	case 6: return 0xFFFFFF;
-    	case 7: return 0xAA0000;
-    	case 8: return 0xAA0000;
+    	case 7: return 0xFFFFFF;
+    	case 8: return 0xFFFFFF;
     	case 9: return 0xAA0000;
 	    default: return 0xAA0000;
     	}
