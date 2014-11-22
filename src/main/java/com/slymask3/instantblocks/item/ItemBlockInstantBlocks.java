@@ -87,6 +87,9 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 		} else if (block == ModBlocks.ibSchematic) {
 			list.add("Creates a structure from any schematic file.");
 			list.add("Right-click to activate.");
+		} else if (block == ModBlocks.ibTree) {
+			list.add("Creates a huge tree of any type.");
+			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.color) {
 			list.add("This block is used by Instant Skydive and Statue.");
 			list.add("When placed, will generate with a random color.");

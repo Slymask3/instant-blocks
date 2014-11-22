@@ -27,7 +27,7 @@ public class GuiTree extends GuiScreen {
 	private GuiTreeSlot treeList;
     private int selected = -1;
     private int selectedTree;
-    private int[] trees = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    private int[] trees = {0, 1, 2, 3, 4, 5, 6, 7};
 	
 	private EntityPlayer player;
 	private TileEntityTree tileEntity;
@@ -121,7 +121,7 @@ public class GuiTree extends GuiScreen {
 	@Override
 	public void drawScreen(final int par1, final int par2, final float par3) {
 		this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, "Instant Tree Block", this.width / 2, 20, 16777215);
+        this.drawCenteredString(this.fontRendererObj, "Instant Huge Tree Block", this.width / 2, 20, 16777215);
         //this.drawString(this.fontRendererObj, "Enter a Schematic File Name:", this.width / 2 - 4 - 150, 37, 10526880);
         this.drawString(this.fontRendererObj, "Options:", this.width / 2 + 4, 40, 10526880);
 
@@ -201,22 +201,28 @@ public class GuiTree extends GuiScreen {
 //        this.done.enabled = f.isFile();
 		
 		
+        if(selected == 7) {
+            this.drawString(this.fontRendererObj, "Coming Soon:", this.width / 2 + 4, 100, 0xAA0000);
+            this.drawString(this.fontRendererObj, "4x4 Jungle Tree", this.width / 2 + 4, 110, 0xAA0000);
+            this.drawString(this.fontRendererObj, "Tall Spruce Tree", this.width / 2 + 4, 120, 0xAA0000);
+            this.drawString(this.fontRendererObj, "Post any of your suggestions", this.width / 2 + 4, 140, 0xAA0000);
+            this.drawString(this.fontRendererObj, "in the official mod thread.", this.width / 2 + 4, 150, 0xAA0000);
+        }
+        
+        
 		
 		super.drawScreen(par1, par2, par3);
 	}
 	
 	private String treeToString(int tree) {
     	switch(tree) {
-    	case 0: return "Oak Tree";
-    	case 1: return "Spruce Tree";
-    	case 2: return "Birch Tree";
-    	case 3: return "Jungle Tree";
-    	case 4: return "Big Jungle Tree";
-    	case 5: return "Acacia Tree";
-    	case 6: return "Dark Oak Tree";
-    	case 7: return "Reverse Tree";
-    	case 8: return "Glass Tree";
-    	case 9: return "Error";
+    	case 0: return "Huge Oak Tree";
+    	case 1: return "Huge Spruce Tree";
+    	case 2: return "Huge Birch Tree";
+    	case 3: return "Huge Jungle Tree";
+    	case 4: return "Huge Acacia Tree";
+    	case 5: return "Huge Dark Oak Tree";
+    	case 6: return "Huge Glass Tree";
 	    default: return "Error";
     	}
     }
@@ -247,7 +253,7 @@ public class GuiTree extends GuiScreen {
     public void selectSchematicIndex(int var1)
     {
         this.selected=var1;
-        if ((var1>=0 && var1<=3) || (var1>=5 && var1<=8)) {
+        if ((var1>=0 && var1<=6)) {
             this.selectedTree=trees[selected];
             this.done.enabled = true;
         } else {

@@ -225,6 +225,10 @@ public class CommandInstantBlocks extends CommandBase {
     		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Schematic Block"));
     		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aGenerates any .schematic file from the /schematics/ folder."));
     		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7cNo."));
+    	} else if (held != null && held.getItem() == Item.getItemFromBlock(mb.ibTree)) {
+    		player.addChatMessage(new ChatComponentText("\u00a72Block: \u00a7aInstant Huge Tree Block"));
+    		player.addChatMessage(new ChatComponentText("\u00a72Description: \u00a7aGenerates any type of huge tree."));
+    		player.addChatMessage(new ChatComponentText("\u00a72Multi-Directional: \u00a7cNo."));
     	}
     	
     	//OTHER
@@ -283,11 +287,8 @@ public class CommandInstantBlocks extends CommandBase {
 	public void changelog(EntityPlayer player) {
 		player.addChatMessage(new ChatComponentText("\u00a78\u00a7l============================================="));
     	player.addChatMessage(new ChatComponentText("\u00a73\u00a7lInstant Blocks v" + Reference.VERSION + " - Changelog"));
-		player.addChatMessage(new ChatComponentText("\u00a72- Added Instant Light Block."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Added Color Ladder block to be generated with color with the skydive."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Added Skydive TP block."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Added color block command (/ib colorblock)."));
-		player.addChatMessage(new ChatComponentText("\u00a72- Removed Skydive Tp and Skydive wool color config options."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Added Instant Schematic Block."));
+		player.addChatMessage(new ChatComponentText("\u00a72- Added Instant Huge Tree Block."));
 		player.addChatMessage(new ChatComponentText("\u00a78\u00a7l============================================="));
 	}
 	

@@ -1,6 +1,6 @@
-v1.5.4 (n/a)
+v1.5.4 (22/11/2014)
 - Added Instant Schematic Block.
-- Added Instant Tree Block.
+- Added Instant Huge Tree Block.
 
 v1.5.3 (16/11/2014)
 - Added Instant Light Block.

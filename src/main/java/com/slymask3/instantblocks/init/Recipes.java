@@ -193,6 +193,46 @@ public class Recipes {
 				Character.valueOf('W'), new ItemStack(Blocks.planks, 1, 5),
 			});
 			
+			GameRegistry.addRecipe(new ItemStack(mb.ibTree, 1), new Object[] {
+				"LLL",
+				"WSW", //Tree
+				"BBB",
+				Character.valueOf('L'), Blocks.leaves,
+				Character.valueOf('W'), Blocks.log,
+				Character.valueOf('S'), Blocks.sapling,
+				Character.valueOf('B'), new ItemStack(Items.dye, 1, 15),
+			});
+			
+			GameRegistry.addRecipe(new ItemStack(mb.ibTree, 1), new Object[] {
+				"LLL",
+				"WSW", //Tree
+				"BBB",
+				Character.valueOf('L'), Blocks.leaves2,
+				Character.valueOf('W'), Blocks.log,
+				Character.valueOf('S'), Blocks.sapling,
+				Character.valueOf('B'), new ItemStack(Items.dye, 1, 15),
+			});
+			
+			GameRegistry.addRecipe(new ItemStack(mb.ibTree, 1), new Object[] {
+				"LLL",
+				"WSW", //Tree
+				"BBB",
+				Character.valueOf('L'), Blocks.leaves,
+				Character.valueOf('W'), Blocks.log2,
+				Character.valueOf('S'), Blocks.sapling,
+				Character.valueOf('B'), new ItemStack(Items.dye, 1, 15),
+			});
+			
+			GameRegistry.addRecipe(new ItemStack(mb.ibTree, 1), new Object[] {
+				"LLL",
+				"WSW", //Tree
+				"BBB",
+				Character.valueOf('L'), Blocks.leaves2,
+				Character.valueOf('W'), Blocks.log2,
+				Character.valueOf('S'), Blocks.sapling,
+				Character.valueOf('B'), new ItemStack(Items.dye, 1, 15),
+			});
+			
 			////////////////// WANDS ////////////////////
 			
 			GameRegistry.addRecipe(new ItemStack(mi.ibWandWood, 1), new Object[] {

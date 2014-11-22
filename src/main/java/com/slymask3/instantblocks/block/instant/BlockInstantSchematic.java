@@ -1,6 +1,5 @@
 package com.slymask3.instantblocks.block.instant;
 
-
 import java.io.File;
 
 import net.minecraft.block.Block;
