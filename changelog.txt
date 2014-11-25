@@ -1,5 +1,6 @@
 v1.5.5 (n/a)
 - Added Instant Clear Block.
+- Added a french language file. (Credits: Mazdallier)
 - Fixed metadata not registering when using (/ib colorblock).
 - Fixed transparent textures to not x-ray when using (/ib colorblock).
 
