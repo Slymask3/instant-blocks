@@ -23,16 +23,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockColor extends Block implements ITileEntityProvider {
 
-	public static Block blockTexture = Blocks.wool;
+	public static Block blockType = Blocks.wool;
+	public static int blockMeta = 0;
 	
 	public BlockColor() {
-		super(Material.cloth);
+		super(blockType.getMaterial());
         setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
         setBlockName("instantblocks:" + Names.Blocks.COLOR);
         setHardness(0.5F);
         //setResistance(2000F);
-        setStepSound(Block.soundTypeCloth);
+        setStepSound(blockType.stepSound);
         setBlockTextureName(Textures.Color.SIDE);
+    	setLightOpacity(blockType.getLightOpacity());
+        setLightLevel(blockType.getLightValue());
 	}
 
 	public int quantityDropped(Random random) {
@@ -40,21 +43,25 @@ public class BlockColor extends Block implements ITileEntityProvider {
 	}
 	
 	public int getRenderBlockPass() {
-        return 0;
+        return blockType.getRenderBlockPass();
     }
 
-//    public boolean isOpaqueCube() {
-//        return false;
-//    }
+    public boolean isOpaqueCube() {
+        return blockType.isOpaqueCube();
+    }
 
-//    public boolean renderAsNormalBlock() {
-//        return false;
+    public boolean renderAsNormalBlock() {
+        return blockType.isOpaqueCube();
+    }
+	
+//	public int getRenderType() {
+//        return blockType.getRenderType();
 //    }
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public IIcon getIcon(int par1, int par2) {
-		return blockTexture.getIcon(par1, par2);
+	public IIcon getIcon(int side, int meta) {
+		return blockType.getIcon(side, blockMeta);
 	}
 
 	@Override

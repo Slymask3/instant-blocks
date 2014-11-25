@@ -5,5 +5,6 @@ public enum GuiID {
     HARVEST,
     SKYDIVE,
     SCHEMATIC,
-    TREE;
+    TREE,
+    FLAT;
 }

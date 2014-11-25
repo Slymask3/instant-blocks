@@ -39,8 +39,8 @@ public class GuiStatue extends GuiScreen {
 	private EntityPlayer player;
 	private TileEntityStatue tileEntity;
 	
-    private GuiButtonExt doneBtn;
-    private GuiButtonExt cancelBtn;
+    private GuiButtonExt done;
+    private GuiButtonExt cancel;
 	private GuiTextField input;
 	
 	private GuiCheckBox head;
@@ -70,8 +70,8 @@ public class GuiStatue extends GuiScreen {
 	public void initGui() {
 		Keyboard.enableRepeatEvents(true);
 		this.buttonList.clear();
-        this.buttonList.add(this.doneBtn = new GuiButtonExt(0, this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, "Generate"));
-        this.buttonList.add(this.cancelBtn = new GuiButtonExt(1, this.width / 2 + 4, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.cancel", new Object[0])));
+        this.buttonList.add(this.done = new GuiButtonExt(0, this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, "Generate"));
+        this.buttonList.add(this.cancel = new GuiButtonExt(1, this.width / 2 + 4, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.cancel", new Object[0])));
         
         this.buttonList.add(this.head = new GuiCheckBox(2, this.width / 2 - 4 - 150, this.height / 4 + 20 + 12, "Head", true));//BlockInstantStatue.head));
         this.buttonList.add(this.body = new GuiCheckBox(3, this.width / 2 - 4 - 150, this.height / 4 + 30 + 12, "Body", true));//BlockInstantStatue.body));
@@ -86,7 +86,7 @@ public class GuiStatue extends GuiScreen {
 		this.input.setText("");
 		this.input.setFocused(true);
 		
-		this.doneBtn.enabled = this.input.getText().trim().length() > 3;
+		this.done.enabled = this.input.getText().trim().length() > 3;
 	}
 
 	@Override
@@ -97,11 +97,11 @@ public class GuiStatue extends GuiScreen {
 	@Override
 	protected void actionPerformed(final GuiButton btn) {
 		if (btn.enabled) {
-			if (btn.id == doneBtn.id) {
+			if (btn.id == done.id) {
 				sendInfo();
 				Keyboard.enableRepeatEvents(false);
 				mc.displayGuiScreen(null);
-			} else if (btn.id == cancelBtn.id) {
+			} else if (btn.id == cancel.id) {
 				Keyboard.enableRepeatEvents(false);
 				mc.displayGuiScreen(null);
 			}
@@ -113,13 +113,13 @@ public class GuiStatue extends GuiScreen {
 		
 		if (("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_".indexOf(par1) >= 0) || (par2 == 14)) {
 			input.textboxKeyTyped(par1, par2);
-		} else if (par2 == doneBtn.id) {
-			actionPerformed(doneBtn);
-		} else if (par2 == cancelBtn.id) {
-			actionPerformed(cancelBtn);
+		} else if (par2 == done.id) {
+			actionPerformed(done);
+		} else if (par2 == cancel.id) {
+			actionPerformed(cancel);
 		}
 
-        this.doneBtn.enabled = this.input.getText().trim().length() > 3;
+        this.done.enabled = this.input.getText().trim().length() > 3;
 	}
 
 	@Override

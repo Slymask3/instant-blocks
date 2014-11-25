@@ -131,7 +131,9 @@ public class CommandInstantBlocks extends CommandBase {
     
     public void colorBlock(EntityPlayer player) {
     	Block block = Block.getBlockFromItem(player.getCurrentEquippedItem().getItem());
-        BlockColor.blockTexture = block;
+    	int meta = player.getCurrentEquippedItem().getItemDamage();
+        BlockColor.blockType = block;
+        BlockColor.blockMeta = meta;
     	player.addChatMessage(new ChatComponentText("\u00a78[\u00a73Instant Blocks v" + Reference.VERSION + "\u00a78] \u00a7aColor Block Texture set to: " + block.getLocalizedName()));
     	
     	World world = player.worldObj;

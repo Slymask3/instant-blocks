@@ -7,6 +7,7 @@ import com.slymask3.instantblocks.block.BlockColorLadder;
 import com.slymask3.instantblocks.block.BlockSkydiveTP;
 import com.slymask3.instantblocks.block.instant.BlockInstantFall;
 import com.slymask3.instantblocks.block.instant.BlockInstantFarm;
+import com.slymask3.instantblocks.block.instant.BlockInstantFlat;
 import com.slymask3.instantblocks.block.instant.BlockInstantGlassDome;
 import com.slymask3.instantblocks.block.instant.BlockInstantGrinder;
 import com.slymask3.instantblocks.block.instant.BlockInstantHarvest;
@@ -45,6 +46,7 @@ public class ModBlocks {
 	public static Block ibLight = new BlockInstantLight();
 	public static Block ibSchematic = new BlockInstantSchematic();
 	public static Block ibTree = new BlockInstantTree();
+	public static Block ibFlat = new BlockInstantFlat();
 	public static Block color = new BlockColor();
 	public static Block colorLadder = new BlockColorLadder();
 	public static Block skydiveTP = new BlockSkydiveTP();
@@ -67,6 +69,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(ibLight, ItemBlockInstantBlocks.class, Names.Blocks.IB_LIGHT);
 		GameRegistry.registerBlock(ibSchematic, ItemBlockInstantBlocks.class, Names.Blocks.IB_SCHEMATIC);
 		GameRegistry.registerBlock(ibTree, ItemBlockInstantBlocks.class, Names.Blocks.IB_TREE);
+		GameRegistry.registerBlock(ibFlat, ItemBlockInstantBlocks.class, Names.Blocks.IB_FLAT);
 		GameRegistry.registerBlock(color, ItemBlockInstantBlocks.class, Names.Blocks.COLOR);
 		GameRegistry.registerBlock(colorLadder, ItemBlockInstantBlocks.class, Names.Blocks.COLOR_LADDER);
 		GameRegistry.registerBlock(skydiveTP, ItemBlockInstantBlocks.class, Names.Blocks.SKYDIVE_TP);

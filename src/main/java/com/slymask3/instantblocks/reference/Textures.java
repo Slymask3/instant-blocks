@@ -100,6 +100,18 @@ public class Textures {
     public static final class Color {
         public static final String SIDE = "wool_colored_white";
     }
+    
+    public static final class Flat {
+        public static final String TOP = FOLDER + "flat_up";
+        public static final String BOTTOM = FOLDER + "flat_down";
+        public static final String LEFT = FOLDER + "flat_left";
+        public static final String RIGHT = FOLDER + "flat_right";
+        public static final String BACK = FOLDER + "flat_back";
+        public static final String FRONT = FOLDER + "flat_forward";
+        public static final String UD = FOLDER + "flat_ud";
+        public static final String FB = FOLDER + "flat_fb";
+        public static final String LR = FOLDER + "flat_lr";
+    }
 
     public static final class ColorLadder {
         //public static final String SIDE = FOLDER + "colorLadder";

@@ -68,7 +68,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
         }
  
         this.packets.add(clazz);
-		LogHelper.info("registerPacket(): ADDED");
+		LogHelper.info(clazz + " registered!");
         return true;
     }
  
@@ -134,6 +134,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
         registerPacket(PacketSkydive.class);
         registerPacket(PacketSchematic.class);
         registerPacket(PacketTree.class);
+        registerPacket(PacketFlat.class);
     }
  
     // Method to call from FMLPostInitializationEvent
