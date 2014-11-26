@@ -8,4 +8,5 @@ This is the source code for my Instant Blocks mod, you can check in here if you'
 
 <b>Released Mod Version:</b> 1.5.4 (MC 1.7.10)
 
-<b>WIP Mod Version:</b> 1.5.5 (MC 1.7.10)
+<b>WIP Mod Version 1:</b> 1.5.5 (MC 1.7.10)
+<b>WIP Mod Version 2:</b> 1.6.0 (MC 1.8)
