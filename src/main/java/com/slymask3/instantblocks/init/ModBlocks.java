@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 
 import com.slymask3.instantblocks.block.BlockColor;
 import com.slymask3.instantblocks.block.BlockColorLadder;
+import com.slymask3.instantblocks.block.BlockCraftInstant;
 import com.slymask3.instantblocks.block.BlockSkydiveTP;
 import com.slymask3.instantblocks.block.instant.BlockInstantFall;
 import com.slymask3.instantblocks.block.instant.BlockInstantFarm;
@@ -50,6 +51,7 @@ public class ModBlocks {
 	public static Block color = new BlockColor();
 	public static Block colorLadder = new BlockColorLadder();
 	public static Block skydiveTP = new BlockSkydiveTP();
+	public static Block instantcraft = new BlockCraftInstant();
 	
 	public static void init() {
 		GameRegistry.registerBlock(ibWood, ItemBlockInstantBlocks.class, Names.Blocks.IB_WOOD_HOUSE);
@@ -73,5 +75,6 @@ public class ModBlocks {
 		GameRegistry.registerBlock(color, ItemBlockInstantBlocks.class, Names.Blocks.COLOR);
 		GameRegistry.registerBlock(colorLadder, ItemBlockInstantBlocks.class, Names.Blocks.COLOR_LADDER);
 		GameRegistry.registerBlock(skydiveTP, ItemBlockInstantBlocks.class, Names.Blocks.SKYDIVE_TP);
+		GameRegistry.registerBlock(instantcraft, ItemBlockInstantBlocks.class, Names.Blocks.INSTANT_CRAFT);
 	}
 }

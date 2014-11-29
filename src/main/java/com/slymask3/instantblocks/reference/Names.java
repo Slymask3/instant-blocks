@@ -23,6 +23,7 @@ public class Names {
         public static final String COLOR = "color";
         public static final String COLOR_LADDER = "colorLadder";
         public static final String SKYDIVE_TP = "skydiveTP";
+        public static final String INSTANT_CRAFT = "instantcraft";
     }
 
     public static final class Items {

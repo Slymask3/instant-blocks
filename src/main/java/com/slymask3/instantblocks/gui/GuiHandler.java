@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.tileentity.TileEntityFlat;
 import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
+import com.slymask3.instantblocks.tileentity.TileEntityInstantCraft;
 import com.slymask3.instantblocks.tileentity.TileEntitySchematic;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
@@ -23,12 +24,9 @@ public class GuiHandler implements IGuiHandler {
     		return null;
     	}
     	
-        if (ID == GuiID.STATUE.ordinal()) {
-            //return new ContainerCraftingTablet(player.inventory, world, x, y, z);
-        	//return new GuiStatueMenu(player, (TileEntityInstantStatue) e);
-        }// else if (ID == GuiIds.DISENCHANTER.ordinal()) {
-        //    return new ContainerDisenchanter(player.inventory, (TileEntityDisenchanter) world.getTileEntity(x, y, z));
-        //}
+        if (ID == GuiID.CRAFT.ordinal()) {
+            return new ContainerInstantCraft(player.inventory, world, x, y, z);
+        }
 
         return null;
     }
@@ -40,7 +38,9 @@ public class GuiHandler implements IGuiHandler {
     		return null;
     	}
     	
-        if (ID == GuiID.STATUE.ordinal()) {
+    	if (ID == GuiID.CRAFT.ordinal()) {
+        	return new GuiInstantCraft(player, (TileEntityInstantCraft) e, world, x, y, z);
+        } else if (ID == GuiID.STATUE.ordinal()) {
             //return new GuiCraftingTablet(new ContainerCraftingTablet(player.inventory, world, x, y, z));
         	return new GuiStatue(player, (TileEntityStatue) e, world, x, y, z);
         } else if (ID == GuiID.HARVEST.ordinal()) {

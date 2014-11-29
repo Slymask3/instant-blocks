@@ -15,6 +15,7 @@ tile.instantblocks:ibHarvest.name=§3Instant Harvester Block§f
 tile.instantblocks:ibLight.name=§3Instant Light Block§f
 tile.instantblocks:ibSchematic.name=§3Instant Schematic Block§f
 tile.instantblocks:ibTree.name=§3Instant Huge Tree Block§f
+tile.instantblocks:ibFlat.name=§3Instant Clear Block§f
 tile.instantblocks:color.name=Color Block
 tile.instantblocks:colorLadder.name=Color Ladder Block
 tile.instantblocks:skydiveTP.name=Skydive TP Block
