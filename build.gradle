@@ -21,9 +21,12 @@ version = "1.5.4"
 group= "com.slymask3.instantblocks" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "instantblocks"
 
+sourceCompatibility=1.8
+targetCompatibility=1.8
+
 minecraft {
-    version = "1.7.10-10.13.2.1230"
-    runDir = "eclipse"
+    version = "1.7.10-10.13.4.1614-1.7.10"
+    runDir = "minecraft"
 }
 
 dependencies {

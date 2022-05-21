@@ -1,13 +1,19 @@
 package com.slymask3.instantblocks.block.instant;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Random;
-
-import javax.imageio.ImageIO;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.reference.*;
+import com.slymask3.instantblocks.tileentity.TileEntityStatue;
+import com.slymask3.instantblocks.utility.BuildHelper;
+import com.slymask3.instantblocks.utility.IBHelper;
+import com.slymask3.instantblocks.utility.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
@@ -22,20 +28,18 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.reference.GuiID;
-import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.tileentity.TileEntityStatue;
-import com.slymask3.instantblocks.utility.BuildHelper;
-import com.slymask3.instantblocks.utility.IBHelper;
-import com.slymask3.instantblocks.utility.LogHelper;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Base64;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class BlockInstantStatue extends BlockContainer implements ITileEntityProvider {
 	
@@ -190,26 +194,29 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 	}
 
 	public static void build(World world, int x, int y, int z, String playerS, int meta, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
-		URL imageURL;
-		BufferedImage img = null;
-		
-		//String playerName = player.getDisplayName();
-		
 		EntityPlayer player = world.getPlayerEntityByName(playerS);
 		
 		LogHelper.info(player);
 		
 		if (username != "") {
 			try {
-				imageURL = new URL("http://skins.minecraft.net/MinecraftSkins/"+username+".png");
-		        img = ImageIO.read(imageURL);
-		        
-//		        IIcon test = Blocks.crafting_table.getIcon(1, 0);
-//
-//		        LogHelper.info(test.getIconName());
-//		        LogHelper.info(test.getIconWidth());
-//		        LogHelper.info(test.getIconHeight());
-//		        
+				GsonBuilder builder = new GsonBuilder();
+				builder.setPrettyPrinting();
+				Gson gson = builder.create();
+
+				String user_api_contents = get_contents("https://api.mojang.com/users/profiles/minecraft/"+username);
+				JsonObject user_json = gson.fromJson(user_api_contents,JsonObject.class);
+				String uuid = user_json.get("id").getAsString();
+
+				String uuid_api_contents = get_contents("https://sessionserver.mojang.com/session/minecraft/profile/"+uuid);
+				JsonObject uuid_json = gson.fromJson(uuid_api_contents,JsonObject.class);
+				String base64 = uuid_json.get("properties").getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString();
+
+				String base64_decoded = new String(Base64.getDecoder().decode(base64));
+				JsonObject image_json = gson.fromJson(base64_decoded,JsonObject.class);
+				String image_url = image_json.get("textures").getAsJsonObject().get("SKIN").getAsJsonObject().get("url").getAsString();
+
+				BufferedImage img = ImageIO.read(new URL(image_url));
 
 				world.setBlock(x, y, z, Blocks.air);
 		        
@@ -244,7 +251,22 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		}
 	}
 
-	
+	private static String get_contents(String url_string) {
+		StringBuilder content = new StringBuilder();
+		try {
+			URL url = new URL(url_string);
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
+			String line;
+			while((line = bufferedReader.readLine()) != null) {
+				content.append(line + "\n");
+			}
+			bufferedReader.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return content.toString();
+	}
+
 //	private void buildPattern(World world, int x, int y, int z, BufferedImage img, int meta) {
 //		if(meta==0) {
 //			world.setBlock(x, y, z-2, Blocks.stone);
