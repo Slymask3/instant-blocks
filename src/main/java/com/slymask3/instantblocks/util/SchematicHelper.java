@@ -1,13 +1,12 @@
-package com.slymask3.instantblocks.utility;
-
-import java.io.File;
-import java.io.FileInputStream;
+package com.slymask3.instantblocks.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
+
+import java.io.File;
+import java.io.FileInputStream;
 
 public class SchematicHelper {
 
@@ -22,23 +21,8 @@ public class SchematicHelper {
  
             byte[] blocks = nbtdata.getByteArray("Blocks");
             byte[] data = nbtdata.getByteArray("Data");
- 
-            //NBTTagList entities = nbtdata.getTagList("Entities", 0);
-            //NBTTagList tileentities = nbtdata.getTagList("TileEntities", 0);
             
             fis.close();
-            
-//            System.out.println("Width: "+width);
-//            System.out.println("Height: "+height);
-//            System.out.println("Length: "+length);
-//            System.out.println("Entities: "+entities);
-//            System.out.println("Tile Entities: "+tileentities);
-//            
-//            int max = width+height*length+1;
-//            
-//            for(int i=0;i<max;i++) {
-//                System.out.println("Block "+i+" - ID: "+blocks[i]+", Meta: "+data[i]);
-//            }
             
             buildSchematic(world, x, y, z, width, height, length, blocks, data, center, ignoreAir);
             
@@ -70,7 +54,17 @@ public class SchematicHelper {
 	            }
 	        }
 		}
-		
-    	//LogHelper.info("done schematic");
     }
+
+	public static void createSchematicsDir() {
+		File dir = new File("schematics");
+		if (!dir.exists()) {
+			try{
+				dir.mkdir();
+				LogHelper.info("created schematics directory");
+			} catch(SecurityException se){
+				LogHelper.error("failed to create schematics directory: " + se.getMessage());
+			}
+		}
+	}
 }

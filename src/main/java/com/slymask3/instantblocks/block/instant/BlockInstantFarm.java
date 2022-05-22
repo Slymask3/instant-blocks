@@ -1,34 +1,27 @@
 package com.slymask3.instantblocks.block.instant;
 
-import java.awt.image.BufferedImage;
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirectional;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
-
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.BlockDirectionalIB;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.utility.BuildHelper;
-import com.slymask3.instantblocks.utility.IBHelper;
+import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.IBHelper;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockInstantFarm extends BlockDirectionalIB {
 	
@@ -73,7 +66,7 @@ public class BlockInstantFarm extends BlockDirectionalIB {
     	
     	ItemStack is = player.getCurrentEquippedItem();
     	
-		if (ConfigurationHandler.useWands == true) {
+		if (Config.useWands) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			} else {
@@ -101,9 +94,9 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 		
 
 		IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibFarm);
-		IBHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.xp(world, player, Config.xp);
 		
-		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		IBHelper.sound(world, Config.sound, x, y, z);
 		IBHelper.effectFull(world, "reddust", x, y, z);
 		
 //		if (r == 0) {

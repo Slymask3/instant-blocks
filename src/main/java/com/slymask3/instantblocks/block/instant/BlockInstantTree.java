@@ -1,7 +1,13 @@
 package com.slymask3.instantblocks.block.instant;
 
-import java.util.Random;
-
+import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.reference.*;
+import com.slymask3.instantblocks.tileentity.TileEntityTree;
+import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
@@ -15,25 +21,14 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.reference.GuiID;
-import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.tileentity.TileEntityTree;
-import com.slymask3.instantblocks.utility.BuildHelper;
-import com.slymask3.instantblocks.utility.IBHelper;
+import java.util.Random;
 
 public class BlockInstantTree extends BlockContainer implements ITileEntityProvider {
 	
 	public BlockInstantTree() {
 		super(Material.plants);
 		setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-		setBlockName("instantblocks:" + Names.Blocks.IB_TREE);
+		setBlockName(Reference.MOD_ID + ":" + Names.Blocks.IB_TREE);
 		setHardness(0.1F);
 		setResistance(2000F);
 		setStepSound(Block.soundTypeGrass);
@@ -84,7 +79,7 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (ConfigurationHandler.useWands == true) {
+		if (Config.useWands) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
@@ -121,7 +116,7 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
 			buildGlass(world, x, y, z, fullLog, fullLeaves, air);
 		}
 		
-		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		IBHelper.sound(world, Config.sound, x, y, z);
 		
 		ItemStack is = player.getCurrentEquippedItem();
 		

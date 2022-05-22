@@ -2,18 +2,17 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.*;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
-import com.slymask3.instantblocks.utility.BuildHelper;
-import com.slymask3.instantblocks.utility.IBHelper;
-import com.slymask3.instantblocks.utility.LogHelper;
+import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
@@ -32,32 +31,18 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Base64;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class BlockInstantStatue extends BlockContainer implements ITileEntityProvider {
-	
-//	public static String username = "";
-//	public static EntityPlayer player;
-//	public static boolean head = true;
-//	public static boolean body = true;
-//	public static boolean armLeft = true;
-//	public static boolean armRight = true;
-//	public static boolean legLeft = true;
-//	public static boolean legRight = true;
-	
-	//public static boolean inProgress = false;
 
 	public BlockInstantStatue() {
 		super(Material.wood);
 		setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-		setBlockName("instantblocks:" + Names.Blocks.IB_STATUE);
+		setBlockName(Reference.MOD_ID + ":" + Names.Blocks.IB_STATUE);
 		setHardness(1.5F);
 		setResistance(2000F);
 		setStepSound(Block.soundTypeWood);
@@ -153,21 +138,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack) {
 		int meta = MathHelper.floor_double((double) (par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 2);
-
-		//System.out.println("meta = " + meta);
 	}
-	
-	//BlockCommandBlock block;
-	//GuiCommandBlock gui;
-	
-//	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-//		if (((TileEntityInstantStatue) world.getTileEntity(x, y, z)).username != "" && !world.isRemote) {
-//			build(world, x, y, z, world.getBlockMetadata(x, y, z), ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).username, ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).head, ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).body, ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).armLeft, ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).armRight, ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).legLeft, ((TileEntityInstantStatue) world.getTileEntity(x, y, z)).legRight);
-//		}
-//		
-//		//LogHelper.info(((TileEntityInstantStatue) world.getTileEntity(x, y, z)).username);
-//		LogHelper.info(world.isRemote);
-//	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		//TileEntityInstantStatue.tile = (TileEntityInstantStatue) world.getTileEntity(x, y, z);
@@ -177,7 +148,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (ConfigurationHandler.useWands == true) {
+		if (Config.useWands) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
@@ -193,12 +164,12 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		return true;
 	}
 
-	public static void build(World world, int x, int y, int z, String playerS, int meta, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
+	public void build(World world, int x, int y, int z, String playerS, int meta, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
 		EntityPlayer player = world.getPlayerEntityByName(playerS);
 		
 		LogHelper.info(player);
 		
-		if (username != "") {
+		if (!username.equalsIgnoreCase("")) {
 			try {
 				GsonBuilder builder = new GsonBuilder();
 				builder.setPrettyPrinting();
@@ -231,9 +202,9 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		        
 		        IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
 		        //IBHelper.xp(world, player, ConfigurationHandler.xp);
-		        IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		        IBHelper.sound(world, Config.sound, x, y, z);
 		        //IBHelper.effectFull(world, "reddust", x, y, z);
-		        //IBHelper.msg(player, "\u00a7aInstant Statue created of the player '" + username + "'.", Colors.a);
+		        //IBHelper.msg(player, Colors.a + "Instant Statue created of the player '" + username + "'.", Colors.a);
 				
 				ItemStack is = player.getCurrentEquippedItem();
 				
@@ -241,12 +212,9 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 					is.damageItem(1, player);
 				}
 				
-			} catch (MalformedURLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-				IBHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
-			} catch (IOException e) {
-				e.printStackTrace();
-				IBHelper.msg(player, "\u00a7cThe minecraft username '" + username + "\u00a7c' does not have a skin.", Colors.c);
+				IBHelper.msg(player, Colors.c + "The minecraft username '" + username + Colors.c + "' does not have a skin.", Colors.c);
 			}
 		}
 	}
@@ -266,18 +234,6 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		}
 		return content.toString();
 	}
-
-//	private void buildPattern(World world, int x, int y, int z, BufferedImage img, int meta) {
-//		if(meta==0) {
-//			world.setBlock(x, y, z-2, Blocks.stone);
-//		} else if(meta==1) {
-//			world.setBlock(x-2, y, z, Blocks.stone);
-//		} else if(meta==2) {
-//			world.setBlock(x, y, z+2, Blocks.stone);
-//		} else if(meta==3) {
-//			world.setBlock(x+2, y, z, Blocks.stone);
-//		}
-//	}
 
 	private static void buildHead(World world, int x, int y, int z, BufferedImage img, int meta, boolean build, boolean rgb) {
 		if (build) {

@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.gui;
 
-import cpw.mods.fml.client.IModGuiFactory;  
-import net.minecraft.client.Minecraft;  
+import cpw.mods.fml.client.IModGuiFactory;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 
 import java.util.Set;

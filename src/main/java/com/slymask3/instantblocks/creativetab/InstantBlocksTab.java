@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.creativetab;
 
 import com.slymask3.instantblocks.init.ModBlocks;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 

@@ -1,15 +1,12 @@
 package com.slymask3.instantblocks.network;
 
+import com.slymask3.instantblocks.block.instant.BlockInstantTree;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
-
-import com.slymask3.instantblocks.block.instant.BlockInstantSchematic;
-import com.slymask3.instantblocks.block.instant.BlockInstantTree;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class PacketTree extends AbstractPacket {
 	int _dim, _x, _y, _z;

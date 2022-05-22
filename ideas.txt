@@ -1,6 +1,0 @@
-Ideas
-- clear block (flatens an area)
-- color block see through fix
-- water/lava try..catch test
-- middle click gives color block with same color
--/ib cb meta

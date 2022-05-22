@@ -1,22 +1,21 @@
 package com.slymask3.instantblocks.block.instant;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
 import com.slymask3.instantblocks.block.BlockLadderIB;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.utility.BuildHelper;
-import com.slymask3.instantblocks.utility.IBHelper;
+import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.IBHelper;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class BlockInstantUp extends BlockLadderIB {
 	
@@ -55,14 +54,14 @@ public class BlockInstantUp extends BlockLadderIB {
     }
 	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-    	if (world.canBlockSeeTheSky(x, y+1, z) == true) {
+    	if (world.canBlockSeeTheSky(x, y+1, z)) {
     		IBHelper.msg(player, Strings.upError, Colors.c);
 			return true;
 		}
     	
     	ItemStack is = player.getCurrentEquippedItem();
     	
-		if (ConfigurationHandler.useWands == true) {
+		if (Config.useWands) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 				//player.triggerAchievement(ib.achUp);
@@ -126,10 +125,10 @@ public class BlockInstantUp extends BlockLadderIB {
 		
 		/************************ Functions ************************/
 		IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibUp);
-		IBHelper.xp(world, player, ConfigurationHandler.xp);
-		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		IBHelper.xp(world, player, Config.xp);
+		IBHelper.sound(world, Config.sound, x, y, z);
 		IBHelper.effectFull(world, "reddust", x, y, z);
-		IBHelper.msg(player, "\u00a7aInstant Escape Ladder created " + (i - y) + " blocks up.", Colors.a);
+		IBHelper.msg(player, Colors.a + "Instant Escape Ladder created " + (i - y) + " blocks up.", Colors.a);
 		
 		return true;
     }

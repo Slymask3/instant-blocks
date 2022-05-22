@@ -1,7 +1,15 @@
 package com.slymask3.instantblocks.block.instant;
 
-import java.io.File;
-
+import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.reference.*;
+import com.slymask3.instantblocks.tileentity.TileEntitySchematic;
+import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.LogHelper;
+import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
@@ -14,27 +22,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.reference.GuiID;
-import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.tileentity.TileEntitySchematic;
-import com.slymask3.instantblocks.utility.IBHelper;
-import com.slymask3.instantblocks.utility.SchematicHelper;
+import java.io.File;
 
 public class BlockInstantSchematic extends BlockContainer implements ITileEntityProvider {
 
 	public BlockInstantSchematic() {
-		//super(ModBlocks.ibSchematic, Names.Blocks.IB_SCHEMATIC, Material.cactus, Block.soundTypeAnvil, 1.5F);
 		super(Material.wood);
 		setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-		setBlockName("instantblocks:" + Names.Blocks.IB_SCHEMATIC);
+		setBlockName(Reference.MOD_ID + ":" + Names.Blocks.IB_SCHEMATIC);
 		setHardness(1.5F);
 		setResistance(2000F);
 		setStepSound(Block.soundTypeWood);
@@ -67,7 +62,7 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (ConfigurationHandler.useWands == true) {
+		if (Config.useWands) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
@@ -93,7 +88,7 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 			
 			ItemStack is = player.getCurrentEquippedItem();
 	    	
-			if (ConfigurationHandler.useWands == true) {
+			if (Config.useWands) {
 				if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 					is.damageItem(1, player);
 				}
@@ -102,11 +97,13 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 			world.setBlock(x, y, z, Blocks.air);
 			
 			IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibSchematic);
-    		IBHelper.xp(world, player, ConfigurationHandler.xp);
-    		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+    		IBHelper.xp(world, player, Config.xp);
+    		IBHelper.sound(world, Config.sound, x, y, z);
     		IBHelper.effectFull(world, "reddust", x, y, z);
 			
-		} catch(Exception e) {}
+		} catch(Exception e) {
+			LogHelper.error("failed to build schematic (" + schematic + "): " + e.getMessage());
+		}
 		
 	}
 

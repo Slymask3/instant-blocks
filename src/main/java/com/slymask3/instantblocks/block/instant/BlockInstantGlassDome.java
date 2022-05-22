@@ -1,15 +1,14 @@
 package com.slymask3.instantblocks.block.instant;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-
 import com.slymask3.instantblocks.block.BlockIB;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
 
 public class BlockInstantGlassDome extends BlockIB {
 	

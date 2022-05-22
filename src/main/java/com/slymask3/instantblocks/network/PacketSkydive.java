@@ -1,27 +1,22 @@
 package com.slymask3.instantblocks.network;
 
+import com.slymask3.instantblocks.block.instant.BlockInstantFall;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
-import com.slymask3.instantblocks.block.instant.BlockInstantFall;
-import com.slymask3.instantblocks.utility.LogHelper;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
-
 public class PacketSkydive extends AbstractPacket {
 	int _dim, _x, _y, _z;
 	String _player;
-	
 	int _color0 , _color1, _color2, _color3, _color4, _color5, _color6, _color7, _color8, _color9, _color10;
 	boolean _tp;
 
 	public PacketSkydive() {
 		
 	}
-
 	public PacketSkydive(World world, int x, int y, int z, String player, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10, boolean tp) {
 		_dim = world.provider.dimensionId;
 		_x = x;
@@ -86,27 +81,13 @@ public class PacketSkydive extends AbstractPacket {
 
 	@Override
 	public void handleClientSide(EntityPlayer player) {
-		//World world = DimensionManager.getWorld(_dim);
-		//TileEntity tileentity = world.getTileEntity(_x, _y, _z);
-		//((TileEntityHarvest)tileentity).setLogs(_logOak, _logSpruce, _logBirch, _logJungle, _logAcacia, _logDark);
-		//((TileEntityHarvest)tileentity).setOther(_wheat, _carrot, _potato, _cactus, _pumpkin, _melon, _sugarcane, _cocoa, _mushroom, _netherwart);
-		//((TileEntityHarvest)tileentity).setReplant(_replant);
 
-		//BlockInstantHarvest block = (BlockInstantHarvest)world.getBlock(_x, _y, _z);
-		//LogHelper.info("handleClientSide()");
-		//block.build(world, _x, _y, _z, _player, _logOak, _logSpruce, _logBirch, _logJungle, _logAcacia, _logDark, _wheat, _carrot, _potato, _cactus, _pumpkin, _melon, _sugarcane, _cocoa, _mushroom, _netherwart, _replant);
-		//block.handleClientSide(world, _x, _y, _z, _player);
-
-		//((TileEntitySkydive)tileentity).setColor();
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
 		BlockInstantFall block = (BlockInstantFall)world.getBlock(_x, _y, _z);
-		//LogHelper.info("handleServerSide()");
 		block.build(world, _x, _y, _z, _player, _color0, _color1, _color2, _color3, _color4, _color5, _color6, _color7, _color8, _color9, _color10, _tp);
-		//int c = 0xFF0000;
-		//block.build(world, _x, _y, _z, _player, c, c, c, c, c, c, c, c, c, c, c);
 	}
 }

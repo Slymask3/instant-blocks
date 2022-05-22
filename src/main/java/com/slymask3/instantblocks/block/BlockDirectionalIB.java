@@ -17,9 +17,9 @@ public class BlockDirectionalIB extends BlockIB {
         return meta & 3;
     }
 	
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack) {
-        int meta = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-        par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 2);
+	public void onBlockPlacedBy(World world, int par2, int par3, int par4, EntityLivingBase entity, ItemStack is) {
+        int meta = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+        world.setBlockMetadataWithNotify(par2, par3, par4, meta, 2);
     }
 	
 }

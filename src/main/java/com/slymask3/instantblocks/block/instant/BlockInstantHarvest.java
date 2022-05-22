@@ -1,14 +1,17 @@
 package com.slymask3.instantblocks.block.instant;
 
-import java.util.Random;
-
-import scala.actors.threadpool.Arrays;
-
+import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.reference.*;
+import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
+import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -19,27 +22,14 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.reference.GuiID;
-import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
-import com.slymask3.instantblocks.utility.IBHelper;
-import com.slymask3.instantblocks.utility.LogHelper;
+import java.util.Random;
 
 public class BlockInstantHarvest extends BlockContainer implements ITileEntityProvider {
-	
-	//public EntityPlayer mainPlayer;
-	
+
 	public BlockInstantHarvest() {
 		super(Material.wood);
 		setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-		setBlockName("instantblocks:" + Names.Blocks.IB_HARVEST);
+		setBlockName(Reference.MOD_ID + ":" + Names.Blocks.IB_HARVEST);
 		setHardness(1.5F);
 		setResistance(2000F);
 		setStepSound(Block.soundTypeWood);
@@ -80,7 +70,7 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (ConfigurationHandler.useWands == true) {
+		if (Config.useWands) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
@@ -117,11 +107,11 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 		EntityPlayer player = world.getPlayerEntityByName(playerS);
 		
 		//if (canHarvest(world, x, y, z, ConfigurationHandler.radiusHarvest, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant)) {
-			harvest(world, x, y, z, ConfigurationHandler.radiusHarvest, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant);
+			harvest(world, x, y, z, Config.radiusHarvest, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant);
 			
 			//organizeChest(world, x, y, z);
 			
-	        IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+	        IBHelper.sound(world, Config.sound, x, y, z);
 			
 			ItemStack is = player.getCurrentEquippedItem();
 			

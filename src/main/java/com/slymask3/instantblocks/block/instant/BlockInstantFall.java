@@ -1,5 +1,14 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.reference.*;
+import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
+import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
@@ -14,33 +23,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.reference.GuiID;
-import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.tileentity.TileEntityColor;
-import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
-import com.slymask3.instantblocks.utility.BuildHelper;
-import com.slymask3.instantblocks.utility.IBHelper;
-import com.slymask3.instantblocks.utility.LogHelper;
-
 public class BlockInstantFall extends BlockContainer implements ITileEntityProvider {
 	
     public BlockInstantFall() {
-        //super(ModBlocks.ibFall, Names.Blocks.IB_RAINBOW_SKYDIVE, Material.cloth, Block.soundTypeCloth, 1.5F);
-        //setTextures("instantblocks:skydive_bottom", "instantblocks:skydive_top", "instantblocks:skydive_");
-        //setCreateMsg(Strings.fallCreate);
-        //setBlockTextureName(Textures.Skydive.SIDE_A);
-        
         super(Material.cloth);
 		setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-		setBlockName("instantblocks:" + Names.Blocks.IB_SKYDIVE);
+		setBlockName(Reference.MOD_ID + ":" + Names.Blocks.IB_SKYDIVE);
 		setHardness(1.5F);
 		setResistance(2000F);
 		setStepSound(Block.soundTypeCloth);
@@ -50,36 +38,21 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
     public static IIcon bottom;
     public static IIcon top;
     public static IIcon side;
-    //public static IIcon side0;
     
 	public void registerBlockIcons(IIconRegister ir) {
-		//if (ConfigurationHandler.animated.getBoolean(true)) {
-			bottom = ir.registerIcon(Textures.Skydive.BOTTOM_A);
-			top = ir.registerIcon(Textures.Skydive.TOP_A);
-			side = ir.registerIcon(Textures.Skydive.SIDE_A);
-		//} else {
-		//	side0 = ir.registerIcon(Textures.Skydive.SIDE);
-		//}
+		bottom = ir.registerIcon(Textures.Skydive.BOTTOM_A);
+		top = ir.registerIcon(Textures.Skydive.TOP_A);
+		side = ir.registerIcon(Textures.Skydive.SIDE_A);
 	}
     
 	public IIcon getIcon(int side, int meta) {
-		//if (ConfigurationHandler.animated.getBoolean(true)) {
-			if (side == 0) {
-				return bottom;
-			} else if (side == 1) {
-				return top;
-			} else if (side>=2 && side<=5) {
-				return this.side;
-			}
-		//} else {
-		//	if (side == 0) {
-		//		return Blocks.wool.getIcon(0, 13);
-		//	} else if (side == 1) {
-		//		return Blocks.wool.getIcon(0, 14);
-		//	} else if (side>=2 && side<=5) {
-		//		return this.side0;
-		//	}
-		//}
+		if (side == 0) {
+			return bottom;
+		} else if (side == 1) {
+			return top;
+		} else if (side>=2 && side<=5) {
+			return this.side;
+		}
 		return blockIcon;
 	}
     
@@ -91,7 +64,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (ConfigurationHandler.useWands == true) {
+		if (Config.useWands) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
@@ -100,20 +73,12 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			}
 		}
 		
-		//world.setBlock(x, y+1, z, ModBlocks.color, 0, 2);
-		//((TileEntityColor) world.getTileEntity(x, y+1, z)).color = 0xFF0000;
-		
-		//LogHelper.info("player == " + player);
-		
 		player.openGui(InstantBlocks.instance, GuiID.SKYDIVE.ordinal(), world, x, y, z);
 		
 		return true;
 	}
 	
     public void build(World world, int x, int y, int z, String playerS, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10, boolean tp) {
-    	//LogHelper.info("build()");
-    	//LogHelper.info("c0 == "+c0);
-    	
     	EntityPlayer player = world.getPlayerEntityByName(playerS);
     	
     	Block wool = Blocks.wool;
@@ -122,7 +87,6 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		Block ladder = Blocks.ladder;
 		
 		int meta = world.getBlockMetadata(x, y, z);
-		
 
 		/************************ Air ************************/
 		for (int c = 256; c >= 1; c--) {
@@ -466,8 +430,8 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			world.setBlock(x+5, 5, z, ModBlocks.skydiveTP);
 			world.setBlock(x-5, 5, z, ModBlocks.skydiveTP);
 		
-			if (tp == true) {
-				IBHelper.sound(world, ConfigurationHandler.sound, x, 256, z+5);
+			if (tp) {
+				IBHelper.sound(world, Config.sound, x, 256, z+5);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z+5 + 0.5);
 				}
@@ -477,8 +441,8 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			world.setBlock(x, 5, z+5, ModBlocks.skydiveTP);
 			world.setBlock(x, 5, z-5, ModBlocks.skydiveTP);
 		
-			if (tp == true) {
-				IBHelper.sound(world, ConfigurationHandler.sound, x-5, 256, z);
+			if (tp) {
+				IBHelper.sound(world, Config.sound, x-5, 256, z);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x-5 + 0.5, 257 + 0.5, z + 0.5);
 				}
@@ -488,8 +452,8 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			world.setBlock(x+5, 5, z, ModBlocks.skydiveTP);
 			world.setBlock(x-5, 5, z, ModBlocks.skydiveTP);
 		
-			if (tp == true) {
-				IBHelper.sound(world, ConfigurationHandler.sound, x, 256, z-5);
+			if (tp) {
+				IBHelper.sound(world, Config.sound, x, 256, z-5);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z-5 + 0.5);
 				}
@@ -499,11 +463,11 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			world.setBlock(x, 5, z+5, ModBlocks.skydiveTP);
 			world.setBlock(x, 5, z-5, ModBlocks.skydiveTP);
 		
-			if (tp == true) {
-				IBHelper.sound(world, ConfigurationHandler.sound, x+5, 256, z);
+			if (tp) {
+				IBHelper.sound(world, Config.sound, x+5, 256, z);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x+5 + 0.5, 257 + 0.5, z + 0.5);
-					IBHelper.sound(world, ConfigurationHandler.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
+					IBHelper.sound(world, Config.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
 				}
 			}
 		}
@@ -515,8 +479,4 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
 		return new TileEntitySkydive();
 	}
-    
-//    public int getColorFromY(int y, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10) {
-//    	
-//    }
 }

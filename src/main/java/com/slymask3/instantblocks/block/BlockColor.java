@@ -1,7 +1,12 @@
 package com.slymask3.instantblocks.block;
 
-import java.util.Random;
-
+import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Reference;
+import com.slymask3.instantblocks.reference.Textures;
+import com.slymask3.instantblocks.tileentity.TileEntityColor;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -13,13 +18,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.tileentity.TileEntityColor;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
 
 public class BlockColor extends Block implements ITileEntityProvider {
 
@@ -28,9 +27,8 @@ public class BlockColor extends Block implements ITileEntityProvider {
 	public BlockColor() {
 		super(Material.cloth);
         setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-        setBlockName("instantblocks:" + Names.Blocks.COLOR);
+        setBlockName(Reference.MOD_ID + ":" + Names.Blocks.COLOR);
         setHardness(0.5F);
-        //setResistance(2000F);
         setStepSound(Block.soundTypeCloth);
         setBlockTextureName(Textures.Color.SIDE);
 	}
@@ -42,14 +40,6 @@ public class BlockColor extends Block implements ITileEntityProvider {
 	public int getRenderBlockPass() {
         return 0;
     }
-
-//    public boolean isOpaqueCube() {
-//        return false;
-//    }
-
-//    public boolean renderAsNormalBlock() {
-//        return false;
-//    }
 	
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -68,41 +58,19 @@ public class BlockColor extends Block implements ITileEntityProvider {
 	public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
 		return ((TileEntityColor) access.getTileEntity(x, y, z)).color;
 	}
-
-	/*@Override
-	public boolean onBlockActivated(World world,int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		//((TileEntityColor) world.getTileEntity(x, y, z)).color = 0x00FFFF00;
-		//world.markBlockForUpdate(x, y, z);
-		
-		return true;
-	}
-	
-	@Override
-	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
-		//((TileEntityColor) world.getTileEntity(x, y, z)).color = 0x000000FF;
-		//world.markBlockForUpdate(x, y, z);
-	}*/
 	
 	//@SideOnly(Side.CLIENT)
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
-		int r = 0;
-		int g = 0;
-		int b = 0;
-		
-		//if(!world.isRemote) {
-			Random rand = new Random();
-			r = rand.nextInt(255);
-			g = rand.nextInt(255);
-			b = rand.nextInt(255);
-		//}
-			
-			int rgb = ((r & 0xFF) << 16) + ((g & 0xFF) << 8) + (b & 0xFF);
+		Random rand = new Random();
+		int r = rand.nextInt(255);
+		int g = rand.nextInt(255);
+		int b = rand.nextInt(255);
+
+		int rgb = ((r & 0xFF) << 16) + ((g & 0xFF) << 8) + (b & 0xFF);
 		
 		if(!world.isRemote) {
 			((TileEntityColor) world.getTileEntity(x, y, z)).color = rgb;
 			world.markBlockForUpdate(x, y, z);
-			//world.notifyBlockChange(x, y, z, ModBlocks.color);
-			//world.updateEntities();
 		}
 	}
 }

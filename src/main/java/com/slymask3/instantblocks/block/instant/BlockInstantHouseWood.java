@@ -1,7 +1,15 @@
 package com.slymask3.instantblocks.block.instant;
 
-import java.util.Random;
-
+import com.slymask3.instantblocks.block.BlockDirectionalIB;
+import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
+import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -12,16 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.block.BlockDirectionalIB;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.utility.BuildHelper;
-import com.slymask3.instantblocks.utility.IBHelper;
+import java.util.Random;
 
 public class BlockInstantHouseWood extends BlockDirectionalIB {
 	
@@ -89,7 +88,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (ConfigurationHandler.useWands == true) {
+		if (Config.useWands) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 				//player.triggerAchievement(ib.achWood);
@@ -103,10 +102,10 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		
 		build(world, x, y, z);
 			
-		IBHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.xp(world, player, Config.xp);
 		//BuildHelper.keepBlocks(world, x, y, z, InstantBlocks.ibWood.blockID);
 				
-		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		IBHelper.sound(world, Config.sound, x, y, z);
 		IBHelper.effectFull(world, "reddust", x, y, z);
 		IBHelper.msg(player, Strings.woodCreate, Colors.a);
 		
@@ -297,7 +296,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			
 			//world.setBlock(p_147449_1_, p_147449_2_, p_147449_3_, p_147449_4_); ////1.7.10 setBlock
 			
-			if (ConfigurationHandler.packWood == true) {
+			if (Config.packWood) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 4, 2);
 			}
 		}
@@ -417,7 +416,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			world.setBlock(x - 7, y + 4, z - 4, torch);
 			world.setBlock(x - 7, y + 4, z + 4, torch);
 			
-			if (ConfigurationHandler.packWood == true) {
+			if (Config.packWood) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 5, 2);
 			}
 		}
@@ -537,7 +536,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			world.setBlock(x - 4, y + 4, z - 7, torch);
 			world.setBlock(x+4, y + 4, z-7, torch);
 			
-			if (ConfigurationHandler.packWood == true) {
+			if (Config.packWood) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 6, 2);
 			}
 		}
@@ -657,7 +656,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			world.setBlock(x + 7, y + 4, z - 4, torch);
 			world.setBlock(x + 7, y + 4, z + 4, torch);
 			
-			if (ConfigurationHandler.packWood == true) {
+			if (Config.packWood) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 7, 2);
 			}
 		}
@@ -721,7 +720,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z-1, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x, y+1, z+2, door, player, "Door");
 			
-			if (notThere == true) {
+			if (notThere) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 4, 2);
 				notThere = false;
 				drop = 0;
@@ -745,7 +744,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x+1, y+1, z+4, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x-2, y+1, z, door, player, "Door");
 			
-			if (notThere == true) {
+			if (notThere) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 5, 2);
 				notThere = false;
 				drop = 0;
@@ -769,7 +768,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x-4, y+1, z+1, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x, y+1, z-2, door, player, "Door");
 			
-			if (notThere == true) {
+			if (notThere) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 6, 2);
 				notThere = false;
 				drop = 0;
@@ -793,7 +792,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x-1, y+1, z-4, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x+2, y+1, z, door, player, "Door");
 			
-			if (notThere == true) {
+			if (notThere) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 7, 2);
 				notThere = false;
 				drop = 0;
@@ -939,7 +938,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z-1, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x, y+1, z+2, door, player, "Door");
 			
-			if (notThere == true) {
+			if (notThere) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 4, 2);
 				notThere = false;
 				return 0;
@@ -949,7 +948,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 
 			//player.triggerAchievement(ib.achWood);
 			
-			//BuildHelper.msg(player, "\u00a7aInstant Wooden House Re-Packed.");
+			//BuildHelper.msg(player, Colors.a + "Instant Wooden House Re-Packed.");
 		} else if (meta == 5) {
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z+4, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z-2, chest, player, "Chest");
@@ -961,7 +960,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x+1, y+1, z+4, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x-2, y+1, z, door, player, "Door");
 			
-			if (notThere == true) {
+			if (notThere) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 5, 2);
 				notThere = false;
 				return 0;
@@ -971,7 +970,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 
 			//player.triggerAchievement(ib.achWood);
 			
-			//BuildHelper.msg(player, "\u00a7aInstant Wooden House Re-Packed.");
+			//BuildHelper.msg(player, Colors.a + "Instant Wooden House Re-Packed.");
 		} else if (meta == 6) {
 			BuildHelper.ifNoBlockThenStop(world, x-3, y+1, z+4, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x+2, y+1, z+4, chest, player, "Chest");
@@ -983,7 +982,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x-4, y+1, z+1, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x, y+1, z-2, door, player, "Door");
 			
-			if (notThere == true) {
+			if (notThere) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 6, 2);
 				notThere = false;
 				return 0;
@@ -1003,7 +1002,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x-1, y+1, z-4, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x+2, y+1, z, door, player, "Door");
 			
-			if (notThere == true) {
+			if (notThere) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 7, 2);
 				notThere = false;
 				return 0;
@@ -1013,7 +1012,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 
 			//player.triggerAchievement(ib.achWood);
 			
-			//BuildHelper.msg(player, "\u00a7aInstant Wooden House Re-Packed.");
+			//BuildHelper.msg(player, Colors.a + "Instant Wooden House Re-Packed.");
 		}
 		return 1;
 	}

@@ -1,31 +1,13 @@
 package com.slymask3.instantblocks.init;
 
-import net.minecraft.block.Block;
-
 import com.slymask3.instantblocks.block.BlockColor;
 import com.slymask3.instantblocks.block.BlockColorLadder;
 import com.slymask3.instantblocks.block.BlockSkydiveTP;
-import com.slymask3.instantblocks.block.instant.BlockInstantFall;
-import com.slymask3.instantblocks.block.instant.BlockInstantFarm;
-import com.slymask3.instantblocks.block.instant.BlockInstantGlassDome;
-import com.slymask3.instantblocks.block.instant.BlockInstantGrinder;
-import com.slymask3.instantblocks.block.instant.BlockInstantHarvest;
-import com.slymask3.instantblocks.block.instant.BlockInstantHouseWood;
-import com.slymask3.instantblocks.block.instant.BlockInstantLadder;
-import com.slymask3.instantblocks.block.instant.BlockInstantLava;
-import com.slymask3.instantblocks.block.instant.BlockInstantLight;
-import com.slymask3.instantblocks.block.instant.BlockInstantPool;
-import com.slymask3.instantblocks.block.instant.BlockInstantRail;
-import com.slymask3.instantblocks.block.instant.BlockInstantSchematic;
-import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
-import com.slymask3.instantblocks.block.instant.BlockInstantSuction;
-import com.slymask3.instantblocks.block.instant.BlockInstantTree;
-import com.slymask3.instantblocks.block.instant.BlockInstantUp;
-import com.slymask3.instantblocks.block.instant.BlockInstantWater;
+import com.slymask3.instantblocks.block.instant.*;
 import com.slymask3.instantblocks.item.ItemBlockInstantBlocks;
 import com.slymask3.instantblocks.reference.Names;
-
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
 
 public class ModBlocks {
 	public static Block ibWood = new BlockInstantHouseWood();

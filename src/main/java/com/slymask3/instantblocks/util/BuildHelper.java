@@ -1,27 +1,19 @@
-package com.slymask3.instantblocks.utility;
+package com.slymask3.instantblocks.util;
 
-import java.awt.image.BufferedImage;
-
+import com.slymask3.instantblocks.block.instant.BlockInstantHouseWood;
+import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.tileentity.TileEntityColor;
+import com.slymask3.instantblocks.tileentity.TileEntityColorLadder;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.block.instant.BlockInstantHouseWood;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.tileentity.TileEntityColor;
-import com.slymask3.instantblocks.tileentity.TileEntityColorLadder;
+import java.awt.image.BufferedImage;
 
 public class BuildHelper {
-	//private static ConfigurationHandlerurationHandler ConfigurationHandler = new ConfigurationHandlerurationHandler();
-	//private static InstantBlocks ib = new InstantBlocks();
-	//private ModBlocks ModBlocks = new ModBlocks();
-	//private ModItems mi = new ModItems();
-	
-	//public static int checkTick = 0;
-	//public static int checkParticle = 0;
-	
 	/***************
 	 * @INFO	   *
 	 * x+# = EAST  *
@@ -219,14 +211,14 @@ public class BuildHelper {
 	}
 	
 	public static void buildIfAir(World world, int x, int y, int z, Block block) {
-		if (world.isAirBlock(x, y, z) == true) {
+		if (world.isAirBlock(x, y, z)) {
 			setBlockIfNoBedrock(world, x, y, z, block);
 		}
 	}
 	
 	public static void ifNoBlockThenStop(World world, int x, int y, int z, Block block, EntityPlayer player, String blockName) {
 		if (world.getBlock(x, y, z) != block) {
-			IBHelper.msg(player, "Missing Block: " + blockName + " at x=" + (x) + ", y=" + (y) + ", z=" + (z) + ".", "\u00a7c");
+			IBHelper.msg(player, "Missing Block: " + blockName + " at x=" + (x) + ", y=" + (y) + ", z=" + (z) + ".", Colors.c);
 			BlockInstantHouseWood.notThere = true;
 		}
 	}
@@ -241,24 +233,24 @@ public class BuildHelper {
 	
 	public static void checkLiquid5(World world, int x, int y, int z, Block block) {
 		c2++;
-		if (c2 < ConfigurationHandler.max) {
-			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) != 15 && c2 < ConfigurationHandler.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
+		if (c2 < Config.max) {
+			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) != 15 && c2 < Config.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
 				counter++;
 				checkLiquid5a(world, x+1, y, z, block);
 			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) != 15 && c2 < ConfigurationHandler.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
+			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) != 15 && c2 < Config.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
 				counter++;
 				checkLiquid5a(world, x-1, y, z, block);
 			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) != 15 && c2 < ConfigurationHandler.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
+			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) != 15 && c2 < Config.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
 				counter++;
 				checkLiquid5a(world, x, y, z+1, block);
 			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) != 15 && c2 < ConfigurationHandler.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
+			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) != 15 && c2 < Config.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
 				counter++;
 				checkLiquid5a(world, x, y, z-1, block);
 			}
-			if (world.getBlock(x, y-1, z) == Blocks.air && world.getBlockMetadata(x, y-1, z) != 15 && c2 < ConfigurationHandler.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
+			if (world.getBlock(x, y-1, z) == Blocks.air && world.getBlockMetadata(x, y-1, z) != 15 && c2 < Config.max/*xDone[counter] == 0 && yDone[counter] == 0 && zDone[counter] == 0*/) {
 				counter++;
 				checkLiquid5a(world, x, y-1, z, block);
 			}
@@ -274,20 +266,20 @@ public class BuildHelper {
 	
 	public static void checkLiquid5Undo(World world, int x, int y, int z, Block block) {
 		c5++;
-		if (c5 < ConfigurationHandler.max) {
-			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) == 15 && c5 < ConfigurationHandler.max) {
+		if (c5 < Config.max) {
+			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) == 15 && c5 < Config.max) {
 				checkLiquid5aUndo(world, x+1, y, z, block);
 			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) == 15 && c5 < ConfigurationHandler.max) {
+			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) == 15 && c5 < Config.max) {
 				checkLiquid5aUndo(world, x-1, y, z, block);
 			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) == 15 && c5 < ConfigurationHandler.max) {
+			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) == 15 && c5 < Config.max) {
 				checkLiquid5aUndo(world, x, y, z+1, block);
 			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) == 15 && c5 < ConfigurationHandler.max) {
+			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) == 15 && c5 < Config.max) {
 				checkLiquid5aUndo(world, x, y, z-1, block);
 			}
-			if (world.getBlock(x, y-1, z) == Blocks.air && world.getBlockMetadata(x, y-1, z) == 15 && c5 < ConfigurationHandler.max) {
+			if (world.getBlock(x, y-1, z) == Blocks.air && world.getBlockMetadata(x, y-1, z) == 15 && c5 < Config.max) {
 				checkLiquid5aUndo(world, x, y-1, z, block);
 			}
 		}
@@ -299,24 +291,24 @@ public class BuildHelper {
 	}
 	
 	public static void buildLiquid4(World world, int x, int y, int z, Block block) {
-		if (c2 < ConfigurationHandler.max) {
-			if (world.getBlock(x+1, y, z) == Blocks.air && c2 < ConfigurationHandler.max) {
+		if (c2 < Config.max) {
+			if (world.getBlock(x+1, y, z) == Blocks.air && c2 < Config.max) {
 				buildLiquid4a(world, x+1, y, z, block);
 				built = true;
 			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x-1, y, z) == Blocks.air && c2 < Config.max) {
 				buildLiquid4a(world, x-1, y, z, block);
 				built = true;
 			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x, y, z+1) == Blocks.air && c2 < Config.max) {
 				buildLiquid4a(world, x, y, z+1, block);
 				built = true;
 			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x, y, z-1) == Blocks.air && c2 < Config.max) {
 				buildLiquid4a(world, x, y, z-1, block);
 				built = true;
 			}
-			if (world.getBlock(x, y-1, z) == Blocks.air && c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x, y-1, z) == Blocks.air && c2 < Config.max) {
 				buildLiquid4a(world, x, y-1, z, block);
 				built = true;
 			}
@@ -325,7 +317,7 @@ public class BuildHelper {
 	
 	public static void buildLiquid4a(World world, int x, int y, int z, Block block) {
 		setBlockIfNoBedrock(world, x, y, z, block, 0, 2);
-		if (c2 < ConfigurationHandler.max) {
+		if (c2 < Config.max) {
 			buildLiquid4(world, x, y, z, block);
 		}
 	}
@@ -334,20 +326,20 @@ public class BuildHelper {
 	
 	public static void checkLiquid5S(World world, int x, int y, int z, Block block) {
 		c2++;
-		if (c2 < ConfigurationHandler.max) {
-			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) != 15 && c2 < ConfigurationHandler.max) {
+		if (c2 < Config.max) {
+			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) != 15 && c2 < Config.max) {
 				counter++;
 				checkLiquid5aS(world, x+1, y, z, block);
 			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) != 15 && c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) != 15 && c2 < Config.max) {
 				counter++;
 				checkLiquid5aS(world, x-1, y, z, block);
 			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) != 15 && c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) != 15 && c2 < Config.max) {
 				counter++;
 				checkLiquid5aS(world, x, y, z+1, block);
 			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) != 15 && c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) != 15 && c2 < Config.max) {
 				counter++;
 				checkLiquid5aS(world, x, y, z-1, block);
 			}
@@ -361,17 +353,17 @@ public class BuildHelper {
 	
 	public static void checkLiquid5UndoS(World world, int x, int y, int z, Block block) {
 		c5++;
-		if (c5 < ConfigurationHandler.max) {
-			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) == 15 && c5 < ConfigurationHandler.max) {
+		if (c5 < Config.max) {
+			if (world.getBlock(x+1, y, z) == Blocks.air && world.getBlockMetadata(x+1, y, z) == 15 && c5 < Config.max) {
 				checkLiquid5aUndoS(world, x+1, y, z, block);
 			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) == 15 && c5 < ConfigurationHandler.max) {
+			if (world.getBlock(x-1, y, z) == Blocks.air && world.getBlockMetadata(x-1, y, z) == 15 && c5 < Config.max) {
 				checkLiquid5aUndoS(world, x-1, y, z, block);
 			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) == 15 && c5 < ConfigurationHandler.max) {
+			if (world.getBlock(x, y, z+1) == Blocks.air && world.getBlockMetadata(x, y, z+1) == 15 && c5 < Config.max) {
 				checkLiquid5aUndoS(world, x, y, z+1, block);
 			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) == 15 && c5 < ConfigurationHandler.max) {
+			if (world.getBlock(x, y, z-1) == Blocks.air && world.getBlockMetadata(x, y, z-1) == 15 && c5 < Config.max) {
 				checkLiquid5aUndoS(world, x, y, z-1, block);
 			}
 		}
@@ -383,20 +375,20 @@ public class BuildHelper {
 	}
 	
 	public static void buildLiquid4S(World world, int x, int y, int z, Block block) {
-		if (c2 < ConfigurationHandler.max) {
-			if (world.getBlock(x+1, y, z) == Blocks.air && c2 < ConfigurationHandler.max) {
+		if (c2 < Config.max) {
+			if (world.getBlock(x+1, y, z) == Blocks.air && c2 < Config.max) {
 				buildLiquid4aS(world, x+1, y, z, block);
 				built = true;
 			}
-			if (world.getBlock(x-1, y, z) == Blocks.air && c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x-1, y, z) == Blocks.air && c2 < Config.max) {
 				buildLiquid4aS(world, x-1, y, z, block);
 				built = true;
 			}
-			if (world.getBlock(x, y, z+1) == Blocks.air && c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x, y, z+1) == Blocks.air && c2 < Config.max) {
 				buildLiquid4aS(world, x, y, z+1, block);
 				built = true;
 			}
-			if (world.getBlock(x, y, z-1) == Blocks.air && c2 < ConfigurationHandler.max) {
+			if (world.getBlock(x, y, z-1) == Blocks.air && c2 < Config.max) {
 				buildLiquid4aS(world, x, y, z-1, block);
 				built = true;
 			}
@@ -405,7 +397,7 @@ public class BuildHelper {
 	
 	public static void buildLiquid4aS(World world, int x, int y, int z, Block block) {
 		setBlockIfNoBedrock(world, x, y, z, block, 0, 2);
-		if (c2 < ConfigurationHandler.max) {
+		if (c2 < Config.max) {
 			buildLiquid4S(world, x, y, z, block);
 		}
 	}
@@ -421,23 +413,23 @@ public class BuildHelper {
 	
 	public static void checkSuck(World world, int x, int y, int z) {
 		cs++;
-		if (cs < ConfigurationHandler.maxSuck) {
-			if ((world.getBlock(x+1, y, z) == Blocks.water || world.getBlock(x+1, y, z) == Blocks.lava) && world.getBlockMetadata(x+1, y, z) != 15 && cs < ConfigurationHandler.maxSuck) {
+		if (cs < Config.maxSuck) {
+			if ((world.getBlock(x+1, y, z) == Blocks.water || world.getBlock(x+1, y, z) == Blocks.lava) && world.getBlockMetadata(x+1, y, z) != 15 && cs < Config.maxSuck) {
 				checkSucka(world, x+1, y, z);
 			}
-			if ((world.getBlock(x-1, y, z) == Blocks.water || world.getBlock(x-1, y, z) == Blocks.lava) && world.getBlockMetadata(x-1, y, z) != 15 && cs < ConfigurationHandler.maxSuck) {
+			if ((world.getBlock(x-1, y, z) == Blocks.water || world.getBlock(x-1, y, z) == Blocks.lava) && world.getBlockMetadata(x-1, y, z) != 15 && cs < Config.maxSuck) {
 				checkSucka(world, x-1, y, z);
 			}
-			if ((world.getBlock(x, y, z+1) == Blocks.water || world.getBlock(x, y, z+1) == Blocks.lava) && world.getBlockMetadata(x, y, z+1) != 15 && cs < ConfigurationHandler.maxSuck) {
+			if ((world.getBlock(x, y, z+1) == Blocks.water || world.getBlock(x, y, z+1) == Blocks.lava) && world.getBlockMetadata(x, y, z+1) != 15 && cs < Config.maxSuck) {
 				checkSucka(world, x, y, z+1);
 			}
-			if ((world.getBlock(x, y, z-1) == Blocks.water || world.getBlock(x, y, z-1) == Blocks.lava) && world.getBlockMetadata(x, y, z-1) != 15 && cs < ConfigurationHandler.maxSuck) {
+			if ((world.getBlock(x, y, z-1) == Blocks.water || world.getBlock(x, y, z-1) == Blocks.lava) && world.getBlockMetadata(x, y, z-1) != 15 && cs < Config.maxSuck) {
 				checkSucka(world, x, y, z-1);
 			}
-			if ((world.getBlock(x, y+1, z) == Blocks.water || world.getBlock(x, y+1, z) == Blocks.lava) && world.getBlockMetadata(x, y+1, z) != 15 && cs < ConfigurationHandler.maxSuck) {
+			if ((world.getBlock(x, y+1, z) == Blocks.water || world.getBlock(x, y+1, z) == Blocks.lava) && world.getBlockMetadata(x, y+1, z) != 15 && cs < Config.maxSuck) {
 				checkSucka(world, x, y+1, z);
 			}
-			if ((world.getBlock(x, y-1, z) == Blocks.water || world.getBlock(x, y-1, z) == Blocks.lava) && world.getBlockMetadata(x, y-1, z) != 15 && cs < ConfigurationHandler.maxSuck) {
+			if ((world.getBlock(x, y-1, z) == Blocks.water || world.getBlock(x, y-1, z) == Blocks.lava) && world.getBlockMetadata(x, y-1, z) != 15 && cs < Config.maxSuck) {
 				checkSucka(world, x, y-1, z);
 			}
 		}
@@ -452,23 +444,23 @@ public class BuildHelper {
 	
 	public static void checkSuckUndo(World world, int x, int y, int z) {
 		cs2++;
-		if (cs2 < ConfigurationHandler.maxSuck) {
-			if ((world.getBlock(x+1, y, z) == Blocks.water || world.getBlock(x+1, y, z) == Blocks.lava) && world.getBlockMetadata(x+1, y, z) == 15 && cs2 < ConfigurationHandler.maxSuck) {
+		if (cs2 < Config.maxSuck) {
+			if ((world.getBlock(x+1, y, z) == Blocks.water || world.getBlock(x+1, y, z) == Blocks.lava) && world.getBlockMetadata(x+1, y, z) == 15 && cs2 < Config.maxSuck) {
 				checkSuckaUndo(world, x+1, y, z);
 			}
-			if ((world.getBlock(x-1, y, z) == Blocks.water || world.getBlock(x-1, y, z) == Blocks.lava) && world.getBlockMetadata(x-1, y, z) == 15 && cs2 < ConfigurationHandler.maxSuck) {
+			if ((world.getBlock(x-1, y, z) == Blocks.water || world.getBlock(x-1, y, z) == Blocks.lava) && world.getBlockMetadata(x-1, y, z) == 15 && cs2 < Config.maxSuck) {
 				checkSuckaUndo(world, x-1, y, z);
 			}
-			if ((world.getBlock(x, y, z+1) == Blocks.water || world.getBlock(x, y, z+1) == Blocks.lava) && world.getBlockMetadata(x, y, z+1) == 15 && cs2 < ConfigurationHandler.maxSuck) {
+			if ((world.getBlock(x, y, z+1) == Blocks.water || world.getBlock(x, y, z+1) == Blocks.lava) && world.getBlockMetadata(x, y, z+1) == 15 && cs2 < Config.maxSuck) {
 				checkSuckaUndo(world, x, y, z+1);
 			}
-			if ((world.getBlock(x, y, z-1) == Blocks.water || world.getBlock(x, y, z-1) == Blocks.lava) && world.getBlockMetadata(x, y, z-1) == 15 && cs2 < ConfigurationHandler.maxSuck) {
+			if ((world.getBlock(x, y, z-1) == Blocks.water || world.getBlock(x, y, z-1) == Blocks.lava) && world.getBlockMetadata(x, y, z-1) == 15 && cs2 < Config.maxSuck) {
 				checkSuckaUndo(world, x, y, z-1);
 			}
-			if ((world.getBlock(x, y+1, z) == Blocks.water || world.getBlock(x, y+1, z) == Blocks.lava) && world.getBlockMetadata(x, y+1, z) == 15 && cs2 < ConfigurationHandler.maxSuck) {
+			if ((world.getBlock(x, y+1, z) == Blocks.water || world.getBlock(x, y+1, z) == Blocks.lava) && world.getBlockMetadata(x, y+1, z) == 15 && cs2 < Config.maxSuck) {
 				checkSuckaUndo(world, x, y+1, z);
 			}
-			if ((world.getBlock(x, y-1, z) == Blocks.water || world.getBlock(x, y-1, z) == Blocks.lava) && world.getBlockMetadata(x, y-1, z) == 15 && cs2 < ConfigurationHandler.maxSuck) {
+			if ((world.getBlock(x, y-1, z) == Blocks.water || world.getBlock(x, y-1, z) == Blocks.lava) && world.getBlockMetadata(x, y-1, z) == 15 && cs2 < Config.maxSuck) {
 				checkSuckaUndo(world, x, y-1, z);
 			}
 		}
@@ -480,7 +472,7 @@ public class BuildHelper {
 	}
 	
 	public static void buildSuck(World world, int x, int y, int z) {
-		if (cs < ConfigurationHandler.maxSuck) {
+		if (cs < Config.maxSuck) {
 		if (world.getBlock(x+1, y, z) == Blocks.water) {
 			buildSucka(world, x+1, y, z, 1);
 		}
@@ -525,7 +517,7 @@ public class BuildHelper {
 		setBlockIfNoBedrock(world, x, y, z, Blocks.air, 0, 2);
 		sucked = true;
 		liq = liqP;
-		if (cs < ConfigurationHandler.maxSuck) {
+		if (cs < Config.maxSuck) {
 			buildSuck(world, x, y, z);
 		}
 	}
@@ -533,40 +525,36 @@ public class BuildHelper {
 	/******************************************************************************************************/
 	
 	public void buildLiquid2(World world, int x, int y, int z, Block block, Block block2, int counter, int max) {
-		if (counter < ConfigurationHandler.max) {
+		if (counter < Config.max) {
 		if (world.getBlock(x+1, y, z) == Blocks.air /*|| world.getBlockId(x+1, y, z) == block2*/) {
 			setBlockIfNoBedrock(world, x+1, y, z, block);
-			buildLiquid2(world, x+1, y, z, block, block2, counter, ConfigurationHandler.max);
+			buildLiquid2(world, x+1, y, z, block, block2, counter, Config.max);
 			counter++;
 		}
 		if (world.getBlock(x-1, y, z) == Blocks.air /*|| world.getBlockId(x-1, y, z) == block2*/) {
 			setBlockIfNoBedrock(world, x-1, y, z, block);
-			buildLiquid2(world, x-1, y, z, block, block2, counter, ConfigurationHandler.max);
+			buildLiquid2(world, x-1, y, z, block, block2, counter, Config.max);
 			counter++;
 		}
 		if (world.getBlock(x, y, z+1) == Blocks.air /*|| world.getBlockId(x, y, z+1) == block2*/) {
 			setBlockIfNoBedrock(world, x, y, z+1, block);
-			buildLiquid2(world, x, y, z+1, block, block2, counter, ConfigurationHandler.max);
+			buildLiquid2(world, x, y, z+1, block, block2, counter, Config.max);
 			counter++;
 		}
 		if (world.getBlock(x, y, z-1) == Blocks.air /*|| world.getBlockId(x, y, z-1) == block2*/) {
 			setBlockIfNoBedrock(world, x, y, z-1, block);
-			buildLiquid2(world, x, y, z-1, block, block2, counter, ConfigurationHandler.max);
+			buildLiquid2(world, x, y, z-1, block, block2, counter, Config.max);
 			counter++;
 		}
 		if (world.getBlock(x, y-1, z) == Blocks.air /*|| world.getBlockId(x, y-1, z) == block2*/) {
 			setBlockIfNoBedrock(world, x, y-1, z, block);
-			buildLiquid2(world, x, y-1, z, block, block2, counter, ConfigurationHandler.max);
+			buildLiquid2(world, x, y-1, z, block, block2, counter, Config.max);
 			counter++;
 		}
 		} else {
 			counter = 1;
 		}
 	}
-	
-	
-	
-
 	
 	public void setColorBlock(World world, int x, int y, int z, BufferedImage img, int imgx, int imgy, boolean rgb) {
 		if (rgb) {

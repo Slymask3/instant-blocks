@@ -1,22 +1,15 @@
 package com.slymask3.instantblocks.init;
 
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-
+import com.slymask3.instantblocks.handler.Config;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes {
-	private static ConfigurationHandler config = new ConfigurationHandler();
-	private static InstantBlocks ib = new InstantBlocks();
-	private static ModBlocks mb = new ModBlocks();
-	private static ModItems mi = new ModItems();
-	
 	public static void init() {
-		if (config.crafting.getBoolean(true)) {
-			GameRegistry.addRecipe(new ItemStack(mb.ibWood, 1), new Object[] {
+		if (Config.crafting.getBoolean(true)) {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibWood, 1), new Object[] {
 				"WVW",
 				"GBG",	//Wooden House
 				"LDL",
@@ -28,7 +21,7 @@ public class Recipes {
 				Character.valueOf('D'), Items.wooden_door
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibLadder, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibLadder, 1), new Object[] {
 				"LST",
 				"LSI",	//Mining Ladder
 				"LSW",
@@ -39,7 +32,7 @@ public class Recipes {
 				Character.valueOf('W'), Items.water_bucket
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibGlassDome, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibGlassDome, 1), new Object[] {
 				"GGG",
 				"GTG",	//Glass Dome
 				"SSS",
@@ -48,7 +41,7 @@ public class Recipes {
 				Character.valueOf('S'), Blocks.stone
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibFarm, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibFarm, 1), new Object[] {
 				"S S",
 				"DWD", //Farm
 				"BBB",
@@ -58,7 +51,7 @@ public class Recipes {
 				Character.valueOf('B'), new ItemStack(Blocks.stonebrick, 1, 0)
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibFall, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibFall, 1), new Object[] {
 //				"123",
 //				"4D5", //Rainbow Skydive
 //				"678",
@@ -78,7 +71,7 @@ public class Recipes {
 				Character.valueOf('D'), Items.diamond
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibGrinder, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibGrinder, 1), new Object[] {
 				"WPW",
 				"GDG", //Grinder
 				"CBC",
@@ -90,7 +83,7 @@ public class Recipes {
 				Character.valueOf('B'), Blocks.crafting_table
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibPool, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibPool, 1), new Object[] {
 				"S S",
 				"GWG", //Pool
 				"SGS",
@@ -99,7 +92,7 @@ public class Recipes {
 				Character.valueOf('W'), Items.water_bucket
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibUp, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibUp, 1), new Object[] {
 				"SLS",
 				"SLS", //Escape Ladder
 				"SLS",
@@ -107,7 +100,7 @@ public class Recipes {
 				Character.valueOf('L'), Blocks.ladder
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibWater, 2), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibWater, 2), new Object[] {
 				"LLL",
 				"LDL", //Water
 				"LLL",
@@ -115,7 +108,7 @@ public class Recipes {
 				Character.valueOf('L'), Items.water_bucket
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibLava, 2), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibLava, 2), new Object[] {
 				"LLL",
 				"LDL", //Lava
 				"LLL",
@@ -123,7 +116,7 @@ public class Recipes {
 				Character.valueOf('L'), Items.lava_bucket
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibSucker, 2), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibSucker, 2), new Object[] {
 				"III",
 				"IHI", //Absorb
 				"III",
@@ -131,7 +124,7 @@ public class Recipes {
 				Character.valueOf('I'), Items.iron_ingot
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibRail, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibRail, 1), new Object[] {
 				"I I",
 				"ISI", //Rail
 				"IBI",
@@ -149,7 +142,7 @@ public class Recipes {
 				Character.valueOf('B'), Items.bone
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibStatue, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibStatue, 1), new Object[] {
 				"WWW",
 				"WHW", //Statue
 				"WWW",
@@ -157,7 +150,7 @@ public class Recipes {
 				Character.valueOf('W'), Blocks.wool
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibHarvest, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibHarvest, 1), new Object[] {
 				" H ",
 				"AWA", //Harvest
 				" H ",
@@ -166,7 +159,7 @@ public class Recipes {
 				Character.valueOf('W'), Blocks.crafting_table
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibHarvest, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibHarvest, 1), new Object[] {
 				" A ",
 				"HWH", //Harvest
 				" A ",
@@ -175,7 +168,7 @@ public class Recipes {
 				Character.valueOf('W'), Blocks.crafting_table
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibLight, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibLight, 1), new Object[] {
 				"TTT",
 				"TCT", //Light
 				"TTT",
@@ -183,7 +176,7 @@ public class Recipes {
 				Character.valueOf('C'), Blocks.coal_block
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibSchematic, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibSchematic, 1), new Object[] {
 				"LDL",
 				"LPL", //Schematic
 				"WWW",
@@ -193,7 +186,7 @@ public class Recipes {
 				Character.valueOf('W'), new ItemStack(Blocks.planks, 1, 5),
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibTree, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibTree, 1), new Object[] {
 				"LLL",
 				"WSW", //Tree
 				"BBB",
@@ -203,7 +196,7 @@ public class Recipes {
 				Character.valueOf('B'), new ItemStack(Items.dye, 1, 15),
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibTree, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibTree, 1), new Object[] {
 				"LLL",
 				"WSW", //Tree
 				"BBB",
@@ -213,7 +206,7 @@ public class Recipes {
 				Character.valueOf('B'), new ItemStack(Items.dye, 1, 15),
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibTree, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibTree, 1), new Object[] {
 				"LLL",
 				"WSW", //Tree
 				"BBB",
@@ -223,7 +216,7 @@ public class Recipes {
 				Character.valueOf('B'), new ItemStack(Items.dye, 1, 15),
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mb.ibTree, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibTree, 1), new Object[] {
 				"LLL",
 				"WSW", //Tree
 				"BBB",
@@ -235,7 +228,7 @@ public class Recipes {
 			
 			////////////////// WANDS ////////////////////
 			
-			GameRegistry.addRecipe(new ItemStack(mi.ibWandWood, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModItems.ibWandWood, 1), new Object[] {
 				" M ",
 				"MRM", //Wooden Wand
 				" S ",
@@ -244,7 +237,7 @@ public class Recipes {
 				Character.valueOf('S'), Items.stick
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mi.ibWandStone, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModItems.ibWandStone, 1), new Object[] {
 				" M ",
 				"MRM", //Stone Wand
 				" S ",
@@ -253,7 +246,7 @@ public class Recipes {
 				Character.valueOf('S'), Items.stick
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mi.ibWandIron, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModItems.ibWandIron, 1), new Object[] {
 				" M ",
 				"MRM", //Iron Wand
 				" S ",
@@ -262,7 +255,7 @@ public class Recipes {
 				Character.valueOf('S'), Items.stick
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mi.ibWandGold, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModItems.ibWandGold, 1), new Object[] {
 				" M ",
 				"MRM", //Golden Wand
 				" S ",
@@ -271,7 +264,7 @@ public class Recipes {
 				Character.valueOf('S'), Items.stick
 			});
 			
-			GameRegistry.addRecipe(new ItemStack(mi.ibWandDiamond, 1), new Object[] {
+			GameRegistry.addRecipe(new ItemStack(ModItems.ibWandDiamond, 1), new Object[] {
 				" M ",
 				"MRM", //Diamond Wand
 				" S ",

@@ -1,7 +1,13 @@
 package com.slymask3.instantblocks.block;
 
-import java.util.Random;
-
+import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.reference.Reference;
+import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,14 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.utility.BuildHelper;
-import com.slymask3.instantblocks.utility.IBHelper;
+import java.util.Random;
 
 public class BlockIB extends Block {
 
@@ -31,12 +30,12 @@ public class BlockIB extends Block {
 	boolean frontB = true;
 	boolean backB = true;
 	
-	String bottomS = "instantblocks:woodhouse_top";
-	String topS = "instantblocks:woodhouse_top";
-	String leftS = "instantblocks:woodhouse_top";
-	String rightS = "instantblocks:woodhouse_top";
-	String frontS = "instantblocks:woodhouse_top";
-	String backS = "instantblocks:woodhouse_top";
+	String bottomS = Reference.MOD_ID + ":woodhouse_top";
+	String topS = Reference.MOD_ID + ":woodhouse_top";
+	String leftS = Reference.MOD_ID + ":woodhouse_top";
+	String rightS = Reference.MOD_ID + ":woodhouse_top";
+	String frontS = Reference.MOD_ID + ":woodhouse_top";
+	String backS = Reference.MOD_ID + ":woodhouse_top";
 
 	Block bottomBl;
 	Block topBl;
@@ -58,7 +57,7 @@ public class BlockIB extends Block {
 	protected BlockIB(Block block, String name, Material material, SoundType soundType, float hardness) {
 		super(material);
         setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-        setBlockName("instantblocks:" + name);
+        setBlockName(Reference.MOD_ID + ":" + name);
         setHardness(hardness);
         setResistance(2000F);
         setStepSound(soundType);
@@ -347,7 +346,7 @@ public class BlockIB extends Block {
 		
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (ConfigurationHandler.useWands == true) {
+		if (Config.useWands) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				if (world.getBlock(x, y, z) != ModBlocks.ibStatue && world.getBlock(x, y, z) != ModBlocks.ibLava && world.getBlock(x, y, z) != ModBlocks.ibWater) {
 					is.damageItem(1, player);
@@ -362,9 +361,9 @@ public class BlockIB extends Block {
 		build(world, x, y, z, player);
 		
 		IBHelper.keepBlocks(world, x, y, z, this.block);
-		IBHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.xp(world, player, Config.xp);
 			
-		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+		IBHelper.sound(world, Config.sound, x, y, z);
 		IBHelper.effectFull(world, "reddust", x, y, z);
 		IBHelper.msg(player, this.createMsg, Colors.a);
     		

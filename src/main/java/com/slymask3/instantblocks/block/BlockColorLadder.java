@@ -1,35 +1,32 @@
 package com.slymask3.instantblocks.block;
 
-import java.util.Random;
-
+import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Reference;
+import com.slymask3.instantblocks.reference.Textures;
+import com.slymask3.instantblocks.tileentity.TileEntityColorLadder;
+import com.slymask3.instantblocks.util.LogHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLadder;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.tileentity.TileEntityColorLadder;
-import com.slymask3.instantblocks.utility.LogHelper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
 
 public class BlockColorLadder extends BlockLadder implements ITileEntityProvider {
 	public BlockColorLadder() {
 		super();
         setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-        setBlockName("instantblocks:" + Names.Blocks.COLOR_LADDER);
+        setBlockName(Reference.MOD_ID + ":" + Names.Blocks.COLOR_LADDER);
         setHardness(0.5F);
-        //setResistance(2000F);
         setStepSound(Block.soundTypeLadder);
         setBlockTextureName(Textures.ColorLadder.SIDE);
 	}
@@ -96,13 +93,6 @@ public class BlockColorLadder extends BlockLadder implements ITileEntityProvider
 		return new TileEntityColorLadder();
 	}
 	
-	
-//	@SideOnly(Side.CLIENT)
-//    public int getRenderColor(int p_149741_1_)
-//    {
-//        return 0x00FF0000;
-//    }
-	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
@@ -115,7 +105,6 @@ public class BlockColorLadder extends BlockLadder implements ITileEntityProvider
     }
 
 	public void func_149797_b(int meta) {
-        //float f = 0.0625F;
         float f = 0.125F;
 
         if (meta == 2)

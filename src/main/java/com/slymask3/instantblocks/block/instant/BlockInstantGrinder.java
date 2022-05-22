@@ -1,29 +1,18 @@
 package com.slymask3.instantblocks.block.instant;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
-
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.BlockDirectionalIB;
-import com.slymask3.instantblocks.block.BlockIB;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.utility.BuildHelper;
-import com.slymask3.instantblocks.utility.IBHelper;
+import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.IBHelper;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
 
 public class BlockInstantGrinder extends BlockDirectionalIB {
 	
@@ -36,8 +25,6 @@ public class BlockInstantGrinder extends BlockDirectionalIB {
     }
 
 	public void build(World world, int x, int y, int z, EntityPlayer player) {
-		//int dir = world.getBlockMetadata(x, y, z);
-		
 		Block stone = Blocks.stone;
 		Block water = Blocks.flowing_water;
 		Block torch = Blocks.torch;
@@ -230,10 +217,10 @@ public class BlockInstantGrinder extends BlockDirectionalIB {
 		world.setBlock(x, y, z, air);
 		
 		/************************ Teleport ************************/
-		if (ConfigurationHandler.tpGrinder == true) {
+		if (Config.tpGrinder) {
 			//BuildHelper.sound(world, config.sound, x+13, y-4, z);
 			player.setPositionAndUpdate(x+13 + 0.5, y-4 + 0.5, z + 0.5);                                         // ----------UNCOMMENT LATER
-    		IBHelper.sound(world, ConfigurationHandler.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
+    		IBHelper.sound(world, Config.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
 			world.setBlock(x+7, y-4, z, glass);
 			world.setBlock(x+7, y-3, z, glass);
 		}

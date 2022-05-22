@@ -1,9 +1,7 @@
 package com.slymask3.instantblocks.gui;
 
-import java.util.ArrayList;
-
-import net.minecraft.client.renderer.Tessellator;
 import cpw.mods.fml.client.GuiScrollingList;
+import net.minecraft.client.renderer.Tessellator;
 
 public class GuiTreeSlot extends GuiScrollingList {
     private GuiTree parent;
@@ -29,7 +27,7 @@ public class GuiTreeSlot extends GuiScrollingList {
     @Override
     protected void elementClicked(int var1, boolean var2)
     {
-        this.parent.selectSchematicIndex(var1);
+        this.parent.selectTreeIndex(var1);
     }
 
     @Override

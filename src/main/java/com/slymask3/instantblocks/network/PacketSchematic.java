@@ -1,21 +1,18 @@
 package com.slymask3.instantblocks.network;
 
+import com.slymask3.instantblocks.block.instant.BlockInstantSchematic;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
-import com.slymask3.instantblocks.block.instant.BlockInstantSchematic;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
-
 public class PacketSchematic extends AbstractPacket {
 	int _dim, _x, _y, _z;
 	String _player;
 	String _schematic;
 	boolean _center, _air;
-	
 
 	public PacketSchematic() {
 		

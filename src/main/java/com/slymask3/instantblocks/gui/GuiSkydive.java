@@ -1,28 +1,25 @@
 package com.slymask3.instantblocks.gui;
 
-import java.util.Random;
-
+import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.network.PacketSkydive;
+import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
+import com.slymask3.instantblocks.util.IBHelper;
+import cpw.mods.fml.client.config.GuiButtonExt;
+import cpw.mods.fml.client.config.GuiCheckBox;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-
 import org.lwjgl.input.Keyboard;
 
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.network.PacketSkydive;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
-import com.slymask3.instantblocks.utility.IBHelper;
-
-import cpw.mods.fml.client.config.GuiButtonExt;
-import cpw.mods.fml.client.config.GuiCheckBox;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class GuiSkydive extends GuiScreen {
@@ -147,7 +144,7 @@ public class GuiSkydive extends GuiScreen {
 	public void sendInfo() {
 		InstantBlocks.packetPipeline.sendToServer(new PacketSkydive(this.world, this.x, this.y, this.z, this.player.getDisplayName(), getHex(color[0].getText()), getHex(color[1].getText()), getHex(color[2].getText()), getHex(color[3].getText()), getHex(color[4].getText()), getHex(color[5].getText()), getHex(color[6].getText()), getHex(color[7].getText()), getHex(color[8].getText()), getHex(color[9].getText()), getHex(color[10].getText()), tp.isChecked()));
 		
-		IBHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.xp(world, player, Config.xp);
         IBHelper.effectFull(world, "reddust", x, y, z);
         IBHelper.msg(player, Strings.fallCreate, Colors.a);
 	}

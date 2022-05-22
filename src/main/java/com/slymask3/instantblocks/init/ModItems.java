@@ -1,13 +1,11 @@
 package com.slymask3.instantblocks.init;
 
+import com.slymask3.instantblocks.item.ItemInstantWand;
+import com.slymask3.instantblocks.reference.Names;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-
-import com.slymask3.instantblocks.item.ItemInstantWand;
-import com.slymask3.instantblocks.reference.Names;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModItems {
 	public static Item ibWandWood = new ItemInstantWand(Item.getItemFromBlock(Blocks.planks)).setMaxDamage(1).setUnlocalizedName("wandWood");

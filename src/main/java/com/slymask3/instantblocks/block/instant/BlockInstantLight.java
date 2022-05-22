@@ -1,7 +1,16 @@
 package com.slymask3.instantblocks.block.instant;
 
-import java.util.Random;
-
+import com.slymask3.instantblocks.block.BlockIB;
+import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
+import com.slymask3.instantblocks.util.IBHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,18 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.block.BlockIB;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.utility.IBHelper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
 
 public class BlockInstantLight extends BlockIB {
 	
@@ -100,7 +98,7 @@ public class BlockInstantLight extends BlockIB {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (ConfigurationHandler.useWands == true) {
+		if (Config.useWands) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			} else {
@@ -115,7 +113,7 @@ public class BlockInstantLight extends BlockIB {
     }
     
     public void build(World world, int x, int y, int z, EntityPlayer player) {
-		lightUp(world, x, y, z, ConfigurationHandler.radiusLight, player);
+		lightUp(world, x, y, z, Config.radiusLight, player);
 	}
 	
 	public void lightUp(World world, int X, int Y, int Z, int radius, EntityPlayer player) {
@@ -187,15 +185,15 @@ public class BlockInstantLight extends BlockIB {
         }
         
         if(amount > 0) {
-        	IBHelper.msg(player, "\u00a7aLit up the area with " + amount + " torches.", Colors.a);
+        	IBHelper.msg(player, Colors.a + "Lit up the area with " + amount + " torches.", Colors.a);
             
             IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLight);
-    		IBHelper.xp(world, player, ConfigurationHandler.xp);
-    		IBHelper.sound(world, ConfigurationHandler.sound, x, y, z);
+    		IBHelper.xp(world, player, Config.xp);
+    		IBHelper.sound(world, Config.sound, x, y, z);
     		IBHelper.effectFull(world, "reddust", x, y, z);
         } else {
     		world.setBlock(X, Y, Z, ModBlocks.ibLight);
-	        IBHelper.msg(player, "\u00a7aThere are no dark areas to light up in a radius of " + ConfigurationHandler.radiusLight + ".", Colors.c);
+	        IBHelper.msg(player, Colors.a + "There are no dark areas to light up in a radius of " + Config.radiusLight + ".", Colors.c);
     		
         }
     }

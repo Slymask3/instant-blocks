@@ -1,15 +1,14 @@
 package com.slymask3.instantblocks.item;
 
-import java.util.List;
-
+import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.reference.Colors;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.Colors;
+import java.util.List;
 
 public class ItemBlockInstantBlocks extends ItemBlock {
 	public Block block;
@@ -50,8 +49,8 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibWater) {
 			list.add("Fills an area with water.");
-			list.add("Maximum: " + ConfigurationHandler.max + " Water Blocks.");
-			if (ConfigurationHandler.simpleWL == true) {
+			list.add("Maximum: " + Config.max + " Water Blocks.");
+			if (Config.simpleWL) {
 				list.add("Mode: Simple.");
 			} else {
 				list.add("Mode: Full.");
@@ -59,8 +58,8 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibLava) {
 			list.add("Fills an area with lava.");
-			list.add("Maximum: " + ConfigurationHandler.max + " Lava Blocks.");
-			if (ConfigurationHandler.simpleWL == true) {
+			list.add("Maximum: " + Config.max + " Lava Blocks.");
+			if (Config.simpleWL) {
 				list.add("Mode: Simple.");
 			} else {
 				list.add("Mode: Full.");
@@ -68,7 +67,7 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibSucker) {
 			list.add("Sucks in water/lava.");
-			list.add("Maximum: " + ConfigurationHandler.maxSuck + ".");
+			list.add("Maximum: " + Config.maxSuck + ".");
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibRail) {
 			list.add("Creates a railway going forward 37 blocks.");
@@ -78,11 +77,11 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibHarvest) {
 			list.add("Harvests renewable resources in a radius.");
-			list.add("Radius: " + ConfigurationHandler.radiusHarvest);
+			list.add("Radius: " + Config.radiusHarvest);
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibLight) {
 			list.add("Lights up dark areas in a radius.");
-			list.add("Radius: " + ConfigurationHandler.radiusLight);
+			list.add("Radius: " + Config.radiusLight);
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibSchematic) {
 			list.add("Creates a structure from any schematic file.");

@@ -1,40 +1,28 @@
 package com.slymask3.instantblocks.gui;
 
-import java.awt.Color;
-
-import net.minecraft.client.Minecraft;
+import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.network.PacketStatue;
+import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.tileentity.TileEntityStatue;
+import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.IBHelper;
+import cpw.mods.fml.client.config.GuiButtonExt;
+import cpw.mods.fml.client.config.GuiCheckBox;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.Packet;
 import net.minecraft.world.World;
-
 import org.lwjgl.input.Keyboard;
-
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.network.PacketSkydive;
-import com.slymask3.instantblocks.network.PacketStatue;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.tileentity.TileEntityColor;
-import com.slymask3.instantblocks.tileentity.TileEntityStatue;
-import com.slymask3.instantblocks.utility.BuildHelper;
-import com.slymask3.instantblocks.utility.IBHelper;
-import com.slymask3.instantblocks.utility.LogHelper;
-
-import cpw.mods.fml.client.config.GuiButtonExt;
-import cpw.mods.fml.client.config.GuiCheckBox;
-import cpw.mods.fml.client.config.GuiSlider;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiStatue extends GuiScreen {
 	private static BuildHelper ibf = new BuildHelper();
-	private static ConfigurationHandler config = new ConfigurationHandler();
+	private static Config config = new Config();
 	
 	private EntityPlayer player;
 	private TileEntityStatue tileEntity;
@@ -142,21 +130,10 @@ public class GuiStatue extends GuiScreen {
 	
 	public void sendInfo() {
 		InstantBlocks.packetPipeline.sendToServer(new PacketStatue(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
-		//InstantBlocks.packetPipeline.sendToAll(new PacketInstantStatue(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
-		//int c = 0xFF0000;
-		//InstantBlocks.packetPipeline.sendToServer(new PacketSkydive(this.world, this.x, this.y, this.z, this.player.getDisplayName(), c,c,c,c,c,c,c,c,c,c,c));
 		
-		//LogHelper.info(this.player.getDisplayName());
-		
-		//config.rgbMode = rgbMode.isChecked();
-		
-		IBHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.xp(world, player, Config.xp);
         IBHelper.effectFull(world, "reddust", x, y, z);
-        IBHelper.msg(player, "\u00a7aInstant Statue created of the player '" + input.getText() + "'.", Colors.a);
-		
-		
-		
-		//LogHelper.info(input.getText());
+        IBHelper.msg(player, Colors.a + "Instant Statue created of the player '" + input.getText() + "'.", Colors.a);
 	}
 	
 }

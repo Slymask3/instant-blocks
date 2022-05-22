@@ -1,23 +1,19 @@
 package com.slymask3.instantblocks.network;
 
+import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
-import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
-
 public class PacketStatue extends AbstractPacket {
 	int _dim, _x, _y, _z;
-	//double _range;
 	String _player;
 	String _username;
 	boolean _head, _body, _armLeft, _armRight, _legLeft, _legRight;
 	boolean _rgb;
-	
 
 	public PacketStatue() {
 		
@@ -29,7 +25,6 @@ public class PacketStatue extends AbstractPacket {
 		_y = y;
 		_z = z;
 		_player = player;
-		//_range = range;
 		_username = username;
 		_head = head;
 		_body = body;
@@ -47,8 +42,6 @@ public class PacketStatue extends AbstractPacket {
 		buffer.writeInt(_y);
 		buffer.writeInt(_z);
 		ByteBufUtils.writeUTF8String(buffer, _player);
-		//buffer.writeDouble(_range);
-		//buffer.writeBytes(_username.getBytes());
 		ByteBufUtils.writeUTF8String(buffer, _username);
 		buffer.writeBoolean(_head);
 		buffer.writeBoolean(_body);
@@ -66,7 +59,6 @@ public class PacketStatue extends AbstractPacket {
 		_y = buffer.readInt();
 		_z = buffer.readInt();
 		_player = ByteBufUtils.readUTF8String(buffer);
-		//_range = buffer.readDouble();
 		_username = ByteBufUtils.readUTF8String(buffer);
 		_head = buffer.readBoolean();
 		_body = buffer.readBoolean();
@@ -79,43 +71,13 @@ public class PacketStatue extends AbstractPacket {
 
 	@Override
 	public void handleClientSide(EntityPlayer player) {
-//		World world = DimensionManager.getWorld(_dim);
-//		TileEntity tileentity = world.getTileEntity(_x, _y, _z);
-//		((TileEntityStatue)tileentity).setUsername(_username);
-//		((TileEntityStatue)tileentity).setParts(_head, _body, _armLeft, _armRight, _legLeft, _legRight);
-//		LogHelper.info("handleCientSide(): CLIENT");
-//
-//		BlockInstantStatue block = (BlockInstantStatue)world.getBlock(_x, _y, _z);
-//		
-//		block.build(world, _x, _y, _z, _player, tileentity.getBlockMetadata(), this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight, this._rgb);
-//
-//		LogHelper.info("handleClientSide(): username = " + this._username);
+
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
-		//if (world==null) return;
-
-		//TileEntity tileentity = world.getTileEntity(_x, _y, _z);
 		BlockInstantStatue block = (BlockInstantStatue)world.getBlock(_x, _y, _z);
-		
-		//if(tileentity != null && tileentity instanceof TileEntityInstantStatue) {
-			//((TileEntityInstantStatue)tileentity).setDetectionRange(_range);
-			//((TileEntityInstantStatue)tileentity).setUsername(_username);
-			//((TileEntityInstantStatue)tileentity).setParts(_head, _body, _armLeft, _armRight, _legLeft, _legRight);
-			//LogHelper.info("handleServerSide(): SERVER");
-			
-			//if (this._username != "" && !world.isRemote) {
-				//sendChangeToServer();
-			block.build(world, _x, _y, _z, _player, world.getTileEntity(_x, _y, _z).getBlockMetadata(), this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight, this._rgb);
-			//}
-			//LogHelper.info("handleServerSide(): username = " + this._username);
-		//}
-//		int c = 0xFF0000;
-//		BlockInstantSkydive block = (BlockInstantSkydive)world.getBlock(_x, _y, _z);
-//		LogHelper.info("handleServerSide()");
-//		block.build(world, _x, _y, _z, _player, c, c, c, c, c, c, c, c, c, c, c);
-	
+		block.build(world, _x, _y, _z, _player, world.getTileEntity(_x, _y, _z).getBlockMetadata(), this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight, this._rgb);
 	}
 }

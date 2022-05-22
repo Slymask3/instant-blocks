@@ -1,26 +1,22 @@
 package com.slymask3.instantblocks.gui;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.world.World;
-
-import org.lwjgl.input.Keyboard;
-
 import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.network.PacketHarvest;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
-import com.slymask3.instantblocks.utility.IBHelper;
-
+import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.client.config.GuiButtonExt;
 import cpw.mods.fml.client.config.GuiCheckBox;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+import org.lwjgl.input.Keyboard;
 
 @SideOnly(Side.CLIENT)
 public class GuiHarvest extends GuiScreen {
@@ -29,7 +25,6 @@ public class GuiHarvest extends GuiScreen {
 	
     private GuiButtonExt done;
     private GuiButtonExt cancel;
-	//private GuiTextField input;
 	
 	private GuiCheckBox logOak;
 	private GuiCheckBox logSpruce;
@@ -124,18 +119,15 @@ public class GuiHarvest extends GuiScreen {
 	public void drawScreen(final int par1, final int par2, final float par3) {
 		this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, "Instant Harvest Block", this.width / 2, 20, 16777215);
-        //this.drawString(this.fontRendererObj, "Enter a Minecraft Username:", this.width / 2 - 4 - 150, 37, 10526880);
         this.drawString(this.fontRendererObj, "Select blocks to harvest:", this.width / 2 - 3 - 150, this.height / 4 - 30 + 12, 10526880);
-        //this.drawString(this.fontRendererObj, "Unchecking RGB Mode will use vanilla minecraft wool colors.", this.width / 2 - 3 - 150, this.height / 4 + 83 + 12, 10526880);
         
 		super.drawScreen(par1, par2, par3);
 	}
 	
 	public void sendInfo() {
-		//InstantBlocks.packetPipeline.sendToAll(new PacketHarvest(this.world, this.x, this.y, this.z, this.player.getDisplayName(), logOak.isChecked(), logSpruce.isChecked(), logBirch.isChecked(), logJungle.isChecked(), logAcacia.isChecked(), logDark.isChecked(), wheat.isChecked(), carrot.isChecked(), potato.isChecked(), cactus.isChecked(), pumpkin.isChecked(), melon.isChecked(), sugarcane.isChecked(), cocoa.isChecked(), mushroom.isChecked(), netherwart.isChecked(), replant.isChecked()));
 		InstantBlocks.packetPipeline.sendToServer(new PacketHarvest(this.world, this.x, this.y, this.z, this.player.getDisplayName(), logOak.isChecked(), logSpruce.isChecked(), logBirch.isChecked(), logJungle.isChecked(), logAcacia.isChecked(), logDark.isChecked(), wheat.isChecked(), carrot.isChecked(), potato.isChecked(), cactus.isChecked(), pumpkin.isChecked(), melon.isChecked(), sugarcane.isChecked(), cocoa.isChecked(), mushroom.isChecked(), netherwart.isChecked(), replant.isChecked()));
 	
-		IBHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.xp(world, player, Config.xp);
         IBHelper.effectFull(world, "reddust", x, y, z);
         IBHelper.msg(player, Strings.harvestCreate, Colors.a);
 	}

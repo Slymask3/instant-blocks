@@ -1,7 +1,12 @@
 package com.slymask3.instantblocks.block;
 
-import java.util.Random;
-
+import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Reference;
+import com.slymask3.instantblocks.reference.Textures;
+import com.slymask3.instantblocks.util.IBHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -9,21 +14,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
-import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.utility.IBHelper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
 
 public class BlockSkydiveTP extends Block {
 	public BlockSkydiveTP() {
 		super(Material.iron);
         setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-        setBlockName("instantblocks:" + Names.Blocks.SKYDIVE_TP);
+        setBlockName(Reference.MOD_ID + ":" + Names.Blocks.SKYDIVE_TP);
         setHardness(1.5F);
-        //setResistance(2000F);
         setStepSound(Block.soundTypeMetal);
         setBlockTextureName(Textures.SkydiveTP.SIDE);
 	}

@@ -1,5 +1,15 @@
 package com.slymask3.instantblocks.gui;
 
+import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.network.PacketTree;
+import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.tileentity.TileEntityTree;
+import com.slymask3.instantblocks.util.IBHelper;
+import cpw.mods.fml.client.config.GuiButtonExt;
+import cpw.mods.fml.client.config.GuiCheckBox;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -7,20 +17,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-
 import org.lwjgl.input.Keyboard;
-
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
-import com.slymask3.instantblocks.network.PacketTree;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.tileentity.TileEntityTree;
-import com.slymask3.instantblocks.utility.IBHelper;
-
-import cpw.mods.fml.client.config.GuiButtonExt;
-import cpw.mods.fml.client.config.GuiCheckBox;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiTree extends GuiScreen {
@@ -51,11 +48,6 @@ public class GuiTree extends GuiScreen {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		
-//		for(int i=0; i<7; i++) {
-//			trees.add(i);
-//			LogHelper.info(i);
-//		}
 	}
 
 	@Override
@@ -70,25 +62,9 @@ public class GuiTree extends GuiScreen {
 
         this.buttonList.add(this.air = new GuiCheckBox(4, this.width / 2 + 4, 80, "Air Blocks Inside", true));
 
-        //this.buttonList.add(this.list = new GuiListExtended(this.mc, this.width / 2 + 4, this.height / 4 + 120 + 12, 150, 20));
-        
-        //this.buttonList.add(this.slot = new GuiSlot(4, this.width / 2 - 4 - 150, this.height / 4 + 25 + 12, "Ignore generating air. (Could prevent lag)", false));
-		
-        //this.list3 = new GuiModList(this);
-        
-//		this.input = new GuiTextField(this.fontRendererObj, this.width / 2 - 4 - 150, 50, 300+8, 20);
-//		this.input.setText("");
-//		this.input.setFocused(true);
-		
-		//this.list2.
-
-		//this.list = new GuiList(this.fontRendererObj, this.width / 2 - 3 - 150, this.height / 4 + 66 + 12, 300+8, 50); //50
-		//this.list2 = new GuiList2(Minecraft.getMinecraft(),  this.width / 2 - 3 - 150, this.height / 4 + 66 + 12, 100, 500, 50); //50
-		
 		this.treeList=new GuiTreeSlot(this, trees, this.width / 2 - 4 - 150, 50, 150, 120);
         this.treeList.registerScrollButtons(this.buttonList, 7, 8);
-		
-		
+
 		this.done.enabled = false;
 	}
 
@@ -113,40 +89,13 @@ public class GuiTree extends GuiScreen {
 		} else if (par2 == cancel.id) {
 			actionPerformed(cancel);
 		}
-
-		//File f = new File("schematics/"+input.getText()+".schematic");
-        //this.done.enabled = f.isFile();
 	}
 	
 	@Override
 	public void drawScreen(final int par1, final int par2, final float par3) {
 		this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, "Instant Huge Tree Block", this.width / 2, 20, 16777215);
-        //this.drawString(this.fontRendererObj, "Enter a Schematic File Name:", this.width / 2 - 4 - 150, 37, 10526880);
         this.drawString(this.fontRendererObj, "Options:", this.width / 2 + 4, 40, 10526880);
-
-        //this.list3 = new GuiModList(this);
-        
-        //this.list.drawScreen(this.width / 2 - 3 - 150, this.height / 4 + 5 + 12, 1);
-        //this.list2.drawScreen(this.width / 2 - 3 - 150, this.height / 4 + 5 + 12, 0);
-        
-        
-        
-//        this.schematics=new ArrayList<String>();
-//        
-//        Collection<File> all = new ArrayList<File>();
-//        addTree(new File("schematics/"), all);
-//        Object[] schems = all.toArray();
-//        
-//        for (int i=0; i<all.size();i++) {
-//        	String schem = schems[i].toString().replaceAll("schematics", "").replaceAll("\\\\", "").replaceAll(".schematic", "");
-//        	schematics.add(schem);
-//        }
-//        
-//        this.schematicList.updateFiles(schematics);
-        
-        
-        
         
         //draw scrolling list
 		this.treeList.drawScreen(par1, par2, par3);
@@ -156,50 +105,8 @@ public class GuiTree extends GuiScreen {
 
 		//background behind schematic file
 		this.drawRect(this.width / 2 - 4 - 150, 37 +(133), this.width / 2 - 4 - 150 +(150), 37 +(133+13), -16777216);
-		
-		
 
         this.drawString(this.fontRendererObj, "Tree Type:", this.width / 2 - 2 - 150, 40, 10526880);
-		
-		
-//		File f = new File("schematics/"+input.getText()+".schematic");
-//        if(f.isFile()) {
-//        	this.drawString(this.fontRendererObj, "File: '.minecraft/schematics/"+input.getText()+".schematic'", this.width / 2 - 2 - 150, this.height / 4 + 41 + 12 +(65), 0x00FF00);
-//        } else {
-//        	this.drawString(this.fontRendererObj, "File: '.minecraft/schematics/"+input.getText()+".schematic'", this.width / 2 - 2 - 150, this.height / 4 + 41 + 12 +(65), 0xAA0000);
-//        }
-		
-		
-        //Collection<File> all = new ArrayList<File>();
-        //addTree(new File("schematics/"), all);
-        //Object[] schems = all.toArray();
-        
-        //this.drawString(this.fontRendererObj, "Found " + all.size() + " schematic files:", this.width / 2 - 2 - 150, this.height / 4 + 31 + 12, 0xFFFFFF);
-        
-        //list.cleanLines();
-//        for (int i=0; i<all.size();i++) {
-//        	String schem = schems[i].toString().replaceAll("schematics", "").replaceAll("\\\\", "").replaceAll(".schematic", "");
-////        	if(schem.equalsIgnoreCase(input.getText())) {
-////        		this.drawString(this.fontRendererObj, schem, this.width / 2 - 3 - 150, this.height / 4 +66+(i*9) + 12, 0x00FF00);
-////        	} else {
-////        		this.drawString(this.fontRendererObj, schem, this.width / 2 - 3 - 150, this.height / 4 +66+(i*9) + 12, 10526880);
-////        	}
-//        	list.addLine(schem);
-//        }
-        
-//        if(all.size() == 0) {
-//        	this.drawString(this.fontRendererObj, "Put .schematic files into the 'schematics' folder in .minecraft.", this.width / 2 - 3 - 150, this.height / 4 +60 + 12, 0xAA0000);
-//        	this.drawString(this.fontRendererObj, "If the 'schematics' folder doesn't exit, create it.", this.width / 2 - 3 - 150, this.height / 4 +70 + 12, 0xAA0000);
-//        	this.drawString(this.fontRendererObj, "Files will update here right away, no need to restart.", this.width / 2 - 3 - 150, this.height / 4 +80 + 12, 0xAA0000);
-//        }
-//
-//		this.input.drawTextBox();
-		
-		
-		
-		//File f = new File("schematics/"+input.getText()+".schematic");
-//        this.done.enabled = f.isFile();
-		
 		
         if(selected == 7) {
             this.drawString(this.fontRendererObj, "Coming Soon:", this.width / 2 + 4, 100, 0xAA0000);
@@ -208,9 +115,7 @@ public class GuiTree extends GuiScreen {
             this.drawString(this.fontRendererObj, "Post any of your suggestions", this.width / 2 + 4, 140, 0xAA0000);
             this.drawString(this.fontRendererObj, "in the official mod thread.", this.width / 2 + 4, 150, 0xAA0000);
         }
-        
-        
-		
+
 		super.drawScreen(par1, par2, par3);
 	}
 	
@@ -230,15 +135,10 @@ public class GuiTree extends GuiScreen {
 	public void sendInfo() {
 		InstantBlocks.packetPipeline.sendToServer(new PacketTree(this.world, this.x, this.y, this.z, this.player.getDisplayName(), selectedTree, !fullLog.isChecked(), !fullLeaves.isChecked(), air.isChecked()));
 		
-		IBHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.xp(world, player, Config.xp);
         IBHelper.effectFull(world, "reddust", x, y, z);
-        IBHelper.msg(player, "\u00a7aInstant " + treeToString(selectedTree) + " created.", Colors.a);
+        IBHelper.msg(player, Colors.a + "Instant " + treeToString(selectedTree) + " created.", Colors.a);
 	}
-	
-	
-	
-	
-	
 	
 	Minecraft getMinecraftInstance() {
         /** Reference to the Minecraft object. */
@@ -250,10 +150,9 @@ public class GuiTree extends GuiScreen {
         return fontRendererObj;
     }
     
-    public void selectSchematicIndex(int var1)
-    {
-        this.selected=var1;
-        if ((var1>=0 && var1<=6)) {
+    public void selectTreeIndex(int index) {
+        this.selected=index;
+        if ((index>=0 && index<=6)) {
             this.selectedTree=trees[selected];
             this.done.enabled = true;
         } else {

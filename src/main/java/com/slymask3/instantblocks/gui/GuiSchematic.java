@@ -1,36 +1,28 @@
 package com.slymask3.instantblocks.gui;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiListExtended;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiSlot;
-import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-
-import org.lwjgl.input.Keyboard;
-
 import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.handler.ConfigurationHandler;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.network.PacketSchematic;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.tileentity.TileEntitySchematic;
-import com.slymask3.instantblocks.utility.BuildHelper;
-import com.slymask3.instantblocks.utility.IBHelper;
-
-import cpw.mods.fml.client.GuiModList;
-import cpw.mods.fml.client.GuiScrollingList;
+import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.client.config.GuiButtonExt;
 import cpw.mods.fml.client.config.GuiCheckBox;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+import org.lwjgl.input.Keyboard;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @SideOnly(Side.CLIENT)
 public class GuiSchematic extends GuiScreen {
@@ -39,8 +31,7 @@ public class GuiSchematic extends GuiScreen {
     private String selectedSchem;
     private int listWidth = 300;
     private ArrayList<String> schematics;
-	
-	
+
 	private EntityPlayer player;
 	private TileEntitySchematic tileEntity;
 	
@@ -50,17 +41,6 @@ public class GuiSchematic extends GuiScreen {
 
 	private GuiCheckBox center;
 	private GuiCheckBox ignoreAir;
-	
-//	private GuiListExtended list;
-//	
-//	private GuiScrollingList list2;
-//	
-//	private GuiModList list3;
-//	
-//	private GuiSlot slot;
-	
-	//private GuiList list;
-	//private GuiList2 list2;
 	
 	private World world;
 	private int x;
@@ -85,26 +65,14 @@ public class GuiSchematic extends GuiScreen {
 
         this.buttonList.add(this.center = new GuiCheckBox(2, this.width / 2 - 4 - 150, this.height / 4 + 4 + 12, "Generate the schematic from the center.", false));
         this.buttonList.add(this.ignoreAir = new GuiCheckBox(3, this.width / 2 - 4 - 150, this.height / 4 + 14 + 12, "Ignore generating air. (Could prevent lag)", false));
-
-        //this.buttonList.add(this.list = new GuiListExtended(this.mc, this.width / 2 + 4, this.height / 4 + 120 + 12, 150, 20));
-        
-        //this.buttonList.add(this.slot = new GuiSlot(4, this.width / 2 - 4 - 150, this.height / 4 + 25 + 12, "Ignore generating air. (Could prevent lag)", false));
-		
-        //this.list3 = new GuiModList(this);
         
 		this.input = new GuiTextField(this.fontRendererObj, this.width / 2 - 4 - 150, 50, 300+8, 20);
 		this.input.setText("");
 		this.input.setFocused(true);
 		
-		//this.list2.
-
-		//this.list = new GuiList(this.fontRendererObj, this.width / 2 - 3 - 150, this.height / 4 + 66 + 12, 300+8, 50); //50
-		//this.list2 = new GuiList2(Minecraft.getMinecraft(),  this.width / 2 - 3 - 150, this.height / 4 + 66 + 12, 100, 500, 50); //50
-		
 		this.schematicList=new GuiSchematicSlot(this, schematics, this.width / 2 - 4 - 150, this.height / 4 + 42 + 12, 300+8, 62);
         this.schematicList.registerScrollButtons(this.buttonList, 7, 8);
-		
-		
+
 		this.done.enabled = false;
 	}
 
@@ -146,7 +114,6 @@ public class GuiSchematic extends GuiScreen {
 	protected void mouseClicked(int x, int y, int click) {
         super.mouseClicked(x, y, click);
         this.input.mouseClicked(x, y, click);
-        //this.list.mouseClicked(x, y, click);
     }
 	
 	@Override
@@ -154,14 +121,6 @@ public class GuiSchematic extends GuiScreen {
 		this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, "Instant Schematic Block", this.width / 2, 20, 16777215);
         this.drawString(this.fontRendererObj, "Enter a Schematic File Name:", this.width / 2 - 4 - 150, 37, 10526880);
-        //this.drawString(this.fontRendererObj, "Options:", this.width / 2 - 3 - 150, this.height / 4 + 5 + 12, 10526880);
-
-        //this.list3 = new GuiModList(this);
-        
-        //this.list.drawScreen(this.width / 2 - 3 - 150, this.height / 4 + 5 + 12, 1);
-        //this.list2.drawScreen(this.width / 2 - 3 - 150, this.height / 4 + 5 + 12, 0);
-        
-        
         
         this.schematics=new ArrayList<String>();
         
@@ -175,9 +134,6 @@ public class GuiSchematic extends GuiScreen {
         }
         
         this.schematicList.updateFiles(schematics);
-        
-        
-        
         
         //draw scrolling list
 		this.schematicList.drawScreen(par1, par2, par3);
@@ -195,24 +151,8 @@ public class GuiSchematic extends GuiScreen {
         } else {
         	this.drawString(this.fontRendererObj, "File: '.minecraft/schematics/"+input.getText()+".schematic'", this.width / 2 - 2 - 150, this.height / 4 + 41 + 12 +(65), 0xAA0000);
         }
-		
-		
-        //Collection<File> all = new ArrayList<File>();
-        //addTree(new File("schematics/"), all);
-        //Object[] schems = all.toArray();
         
         this.drawString(this.fontRendererObj, "Found " + all.size() + " schematic files:", this.width / 2 - 2 - 150, this.height / 4 + 31 + 12, 0xFFFFFF);
-        
-        //list.cleanLines();
-//        for (int i=0; i<all.size();i++) {
-//        	String schem = schems[i].toString().replaceAll("schematics", "").replaceAll("\\\\", "").replaceAll(".schematic", "");
-////        	if(schem.equalsIgnoreCase(input.getText())) {
-////        		this.drawString(this.fontRendererObj, schem, this.width / 2 - 3 - 150, this.height / 4 +66+(i*9) + 12, 0x00FF00);
-////        	} else {
-////        		this.drawString(this.fontRendererObj, schem, this.width / 2 - 3 - 150, this.height / 4 +66+(i*9) + 12, 10526880);
-////        	}
-//        	list.addLine(schem);
-//        }
         
         if(all.size() == 0) {
         	this.drawString(this.fontRendererObj, "Put .schematic files into the 'schematics' folder in .minecraft.", this.width / 2 - 3 - 150, this.height / 4 +60 + 12, 0xAA0000);
@@ -221,13 +161,8 @@ public class GuiSchematic extends GuiScreen {
         }
 
 		this.input.drawTextBox();
-		
-		
-		
-		//File f = new File("schematics/"+input.getText()+".schematic");
+
         this.done.enabled = f.isFile();
-		
-		
 		
 		super.drawScreen(par1, par2, par3);
 	}
@@ -245,15 +180,10 @@ public class GuiSchematic extends GuiScreen {
 	public void sendInfo() {
 		InstantBlocks.packetPipeline.sendToServer(new PacketSchematic(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), center.isChecked(), ignoreAir.isChecked()));
 		
-		IBHelper.xp(world, player, ConfigurationHandler.xp);
+		IBHelper.xp(world, player, Config.xp);
         IBHelper.effectFull(world, "reddust", x, y, z);
-        IBHelper.msg(player, "\u00a7aInstant Schematic created from the file '" + input.getText() + "'.", Colors.a);
+        IBHelper.msg(player, Colors.a + "Instant Schematic created from the file '" + input.getText() + "'.", Colors.a);
 	}
-	
-	
-	
-	
-	
 	
 	Minecraft getMinecraftInstance() {
         /** Reference to the Minecraft object. */
@@ -265,13 +195,9 @@ public class GuiSchematic extends GuiScreen {
         return fontRendererObj;
     }
 
-    /**
-     * @param var1
-     */
-    public void selectSchematicIndex(int var1)
-    {
-        this.selected=var1;
-        if (var1>=0 && var1<=schematics.size()) {
+    public void selectSchematicIndex(int index) {
+        this.selected=index;
+        if (index>=0 && index<=schematics.size()) {
             this.selectedSchem=schematics.get(selected);
             this.input.setText(selectedSchem);
         } else {
@@ -280,7 +206,6 @@ public class GuiSchematic extends GuiScreen {
         
         File f = new File("schematics/"+input.getText()+".schematic");
         this.done.enabled = f.isFile();
-        //cachedLogo = null;
     }
 
     public boolean schematicIndexSelected(int var1)
