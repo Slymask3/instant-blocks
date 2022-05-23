@@ -1,6 +1,8 @@
 package com.slymask3.instantblocks.reference;
 
 public class Strings {
+	public static final String PREFIX = Colors._8 + "[" + Colors._3 + "InstantBlocks" + Colors._8 + "] ";
+
 	public static final String ERROR_WAND = "You must use an Instant Wand.";
 	public static final String ERROR_WOODEN_HOUSE = "You have to pack up the Instant Wooden House first.";
 	public static final String ERROR_GRINDER = "You must place this above a Zombie/Skeleton spawner.";

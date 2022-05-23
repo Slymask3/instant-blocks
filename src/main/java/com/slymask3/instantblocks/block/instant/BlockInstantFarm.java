@@ -46,7 +46,7 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 	public IIcon getIcon(int side, int meta) {
 		if (side != 1) {
 			return Blocks.stonebrick.getIcon(0, 0);
-		} else if (side == 1) {
+		} else {
 			if (meta == 0) {
 				return top0;
 			} else if (meta == 1) {

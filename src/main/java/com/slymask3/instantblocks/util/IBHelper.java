@@ -2,6 +2,7 @@ package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.reference.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +45,7 @@ public class IBHelper {
 		if(Config.SHOW_MESSAGES) {
 			World world = player.worldObj;
 			if(world.isRemote) { //IF CLIENT
-				player.addChatMessage(new ChatComponentText(Colors._8 + "[" + Colors._3 + "InstantBlocks" + Colors._8 + "] " + ColorHelper.colorEveryWord(msg, color)));
+				player.addChatMessage(new ChatComponentText(Strings.PREFIX + ColorHelper.colorEveryWord(msg, color)));
 			}
 		}
 	}
