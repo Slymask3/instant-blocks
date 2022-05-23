@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 public class Recipes {
 	public static void init() {
-		if (Config.crafting.getBoolean(true)) {
+		if(Config.crafting.getBoolean(true)) {
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibWood, 1), new Object[] {
 				"WVW",
 				"GBG",	//Wooden House
@@ -52,18 +52,6 @@ public class Recipes {
 			});
 			
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.ibFall, 1), new Object[] {
-//				"123",
-//				"4D5", //Rainbow Skydive
-//				"678",
-//				Character.valueOf('1'), new ItemStack(Blocks.wool, 1, 14),
-//				Character.valueOf('2'), new ItemStack(Blocks.wool, 1, 1),
-//				Character.valueOf('3'), new ItemStack(Blocks.wool, 1, 4),
-//				Character.valueOf('4'), new ItemStack(Blocks.wool, 1, 5),
-//				Character.valueOf('D'), Items.diamond, 
-//				Character.valueOf('5'), new ItemStack(Blocks.wool, 1, 13),
-//				Character.valueOf('6'), new ItemStack(Blocks.wool, 1, 9),
-//				Character.valueOf('7'), new ItemStack(Blocks.wool, 1, 3),
-//				Character.valueOf('8'), new ItemStack(Blocks.wool, 1, 11)
 				"WWW",
 				"WDW", //Rainbow Skydive
 				"WWW",

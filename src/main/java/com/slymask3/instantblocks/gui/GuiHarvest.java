@@ -129,7 +129,7 @@ public class GuiHarvest extends GuiScreen {
 	
 		IBHelper.xp(world, player, Config.xp);
         IBHelper.effectFull(world, "reddust", x, y, z);
-        IBHelper.msg(player, Strings.harvestCreate, Colors.a);
+        IBHelper.msg(player, Strings.CREATE_HARVEST, Colors.a);
 	}
 	
 }

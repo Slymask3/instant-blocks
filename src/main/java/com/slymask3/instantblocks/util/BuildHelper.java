@@ -4,6 +4,7 @@ import com.slymask3.instantblocks.block.instant.BlockInstantHouseWood;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.tileentity.TileEntityColorLadder;
 import net.minecraft.block.Block;
@@ -218,7 +219,7 @@ public class BuildHelper {
 	
 	public static void ifNoBlockThenStop(World world, int x, int y, int z, Block block, EntityPlayer player, String blockName) {
 		if (world.getBlock(x, y, z) != block) {
-			IBHelper.msg(player, "Missing Block: " + blockName + " at x=" + (x) + ", y=" + (y) + ", z=" + (z) + ".", Colors.c);
+			IBHelper.msg(player, Strings.ERROR_MISSING.replace("%block%",blockName).replace("%x%",String.valueOf(x)).replace("%y%",String.valueOf(y)).replace("%z%",String.valueOf(z)), Colors.c);
 			BlockInstantHouseWood.notThere = true;
 		}
 	}

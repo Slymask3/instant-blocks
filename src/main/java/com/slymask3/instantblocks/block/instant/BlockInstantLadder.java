@@ -23,6 +23,7 @@ public class BlockInstantLadder extends BlockDirectionalIB {
 	
     public BlockInstantLadder() {
         super(ModBlocks.ibLadder, Names.Blocks.IB_MINING_LADDER, Material.rock, Block.soundTypeStone, 1.5F);
+		setResistance(2000F);
         setBlockTextureName(Textures.MiningLadder.TOP0);
     }
 	
@@ -58,7 +59,7 @@ public class BlockInstantLadder extends BlockDirectionalIB {
 	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
     	if (y <= 15) {
-    		IBHelper.msg(player, Strings.ladderError, Colors.c);
+    		IBHelper.msg(player, Strings.ERROR_LADDER, Colors.c);
 			return true;
 		}
     	
@@ -69,7 +70,7 @@ public class BlockInstantLadder extends BlockDirectionalIB {
 				is.damageItem(1, player);
 				//player.triggerAchievement(ib.achLadder);
 			} else {
-				IBHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
 				return true;
 			}
 		}
@@ -81,36 +82,8 @@ public class BlockInstantLadder extends BlockDirectionalIB {
 			
 		IBHelper.sound(world, Config.sound, x, y, z);
 		IBHelper.effectFull(world, "reddust", x, y, z);
-		IBHelper.msg(player, Strings.ladderCreate, Colors.a);
-    	
-    	//ComponentVillageWell.buildComponent(null, null, null) {
-    	//	
-    	//}
-    	
-    	//MapGenVillage.getStructureStart(x, z);
-    	
-    	//Random rand = new Random();
-    	
-    	//new net.minecraft.world.gen.structure.StructureVillageStart(world, rand, x, z, 1);
-    	
-    	//Map map = new HashMap();
-    	
-    	//new MapGenVillage(map);
-    	
-    	//new StructureVillageStart(world, rand, x, y, z);
+		IBHelper.msg(player, Strings.CREATE_MINING_LADDER, Colors.a);
 
-    	//world.setBlock(x, y, z, Block.sand.blockID);
-    	//world.setBlock(x, y, z, Block.waterStill.blockID);
-    	
-    	//System.out.println("Started");
-    	
-    	//WorldGenDesertWells worldgendesertwells = new WorldGenDesertWells();
-    	//WorldGenDungeons gen = new WorldGenDungeons();
-    	//WorldGenClay gen = new WorldGenClay(10);
-        //gen.generate(world, rand, x, y, z);
-
-    	//System.out.println("Ended");
-		
 		return true;
     }
 

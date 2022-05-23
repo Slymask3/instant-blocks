@@ -27,6 +27,7 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 	
     public BlockInstantFarm() {
         super(ModBlocks.ibFarm, Names.Blocks.IB_FARM, Material.rock, Block.soundTypeStone, 1.5F);
+		setResistance(2000F);
         setBlockTextureName(Textures.Farm.TOP0);
     }
 	
@@ -70,7 +71,7 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			} else {
-				IBHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
 				return true;
 			}
 		}
@@ -100,17 +101,17 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 		IBHelper.effectFull(world, "reddust", x, y, z);
 		
 //		if (r == 0) {
-//			BuildHelper.msg(player, Strings.farmCreateP, Colors.a);
+//			BuildHelper.msg(player, Strings.CREATE_FARMP, Colors.a);
 //			//player.triggerAchievement(ib.achFarm3);
 //		} else if (r == 1) {
-//			BuildHelper.msg(player, Strings.farmCreateC, Colors.a);
+//			BuildHelper.msg(player, Strings.CREATE_FARMC, Colors.a);
 //			//player.triggerAchievement(ib.achFarm2);
 //		} else {
-//			BuildHelper.msg(player, Strings.farmCreateW, Colors.a);
+//			BuildHelper.msg(player, Strings.CREATE_FARMW, Colors.a);
 //			//player.triggerAchievement(ib.achFarm);
 //		}
 		
-		IBHelper.msg(player, Strings.farmCreate, Colors.a);
+		IBHelper.msg(player, Strings.CREATE_FARM, Colors.a);
 		
 		return true;
     }

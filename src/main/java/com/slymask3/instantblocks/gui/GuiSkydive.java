@@ -146,7 +146,7 @@ public class GuiSkydive extends GuiScreen {
 		
 		IBHelper.xp(world, player, Config.xp);
         IBHelper.effectFull(world, "reddust", x, y, z);
-        IBHelper.msg(player, Strings.fallCreate, Colors.a);
+        IBHelper.msg(player, Strings.CREATE_SKYDIVE, Colors.a);
 	}
 	
 	public int getHex(String input) {

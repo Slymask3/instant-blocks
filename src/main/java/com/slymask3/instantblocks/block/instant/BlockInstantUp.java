@@ -24,6 +24,7 @@ public class BlockInstantUp extends BlockLadderIB {
 	
     public BlockInstantUp() {
         super(ModBlocks.ibUp, Names.Blocks.IB_ESCAPE_LADDER, Material.circuits, Block.soundTypeLadder, 0.4F);
+		setResistance(2000F);
         setTextures(Textures.EscapeLadder.SIDE);
         setTickRandomly(true);
         setBlockTextureName(Textures.EscapeLadder.SIDE);
@@ -31,22 +32,18 @@ public class BlockInstantUp extends BlockLadderIB {
     
 	public void func_149797_b(int par1) {
         float f = 0.125F;
-
         if (par1 == 2) {
             this.setBlockBounds(0.0F, 0.0F, 1.0F - f, 1.0F, 1.0F, 1.0F);
             side = 2;
         }
-
         if (par1 == 3) {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
             side = 3;
         }
-
         if (par1 == 4) {
             this.setBlockBounds(1.0F - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             side = 4;
         }
-
         if (par1 == 5) {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
             side = 5;
@@ -55,7 +52,7 @@ public class BlockInstantUp extends BlockLadderIB {
 	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
     	if (world.canBlockSeeTheSky(x, y+1, z)) {
-    		IBHelper.msg(player, Strings.upError, Colors.c);
+    		IBHelper.msg(player, Strings.ERROR_ESCAPE_LADDER, Colors.c);
 			return true;
 		}
     	
@@ -66,7 +63,7 @@ public class BlockInstantUp extends BlockLadderIB {
 				is.damageItem(1, player);
 				//player.triggerAchievement(ib.achUp);
 			} else {
-				IBHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
 				return true;
 			}
 		}
@@ -78,7 +75,7 @@ public class BlockInstantUp extends BlockLadderIB {
 		
 		int i = y - 1;
 		int n = 0;
-		while(world.canBlockSeeTheSky(x, i+1, z) == false) {
+		while(!world.canBlockSeeTheSky(x, i+1, z)) {
 			i++;
 			BuildHelper.build(world, x-1, y-1, z-1, stone, 3, 1, 3);
 			BuildHelper.build(world, x-1, i, z-1, stone, 3, 1, 3);
@@ -128,7 +125,7 @@ public class BlockInstantUp extends BlockLadderIB {
 		IBHelper.xp(world, player, Config.xp);
 		IBHelper.sound(world, Config.sound, x, y, z);
 		IBHelper.effectFull(world, "reddust", x, y, z);
-		IBHelper.msg(player, Colors.a + "Instant Escape Ladder created " + (i - y) + " blocks up.", Colors.a);
+		IBHelper.msg(player, Strings.CREATE_ESCAPE_LADDER.replace("%i%",String.valueOf(i-y)), Colors.a);
 		
 		return true;
     }

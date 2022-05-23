@@ -18,9 +18,10 @@ public class BlockInstantGrinder extends BlockDirectionalIB {
 	
 	public BlockInstantGrinder() {
         super(ModBlocks.ibGrinder, Names.Blocks.IB_GRINDER, Material.rock, Block.soundTypeMetal, 1.5F);
+		setResistance(2000F);
         setTextures(Textures.Grinder.SIDE);
-        setCreateMsg(Strings.grinderCreate);
-        setErrorMsg(Strings.grinderError);
+        setCreateMsg(Strings.CREATE_GRINDER);
+        setErrorMsg(Strings.ERROR_GRINDER);
         setBlockTextureName(Textures.Grinder.SIDE);
     }
 

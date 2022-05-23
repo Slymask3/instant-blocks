@@ -352,7 +352,7 @@ public class BlockIB extends Block {
 					is.damageItem(1, player);
 				}
 			} else {
-				IBHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
 				return true;
 			}
 		}

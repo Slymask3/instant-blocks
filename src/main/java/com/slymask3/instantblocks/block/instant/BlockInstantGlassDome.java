@@ -14,9 +14,10 @@ public class BlockInstantGlassDome extends BlockIB {
 	
     public BlockInstantGlassDome() {
         super(ModBlocks.ibGlassDome, Names.Blocks.IB_GLASS_DOME, Material.glass, Block.soundTypeGlass, 0.5F);
+		setResistance(2000F);
         setTextures(Blocks.stone, Blocks.glass, Textures.GlassDome.SIDE);
         setTextureBooleans(false, false, true, true, true, true);
-        setCreateMsg(Strings.domeCreate);
+        setCreateMsg(Strings.CREATE_DOME);
         setBlockTextureName(Textures.GlassDome.SIDE);
     }
 	

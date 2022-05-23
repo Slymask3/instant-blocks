@@ -26,6 +26,7 @@ public class BlockInstantWater extends BlockIB {
 	
     public BlockInstantWater() {
         super(ModBlocks.ibWater, Names.Blocks.IB_WATER, Material.water, new SoundTypeLiquid("random.splash", 1.0F, 1.0F), 0.5F);
+		setResistance(2000F);
         setTextures(Blocks.water);
         setTextureBooleans(false, false, false, false, false, false);
         setLightOpacity(3);
@@ -72,7 +73,7 @@ public class BlockInstantWater extends BlockIB {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//do not dmg yet
 			} else {
-				IBHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
 				return true;
 			}
 		}
@@ -102,7 +103,7 @@ public class BlockInstantWater extends BlockIB {
 			IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibWater);
 			IBHelper.sound(world, Config.sound, x, y, z);
 			IBHelper.effectFull(world, "reddust", x, y, z);
-			IBHelper.msg(player, Colors.a + "Instant Water created with " + (BuildHelper.counter + 1) + " water blocks.", Colors.a);
+			IBHelper.msg(player, Strings.CREATE_WATER.replace("%i%",String.valueOf(BuildHelper.counter+1)), Colors.a);
 			IBHelper.xp(world, player, Config.xp);
 			if (Config.useWands) {
 				player.getCurrentEquippedItem().damageItem(1, player);
@@ -113,13 +114,13 @@ public class BlockInstantWater extends BlockIB {
 				IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibWater);
 				IBHelper.sound(world, Config.sound, x, y, z);
 				IBHelper.effectFull(world, "reddust", x, y, z);
-				IBHelper.msg(player, Strings.waterCreate1, Colors.a);
+				IBHelper.msg(player, Strings.CREATE_WATER_1, Colors.a);
 				IBHelper.xp(world, player, Config.xp);
 				if (Config.useWands) {
 					player.getCurrentEquippedItem().damageItem(1, player);
 				}
 			} else {
-				IBHelper.msg(player, Colors.c + "Prevented from creating over " + Config.max + " water blocks.", Colors.c);
+				IBHelper.msg(player, Strings.ERROR_WATER_MAX.replace("%i%",String.valueOf(Config.max)), Colors.c);
 			}
 		}
 		

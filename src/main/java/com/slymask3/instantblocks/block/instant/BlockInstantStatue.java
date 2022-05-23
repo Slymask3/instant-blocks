@@ -152,7 +152,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
-				IBHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
 				return true;
 			}
 		}
@@ -204,7 +204,6 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		        //IBHelper.xp(world, player, ConfigurationHandler.xp);
 		        IBHelper.sound(world, Config.sound, x, y, z);
 		        //IBHelper.effectFull(world, "reddust", x, y, z);
-		        //IBHelper.msg(player, Colors.a + "Instant Statue created of the player '" + username + "'.", Colors.a);
 				
 				ItemStack is = player.getCurrentEquippedItem();
 				
@@ -214,7 +213,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 				
 			} catch (Exception e) {
 				e.printStackTrace();
-				IBHelper.msg(player, Colors.c + "The minecraft username '" + username + Colors.c + "' does not have a skin.", Colors.c);
+				IBHelper.msg(player, Strings.ERROR_STATUE.replace("%username%",username), Colors.c);
 			}
 		}
 	}

@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class IBHelper {
 	public static void xp(World world, EntityPlayer player, int xpAmount) {
 		if (!world.isRemote) { //IF SERVER
-			if  (xpAmount > 0) {
+			if(xpAmount > 0) {
 				EntityXPOrb xp = new EntityXPOrb(world, player.posX, player.posY, player.posZ, xpAmount);
 				world.spawnEntityInWorld(xp);
 			}
@@ -22,7 +22,7 @@ public class IBHelper {
 	}
 
 	public static void sound(World world, String sound, int x, int y, int z) {
-		world.playSoundEffect((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), sound, 2.0F, 1.0F);
+		world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), sound, 2.0F, 1.0F, false);
 	}
 
 	public static void effectFull(World world, String particle, int x, int y, int z) {

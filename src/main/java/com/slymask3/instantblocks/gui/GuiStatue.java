@@ -4,6 +4,7 @@ import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.network.PacketStatue;
 import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
@@ -133,7 +134,7 @@ public class GuiStatue extends GuiScreen {
 		
 		IBHelper.xp(world, player, Config.xp);
         IBHelper.effectFull(world, "reddust", x, y, z);
-        IBHelper.msg(player, Colors.a + "Instant Statue created of the player '" + input.getText() + "'.", Colors.a);
+        IBHelper.msg(player, Strings.CREATE_STATUE.replace("%username%",input.getText()), Colors.a);
 	}
 	
 }

@@ -26,9 +26,9 @@ public class BlockInstantLight extends BlockIB {
 	
     public BlockInstantLight() {
         super(ModBlocks.ibLight, Names.Blocks.IB_LIGHT, Material.wood, Block.soundTypeWood, 0.5F);
-        setCreateMsg(Strings.lightCreate);
+        setResistance(2000F);
+        setCreateMsg(Strings.CREATE_LIGHT);
         setBlockTextureName(Textures.Light.SIDE);
-        //setTextures(Textures.Light.SIDE);
         setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 0.90F, 0.625F);
         setLightLevel(1.0F);
     }
@@ -102,7 +102,7 @@ public class BlockInstantLight extends BlockIB {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			} else {
-				IBHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
 				return true;
 			}
 		}
@@ -185,7 +185,7 @@ public class BlockInstantLight extends BlockIB {
         }
         
         if(amount > 0) {
-        	IBHelper.msg(player, Colors.a + "Lit up the area with " + amount + " torches.", Colors.a);
+        	IBHelper.msg(player, Strings.CREATE_LIGHT_AMOUNT.replace("%i%",String.valueOf(amount)), Colors.a);
             
             IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLight);
     		IBHelper.xp(world, player, Config.xp);
@@ -193,7 +193,7 @@ public class BlockInstantLight extends BlockIB {
     		IBHelper.effectFull(world, "reddust", x, y, z);
         } else {
     		world.setBlock(X, Y, Z, ModBlocks.ibLight);
-	        IBHelper.msg(player, Colors.a + "There are no dark areas to light up in a radius of " + Config.radiusLight + ".", Colors.c);
+	        IBHelper.msg(player, Strings.ERROR_LIGHT.replace("%i%",String.valueOf(Config.radiusLight)), Colors.c);
     		
         }
     }

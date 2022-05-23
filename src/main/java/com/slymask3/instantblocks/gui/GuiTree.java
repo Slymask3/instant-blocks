@@ -4,6 +4,7 @@ import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.network.PacketTree;
 import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityTree;
 import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.client.config.GuiButtonExt;
@@ -137,7 +138,7 @@ public class GuiTree extends GuiScreen {
 		
 		IBHelper.xp(world, player, Config.xp);
         IBHelper.effectFull(world, "reddust", x, y, z);
-        IBHelper.msg(player, Colors.a + "Instant " + treeToString(selectedTree) + " created.", Colors.a);
+        IBHelper.msg(player, Strings.CREATE_TREE.replace("%tree%",treeToString(selectedTree)), Colors.a);
 	}
 	
 	Minecraft getMinecraftInstance() {

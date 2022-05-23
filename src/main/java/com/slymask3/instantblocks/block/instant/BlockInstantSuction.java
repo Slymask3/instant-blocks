@@ -20,6 +20,7 @@ public class BlockInstantSuction extends BlockIB {
 	
     public BlockInstantSuction() {
         super(ModBlocks.ibSucker, Names.Blocks.IB_SUCTION, Material.rock, Block.soundTypeStone, 1.5F);
+		setResistance(2000F);
         setTextures(Textures.Suction.SIDE);
         setBlockTextureName(Textures.Suction.SIDE);
     }
@@ -31,7 +32,7 @@ public class BlockInstantSuction extends BlockIB {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//do not dmg yet
 			} else {
-				IBHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
 				return true;
 			}
 		}
@@ -62,9 +63,9 @@ public class BlockInstantSuction extends BlockIB {
 				IBHelper.sound(world, Config.sound, x, y, z);
 				IBHelper.effectFull(world, "reddust", x, y, z);
 				if (BuildHelper.counter == 1) {
-					IBHelper.msg(player, Colors.a + "Sucked in " + (BuildHelper.counter) + " Water Block.", Colors.a);
+					IBHelper.msg(player, Strings.CREATE_SUCTION_WATER_1.replace("%i%",String.valueOf(BuildHelper.counter)), Colors.a);
 				} else {
-					IBHelper.msg(player, Colors.a + "Sucked in " + (BuildHelper.counter) + " Water Blocks.", Colors.a);
+					IBHelper.msg(player, Strings.CREATE_SUCTION_WATER.replace("%i%",String.valueOf(BuildHelper.counter)), Colors.a);
 				}
 				IBHelper.xp(world, player, Config.xp);
 				
@@ -79,9 +80,9 @@ public class BlockInstantSuction extends BlockIB {
 				IBHelper.sound(world, Config.sound, x, y, z);
 				IBHelper.effectFull(world, "reddust", x, y, z);
 				if (BuildHelper.counter == 1) {
-					IBHelper.msg(player, Colors.a + "Sucked in " + (BuildHelper.counter) + " Lava Block.", Colors.a);
+					IBHelper.msg(player, Strings.CREATE_SUCTION_LAVA_1.replace("%i%",String.valueOf(BuildHelper.counter)), Colors.a);
 				} else {
-					IBHelper.msg(player, Colors.a + "Sucked in " + (BuildHelper.counter) + " Lava Blocks.", Colors.a);
+					IBHelper.msg(player, Strings.CREATE_SUCTION_LAVA.replace("%i%",String.valueOf(BuildHelper.counter)), Colors.a);
 				}
 				IBHelper.xp(world, player, Config.xp);
 				
@@ -93,9 +94,9 @@ public class BlockInstantSuction extends BlockIB {
 			}
 		} else {
 			if (BuildHelper.liq == 0) {
-				IBHelper.msg(player, Colors.c + "No liquids found.", Colors.c);
+				IBHelper.msg(player, Strings.ERROR_NO_LIQUID, Colors.c);
 			} else if (BuildHelper.liq == -1) {
-				IBHelper.msg(player, Colors.c + "Prevented from sucking in over " + Config.maxSuck + " Water/Lava Blocks.", Colors.c);
+				IBHelper.msg(player, Strings.ERROR_SUCTION.replace("%i%",String.valueOf(Config.maxSuck)), Colors.c);
 			}
 		}
 		

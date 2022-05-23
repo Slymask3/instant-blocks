@@ -9,7 +9,7 @@ public class ColorHelper {
 	
 	public static String colorEveryWord(String msg, String color) {
 	    StringBuilder builder = new StringBuilder(msg.length());
-
+		builder.append(color);
 	    for (int i = 0; i < msg.length(); i++) {
 	        char c = msg.charAt(i);
 	        switch (c) {

@@ -74,7 +74,7 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
-				IBHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
 				return true;
 			}
 		}
@@ -100,7 +100,7 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 		
 		IBHelper.xp(world, player, ConfigurationHandler.xp);
         IBHelper.effectFull(world, "reddust", x, y, z);
-        IBHelper.msg(player, Strings.harvestCreate, Colors.a);
+        IBHelper.msg(player, Strings.CREATE_HARVEST, Colors.a);
 	}*/
 	
 	public void build(World world, int x, int y, int z, String playerS, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
@@ -121,7 +121,7 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 			
 //			IBHelper.xp(world, mainPlayer, ConfigurationHandler.xp);
 //	        IBHelper.effectFull(world, "reddust", x, y, z);
-//	        IBHelper.msg(mainPlayer, Strings.harvestCreate, Colors.a);
+//	        IBHelper.msg(mainPlayer, Strings.CREATE_HARVEST, Colors.a);
 //		} else {
 //			IBHelper.msg(mainPlayer, "\u00c7aThere are no renewable resources to harvest in a radius of " + ConfigurationHandler.radiusLight + ".", Colors.c);
 //		}

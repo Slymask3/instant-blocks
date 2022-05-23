@@ -4,6 +4,7 @@ import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.network.PacketSchematic;
 import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntitySchematic;
 import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.client.config.GuiButtonExt;
@@ -182,7 +183,7 @@ public class GuiSchematic extends GuiScreen {
 		
 		IBHelper.xp(world, player, Config.xp);
         IBHelper.effectFull(world, "reddust", x, y, z);
-        IBHelper.msg(player, Colors.a + "Instant Schematic created from the file '" + input.getText() + "'.", Colors.a);
+        IBHelper.msg(player, Strings.CREATE_SCHEMATIC.replace("%schematic%",input.getText()), Colors.a);
 	}
 	
 	Minecraft getMinecraftInstance() {

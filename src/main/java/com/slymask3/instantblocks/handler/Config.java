@@ -8,8 +8,7 @@ import net.minecraftforge.common.config.Property;
 
 import java.io.File;
 
-public class Config
-{
+public class Config {
     public static Configuration configuration;
     
     public static boolean msg;

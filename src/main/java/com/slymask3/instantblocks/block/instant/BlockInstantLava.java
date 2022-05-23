@@ -27,6 +27,7 @@ public class BlockInstantLava extends BlockIB {
 	
     public BlockInstantLava() {
         super(ModBlocks.ibLava, Names.Blocks.IB_LAVA, Material.lava, new SoundTypeLiquid("random.fizz", 1.0F, 1.0F), 0.5F);
+		setResistance(2000F);
         setTextures(Blocks.lava);
         setTextureBooleans(false, false, false, false, false, false);
         setLightLevel(1.0F);
@@ -72,7 +73,7 @@ public class BlockInstantLava extends BlockIB {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//do not dmg yet
 			} else {
-				IBHelper.msg(player, Strings.wandReq, Colors.c);
+				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
 				return true;
 			}
 		}
@@ -104,7 +105,7 @@ public class BlockInstantLava extends BlockIB {
 			IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLava);
 			IBHelper.sound(world, Config.sound, x, y, z);
 			IBHelper.effectFull(world, "reddust", x, y, z);
-			IBHelper.msg(player, Colors.a + "Instant Lava created with " + (BuildHelper.counter + 1) + " lava blocks.", Colors.a);
+			IBHelper.msg(player, Strings.CREATE_LAVA.replace("%i%",String.valueOf(BuildHelper.counter+1)), Colors.a);
 			IBHelper.xp(world, player, Config.xp);
 			if (Config.useWands) {
 				player.getCurrentEquippedItem().damageItem(1, player);
@@ -115,13 +116,13 @@ public class BlockInstantLava extends BlockIB {
 				IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLava);
 				IBHelper.sound(world, Config.sound, x, y, z);
 				IBHelper.effectFull(world, "reddust", x, y, z);
-				IBHelper.msg(player, Strings.lavaCreate1, Colors.a);
+				IBHelper.msg(player, Strings.CREATE_LAVA_1, Colors.a);
 				IBHelper.xp(world, player, Config.xp);
 				if (Config.useWands) {
 					player.getCurrentEquippedItem().damageItem(1, player);
 				}
 			} else {
-				IBHelper.msg(player, Colors.c + "Prevented from creating over " + Config.max + " lava blocks.", Colors.c);
+				IBHelper.msg(player, Strings.ERROR_LAVA_MAX.replace("%i%",String.valueOf(Config.max)), Colors.c);
 			}
 		}
 		
