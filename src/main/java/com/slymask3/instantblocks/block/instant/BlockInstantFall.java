@@ -64,7 +64,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.useWands) {
+		if (Config.USE_WANDS) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
@@ -431,7 +431,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			world.setBlock(x-5, 5, z, ModBlocks.skydiveTP);
 		
 			if (tp) {
-				IBHelper.sound(world, Config.sound, x, 256, z+5);
+				IBHelper.sound(world, Config.SOUND, x, 256, z+5);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z+5 + 0.5);
 				}
@@ -442,7 +442,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			world.setBlock(x, 5, z-5, ModBlocks.skydiveTP);
 		
 			if (tp) {
-				IBHelper.sound(world, Config.sound, x-5, 256, z);
+				IBHelper.sound(world, Config.SOUND, x-5, 256, z);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x-5 + 0.5, 257 + 0.5, z + 0.5);
 				}
@@ -453,7 +453,7 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			world.setBlock(x-5, 5, z, ModBlocks.skydiveTP);
 		
 			if (tp) {
-				IBHelper.sound(world, Config.sound, x, 256, z-5);
+				IBHelper.sound(world, Config.SOUND, x, 256, z-5);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z-5 + 0.5);
 				}
@@ -464,10 +464,10 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 			world.setBlock(x, 5, z-5, ModBlocks.skydiveTP);
 		
 			if (tp) {
-				IBHelper.sound(world, Config.sound, x+5, 256, z);
+				IBHelper.sound(world, Config.SOUND, x+5, 256, z);
 				if (!world.isRemote) { //IF SERVER
 					player.setPositionAndUpdate(x+5 + 0.5, 257 + 0.5, z + 0.5);
-					IBHelper.sound(world, Config.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
+					IBHelper.sound(world, Config.SOUND, (int)player.posX, (int)player.posY, (int)player.posZ);
 				}
 			}
 		}

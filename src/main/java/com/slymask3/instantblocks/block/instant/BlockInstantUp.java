@@ -58,7 +58,7 @@ public class BlockInstantUp extends BlockLadderIB {
     	
     	ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.useWands) {
+		if (Config.USE_WANDS) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 				//player.triggerAchievement(ib.achUp);
@@ -122,8 +122,8 @@ public class BlockInstantUp extends BlockLadderIB {
 		
 		/************************ Functions ************************/
 		IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibUp);
-		IBHelper.xp(world, player, Config.xp);
-		IBHelper.sound(world, Config.sound, x, y, z);
+		IBHelper.xp(world, player, Config.XP_AMOUNT);
+		IBHelper.sound(world, Config.SOUND, x, y, z);
 		IBHelper.effectFull(world, "reddust", x, y, z);
 		IBHelper.msg(player, Strings.CREATE_ESCAPE_LADDER.replace("%i%",String.valueOf(i-y)), Colors.a);
 		

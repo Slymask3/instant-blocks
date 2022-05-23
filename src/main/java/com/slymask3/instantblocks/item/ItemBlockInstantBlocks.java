@@ -49,8 +49,8 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibWater) {
 			list.add("Fills an area with water.");
-			list.add("Maximum: " + Config.max + " Water Blocks.");
-			if (Config.simpleWL) {
+			list.add("Maximum: " + Config.MAX_LIQUID + " Water Blocks.");
+			if (Config.SIMPLE_LIQUID) {
 				list.add("Mode: Simple.");
 			} else {
 				list.add("Mode: Full.");
@@ -58,8 +58,8 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibLava) {
 			list.add("Fills an area with lava.");
-			list.add("Maximum: " + Config.max + " Lava Blocks.");
-			if (Config.simpleWL) {
+			list.add("Maximum: " + Config.MAX_LIQUID + " Lava Blocks.");
+			if (Config.SIMPLE_LIQUID) {
 				list.add("Mode: Simple.");
 			} else {
 				list.add("Mode: Full.");
@@ -67,7 +67,7 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibSucker) {
 			list.add("Sucks in water/lava.");
-			list.add("Maximum: " + Config.maxSuck + ".");
+			list.add("Maximum: " + Config.MAX_FILL + ".");
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibRail) {
 			list.add("Creates a railway going forward 37 blocks.");
@@ -77,11 +77,11 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibHarvest) {
 			list.add("Harvests renewable resources in a radius.");
-			list.add("Radius: " + Config.radiusHarvest);
+			list.add("Radius: " + Config.RADIUS_HARVEST);
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibLight) {
 			list.add("Lights up dark areas in a radius.");
-			list.add("Radius: " + Config.radiusLight);
+			list.add("Radius: " + Config.RADIUS_LIGHT);
 			list.add("Right-click to activate.");
 		} else if (block == ModBlocks.ibSchematic) {
 			list.add("Creates a structure from any schematic file.");

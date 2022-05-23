@@ -98,7 +98,7 @@ public class BlockInstantLight extends BlockIB {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.useWands) {
+		if (Config.USE_WANDS) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			} else {
@@ -113,7 +113,7 @@ public class BlockInstantLight extends BlockIB {
     }
     
     public void build(World world, int x, int y, int z, EntityPlayer player) {
-		lightUp(world, x, y, z, Config.radiusLight, player);
+		lightUp(world, x, y, z, Config.RADIUS_LIGHT, player);
 	}
 	
 	public void lightUp(World world, int X, int Y, int Z, int radius, EntityPlayer player) {
@@ -188,12 +188,12 @@ public class BlockInstantLight extends BlockIB {
         	IBHelper.msg(player, Strings.CREATE_LIGHT_AMOUNT.replace("%i%",String.valueOf(amount)), Colors.a);
             
             IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLight);
-    		IBHelper.xp(world, player, Config.xp);
-    		IBHelper.sound(world, Config.sound, x, y, z);
+    		IBHelper.xp(world, player, Config.XP_AMOUNT);
+    		IBHelper.sound(world, Config.SOUND, x, y, z);
     		IBHelper.effectFull(world, "reddust", x, y, z);
         } else {
     		world.setBlock(X, Y, Z, ModBlocks.ibLight);
-	        IBHelper.msg(player, Strings.ERROR_LIGHT.replace("%i%",String.valueOf(Config.radiusLight)), Colors.c);
+	        IBHelper.msg(player, Strings.ERROR_LIGHT.replace("%i%",String.valueOf(Config.RADIUS_LIGHT)), Colors.c);
     		
         }
     }

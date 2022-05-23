@@ -4,6 +4,7 @@ import com.slymask3.instantblocks.block.BlockColor;
 import com.slymask3.instantblocks.block.BlockColorLadder;
 import com.slymask3.instantblocks.block.BlockSkydiveTP;
 import com.slymask3.instantblocks.block.instant.*;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.item.ItemBlockInstantBlocks;
 import com.slymask3.instantblocks.reference.Names;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -32,25 +33,31 @@ public class ModBlocks {
 	public static Block skydiveTP = new BlockSkydiveTP();
 	
 	public static void init() {
-		GameRegistry.registerBlock(ibWood, ItemBlockInstantBlocks.class, Names.Blocks.IB_WOOD_HOUSE);
-		GameRegistry.registerBlock(ibLadder, ItemBlockInstantBlocks.class, Names.Blocks.IB_MINING_LADDER);
-		GameRegistry.registerBlock(ibGlassDome, ItemBlockInstantBlocks.class, Names.Blocks.IB_GLASS_DOME);
-		GameRegistry.registerBlock(ibFarm, ItemBlockInstantBlocks.class, Names.Blocks.IB_FARM);
-		GameRegistry.registerBlock(ibFall, ItemBlockInstantBlocks.class, Names.Blocks.IB_SKYDIVE);
-		GameRegistry.registerBlock(ibGrinder, ItemBlockInstantBlocks.class, Names.Blocks.IB_GRINDER);
-		GameRegistry.registerBlock(ibPool, ItemBlockInstantBlocks.class, Names.Blocks.IB_POOL);
-		GameRegistry.registerBlock(ibUp, ItemBlockInstantBlocks.class, Names.Blocks.IB_ESCAPE_LADDER);
-		GameRegistry.registerBlock(ibWater, ItemBlockInstantBlocks.class, Names.Blocks.IB_WATER);
-		GameRegistry.registerBlock(ibLava, ItemBlockInstantBlocks.class, Names.Blocks.IB_LAVA);
-		GameRegistry.registerBlock(ibSucker, ItemBlockInstantBlocks.class, Names.Blocks.IB_SUCTION);
-		GameRegistry.registerBlock(ibRail, ItemBlockInstantBlocks.class, Names.Blocks.IB_RAIL);
-		GameRegistry.registerBlock(ibStatue, ItemBlockInstantBlocks.class, Names.Blocks.IB_STATUE);
-		GameRegistry.registerBlock(ibHarvest, ItemBlockInstantBlocks.class, Names.Blocks.IB_HARVEST);
-		GameRegistry.registerBlock(ibLight, ItemBlockInstantBlocks.class, Names.Blocks.IB_LIGHT);
-		GameRegistry.registerBlock(ibSchematic, ItemBlockInstantBlocks.class, Names.Blocks.IB_SCHEMATIC);
-		GameRegistry.registerBlock(ibTree, ItemBlockInstantBlocks.class, Names.Blocks.IB_TREE);
-		GameRegistry.registerBlock(color, ItemBlockInstantBlocks.class, Names.Blocks.COLOR);
-		GameRegistry.registerBlock(colorLadder, ItemBlockInstantBlocks.class, Names.Blocks.COLOR_LADDER);
-		GameRegistry.registerBlock(skydiveTP, ItemBlockInstantBlocks.class, Names.Blocks.SKYDIVE_TP);
+		add(ibWood, Names.Blocks.IB_WOOD_HOUSE, Config.ADD_WOODEN_HOUSE);
+		add(ibLadder, Names.Blocks.IB_MINING_LADDER, Config.ADD_MINING_LADDER);
+		add(ibGlassDome, Names.Blocks.IB_GLASS_DOME, Config.ADD_GLASS_DOME);
+		add(ibFarm, Names.Blocks.IB_FARM, Config.ADD_FARM);
+		add(ibFall, Names.Blocks.IB_SKYDIVE, Config.ADD_SKYDIVE);
+		add(ibGrinder, Names.Blocks.IB_GRINDER, Config.ADD_GRINDER);
+		add(ibPool, Names.Blocks.IB_POOL, Config.ADD_POOL);
+		add(ibUp, Names.Blocks.IB_ESCAPE_LADDER, Config.ADD_ESCAPE_LADDER);
+		add(ibWater, Names.Blocks.IB_WATER, Config.ADD_WATER);
+		add(ibLava, Names.Blocks.IB_LAVA, Config.ADD_LAVA);
+		add(ibSucker, Names.Blocks.IB_SUCTION, Config.ADD_SUCTION);
+		add(ibRail, Names.Blocks.IB_RAIL, Config.ADD_RAIL);
+		add(ibStatue, Names.Blocks.IB_STATUE, Config.ADD_STATUE);
+		add(ibHarvest, Names.Blocks.IB_HARVEST, Config.ADD_HARVEST);
+		add(ibLight, Names.Blocks.IB_LIGHT, Config.ADD_LIGHT);
+		add(ibSchematic, Names.Blocks.IB_SCHEMATIC, Config.ADD_SCHEMATIC);
+		add(ibTree, Names.Blocks.IB_TREE, Config.ADD_TREE);
+		add(color, Names.Blocks.COLOR, Config.ADD_SKYDIVE || Config.ADD_STATUE);
+		add(colorLadder, Names.Blocks.COLOR_LADDER, Config.ADD_SKYDIVE);
+		add(skydiveTP, Names.Blocks.SKYDIVE_TP, Config.ADD_SKYDIVE);
+	}
+
+	private static void add(Block block, String name, Boolean add) {
+		if(add) {
+			GameRegistry.registerBlock(block, ItemBlockInstantBlocks.class, name);
+		}
 	}
 }

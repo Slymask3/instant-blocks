@@ -89,7 +89,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.useWands) {
+		if (Config.USE_WANDS) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			} else {
@@ -102,10 +102,10 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		
 		build(world, x, y, z);
 			
-		IBHelper.xp(world, player, Config.xp);
+		IBHelper.xp(world, player, Config.XP_AMOUNT);
 		//BuildHelper.keepBlocks(world, x, y, z, InstantBlocks.ibWood.blockID);
 				
-		IBHelper.sound(world, Config.sound, x, y, z);
+		IBHelper.sound(world, Config.SOUND, x, y, z);
 		IBHelper.effectFull(world, "reddust", x, y, z);
 		IBHelper.msg(player, Strings.CREATE_WOODEN_HOUSE, Colors.a);
 		
@@ -296,7 +296,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			
 			//world.setBlock(p_147449_1_, p_147449_2_, p_147449_3_, p_147449_4_); ////1.7.10 setBlock
 			
-			if (Config.packWood) {
+			if (Config.PACK_HOUSE) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 4, 2);
 			}
 		}
@@ -416,7 +416,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			world.setBlock(x - 7, y + 4, z - 4, torch);
 			world.setBlock(x - 7, y + 4, z + 4, torch);
 			
-			if (Config.packWood) {
+			if (Config.PACK_HOUSE) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 5, 2);
 			}
 		}
@@ -536,7 +536,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			world.setBlock(x - 4, y + 4, z - 7, torch);
 			world.setBlock(x+4, y + 4, z-7, torch);
 			
-			if (Config.packWood) {
+			if (Config.PACK_HOUSE) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 6, 2);
 			}
 		}
@@ -656,7 +656,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			world.setBlock(x + 7, y + 4, z - 4, torch);
 			world.setBlock(x + 7, y + 4, z + 4, torch);
 			
-			if (Config.packWood) {
+			if (Config.PACK_HOUSE) {
 				world.setBlock(x, y, z, ModBlocks.ibWood, 7, 2);
 			}
 		}

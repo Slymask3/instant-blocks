@@ -67,7 +67,7 @@ public class BlockInstantFarm extends BlockDirectionalIB {
     	
     	ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.useWands) {
+		if (Config.USE_WANDS) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			} else {
@@ -95,9 +95,9 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 		
 
 		IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibFarm);
-		IBHelper.xp(world, player, Config.xp);
+		IBHelper.xp(world, player, Config.XP_AMOUNT);
 		
-		IBHelper.sound(world, Config.sound, x, y, z);
+		IBHelper.sound(world, Config.SOUND, x, y, z);
 		IBHelper.effectFull(world, "reddust", x, y, z);
 		
 //		if (r == 0) {

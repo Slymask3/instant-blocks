@@ -136,7 +136,7 @@ public class GuiTree extends GuiScreen {
 	public void sendInfo() {
 		InstantBlocks.packetPipeline.sendToServer(new PacketTree(this.world, this.x, this.y, this.z, this.player.getDisplayName(), selectedTree, !fullLog.isChecked(), !fullLeaves.isChecked(), air.isChecked()));
 		
-		IBHelper.xp(world, player, Config.xp);
+		IBHelper.xp(world, player, Config.XP_AMOUNT);
         IBHelper.effectFull(world, "reddust", x, y, z);
         IBHelper.msg(player, Strings.CREATE_TREE.replace("%tree%",treeToString(selectedTree)), Colors.a);
 	}

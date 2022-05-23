@@ -69,7 +69,7 @@ public class BlockInstantLava extends BlockIB {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.useWands) {
+		if (Config.USE_WANDS) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//do not dmg yet
 			} else {
@@ -90,7 +90,7 @@ public class BlockInstantLava extends BlockIB {
 		
 		int max = 6;
 		
-		if (Config.simpleWL) {
+		if (Config.SIMPLE_LIQUID) {
 			BuildHelper.checkLiquid5S(world, x, y, z, liquid);
 			BuildHelper.buildLiquid4S(world, x, y, z, liquid);
 			BuildHelper.checkLiquid5UndoS(world, x, y, z, liquid);
@@ -103,26 +103,26 @@ public class BlockInstantLava extends BlockIB {
 		if (BuildHelper.built) {
 			world.setBlock(x, y, z, liquid);
 			IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLava);
-			IBHelper.sound(world, Config.sound, x, y, z);
+			IBHelper.sound(world, Config.SOUND, x, y, z);
 			IBHelper.effectFull(world, "reddust", x, y, z);
 			IBHelper.msg(player, Strings.CREATE_LAVA.replace("%i%",String.valueOf(BuildHelper.counter+1)), Colors.a);
-			IBHelper.xp(world, player, Config.xp);
-			if (Config.useWands) {
+			IBHelper.xp(world, player, Config.XP_AMOUNT);
+			if (Config.USE_WANDS) {
 				player.getCurrentEquippedItem().damageItem(1, player);
 			}
 		} else {
 			if (world.getBlock(x+1, y, z) != Blocks.air && world.getBlock(x-1, y, z) != Blocks.air && world.getBlock(x, y, z+1) != Blocks.air && world.getBlock(x, y, z-1) != Blocks.air && world.getBlock(x, y-1, z) != Blocks.air) {
 				world.setBlock(x, y, z, liquid);
 				IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLava);
-				IBHelper.sound(world, Config.sound, x, y, z);
+				IBHelper.sound(world, Config.SOUND, x, y, z);
 				IBHelper.effectFull(world, "reddust", x, y, z);
 				IBHelper.msg(player, Strings.CREATE_LAVA_1, Colors.a);
-				IBHelper.xp(world, player, Config.xp);
-				if (Config.useWands) {
+				IBHelper.xp(world, player, Config.XP_AMOUNT);
+				if (Config.USE_WANDS) {
 					player.getCurrentEquippedItem().damageItem(1, player);
 				}
 			} else {
-				IBHelper.msg(player, Strings.ERROR_LAVA_MAX.replace("%i%",String.valueOf(Config.max)), Colors.c);
+				IBHelper.msg(player, Strings.ERROR_LAVA_MAX.replace("%i%",String.valueOf(Config.MAX_LIQUID)), Colors.c);
 			}
 		}
 		

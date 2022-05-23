@@ -132,7 +132,7 @@ public class GuiStatue extends GuiScreen {
 	public void sendInfo() {
 		InstantBlocks.packetPipeline.sendToServer(new PacketStatue(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
 		
-		IBHelper.xp(world, player, Config.xp);
+		IBHelper.xp(world, player, Config.XP_AMOUNT);
         IBHelper.effectFull(world, "reddust", x, y, z);
         IBHelper.msg(player, Strings.CREATE_STATUE.replace("%username%",input.getText()), Colors.a);
 	}

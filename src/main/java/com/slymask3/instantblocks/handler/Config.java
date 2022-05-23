@@ -4,72 +4,106 @@ import com.slymask3.instantblocks.reference.Reference;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 import java.io.File;
 
 public class Config {
     public static Configuration configuration;
-    
-    public static boolean msg;
-	public static Property crafting;
-	public static Property dungeonChests;
-	public static Property bonusChest;
-	public static Property villageChests;
-	public static Property mineshaftChests;
-	public static Property strongholdChests;
-	public static Property templeChests;
-	public static boolean effect;
-	public static String sound;
-	public static boolean tpGrinder;
-	public static int max;
-	public static int maxSuck;
-	public static boolean simpleWL;
-	public static boolean useWands;
-	public static boolean packWood;
-	public static boolean keepBlocks;
-	public static int xp;
-	public static int radiusHarvest;
-	public static int radiusLight;
+
+	public static String GENERAL = "general";
+    public static boolean SHOW_MESSAGES;
+	public static boolean ALLOW_CRAFTING;
+	public static boolean GENERATE_IN_CHESTS_DUNGEON;
+	public static boolean GENERATE_IN_CHESTS_BONUS;
+	public static boolean GENERATE_IN_CHESTS_VILLAGE;
+	public static boolean GENERATE_IN_CHESTS_MINESHAFT;
+	public static boolean GENERATE_IN_CHESTS_STRONGHOLD;
+	public static boolean GENERATE_IN_CHESTS_TEMPLE;
+	public static boolean SHOW_EFFECTS;
+	public static String SOUND;
+	public static boolean TP_GRINDER;
+	public static int MAX_LIQUID;
+	public static int MAX_FILL;
+	public static boolean SIMPLE_LIQUID;
+	public static boolean USE_WANDS;
+	public static boolean PACK_HOUSE;
+	public static int RADIUS_HARVEST;
+	public static int RADIUS_LIGHT;
+
+	public static String CHEATS = "cheats";
+	public static boolean KEEP_BLOCKS;
+	public static int XP_AMOUNT;
+
+	public static String BLOCKS = "blocks";
+	public static boolean ADD_WOODEN_HOUSE;
+	public static boolean ADD_MINING_LADDER;
+	public static boolean ADD_GLASS_DOME;
+	public static boolean ADD_FARM;
+	public static boolean ADD_SKYDIVE;
+	public static boolean ADD_GRINDER;
+	public static boolean ADD_POOL;
+	public static boolean ADD_ESCAPE_LADDER;
+	public static boolean ADD_WATER;
+	public static boolean ADD_LAVA;
+	public static boolean ADD_SUCTION;
+	public static boolean ADD_RAIL;
+	public static boolean ADD_STATUE;
+	public static boolean ADD_HARVEST;
+	public static boolean ADD_LIGHT;
+	public static boolean ADD_SCHEMATIC;
+	public static boolean ADD_TREE;
 
     public static void init(File configFile) {
-        if (configuration == null) {
+        if(configuration == null) {
             configuration = new Configuration(configFile);
             loadConfiguration();
         }
     }
 
-	public static String options = "Options";
-	public static String woolColors = "Options";
-	public static String other = "Options";
-	public static String cheats = "Options";
-    
     private static void loadConfiguration() {
-        crafting = configuration.get(options, "[Option] Crafting Instant Blocks", true, "Whether to allow crafting of Instant Blocks or not.\n(Default = true)");
-		dungeonChests = configuration.get(options, "[Option] Dungeon Chests", true, "Whether to generate Instant Blocks in Dungeon Chests or not.\n(Default = true)");
-		bonusChest = configuration.get(options, "[Option] Bonus Chest", true, "Whether to generate the Instant Wooden House Block in the Bonus Chest or not.\n(Default = true)");
-		villageChests = configuration.get(options, "[Option] Village Chests", true, "Whether to generate Instant Blocks in Village Chests or not.\n(Default = true)");
-		mineshaftChests = configuration.get(options, "[Option] Mineshaft Chests", true, "Whether to generate Instant Blocks in Mineshaft Chests or not.\n(Default = true)");
-		strongholdChests = configuration.get(options, "[Option] Stronghold Chests", true, "Whether to generate Instant Blocks in  Stronghold Chests or not.\n(Default = true)");
-		templeChests = configuration.get(options, "[Option] Temple Chests", true, "Whether to generate Instant Blocks in Desert/Jungle Temple Chests or not.\n(Default = true)");
-		tpGrinder = configuration.get(options, "[Option] Grinder Teleport", true, "Whether to teleport the player to the collection room of the Instant Grinder upon right-click.\n(Default = true)").getBoolean();
-		max = configuration.get(options, "[Option] Maximum Water/Lava Blocks", 1000, "Maximum amount of water/lava blocks to create.\n(Default = 1000)").getInt();
-		maxSuck = configuration.get(options, "[Option] Maximum Suction", 1000, "Maximum amount of water/lava blocks to suck in.\n(Default = 1000)").getInt();
-		simpleWL = configuration.get(options, "[Option] Simple Water/Lava Blocks", false, "Only create water/lava source blocks on the block's layer, instead of the whole area.\n(Default = false)").getBoolean();
-		useWands = configuration.get(options, "[Option] Use Wands", true, "Whether to use wands to create Instant Blocks.\n(Default = true)").getBoolean();
-		packWood = configuration.get(options, "[Option] Pack Up House", true, "Whether to be able to pack up an Instant Wooden House.\n(Default = false)").getBoolean();
+		ALLOW_CRAFTING = configuration.get(GENERAL, "ALLOW_CRAFTING", true, "Whether to allow crafting of Instant Blocks or not.\n(Default = true)").getBoolean();
+		GENERATE_IN_CHESTS_DUNGEON = configuration.get(GENERAL, "GENERATE_IN_CHESTS_DUNGEON", true, "Whether to generate Instant Blocks in Dungeon Chests or not.\n(Default = true)").getBoolean();
+		GENERATE_IN_CHESTS_BONUS = configuration.get(GENERAL, "GENERATE_IN_CHESTS_BONUS", true, "Whether to generate the Instant Wooden House Block in the Bonus Chest or not.\n(Default = true)").getBoolean();
+		GENERATE_IN_CHESTS_VILLAGE = configuration.get(GENERAL, "GENERATE_IN_CHESTS_VILLAGE", true, "Whether to generate Instant Blocks in Village Chests or not.\n(Default = true)").getBoolean();
+		GENERATE_IN_CHESTS_MINESHAFT = configuration.get(GENERAL, "GENERATE_IN_CHESTS_MINESHAFT", true, "Whether to generate Instant Blocks in Mineshaft Chests or not.\n(Default = true)").getBoolean();
+		GENERATE_IN_CHESTS_STRONGHOLD = configuration.get(GENERAL, "GENERATE_IN_CHESTS_STRONGHOLD", true, "Whether to generate Instant Blocks in  Stronghold Chests or not.\n(Default = true)").getBoolean();
+		GENERATE_IN_CHESTS_TEMPLE = configuration.get(GENERAL, "GENERATE_IN_CHESTS_TEMPLE", true, "Whether to generate Instant Blocks in Desert/Jungle Temple Chests or not.\n(Default = true)").getBoolean();
+		TP_GRINDER = configuration.get(GENERAL, "TP_GRINDER", true, "Whether to teleport the player to the collection room of the Instant Grinder upon right-click.\n(Default = true)").getBoolean();
+		MAX_LIQUID = configuration.get(GENERAL, "MAX_LIQUID", 1000, "Maximum amount of water/lava blocks to create.\n(Default = 1000)").getInt();
+		MAX_FILL = configuration.get(GENERAL, "MAX_FILL", 1000, "Maximum amount of water/lava blocks to suck in.\n(Default = 1000)").getInt();
+		SIMPLE_LIQUID = configuration.get(GENERAL, "SIMPLE_LIQUID", false, "Only create water/lava source blocks on the block's layer, instead of the whole area.\n(Default = false)").getBoolean();
+		USE_WANDS = configuration.get(GENERAL, "USE_WANDS", true, "Whether to use wands to create Instant Blocks.\n(Default = true)").getBoolean();
+		PACK_HOUSE = configuration.get(GENERAL, "PACK_HOUSE", false, "Whether to be able to pack up an Instant Wooden House.\n(Default = false)").getBoolean();
 
-		keepBlocks = configuration.get(cheats, "[Cheat] Keep Instant Blocks", false, "Whether to keep Instant Blocks after right-clicking or not.\n(Default = false)").getBoolean();
-		xp = configuration.get(cheats, "[Cheat] XP From Instant Blocks", 0, "How much experience from right-clicking Instant Blocks give you.\n(Default = 0)").getInt();
+		SHOW_MESSAGES = configuration.get(GENERAL, "SHOW_MESSAGES", true, "Whether to show InstantBlock messages or not.\n(Default = true)").getBoolean(true);
+		SHOW_EFFECTS = configuration.get(GENERAL, "SHOW_EFFECTS", true, "Whether to show red particle effects on right-click of Instant Blocks or not.\n(Default = true)").getBoolean(true);
+		SOUND = configuration.get(GENERAL, "SOUND", "random.levelup", "Which sound to play on right-click of Instant Blocks.\nThe directory is .minecarft\\resources\\sound3\\.\nFor example, the default sound is .minecarft\\resources\\sound3\\random\\levelup.ogg\n(Default = random.levelup)").getString();
 
-		msg = configuration.get(options, "[Option] Messages", true, "Whether to show InstantBlock messages or not.\n(Default = true)").getBoolean(true);
-		effect = configuration.get(options, "[Option] Effect", true, "Whether to show red particle effects on right-click of Instant Blocks or not.\n(Default = true)").getBoolean(true);
-		sound = configuration.get(options, "[Option] Sound", "random.levelup", "Which sound to play on right-click of Instant Blocks.\nThe directory is .minecarft\\resources\\sound3\\.\nFor example, the default sound is .minecarft\\resources\\sound3\\random\\levelup.ogg\n(Default = random.levelup)").getString();
+		RADIUS_HARVEST = configuration.get(GENERAL, "RADIUS_HARVEST", 50, "Radius to Harvest blocks around Instant Harvester.\n(Default = 50)").getInt();
+		RADIUS_LIGHT = configuration.get(GENERAL, "RADIUS_LIGHT", 50, "Radius to light up dark areas around Instant Light Block.\n(Default = 50)").getInt();
 
-		radiusHarvest = configuration.get(options, "[Option] Instant Harvester Radius.", 50, "Radius to Harvest blocks around Instant Harvester.\n(Default = 50)").getInt();
-		radiusLight = configuration.get(options, "[Option] Instant Light Radius.", 50, "Radius to light up dark areas around Instant Light Block.\n(Default = 50)").getInt();
+		KEEP_BLOCKS = configuration.get(CHEATS, "KEEP_BLOCKS", false, "Whether to keep Instant Blocks after right-clicking or not.\n(Default = false)").getBoolean();
+		XP_AMOUNT = configuration.get(CHEATS, "XP_AMOUNT", 0, "How much experience from right-clicking Instant Blocks give you.\n(Default = 0)").getInt();
 
-        if (configuration.hasChanged()) {
+		ADD_WOODEN_HOUSE = configuration.get(BLOCKS, "ADD_WOODEN_HOUSE", true, "Add Instant Wooden House\n(Default = true)").getBoolean();
+		ADD_MINING_LADDER = configuration.get(BLOCKS, "ADD_MINING_LADDER", true, "Add Instant Mining Ladder\n(Default = true)").getBoolean();
+		ADD_GLASS_DOME = configuration.get(BLOCKS, "ADD_GLASS_DOME", true, "Add Instant Glass Dome\n(Default = true)").getBoolean();
+		ADD_FARM = configuration.get(BLOCKS, "ADD_FARM", true, "Add Instant Farm\n(Default = true)").getBoolean();
+		ADD_SKYDIVE = configuration.get(BLOCKS, "ADD_SKYDIVE", true, "Add Instant Rainbow Skydive\n(Default = true)").getBoolean();
+		ADD_GRINDER = configuration.get(BLOCKS, "ADD_GRINDER", true, "Add Instant Grinder\n(Default = true)").getBoolean();
+		ADD_POOL = configuration.get(BLOCKS, "ADD_POOL", true, "Add Instant Pool\n(Default = true)").getBoolean();
+		ADD_ESCAPE_LADDER = configuration.get(BLOCKS, "ADD_ESCAPE_LADDER", true, "Add Instant Escape Ladder\n(Default = true)").getBoolean();
+		ADD_WATER = configuration.get(BLOCKS, "ADD_WATER", true, "Add Instant Water\n(Default = true)").getBoolean();
+		ADD_LAVA = configuration.get(BLOCKS, "ADD_LAVA", true, "Add Instant Lava\n(Default = true)").getBoolean();
+		ADD_SUCTION = configuration.get(BLOCKS, "ADD_SUCTION", true, "Add Instant Suction\n(Default = true)").getBoolean();
+		ADD_RAIL = configuration.get(BLOCKS, "ADD_RAIL", true, "Add Instant Rail\n(Default = true)").getBoolean();
+		ADD_STATUE = configuration.get(BLOCKS, "ADD_STATUE", true, "Add Instant Statue\n(Default = true)").getBoolean();
+		ADD_HARVEST = configuration.get(BLOCKS, "ADD_HARVEST", true, "Add Instant Harvest\n(Default = true)").getBoolean();
+		ADD_LIGHT = configuration.get(BLOCKS, "ADD_LIGHT", true, "Add Instant Light\n(Default = true)").getBoolean();
+		ADD_SCHEMATIC = configuration.get(BLOCKS, "ADD_SCHEMATIC", true, "Add Instant Schematic\n(Default = true)").getBoolean();
+		ADD_TREE = configuration.get(BLOCKS, "ADD_TREE", true, "Add Instant Tree\n(Default = true)").getBoolean();
+
+        if(configuration.hasChanged()) {
             configuration.save();
         }
     }

@@ -127,7 +127,7 @@ public class GuiHarvest extends GuiScreen {
 	public void sendInfo() {
 		InstantBlocks.packetPipeline.sendToServer(new PacketHarvest(this.world, this.x, this.y, this.z, this.player.getDisplayName(), logOak.isChecked(), logSpruce.isChecked(), logBirch.isChecked(), logJungle.isChecked(), logAcacia.isChecked(), logDark.isChecked(), wheat.isChecked(), carrot.isChecked(), potato.isChecked(), cactus.isChecked(), pumpkin.isChecked(), melon.isChecked(), sugarcane.isChecked(), cocoa.isChecked(), mushroom.isChecked(), netherwart.isChecked(), replant.isChecked()));
 	
-		IBHelper.xp(world, player, Config.xp);
+		IBHelper.xp(world, player, Config.XP_AMOUNT);
         IBHelper.effectFull(world, "reddust", x, y, z);
         IBHelper.msg(player, Strings.CREATE_HARVEST, Colors.a);
 	}

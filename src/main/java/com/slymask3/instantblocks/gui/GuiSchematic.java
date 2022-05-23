@@ -181,7 +181,7 @@ public class GuiSchematic extends GuiScreen {
 	public void sendInfo() {
 		InstantBlocks.packetPipeline.sendToServer(new PacketSchematic(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), center.isChecked(), ignoreAir.isChecked()));
 		
-		IBHelper.xp(world, player, Config.xp);
+		IBHelper.xp(world, player, Config.XP_AMOUNT);
         IBHelper.effectFull(world, "reddust", x, y, z);
         IBHelper.msg(player, Strings.CREATE_SCHEMATIC.replace("%schematic%",input.getText()), Colors.a);
 	}

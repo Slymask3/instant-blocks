@@ -70,7 +70,7 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.useWands) {
+		if (Config.USE_WANDS) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
@@ -107,11 +107,11 @@ public class BlockInstantHarvest extends BlockContainer implements ITileEntityPr
 		EntityPlayer player = world.getPlayerEntityByName(playerS);
 		
 		//if (canHarvest(world, x, y, z, ConfigurationHandler.radiusHarvest, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant)) {
-			harvest(world, x, y, z, Config.radiusHarvest, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant);
+			harvest(world, x, y, z, Config.RADIUS_HARVEST, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant);
 			
 			//organizeChest(world, x, y, z);
 			
-	        IBHelper.sound(world, Config.sound, x, y, z);
+	        IBHelper.sound(world, Config.SOUND, x, y, z);
 			
 			ItemStack is = player.getCurrentEquippedItem();
 			

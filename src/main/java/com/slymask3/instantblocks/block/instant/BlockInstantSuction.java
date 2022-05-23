@@ -28,7 +28,7 @@ public class BlockInstantSuction extends BlockIB {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.useWands) {
+		if (Config.USE_WANDS) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//do not dmg yet
 			} else {
@@ -47,7 +47,7 @@ public class BlockInstantSuction extends BlockIB {
 		BuildHelper.buildSuck(world, x, y, z);
 		BuildHelper.checkSuckUndo(world, x, y, z);
 		
-		if (Config.effect) {
+		if (Config.SHOW_EFFECTS) {
 			world.spawnParticle("cloud", (double)x + 0.5D, (double)y + 1.2D, (double)z + 0.5D, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("cloud", (double)x + 1.2D, (double)y + 0.5D, (double)z + 0.5D, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("cloud", (double)x + 0.5D, (double)y + 0.5D, (double)z + 1.2D, 0.0D, 0.0D, 0.0D);
@@ -60,16 +60,16 @@ public class BlockInstantSuction extends BlockIB {
 			if (BuildHelper.liq == 1) {
 				world.setBlock(x, y, z, ModBlocks.ibWater);
 				IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibSucker);
-				IBHelper.sound(world, Config.sound, x, y, z);
+				IBHelper.sound(world, Config.SOUND, x, y, z);
 				IBHelper.effectFull(world, "reddust", x, y, z);
 				if (BuildHelper.counter == 1) {
 					IBHelper.msg(player, Strings.CREATE_SUCTION_WATER_1.replace("%i%",String.valueOf(BuildHelper.counter)), Colors.a);
 				} else {
 					IBHelper.msg(player, Strings.CREATE_SUCTION_WATER.replace("%i%",String.valueOf(BuildHelper.counter)), Colors.a);
 				}
-				IBHelper.xp(world, player, Config.xp);
+				IBHelper.xp(world, player, Config.XP_AMOUNT);
 				
-				if (Config.useWands) {
+				if (Config.USE_WANDS) {
 					player.getCurrentEquippedItem().damageItem(1, player);
 				}
 				
@@ -77,16 +77,16 @@ public class BlockInstantSuction extends BlockIB {
 			} else if (BuildHelper.liq == 2) {
 				world.setBlock(x, y, z, ModBlocks.ibLava);
 				IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibSucker);
-				IBHelper.sound(world, Config.sound, x, y, z);
+				IBHelper.sound(world, Config.SOUND, x, y, z);
 				IBHelper.effectFull(world, "reddust", x, y, z);
 				if (BuildHelper.counter == 1) {
 					IBHelper.msg(player, Strings.CREATE_SUCTION_LAVA_1.replace("%i%",String.valueOf(BuildHelper.counter)), Colors.a);
 				} else {
 					IBHelper.msg(player, Strings.CREATE_SUCTION_LAVA.replace("%i%",String.valueOf(BuildHelper.counter)), Colors.a);
 				}
-				IBHelper.xp(world, player, Config.xp);
+				IBHelper.xp(world, player, Config.XP_AMOUNT);
 				
-				if (Config.useWands) {
+				if (Config.USE_WANDS) {
 					player.getCurrentEquippedItem().damageItem(1, player);
 				}
 
@@ -96,7 +96,7 @@ public class BlockInstantSuction extends BlockIB {
 			if (BuildHelper.liq == 0) {
 				IBHelper.msg(player, Strings.ERROR_NO_LIQUID, Colors.c);
 			} else if (BuildHelper.liq == -1) {
-				IBHelper.msg(player, Strings.ERROR_SUCTION.replace("%i%",String.valueOf(Config.maxSuck)), Colors.c);
+				IBHelper.msg(player, Strings.ERROR_SUCTION.replace("%i%",String.valueOf(Config.MAX_FILL)), Colors.c);
 			}
 		}
 		

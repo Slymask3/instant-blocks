@@ -57,28 +57,28 @@ public class CommandInstantBlocks extends CommandBase {
         	}
         } else if (arg.length == 2) {
         	if (arg[0].equalsIgnoreCase("msg")) {
-        		Config.msg = ConfigBoolean(arg, player, Config.msg, "Messages");
+        		Config.SHOW_MESSAGES = ConfigBoolean(arg, player, Config.SHOW_MESSAGES, "Messages");
         	} else if (arg[0].equalsIgnoreCase("keepBlocks")) {
-        		Config.keepBlocks = ConfigBoolean(arg, player, Config.keepBlocks, "Keep Blocks");
+        		Config.KEEP_BLOCKS = ConfigBoolean(arg, player, Config.KEEP_BLOCKS, "Keep Blocks");
         	} else if (arg[0].equalsIgnoreCase("effect")) {
-        		Config.effect = ConfigBoolean(arg, player, Config.effect, "Effect");
+        		Config.SHOW_EFFECTS = ConfigBoolean(arg, player, Config.SHOW_EFFECTS, "Effect");
         	} else if (arg[0].equalsIgnoreCase("tpGrinder")) {
-        		Config.tpGrinder = ConfigBoolean(arg, player, Config.tpGrinder, "Grinder Teleport");
+        		Config.TP_GRINDER = ConfigBoolean(arg, player, Config.TP_GRINDER, "Grinder Teleport");
         	} else if (arg[0].equalsIgnoreCase("simpleWL") || arg[0].equalsIgnoreCase("simpleMode")) {
-        		Config.simpleWL = ConfigBoolean(arg, player, Config.simpleWL, "Simple Mode");
+        		Config.SIMPLE_LIQUID = ConfigBoolean(arg, player, Config.SIMPLE_LIQUID, "Simple Mode");
         	} else if (arg[0].equalsIgnoreCase("useWands") || arg[0].equalsIgnoreCase("wandReq")) {
-        		Config.useWands = ConfigBoolean(arg, player, Config.useWands, "Use Wands");
+        		Config.USE_WANDS = ConfigBoolean(arg, player, Config.USE_WANDS, "Use Wands");
         	} else if (arg[0].equalsIgnoreCase("packWood") || arg[0].equalsIgnoreCase("packWoodenHouse") || arg[0].equalsIgnoreCase("packHouse")) {
-        		Config.packWood = ConfigBoolean(arg, player, Config.packWood, "Pack Wooden House");
+        		Config.PACK_HOUSE = ConfigBoolean(arg, player, Config.PACK_HOUSE, "Pack Wooden House");
         	} else if (arg[0].equalsIgnoreCase("xp") || arg[0].equalsIgnoreCase("exp")) {
-        		Config.xp = ConfigInt(arg, player, Config.xp, "XP From Instant Blocks");
+        		Config.XP_AMOUNT = ConfigInt(arg, player, Config.XP_AMOUNT, "XP From Instant Blocks");
         	} else if (arg[0].equalsIgnoreCase("maxWL") || arg[0].equalsIgnoreCase("max") || arg[0].equalsIgnoreCase("maxWaterLava")) {
-        		Config.max = ConfigInt(arg, player, Config.max, "Max Water/Lava");
+        		Config.MAX_LIQUID = ConfigInt(arg, player, Config.MAX_LIQUID, "Max Water/Lava");
         	} else if (arg[0].equalsIgnoreCase("maxSuction") || arg[0].equalsIgnoreCase("maxSuck")) {
-        		Config.maxSuck = ConfigInt(arg, player, Config.maxSuck, "Max Suction");
+        		Config.MAX_FILL = ConfigInt(arg, player, Config.MAX_FILL, "Max Suction");
         	} else if (arg[0].equalsIgnoreCase("sound")) {
-        		Config.sound = ConfigString(arg, player, Config.sound, "Sound");
-        		IBHelper.sound(player.worldObj, Config.sound, (int)player.posX, (int)player.posY, (int)player.posZ);
+        		Config.SOUND = ConfigString(arg, player, Config.SOUND, "Sound");
+        		IBHelper.sound(player.worldObj, Config.SOUND, (int)player.posX, (int)player.posY, (int)player.posZ);
         	}
         	
          	else {
@@ -135,8 +135,8 @@ public class CommandInstantBlocks extends CommandBase {
 	
 	public void info(EntityPlayer player) {
         ItemStack held = player.getCurrentEquippedItem();
-        String wandReq = (Config.useWands) ? "Yes" : "No";
-        String simpleWL = (Config.simpleWL) ? "Simple" : "Full";
+        String wandReq = (Config.USE_WANDS) ? "Yes" : "No";
+        String simpleWL = (Config.SIMPLE_LIQUID) ? "Simple" : "Full";
     	
         player.addChatMessage(new ChatComponentText(Colors._8 + Colors.BOLD + "============================================="));
     	player.addChatMessage(new ChatComponentText(Colors._3 + Colors.BOLD + "InstantBlocks" + " - Info"));
@@ -178,19 +178,19 @@ public class CommandInstantBlocks extends CommandBase {
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibWater)) {
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Block: " + Colors.a + "Instant Water Block"));
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Description: " + Colors.a + "Fills an area with water source blocks. 'Simple' mode only fills one layer that the core block is on. 'Full' mode fills the layer that the core block is on, and all the layers below it. (Change to 'Simple' in the config file for 'not-so-good' computers.)"));
-    		player.addChatMessage(new ChatComponentText(Colors._2 + "Maximum: " + Colors.a + Config.max + " Water Source Blocks."));
+    		player.addChatMessage(new ChatComponentText(Colors._2 + "Maximum: " + Colors.a + Config.MAX_LIQUID + " Water Source Blocks."));
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Mode: " + Colors.a+simpleWL+"."));
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Multi-Directional: " + Colors._7 + "N/A."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibLava)) {
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Block: " + Colors.a + "Instant Lava Block"));
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Description: " + Colors.a + "Fills an area with lava source blocks. 'Simple' mode only fills one layer that the core block is on. 'Full' mode fills the layer that the core block is on, and all the layers below it. (Change to 'Simple' in the config file for 'not-so-good' computers.)"));
-    		player.addChatMessage(new ChatComponentText(Colors._2 + "Maximum: " + Colors.a + Config.max + " Lava Source Blocks."));
+    		player.addChatMessage(new ChatComponentText(Colors._2 + "Maximum: " + Colors.a + Config.MAX_LIQUID + " Lava Source Blocks."));
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Mode: " + Colors.a+simpleWL+"."));
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Multi-Directional: " + Colors._7 + "N/A."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibSucker)) {
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Block: " + Colors.a + "Instant Suction Block"));
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Description: " + Colors.a + "Sucks in all water/lava around it."));
-    		player.addChatMessage(new ChatComponentText(Colors._2 + "Maximum: " + Colors.a + Config.maxSuck + "."));
+    		player.addChatMessage(new ChatComponentText(Colors._2 + "Maximum: " + Colors.a + Config.MAX_FILL + "."));
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Multi-Directional: " + Colors._7 + "N/A."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibRail)) {
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Block: " + Colors.a + "Instant Rail Block"));
@@ -203,12 +203,12 @@ public class CommandInstantBlocks extends CommandBase {
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibHarvest)) {
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Block: " + Colors.a + "Instant Harvester Block"));
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Description: " + Colors.a + "Harvests renewable resources in a radius Configurable in the config."));
-    		player.addChatMessage(new ChatComponentText(Colors._2 + "Radius: " + Colors.a + Config.radiusHarvest + "."));
+    		player.addChatMessage(new ChatComponentText(Colors._2 + "Radius: " + Colors.a + Config.RADIUS_HARVEST + "."));
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Multi-Directional: " + Colors._7 + "N/A."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibLight)) {
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Block: " + Colors.a + "Instant Light Block"));
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Description: " + Colors.a + "Lights up dark areas in a radius Configurable in the config."));
-    		player.addChatMessage(new ChatComponentText(Colors._2 + "Radius: " + Colors.a + Config.radiusLight + "."));
+    		player.addChatMessage(new ChatComponentText(Colors._2 + "Radius: " + Colors.a + Config.RADIUS_LIGHT + "."));
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Multi-Directional: " + Colors._7 + "N/A."));
     	} else if (held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibSchematic)) {
     		player.addChatMessage(new ChatComponentText(Colors._2 + "Block: " + Colors.a + "Instant Schematic Block"));

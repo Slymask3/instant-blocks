@@ -148,7 +148,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.useWands) {
+		if (Config.USE_WANDS) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
@@ -202,7 +202,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		        
 		        IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
 		        //IBHelper.xp(world, player, ConfigurationHandler.xp);
-		        IBHelper.sound(world, Config.sound, x, y, z);
+		        IBHelper.sound(world, Config.SOUND, x, y, z);
 		        //IBHelper.effectFull(world, "reddust", x, y, z);
 				
 				ItemStack is = player.getCurrentEquippedItem();

@@ -26,7 +26,7 @@ public class IBHelper {
 	}
 
 	public static void effectFull(World world, String particle, int x, int y, int z) {
-		if (Config.effect) {
+		if (Config.SHOW_EFFECTS) {
 			//if (checkParticle > 0) {
 				for (double i = 0; i <= 1; i = i + 0.1) {
 					for (double n = 0; n <= 1; n = n + 0.1) {
@@ -41,7 +41,7 @@ public class IBHelper {
 	}
 	
 	public static void msg(EntityPlayer player, String msg, String color) {
-		if(Config.msg) {
+		if(Config.SHOW_MESSAGES) {
 			World world = player.worldObj;
 			if(world.isRemote) { //IF CLIENT
 				player.addChatMessage(new ChatComponentText(Colors._8 + "[" + Colors._3 + "InstantBlocks" + Colors._8 + "] " + ColorHelper.colorEveryWord(msg, color)));
@@ -50,7 +50,7 @@ public class IBHelper {
 	}
 	
 	public static void keepBlocks(World world, int x, int y, int z, Block block) {
-		if (Config.keepBlocks) {
+		if (Config.KEEP_BLOCKS) {
 			BuildHelper.setBlockIfNoBedrock(world, x, y, z, block);
 		} else {
 			//Do not keep block.
@@ -60,7 +60,7 @@ public class IBHelper {
 	public void tp(World world, EntityPlayer player, int x, int y, int z, boolean property) {
 		if (!world.isRemote) { //IF SERVER
 			if (property) {
-				IBHelper.sound(world, Config.sound, x, y, z);
+				IBHelper.sound(world, Config.SOUND, x, y, z);
 				player.setPositionAndUpdate(x + 0.5, y + 0.5, z + 0.5);
 			}
 		}

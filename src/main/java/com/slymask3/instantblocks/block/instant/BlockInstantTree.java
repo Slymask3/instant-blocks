@@ -79,7 +79,7 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.useWands) {
+		if (Config.USE_WANDS) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
@@ -116,7 +116,7 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
 			buildGlass(world, x, y, z, fullLog, fullLeaves, air);
 		}
 		
-		IBHelper.sound(world, Config.sound, x, y, z);
+		IBHelper.sound(world, Config.SOUND, x, y, z);
 		
 		ItemStack is = player.getCurrentEquippedItem();
 		

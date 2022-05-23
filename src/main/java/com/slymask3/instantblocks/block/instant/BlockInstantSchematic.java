@@ -62,7 +62,7 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.useWands) {
+		if (Config.USE_WANDS) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
@@ -88,7 +88,7 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 			
 			ItemStack is = player.getCurrentEquippedItem();
 	    	
-			if (Config.useWands) {
+			if (Config.USE_WANDS) {
 				if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 					is.damageItem(1, player);
 				}
@@ -97,8 +97,8 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 			world.setBlock(x, y, z, Blocks.air);
 			
 			IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibSchematic);
-    		IBHelper.xp(world, player, Config.xp);
-    		IBHelper.sound(world, Config.sound, x, y, z);
+    		IBHelper.xp(world, player, Config.XP_AMOUNT);
+    		IBHelper.sound(world, Config.SOUND, x, y, z);
     		IBHelper.effectFull(world, "reddust", x, y, z);
 			
 		} catch(Exception e) {

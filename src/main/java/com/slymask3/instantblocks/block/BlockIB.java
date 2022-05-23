@@ -346,7 +346,7 @@ public class BlockIB extends Block {
 		
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.useWands) {
+		if (Config.USE_WANDS) {
 			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				if (world.getBlock(x, y, z) != ModBlocks.ibStatue && world.getBlock(x, y, z) != ModBlocks.ibLava && world.getBlock(x, y, z) != ModBlocks.ibWater) {
 					is.damageItem(1, player);
@@ -361,9 +361,9 @@ public class BlockIB extends Block {
 		build(world, x, y, z, player);
 		
 		IBHelper.keepBlocks(world, x, y, z, this.block);
-		IBHelper.xp(world, player, Config.xp);
+		IBHelper.xp(world, player, Config.XP_AMOUNT);
 			
-		IBHelper.sound(world, Config.sound, x, y, z);
+		IBHelper.sound(world, Config.SOUND, x, y, z);
 		IBHelper.effectFull(world, "reddust", x, y, z);
 		IBHelper.msg(player, this.createMsg, Colors.a);
     		
