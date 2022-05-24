@@ -3,10 +3,9 @@ package com.slymask3.instantblocks.block.instant;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.slymask3.instantblocks.block.BlockGuiIB;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.*;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
 import com.slymask3.instantblocks.util.BuildHelper;
@@ -31,11 +30,12 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Base64;
 
-public class BlockInstantStatue extends BlockGuiIB {
+public class BlockInstantStatue extends BlockInstant {
 
 	public BlockInstantStatue() {
-		super(Names.Blocks.IB_STATUE, Material.wood, Block.soundTypeWood, 1.5F, GuiID.STATUE);
+		super(ModBlocks.ibStatue, Names.Blocks.IB_STATUE, Material.wood, Block.soundTypeWood, 1.5F);
         setBlockTextureName(Textures.Statue.FRONT);
+		setGuiID(GuiID.STATUE);
 	}
 
 	public static IIcon bottom;
@@ -168,7 +168,7 @@ public class BlockInstantStatue extends BlockGuiIB {
 				
 				ItemStack is = player.getCurrentEquippedItem();
 				
-				if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+				if(IBHelper.isWand(is)) {
 					is.damageItem(1, player);
 				}
 				

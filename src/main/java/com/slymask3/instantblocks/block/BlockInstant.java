@@ -1,27 +1,30 @@
 package com.slymask3.instantblocks.block;
 
+import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockIB extends Block {
-
+public abstract class BlockInstant extends Block implements ITileEntityProvider {
 	Block block;
 	
 	boolean bottomB = true;
@@ -51,11 +54,14 @@ public class BlockIB extends Block {
 	IIcon rightI;
 	IIcon frontI;
 	IIcon backI;
+
+	public String createMsg = "";
+	public String errorMsg = "";
+
+	boolean is_directional = false;
+	GuiID guiID = null;
 	
-	String createMsg="";
-	String errorMsg="";
-	
-	protected BlockIB(Block block, String name, Material material, SoundType soundType, float hardness) {
+	protected BlockInstant(Block block, String name, Material material, SoundType soundType, float hardness) {
 		super(material);
         setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
         setBlockName(Reference.MOD_ID + ":" + name);
@@ -72,7 +78,15 @@ public class BlockIB extends Block {
 	public void setErrorMsg(String msg) {
 		this.errorMsg = msg;
 	}
-	
+
+	public void setDirectional(boolean directional) {
+		this.is_directional = directional;
+	}
+
+	public void setGuiID(GuiID guiID) {
+		this.guiID = guiID;
+	}
+
 	public void setTextures(String bottom, String top, String left, String right, String front, String back) {
 		this.bottomS = bottom;
 		this.topS = top;
@@ -336,19 +350,36 @@ public class BlockIB extends Block {
     public int quantityDropped(Random random) {
         return 1;
     }
-	
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		if(BuildHelper.getBlock(world,x, y, z) == ModBlocks.ibGrinder) {
-			if(BuildHelper.getBlock(world,x, y-1, z) != Blocks.mob_spawner) {
-				IBHelper.msg(player, errorMsg, Colors.c);
-				return true;
-	    	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world, int i) {
+		return null;
+	}
+
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
+		if(this.is_directional) {
+			int meta = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+			world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 		}
-		
+	}
+
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+		return guiID == null ? onActivate(world,x,y,z,player) : onActivateGui(world,x,y,z,player);
+	}
+
+	public boolean canActivate(World world, int x, int y, int z, EntityPlayer player) {
+		return true;
+	}
+
+	public boolean onActivate(World world, int x, int y, int z, EntityPlayer player) {
+		if(!canActivate(world,x,y,z,player)) {
+			return true;
+		}
+
 		ItemStack is = player.getCurrentEquippedItem();
-    	
+
 		if(Config.USE_WANDS) {
-			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+			if(IBHelper.isWand(is)) {
 				if(BuildHelper.getBlock(world,x, y, z) != ModBlocks.ibStatue && BuildHelper.getBlock(world,x, y, z) != ModBlocks.ibLava && BuildHelper.getBlock(world,x, y, z) != ModBlocks.ibWater) {
 					is.damageItem(1, player);
 				}
@@ -360,16 +391,35 @@ public class BlockIB extends Block {
 
 		build(world, x, y, z);
 		build(world, x, y, z, player);
-		
+
 		IBHelper.keepBlocks(world, x, y, z, this.block);
 		IBHelper.xp(world, player, Config.XP_AMOUNT);
-			
+
 		IBHelper.sound(world, Config.SOUND, x, y, z);
 		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
 		IBHelper.msg(player, this.createMsg, Colors.a);
-    		
-    	return true;
-    }
+
+		return true;
+	}
+
+	public boolean onActivateGui(World world, int x, int y, int z, EntityPlayer player) {
+		if(!canActivate(world,x,y,z,player)) {
+			return true;
+		}
+
+		ItemStack is = player.getCurrentEquippedItem();
+
+		if(Config.USE_WANDS) {
+			if(!IBHelper.isWand(is)) {
+				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
+				return true;
+			}
+		}
+
+		player.openGui(InstantBlocks.instance, this.guiID.ordinal(), world, x, y, z);
+
+		return true;
+	}
 	
 	public void build(World world, int x, int y, int z) {
 		//build structure

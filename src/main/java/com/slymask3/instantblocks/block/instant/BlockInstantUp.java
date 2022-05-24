@@ -1,9 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockLadderIB;
-import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
@@ -14,7 +12,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class BlockInstantUp extends BlockLadderIB {
@@ -22,7 +19,6 @@ public class BlockInstantUp extends BlockLadderIB {
 	
     public BlockInstantUp() {
         super(ModBlocks.ibUp, Names.Blocks.IB_ESCAPE_LADDER, Material.circuits, Block.soundTypeLadder, 0.4F);
-		setResistance(2000F);
         setTextures(Textures.EscapeLadder.SIDE);
         setTickRandomly(true);
         setBlockTextureName(Textures.EscapeLadder.SIDE);
@@ -47,84 +43,66 @@ public class BlockInstantUp extends BlockLadderIB {
             side = 5;
         }
     }
-	
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-    	if(world.canBlockSeeTheSky(x, y+1, z)) {
-    		IBHelper.msg(player, Strings.ERROR_ESCAPE_LADDER, Colors.c);
-			return true;
+
+	public boolean canActivate(World world, int x, int y, int z, EntityPlayer player) {
+		if(world.canBlockSeeTheSky(x, y+1, z)) {
+			IBHelper.msg(player, Strings.ERROR_ESCAPE_LADDER, Colors.c);
+			return false;
 		}
-    	
-    	ItemStack is = player.getCurrentEquippedItem();
-    	
-		if(Config.USE_WANDS) {
-			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
-				is.damageItem(1, player);
-				//player.triggerAchievement(ib.achUp);
-			} else {
-				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
-				return true;
-			}
-		}
-		
+		return true;
+	}
+
+	public void build(World world, int x, int y, int z, EntityPlayer player) {
 		Block stone = Blocks.stone;
 		Block ladder = Blocks.ladder;
 		Block torch = Blocks.torch;
 		Block air = Blocks.air;
-		
+
 		int i = y - 1;
-		int n = 0;
 		while(!world.canBlockSeeTheSky(x, i+1, z)) {
 			i++;
 			BuildHelper.build(world, x-1, y-1, z-1, stone, 3, 1, 3);
 			BuildHelper.build(world, x-1, i, z-1, stone, 3, 1, 3);
 			BuildHelper.setBlock(world,x, i, z, air);
-			
+
 			if(side == 2) {
 				BuildHelper.setBlock(world,x, i, z, ladder, 2, 0);
-				
+
 				BuildHelper.setBlock(world,x, y, z-1, air);
 				BuildHelper.setBlock(world,x, y+1, z-1, air);
-					
+
 				for(int m = y + 6; m < i; m = m + 6) {
 					BuildHelper.setBlock(world,x, m, z-1, torch);
 				}
 			} else if(side == 3) {
 				BuildHelper.setBlock(world,x, i, z, ladder, 3, 0);
-					
+
 				BuildHelper.setBlock(world,x, y, z+1, air);
 				BuildHelper.setBlock(world,x, y+1, z+1, air);
-					
+
 				for(int m = y + 6; m < i; m = m + 6) {
 					BuildHelper.setBlock(world,x, m, z+1, torch);
 				}
 			} else if(side == 4) {
 				BuildHelper.setBlock(world,x, i, z, ladder, 4, 0);
-					
+
 				BuildHelper.setBlock(world,x-1, y, z, air);
 				BuildHelper.setBlock(world,x-1, y+1, z, air);
-					
+
 				for(int m = y + 6; m < i; m = m + 6) {
 					BuildHelper.setBlock(world,x-1, m, z, torch);
 				}
 			} else if(side == 5) {
 				BuildHelper.setBlock(world,x, i, z, ladder, 5, 0);
-					
+
 				BuildHelper.setBlock(world,x+1, y, z, air);
 				BuildHelper.setBlock(world,x+1, y+1, z, air);
-					
+
 				for(int m = y + 6; m < i; m = m + 6) {
 					BuildHelper.setBlock(world,x+1, m, z, torch);
 				}
 			}
 		}
-		
-		/************************ Functions ************************/
-		IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibUp);
-		IBHelper.xp(world, player, Config.XP_AMOUNT);
-		IBHelper.sound(world, Config.SOUND, x, y, z);
-		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
-		IBHelper.msg(player, Strings.CREATE_ESCAPE_LADDER.replace("%i%",String.valueOf(i-y)), Colors.a);
-		
-		return true;
-    }
+		setCreateMsg(Strings.CREATE_ESCAPE_LADDER.replace("%i%",String.valueOf(i-y)));
+	}
 }

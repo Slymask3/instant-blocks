@@ -1,8 +1,8 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.block.BlockGuiIB;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Textures;
@@ -20,12 +20,13 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockInstantTree extends BlockGuiIB {
+public class BlockInstantTree extends BlockInstant {
 	
 	public BlockInstantTree() {
-		super(Names.Blocks.IB_TREE, Material.plants, Block.soundTypeGrass, 0.1F, GuiID.TREE);
+		super(ModBlocks.ibTree, Names.Blocks.IB_TREE, Material.plants, Block.soundTypeGrass, 0.1F);
 		setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 1.0F, 0.8125F);
         setBlockTextureName(Textures.Tree.SIDE);
+		setGuiID(GuiID.TREE);
 	}
 	
 	public int getRenderType() {
@@ -86,7 +87,7 @@ public class BlockInstantTree extends BlockGuiIB {
 		
 		ItemStack is = player.getCurrentEquippedItem();
 		
-		if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+		if(IBHelper.isWand(is)) {
 			is.damageItem(1, player);
 		}
 	}

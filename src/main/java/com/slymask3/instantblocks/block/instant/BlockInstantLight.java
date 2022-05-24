@@ -1,9 +1,8 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.block.BlockIB;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
@@ -23,11 +22,10 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockInstantLight extends BlockIB {
+public class BlockInstantLight extends BlockInstant {
 	
     public BlockInstantLight() {
         super(ModBlocks.ibLight, Names.Blocks.IB_LIGHT, Material.wood, Block.soundTypeWood, 0.5F);
-        setResistance(2000F);
         setCreateMsg(Strings.CREATE_LIGHT);
         setBlockTextureName(Textures.Light.SIDE);
         setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 0.90F, 0.625F);
@@ -100,7 +98,7 @@ public class BlockInstantLight extends BlockIB {
 		ItemStack is = player.getCurrentEquippedItem();
     	
 		if(Config.USE_WANDS) {
-			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+			if(IBHelper.isWand(is)) {
 				is.damageItem(1, player);
 			} else {
 				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);

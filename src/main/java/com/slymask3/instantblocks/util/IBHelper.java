@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.item.ItemInstantWand;
 import com.slymask3.instantblocks.reference.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -81,5 +82,9 @@ public class IBHelper {
 				break;
 			}
 		}
+	}
+
+	public static boolean isWand(ItemStack is) {
+		return is != null && is.getItem() instanceof ItemInstantWand;
 	}
 }

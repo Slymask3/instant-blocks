@@ -1,9 +1,8 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.block.BlockIB;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
@@ -16,20 +15,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class BlockInstantSuction extends BlockIB {
+public class BlockInstantSuction extends BlockInstant {
 	
     public BlockInstantSuction() {
         super(ModBlocks.ibSucker, Names.Blocks.IB_SUCTION, Material.rock, Block.soundTypeStone, 1.5F);
-		setResistance(2000F);
         setTextures(Textures.Suction.SIDE);
         setBlockTextureName(Textures.Suction.SIDE);
     }
     
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
-    	
+
 		if(Config.USE_WANDS) {
-			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+			if(IBHelper.isWand(is)) {
 				//do not dmg yet
 			} else {
 				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
@@ -38,7 +36,7 @@ public class BlockInstantSuction extends BlockIB {
 		}
 
 		build(world, x, y, z, player);
-    		
+
     	return true;
     }
     

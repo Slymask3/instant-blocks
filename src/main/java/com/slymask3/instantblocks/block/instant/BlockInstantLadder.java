@@ -1,9 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.block.BlockDirectionalIB;
-import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
@@ -15,16 +13,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockInstantLadder extends BlockDirectionalIB {
+public class BlockInstantLadder extends BlockInstant {
 	
     public BlockInstantLadder() {
         super(ModBlocks.ibLadder, Names.Blocks.IB_MINING_LADDER, Material.rock, Block.soundTypeStone, 1.5F);
-		setResistance(2000F);
         setBlockTextureName(Textures.MiningLadder.TOP0);
+		setCreateMsg(Strings.CREATE_MINING_LADDER);
+		setDirectional(true);
     }
 	
     public static IIcon top0;
@@ -56,36 +54,14 @@ public class BlockInstantLadder extends BlockDirectionalIB {
 		
 		return blockIcon;
 	}
-	
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-    	if(y <= 15) {
-    		IBHelper.msg(player, Strings.ERROR_LADDER, Colors.c);
-			return true;
-		}
-    	
-    	ItemStack is = player.getCurrentEquippedItem();
-    	
-		if(Config.USE_WANDS) {
-			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
-				is.damageItem(1, player);
-				//player.triggerAchievement(ib.achLadder);
-			} else {
-				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
-				return true;
-			}
-		}
-		
-		build(world, x, y, z);
-				
-		IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLadder);
-		IBHelper.xp(world, player, Config.XP_AMOUNT);
-			
-		IBHelper.sound(world, Config.SOUND, x, y, z);
-		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
-		IBHelper.msg(player, Strings.CREATE_MINING_LADDER, Colors.a);
 
+	public boolean canActivate(World world, int x, int y, int z, EntityPlayer player) {
+		if(y <= 15) {
+			IBHelper.msg(player, Strings.ERROR_LADDER, Colors.c);
+			return false;
+		}
 		return true;
-    }
+	}
 
 	public void build(World world, int x, int y, int z) {
 		Block ladder = Blocks.ladder;

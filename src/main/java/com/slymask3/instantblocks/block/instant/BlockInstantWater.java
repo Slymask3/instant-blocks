@@ -1,9 +1,8 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.block.BlockIB;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
@@ -22,11 +21,10 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockInstantWater extends BlockIB {
+public class BlockInstantWater extends BlockInstant {
 	
     public BlockInstantWater() {
         super(ModBlocks.ibWater, Names.Blocks.IB_WATER, Material.water, new SoundTypeLiquid("random.splash", 1.0F, 1.0F), 0.5F);
-		setResistance(2000F);
         setTextures(Blocks.water);
         setTextureBooleans(false, false, false, false, false, false);
         setLightOpacity(3);
@@ -68,9 +66,9 @@ public class BlockInstantWater extends BlockIB {
     
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
-    	
+
 		if(Config.USE_WANDS) {
-			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+			if(IBHelper.isWand(is)) {
 				//do not dmg yet
 			} else {
 				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
@@ -79,7 +77,7 @@ public class BlockInstantWater extends BlockIB {
 		}
 
 		build(world, x, y, z, player);
-    		
+
     	return true;
     }
     

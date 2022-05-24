@@ -1,9 +1,8 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.block.BlockDirectionalIB;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
@@ -23,12 +22,12 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockInstantFarm extends BlockDirectionalIB {
+public class BlockInstantFarm extends BlockInstant {
 	
     public BlockInstantFarm() {
         super(ModBlocks.ibFarm, Names.Blocks.IB_FARM, Material.rock, Block.soundTypeStone, 1.5F);
-		setResistance(2000F);
         setBlockTextureName(Textures.Farm.TOP0);
+		setDirectional(true);
     }
 	
     public static IIcon top0;
@@ -59,13 +58,12 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 		}
 		return blockIcon;
 	}
-	
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-    	
+
+    public boolean onActivate(World world, int x, int y, int z, EntityPlayer player) {
     	ItemStack is = player.getCurrentEquippedItem();
     	
 		if(Config.USE_WANDS) {
-			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+			if(IBHelper.isWand(is)) {
 				is.damageItem(1, player);
 			} else {
 				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);

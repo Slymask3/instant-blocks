@@ -1,8 +1,9 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.block.BlockDirectionalIB;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
@@ -14,16 +15,24 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
-public class BlockInstantGrinder extends BlockDirectionalIB {
+public class BlockInstantGrinder extends BlockInstant {
 	
 	public BlockInstantGrinder() {
         super(ModBlocks.ibGrinder, Names.Blocks.IB_GRINDER, Material.rock, Block.soundTypeMetal, 1.5F);
-		setResistance(2000F);
         setTextures(Textures.Grinder.SIDE);
         setCreateMsg(Strings.CREATE_GRINDER);
         setErrorMsg(Strings.ERROR_GRINDER);
         setBlockTextureName(Textures.Grinder.SIDE);
+		setDirectional(true);
     }
+
+	public boolean canActivate(World world, int x, int y, int z, EntityPlayer player) {
+		if(BuildHelper.getBlock(world,x, y-1, z) != Blocks.mob_spawner) {
+			IBHelper.msg(player, errorMsg, Colors.c);
+			return false;
+		}
+		return true;
+	}
 
 	public void build(World world, int x, int y, int z, EntityPlayer player) {
 		Block stone = Blocks.stone;

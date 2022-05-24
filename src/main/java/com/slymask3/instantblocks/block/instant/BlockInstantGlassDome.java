@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.block.BlockIB;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
@@ -11,11 +11,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
-public class BlockInstantGlassDome extends BlockIB {
+public class BlockInstantGlassDome extends BlockInstant {
 	
     public BlockInstantGlassDome() {
         super(ModBlocks.ibGlassDome, Names.Blocks.IB_GLASS_DOME, Material.glass, Block.soundTypeGlass, 0.5F);
-		setResistance(2000F);
         setTextures(Blocks.stone, Blocks.glass, Textures.GlassDome.SIDE);
         setTextureBooleans(false, false, true, true, true, true);
         setCreateMsg(Strings.CREATE_DOME);

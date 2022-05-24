@@ -1,9 +1,8 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.block.BlockDirectionalIB;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
@@ -16,18 +15,17 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemDoor;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockInstantHouseWood extends BlockDirectionalIB {
+public class BlockInstantHouseWood extends BlockInstant {
 	
 	public BlockInstantHouseWood() {
 		super(ModBlocks.ibWood, Names.Blocks.IB_WOOD_HOUSE, Material.wood, Block.soundTypeWood, 1.5F);
-		setResistance(2000F);
         setBlockTextureName(Textures.WoodHouse.FRONT);
+		setDirectional(true);
 	}
 
 	public int drop = 1;
@@ -36,7 +34,6 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		return drop;
 	}
 
-	//public static IIcon bottom;
 	public static IIcon top;
 	public static IIcon side;
 	public static IIcon front;
@@ -80,77 +77,21 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			return blockIcon;
 		}
 	}
-	
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+
+	public boolean canActivate(World world, int x, int y, int z, EntityPlayer player) {
 		if(world.getBlockMetadata(x, y, z) >= 4 && world.getBlockMetadata(x, y, z) <= 7) {
 			IBHelper.msg(player, Strings.ERROR_WOODEN_HOUSE, Colors.c);
-			return true;
+			return false;
 		}
-		
-		ItemStack is = player.getCurrentEquippedItem();
-    	
-		if(Config.USE_WANDS) {
-			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
-				is.damageItem(1, player);
-			} else {
-				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
-				return true;
-			}
-		}
-		
-		int meta = world.getBlockMetadata(x, y, z);
-		
-		build(world, x, y, z);
-			
-		IBHelper.xp(world, player, Config.XP_AMOUNT);
-		//BuildHelper.keepBlocks(world, x, y, z, InstantBlocks.ibWood.blockID);
-				
-		IBHelper.sound(world, Config.SOUND, x, y, z);
-		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
-		IBHelper.msg(player, Strings.CREATE_WOODEN_HOUSE, Colors.a);
-		
-		//System.out.println("meta = " + meta);
-		
 		return true;
 	}
 	
-	//EntityPlayer currentPlayer;
-	
-	/*public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
-		currentPlayer = player;
-		
-		System.out.println("currentPlayer = " + currentPlayer);
-	}*/
-	
 	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
 		System.out.println("isRemote == " + world.isRemote);
-		
 		check(world, x, y, z, meta);
-		
-		//EntityPlayer player = world.getClosestPlayer(x, y, z, 10);
-		//BuildHelper.msg(player, "WENT THROUGH");
 	}
 
 	public void build(World world, int x, int y, int z) {
-		/*int light = Block.planks.blockID;
-		int dark = Block.planks.blockID;
-		int log = Block.wood.blockID;
-		int craft = Block.workbench.blockID;
-		int chest = Block.chest.blockID;
-		int furnace = Block.furnaceIdle.blockID;
-		int fence = Block.fence.blockID;
-		int gate = Block.fenceGate.blockID;
-		int stair = Block.stairsWoodOak.blockID;
-		int sign = Block.signWall.blockID;
-		int bed = Block.bed.blockID;
-		int door = Block.doorWood.blockID;
-		int pane = Block.thinGlass.blockID;
-		int torch = Block.torchWood.blockID;
-		int plate = Block.pressurePlatePlanks.blockID;
-		int slabL = 126;
-		int slabD = 126;
-		int air = 0;*/
-		
 		Block light = Blocks.planks;
 		Block dark = Blocks.planks;
 		Block log = Blocks.log;
@@ -885,25 +826,6 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 	}
 
 	private int checkDrop(World world, int x, int y, int z, int meta) {
-		/*int light = Block.planks.blockID;
-		int dark = Block.planks.blockID;
-		int log = Block.wood.blockID;
-		int craft = Block.workbench.blockID;
-		int chest = Block.chest.blockID;
-		int furnace = Block.furnaceIdle.blockID;
-		int fence = Block.fence.blockID;
-		int gate = Block.fenceGate.blockID;
-		int stair = Block.stairsWoodOak.blockID;
-		int sign = Block.signWall.blockID;
-		int bed = Block.bed.blockID;
-		int door = Block.doorWood.blockID;
-		int pane = Block.thinGlass.blockID;
-		int torch = Block.torchWood.blockID;
-		int plate = Block.pressurePlatePlanks.blockID;
-		int slabL = 126;
-		int slabD = 126;
-		int air = 0;*/
-		
 		Block light = Blocks.planks;
 		Block dark = Blocks.planks;
 		Block log = Blocks.log;

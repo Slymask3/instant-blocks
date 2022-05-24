@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.block.BlockGuiIB;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.GuiID;
@@ -21,11 +21,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockInstantFall extends BlockGuiIB {
+public class BlockInstantFall extends BlockInstant {
 	
     public BlockInstantFall() {
-		super(Names.Blocks.IB_SKYDIVE, Material.cloth, Block.soundTypeCloth, 1.5F, GuiID.SKYDIVE);
+		super(ModBlocks.ibFall, Names.Blocks.IB_SKYDIVE, Material.cloth, Block.soundTypeCloth, 1.5F);
         setBlockTextureName(Textures.Harvest.SIDE0);
+		setGuiID(GuiID.SKYDIVE);
     }
     
     public static IIcon bottom;

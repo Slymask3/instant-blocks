@@ -13,7 +13,7 @@ import java.util.Random;
 
 import static net.minecraftforge.common.util.ForgeDirection.*;
 
-public class BlockLadderIB extends BlockIB {
+public class BlockLadderIB extends BlockInstant {
 
 	protected BlockLadderIB(Block block, String name, Material material, SoundType soundType, float hardness) {
 		super(block, name, material, soundType, hardness);

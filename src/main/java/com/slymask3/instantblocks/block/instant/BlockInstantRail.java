@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.block.BlockIB;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Names;
@@ -20,11 +20,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockInstantRail extends BlockIB {
+public class BlockInstantRail extends BlockInstant {
 
 	public BlockInstantRail() {
 		super(ModBlocks.ibRail, Names.Blocks.IB_RAIL, Material.circuits, Block.soundTypeMetal, 0.5F);
-		setResistance(2000F);
         setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
         setCreateMsg(Strings.CREATE_RAIL);
         setBlockTextureName(Textures.Rail.TOP0);
