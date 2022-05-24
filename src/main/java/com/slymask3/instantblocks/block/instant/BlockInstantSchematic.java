@@ -1,19 +1,18 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.block.BlockGuiIB;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.*;
+import com.slymask3.instantblocks.reference.GuiID;
+import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntitySchematic;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
 import com.slymask3.instantblocks.util.LogHelper;
 import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,15 +24,10 @@ import net.minecraft.world.World;
 
 import java.io.File;
 
-public class BlockInstantSchematic extends BlockContainer implements ITileEntityProvider {
+public class BlockInstantSchematic extends BlockGuiIB {
 
 	public BlockInstantSchematic() {
-		super(Material.wood);
-		setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-		setBlockName(Reference.MOD_ID + ":" + Names.Blocks.IB_SCHEMATIC);
-		setHardness(1.5F);
-		setResistance(2000F);
-		setStepSound(Block.soundTypeWood);
+		super(Names.Blocks.IB_SCHEMATIC, Material.wood, Block.soundTypeWood, 1.5F, GuiID.SCHEMATIC);
         setBlockTextureName(Textures.Harvest.SIDE0);
 	}
 
@@ -60,29 +54,10 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 		return new TileEntitySchematic();
 	}
 	
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		ItemStack is = player.getCurrentEquippedItem();
-    	
-		if(Config.USE_WANDS) {
-			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
-				//is.damageItem(1, player);
-			} else {
-				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
-				return true;
-			}
-		}
-		
-		
-		
-		player.openGui(InstantBlocks.instance, GuiID.SCHEMATIC.ordinal(), world, x, y, z);
-		
-		return true;
-	}
-	
 	public void build(World world, int x, int y, int z, int meta, String playerS, String schematic, boolean center, boolean ignoreAir) {
 		EntityPlayer player = world.getPlayerEntityByName(playerS);
 		
-		try{
+		try {
 			File f = new File("schematics/"+schematic+".schematic");
 			
 			SchematicHelper.loadSchematic(world, x, y ,z, f, center, ignoreAir);
@@ -105,7 +80,5 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 		} catch(Exception e) {
 			LogHelper.error("failed to build schematic (" + schematic + "): " + e.getMessage());
 		}
-		
 	}
-
 }

@@ -3,8 +3,7 @@ package com.slymask3.instantblocks.block.instant;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.block.BlockGuiIB;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
@@ -14,8 +13,6 @@ import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
 import com.slymask3.instantblocks.util.LogHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -33,22 +30,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Base64;
-import java.util.Random;
 
-public class BlockInstantStatue extends BlockContainer implements ITileEntityProvider {
+public class BlockInstantStatue extends BlockGuiIB {
 
 	public BlockInstantStatue() {
-		super(Material.wood);
-		setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-		setBlockName(Reference.MOD_ID + ":" + Names.Blocks.IB_STATUE);
-		setHardness(1.5F);
-		setResistance(2000F);
-		setStepSound(Block.soundTypeWood);
+		super(Names.Blocks.IB_STATUE, Material.wood, Block.soundTypeWood, 1.5F, GuiID.STATUE);
         setBlockTextureName(Textures.Statue.FRONT);
-	}
-
-	public int quantityDropped(Random random) {
-		return 1;
 	}
 
 	public static IIcon bottom;
@@ -132,34 +119,10 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
 		return new TileEntityStatue();
 	}
-	
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack) {
-		int meta = MathHelper.floor_double((double) (par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 2);
-	}
-	
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		//TileEntityInstantStatue.tile = (TileEntityInstantStatue) world.getTileEntity(x, y, z);
-		
-		int meta = world.getBlockMetadata(x, y, z);
-		//LogHelper.info("meta == "+meta);
-		
-		ItemStack is = player.getCurrentEquippedItem();
-    	
-		if(Config.USE_WANDS) {
-			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
-				//is.damageItem(1, player);
-			} else {
-				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
-				return true;
-			}
-		}
-		
-		player.openGui(InstantBlocks.instance, GuiID.STATUE.ordinal(), world, x, y, z);
-		
-		//build(world, x, y, z, player, meta);
-		
-		return true;
+
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
+		int meta = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 	}
 
 	public void build(World world, int x, int y, int z, String playerS, int meta, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {

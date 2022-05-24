@@ -1,16 +1,15 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.block.BlockGuiIB;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.*;
+import com.slymask3.instantblocks.reference.GuiID;
+import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityTree;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,17 +20,10 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
-public class BlockInstantTree extends BlockContainer implements ITileEntityProvider {
+public class BlockInstantTree extends BlockGuiIB {
 	
 	public BlockInstantTree() {
-		super(Material.plants);
-		setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-		setBlockName(Reference.MOD_ID + ":" + Names.Blocks.IB_TREE);
-		setHardness(0.1F);
-		setResistance(2000F);
-		setStepSound(Block.soundTypeGrass);
+		super(Names.Blocks.IB_TREE, Material.plants, Block.soundTypeGrass, 0.1F, GuiID.TREE);
 		setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 1.0F, 0.8125F);
         setBlockTextureName(Textures.Tree.SIDE);
 	}
@@ -51,10 +43,6 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
         return null;
     }
-    
-	public int quantityDropped(Random random) {
-		return 1;
-	}
 
 	public static IIcon side;
 
@@ -63,34 +51,12 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
 	}
 
 	public IIcon getIcon(int side, int meta) {
-//		if(side == 0 || side == 1) {
-//			return Blocks.log.getIcon(side, 0);
-//		} else {
-//			return this.side;
-//		}
 		return this.side;
 	}
 	
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
 		return new TileEntityTree();
-	}
-
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		ItemStack is = player.getCurrentEquippedItem();
-    	
-		if(Config.USE_WANDS) {
-			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
-				//is.damageItem(1, player);
-			} else {
-				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
-				return true;
-			}
-		}
-		
-		player.openGui(InstantBlocks.instance, GuiID.TREE.ordinal(), world, x, y, z);
-		
-		return true;
 	}
 	
 	public void build(World world, int x, int y, int z, String playerS, int type, boolean fullLog, boolean fullLeaves, boolean air) {

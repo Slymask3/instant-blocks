@@ -1,17 +1,15 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.block.BlockGuiIB;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.*;
+import com.slymask3.instantblocks.reference.GuiID;
+import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,15 +21,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockInstantFall extends BlockContainer implements ITileEntityProvider {
+public class BlockInstantFall extends BlockGuiIB {
 	
     public BlockInstantFall() {
-        super(Material.cloth);
-		setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
-		setBlockName(Reference.MOD_ID + ":" + Names.Blocks.IB_SKYDIVE);
-		setHardness(1.5F);
-		setResistance(2000F);
-		setStepSound(Block.soundTypeCloth);
+		super(Names.Blocks.IB_SKYDIVE, Material.cloth, Block.soundTypeCloth, 1.5F, GuiID.SKYDIVE);
         setBlockTextureName(Textures.Harvest.SIDE0);
     }
     
@@ -55,27 +48,10 @@ public class BlockInstantFall extends BlockContainer implements ITileEntityProvi
 		}
 		return blockIcon;
 	}
-    
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack) {
-        int meta = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-        par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 2);
-    }
-	
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		ItemStack is = player.getCurrentEquippedItem();
-    	
-		if(Config.USE_WANDS) {
-			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
-				//is.damageItem(1, player);
-			} else {
-				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
-				return true;
-			}
-		}
-		
-		player.openGui(InstantBlocks.instance, GuiID.SKYDIVE.ordinal(), world, x, y, z);
-		
-		return true;
+
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
+		int meta = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 	}
 	
     public void build(World world, int x, int y, int z, String playerS, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10, boolean tp) {
