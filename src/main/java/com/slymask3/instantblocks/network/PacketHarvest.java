@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.network;
 
 import com.slymask3.instantblocks.block.instant.BlockInstantHarvest;
+import com.slymask3.instantblocks.util.BuildHelper;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -106,7 +107,7 @@ public class PacketHarvest extends AbstractPacket {
 	@Override
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
-		BlockInstantHarvest block = (BlockInstantHarvest)world.getBlock(_x, _y, _z);
+		BlockInstantHarvest block = (BlockInstantHarvest) BuildHelper.getBlock(world,_x, _y, _z);
 		block.build(world, _x, _y, _z, _player, _logOak, _logSpruce, _logBirch, _logJungle, _logAcacia, _logDark, _wheat, _carrot, _potato, _cactus, _pumpkin, _melon, _sugarcane, _cocoa, _mushroom, _netherwart, _replant);
 	}
 }

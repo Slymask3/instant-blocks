@@ -26,29 +26,29 @@ public class SchematicHelper {
             
             buildSchematic(world, x, y, z, width, height, length, blocks, data, center, ignoreAir);
             
-        } catch (Exception e) {
+        } catch(Exception e) {
         	LogHelper.info("Couldn't load schematic.");
         }
     }
     
     public static void buildSchematic(World world, int X, int Y, int Z, short width, short height, short length, byte[] block, byte meta[], boolean center, boolean ignoreAir) {
-    	for (int x = 0; x < width; ++x) {
-	        for (int y = 0; y < height; ++y) {
-	            for (int z = 0; z < length; ++z) {
+    	for(int x = 0; x < width; ++x) {
+	        for(int y = 0; y < height; ++y) {
+	            for(int z = 0; z < length; ++z) {
 	                int index = y * width * length + z * width + x;
 	                if((block[index] & 0xFF) != 0 && ignoreAir) {
 	                	if(center) {
-	                		world.setBlock(x+X-(width/2), y+Y, z+Z-(length/2), Block.getBlockById(block[index] & 0xFF), meta[index], 2);
+	                		BuildHelper.setBlock(world,x+X-(width/2), y+Y, z+Z-(length/2), Block.getBlockById(block[index] & 0xFF), meta[index], 2);
 	                	} else {
-	                		world.setBlock(x+X, y+Y, z+Z, Block.getBlockById(block[index] & 0xFF), meta[index], 2);
+	                		BuildHelper.setBlock(world,x+X, y+Y, z+Z, Block.getBlockById(block[index] & 0xFF), meta[index], 2);
 	                	}
 	                } else if(ignoreAir) {
 	                	//Ignore Air
 	                } else {
 	                	if(center) {
-	                		world.setBlock(x+X-(width/2), y+Y, z+Z-(length/2), Block.getBlockById(block[index] & 0xFF), meta[index], 2);
+	                		BuildHelper.setBlock(world,x+X-(width/2), y+Y, z+Z-(length/2), Block.getBlockById(block[index] & 0xFF), meta[index], 2);
 	                	} else {
-	                		world.setBlock(x+X, y+Y, z+Z, Block.getBlockById(block[index] & 0xFF), meta[index], 2);
+	                		BuildHelper.setBlock(world,x+X, y+Y, z+Z, Block.getBlockById(block[index] & 0xFF), meta[index], 2);
 	                	}
 	                }
 	            }
@@ -58,7 +58,7 @@ public class SchematicHelper {
 
 	public static void createSchematicsDir() {
 		File dir = new File("schematics");
-		if (!dir.exists()) {
+		if(!dir.exists()) {
 			try{
 				dir.mkdir();
 				LogHelper.info("created schematics directory");

@@ -145,7 +145,7 @@ public class TileEntitySkydive extends TileEntity {
 		} else {
 			try {
 				color = Integer.parseInt(input, 16);
-			} catch (Exception e) {}
+			} catch(Exception e) {}
 		}
 		
 		this.colorCode[i] = color;

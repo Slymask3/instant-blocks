@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.network;
 
 import com.slymask3.instantblocks.block.instant.BlockInstantFall;
+import com.slymask3.instantblocks.util.BuildHelper;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -87,7 +88,7 @@ public class PacketSkydive extends AbstractPacket {
 	@Override
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
-		BlockInstantFall block = (BlockInstantFall)world.getBlock(_x, _y, _z);
+		BlockInstantFall block = (BlockInstantFall) BuildHelper.getBlock(world,_x, _y, _z);
 		block.build(world, _x, _y, _z, _player, _color0, _color1, _color2, _color3, _color4, _color5, _color6, _color7, _color8, _color9, _color10, _tp);
 	}
 }

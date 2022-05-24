@@ -71,12 +71,12 @@ public class GuiTree extends GuiScreen {
 
 	@Override
 	protected void actionPerformed(final GuiButton btn) {
-		if (btn.enabled) {
-			if (btn.id == done.id) {
+		if(btn.enabled) {
+			if(btn.id == done.id) {
 				sendInfo();
 				Keyboard.enableRepeatEvents(false);
 				mc.displayGuiScreen(null);
-			} else if (btn.id == cancel.id) {
+			} else if(btn.id == cancel.id) {
 				Keyboard.enableRepeatEvents(false);
 				mc.displayGuiScreen(null);
 			}
@@ -85,9 +85,9 @@ public class GuiTree extends GuiScreen {
 
 	@Override
 	protected void keyTyped(final char par1, final int par2) {
-		if (par2 == done.id) {
+		if(par2 == done.id) {
 			actionPerformed(done);
-		} else if (par2 == cancel.id) {
+		} else if(par2 == cancel.id) {
 			actionPerformed(cancel);
 		}
 	}
@@ -137,7 +137,7 @@ public class GuiTree extends GuiScreen {
 		InstantBlocks.packetPipeline.sendToServer(new PacketTree(this.world, this.x, this.y, this.z, this.player.getDisplayName(), selectedTree, !fullLog.isChecked(), !fullLeaves.isChecked(), air.isChecked()));
 		
 		IBHelper.xp(world, player, Config.XP_AMOUNT);
-        IBHelper.effectFull(world, "reddust", x, y, z);
+        IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
         IBHelper.msg(player, Strings.CREATE_TREE.replace("%tree%",treeToString(selectedTree)), Colors.a);
 	}
 	
@@ -153,7 +153,7 @@ public class GuiTree extends GuiScreen {
     
     public void selectTreeIndex(int index) {
         this.selected=index;
-        if ((index>=0 && index<=6)) {
+        if((index>=0 && index<=6)) {
             this.selectedTree=trees[selected];
             this.done.enabled = true;
         } else {

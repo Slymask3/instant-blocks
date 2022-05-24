@@ -33,17 +33,15 @@ public class BlockInstantLava extends BlockIB {
         setLightLevel(1.0F);
         setBlockTextureName(Textures.Lava.SIDE);
     }
-	
+
+	int checkLava = 0;
 	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-		int checkLava = 0;
-		if (checkLava == 0) {
-			IBHelper.sound(world, "random.fizz", x, y, z);
-	        
-	        for (int l = 0; l < 8; ++l) {
+		if(checkLava == 0) {
+	        for(int l = 0; l < 8; ++l) {
 	            world.spawnParticle("largesmoke", (double)x + Math.random(), (double)y + 1.2D, (double)z + Math.random(), 0.0D, 0.0D, 0.0D);
 	        }
-			checkLava = 30;
-		} else if (checkLava > 0) {
+			checkLava = 5;
+		} else if(checkLava > 0) {
         	checkLava--;
         }
 	}
@@ -69,8 +67,8 @@ public class BlockInstantLava extends BlockIB {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.USE_WANDS) {
-			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+		if(Config.USE_WANDS) {
+			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//do not dmg yet
 			} else {
 				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
@@ -84,13 +82,10 @@ public class BlockInstantLava extends BlockIB {
     }
     
     public void build(World world, int x, int y, int z, EntityPlayer player) {
-    	Block liquid2 = Blocks.lava; // FIX TO lavaStill? 1.7.10
-		Block liquid = Blocks.lava; // FIX TO lavaMoving? 1.7.10
+		Block liquid = Blocks.lava;
 		Block air = Blocks.air;
 		
-		int max = 6;
-		
-		if (Config.SIMPLE_LIQUID) {
+		if(Config.SIMPLE_LIQUID) {
 			BuildHelper.checkLiquid5S(world, x, y, z, liquid);
 			BuildHelper.buildLiquid4S(world, x, y, z, liquid);
 			BuildHelper.checkLiquid5UndoS(world, x, y, z, liquid);
@@ -100,25 +95,25 @@ public class BlockInstantLava extends BlockIB {
 			BuildHelper.checkLiquid5Undo(world, x, y, z, liquid);
 		}
 		
-		if (BuildHelper.built) {
-			world.setBlock(x, y, z, liquid);
+		if(BuildHelper.built) {
+			BuildHelper.setBlock(world,x, y, z, liquid);
 			IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLava);
 			IBHelper.sound(world, Config.SOUND, x, y, z);
-			IBHelper.effectFull(world, "reddust", x, y, z);
+			IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
 			IBHelper.msg(player, Strings.CREATE_LAVA.replace("%i%",String.valueOf(BuildHelper.counter+1)), Colors.a);
 			IBHelper.xp(world, player, Config.XP_AMOUNT);
-			if (Config.USE_WANDS) {
+			if(Config.USE_WANDS) {
 				player.getCurrentEquippedItem().damageItem(1, player);
 			}
 		} else {
-			if (world.getBlock(x+1, y, z) != Blocks.air && world.getBlock(x-1, y, z) != Blocks.air && world.getBlock(x, y, z+1) != Blocks.air && world.getBlock(x, y, z-1) != Blocks.air && world.getBlock(x, y-1, z) != Blocks.air) {
-				world.setBlock(x, y, z, liquid);
+			if(BuildHelper.getBlock(world,x+1, y, z) != Blocks.air && BuildHelper.getBlock(world,x-1, y, z) != Blocks.air && BuildHelper.getBlock(world,x, y, z+1) != Blocks.air && BuildHelper.getBlock(world,x, y, z-1) != Blocks.air && BuildHelper.getBlock(world,x, y-1, z) != Blocks.air) {
+				BuildHelper.setBlock(world,x, y, z, liquid);
 				IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLava);
 				IBHelper.sound(world, Config.SOUND, x, y, z);
-				IBHelper.effectFull(world, "reddust", x, y, z);
+				IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
 				IBHelper.msg(player, Strings.CREATE_LAVA_1, Colors.a);
 				IBHelper.xp(world, player, Config.XP_AMOUNT);
-				if (Config.USE_WANDS) {
+				if(Config.USE_WANDS) {
 					player.getCurrentEquippedItem().damageItem(1, player);
 				}
 			} else {

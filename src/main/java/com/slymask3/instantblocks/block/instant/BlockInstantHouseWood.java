@@ -48,30 +48,30 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 	}
 
 	public IIcon getIcon(int side, int meta) {
-		if (side == 0) {
+		if(side == 0) {
 			return Blocks.planks.getIcon(0, 1);
-		} else if (side == 1) {
+		} else if(side == 1) {
 			return top;
-		} else if (side == 2) {
-			if (meta == 2 || meta == 6) {
+		} else if(side == 2) {
+			if(meta == 2 || meta == 6) {
 				return front;
 			} else {
 				return this.side;
 			}
-		} else if (side == 3) {
-			if (meta == 0 || meta == 4) {
+		} else if(side == 3) {
+			if(meta == 0 || meta == 4) {
 				return front;
 			} else {
 				return this.side;
 			}
-		} else if (side == 4) {
-			if (meta == 1 || meta == 5) {
+		} else if(side == 4) {
+			if(meta == 1 || meta == 5) {
 				return front;
 			} else {
 				return this.side;
 			}
-		} else if (side == 5) {
-			if (meta == 3 || meta == 7) {
+		} else if(side == 5) {
+			if(meta == 3 || meta == 7) {
 				return front;
 			} else {
 				return this.side;
@@ -82,15 +82,15 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		if (world.getBlockMetadata(x, y, z) >= 4 && world.getBlockMetadata(x, y, z) <= 7) {
+		if(world.getBlockMetadata(x, y, z) >= 4 && world.getBlockMetadata(x, y, z) <= 7) {
 			IBHelper.msg(player, Strings.ERROR_WOODEN_HOUSE, Colors.c);
 			return true;
 		}
 		
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.USE_WANDS) {
-			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+		if(Config.USE_WANDS) {
+			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			} else {
 				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
@@ -106,7 +106,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		//BuildHelper.keepBlocks(world, x, y, z, InstantBlocks.ibWood.blockID);
 				
 		IBHelper.sound(world, Config.SOUND, x, y, z);
-		IBHelper.effectFull(world, "reddust", x, y, z);
+		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
 		IBHelper.msg(player, Strings.CREATE_WOODEN_HOUSE, Colors.a);
 		
 		//System.out.println("meta = " + meta);
@@ -173,7 +173,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		int meta = world.getBlockMetadata(x, y, z);
 		
 		/************************ meta == 0 ************************/
-		if (meta == 0 || meta == 4) {
+		if(meta == 0 || meta == 4) {
 			/************************ Layer 0 to 7 : AIR ************************/ //DONE
 			BuildHelper.build(world, x-5, y, z-5, air, 0, 2, 8, 6, 11); //HOUSE ROOM
 			BuildHelper.build(world, x-4, y+5, z-4, air, 0, 2, 6, 1, 9); //HOUSE ROOF 1
@@ -227,7 +227,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.build(world, x-4, y+1, z+4, fence, 0, 2, 2, 1, 1); //PORCH SIDE 1
 			BuildHelper.build(world, x+4, y+1, z+4, fence, 0, 2, 2, 1, 1); //PORCH SIDE 2
 			BuildHelper.build(world, x-3, y+1, z+6, fence, 0, 2, 1, 1, 7); //PORCH SIDE 3 (FRONT)
-			world.setBlock(x, y+1, z+6, gate, 0, 0); //PORCH GATE
+			BuildHelper.setBlock(world,x, y+1, z+6, gate, 0, 0); //PORCH GATE
 			
 			/************************ Layer 5 to 6 : ROOF ************************/
 			BuildHelper.build(world, x-5, y+5, z-5, slabD, 1, 2, 1, 1, 11); //HOUSE ROOF 1
@@ -248,61 +248,61 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.build(world, x-2, y+6, z-2, light, 2, 2, 2, 1, 5); //HOUSE ROOF TOP
 			
 			/************************ Layer 1 to 4 : INSIDE ************************/
-			world.setBlock(x + 4, y + 1, z - 4, bed, 11, 0); //BED //NOT 10 //GOOD
-			world.setBlock(x + 3, y + 1, z - 4, bed, 3, 0); //BED //NOT 2 //GOOD
+			BuildHelper.setBlock(world,x + 4, y + 1, z - 4, bed, 11, 0); //BED //NOT 10 //GOOD
+			BuildHelper.setBlock(world,x + 3, y + 1, z - 4, bed, 3, 0); //BED //NOT 2 //GOOD
 			
-			world.setBlock(x-2, y + 1, z-4, chest); //CHEST
-			world.setBlock(x-3, y + 1, z-4, chest); //CHEST
-			world.setBlock(x-4, y + 1, z-3, chest); //CHEST
-			world.setBlock(x-4, y + 1, z-2, chest); //CHEST
+			BuildHelper.setBlock(world,x-2, y + 1, z-4, chest); //CHEST
+			BuildHelper.setBlock(world,x-3, y + 1, z-4, chest); //CHEST
+			BuildHelper.setBlock(world,x-4, y + 1, z-3, chest); //CHEST
+			BuildHelper.setBlock(world,x-4, y + 1, z-2, chest); //CHEST
 			
-			world.setBlock(x - 4, y + 1, z - 4, craft); //WORKBENCH
-			world.setBlock(x + 4, y + 1, z - 2, furnace, 3, 0); //FURNACE
-			world.setBlock(x + 4, y + 1, z - 1, furnace, 3, 0); //FURNACE
+			BuildHelper.setBlock(world,x - 4, y + 1, z - 4, craft); //WORKBENCH
+			BuildHelper.setBlock(world,x + 4, y + 1, z - 2, furnace, 3, 0); //FURNACE
+			BuildHelper.setBlock(world,x + 4, y + 1, z - 1, furnace, 3, 0); //FURNACE
 
 			
 			
-			//world.setBlock(x - 4, y + 1, z - 1, stair, 9, 0); //CHAIR //NOT 3, 2, 1
-			//world.setBlock(x+4, y + 1, z-1, stair, 0, 0); //CHAIR //NOT 10 //GOOD
-			//world.setBlock(x-4, y + 1, z, sign, 3, 0); //CHAIR //NOT 4, 5
-			//world.setBlock(x+4, y + 1, z, sign, 3, 0); //CHAIR //NOT 4, 5
+			//BuildHelper.setBlock(world,x - 4, y + 1, z - 1, stair, 9, 0); //CHAIR //NOT 3, 2, 1
+			//BuildHelper.setBlock(world,x+4, y + 1, z-1, stair, 0, 0); //CHAIR //NOT 10 //GOOD
+			//BuildHelper.setBlock(world,x-4, y + 1, z, sign, 3, 0); //CHAIR //NOT 4, 5
+			//BuildHelper.setBlock(world,x+4, y + 1, z, sign, 3, 0); //CHAIR //NOT 4, 5
 			
-			world.setBlock(x-4, y + 1, z+1, stair, 9, 0); //CHAIR
-			world.setBlock(x + 4, y + 1, z + 1, stair, 0, 0); //CHAIR
-			world.setBlock(x-4, y + 1, z, sign, 2, 0); //CHAIR
-			world.setBlock(x+4, y + 1, z, sign, 2, 0); //CHAIR
+			BuildHelper.setBlock(world,x-4, y + 1, z+1, stair, 9, 0); //CHAIR
+			BuildHelper.setBlock(world,x + 4, y + 1, z + 1, stair, 0, 0); //CHAIR
+			BuildHelper.setBlock(world,x-4, y + 1, z, sign, 2, 0); //CHAIR
+			BuildHelper.setBlock(world,x+4, y + 1, z, sign, 2, 0); //CHAIR
 			
-			world.setBlock(x-2,y+2,z+1,plate); //TABLE
-			world.setBlock(x+2,y+2,z+1,plate); //TABLE
-			world.setBlock(x-2,y+1,z+1,fence); //TABLE
-			world.setBlock(x+2,y+1,z+1,fence); //TABLE
+			BuildHelper.setBlock(world,x-2,y+2,z+1,plate); //TABLE
+			BuildHelper.setBlock(world,x+2,y+2,z+1,plate); //TABLE
+			BuildHelper.setBlock(world,x-2,y+1,z+1,fence); //TABLE
+			BuildHelper.setBlock(world,x+2,y+1,z+1,fence); //TABLE
 			
-			world.setBlock(x-1, y + 2, z+6, torch);
-			world.setBlock(x + 1, y + 2, z + 6, torch);
-			world.setBlock(x-1, y + 3, z+3, torch);
-			world.setBlock(x + 1, y + 3, z + 3, torch);
-			world.setBlock(x - 2, y + 4, z - 4, torch);
-			world.setBlock(x+2, y + 4, z-4, torch);
-			world.setBlock(x - 4, y + 4, z - 2, torch);
-			world.setBlock(x+4, y + 4, z-2, torch);
-			world.setBlock(x - 4, y + 4, z - 1, torch);
-			world.setBlock(x+4, y + 4, z-1, torch);
-			world.setBlock(x-2, y + 4, z+1, torch);
-			world.setBlock(x + 2, y + 4, z + 1, torch);
-			world.setBlock(x + 5, y + 4, z + 6, torch);
-			world.setBlock(x-5, y + 4, z+6, torch);
-			world.setBlock(x-4, y + 4, z+7, torch);
-			world.setBlock(x + 4, y + 4, z + 7, torch);
+			BuildHelper.setBlock(world,x-1, y + 2, z+6, torch);
+			BuildHelper.setBlock(world,x + 1, y + 2, z + 6, torch);
+			BuildHelper.setBlock(world,x-1, y + 3, z+3, torch);
+			BuildHelper.setBlock(world,x + 1, y + 3, z + 3, torch);
+			BuildHelper.setBlock(world,x - 2, y + 4, z - 4, torch);
+			BuildHelper.setBlock(world,x+2, y + 4, z-4, torch);
+			BuildHelper.setBlock(world,x - 4, y + 4, z - 2, torch);
+			BuildHelper.setBlock(world,x+4, y + 4, z-2, torch);
+			BuildHelper.setBlock(world,x - 4, y + 4, z - 1, torch);
+			BuildHelper.setBlock(world,x+4, y + 4, z-1, torch);
+			BuildHelper.setBlock(world,x-2, y + 4, z+1, torch);
+			BuildHelper.setBlock(world,x + 2, y + 4, z + 1, torch);
+			BuildHelper.setBlock(world,x + 5, y + 4, z + 6, torch);
+			BuildHelper.setBlock(world,x-5, y + 4, z+6, torch);
+			BuildHelper.setBlock(world,x-4, y + 4, z+7, torch);
+			BuildHelper.setBlock(world,x + 4, y + 4, z + 7, torch);
 			
-			//world.setBlock(p_147449_1_, p_147449_2_, p_147449_3_, p_147449_4_); ////1.7.10 setBlock
+			//BuildHelper.setBlock(world,p_147449_1_, p_147449_2_, p_147449_3_, p_147449_4_); ////1.7.10 setBlock
 			
-			if (Config.PACK_HOUSE) {
-				world.setBlock(x, y, z, ModBlocks.ibWood, 4, 2);
+			if(Config.PACK_HOUSE) {
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 4, 2);
 			}
 		}
 		
 		/************************ meta == 1 ************************/
-		else if (meta == 1 || meta == 5) {
+		else if(meta == 1 || meta == 5) {
 			/************************ Layer 0 to 7 : AIR ************************/
 			BuildHelper.build(world, x-2, y, z-5, air, 0, 2, 11, 6, 8); //HOUSE ROOM
 			BuildHelper.build(world, x-1, y+5, z-4, air, 0, 2, 9, 1, 6); //HOUSE ROOF 1
@@ -356,7 +356,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.build(world, x-5, y+1, z-4, fence, 0, 2, 1, 1, 2); //PORCH SIDE 1
 			BuildHelper.build(world, x-5, y+1, z+4, fence, 0, 2, 1, 1, 2); //PORCH SIDE 2
 			BuildHelper.build(world, x-6, y+1, z-3, fence, 0, 2, 7, 1, 1); //PORCH SIDE 3 (FRONT)
-			world.setBlock(x-6, y+1, z, gate, 1, 0); //PORCH GATE
+			BuildHelper.setBlock(world,x-6, y+1, z, gate, 1, 0); //PORCH GATE
 			
 			/************************ Layer 5 to 6 : ROOF ************************/ //GOOD
 			BuildHelper.build(world, x+5, y+5, z-5, slabD, 1, 2, 11, 1, 1); //HOUSE ROOF 1
@@ -377,52 +377,52 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.build(world, x+1, y+6, z-2, light, 2, 2, 5, 1, 2); //HOUSE ROOF TOP
 			
 			/************************ Layer 1 to 4 : INSIDE ************************/
-			world.setBlock(x + 4, y + 1, z + 4, bed, 8, 0); //BED //NOT 10, 9, 11 //GOD
-			world.setBlock(x + 4, y + 1, z + 3, bed, 0, 0); //BED //NOT 2, 1, 3 //GOOD
+			BuildHelper.setBlock(world,x + 4, y + 1, z + 4, bed, 8, 0); //BED //NOT 10, 9, 11 //GOD
+			BuildHelper.setBlock(world,x + 4, y + 1, z + 3, bed, 0, 0); //BED //NOT 2, 1, 3 //GOOD
 			
-			world.setBlock(x + 4, y + 1, z - 2, chest); //CHEST
-			world.setBlock(x + 4, y + 1, z - 3, chest); //CHEST
-			world.setBlock(x + 3, y + 1, z - 4, chest); //CHEST
-			world.setBlock(x + 2, y + 1, z - 4, chest); //CHEST
+			BuildHelper.setBlock(world,x + 4, y + 1, z - 2, chest); //CHEST
+			BuildHelper.setBlock(world,x + 4, y + 1, z - 3, chest); //CHEST
+			BuildHelper.setBlock(world,x + 3, y + 1, z - 4, chest); //CHEST
+			BuildHelper.setBlock(world,x + 2, y + 1, z - 4, chest); //CHEST
 			
-			world.setBlock(x + 4, y + 1, z - 4, craft); //WORKBENCH
-			world.setBlock(x + 2, y + 1, z + 4, furnace, 2, 0); //FURNACE //NOT 3
-			world.setBlock(x + 1, y + 1, z + 4, furnace, 2, 0); //FURNACE //NOT 3
+			BuildHelper.setBlock(world,x + 4, y + 1, z - 4, craft); //WORKBENCH
+			BuildHelper.setBlock(world,x + 2, y + 1, z + 4, furnace, 2, 0); //FURNACE //NOT 3
+			BuildHelper.setBlock(world,x + 1, y + 1, z + 4, furnace, 2, 0); //FURNACE //NOT 3
 
-			world.setBlock(x - 1, y + 1, z - 4, stair, 3, 0); //CHAIR
-			world.setBlock(x - 1, y + 1, z + 4, stair, 10, 0); //CHAIR
-			world.setBlock(x, y + 1, z - 4, sign, 5, 0); //CHAIR //NOT 4, 3
-			world.setBlock(x, y + 1, z + 4, sign, 5, 0); //CHAIR //NOT 4, 3
+			BuildHelper.setBlock(world,x - 1, y + 1, z - 4, stair, 3, 0); //CHAIR
+			BuildHelper.setBlock(world,x - 1, y + 1, z + 4, stair, 10, 0); //CHAIR
+			BuildHelper.setBlock(world,x, y + 1, z - 4, sign, 5, 0); //CHAIR //NOT 4, 3
+			BuildHelper.setBlock(world,x, y + 1, z + 4, sign, 5, 0); //CHAIR //NOT 4, 3
 			
-			world.setBlock(x-1,y+2,z-2,plate); //TABLE
-			world.setBlock(x-1,y+2,z+2,plate); //TABLE
-			world.setBlock(x-1,y+1,z-2,fence); //TABLE
-			world.setBlock(x-1,y+1,z+2,fence); //TABLE
+			BuildHelper.setBlock(world,x-1,y+2,z-2,plate); //TABLE
+			BuildHelper.setBlock(world,x-1,y+2,z+2,plate); //TABLE
+			BuildHelper.setBlock(world,x-1,y+1,z-2,fence); //TABLE
+			BuildHelper.setBlock(world,x-1,y+1,z+2,fence); //TABLE
 			
-			world.setBlock(x - 6, y + 2, z - 1, torch);
-			world.setBlock(x - 6, y + 2, z + 1, torch);
-			world.setBlock(x - 3, y + 3, z - 1, torch);
-			world.setBlock(x - 3, y + 3, z + 1, torch);
-			world.setBlock(x + 4, y + 4, z - 2, torch);
-			world.setBlock(x + 4, y + 4, z + 2, torch);
-			world.setBlock(x + 2, y + 4, z - 4, torch);
-			world.setBlock(x + 2, y + 4, z + 4, torch);
-			world.setBlock(x + 1, y + 4, z - 4, torch);
-			world.setBlock(x + 1, y + 4, z + 4, torch);
-			world.setBlock(x - 1, y + 4, z - 2, torch);
-			world.setBlock(x - 1, y + 4, z + 2, torch);
-			world.setBlock(x - 6, y + 4, z + 5, torch);
-			world.setBlock(x - 6, y + 4, z - 5, torch);
-			world.setBlock(x - 7, y + 4, z - 4, torch);
-			world.setBlock(x - 7, y + 4, z + 4, torch);
+			BuildHelper.setBlock(world,x - 6, y + 2, z - 1, torch);
+			BuildHelper.setBlock(world,x - 6, y + 2, z + 1, torch);
+			BuildHelper.setBlock(world,x - 3, y + 3, z - 1, torch);
+			BuildHelper.setBlock(world,x - 3, y + 3, z + 1, torch);
+			BuildHelper.setBlock(world,x + 4, y + 4, z - 2, torch);
+			BuildHelper.setBlock(world,x + 4, y + 4, z + 2, torch);
+			BuildHelper.setBlock(world,x + 2, y + 4, z - 4, torch);
+			BuildHelper.setBlock(world,x + 2, y + 4, z + 4, torch);
+			BuildHelper.setBlock(world,x + 1, y + 4, z - 4, torch);
+			BuildHelper.setBlock(world,x + 1, y + 4, z + 4, torch);
+			BuildHelper.setBlock(world,x - 1, y + 4, z - 2, torch);
+			BuildHelper.setBlock(world,x - 1, y + 4, z + 2, torch);
+			BuildHelper.setBlock(world,x - 6, y + 4, z + 5, torch);
+			BuildHelper.setBlock(world,x - 6, y + 4, z - 5, torch);
+			BuildHelper.setBlock(world,x - 7, y + 4, z - 4, torch);
+			BuildHelper.setBlock(world,x - 7, y + 4, z + 4, torch);
 			
-			if (Config.PACK_HOUSE) {
-				world.setBlock(x, y, z, ModBlocks.ibWood, 5, 2);
+			if(Config.PACK_HOUSE) {
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 5, 2);
 			}
 		}
 		
 		/************************ meta == 2 ************************/
-		else if (meta == 2 || meta == 6) {
+		else if(meta == 2 || meta == 6) {
 			/************************ Layer 0 to 7 : AIR ************************/ //DONE
 			BuildHelper.build(world, x-5, y, z-2, air, 0, 2, 8, 6, 11); //HOUSE ROOM
 			BuildHelper.build(world, x-4, y+5, z-1, air, 0, 2, 6, 1, 9); //HOUSE ROOF 1
@@ -476,7 +476,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.build(world, x-4, y+1, z-5, fence, 0, 2, 2, 1, 1); //PORCH SIDE 1
 			BuildHelper.build(world, x+4, y+1, z-5, fence, 0, 2, 2, 1, 1); //PORCH SIDE 2
 			BuildHelper.build(world, x-3, y+1, z-6, fence, 0, 2, 1, 1, 7); //PORCH SIDE 3 (FRONT)
-			world.setBlock(x, y+1, z-6, gate, 0, 0); //PORCH GATE
+			BuildHelper.setBlock(world,x, y+1, z-6, gate, 0, 0); //PORCH GATE
 			
 			/************************ Layer 5 to 6 : ROOF ************************/ //DONE
 			BuildHelper.build(world, x-5, y+5, z+5, slabD, 1, 2, 1, 1, 11); //HOUSE ROOF 1
@@ -497,52 +497,52 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.build(world, x-2, y+6, z+1, light, 2, 2, 2, 1, 5); //HOUSE ROOF TOP
 			
 			/************************ Layer 1 to 4 : INSIDE ************************/
-			world.setBlock(x - 4, y + 1, z + 4, bed, 9, 0); //BED //NOT 10, 9, 11, 8
-			world.setBlock(x - 3, y + 1, z + 4, bed, 1, 0); //BED //NOT 2, 1, 3, 0
+			BuildHelper.setBlock(world,x - 4, y + 1, z + 4, bed, 9, 0); //BED //NOT 10, 9, 11, 8
+			BuildHelper.setBlock(world,x - 3, y + 1, z + 4, bed, 1, 0); //BED //NOT 2, 1, 3, 0
 			
-			world.setBlock(x+2, y + 1, z+4, chest); //CHEST
-			world.setBlock(x+3, y + 1, z+4, chest); //CHEST
-			world.setBlock(x+4, y + 1, z+3, chest); //CHEST
-			world.setBlock(x+4, y + 1, z+2, chest); //CHEST
+			BuildHelper.setBlock(world,x+2, y + 1, z+4, chest); //CHEST
+			BuildHelper.setBlock(world,x+3, y + 1, z+4, chest); //CHEST
+			BuildHelper.setBlock(world,x+4, y + 1, z+3, chest); //CHEST
+			BuildHelper.setBlock(world,x+4, y + 1, z+2, chest); //CHEST
 			
-			world.setBlock(x + 4, y + 1, z + 4, craft); //WORKBENCH
-			world.setBlock(x - 4, y + 1, z + 2, furnace, 2, 0); //FURNACE //NOT 3
-			world.setBlock(x - 4, y + 1, z + 1, furnace, 2, 0); //FURNACE //NOT 3
+			BuildHelper.setBlock(world,x + 4, y + 1, z + 4, craft); //WORKBENCH
+			BuildHelper.setBlock(world,x - 4, y + 1, z + 2, furnace, 2, 0); //FURNACE //NOT 3
+			BuildHelper.setBlock(world,x - 4, y + 1, z + 1, furnace, 2, 0); //FURNACE //NOT 3
 
-			world.setBlock(x - 4, y + 1, z - 1, stair, 9, 0); //CHAIR //NOT 3, 2, 1
-			world.setBlock(x+4, y + 1, z-1, stair, 0, 0); //CHAIR //NOT 10 //GOOD
-			world.setBlock(x-4, y + 1, z, sign, 3, 0); //CHAIR //NOT 4, 5
-			world.setBlock(x+4, y + 1, z, sign, 3, 0); //CHAIR //NOT 4, 5
+			BuildHelper.setBlock(world,x - 4, y + 1, z - 1, stair, 9, 0); //CHAIR //NOT 3, 2, 1
+			BuildHelper.setBlock(world,x+4, y + 1, z-1, stair, 0, 0); //CHAIR //NOT 10 //GOOD
+			BuildHelper.setBlock(world,x-4, y + 1, z, sign, 3, 0); //CHAIR //NOT 4, 5
+			BuildHelper.setBlock(world,x+4, y + 1, z, sign, 3, 0); //CHAIR //NOT 4, 5
 			
-			world.setBlock(x-2,y+2,z-1,plate); //TABLE
-			world.setBlock(x+2,y+2,z-1,plate); //TABLE
-			world.setBlock(x-2,y+1,z-1,fence); //TABLE
-			world.setBlock(x+2,y+1,z-1,fence); //TABLE
+			BuildHelper.setBlock(world,x-2,y+2,z-1,plate); //TABLE
+			BuildHelper.setBlock(world,x+2,y+2,z-1,plate); //TABLE
+			BuildHelper.setBlock(world,x-2,y+1,z-1,fence); //TABLE
+			BuildHelper.setBlock(world,x+2,y+1,z-1,fence); //TABLE
 			
-			world.setBlock(x - 1, y + 2, z - 6, torch);
-			world.setBlock(x+1, y + 2, z-6, torch);
-			world.setBlock(x - 1, y + 3, z - 3, torch);
-			world.setBlock(x+1, y + 3, z-3, torch);
-			world.setBlock(x-2, y + 4, z+4, torch);
-			world.setBlock(x + 2, y + 4, z + 4, torch);
-			world.setBlock(x-4, y + 4, z+2, torch);
-			world.setBlock(x + 4, y + 4, z + 2, torch);
-			world.setBlock(x-4, y + 4, z+1, torch);
-			world.setBlock(x + 4, y + 4, z + 1, torch);
-			world.setBlock(x - 2, y + 4, z - 1, torch);
-			world.setBlock(x+2, y + 4, z-1, torch);
-			world.setBlock(x+5, y + 4, z-6, torch);
-			world.setBlock(x - 5, y + 4, z - 6, torch);
-			world.setBlock(x - 4, y + 4, z - 7, torch);
-			world.setBlock(x+4, y + 4, z-7, torch);
+			BuildHelper.setBlock(world,x - 1, y + 2, z - 6, torch);
+			BuildHelper.setBlock(world,x+1, y + 2, z-6, torch);
+			BuildHelper.setBlock(world,x - 1, y + 3, z - 3, torch);
+			BuildHelper.setBlock(world,x+1, y + 3, z-3, torch);
+			BuildHelper.setBlock(world,x-2, y + 4, z+4, torch);
+			BuildHelper.setBlock(world,x + 2, y + 4, z + 4, torch);
+			BuildHelper.setBlock(world,x-4, y + 4, z+2, torch);
+			BuildHelper.setBlock(world,x + 4, y + 4, z + 2, torch);
+			BuildHelper.setBlock(world,x-4, y + 4, z+1, torch);
+			BuildHelper.setBlock(world,x + 4, y + 4, z + 1, torch);
+			BuildHelper.setBlock(world,x - 2, y + 4, z - 1, torch);
+			BuildHelper.setBlock(world,x+2, y + 4, z-1, torch);
+			BuildHelper.setBlock(world,x+5, y + 4, z-6, torch);
+			BuildHelper.setBlock(world,x - 5, y + 4, z - 6, torch);
+			BuildHelper.setBlock(world,x - 4, y + 4, z - 7, torch);
+			BuildHelper.setBlock(world,x+4, y + 4, z-7, torch);
 			
-			if (Config.PACK_HOUSE) {
-				world.setBlock(x, y, z, ModBlocks.ibWood, 6, 2);
+			if(Config.PACK_HOUSE) {
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 6, 2);
 			}
 		}
 		
 		/************************ meta == 3 ************************/
-		else if (meta == 3 || meta == 7) {
+		else if(meta == 3 || meta == 7) {
 			/************************ Layer 0 to 7 : AIR ************************/
 			BuildHelper.build(world, x-5, y, z-5, air, 0, 2, 11, 6, 8); //HOUSE ROOM
 			BuildHelper.build(world, x-4, y+5, z-4, air, 0, 2, 9, 1, 6); //HOUSE ROOF 1
@@ -596,7 +596,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.build(world, x+4, y+1, z-4, fence, 0, 2, 1, 1, 2); //PORCH SIDE 1
 			BuildHelper.build(world, x+4, y+1, z+4, fence, 0, 2, 1, 1, 2); //PORCH SIDE 2
 			BuildHelper.build(world, x+6, y+1, z-3, fence, 0, 2, 7, 1, 1); //PORCH SIDE 3 (FRONT)
-			world.setBlock(x+6, y+1, z, gate, 1, 0); //PORCH GATE
+			BuildHelper.setBlock(world,x+6, y+1, z, gate, 1, 0); //PORCH GATE
 			
 			/************************ Layer 5 tp 6 : ROOF ************************/
 			BuildHelper.build(world, x-5, y+5, z-5, slabD, 1, 2, 11, 1, 1); //HOUSE ROOF 1
@@ -617,47 +617,47 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.build(world, x-2, y+6, z-2, light, 2, 2, 5, 1, 2); //HOUSE ROOF TOP
 			
 			/************************ Layer 1 to 4 : INSIDE ************************/
-			world.setBlock(x - 4, y + 1, z - 4, bed, 10, 0); //BED
-			world.setBlock(x - 4, y + 1, z - 3, bed, 2, 0); //BED
+			BuildHelper.setBlock(world,x - 4, y + 1, z - 4, bed, 10, 0); //BED
+			BuildHelper.setBlock(world,x - 4, y + 1, z - 3, bed, 2, 0); //BED
 			
-			world.setBlock(x - 4, y + 1, z + 2, chest); //CHEST
-			world.setBlock(x - 4, y + 1, z + 3, chest); //CHEST
-			world.setBlock(x - 3, y + 1, z + 4, chest); //CHEST
-			world.setBlock(x - 2, y + 1, z + 4, chest); //CHEST
+			BuildHelper.setBlock(world,x - 4, y + 1, z + 2, chest); //CHEST
+			BuildHelper.setBlock(world,x - 4, y + 1, z + 3, chest); //CHEST
+			BuildHelper.setBlock(world,x - 3, y + 1, z + 4, chest); //CHEST
+			BuildHelper.setBlock(world,x - 2, y + 1, z + 4, chest); //CHEST
 			
-			world.setBlock(x - 4, y + 1, z + 4, craft); //WORKBENCH
-			world.setBlock(x - 2, y + 1, z - 4, furnace, 3, 0); //FURNACE
-			world.setBlock(x - 1, y + 1, z - 4, furnace, 3, 0); //FURNACE
+			BuildHelper.setBlock(world,x - 4, y + 1, z + 4, craft); //WORKBENCH
+			BuildHelper.setBlock(world,x - 2, y + 1, z - 4, furnace, 3, 0); //FURNACE
+			BuildHelper.setBlock(world,x - 1, y + 1, z - 4, furnace, 3, 0); //FURNACE
 
-			world.setBlock(x + 1, y + 1, z - 4, stair, 3, 0); //CHAIR
-			world.setBlock(x + 1, y + 1, z + 4, stair, 10, 0); //CHAIR
-			world.setBlock(x, y + 1, z - 4, sign, 4, 0); //CHAIR
-			world.setBlock(x, y + 1, z + 4, sign, 4, 0); //CHAIR
+			BuildHelper.setBlock(world,x + 1, y + 1, z - 4, stair, 3, 0); //CHAIR
+			BuildHelper.setBlock(world,x + 1, y + 1, z + 4, stair, 10, 0); //CHAIR
+			BuildHelper.setBlock(world,x, y + 1, z - 4, sign, 4, 0); //CHAIR
+			BuildHelper.setBlock(world,x, y + 1, z + 4, sign, 4, 0); //CHAIR
 			
-			world.setBlock(x+1,y+2,z-2,plate); //TABLE
-			world.setBlock(x+1,y+2,z+2,plate); //TABLE
-			world.setBlock(x+1,y+1,z-2,fence); //TABLE
-			world.setBlock(x+1,y+1,z+2,fence); //TABLE
+			BuildHelper.setBlock(world,x+1,y+2,z-2,plate); //TABLE
+			BuildHelper.setBlock(world,x+1,y+2,z+2,plate); //TABLE
+			BuildHelper.setBlock(world,x+1,y+1,z-2,fence); //TABLE
+			BuildHelper.setBlock(world,x+1,y+1,z+2,fence); //TABLE
 			
-			world.setBlock(x + 6, y + 2, z - 1, torch);
-			world.setBlock(x + 6, y + 2, z + 1, torch);
-			world.setBlock(x + 3, y + 3, z - 1, torch);
-			world.setBlock(x + 3, y + 3, z + 1, torch);
-			world.setBlock(x - 4, y + 4, z - 2, torch);
-			world.setBlock(x - 4, y + 4, z + 2, torch);
-			world.setBlock(x - 2, y + 4, z - 4, torch);
-			world.setBlock(x - 2, y + 4, z + 4, torch);
-			world.setBlock(x - 1, y + 4, z - 4, torch);
-			world.setBlock(x - 1, y + 4, z + 4, torch);
-			world.setBlock(x + 1, y + 4, z - 2, torch);
-			world.setBlock(x + 1, y + 4, z + 2, torch);
-			world.setBlock(x + 6, y + 4, z + 5, torch);
-			world.setBlock(x + 6, y + 4, z - 5, torch);
-			world.setBlock(x + 7, y + 4, z - 4, torch);
-			world.setBlock(x + 7, y + 4, z + 4, torch);
+			BuildHelper.setBlock(world,x + 6, y + 2, z - 1, torch);
+			BuildHelper.setBlock(world,x + 6, y + 2, z + 1, torch);
+			BuildHelper.setBlock(world,x + 3, y + 3, z - 1, torch);
+			BuildHelper.setBlock(world,x + 3, y + 3, z + 1, torch);
+			BuildHelper.setBlock(world,x - 4, y + 4, z - 2, torch);
+			BuildHelper.setBlock(world,x - 4, y + 4, z + 2, torch);
+			BuildHelper.setBlock(world,x - 2, y + 4, z - 4, torch);
+			BuildHelper.setBlock(world,x - 2, y + 4, z + 4, torch);
+			BuildHelper.setBlock(world,x - 1, y + 4, z - 4, torch);
+			BuildHelper.setBlock(world,x - 1, y + 4, z + 4, torch);
+			BuildHelper.setBlock(world,x + 1, y + 4, z - 2, torch);
+			BuildHelper.setBlock(world,x + 1, y + 4, z + 2, torch);
+			BuildHelper.setBlock(world,x + 6, y + 4, z + 5, torch);
+			BuildHelper.setBlock(world,x + 6, y + 4, z - 5, torch);
+			BuildHelper.setBlock(world,x + 7, y + 4, z - 4, torch);
+			BuildHelper.setBlock(world,x + 7, y + 4, z + 4, torch);
 			
-			if (Config.PACK_HOUSE) {
-				world.setBlock(x, y, z, ModBlocks.ibWood, 7, 2);
+			if(Config.PACK_HOUSE) {
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 7, 2);
 			}
 		}
 	}
@@ -708,7 +708,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		
 		EntityPlayer player = world.getClosestPlayer(x, y, z, 10);
 		
-		if (meta == 4) {
+		if(meta == 4) {
 			//BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z-4, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x+3, y+1, z-4, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x-2, y+1, z-4, chest, player, "Chest");
@@ -720,8 +720,8 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z-1, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x, y+1, z+2, door, player, "Door");
 			
-			if (notThere) {
-				world.setBlock(x, y, z, ModBlocks.ibWood, 4, 2);
+			if(notThere) {
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 4, 2);
 				notThere = false;
 				drop = 0;
 				return true;
@@ -733,7 +733,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			
 			IBHelper.msg(player, Strings.PACK_WOODEN_HOUSE, Colors.a);
 			IBHelper.sound(world, "step.ladder", x, y, z);
-		} else if (meta == 5) {
+		} else if(meta == 5) {
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z+4, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z-2, chest, player, "Chest");
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z-3, chest, player, "Chest");
@@ -744,8 +744,8 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x+1, y+1, z+4, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x-2, y+1, z, door, player, "Door");
 			
-			if (notThere) {
-				world.setBlock(x, y, z, ModBlocks.ibWood, 5, 2);
+			if(notThere) {
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 5, 2);
 				notThere = false;
 				drop = 0;
 				return true;
@@ -757,7 +757,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			
 			IBHelper.msg(player, Strings.PACK_WOODEN_HOUSE, Colors.a);
 			IBHelper.sound(world, "step.ladder", x, y, z);
-		} else if (meta == 6) {
+		} else if(meta == 6) {
 			BuildHelper.ifNoBlockThenStop(world, x-3, y+1, z+4, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x+2, y+1, z+4, chest, player, "Chest");
 			BuildHelper.ifNoBlockThenStop(world, x+3, y+1, z+4, chest, player, "Chest");
@@ -768,8 +768,8 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x-4, y+1, z+1, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x, y+1, z-2, door, player, "Door");
 			
-			if (notThere) {
-				world.setBlock(x, y, z, ModBlocks.ibWood, 6, 2);
+			if(notThere) {
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 6, 2);
 				notThere = false;
 				drop = 0;
 				return true;
@@ -781,7 +781,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 
 			IBHelper.msg(player, Strings.PACK_WOODEN_HOUSE, Colors.a);
 			IBHelper.sound(world, "step.ladder", x, y, z);
-		} else if (meta == 7) {
+		} else if(meta == 7) {
 			BuildHelper.ifNoBlockThenStop(world, x-4, y+1, z-3, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x-4, y+1, z+2, chest, player, "Chest");
 			BuildHelper.ifNoBlockThenStop(world, x-4, y+1, z+3, chest, player, "Chest");
@@ -792,8 +792,8 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x-1, y+1, z-4, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x+2, y+1, z, door, player, "Door");
 			
-			if (notThere) {
-				world.setBlock(x, y, z, ModBlocks.ibWood, 7, 2);
+			if(notThere) {
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 7, 2);
 				notThere = false;
 				drop = 0;
 				return true;
@@ -816,7 +816,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		//int meta = world.getBlockMetadata(x, y, z);
 		
 		/************************ meta == 0 ************************/
-		if (meta == 0 || meta == 4) {
+		if(meta == 0 || meta == 4) {
 			/************************ Layer 0 to 7 : AIR ************************/ //DONE
 			BuildHelper.build(world, x-5, y, z-5, air, 0, 2, 8, 6, 11); //HOUSE ROOM
 			BuildHelper.build(world, x-4, y+5, z-4, air, 0, 2, 6, 1, 9); //HOUSE ROOF 1
@@ -824,16 +824,16 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 
 			BuildHelper.build(world, x-4, y, z+3, air, 0, 2, 4, 5, 9); //PORCH
 			
-			world.setBlock(x + 5, y + 4, z + 6, air, 0, 2);
-			world.setBlock(x-5, y + 4, z+6, air, 0, 2);
-			world.setBlock(x-4, y + 4, z+7, air, 0, 2);
-			world.setBlock(x + 4, y + 4, z + 7, air, 0, 2);
+			BuildHelper.setBlock(world,x + 5, y + 4, z + 6, air, 0, 2);
+			BuildHelper.setBlock(world,x-5, y + 4, z+6, air, 0, 2);
+			BuildHelper.setBlock(world,x-4, y + 4, z+7, air, 0, 2);
+			BuildHelper.setBlock(world,x + 4, y + 4, z + 7, air, 0, 2);
 			
 			System.out.println("0 or 4");
 		}
 		
 		/************************ meta == 1 ************************/
-		else if (meta == 1 || meta == 5) {
+		else if(meta == 1 || meta == 5) {
 			/************************ Layer 0 to 7 : AIR ************************/
 			BuildHelper.build(world, x-2, y, z-5, air, 0, 2, 11, 6, 8); //HOUSE ROOM
 			BuildHelper.build(world, x-1, y+5, z-4, air, 0, 2, 9, 1, 6); //HOUSE ROOF 1
@@ -841,16 +841,16 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 
 			BuildHelper.build(world, x-6, y, z-4, air, 0, 2, 9, 5, 4); //PORCH
 
-			world.setBlock(x - 6, y + 4, z + 5, air, 0, 2);
-			world.setBlock(x - 6, y + 4, z - 5, air, 0, 2);
-			world.setBlock(x - 7, y + 4, z - 4, air, 0, 2);
-			world.setBlock(x - 7, y + 4, z + 4, air, 0, 2);
+			BuildHelper.setBlock(world,x - 6, y + 4, z + 5, air, 0, 2);
+			BuildHelper.setBlock(world,x - 6, y + 4, z - 5, air, 0, 2);
+			BuildHelper.setBlock(world,x - 7, y + 4, z - 4, air, 0, 2);
+			BuildHelper.setBlock(world,x - 7, y + 4, z + 4, air, 0, 2);
 			
 			System.out.println("1 or 5");
 		}
 		
 		/************************ meta == 2 ************************/
-		else if (meta == 2 || meta == 6) {
+		else if(meta == 2 || meta == 6) {
 			/************************ Layer 0 to 7 : AIR ************************/ //DONE
 			BuildHelper.build(world, x-5, y, z-2, air, 0, 2, 8, 6, 11); //HOUSE ROOM
 			BuildHelper.build(world, x-4, y+5, z-1, air, 0, 2, 6, 1, 9); //HOUSE ROOF 1
@@ -858,16 +858,16 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 
 			BuildHelper.build(world, x-4, y, z-6, air, 0, 2, 4, 5, 9); //PORCH
 
-			world.setBlock(x+5, y + 4, z-6, air, 0, 2);
-			world.setBlock(x - 5, y + 4, z - 6, air, 0, 2);
-			world.setBlock(x - 4, y + 4, z - 7, air, 0, 2);
-			world.setBlock(x+4, y + 4, z-7, air, 0, 2);
+			BuildHelper.setBlock(world,x+5, y + 4, z-6, air, 0, 2);
+			BuildHelper.setBlock(world,x - 5, y + 4, z - 6, air, 0, 2);
+			BuildHelper.setBlock(world,x - 4, y + 4, z - 7, air, 0, 2);
+			BuildHelper.setBlock(world,x+4, y + 4, z-7, air, 0, 2);
 			
 			System.out.println("2 or 6");
 		}
 		
 		/************************ meta == 3 ************************/
-		else if (meta == 3 || meta == 7) {
+		else if(meta == 3 || meta == 7) {
 			/************************ Layer 0 to 7 : AIR ************************/
 			BuildHelper.build(world, x-5, y, z-5, air, 0, 2, 11, 6, 8); //HOUSE ROOM
 			BuildHelper.build(world, x-4, y+5, z-4, air, 0, 2, 9, 1, 6); //HOUSE ROOF 1
@@ -875,10 +875,10 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 
 			BuildHelper.build(world, x+3, y, z-4, air, 0, 2, 9, 5, 4); //PORCH
 
-			world.setBlock(x + 6, y + 4, z + 5, air, 0, 2);
-			world.setBlock(x + 6, y + 4, z - 5, air, 0, 2);
-			world.setBlock(x + 7, y + 4, z - 4, air, 0, 2);
-			world.setBlock(x + 7, y + 4, z + 4, air, 0, 2);
+			BuildHelper.setBlock(world,x + 6, y + 4, z + 5, air, 0, 2);
+			BuildHelper.setBlock(world,x + 6, y + 4, z - 5, air, 0, 2);
+			BuildHelper.setBlock(world,x + 7, y + 4, z - 4, air, 0, 2);
+			BuildHelper.setBlock(world,x + 7, y + 4, z + 4, air, 0, 2);
 			
 			System.out.println("3 or 7");
 		}
@@ -927,7 +927,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 		
 		EntityPlayer player = world.getClosestPlayer(x, y, z, 10);
 		
-		if (meta == 4) {
+		if(meta == 4) {
 			BuildHelper.ifNoBlockThenStop(world, x+3, y+1, z-4, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x-2, y+1, z-4, chest, player, "Chest");
 			BuildHelper.ifNoBlockThenStop(world, x-3, y+1, z-4, chest, player, "Chest");
@@ -938,8 +938,8 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z-1, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x, y+1, z+2, door, player, "Door");
 			
-			if (notThere) {
-				world.setBlock(x, y, z, ModBlocks.ibWood, 4, 2);
+			if(notThere) {
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 4, 2);
 				notThere = false;
 				return 0;
 			}
@@ -949,7 +949,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			//player.triggerAchievement(ib.achWood);
 			
 			//BuildHelper.msg(player, Colors.a + "Instant Wooden House Re-Packed.");
-		} else if (meta == 5) {
+		} else if(meta == 5) {
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z+4, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z-2, chest, player, "Chest");
 			BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z-3, chest, player, "Chest");
@@ -960,8 +960,8 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x+1, y+1, z+4, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x-2, y+1, z, door, player, "Door");
 			
-			if (notThere) {
-				world.setBlock(x, y, z, ModBlocks.ibWood, 5, 2);
+			if(notThere) {
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 5, 2);
 				notThere = false;
 				return 0;
 			}
@@ -971,7 +971,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			//player.triggerAchievement(ib.achWood);
 			
 			//BuildHelper.msg(player, Colors.a + "Instant Wooden House Re-Packed.");
-		} else if (meta == 6) {
+		} else if(meta == 6) {
 			BuildHelper.ifNoBlockThenStop(world, x-3, y+1, z+4, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x+2, y+1, z+4, chest, player, "Chest");
 			BuildHelper.ifNoBlockThenStop(world, x+3, y+1, z+4, chest, player, "Chest");
@@ -982,8 +982,8 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x-4, y+1, z+1, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x, y+1, z-2, door, player, "Door");
 			
-			if (notThere) {
-				world.setBlock(x, y, z, ModBlocks.ibWood, 6, 2);
+			if(notThere) {
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 6, 2);
 				notThere = false;
 				return 0;
 			}
@@ -991,7 +991,7 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			//pack(world, x, y, z, 6);
 
 			//player.triggerAchievement(ib.achWood);
-		} else if (meta == 7) {
+		} else if(meta == 7) {
 			BuildHelper.ifNoBlockThenStop(world, x-4, y+1, z-3, bed, player, "Bed");
 			BuildHelper.ifNoBlockThenStop(world, x-4, y+1, z+2, chest, player, "Chest");
 			BuildHelper.ifNoBlockThenStop(world, x-4, y+1, z+3, chest, player, "Chest");
@@ -1002,8 +1002,8 @@ public class BlockInstantHouseWood extends BlockDirectionalIB {
 			BuildHelper.ifNoBlockThenStop(world, x-1, y+1, z-4, furnace, player, "Furnace");
 			BuildHelper.ifNoBlockThenStop(world, x+2, y+1, z, door, player, "Door");
 			
-			if (notThere) {
-				world.setBlock(x, y, z, ModBlocks.ibWood, 7, 2);
+			if(notThere) {
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 7, 2);
 				notThere = false;
 				return 0;
 			}

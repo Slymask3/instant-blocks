@@ -30,9 +30,7 @@ import net.minecraft.world.World;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Base64;
 import java.util.Random;
@@ -70,60 +68,60 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 	}
 
 	public IIcon getIcon(int side, int meta) {
-		if (meta==2 || meta==6) {
-			if (side==0) {
+		if(meta==2 || meta==6) {
+			if(side==0) {
 				return bottom;
-			} else if (side==1) {
+			} else if(side==1) {
 				return top;
-			} else if (side==2) {
+			} else if(side==2) {
 				return front;
-			} else if (side==3) {
+			} else if(side==3) {
 				return back;
-			} else if (side==4) {
+			} else if(side==4) {
 				return sidel;
-			} else if (side==5) {
+			} else if(side==5) {
 				return sider;
 			}
-		} else if (meta==0 || meta==4) {
-			if (side==0) {
+		} else if(meta==0 || meta==4) {
+			if(side==0) {
 				return bottom;
-			} else if (side==1) {
+			} else if(side==1) {
 				return top;
-			} else if (side==2) {
+			} else if(side==2) {
 				return back;
-			} else if (side==3) {
+			} else if(side==3) {
 				return front;
-			} else if (side==4) {
+			} else if(side==4) {
 				return sider;
-			} else if (side==5) {
+			} else if(side==5) {
 				return sidel;
 			}
-		} else if (meta==1 || meta==5) {
-			if (side==0) {
+		} else if(meta==1 || meta==5) {
+			if(side==0) {
 				return bottom;
-			} else if (side==1) {
+			} else if(side==1) {
 				return top;
-			} else if (side==2) {
+			} else if(side==2) {
 				return sider;
-			} else if (side==3) {
+			} else if(side==3) {
 				return sidel;
-			} else if (side==4) {
+			} else if(side==4) {
 				return front;
-			} else if (side==5) {
+			} else if(side==5) {
 				return back;
 			}
-		} else if (meta==3 || meta==7) {
-			if (side==0) {
+		} else if(meta==3 || meta==7) {
+			if(side==0) {
 				return bottom;
-			} else if (side==1) {
+			} else if(side==1) {
 				return top;
-			} else if (side==2) {
+			} else if(side==2) {
 				return sidel;
-			} else if (side==3) {
+			} else if(side==3) {
 				return sider;
-			} else if (side==4) {
+			} else if(side==4) {
 				return back;
-			} else if (side==5) {
+			} else if(side==5) {
 				return front;
 			}
 		}
@@ -148,8 +146,8 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.USE_WANDS) {
-			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+		if(Config.USE_WANDS) {
+			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
 				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
@@ -169,7 +167,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		
 		LogHelper.info(player);
 		
-		if (!username.equalsIgnoreCase("")) {
+		if(!username.equalsIgnoreCase("")) {
 			try {
 				GsonBuilder builder = new GsonBuilder();
 				builder.setPrettyPrinting();
@@ -189,7 +187,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 
 				BufferedImage img = ImageIO.read(new URL(image_url));
 
-				world.setBlock(x, y, z, Blocks.air);
+				BuildHelper.setBlock(world,x, y, z, Blocks.air);
 		        
 		        buildHead(world, x, y, z, img, meta, head, rgb);
 		        buildBody(world, x, y, z, img, meta, body, rgb);
@@ -203,15 +201,15 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		        IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
 		        //IBHelper.xp(world, player, ConfigurationHandler.xp);
 		        IBHelper.sound(world, Config.SOUND, x, y, z);
-		        //IBHelper.effectFull(world, "reddust", x, y, z);
+		        //IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
 				
 				ItemStack is = player.getCurrentEquippedItem();
 				
-				if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+				if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 					is.damageItem(1, player);
 				}
 				
-			} catch (Exception e) {
+			} catch(Exception e) {
 				e.printStackTrace();
 				IBHelper.msg(player, Strings.ERROR_STATUE.replace("%username%",username), Colors.c);
 			}
@@ -235,7 +233,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 	}
 
 	private static void buildHead(World world, int x, int y, int z, BufferedImage img, int meta, boolean build, boolean rgb) {
-		if (build) {
+		if(build) {
 		//TOP
 		for(int xtimes=0; xtimes<8; xtimes++) {
 			for(int ytimes=0; ytimes<8; ytimes++) {
@@ -284,7 +282,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 	}
 
 	private static void buildBody(World world, int x, int y, int z, BufferedImage img, int meta, boolean build, boolean rgb) {
-		if (build) {
+		if(build) {
 		//TOP
 		for(int xtimes=0; xtimes<8; xtimes++) {
 			for(int ytimes=0; ytimes<4; ytimes++) { //topbody is 8x4
@@ -336,7 +334,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 	}
 
 	private static void buildArms(World world, int x, int y, int z, BufferedImage img, int meta, boolean buildLeft, boolean buildRight, boolean rgb) {
-		if (buildLeft) {
+		if(buildLeft) {
 			//LEFT ARM
 
 			//LEFT
@@ -388,7 +386,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 			}
 		}
 		
-		if (buildRight) {
+		if(buildRight) {
 			//RIGHT ARM
 
 			//LEFT
@@ -444,7 +442,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 	}
 	
 	private static void buildLegs(World world, int x, int y, int z, BufferedImage img, int meta, boolean buildLeft, boolean buildRight, boolean rgb) {
-		if (buildLeft) {
+		if(buildLeft) {
 		//LEFT LEG
 
 		//TOP
@@ -496,7 +494,7 @@ public class BlockInstantStatue extends BlockContainer implements ITileEntityPro
 		}
 		}
 
-		if (buildRight) {
+		if(buildRight) {
 		//RIGHT LEG
  
 		//TOP

@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.network;
 
 import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
+import com.slymask3.instantblocks.util.BuildHelper;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -77,7 +78,7 @@ public class PacketStatue extends AbstractPacket {
 	@Override
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
-		BlockInstantStatue block = (BlockInstantStatue)world.getBlock(_x, _y, _z);
+		BlockInstantStatue block = (BlockInstantStatue) BuildHelper.getBlock(world,_x, _y, _z);
 		block.build(world, _x, _y, _z, _player, world.getTileEntity(_x, _y, _z).getBlockMetadata(), this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight, this._rgb);
 	}
 }

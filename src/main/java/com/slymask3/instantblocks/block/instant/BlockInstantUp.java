@@ -18,8 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class BlockInstantUp extends BlockLadderIB {
-	
-	public boolean canSeeSky;
 	public int side = 0;
 	
     public BlockInstantUp() {
@@ -32,34 +30,34 @@ public class BlockInstantUp extends BlockLadderIB {
     
 	public void func_149797_b(int par1) {
         float f = 0.125F;
-        if (par1 == 2) {
+        if(par1 == 2) {
             this.setBlockBounds(0.0F, 0.0F, 1.0F - f, 1.0F, 1.0F, 1.0F);
             side = 2;
         }
-        if (par1 == 3) {
+        if(par1 == 3) {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
             side = 3;
         }
-        if (par1 == 4) {
+        if(par1 == 4) {
             this.setBlockBounds(1.0F - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             side = 4;
         }
-        if (par1 == 5) {
+        if(par1 == 5) {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
             side = 5;
         }
     }
 	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-    	if (world.canBlockSeeTheSky(x, y+1, z)) {
+    	if(world.canBlockSeeTheSky(x, y+1, z)) {
     		IBHelper.msg(player, Strings.ERROR_ESCAPE_LADDER, Colors.c);
 			return true;
 		}
     	
     	ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.USE_WANDS) {
-			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+		if(Config.USE_WANDS) {
+			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 				//player.triggerAchievement(ib.achUp);
 			} else {
@@ -79,43 +77,43 @@ public class BlockInstantUp extends BlockLadderIB {
 			i++;
 			BuildHelper.build(world, x-1, y-1, z-1, stone, 3, 1, 3);
 			BuildHelper.build(world, x-1, i, z-1, stone, 3, 1, 3);
-			world.setBlock(x, i, z, air);
+			BuildHelper.setBlock(world,x, i, z, air);
 			
-			if (side == 2) {
-				world.setBlock(x, i, z, ladder, 2, 0);
+			if(side == 2) {
+				BuildHelper.setBlock(world,x, i, z, ladder, 2, 0);
 				
-				world.setBlock(x, y, z-1, air);
-				world.setBlock(x, y+1, z-1, air);
+				BuildHelper.setBlock(world,x, y, z-1, air);
+				BuildHelper.setBlock(world,x, y+1, z-1, air);
 					
-				for (int m = y + 6; m < i; m = m + 6) {
-					world.setBlock(x, m, z-1, torch);
+				for(int m = y + 6; m < i; m = m + 6) {
+					BuildHelper.setBlock(world,x, m, z-1, torch);
 				}
-			} else if (side == 3) {
-				world.setBlock(x, i, z, ladder, 3, 0);
+			} else if(side == 3) {
+				BuildHelper.setBlock(world,x, i, z, ladder, 3, 0);
 					
-				world.setBlock(x, y, z+1, air);
-				world.setBlock(x, y+1, z+1, air);
+				BuildHelper.setBlock(world,x, y, z+1, air);
+				BuildHelper.setBlock(world,x, y+1, z+1, air);
 					
-				for (int m = y + 6; m < i; m = m + 6) {
-					world.setBlock(x, m, z+1, torch);
+				for(int m = y + 6; m < i; m = m + 6) {
+					BuildHelper.setBlock(world,x, m, z+1, torch);
 				}
-			} else if (side == 4) {
-				world.setBlock(x, i, z, ladder, 4, 0);
+			} else if(side == 4) {
+				BuildHelper.setBlock(world,x, i, z, ladder, 4, 0);
 					
-				world.setBlock(x-1, y, z, air);
-				world.setBlock(x-1, y+1, z, air);
+				BuildHelper.setBlock(world,x-1, y, z, air);
+				BuildHelper.setBlock(world,x-1, y+1, z, air);
 					
-				for (int m = y + 6; m < i; m = m + 6) {
-					world.setBlock(x-1, m, z, torch);
+				for(int m = y + 6; m < i; m = m + 6) {
+					BuildHelper.setBlock(world,x-1, m, z, torch);
 				}
-			} else if (side == 5) {
-				world.setBlock(x, i, z, ladder, 5, 0);
+			} else if(side == 5) {
+				BuildHelper.setBlock(world,x, i, z, ladder, 5, 0);
 					
-				world.setBlock(x+1, y, z, air);
-				world.setBlock(x+1, y+1, z, air);
+				BuildHelper.setBlock(world,x+1, y, z, air);
+				BuildHelper.setBlock(world,x+1, y+1, z, air);
 					
-				for (int m = y + 6; m < i; m = m + 6) {
-					world.setBlock(x+1, m, z, torch);
+				for(int m = y + 6; m < i; m = m + 6) {
+					BuildHelper.setBlock(world,x+1, m, z, torch);
 				}
 			}
 		}
@@ -124,7 +122,7 @@ public class BlockInstantUp extends BlockLadderIB {
 		IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibUp);
 		IBHelper.xp(world, player, Config.XP_AMOUNT);
 		IBHelper.sound(world, Config.SOUND, x, y, z);
-		IBHelper.effectFull(world, "reddust", x, y, z);
+		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
 		IBHelper.msg(player, Strings.CREATE_ESCAPE_LADDER.replace("%i%",String.valueOf(i-y)), Colors.a);
 		
 		return true;

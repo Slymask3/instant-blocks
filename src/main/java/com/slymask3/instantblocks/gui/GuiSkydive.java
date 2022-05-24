@@ -71,15 +71,15 @@ public class GuiSkydive extends GuiScreen {
 
 	@Override
 	protected void actionPerformed(final GuiButton btn) {
-		if (btn.enabled) {
-			if (btn.id == done.id) {
+		if(btn.enabled) {
+			if(btn.id == done.id) {
 				sendInfo();
 				Keyboard.enableRepeatEvents(false);
 				mc.displayGuiScreen(null);
-			} else if (btn.id == cancel.id) {
+			} else if(btn.id == cancel.id) {
 				Keyboard.enableRepeatEvents(false);
 				mc.displayGuiScreen(null);
-			} else if (btn.id == random.id) {
+			} else if(btn.id == random.id) {
 				setRandom();
 			}
 		}
@@ -95,7 +95,7 @@ public class GuiSkydive extends GuiScreen {
 	@Override
 	protected void keyTyped(final char par1, final int par2) {
 		
-		if (("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ".indexOf(par1) >= 0) || (par2 == 14)) {
+		if(("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ".indexOf(par1) >= 0) || (par2 == 14)) {
 			
 			for(int i=0; i<11; i++) {
 				color[i].textboxKeyTyped(par1, par2);
@@ -104,11 +104,11 @@ public class GuiSkydive extends GuiScreen {
 	        }
 		}
 		
-		if (par2 == done.id) {
+		if(par2 == done.id) {
 			actionPerformed(done);
-		} else if (par2 == cancel.id) {
+		} else if(par2 == cancel.id) {
 			actionPerformed(cancel);
-		} else if (par2 == random.id) {
+		} else if(par2 == random.id) {
 			actionPerformed(random);
 		}
 	}
@@ -145,7 +145,7 @@ public class GuiSkydive extends GuiScreen {
 		InstantBlocks.packetPipeline.sendToServer(new PacketSkydive(this.world, this.x, this.y, this.z, this.player.getDisplayName(), getHex(color[0].getText()), getHex(color[1].getText()), getHex(color[2].getText()), getHex(color[3].getText()), getHex(color[4].getText()), getHex(color[5].getText()), getHex(color[6].getText()), getHex(color[7].getText()), getHex(color[8].getText()), getHex(color[9].getText()), getHex(color[10].getText()), tp.isChecked()));
 		
 		IBHelper.xp(world, player, Config.XP_AMOUNT);
-        IBHelper.effectFull(world, "reddust", x, y, z);
+        IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
         IBHelper.msg(player, Strings.CREATE_SKYDIVE, Colors.a);
 	}
 	
@@ -187,7 +187,7 @@ public class GuiSkydive extends GuiScreen {
 		} else {
 			try {
 				color = (int)Long.parseLong(input, 16);
-			} catch (Exception e) {}
+			} catch(Exception e) {}
 		}
 		
 		return color;

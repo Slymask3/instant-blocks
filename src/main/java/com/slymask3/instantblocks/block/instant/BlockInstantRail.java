@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockIB;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
@@ -45,14 +46,14 @@ public class BlockInstantRail extends BlockIB {
 	
 	@SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
-        if (side==1 || side==0) {
-			if (meta==0) {
+        if(side==1 || side==0) {
+			if(meta==0) {
 	        	return top0;
-	        } else if (meta==1) {
+	        } else if(meta==1) {
 	        	return top1;
-	        } else if (meta==2) {
+	        } else if(meta==2) {
 	        	return top2;
-	        } else if (meta==3) {
+	        } else if(meta==3) {
 	        	return top3;
 	        }
         } else {
@@ -65,12 +66,9 @@ public class BlockInstantRail extends BlockIB {
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack) {
 		int meta = MathHelper.floor_double((double) (par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 2);
-
-		//System.out.println("meta = " + meta);
 	}
 	
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_)
-    {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
         byte b0 = 0;
         float f = 0.0625F;
         return AxisAlignedBB.getBoundingBox((double)p_149668_2_ + this.minX, (double)p_149668_3_ + this.minY, (double)p_149668_4_ + this.minZ, (double)p_149668_2_ + this.maxX, (double)((float)p_149668_3_ + (float)b0 * f), (double)p_149668_4_ + this.maxZ);
@@ -94,8 +92,7 @@ public class BlockInstantRail extends BlockIB {
     
     public void build(World world, int x, int y, int z) {
     	int meta = world.getBlockMetadata(x, y, z);
-    	
-    	for (int i=0; i<=37; i++) {
+    	for(int i = 0; i<= Config.RAILS_AMOUNT; i++) {
 	    	BuildHelper.setBlockDirectional(world, x, y-1, z, Blocks.stone, meta, i, 0, 0, 0);
 	    	BuildHelper.setBlockDirectional(world, x, y, z, Blocks.rail, meta, i, 0, 0, 0);
 	    	BuildHelper.setBlockDirectional(world, x, y+1, z, Blocks.air, meta, i, 0, 0, 0);

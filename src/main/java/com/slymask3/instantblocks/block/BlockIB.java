@@ -7,6 +7,7 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -176,152 +177,152 @@ public class BlockIB extends Block {
 	}
 
 	public IIcon getIcon(int side, int meta) {
-		if (meta==2 || meta==6) {
-			if (side==0) {
+		if(meta==2 || meta==6) {
+			if(side==0) {
 				if(bottomB) {
 					return bottomI;
 				} else {
 					return bottomBl.getIcon(0, 0);
 				}
-			} else if (side==1) {
+			} else if(side==1) {
 				if(topB) {
 					return topI;
 				} else {
 					return topBl.getIcon(0, 0);
 				}
-			} else if (side==2) {
+			} else if(side==2) {
 				if(frontB) {
 					return frontI;
 				} else {
 					return frontBl.getIcon(0, 0);
 				}
-			} else if (side==3) {
+			} else if(side==3) {
 				if(backB) {
 					return backI;
 				} else {
 					return backBl.getIcon(0, 0);
 				}
-			} else if (side==4) {
+			} else if(side==4) {
 				if(leftB) {
 					return leftI;
 				} else {
 					return leftBl.getIcon(0, 0);
 				}
-			} else if (side==5) {
+			} else if(side==5) {
 				if(rightB) {
 					return rightI;
 				} else {
 					return rightBl.getIcon(0, 0);
 				}
 			}
-		} else if (meta==0 || meta==4) {
-			if (side==0) {
+		} else if(meta==0 || meta==4) {
+			if(side==0) {
 				if(bottomB) {
 					return bottomI;
 				} else {
 					return bottomBl.getIcon(0, 0);
 				}
-			} else if (side==1) {
+			} else if(side==1) {
 				if(topB) {
 					return topI;
 				} else {
 					return topBl.getIcon(0, 0);
 				}
-			} else if (side==2) {
+			} else if(side==2) {
 				if(backB) {
 					return backI;
 				} else {
 					return backBl.getIcon(0, 0);
 				}
-			} else if (side==3) {
+			} else if(side==3) {
 				if(frontB) {
 					return frontI;
 				} else {
 					return frontBl.getIcon(0, 0);
 				}
-			} else if (side==4) {
+			} else if(side==4) {
 				if(rightB) {
 					return rightI;
 				} else {
 					return rightBl.getIcon(0, 0);
 				}
-			} else if (side==5) {
+			} else if(side==5) {
 				if(leftB) {
 					return leftI;
 				} else {
 					return leftBl.getIcon(0, 0);
 				}
 			}
-		} else if (meta==1 || meta==5) {
-			if (side==0) {
+		} else if(meta==1 || meta==5) {
+			if(side==0) {
 				if(bottomB) {
 					return bottomI;
 				} else {
 					return bottomBl.getIcon(0, 0);
 				}
-			} else if (side==1) {
+			} else if(side==1) {
 				if(topB) {
 					return topI;
 				} else {
 					return topBl.getIcon(0, 0);
 				}
-			} else if (side==2) {
+			} else if(side==2) {
 				if(rightB) {
 					return rightI;
 				} else {
 					return rightBl.getIcon(0, 0);
 				}
-			} else if (side==3) {
+			} else if(side==3) {
 				if(leftB) {
 					return leftI;
 				} else {
 					return leftBl.getIcon(0, 0);
 				}
-			} else if (side==4) {
+			} else if(side==4) {
 				if(frontB) {
 					return frontI;
 				} else {
 					return frontBl.getIcon(0, 0);
 				}
-			} else if (side==5) {
+			} else if(side==5) {
 				if(backB) {
 					return backI;
 				} else {
 					return backBl.getIcon(0, 0);
 				}
 			}
-		} else if (meta==3 || meta==7) {
-			if (side==0) {
+		} else if(meta==3 || meta==7) {
+			if(side==0) {
 				if(bottomB) {
 					return bottomI;
 				} else {
 					return bottomBl.getIcon(0, 0);
 				}
-			} else if (side==1) {
+			} else if(side==1) {
 				if(topB) {
 					return topI;
 				} else {
 					return topBl.getIcon(0, 0);
 				}
-			} else if (side==2) {
+			} else if(side==2) {
 				if(leftB) {
 					return leftI;
 				} else {
 					return leftBl.getIcon(0, 0);
 				}
-			} else if (side==3) {
+			} else if(side==3) {
 				if(rightB) {
 					return rightI;
 				} else {
 					return rightBl.getIcon(0, 0);
 				}
-			} else if (side==4) {
+			} else if(side==4) {
 				if(backB) {
 					return backI;
 				} else {
 					return backBl.getIcon(0, 0);
 				}
-			} else if (side==5) {
+			} else if(side==5) {
 				if(frontB) {
 					return frontI;
 				} else {
@@ -337,8 +338,8 @@ public class BlockIB extends Block {
     }
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		if (world.getBlock(x, y, z) == ModBlocks.ibGrinder) {
-			if (world.getBlock(x, y-1, z) != Blocks.mob_spawner) {
+		if(BuildHelper.getBlock(world,x, y, z) == ModBlocks.ibGrinder) {
+			if(BuildHelper.getBlock(world,x, y-1, z) != Blocks.mob_spawner) {
 				IBHelper.msg(player, errorMsg, Colors.c);
 				return true;
 	    	}
@@ -346,9 +347,9 @@ public class BlockIB extends Block {
 		
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.USE_WANDS) {
-			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
-				if (world.getBlock(x, y, z) != ModBlocks.ibStatue && world.getBlock(x, y, z) != ModBlocks.ibLava && world.getBlock(x, y, z) != ModBlocks.ibWater) {
+		if(Config.USE_WANDS) {
+			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+				if(BuildHelper.getBlock(world,x, y, z) != ModBlocks.ibStatue && BuildHelper.getBlock(world,x, y, z) != ModBlocks.ibLava && BuildHelper.getBlock(world,x, y, z) != ModBlocks.ibWater) {
 					is.damageItem(1, player);
 				}
 			} else {
@@ -364,7 +365,7 @@ public class BlockIB extends Block {
 		IBHelper.xp(world, player, Config.XP_AMOUNT);
 			
 		IBHelper.sound(world, Config.SOUND, x, y, z);
-		IBHelper.effectFull(world, "reddust", x, y, z);
+		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
 		IBHelper.msg(player, this.createMsg, Colors.a);
     		
     	return true;

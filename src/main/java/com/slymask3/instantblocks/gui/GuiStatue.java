@@ -85,12 +85,12 @@ public class GuiStatue extends GuiScreen {
 
 	@Override
 	protected void actionPerformed(final GuiButton btn) {
-		if (btn.enabled) {
-			if (btn.id == doneBtn.id) {
+		if(btn.enabled) {
+			if(btn.id == doneBtn.id) {
 				sendInfo();
 				Keyboard.enableRepeatEvents(false);
 				mc.displayGuiScreen(null);
-			} else if (btn.id == cancelBtn.id) {
+			} else if(btn.id == cancelBtn.id) {
 				Keyboard.enableRepeatEvents(false);
 				mc.displayGuiScreen(null);
 			}
@@ -100,11 +100,11 @@ public class GuiStatue extends GuiScreen {
 	@Override
 	protected void keyTyped(final char par1, final int par2) {
 		
-		if (("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_".indexOf(par1) >= 0) || (par2 == 14)) {
+		if(("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_".indexOf(par1) >= 0) || (par2 == 14)) {
 			input.textboxKeyTyped(par1, par2);
-		} else if (par2 == doneBtn.id) {
+		} else if(par2 == doneBtn.id) {
 			actionPerformed(doneBtn);
-		} else if (par2 == cancelBtn.id) {
+		} else if(par2 == cancelBtn.id) {
 			actionPerformed(cancelBtn);
 		}
 
@@ -133,7 +133,7 @@ public class GuiStatue extends GuiScreen {
 		InstantBlocks.packetPipeline.sendToServer(new PacketStatue(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
 		
 		IBHelper.xp(world, player, Config.XP_AMOUNT);
-        IBHelper.effectFull(world, "reddust", x, y, z);
+        IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
         IBHelper.msg(player, Strings.CREATE_STATUE.replace("%username%",input.getText()), Colors.a);
 	}
 	

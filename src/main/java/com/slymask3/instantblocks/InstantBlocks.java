@@ -41,7 +41,6 @@ public class InstantBlocks {
 	public void preInit(FMLPreInitializationEvent event) {
 		Config.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new Config());
-
 		TileEntity.addMapping(TileEntityColor.class, "TileEntityColor");
 		TileEntity.addMapping(TileEntityStatue.class, "TileEntityStatue");
 		TileEntity.addMapping(TileEntityHarvest.class, "TileEntityHarvest");
@@ -49,26 +48,19 @@ public class InstantBlocks {
 		TileEntity.addMapping(TileEntityColorLadder.class, "TileEntityColorLadder");
 		TileEntity.addMapping(TileEntitySchematic.class, "TileEntitySchematic");
 		TileEntity.addMapping(TileEntityTree.class, "TileEntityTree");
-		
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-		
 		packetPipeline.initialise();
-		
 		ModItems.init();
 		ModBlocks.init();
-
 		SchematicHelper.createSchematicsDir();
-		
 		LogHelper.info("Pre Initialization Complete!");
 	}
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.registerInformation();
-		
 		Recipes.init();
 		Loot.init();
-		
 		LogHelper.info("Initialization Complete!");
 	}
 
@@ -82,7 +74,6 @@ public class InstantBlocks {
 		MinecraftServer server = MinecraftServer.getServer();
 		ICommandManager command = server.getCommandManager();
 		ServerCommandManager serverCommand = ((ServerCommandManager) command);
-		
 		serverCommand.registerCommand(new CommandInstantBlocks());
 	}
 }

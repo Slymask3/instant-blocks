@@ -17,19 +17,19 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
     	final TileEntity e = world.getTileEntity(x, y, z);
-    	if (e == null) {
+    	if(e == null) {
     		return null;
     	}
     	
-        if (ID == GuiID.STATUE.ordinal()) {
+        if(ID == GuiID.STATUE.ordinal()) {
         	return new GuiStatue(player, (TileEntityStatue) e, world, x, y, z);
-        } else if (ID == GuiID.HARVEST.ordinal()) {
+        } else if(ID == GuiID.HARVEST.ordinal()) {
         	return new GuiHarvest(player, (TileEntityHarvest) e, world, x, y, z);
-        } else if (ID == GuiID.SKYDIVE.ordinal()) {
+        } else if(ID == GuiID.SKYDIVE.ordinal()) {
         	return new GuiSkydive(player, (TileEntitySkydive) e, world, x, y, z);
-        } else if (ID == GuiID.SCHEMATIC.ordinal()) {
+        } else if(ID == GuiID.SCHEMATIC.ordinal()) {
         	return new GuiSchematic(player, (TileEntitySchematic) e, world, x, y, z);
-        } else if (ID == GuiID.TREE.ordinal()) {
+        } else if(ID == GuiID.TREE.ordinal()) {
         	return new GuiTree(player, (TileEntityTree) e, world, x, y, z);
         }
 

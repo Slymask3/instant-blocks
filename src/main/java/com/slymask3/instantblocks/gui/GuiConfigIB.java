@@ -9,7 +9,7 @@ import net.minecraftforge.common.config.ConfigElement;
 import java.util.List;
 
 public class GuiConfigIB extends GuiConfig {  
-    static List list = new ConfigElement(Config.configuration.getCategory("options")).getChildElements();
+    private static List list = new ConfigElement(Config.configuration.getCategory(Config.GENERAL)).getChildElements();
 	private static String titleDir = GuiConfig.getAbridgedConfigPath(Config.configuration.toString());
 
 	public GuiConfigIB(GuiScreen parent) {

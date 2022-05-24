@@ -44,31 +44,28 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 	}
     
 	public IIcon getIcon(int side, int meta) {
-		if (side != 1) {
+		if(side != 1) {
 			return Blocks.stonebrick.getIcon(0, 0);
 		} else {
-			if (meta == 0) {
+			if(meta == 0) {
 				return top0;
-			} else if (meta == 1) {
+			} else if(meta == 1) {
 				return top1;
-			} else if (meta == 2) {
+			} else if(meta == 2) {
 				return top2;
-			} else if (meta == 3) {
+			} else if(meta == 3) {
 				return top3;
 			}
 		}
 		return blockIcon;
 	}
 	
-	//public Block crop = Blocks.wheat;
-	//public int r = 1;
-	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
     	
     	ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.USE_WANDS) {
-			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+		if(Config.USE_WANDS) {
+			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			} else {
 				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
@@ -76,15 +73,14 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			}
 		}
 
-		Random ran = new Random();
 		Block crop = Blocks.wheat;
-		int r = 0;
 		
-		if (!world.isRemote) { //IF SERVER
-			r = ran.nextInt(20);
-			if (r == 0) {
+		if(!world.isRemote) { //IF SERVER
+			Random ran = new Random();
+			int r = ran.nextInt(20);
+			if(r == 0) {
 				crop = Blocks.potatoes;
-			} else if (r == 1) {
+			} else if(r == 1) {
 				crop = Blocks.carrots;
 			} else {
 				crop = Blocks.wheat;
@@ -98,18 +94,7 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 		IBHelper.xp(world, player, Config.XP_AMOUNT);
 		
 		IBHelper.sound(world, Config.SOUND, x, y, z);
-		IBHelper.effectFull(world, "reddust", x, y, z);
-		
-//		if (r == 0) {
-//			BuildHelper.msg(player, Strings.CREATE_FARMP, Colors.a);
-//			//player.triggerAchievement(ib.achFarm3);
-//		} else if (r == 1) {
-//			BuildHelper.msg(player, Strings.CREATE_FARMC, Colors.a);
-//			//player.triggerAchievement(ib.achFarm2);
-//		} else {
-//			BuildHelper.msg(player, Strings.CREATE_FARMW, Colors.a);
-//			//player.triggerAchievement(ib.achFarm);
-//		}
+		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
 		
 		IBHelper.msg(player, Strings.CREATE_FARM, Colors.a);
 		
@@ -131,7 +116,7 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 		
 		int meta = world.getBlockMetadata(x, y, z);
 		
-		if (meta == 0) { //NORTH
+		if(meta == 0) { //NORTH
 			BuildHelper.build(world, x-7, y-1, z-4, Blocks.air, 9, 5, 15); //AIR
 			
 			BuildHelper.build(world, x+7, y+1, z-3, fence, 7, 1, 1); //FENCES
@@ -139,18 +124,18 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			BuildHelper.build(world, x-7, y+1, z-4, fence, 1, 1, 15); //FENCES
 			BuildHelper.build(world, x-7, y+1, z+4, fence, 1, 1, 15); //FENCES
 		
-			world.setBlock(x+7, y+2, z-4, torch); //TORCH
-			world.setBlock(x+2, y+2, z-4, torch); //TORCH
-			world.setBlock(x-2, y+2, z-4, torch); //TORCH
-			world.setBlock(x-7, y+2, z-4, torch); //TORCH
+			BuildHelper.setBlock(world,x+7, y+2, z-4, torch); //TORCH
+			BuildHelper.setBlock(world,x+2, y+2, z-4, torch); //TORCH
+			BuildHelper.setBlock(world,x-2, y+2, z-4, torch); //TORCH
+			BuildHelper.setBlock(world,x-7, y+2, z-4, torch); //TORCH
 
-			world.setBlock(x-7, y+2, z, torch); //TORCH
-			world.setBlock(x+7, y+2, z, torch); //TORCH
+			BuildHelper.setBlock(world,x-7, y+2, z, torch); //TORCH
+			BuildHelper.setBlock(world,x+7, y+2, z, torch); //TORCH
 		
-			world.setBlock(x+7, y+2, z+4, torch); //TORCH
-			world.setBlock(x+2, y+2, z+4, torch); //TORCH
-			world.setBlock(x-2, y+2, z+4, torch); //TORCH
-			world.setBlock(x-7, y+2, z+4, torch); //TORCH
+			BuildHelper.setBlock(world,x+7, y+2, z+4, torch); //TORCH
+			BuildHelper.setBlock(world,x+2, y+2, z+4, torch); //TORCH
+			BuildHelper.setBlock(world,x-2, y+2, z+4, torch); //TORCH
+			BuildHelper.setBlock(world,x-7, y+2, z+4, torch); //TORCH
 		
 			BuildHelper.build(world, x-7, y-1, z-4, stone, 9, 2, 15); //STONE
 		
@@ -165,14 +150,14 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			BuildHelper.build(world, x+2, y+1, z-3, crop, 7, 1, 2); //CROP
 			BuildHelper.build(world, x+5, y+1, z-3, crop, 7, 1, 2); //CROP
 
-			world.setBlock(x, y+1, z+4, gate, 0, 0); //GATE
-			world.setBlock(x+1, y+1, z-3, chest, 5, 0); //CHEST
-			world.setBlock(x, y+1, z-3, craft, 5, 0); //WORKBENCH
-			world.setBlock(x-1, y+1, z-3, chest, 5, 0); //CHEST
+			BuildHelper.setBlock(world,x, y+1, z+4, gate, 0, 0); //GATE
+			BuildHelper.setBlock(world,x+1, y+1, z-3, chest, 5, 0); //CHEST
+			BuildHelper.setBlock(world,x, y+1, z-3, craft, 5, 0); //WORKBENCH
+			BuildHelper.setBlock(world,x-1, y+1, z-3, chest, 5, 0); //CHEST
 			
 			chest1 = (TileEntityChest)world.getTileEntity(x+1, y+1, z-3);
 			chest2 = (TileEntityChest)world.getTileEntity(x-1, y+1, z-3);
-		} else if (meta == 1) { //EAST
+		} else if(meta == 1) { //EAST
 			BuildHelper.build(world, x-4, y-1, z-7, Blocks.air, 15, 5, 9); //AIR
 		
 			BuildHelper.build(world, x-3, y+1, z+7, fence, 1, 1, 7); //FENCES
@@ -180,18 +165,18 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			BuildHelper.build(world, x-4, y+1, z-7, fence, 15, 1, 1); //FENCES
 			BuildHelper.build(world, x+4, y+1, z-7, fence, 15, 1, 1); //FENCES
 		
-			world.setBlock(x-4, y+2, z+7, torch); //TORCH
-			world.setBlock(x-4, y+2, z+2, torch); //TORCH
-			world.setBlock(x-4, y+2, z-2, torch); //TORCH
-			world.setBlock(x-4, y+2, z-7, torch); //TORCH
+			BuildHelper.setBlock(world,x-4, y+2, z+7, torch); //TORCH
+			BuildHelper.setBlock(world,x-4, y+2, z+2, torch); //TORCH
+			BuildHelper.setBlock(world,x-4, y+2, z-2, torch); //TORCH
+			BuildHelper.setBlock(world,x-4, y+2, z-7, torch); //TORCH
 
-			world.setBlock(x, y+2, z-7, torch); //TORCH
-			world.setBlock(x, y+2, z+7, torch); //TORCH
+			BuildHelper.setBlock(world,x, y+2, z-7, torch); //TORCH
+			BuildHelper.setBlock(world,x, y+2, z+7, torch); //TORCH
 		
-			world.setBlock(x+4, y+2, z+7, torch); //TORCH
-			world.setBlock(x+4, y+2, z+2, torch); //TORCH
-			world.setBlock(x+4, y+2, z-2, torch); //TORCH
-			world.setBlock(x+4, y+2, z-7, torch); //TORCH
+			BuildHelper.setBlock(world,x+4, y+2, z+7, torch); //TORCH
+			BuildHelper.setBlock(world,x+4, y+2, z+2, torch); //TORCH
+			BuildHelper.setBlock(world,x+4, y+2, z-2, torch); //TORCH
+			BuildHelper.setBlock(world,x+4, y+2, z-7, torch); //TORCH
 		
 			BuildHelper.build(world, x-4, y-1, z-7, stone, 15, 2, 9); //STONE
 		
@@ -206,14 +191,14 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			BuildHelper.build(world, x-3, y+1, z+2, crop, 2, 1, 7); //CROP
 			BuildHelper.build(world, x-3, y+1, z+5, crop, 2, 1, 7); //CROP
 
-			world.setBlock(x-4, y+1, z, gate, 1, 0); //GATE
-			world.setBlock(x+3, y+1, z+1, chest, 5, 0); //CHEST
-			world.setBlock(x+3, y+1, z, craft, 5, 0); //WORKBENCH
-			world.setBlock(x+3, y+1, z-1, chest, 5, 0); //CHEST
+			BuildHelper.setBlock(world,x-4, y+1, z, gate, 1, 0); //GATE
+			BuildHelper.setBlock(world,x+3, y+1, z+1, chest, 5, 0); //CHEST
+			BuildHelper.setBlock(world,x+3, y+1, z, craft, 5, 0); //WORKBENCH
+			BuildHelper.setBlock(world,x+3, y+1, z-1, chest, 5, 0); //CHEST
 			
 			chest1 = (TileEntityChest)world.getTileEntity(x+3, y+1, z+1);
 			chest2 = (TileEntityChest)world.getTileEntity(x+3, y+1, z-1);
-		} else if (meta == 2) { //SOUTH
+		} else if(meta == 2) { //SOUTH
 			BuildHelper.build(world, x-7, y-1, z-4, Blocks.air, 9, 5, 15); //AIR
 			
 			BuildHelper.build(world, x+7, y+1, z-3, fence, 7, 1, 1); //FENCES
@@ -221,18 +206,18 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			BuildHelper.build(world, x-7, y+1, z-4, fence, 1, 1, 15); //FENCES
 			BuildHelper.build(world, x-7, y+1, z+4, fence, 1, 1, 15); //FENCES
 		
-			world.setBlock(x+7, y+2, z-4, torch); //TORCH
-			world.setBlock(x+2, y+2, z-4, torch); //TORCH
-			world.setBlock(x-2, y+2, z-4, torch); //TORCH
-			world.setBlock(x-7, y+2, z-4, torch); //TORCH
+			BuildHelper.setBlock(world,x+7, y+2, z-4, torch); //TORCH
+			BuildHelper.setBlock(world,x+2, y+2, z-4, torch); //TORCH
+			BuildHelper.setBlock(world,x-2, y+2, z-4, torch); //TORCH
+			BuildHelper.setBlock(world,x-7, y+2, z-4, torch); //TORCH
 
-			world.setBlock(x-7, y+2, z, torch); //TORCH
-			world.setBlock(x+7, y+2, z, torch); //TORCH
+			BuildHelper.setBlock(world,x-7, y+2, z, torch); //TORCH
+			BuildHelper.setBlock(world,x+7, y+2, z, torch); //TORCH
 		
-			world.setBlock(x+7, y+2, z+4, torch); //TORCH
-			world.setBlock(x+2, y+2, z+4, torch); //TORCH
-			world.setBlock(x-2, y+2, z+4, torch); //TORCH
-			world.setBlock(x-7, y+2, z+4, torch); //TORCH
+			BuildHelper.setBlock(world,x+7, y+2, z+4, torch); //TORCH
+			BuildHelper.setBlock(world,x+2, y+2, z+4, torch); //TORCH
+			BuildHelper.setBlock(world,x-2, y+2, z+4, torch); //TORCH
+			BuildHelper.setBlock(world,x-7, y+2, z+4, torch); //TORCH
 		
 			BuildHelper.build(world, x-7, y-1, z-4, stone, 9, 2, 15); //STONE
 		
@@ -247,14 +232,14 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			BuildHelper.build(world, x+2, y+1, z-3, crop, 7, 1, 2); //CROP
 			BuildHelper.build(world, x+5, y+1, z-3, crop, 7, 1, 2); //CROP
 
-			world.setBlock(x, y+1, z-4, gate, 0, 0); //GATE
-			world.setBlock(x+1, y+1, z+3, chest, 5, 0); //CHEST
-			world.setBlock(x, y+1, z+3, craft, 5, 0); //WORKBENCH
-			world.setBlock(x-1, y+1, z+3, chest, 5, 0); //CHEST
+			BuildHelper.setBlock(world,x, y+1, z-4, gate, 0, 0); //GATE
+			BuildHelper.setBlock(world,x+1, y+1, z+3, chest, 5, 0); //CHEST
+			BuildHelper.setBlock(world,x, y+1, z+3, craft, 5, 0); //WORKBENCH
+			BuildHelper.setBlock(world,x-1, y+1, z+3, chest, 5, 0); //CHEST
 			
 			chest1 = (TileEntityChest)world.getTileEntity(x+1, y+1, z+3);
 			chest2 = (TileEntityChest)world.getTileEntity(x-1, y+1, z+3);
-		} else if (meta == 3) { //WEST (ORIGINAL)
+		} else if(meta == 3) { //WEST (ORIGINAL)
 			BuildHelper.build(world, x-4, y-1, z-7, Blocks.air, 15, 5, 9); //AIR
 		
 			BuildHelper.build(world, x-3, y+1, z+7, fence, 1, 1, 7); //FENCES
@@ -262,18 +247,18 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			BuildHelper.build(world, x-4, y+1, z-7, fence, 15, 1, 1); //FENCES
 			BuildHelper.build(world, x+4, y+1, z-7, fence, 15, 1, 1); //FENCES
 		
-			world.setBlock(x-4, y+2, z+7, torch); //TORCH
-			world.setBlock(x-4, y+2, z+2, torch); //TORCH
-			world.setBlock(x-4, y+2, z-2, torch); //TORCH
-			world.setBlock(x-4, y+2, z-7, torch); //TORCH
+			BuildHelper.setBlock(world,x-4, y+2, z+7, torch); //TORCH
+			BuildHelper.setBlock(world,x-4, y+2, z+2, torch); //TORCH
+			BuildHelper.setBlock(world,x-4, y+2, z-2, torch); //TORCH
+			BuildHelper.setBlock(world,x-4, y+2, z-7, torch); //TORCH
 
-			world.setBlock(x, y+2, z-7, torch); //TORCH
-			world.setBlock(x, y+2, z+7, torch); //TORCH
+			BuildHelper.setBlock(world,x, y+2, z-7, torch); //TORCH
+			BuildHelper.setBlock(world,x, y+2, z+7, torch); //TORCH
 		
-			world.setBlock(x+4, y+2, z+7, torch); //TORCH
-			world.setBlock(x+4, y+2, z+2, torch); //TORCH
-			world.setBlock(x+4, y+2, z-2, torch); //TORCH
-			world.setBlock(x+4, y+2, z-7, torch); //TORCH
+			BuildHelper.setBlock(world,x+4, y+2, z+7, torch); //TORCH
+			BuildHelper.setBlock(world,x+4, y+2, z+2, torch); //TORCH
+			BuildHelper.setBlock(world,x+4, y+2, z-2, torch); //TORCH
+			BuildHelper.setBlock(world,x+4, y+2, z-7, torch); //TORCH
 		
 			BuildHelper.build(world, x-4, y-1, z-7, stone, 15, 2, 9); //STONE
 		
@@ -288,10 +273,10 @@ public class BlockInstantFarm extends BlockDirectionalIB {
 			BuildHelper.build(world, x-3, y+1, z+2, crop, 2, 1, 7); //CROP
 			BuildHelper.build(world, x-3, y+1, z+5, crop, 2, 1, 7); //CROP
 
-			world.setBlock(x+4, y+1, z, gate, 1, 0); //GATE
-			world.setBlock(x-3, y+1, z+1, chest, 5, 0); //CHEST
-			world.setBlock(x-3, y+1, z, craft, 5, 0); //WORKBENCH
-			world.setBlock(x-3, y+1, z-1, chest, 5, 0); //CHEST
+			BuildHelper.setBlock(world,x+4, y+1, z, gate, 1, 0); //GATE
+			BuildHelper.setBlock(world,x-3, y+1, z+1, chest, 5, 0); //CHEST
+			BuildHelper.setBlock(world,x-3, y+1, z, craft, 5, 0); //WORKBENCH
+			BuildHelper.setBlock(world,x-3, y+1, z-1, chest, 5, 0); //CHEST
 			
 			chest1 = (TileEntityChest)world.getTileEntity(x-3, y+1, z+1);
 			chest2 = (TileEntityChest)world.getTileEntity(x-3, y+1, z-1);

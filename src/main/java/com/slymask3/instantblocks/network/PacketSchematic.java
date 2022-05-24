@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.network;
 
 import com.slymask3.instantblocks.block.instant.BlockInstantSchematic;
+import com.slymask3.instantblocks.util.BuildHelper;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -61,7 +62,7 @@ public class PacketSchematic extends AbstractPacket {
 	@Override
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
-		BlockInstantSchematic block = (BlockInstantSchematic)world.getBlock(_x, _y, _z);
+		BlockInstantSchematic block = (BlockInstantSchematic) BuildHelper.getBlock(world,_x, _y, _z);
 		block.build(world, _x, _y, _z, world.getTileEntity(_x, _y, _z).getBlockMetadata(), _player, this._schematic, this._center, this._air);
 	}
 }

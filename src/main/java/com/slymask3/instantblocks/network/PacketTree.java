@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.network;
 
 import com.slymask3.instantblocks.block.instant.BlockInstantTree;
+import com.slymask3.instantblocks.util.BuildHelper;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -65,7 +66,7 @@ public class PacketTree extends AbstractPacket {
 	@Override
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
-		BlockInstantTree block = (BlockInstantTree)world.getBlock(_x, _y, _z);
+		BlockInstantTree block = (BlockInstantTree) BuildHelper.getBlock(world,_x, _y, _z);
 		block.build(world, _x, _y, _z, _player, this._type, this._log, this._leaves, this._air);
 	}
 }

@@ -63,7 +63,7 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
 	}
 
 	public IIcon getIcon(int side, int meta) {
-//		if (side == 0 || side == 1) {
+//		if(side == 0 || side == 1) {
 //			return Blocks.log.getIcon(side, 0);
 //		} else {
 //			return this.side;
@@ -79,8 +79,8 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.USE_WANDS) {
-			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+		if(Config.USE_WANDS) {
+			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
 				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
@@ -96,23 +96,23 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
 	public void build(World world, int x, int y, int z, String playerS, int type, boolean fullLog, boolean fullLeaves, boolean air) {
 		EntityPlayer player = world.getPlayerEntityByName(playerS);
 		
-		if (type == 0) { //IF OAK
+		if(type == 0) { //IF OAK
 			buildOak(world, x, y, z, fullLog, fullLeaves, air);
-		} else if (type == 1) { //IF SPRUCE
+		} else if(type == 1) { //IF SPRUCE
 			buildSpruce(world, x, y, z, fullLog, fullLeaves, air);
-		} else if (type == 2) { //IF BIRCH
+		} else if(type == 2) { //IF BIRCH
 			buildBirch(world, x, y, z, fullLog, fullLeaves, air);
-		} else if (type == 3) { //IF JUNGLE
+		} else if(type == 3) { //IF JUNGLE
 			buildJungle(world, x, y, z, fullLog, fullLeaves, air);
-//		} else if (type == 4) { //IF BIG JUNGLE
+//		} else if(type == 4) { //IF BIG JUNGLE
 //			buildJungleBig(world, x, y, z, fullLog, fullLeaves, air);
-		} else if (type == 4) { //IF ACACIA
+		} else if(type == 4) { //IF ACACIA
 			buildAcacia(world, x, y, z, fullLog, fullLeaves, air);
-		} else if (type == 5) { //IF DARK OAK
+		} else if(type == 5) { //IF DARK OAK
 			buildDarkOak(world, x, y, z, fullLog, fullLeaves, air);
-//		} else if (type == 7) { //IF REVERSE
+//		} else if(type == 7) { //IF REVERSE
 //			buildReverse(world, x, y, z, fullLog, fullLeaves, air);
-		} else if (type == 6) { //IF GLASS
+		} else if(type == 6) { //IF GLASS
 			buildGlass(world, x, y, z, fullLog, fullLeaves, air);
 		}
 		
@@ -120,7 +120,7 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
 		
 		ItemStack is = player.getCurrentEquippedItem();
 		
-		if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+		if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 			is.damageItem(1, player);
 		}
 	}
@@ -1003,56 +1003,56 @@ public class BlockInstantTree extends BlockContainer implements ITileEntityProvi
 	
 	
 	public void buildLog(World world, int x, int y, int z, Block block, int meta, boolean fullLog, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		if (fullLog) {
+		if(fullLog) {
 			BuildHelper.build(world, x-1, y, z-1, block, meta, 4, 4, 4);
 		} else {
-			if (air) {
+			if(air) {
 				BuildHelper.build(world, x-1, y, z-1, Blocks.air, 0, 4, 4, 4);
 			}
-			if (up) {
+			if(up) {
 				BuildHelper.build(world, x-1, y+3, z-1, block, meta, 4, 1, 4);
 			}
-			if (down) {
+			if(down) {
 				BuildHelper.build(world, x-1, y, z-1, block, meta, 4, 1, 4);
 			}
-			if (north) {
+			if(north) {
 				BuildHelper.build(world, x-1, y, z-1, block, meta, 1, 4, 4);
 			}
-			if (south) {
+			if(south) {
 				BuildHelper.build(world, x-1, y, z+2, block, meta, 1, 4, 4);
 			}
-			if (east) {
+			if(east) {
 				BuildHelper.build(world, x+2, y, z-1, block, meta, 4, 4, 1);
 			}
-			if (west) {
+			if(west) {
 				BuildHelper.build(world, x-1, y, z-1, block, meta, 4, 4, 1);
 			}
 		}
 	}
 	
 	public void buildLeaves(World world, int x, int y, int z, Block block, int meta, boolean fullLeaves, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		if (fullLeaves) {
+		if(fullLeaves) {
 			BuildHelper.build(world, x-1, y, z-1, block, meta, 4, 4, 4);
 		} else {
-			if (air) {
+			if(air) {
 				BuildHelper.build(world, x-1, y, z-1, Blocks.air, 0, 4, 4, 4);
 			}
-			if (up) {
+			if(up) {
 				BuildHelper.build(world, x-1, y+3, z-1, block, meta, 4, 1, 4);
 			}
-			if (down) {
+			if(down) {
 				BuildHelper.build(world, x-1, y, z-1, block, meta, 4, 1, 4);
 			}
-			if (north) {
+			if(north) {
 				BuildHelper.build(world, x-1, y, z-1, block, meta, 1, 4, 4);
 			}
-			if (south) {
+			if(south) {
 				BuildHelper.build(world, x-1, y, z+2, block, meta, 1, 4, 4);
 			}
-			if (east) {
+			if(east) {
 				BuildHelper.build(world, x+2, y, z-1, block, meta, 4, 4, 1);
 			}
-			if (west) {
+			if(west) {
 				BuildHelper.build(world, x-1, y, z-1, block, meta, 4, 4, 1);
 			}
 		}

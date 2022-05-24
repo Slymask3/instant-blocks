@@ -41,26 +41,26 @@ public class BlockColorLadder extends BlockLadder implements ITileEntityProvider
 	
 	@SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
-        if (side==2) {
-			if (meta==2) {
+        if(side==2) {
+			if(meta==2) {
 	        	return this.side;
 			} else {
 	        	return blank;
 			}
-        } else if (side==3) {
-			if (meta==3) {
+        } else if(side==3) {
+			if(meta==3) {
 	        	return this.side;
 			} else {
 	        	return blank;
 			}
-        } else if (side==4) {
-        	if (meta==4) {
+        } else if(side==4) {
+        	if(meta==4) {
 	        	return this.side;
 			} else {
 	        	return blank;
 			}
-        }  else if (side==5) {
-        	if (meta==5) {
+        }  else if(side==5) {
+        	if(meta==5) {
 	        	return this.side;
 			} else {
 	        	return blank;
@@ -107,22 +107,22 @@ public class BlockColorLadder extends BlockLadder implements ITileEntityProvider
 	public void func_149797_b(int meta) {
         float f = 0.125F;
 
-        if (meta == 2)
+        if(meta == 2)
         {
             this.setBlockBounds(0.0F, 0.0F, 1.0F - f, 1.0F, 1.0F, 1.0F);
         }
 
-        if (meta == 3)
+        if(meta == 3)
         {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
         }
 
-        if (meta == 4)
+        if(meta == 4)
         {
             this.setBlockBounds(1.0F - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         }
 
-        if (meta == 5)
+        if(meta == 5)
         {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
         }

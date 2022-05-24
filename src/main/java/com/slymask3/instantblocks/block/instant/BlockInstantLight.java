@@ -8,6 +8,7 @@ import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
+import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -42,7 +43,7 @@ public class BlockInstantLight extends BlockIB {
 	}
     
 	public IIcon getIcon(int side, int meta) {
-		if (side == 1) {
+		if(side == 1) {
 			return this.top;
 		} else {
 			return this.side;
@@ -98,8 +99,8 @@ public class BlockInstantLight extends BlockIB {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.USE_WANDS) {
-			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+		if(Config.USE_WANDS) {
+			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				is.damageItem(1, player);
 			} else {
 				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
@@ -117,7 +118,7 @@ public class BlockInstantLight extends BlockIB {
 	}
 	
 	public void lightUp(World world, int X, int Y, int Z, int radius, EntityPlayer player) {
-		world.setBlock(X, Y, Z, Blocks.air);
+		BuildHelper.setBlock(world,X, Y, Z, Blocks.air);
 		
 		int amount = 0;
 		
@@ -130,20 +131,20 @@ public class BlockInstantLight extends BlockIB {
         int bx = x;
         int bz = z;
  
-        for (int i=0; i<radius*2+1; i++) {
-            for (int j=0; j<radius*2+1; j++) {
-                for (int k=0; k<radius*2+1; k++) {
-                    Block block = world.getBlock(x, y, z);
+        for(int i=0; i<radius*2+1; i++) {
+            for(int j=0; j<radius*2+1; j++) {
+                for(int k=0; k<radius*2+1; k++) {
+                    Block block = BuildHelper.getBlock(world,x, y, z);
                     int meta = world.getBlockMetadata(x, y, z);
                     
                     //LogHelper.info("getAmbientOcclusionLightValue() == "+block.getAmbientOcclusionLightValue());
                     //LogHelper.info("getBlockLightValue() == "+world.getBlockLightValue(x, y, z));
 
-                    Block block1 = world.getBlock(x+1, y, z);
-                    Block block2 = world.getBlock(x-1, y, z);
-                    Block block4 = world.getBlock(x, y-1, z);
-                    Block block5 = world.getBlock(x, y, z+1);
-                    Block block6 = world.getBlock(x, y, z-1);
+                    Block block1 = BuildHelper.getBlock(world,x+1, y, z);
+                    Block block2 = BuildHelper.getBlock(world,x-1, y, z);
+                    Block block4 = BuildHelper.getBlock(world,x, y-1, z);
+                    Block block5 = BuildHelper.getBlock(world,x, y, z+1);
+                    Block block6 = BuildHelper.getBlock(world,x, y, z-1);
                     
                     //Block[] badBlocks = {Blocks.air, Blocks.water, Blocks.lava, Blocks.leaves, Blocks.leaves2, Blocks.reeds, Blocks.cactus, Blocks.rail, Blocks.glass, Blocks.glass_pane, Blocks.glowstone, Blocks.bed, Blocks.acacia_stairs, Blocks.oak_stairs, Blocks.spruce_stairs, Blocks.birch_stairs, Blocks.jungle_stairs, Blocks.dark_oak_stairs, Blocks.anvil, Blocks.brewing_stand, Blocks.cake, Blocks.carpet, Blocks.carrots, Blocks.potatoes, Blocks.wheat, Blocks.stone_brick_stairs, Blocks.brick_stairs, Blocks.stone_stairs, Blocks.sandstone_stairs, Blocks.nether_brick_stairs};
                     
@@ -152,24 +153,24 @@ public class BlockInstantLight extends BlockIB {
                     
                     if((world.getBlockLightValue(x, y, z) < 10) && (block == Blocks.air) && (block1.isOpaqueCube() || block2.isOpaqueCube() || block4.isOpaqueCube() || block5.isOpaqueCube() || block6.isOpaqueCube())) {
                     	
-                    	world.setBlock(x, y, z, Blocks.torch);
+                    	BuildHelper.setBlock(world,x, y, z, Blocks.torch);
                     	amount++;
                     	
                     	
 //                    	boolean place = false;
 //                    	
 //                    	for(int b=0; b<badBlocks.length; b++) {
-//                    		if (block1 == badBlocks[b] || block2 == badBlocks[b] || block4 == badBlocks[b] || block5 == badBlocks[b] || block6 == badBlocks[b]) {
+//                    		if(block1 == badBlocks[b] || block2 == badBlocks[b] || block4 == badBlocks[b] || block5 == badBlocks[b] || block6 == badBlocks[b]) {
 //                    			break;
 //                    		}
 //                    		
-//                    		if (b==badBlocks.length-1) {
+//                    		if(b==badBlocks.length-1) {
 //                    			place = true;
 //                    		}
 //                    	}
 //
 //                		if(place) {
-//                			world.setBlock(x, y, z, Blocks.torch);
+//                			BuildHelper.setBlock(world,x, y, z, Blocks.torch);
 //                        	amount++;
 //                		}
                     }
@@ -190,9 +191,9 @@ public class BlockInstantLight extends BlockIB {
             IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibLight);
     		IBHelper.xp(world, player, Config.XP_AMOUNT);
     		IBHelper.sound(world, Config.SOUND, x, y, z);
-    		IBHelper.effectFull(world, "reddust", x, y, z);
+    		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
         } else {
-    		world.setBlock(X, Y, Z, ModBlocks.ibLight);
+    		BuildHelper.setBlock(world,X, Y, Z, ModBlocks.ibLight);
 	        IBHelper.msg(player, Strings.ERROR_LIGHT.replace("%i%",String.valueOf(Config.RADIUS_LIGHT)), Colors.c);
     		
         }
@@ -208,16 +209,16 @@ public class BlockInstantLight extends BlockIB {
 //        int bx = x;
 //        int bz = z;
 // 
-//        for (int i=0; i<radius*2+1; i++) {
-//            for (int j=0; j<radius*2+1; j++) {
-//                for (int k=0; k<radius*2+1; k++) {
-//                    Block block = world.getBlock(x, y, z);
+//        for(int i=0; i<radius*2+1; i++) {
+//            for(int j=0; j<radius*2+1; j++) {
+//                for(int k=0; k<radius*2+1; k++) {
+//                    Block block = BuildHelper.getBlock(world,x, y, z);
 //                    
-//                    Block block1 = world.getBlock(x+1, y, z);
-//                    Block block2 = world.getBlock(x-1, y, z);
-//                    Block block4 = world.getBlock(x, y-1, z);
-//                    Block block5 = world.getBlock(x, y, z+1);
-//                    Block block6 = world.getBlock(x, y, z-1);
+//                    Block block1 = BuildHelper.getBlock(world,x+1, y, z);
+//                    Block block2 = BuildHelper.getBlock(world,x-1, y, z);
+//                    Block block4 = BuildHelper.getBlock(world,x, y-1, z);
+//                    Block block5 = BuildHelper.getBlock(world,x, y, z+1);
+//                    Block block6 = BuildHelper.getBlock(world,x, y, z-1);
 //                    
 //                    if((world.getBlockLightValue(x, y, z) < 10) && (block == Blocks.air) && (block1.isOpaqueCube() || block2.isOpaqueCube() || block4.isOpaqueCube() || block5.isOpaqueCube() || block6.isOpaqueCube())) {
 //                    	amount++;
@@ -233,7 +234,7 @@ public class BlockInstantLight extends BlockIB {
 //            y--;
 //        }
 //        
-//        if (amount > 0) {
+//        if(amount > 0) {
 //        	return true;
 //        } else {
 //        	return false;

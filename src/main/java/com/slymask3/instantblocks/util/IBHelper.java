@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -14,7 +13,7 @@ import net.minecraft.world.World;
 
 public class IBHelper {
 	public static void xp(World world, EntityPlayer player, int xpAmount) {
-		if (!world.isRemote) { //IF SERVER
+		if(!world.isRemote) { //IF SERVER
 			if(xpAmount > 0) {
 				EntityXPOrb xp = new EntityXPOrb(world, player.posX, player.posY, player.posZ, xpAmount);
 				world.spawnEntityInWorld(xp);
@@ -27,17 +26,14 @@ public class IBHelper {
 	}
 
 	public static void effectFull(World world, String particle, int x, int y, int z) {
-		if (Config.SHOW_EFFECTS) {
-			//if (checkParticle > 0) {
-				for (double i = 0; i <= 1; i = i + 0.1) {
-					for (double n = 0; n <= 1; n = n + 0.1) {
-						for (double v = 0; v <= 1; v = v + 0.1) {
-							world.spawnParticle(particle, x+i, y+v, z+n, 0.0D, 0.0D, 0.0D);
-							//System.out.println("PARTICLE");
-						}
+		if(Config.SHOW_EFFECTS) {
+			for(double i = 0; i <= 1; i = i + 0.1) {
+				for(double n = 0; n <= 1; n = n + 0.1) {
+					for(double v = 0; v <= 1; v = v + 0.1) {
+						world.spawnParticle(particle, x+i, y+v, z+n, 0.0D, 0.0D, 0.0D);
 					}
 				}
-			//}
+			}
 		}
 	}
 	
@@ -51,16 +47,16 @@ public class IBHelper {
 	}
 	
 	public static void keepBlocks(World world, int x, int y, int z, Block block) {
-		if (Config.KEEP_BLOCKS) {
-			BuildHelper.setBlockIfNoBedrock(world, x, y, z, block);
+		if(Config.KEEP_BLOCKS) {
+			BuildHelper.setBlock(world, x, y, z, block);
 		} else {
 			//Do not keep block.
 		}
 	}
 	
 	public void tp(World world, EntityPlayer player, int x, int y, int z, boolean property) {
-		if (!world.isRemote) { //IF SERVER
-			if (property) {
+		if(!world.isRemote) { //IF SERVER
+			if(property) {
 				IBHelper.sound(world, Config.SOUND, x, y, z);
 				player.setPositionAndUpdate(x + 0.5, y + 0.5, z + 0.5);
 			}
@@ -72,15 +68,15 @@ public class IBHelper {
 	}
 	
 	public static void addItemsToChest(TileEntityChest chest, Item item, int amount, int meta) {
-		for (int i=0; i<chest.getSizeInventory(); i++) {
+		for(int i=0; i<chest.getSizeInventory(); i++) {
 			ItemStack is = new ItemStack(item, amount, meta);
-			if (chest.getStackInSlot(i) != null && chest.getStackInSlot(i).getItem() == is.getItem() && chest.getStackInSlot(i).getItemDamage() == is.getItemDamage() && chest.getStackInSlot(i).stackSize < 64) {
+			if(chest.getStackInSlot(i) != null && chest.getStackInSlot(i).getItem() == is.getItem() && chest.getStackInSlot(i).getItemDamage() == is.getItemDamage() && chest.getStackInSlot(i).stackSize < 64) {
 				chest.setInventorySlotContents(i, new ItemStack(item, amount + chest.getStackInSlot(i).stackSize, meta));
 				break;
-			} else if (chest.getStackInSlot(i) != null && chest.getStackInSlot(i).getItem() == is.getItem() && chest.getStackInSlot(i).getItemDamage() == is.getItemDamage() && chest.getStackInSlot(i).stackSize > 64) {
+			} else if(chest.getStackInSlot(i) != null && chest.getStackInSlot(i).getItem() == is.getItem() && chest.getStackInSlot(i).getItemDamage() == is.getItemDamage() && chest.getStackInSlot(i).stackSize > 64) {
 				chest.setInventorySlotContents(i+1, new ItemStack(item, amount, meta));
 				break;
-			} else if (chest.getStackInSlot(i) == null) {
+			} else if(chest.getStackInSlot(i) == null) {
 				chest.setInventorySlotContents(i, new ItemStack(item, amount, meta));
 				break;
 			}

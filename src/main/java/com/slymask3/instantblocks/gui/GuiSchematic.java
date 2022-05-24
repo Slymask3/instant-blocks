@@ -84,12 +84,12 @@ public class GuiSchematic extends GuiScreen {
 
 	@Override
 	protected void actionPerformed(final GuiButton btn) {
-		if (btn.enabled) {
-			if (btn.id == done.id) {
+		if(btn.enabled) {
+			if(btn.id == done.id) {
 				sendInfo();
 				Keyboard.enableRepeatEvents(false);
 				mc.displayGuiScreen(null);
-			} else if (btn.id == cancel.id) {
+			} else if(btn.id == cancel.id) {
 				Keyboard.enableRepeatEvents(false);
 				mc.displayGuiScreen(null);
 			}
@@ -99,11 +99,11 @@ public class GuiSchematic extends GuiScreen {
 	@Override
 	protected void keyTyped(final char par1, final int par2) {
 		
-		if (("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ^&'@{}[],$=!-#()%.+~_ ".indexOf(par1) >= 0) || (par2 == 14)) {
+		if(("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ^&'@{}[],$=!-#()%.+~_ ".indexOf(par1) >= 0) || (par2 == 14)) {
 			input.textboxKeyTyped(par1, par2);
-		} else if (par2 == done.id) {
+		} else if(par2 == done.id) {
 			actionPerformed(done);
-		} else if (par2 == cancel.id) {
+		} else if(par2 == cancel.id) {
 			actionPerformed(cancel);
 		}
 
@@ -129,7 +129,7 @@ public class GuiSchematic extends GuiScreen {
         addTree(new File("schematics/"), all);
         Object[] schems = all.toArray();
         
-        for (int i=0; i<all.size();i++) {
+        for(int i=0; i<all.size();i++) {
         	String schem = schems[i].toString().replaceAll("schematics", "").replaceAll("\\\\", "").replaceAll(".schematic", "");
         	schematics.add(schem);
         }
@@ -170,8 +170,8 @@ public class GuiSchematic extends GuiScreen {
 	
 	public void addTree(File file, Collection<File> all) {
         File[] children = file.listFiles();
-        if (children != null) {
-            for (File child : children) {
+        if(children != null) {
+            for(File child : children) {
                 all.add(child);
                 addTree(child, all);
             }
@@ -182,7 +182,7 @@ public class GuiSchematic extends GuiScreen {
 		InstantBlocks.packetPipeline.sendToServer(new PacketSchematic(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), center.isChecked(), ignoreAir.isChecked()));
 		
 		IBHelper.xp(world, player, Config.XP_AMOUNT);
-        IBHelper.effectFull(world, "reddust", x, y, z);
+        IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
         IBHelper.msg(player, Strings.CREATE_SCHEMATIC.replace("%schematic%",input.getText()), Colors.a);
 	}
 	
@@ -198,7 +198,7 @@ public class GuiSchematic extends GuiScreen {
 
     public void selectSchematicIndex(int index) {
         this.selected=index;
-        if (index>=0 && index<=schematics.size()) {
+        if(index>=0 && index<=schematics.size()) {
             this.selectedSchem=schematics.get(selected);
             this.input.setText(selectedSchem);
         } else {

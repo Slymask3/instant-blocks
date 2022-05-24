@@ -40,18 +40,17 @@ public class BlockSkydiveTP extends Block {
 	
 	@SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
-        if (side==0 || side==1) {
+        if(side==0 || side==1) {
         	return other;
         } else {
         	return this.side;
         }
     }
-	
 
 	@Override
 	public boolean onBlockActivated(World world,int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		IBHelper.sound(world, "portal.trigger", x, 257, z);
-		if (!world.isRemote) { //IF SERVER
+		if(!world.isRemote) { //IF SERVER
 			player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z + 0.5);
 		}
 		

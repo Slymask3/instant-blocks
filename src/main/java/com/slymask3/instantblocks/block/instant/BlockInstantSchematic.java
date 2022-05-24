@@ -7,6 +7,7 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.*;
 import com.slymask3.instantblocks.tileentity.TileEntitySchematic;
+import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
 import com.slymask3.instantblocks.util.LogHelper;
 import com.slymask3.instantblocks.util.SchematicHelper;
@@ -45,9 +46,9 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 	}
     
 	public IIcon getIcon(int side, int meta) {
-		if (side == 0) {
+		if(side == 0) {
 			return Blocks.planks.getIcon(0, 5);
-		} else if (side == 1) {
+		} else if(side == 1) {
 			return top;
 		} else {
 			return this.side;
@@ -62,8 +63,8 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		ItemStack is = player.getCurrentEquippedItem();
     	
-		if (Config.USE_WANDS) {
-			if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+		if(Config.USE_WANDS) {
+			if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 				//is.damageItem(1, player);
 			} else {
 				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
@@ -88,18 +89,18 @@ public class BlockInstantSchematic extends BlockContainer implements ITileEntity
 			
 			ItemStack is = player.getCurrentEquippedItem();
 	    	
-			if (Config.USE_WANDS) {
-				if (is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
+			if(Config.USE_WANDS) {
+				if(is != null && (is.getItem() == ModItems.ibWandWood || is.getItem() == ModItems.ibWandStone || is.getItem() == ModItems.ibWandIron || is.getItem() == ModItems.ibWandGold || is.getItem() == ModItems.ibWandDiamond)) {
 					is.damageItem(1, player);
 				}
 			}
 			
-			world.setBlock(x, y, z, Blocks.air);
+			BuildHelper.setBlock(world,x, y, z, Blocks.air);
 			
 			IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibSchematic);
     		IBHelper.xp(world, player, Config.XP_AMOUNT);
     		IBHelper.sound(world, Config.SOUND, x, y, z);
-    		IBHelper.effectFull(world, "reddust", x, y, z);
+    		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
 			
 		} catch(Exception e) {
 			LogHelper.error("failed to build schematic (" + schematic + "): " + e.getMessage());
