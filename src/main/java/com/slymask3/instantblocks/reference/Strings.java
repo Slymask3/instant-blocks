@@ -8,8 +8,8 @@ public class Strings {
 	public static final String ERROR_GRINDER = "You must place this above a Zombie/Skeleton spawner.";
 	public static final String ERROR_LADDER = "Instant Mining Ladder cannot be created below layer 16.";
 	public static final String ERROR_ESCAPE_LADDER = "This block only works underground.";
-	public static final String ERROR_WATER_MAX = "You were prevented from filling in over %i% lava blocks.";
-	public static final String ERROR_LAVA_MAX = "You were prevented from filling in over %i% water blocks.";
+	public static final String ERROR_WATER_MAX = "You were prevented from filling in over %i% water blocks.";
+	public static final String ERROR_LAVA_MAX = "You were prevented from filling in over %i% lava blocks.";
 	public static final String ERROR_LIGHT = "There are no dark areas to light up in a radius of %i% blocks.";
 	public static final String ERROR_NO_LIQUID = "No liquids found.";
 	public static final String ERROR_STATUE = "Couldn't find a skin from '%username%'.";
@@ -27,10 +27,8 @@ public class Strings {
 	public static final String CREATE_LAVA_1 = "Instant Lava created with 1 lava block.";
 	public static final String CREATE_WATER = "Instant Water created with %i% water blocks.";
 	public static final String CREATE_WATER_1 = "Instant Water created with 1 water block.";
-	public static final String CREATE_SUCTION_WATER = "Filled in %i% water blocks.";
-	public static final String CREATE_SUCTION_WATER_1 = "Filled in 1 water block.";
-	public static final String CREATE_SUCTION_LAVA = "Filled in %i% lava blocks.";
-	public static final String CREATE_SUCTION_LAVA_1 = "Filled in 1 lava block.";
+	public static final String CREATE_SUCTION = "Filled in %i% %type% blocks.";
+	public static final String CREATE_SUCTION_1 = "Filled in 1 %type% block.";
 	public static final String CREATE_RAIL = "Instant Rail created.";
 	public static final String CREATE_HARVEST = "Harvested all blocks around.";
 	public static final String CREATE_LIGHT = "Lit up this area.";

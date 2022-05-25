@@ -1,20 +1,44 @@
 package com.slymask3.instantblocks.item;
 
+import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
+import com.slymask3.instantblocks.reference.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class ItemInstantWand extends ItemIB {
+public class ItemInstantWand extends Item {
 	public Item material;
 	
 	public ItemInstantWand(Item mat) {
 		super();
+		this.setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
         maxStackSize = 1;
         material = mat;
+	}
+
+	@Override
+	public String getUnlocalizedName() {
+		return String.format("item.%s%s", Reference.MOD_ID + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+	}
+
+	@Override
+	public String getUnlocalizedName(ItemStack itemStack) {
+		return String.format("item.%s%s", Reference.MOD_ID + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister iconRegister) {
+		itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+	}
+
+	protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
+		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
 	}
 	
 	@SideOnly(Side.CLIENT)
