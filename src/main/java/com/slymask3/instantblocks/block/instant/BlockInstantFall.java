@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
-import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
@@ -22,9 +21,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class BlockInstantFall extends BlockInstant {
-	
     public BlockInstantFall() {
-		super(ModBlocks.ibFall, Names.Blocks.IB_SKYDIVE, Material.cloth, Block.soundTypeCloth, 1.5F);
+		super(Names.Blocks.IB_SKYDIVE, Material.cloth, Block.soundTypeCloth, 1.5F);
         setBlockTextureName(Textures.Harvest.SIDE0);
 		setGuiID(GuiID.SKYDIVE);
     }
@@ -57,25 +55,24 @@ public class BlockInstantFall extends BlockInstant {
 	
     public void build(World world, int x, int y, int z, String playerS, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10, boolean tp) {
     	EntityPlayer player = world.getPlayerEntityByName(playerS);
-    	
-    	Block wool = Blocks.wool;
-		Block stone = Blocks.stone;
+
 		Block water = Blocks.water;
-		Block ladder = Blocks.ladder;
+		Block air = Blocks.air;
 		
 		int meta = world.getBlockMetadata(x, y, z);
+		int min = 7;
 
 		/************************ Air ************************/
-		for(int c = 256; c >= 1; c--) {
-			BuildHelper.buildClean(world, x-3, c, z-3, Blocks.air, 7, 1, 7); //CENTER
-			BuildHelper.buildClean(world, x-4, c, z-2, Blocks.air, 5, 1, 1); //WALL
-			BuildHelper.buildClean(world, x+4, c, z-2, Blocks.air, 5, 1, 1); //WALL
-			BuildHelper.buildClean(world, x-2, c, z+4, Blocks.air, 1, 1, 5); //WALL
-			BuildHelper.buildClean(world, x-2, c, z-4, Blocks.air, 1, 1, 5); //WALL
+		for(int c = 256; c >= min; c--) {
+			BuildHelper.buildClean(world, x-3, c, z-3, air, 7, 1, 7); //CENTER
+			BuildHelper.buildClean(world, x-4, c, z-2, air, 5, 1, 1); //WALL
+			BuildHelper.buildClean(world, x+4, c, z-2, air, 5, 1, 1); //WALL
+			BuildHelper.buildClean(world, x-2, c, z+4, air, 1, 1, 5); //WALL
+			BuildHelper.buildClean(world, x-2, c, z-4, air, 1, 1, 5); //WALL
 		}
 		
 		/************************ 0 : Red (14) ************************/
-		for(int c = 253; c >= 1; c =  c - 33) {
+		for(int c = 253; c >= min; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c0); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c0); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c0); //WALL
@@ -101,7 +98,7 @@ public class BlockInstantFall extends BlockInstant {
 		}
 		
 		/************************ 1 : Orange (1) ************************/
-		for(int c = 250; c >= 1; c =  c - 33) {
+		for(int c = 250; c >= min; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c1); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c1); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c1); //WALL
@@ -127,7 +124,7 @@ public class BlockInstantFall extends BlockInstant {
 		}
 		
 		/************************ 2 : Yellow (4) ************************/
-		for(int c = 247; c >= 1; c =  c - 33) {
+		for(int c = 247; c >= min; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c2); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c2); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c2); //WALL
@@ -153,7 +150,7 @@ public class BlockInstantFall extends BlockInstant {
 		}
 		
 		/************************ 3 : Lime (5) ************************/
-		for(int c = 244; c >= 1; c =  c - 33) {
+		for(int c = 244; c >= min; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c3); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c3); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c3); //WALL
@@ -179,7 +176,7 @@ public class BlockInstantFall extends BlockInstant {
 		}
 		
 		/************************ 4 : Green (13) ************************/
-		for(int c = 241; c >= 1; c =  c - 33) {
+		for(int c = 241; c >= min; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c4); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c4); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c4); //WALL
@@ -205,7 +202,7 @@ public class BlockInstantFall extends BlockInstant {
 		}
 		
 		/************************ 5 : Cyan (9) ************************/
-		for(int c = 238; c >= 1; c =  c - 33) {
+		for(int c = 238; c >= min; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c5); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c5); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c5); //WALL
@@ -231,7 +228,7 @@ public class BlockInstantFall extends BlockInstant {
 		}
 		
 		/************************ 6 : Light Blue (3) ************************/
-		for(int c = 235; c >= 1; c =  c - 33) {
+		for(int c = 235; c >= min; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c6); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c6); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c6); //WALL
@@ -257,7 +254,7 @@ public class BlockInstantFall extends BlockInstant {
 		}
 		
 		/************************ 7 : Blue (11) ************************/
-		for(int c = 232; c >= 1; c =  c - 33) {
+		for(int c = 232; c >= min; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c7); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c7); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c7); //WALL
@@ -283,7 +280,7 @@ public class BlockInstantFall extends BlockInstant {
 		}
 		
 		/************************ 8 : Purple (10) ************************/
-		for(int c = 229; c >= 1; c =  c - 33) {
+		for(int c = 229; c >= min; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c8); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c8); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c8); //WALL
@@ -309,7 +306,7 @@ public class BlockInstantFall extends BlockInstant {
 		}
 		
 		/************************ 9 : Light Purple (2) ************************/
-		for(int c = 226; c >= 1; c =  c - 33) {
+		for(int c = 226; c >= min; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c9); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c9); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c9); //WALL
@@ -335,7 +332,7 @@ public class BlockInstantFall extends BlockInstant {
 		}
 		
 		/************************ 10 : Pink (6) ************************/
-		for(int c = 223; c >= 1; c =  c - 33) {
+		for(int c = 223; c >= min; c =  c - 33) {
 			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c10); //WALL
 			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c10); //WALL
 			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c10); //WALL
@@ -361,7 +358,7 @@ public class BlockInstantFall extends BlockInstant {
 		}
 
 		/************************ Stone (Prevent Lava Burning) ************************/
-//		for(int c = 50; c >= 1; c--) {
+//		for(int c = 50; c >= min; c--) {
 //			BuildHelper.buildClean(world, x-6, c, z-3, stone, 7, 1, 1); //WALL
 //			BuildHelper.buildClean(world, x+6, c, z-3, stone, 7, 1, 1); //WALL
 //			BuildHelper.buildClean(world, x-3, c, z+6, stone, 1, 1, 7); //WALL
@@ -386,7 +383,7 @@ public class BlockInstantFall extends BlockInstant {
 //		}
 
 		/************************ Water ************************/
-		for(int c = 4; c > 1; c--) {
+		for(int c = min+3; c > min; c--) {
 			BuildHelper.buildClean(world, x-3, c, z-3, water, 7, 1, 7); //CENTER
 			BuildHelper.buildClean(world, x-4, c, z-2, water, 5, 1, 1); //WALL
 			BuildHelper.buildClean(world, x+4, c, z-2, water, 5, 1, 1); //WALL
@@ -394,62 +391,35 @@ public class BlockInstantFall extends BlockInstant {
 			BuildHelper.buildClean(world, x-2, c, z-4, water, 1, 1, 5); //WALL
 		}
 		
-		/************************ Floor (c7) ************************/
-		BuildHelper.buildColorBlock(world, x-3, 1, z-3, 7, 1, 7, c7); //CENTER
-		BuildHelper.buildColorBlock(world, x-4, 1, z-2, 5, 1, 1, c7); //WALL
-		BuildHelper.buildColorBlock(world, x+4, 1, z-2, 5, 1, 1, c7); //WALL
-		BuildHelper.buildColorBlock(world, x-2, 1, z+4, 1, 1, 5, c7); //WALL
-		BuildHelper.buildColorBlock(world, x-2, 1, z-4, 1, 1, 5, c7); //WALL
+		/************************ Floor (c5) ************************/
+		BuildHelper.buildColorBlock(world, x-3, min, z-3, 7, 1, 7, c5); //CENTER
+		BuildHelper.buildColorBlock(world, x-4, min, z-2, 5, 1, 1, c5); //WALL
+		BuildHelper.buildColorBlock(world, x+4, min, z-2, 5, 1, 1, c5); //WALL
+		BuildHelper.buildColorBlock(world, x-2, min, z+4, 1, 1, 5, c5); //WALL
+		BuildHelper.buildColorBlock(world, x-2, min, z-4, 1, 1, 5, c5); //WALL
 
 		/************************ Ladder ************************/
 		if(meta == 0) {
-			BuildHelper.setBlock(world,x, 5, z+5, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x+5, 5, z, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x-5, 5, z, ModBlocks.skydiveTP);
-		
-			if(tp) {
-				IBHelper.sound(world, Config.SOUND, x, 256, z+5);
-				if(!world.isRemote) { //IF SERVER
-					player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z+5 + 0.5);
-				}
-			}
+			BuildHelper.setBlock(world,x, min+4, z+5, ModBlocks.skydiveTP);
+			BuildHelper.setBlock(world,x+5, min+4, z, ModBlocks.skydiveTP);
+			BuildHelper.setBlock(world,x-5, min+4, z, ModBlocks.skydiveTP);
+			IBHelper.teleport(world,player,x,257,z+5, tp);
 		} else if(meta == 1) {
-			BuildHelper.setBlock(world,x-5, 5, z, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x, 5, z+5, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x, 5, z-5, ModBlocks.skydiveTP);
-		
-			if(tp) {
-				IBHelper.sound(world, Config.SOUND, x-5, 256, z);
-				if(!world.isRemote) { //IF SERVER
-					player.setPositionAndUpdate(x-5 + 0.5, 257 + 0.5, z + 0.5);
-				}
-			}
+			BuildHelper.setBlock(world,x-5, min+4, z, ModBlocks.skydiveTP);
+			BuildHelper.setBlock(world,x, min+4, z+5, ModBlocks.skydiveTP);
+			BuildHelper.setBlock(world,x, min+4, z-5, ModBlocks.skydiveTP);
+			IBHelper.teleport(world,player,x-5,257,z, tp);
 		} else if(meta == 2) {
-			BuildHelper.setBlock(world,x, 5, z-5, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x+5, 5, z, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x-5, 5, z, ModBlocks.skydiveTP);
-		
-			if(tp) {
-				IBHelper.sound(world, Config.SOUND, x, 256, z-5);
-				if(!world.isRemote) { //IF SERVER
-					player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z-5 + 0.5);
-				}
-			}
+			BuildHelper.setBlock(world,x, min+4, z-5, ModBlocks.skydiveTP);
+			BuildHelper.setBlock(world,x+5, min+4, z, ModBlocks.skydiveTP);
+			BuildHelper.setBlock(world,x-5, min+4, z, ModBlocks.skydiveTP);
+			IBHelper.teleport(world,player,x,257,z-5, tp);
 		} else if(meta == 3) {
-			BuildHelper.setBlock(world,x+5, 5, z, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x, 5, z+5, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x, 5, z-5, ModBlocks.skydiveTP);
-		
-			if(tp) {
-				IBHelper.sound(world, Config.SOUND, x+5, 256, z);
-				if(!world.isRemote) { //IF SERVER
-					player.setPositionAndUpdate(x+5 + 0.5, 257 + 0.5, z + 0.5);
-					IBHelper.sound(world, Config.SOUND, (int)player.posX, (int)player.posY, (int)player.posZ);
-				}
-			}
+			BuildHelper.setBlock(world,x+5, min+4, z, ModBlocks.skydiveTP);
+			BuildHelper.setBlock(world,x, min+4, z+5, ModBlocks.skydiveTP);
+			BuildHelper.setBlock(world,x, min+4, z-5, ModBlocks.skydiveTP);
+			IBHelper.teleport(world,player,x+5,257,z, tp);
 		}
-		
-		
 	}
 
     @Override

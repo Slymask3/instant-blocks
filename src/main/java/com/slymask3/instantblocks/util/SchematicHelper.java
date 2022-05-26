@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileInputStream;
 
 public class SchematicHelper {
-
     public static void loadSchematic(World world, int x, int y, int z, File file, boolean center, boolean ignoreAir) {
         try {
         	FileInputStream fis = new FileInputStream(file);

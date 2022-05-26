@@ -6,7 +6,6 @@ import com.slymask3.instantblocks.network.PacketStatue;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
-import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.client.config.GuiButtonExt;
 import cpw.mods.fml.client.config.GuiCheckBox;
@@ -22,29 +21,15 @@ import org.lwjgl.input.Keyboard;
 
 @SideOnly(Side.CLIENT)
 public class GuiStatue extends GuiScreen {
-	private static BuildHelper ibf = new BuildHelper();
-	private static Config config = new Config();
+	private final World world;
+	private final int x, y, z;
+	private final EntityPlayer player;
+	private final TileEntityStatue tileEntity;
 	
-	private EntityPlayer player;
-	private TileEntityStatue tileEntity;
-	
-    private GuiButtonExt doneBtn;
-    private GuiButtonExt cancelBtn;
+    private GuiButtonExt doneBtn, cancelBtn;
 	private GuiTextField input;
-	
-	private GuiCheckBox head;
-	private GuiCheckBox body;
-	private GuiCheckBox armLeft;
-	private GuiCheckBox armRight;
-	private GuiCheckBox legLeft;
-	private GuiCheckBox legRight;
-	
+	private GuiCheckBox head, body, armLeft, armRight, legLeft, legRight;
 	private GuiCheckBox rgbMode;
-	
-	private World world;
-	private int x;
-	private int y;
-	private int z;
 
 	public GuiStatue(EntityPlayer player, TileEntityStatue entity, World world, int x, int y, int z) {
 		this.player = player;
@@ -99,7 +84,6 @@ public class GuiStatue extends GuiScreen {
 
 	@Override
 	protected void keyTyped(final char par1, final int par2) {
-		
 		if(("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_".indexOf(par1) >= 0) || (par2 == 14)) {
 			input.textboxKeyTyped(par1, par2);
 		} else if(par2 == doneBtn.id) {
@@ -107,7 +91,6 @@ public class GuiStatue extends GuiScreen {
 		} else if(par2 == cancelBtn.id) {
 			actionPerformed(cancelBtn);
 		}
-
         this.doneBtn.enabled = this.input.getText().trim().length() > 3;
 	}
 
@@ -136,5 +119,4 @@ public class GuiStatue extends GuiScreen {
         IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
         IBHelper.msg(player, Strings.CREATE_STATUE.replace("%username%",input.getText()), Colors.a);
 	}
-	
 }

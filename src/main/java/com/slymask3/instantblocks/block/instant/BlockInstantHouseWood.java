@@ -21,10 +21,10 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockInstantHouseWood extends BlockInstant {
-	
 	public BlockInstantHouseWood() {
-		super(ModBlocks.ibWood, Names.Blocks.IB_WOOD_HOUSE, Material.wood, Block.soundTypeWood, 1.5F);
+		super(Names.Blocks.IB_WOOD_HOUSE, Material.wood, Block.soundTypeWood, 1.5F);
         setBlockTextureName(Textures.WoodHouse.FRONT);
+		setCreateMsg(Strings.CREATE_WOODEN_HOUSE);
 		setDirectional(true);
 	}
 
@@ -87,7 +87,6 @@ public class BlockInstantHouseWood extends BlockInstant {
 	}
 	
 	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
-		System.out.println("isRemote == " + world.isRemote);
 		check(world, x, y, z, meta);
 	}
 

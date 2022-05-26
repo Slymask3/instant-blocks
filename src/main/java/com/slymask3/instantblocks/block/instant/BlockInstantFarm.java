@@ -23,9 +23,8 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockInstantFarm extends BlockInstant {
-	
     public BlockInstantFarm() {
-        super(ModBlocks.ibFarm, Names.Blocks.IB_FARM, Material.rock, Block.soundTypeStone, 1.5F);
+        super(Names.Blocks.IB_FARM, Material.rock, Block.soundTypeStone, 1.5F);
         setBlockTextureName(Textures.Farm.TOP0);
 		setDirectional(true);
     }
@@ -73,7 +72,7 @@ public class BlockInstantFarm extends BlockInstant {
 
 		Block crop = Blocks.wheat;
 		
-		if(!world.isRemote) { //IF SERVER
+		if(IBHelper.isServer(world)) {
 			Random ran = new Random();
 			int r = ran.nextInt(20);
 			if(r == 0) {

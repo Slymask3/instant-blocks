@@ -4,10 +4,7 @@ import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.Colors;
-import com.slymask3.instantblocks.reference.GuiID;
-import com.slymask3.instantblocks.reference.Reference;
-import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.*;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
@@ -25,50 +22,25 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public abstract class BlockInstant extends Block implements ITileEntityProvider {
-	Block block;
-	
-	boolean bottomB = true;
-	boolean topB = true;
-	boolean leftB = true;
-	boolean rightB = true;
-	boolean frontB = true;
-	boolean backB = true;
-	
-	String bottomS = Reference.MOD_ID + ":woodhouse_top";
-	String topS = Reference.MOD_ID + ":woodhouse_top";
-	String leftS = Reference.MOD_ID + ":woodhouse_top";
-	String rightS = Reference.MOD_ID + ":woodhouse_top";
-	String frontS = Reference.MOD_ID + ":woodhouse_top";
-	String backS = Reference.MOD_ID + ":woodhouse_top";
+	boolean bottomB, topB, leftB, rightB, frontB, backB;
+	String bottomS, topS, leftS, rightS, frontS, backS;
+	Block bottomBl, topBl, leftBl, rightBl, frontBl, backBl;
+	IIcon bottomI, topI, leftI, rightI, frontI, backI;
 
-	Block bottomBl;
-	Block topBl;
-	Block leftBl;
-	Block rightBl;
-	Block frontBl;
-	Block backBl;
-	
-	IIcon bottomI;
-	IIcon topI;
-	IIcon leftI;
-	IIcon rightI;
-	IIcon frontI;
-	IIcon backI;
-
-	public String createMsg = "";
-	public String errorMsg = "";
-
+	public String createMsg, errorMsg;
 	boolean is_directional = false;
 	GuiID guiID = null;
 	
-	protected BlockInstant(Block block, String name, Material material, SoundType soundType, float hardness) {
+	protected BlockInstant(String name, Material material, SoundType soundType, float hardness) {
 		super(material);
         setCreativeTab(InstantBlocksTab.INSTANTBLOCKS_TAB);
         setBlockName(Reference.MOD_ID + ":" + name);
         setHardness(hardness);
         setResistance(2000F);
         setStepSound(soundType);
-        this.block = block;
+		bottomB = topB = leftB = rightB = frontB = backB = true;
+		bottomS = topS = leftS = rightS = frontS = backS = Textures.WoodHouse.FRONT;
+		createMsg = errorMsg = "";
 	}
 
 	public void setCreateMsg(String msg) {
@@ -392,7 +364,7 @@ public abstract class BlockInstant extends Block implements ITileEntityProvider 
 		build(world, x, y, z);
 		build(world, x, y, z, player);
 
-		IBHelper.keepBlocks(world, x, y, z, this.block);
+		IBHelper.keepBlocks(world, x, y, z, this);
 		IBHelper.xp(world, player, Config.XP_AMOUNT);
 
 		IBHelper.sound(world, Config.SOUND, x, y, z);

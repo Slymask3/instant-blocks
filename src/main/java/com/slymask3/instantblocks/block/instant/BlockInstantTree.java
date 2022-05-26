@@ -2,7 +2,6 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Textures;
@@ -21,9 +20,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class BlockInstantTree extends BlockInstant {
-	
 	public BlockInstantTree() {
-		super(ModBlocks.ibTree, Names.Blocks.IB_TREE, Material.plants, Block.soundTypeGrass, 0.1F);
+		super(Names.Blocks.IB_TREE, Material.plants, Block.soundTypeGrass, 0.1F);
 		setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 1.0F, 0.8125F);
         setBlockTextureName(Textures.Tree.SIDE);
 		setGuiID(GuiID.TREE);

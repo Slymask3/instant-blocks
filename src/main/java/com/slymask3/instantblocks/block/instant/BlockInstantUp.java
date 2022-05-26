@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
-import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
@@ -19,15 +18,13 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 import static net.minecraftforge.common.util.ForgeDirection.*;
 
 public class BlockInstantUp extends BlockInstant {
 	public int side = 0;
 	
     public BlockInstantUp() {
-        super(ModBlocks.ibUp, Names.Blocks.IB_ESCAPE_LADDER, Material.circuits, Block.soundTypeLadder, 0.4F);
+        super(Names.Blocks.IB_ESCAPE_LADDER, Material.circuits, Block.soundTypeLadder, 0.4F);
         setTextures(Textures.EscapeLadder.SIDE);
         setTickRandomly(true);
         setBlockTextureName(Textures.EscapeLadder.SIDE);
@@ -222,14 +219,6 @@ public class BlockInstantUp extends BlockInstant {
 			p_149695_1_.setBlockToAir(p_149695_2_, p_149695_3_, p_149695_4_);
 		}
 		super.onNeighborBlockChange(p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_, p_149695_5_);
-	}
-
-	/**
-	 * Returns the quantity of items to drop on block destruction.
-	 */
-	public int quantityDropped(Random p_149745_1_)
-	{
-		return 1;
 	}
 
 	@Override

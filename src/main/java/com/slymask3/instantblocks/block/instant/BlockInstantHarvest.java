@@ -2,7 +2,6 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Textures;
@@ -25,9 +24,8 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockInstantHarvest extends BlockInstant {
-
 	public BlockInstantHarvest() {
-		super(ModBlocks.ibHarvest, Names.Blocks.IB_HARVEST, Material.wood, Block.soundTypeWood, 1.5F);
+		super(Names.Blocks.IB_HARVEST, Material.wood, Block.soundTypeWood, 1.5F);
         setBlockTextureName(Textures.Harvest.SIDE0);
 		setGuiID(GuiID.HARVEST);
 	}

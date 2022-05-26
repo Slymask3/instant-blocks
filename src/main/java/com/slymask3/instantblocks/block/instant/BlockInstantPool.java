@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
-import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
@@ -14,9 +13,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class BlockInstantPool extends BlockInstant {
-	
     public BlockInstantPool() {
-        super(ModBlocks.ibPool, Names.Blocks.IB_POOL, Material.rock, Block.soundTypeStone, 1.5F);
+        super(Names.Blocks.IB_POOL, Material.rock, Block.soundTypeStone, 1.5F);
         setCreateMsg(Strings.CREATE_POOL);
         setBlockTextureName(Textures.Pool.TOP0);
 		setDirectional(true);

@@ -14,7 +14,6 @@ public class PacketTree extends AbstractPacket {
 	String _player;
 	int _type;
 	boolean _log, _leaves, _air;
-	
 
 	public PacketTree() {
 		

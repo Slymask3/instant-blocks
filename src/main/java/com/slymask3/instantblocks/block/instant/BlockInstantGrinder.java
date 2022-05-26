@@ -2,7 +2,6 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
@@ -16,19 +15,17 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 public class BlockInstantGrinder extends BlockInstant {
-	
 	public BlockInstantGrinder() {
-        super(ModBlocks.ibGrinder, Names.Blocks.IB_GRINDER, Material.rock, Block.soundTypeMetal, 1.5F);
+        super(Names.Blocks.IB_GRINDER, Material.rock, Block.soundTypeMetal, 1.5F);
         setTextures(Textures.Grinder.SIDE);
         setCreateMsg(Strings.CREATE_GRINDER);
-        setErrorMsg(Strings.ERROR_GRINDER);
         setBlockTextureName(Textures.Grinder.SIDE);
 		setDirectional(true);
     }
 
 	public boolean canActivate(World world, int x, int y, int z, EntityPlayer player) {
 		if(BuildHelper.getBlock(world,x, y-1, z) != Blocks.mob_spawner) {
-			IBHelper.msg(player, errorMsg, Colors.c);
+			IBHelper.msg(player, Strings.ERROR_GRINDER, Colors.c);
 			return false;
 		}
 		return true;
@@ -227,10 +224,8 @@ public class BlockInstantGrinder extends BlockInstant {
 		BuildHelper.setBlock(world,x, y, z, air);
 		
 		/************************ Teleport ************************/
+		IBHelper.teleport(world,player,x+13,y-4,z,Config.TP_GRINDER);
 		if(Config.TP_GRINDER) {
-			//BuildHelper.sound(world, Config.SOUND, x+13, y-4, z);
-			player.setPositionAndUpdate(x+13 + 0.5, y-4 + 0.5, z + 0.5);                                         // ----------UNCOMMENT LATER
-    		IBHelper.sound(world, Config.SOUND, (int)player.posX, (int)player.posY, (int)player.posZ);
 			BuildHelper.setBlock(world,x+7, y-4, z, glass);
 			BuildHelper.setBlock(world,x+7, y-3, z, glass);
 		}

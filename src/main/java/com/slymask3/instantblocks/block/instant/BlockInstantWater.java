@@ -2,7 +2,6 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstantLiquid;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
@@ -17,7 +16,7 @@ import java.util.Random;
 
 public class BlockInstantWater extends BlockInstantLiquid {
     public BlockInstantWater() {
-        super(ModBlocks.ibWater, Names.Blocks.IB_WATER, Material.water, new SoundTypeLiquid("random.splash", 1.0F, 1.0F), 0.5F, Blocks.air, Blocks.water);
+        super(Names.Blocks.IB_WATER, Material.water, new SoundTypeLiquid("random.splash", 1.0F, 1.0F), 0.5F, Blocks.air, Blocks.water);
         setTextures(Blocks.water);
         setTextureBooleans(false, false, false, false, false, false);
         setLightOpacity(3);

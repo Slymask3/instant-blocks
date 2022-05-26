@@ -27,26 +27,20 @@ import java.util.Collection;
 
 @SideOnly(Side.CLIENT)
 public class GuiSchematic extends GuiScreen {
+	private final World world;
+	private final int x, y, z;
+	private final EntityPlayer player;
+	private final TileEntitySchematic tileEntity;
+
 	private GuiSchematicSlot schematicList;
     private int selected = -1;
     private String selectedSchem;
     private int listWidth = 300;
     private ArrayList<String> schematics;
-
-	private EntityPlayer player;
-	private TileEntitySchematic tileEntity;
 	
-    private GuiButtonExt done;
-    private GuiButtonExt cancel;
+    private GuiButtonExt done, cancel;
 	private GuiTextField input;
-
-	private GuiCheckBox center;
-	private GuiCheckBox ignoreAir;
-	
-	private World world;
-	private int x;
-	private int y;
-	private int z;
+	private GuiCheckBox center, ignoreAir;
 
 	public GuiSchematic(EntityPlayer player, TileEntitySchematic entity, World world, int x, int y, int z) {
 		this.player = player;
@@ -98,7 +92,6 @@ public class GuiSchematic extends GuiScreen {
 
 	@Override
 	protected void keyTyped(final char par1, final int par2) {
-		
 		if(("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ^&'@{}[],$=!-#()%.+~_ ".indexOf(par1) >= 0) || (par2 == 14)) {
 			input.textboxKeyTyped(par1, par2);
 		} else if(par2 == done.id) {

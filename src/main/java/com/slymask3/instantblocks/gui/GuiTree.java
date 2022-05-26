@@ -22,25 +22,18 @@ import org.lwjgl.input.Keyboard;
 
 @SideOnly(Side.CLIENT)
 public class GuiTree extends GuiScreen {
+	private final World world;
+	private final int x, y, z;
+	private final EntityPlayer player;
+	private final TileEntityTree tileEntity;
+
 	private GuiTreeSlot treeList;
     private int selected = -1;
     private int selectedTree;
     private int[] trees = {0, 1, 2, 3, 4, 5, 6, 7};
 	
-	private EntityPlayer player;
-	private TileEntityTree tileEntity;
-	
-    private GuiButtonExt done;
-    private GuiButtonExt cancel;
-
-	private GuiCheckBox fullLog;
-	private GuiCheckBox fullLeaves;
-	private GuiCheckBox air;
-	
-	private World world;
-	private int x;
-	private int y;
-	private int z;
+    private GuiButtonExt done, cancel;
+	private GuiCheckBox fullLog, fullLeaves, air;
 
 	public GuiTree(EntityPlayer player, TileEntityTree entity, World world, int x, int y, int z) {
 		this.player = player;
@@ -122,14 +115,14 @@ public class GuiTree extends GuiScreen {
 	
 	private String treeToString(int tree) {
     	switch(tree) {
-    	case 0: return "Huge Oak Tree";
-    	case 1: return "Huge Spruce Tree";
-    	case 2: return "Huge Birch Tree";
-    	case 3: return "Huge Jungle Tree";
-    	case 4: return "Huge Acacia Tree";
-    	case 5: return "Huge Dark Oak Tree";
-    	case 6: return "Huge Glass Tree";
-	    default: return "Error";
+			case 0: return "Huge Oak Tree";
+			case 1: return "Huge Spruce Tree";
+			case 2: return "Huge Birch Tree";
+			case 3: return "Huge Jungle Tree";
+			case 4: return "Huge Acacia Tree";
+			case 5: return "Huge Dark Oak Tree";
+			case 6: return "Huge Glass Tree";
+			default: return "Error";
     	}
     }
 	
@@ -142,12 +135,10 @@ public class GuiTree extends GuiScreen {
 	}
 	
 	Minecraft getMinecraftInstance() {
-        /** Reference to the Minecraft object. */
         return mc;
     }
 
     FontRenderer getFontRenderer() {
-        /** The FontRenderer used by GuiScreen */
         return fontRendererObj;
     }
     
@@ -160,15 +151,10 @@ public class GuiTree extends GuiScreen {
             this.selectedTree=-1;
             this.done.enabled = false;
         }
-        
-        //File f = new File("schematics/"+input.getText()+".schematic");
-        //this.done.enabled = f.isFile();
-        //cachedLogo = null;
     }
 
     public boolean schematicIndexSelected(int var1)
     {
         return var1==selected;
     }
-	
 }

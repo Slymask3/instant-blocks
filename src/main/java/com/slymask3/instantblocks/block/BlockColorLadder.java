@@ -5,6 +5,7 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityColorLadder;
+import com.slymask3.instantblocks.util.IBHelper;
 import com.slymask3.instantblocks.util.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -136,7 +137,7 @@ public class BlockColorLadder extends BlockLadder implements ITileEntityProvider
 		
 		int rgb = ((r & 0xFF) << 16) + ((g & 0xFF) << 8) + (b & 0xFF);
 		
-		if(!world.isRemote) {
+		if(IBHelper.isServer(world)) {
 			((TileEntityColorLadder) world.getTileEntity(x, y, z)).color = rgb;
 			world.markBlockForUpdate(x, y, z);
 		}

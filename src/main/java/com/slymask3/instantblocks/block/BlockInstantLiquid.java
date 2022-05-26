@@ -8,6 +8,7 @@ import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Coords;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -23,8 +24,8 @@ public class BlockInstantLiquid extends BlockInstant {
 	public String create1;
 	public boolean isSuction = false;
 
-    public BlockInstantLiquid(Block block, String name, Material material, SoundType soundType, float hardness, Block blockCheck, Block blockReplace) {
-        super(block, name, material, soundType, hardness);
+    public BlockInstantLiquid(String name, Material material, SoundType soundType, float hardness, Block blockCheck, Block blockReplace) {
+        super(name, material, soundType, hardness);
 		this.coordsList = new ArrayList<>();
 		this.blockCheck = blockCheck;
 		this.blockReplace = blockReplace;
@@ -55,7 +56,13 @@ public class BlockInstantLiquid extends BlockInstant {
 			IBHelper.msg(player, Strings.ERROR_NO_LIQUID, Colors.c);
 			return false;
 		}
-		return coordsList.size() < getMax();
+		if(coordsList.size() >= getMax()) {
+			IBHelper.msg(player, errorMsg, Colors.c);
+			coordsList = new ArrayList<>();
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public void build(World world, int x, int y, int z, EntityPlayer player) {
@@ -88,16 +95,32 @@ public class BlockInstantLiquid extends BlockInstant {
 	}
 
 	private void check(World world, int x, int y, int z) {
-		if(isCorrectBlock(BuildHelper.getBlock(world,x,y,z)) && coordsList.size() < getMax() && addCoords(x,y,z)) {
+		Block blockCurrent = BuildHelper.getBlock(world,x,y,z);
+		if(isCorrectBlock(blockCurrent) && coordsList.size() < getMax() && addCoords(x,y,z)) {
 			if(blockCheck == null) {
-				blockCheck = BuildHelper.getBlock(world,x,y,z);
+				if(blockCurrent == Blocks.flowing_water) {
+					blockCheck = Blocks.water;
+				} else if(blockCurrent == Blocks.flowing_lava) {
+					blockCheck = Blocks.lava;
+				} else {
+					blockCheck = blockCurrent;
+				}
 			}
 			checkForBlock(world,x,y,z);
 		}
 	}
 
 	private boolean isCorrectBlock(Block block) {
-		return blockCheck == null ? block == Blocks.water || block == Blocks.lava : block == blockCheck;
+		if(blockCheck == null) {
+			return block == Blocks.water || block == Blocks.lava || block == Blocks.flowing_water || block == Blocks.flowing_lava;
+		} else if(blockCheck == Blocks.air) {
+			return block == blockCheck || block instanceof BlockBush || block == Blocks.flowing_water || block == Blocks.flowing_lava;
+		} else if(blockCheck == Blocks.water) {
+			return block == blockCheck || block == Blocks.flowing_water;
+		} else if(blockCheck == Blocks.lava) {
+			return block == blockCheck || block == Blocks.flowing_lava;
+		}
+		return block == blockCheck;
 	}
 
 	private boolean addCoords(int x, int y, int z) {

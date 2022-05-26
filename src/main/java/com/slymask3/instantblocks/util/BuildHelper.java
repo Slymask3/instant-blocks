@@ -178,7 +178,7 @@ public class BuildHelper {
 		for(int yTimes = 0; yTimes < yTimesTotal; yTimes++) {
 			for(int zTimes = 0; zTimes < zTimesTotal; zTimes++) {
 				for(int xTimes = 0; xTimes < xTimesTotal; xTimes++) {
-					setBlock(world,x2, y, z2, ModBlocks.color, 0, 2);
+					setBlock(world,x2, y, z2, ModBlocks.color);
 					try {
 						((TileEntityColor) world.getTileEntity(x2, y, z2)).color = c;
 					} catch(Exception e) {LogHelper.info(e);}
@@ -246,20 +246,6 @@ public class BuildHelper {
 			setBlockDirectionalSimple(world, x, y, z, Blocks.wool, metaDirection, forwardBack, leftRight, ColorHelper.getWoolColor(ColorHelper.getColorAt(img, imgx, imgy)), 1);
 		}
 	}
-
-	
-	private static boolean isPositive(int i) {
-		if(i == 0) return true;
-	    if(i >> 31 != 0) return false;
-	    return true;
-	}
-	
-	public static int toPositive(int i) {
-		if(i < 0) {
-			return -i;
-		}
-		return i;
-	}
 	
 	public static void setBlockDirectionalSimple(World world, int x, int y, int z, Block block, int metaDirection, int forwardBack, int leftRight) {
 		setBlockDirectionalSimple(world, x, y, z, block, metaDirection, forwardBack, leftRight, 0, 1);
@@ -271,24 +257,21 @@ public class BuildHelper {
     	// +leftRight == right
     	// -leftRight == left
 		
-		int forward;
-		int back;
-		int left;
-		int right;
+		int forward, back, left, right;
 		
-		if(isPositive(forwardBack)) {
+		if(IBHelper.isPositive(forwardBack)) {
 			forward = forwardBack;
 			back = 0;
 		} else {
 			forward = 0;
-			back = toPositive(forwardBack);
+			back = IBHelper.toPositive(forwardBack);
 		}
 		
-		if(isPositive(leftRight)) {
+		if(IBHelper.isPositive(leftRight)) {
 			left = 0;
 			right = leftRight;
 		} else {
-			left = toPositive(leftRight);
+			left = IBHelper.toPositive(leftRight);
 			right = 0;
 		}
 		setBlockDirectional(world, x, y, z, block, metaDirection, forward, back, left, right, meta, flag);
@@ -338,39 +321,39 @@ public class BuildHelper {
     		int left;
     		int right;
     		
-    		if(isPositive(forwardBack)) {
+    		if(IBHelper.isPositive(forwardBack)) {
     			back = forwardBack;
     			forward = 0;
     		} else {
     			back = 0;
-    			forward = toPositive(forwardBack);
+    			forward = IBHelper.toPositive(forwardBack);
     		}
     		
-    		if(isPositive(leftRight)) {
+    		if(IBHelper.isPositive(leftRight)) {
     			right = 0;
     			left = leftRight;
     		} else {
-    			right = toPositive(leftRight);
+    			right = IBHelper.toPositive(leftRight);
     			left = 0;
     		}
     		
     		if(metaDirection==0) {
-        		setBlock(world, x+left-right, y, z-forward+back, ModBlocks.color, 0, 2);
+        		setBlock(world, x+left-right, y, z-forward+back, ModBlocks.color);
         		((TileEntityColor) world.getTileEntity(x+left-right, y, z-forward+back)).color = img.getRGB(imgx, imgy);
         		//((TileEntityColor) world.getTileEntity(x+left-right, y, z-forward+back)).color = 0xFF0000;
     			world.markBlockForUpdate(x+left-right, y, z-forward+back);
     		} else if(metaDirection==1) {
-    			setBlock(world, x+forward-back, y, z+left-right, ModBlocks.color, 0, 2);
+    			setBlock(world, x+forward-back, y, z+left-right, ModBlocks.color);
     			((TileEntityColor) world.getTileEntity(x+forward-back, y, z+left-right)).color = img.getRGB(imgx, imgy);
     			//((TileEntityColor) world.getTileEntity(x+forward-back, y, z+left-right)).color = 0x00FF00;
     			world.markBlockForUpdate(x+forward-back, y, z+left-right);
     		} else if(metaDirection==2) {
-    			setBlock(world, x-left+right, y, z+forward-back, ModBlocks.color, 0, 2);
+    			setBlock(world, x-left+right, y, z+forward-back, ModBlocks.color);
     			((TileEntityColor) world.getTileEntity(x-left+right, y, z+forward-back)).color = img.getRGB(imgx, imgy);
     			//((TileEntityColor) world.getTileEntity(x-left+right, y, z+forward-back)).color = 0x0000FF;
     			world.markBlockForUpdate(x-left+right, y, z+forward-back);
     		} else if(metaDirection==3) {
-    			setBlock(world, x-forward+back, y, z-left+right, ModBlocks.color, 0, 2);
+    			setBlock(world, x-forward+back, y, z-left+right, ModBlocks.color);
     			((TileEntityColor) world.getTileEntity(x-forward+back, y, z-left+right)).color = img.getRGB(imgx, imgy);
     			//((TileEntityColor) world.getTileEntity(x-forward+back, y, z-left+right)).color = 0xFFFF00;
     			world.markBlockForUpdate(x-forward+back, y, z-left+right);
@@ -381,19 +364,19 @@ public class BuildHelper {
     		int left;
     		int right;
     		
-    		if(isPositive(forwardBack)) {
+    		if(IBHelper.isPositive(forwardBack)) {
     			back = forwardBack;
     			forward = 0;
     		} else {
     			back = 0;
-    			forward = toPositive(forwardBack);
+    			forward = IBHelper.toPositive(forwardBack);
     		}
     		
-    		if(isPositive(leftRight)) {
+    		if(IBHelper.isPositive(leftRight)) {
     			right = 0;
     			left = leftRight;
     		} else {
-    			right = toPositive(leftRight);
+    			right = IBHelper.toPositive(leftRight);
     			left = 0;
     		}
 		

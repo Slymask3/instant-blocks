@@ -23,9 +23,8 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockInstantLight extends BlockInstant {
-	
     public BlockInstantLight() {
-        super(ModBlocks.ibLight, Names.Blocks.IB_LIGHT, Material.wood, Block.soundTypeWood, 0.5F);
+        super(Names.Blocks.IB_LIGHT, Material.wood, Block.soundTypeWood, 0.5F);
         setCreateMsg(Strings.CREATE_LIGHT);
         setBlockTextureName(Textures.Light.SIDE);
         setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 0.90F, 0.625F);

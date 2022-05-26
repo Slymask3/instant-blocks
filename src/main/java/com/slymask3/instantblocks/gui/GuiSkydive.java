@@ -23,21 +23,14 @@ import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class GuiSkydive extends GuiScreen {
-	private EntityPlayer player;
-	private TileEntitySkydive tileEntity;
+	private final World world;
+	private final int x, y, z;
+	private final EntityPlayer player;
+	private final TileEntitySkydive tileEntity;
 	
-    private GuiButtonExt done;
-    private GuiButtonExt cancel;
-    private GuiButtonExt random;
-
+    private GuiButtonExt done, cancel, random;
 	private GuiTextField[] color = new GuiTextField[11];
-	
 	private GuiCheckBox tp;
-	
-	private World world;
-	private int x;
-	private int y;
-	private int z;
 
 	public GuiSkydive(EntityPlayer player, TileEntitySkydive entity, World world, int x, int y, int z) {
 		this.player = player;
@@ -94,7 +87,6 @@ public class GuiSkydive extends GuiScreen {
 	
 	@Override
 	protected void keyTyped(final char par1, final int par2) {
-		
 		if(("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ".indexOf(par1) >= 0) || (par2 == 14)) {
 			
 			for(int i=0; i<11; i++) {
@@ -151,7 +143,6 @@ public class GuiSkydive extends GuiScreen {
 	
 	public int getHex(String input) {
 		int color = 0x00FFFFFF;
-		
 		if(input.equalsIgnoreCase("red")) {
 			color = 0x00963430;
 		} else if(input.equalsIgnoreCase("orange")) {
@@ -189,7 +180,6 @@ public class GuiSkydive extends GuiScreen {
 				color = (int)Long.parseLong(input, 16);
 			} catch(Exception e) {}
 		}
-		
 		return color;
 	}
 	
@@ -203,14 +193,12 @@ public class GuiSkydive extends GuiScreen {
 	
 	public String createRandomHex() {
 		StringBuilder sb = new StringBuilder();
-
 		sb.append(getHexSingleValue());
 		sb.append(getHexSingleValue());
 		sb.append(getHexSingleValue());
 		sb.append(getHexSingleValue());
 		sb.append(getHexSingleValue());
 		sb.append(getHexSingleValue());
-		
 		return sb.toString();
 	}
 	
@@ -218,16 +206,9 @@ public class GuiSkydive extends GuiScreen {
 		Random rand = new Random();
 		int i = rand.nextInt(16);
 		switch(i) {
-			case 0: return "0";
-			case 1: return "1";
-			case 2: return "2";
-			case 3: return "3";
-			case 4: return "4";
-			case 5: return "5";
-			case 6: return "6";
-			case 7: return "7";
-			case 8: return "8";
-			case 9: return "9";
+			case 0: case 1: case 2: case 3: case 4:
+			case 5: case 6: case 7: case 8: case 9:
+				return String.valueOf(i);
 			case 10: return "A";
 			case 11: return "B";
 			case 12: return "C";
@@ -237,5 +218,4 @@ public class GuiSkydive extends GuiScreen {
 			default: return "0";
 		}
 	}
-	
 }

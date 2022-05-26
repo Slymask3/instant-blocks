@@ -7,7 +7,6 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Loot {
 	private static ArrayList<Block> blocks;
@@ -43,8 +42,6 @@ public class Loot {
 		setupBlocks();
 
 		if(blocks.size() > 0) {
-			Iterator<Block> iterator = blocks.iterator();
-
 			if(Config.GENERATE_IN_CHESTS_BONUS) {
 				if(Config.ADD_WOODEN_HOUSE) {
 					ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(ModBlocks.ibWood), 1, 1, 4));
@@ -54,36 +51,36 @@ public class Loot {
 			}
 
 			if(Config.GENERATE_IN_CHESTS_DUNGEON) {
-				while(iterator.hasNext()) {
-					ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(iterator.next()), 1, 1, 1));
+				for(Block block : blocks) {
+					ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(block), 1, 1, 1));
 				}
 			}
 
 			if(Config.GENERATE_IN_CHESTS_VILLAGE) {
-				while(iterator.hasNext()) {
-					ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(iterator.next()), 1, 1, 1));
+				for(Block block : blocks) {
+					ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(block), 1, 1, 1));
 				}
 			}
 
 			if(Config.GENERATE_IN_CHESTS_MINESHAFT) {
-				while(iterator.hasNext()) {
-					ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(iterator.next()), 1, 1, 1));
+				for(Block block : blocks) {
+					ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(block), 1, 1, 1));
 				}
 			}
 
 			if(Config.GENERATE_IN_CHESTS_STRONGHOLD) {
-				while(iterator.hasNext()) {
-					ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(iterator.next()), 1, 1, 1));
-					ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(iterator.next()), 1, 1, 1));
-					ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(new ItemStack(iterator.next()), 1, 1, 1));
+				for(Block block : blocks) {
+					ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(block), 1, 1, 1));
+					ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(block), 1, 1, 1));
+					ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(new ItemStack(block), 1, 1, 1));
 				}
 			}
 
 			if(Config.GENERATE_IN_CHESTS_TEMPLE) {
-				while(iterator.hasNext()) {
-					ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(iterator.next()), 1, 1, 1));
-					ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(iterator.next()), 1, 1, 1));
-					ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_DISPENSER, new WeightedRandomChestContent(new ItemStack(iterator.next()), 1, 1, 1));
+				for(Block block : blocks) {
+					ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(block), 1, 1, 1));
+					ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(block), 1, 1, 1));
+					ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_DISPENSER, new WeightedRandomChestContent(new ItemStack(block), 1, 1, 1));
 				}
 			}
 		}

@@ -49,11 +49,7 @@ public class BlockSkydiveTP extends Block {
 
 	@Override
 	public boolean onBlockActivated(World world,int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		IBHelper.sound(world, "portal.trigger", x, 257, z);
-		if(!world.isRemote) { //IF SERVER
-			player.setPositionAndUpdate(x + 0.5, 257 + 0.5, z + 0.5);
-		}
-		
+		IBHelper.teleport(world,player,x,257,z, true);
 		return true;
 	}
 }

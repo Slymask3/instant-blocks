@@ -20,38 +20,15 @@ import org.lwjgl.input.Keyboard;
 
 @SideOnly(Side.CLIENT)
 public class GuiHarvest extends GuiScreen {
-	private EntityPlayer player;
-	private TileEntityHarvest tileEntity;
-	
-    private GuiButtonExt done;
-    private GuiButtonExt cancel;
-	
-	private GuiCheckBox logOak;
-	private GuiCheckBox logSpruce;
-	private GuiCheckBox logBirch;
-	private GuiCheckBox logJungle;
-	private GuiCheckBox logAcacia;
-	private GuiCheckBox logDark;
+	private final World world;
+	private final int x, y, z;
+	private final EntityPlayer player;
+	private final TileEntityHarvest tileEntity;
 
-	private GuiCheckBox wheat;
-	private GuiCheckBox carrot;
-	private GuiCheckBox potato;
-
-	private GuiCheckBox cactus;
-	private GuiCheckBox pumpkin;
-	private GuiCheckBox melon;
-	private GuiCheckBox sugarcane;
-	
-	private GuiCheckBox cocoa;
-	private GuiCheckBox mushroom;
-	private GuiCheckBox netherwart;
-	
+	private GuiButtonExt done, cancel;
+	private GuiCheckBox logOak, logSpruce, logBirch, logJungle, logAcacia, logDark;
+	private GuiCheckBox wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart;
 	private GuiCheckBox replant;
-	
-	private World world;
-	private int x;
-	private int y;
-	private int z;
 
 	public GuiHarvest(EntityPlayer player, TileEntityHarvest entity, World world, int x, int y, int z) {
 		this.player = player;

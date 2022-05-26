@@ -24,9 +24,8 @@ import net.minecraft.world.World;
 import java.io.File;
 
 public class BlockInstantSchematic extends BlockInstant {
-
 	public BlockInstantSchematic() {
-		super(ModBlocks.ibSchematic, Names.Blocks.IB_SCHEMATIC, Material.wood, Block.soundTypeWood, 1.5F);
+		super(Names.Blocks.IB_SCHEMATIC, Material.wood, Block.soundTypeWood, 1.5F);
         setBlockTextureName(Textures.Harvest.SIDE0);
 		setGuiID(GuiID.SCHEMATIC);
 	}

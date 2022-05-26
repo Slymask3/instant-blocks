@@ -31,9 +31,8 @@ import java.net.URL;
 import java.util.Base64;
 
 public class BlockInstantStatue extends BlockInstant {
-
 	public BlockInstantStatue() {
-		super(ModBlocks.ibStatue, Names.Blocks.IB_STATUE, Material.wood, Block.soundTypeWood, 1.5F);
+		super(Names.Blocks.IB_STATUE, Material.wood, Block.soundTypeWood, 1.5F);
         setBlockTextureName(Textures.Statue.FRONT);
 		setGuiID(GuiID.STATUE);
 	}

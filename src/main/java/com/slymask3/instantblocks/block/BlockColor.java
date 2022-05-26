@@ -5,6 +5,7 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
+import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -69,7 +70,7 @@ public class BlockColor extends Block implements ITileEntityProvider {
     }
 
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
-        if(!world.isRemote) {
+        if(IBHelper.isServer(world)) {
             Random rand = new Random();
             int r = rand.nextInt(255);
             int g = rand.nextInt(255);

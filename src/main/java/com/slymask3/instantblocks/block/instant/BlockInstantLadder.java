@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
-import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
@@ -17,9 +16,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class BlockInstantLadder extends BlockInstant {
-	
     public BlockInstantLadder() {
-        super(ModBlocks.ibLadder, Names.Blocks.IB_MINING_LADDER, Material.rock, Block.soundTypeStone, 1.5F);
+        super(Names.Blocks.IB_MINING_LADDER, Material.rock, Block.soundTypeStone, 1.5F);
         setBlockTextureName(Textures.MiningLadder.TOP0);
 		setCreateMsg(Strings.CREATE_MINING_LADDER);
 		setDirectional(true);

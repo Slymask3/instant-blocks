@@ -102,6 +102,8 @@ public class CommandInstantBlocks extends CommandBase {
         } else {
 			list(player,1);
     	}
+
+		Config.configuration.save();
     }
 
 	private void init() {

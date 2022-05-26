@@ -13,8 +13,16 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 public class IBHelper {
+	public static boolean isClient(World world) {
+		return world.isRemote;
+	}
+
+	public static boolean isServer(World world) {
+		return !world.isRemote;
+	}
+
 	public static void xp(World world, EntityPlayer player, int xpAmount) {
-		if(!world.isRemote) { //IF SERVER
+		if(isServer(world)) {
 			if(xpAmount > 0) {
 				EntityXPOrb xp = new EntityXPOrb(world, player.posX, player.posY, player.posZ, xpAmount);
 				world.spawnEntityInWorld(xp);
@@ -23,7 +31,7 @@ public class IBHelper {
 	}
 
 	public static void sound(World world, String sound, int x, int y, int z) {
-		world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), sound, 2.0F, 1.0F, false);
+		world.playSound(x+0.5D, y+0.5D, z+0.5D, sound, 2.0F, 1.0F, false);
 	}
 
 	public static void effectFull(World world, String particle, int x, int y, int z) {
@@ -41,7 +49,7 @@ public class IBHelper {
 	public static void msg(EntityPlayer player, String msg, String color) {
 		if(Config.SHOW_MESSAGES) {
 			World world = player.worldObj;
-			if(world.isRemote) { //IF CLIENT
+			if(isClient(world)) {
 				player.addChatMessage(new ChatComponentText(Strings.PREFIX + ColorHelper.colorEveryWord(msg, color)));
 			}
 		}
@@ -50,17 +58,13 @@ public class IBHelper {
 	public static void keepBlocks(World world, int x, int y, int z, Block block) {
 		if(Config.KEEP_BLOCKS) {
 			BuildHelper.setBlock(world, x, y, z, block);
-		} else {
-			//Do not keep block.
 		}
 	}
 	
-	public void tp(World world, EntityPlayer player, int x, int y, int z, boolean property) {
-		if(!world.isRemote) { //IF SERVER
-			if(property) {
-				IBHelper.sound(world, Config.SOUND, x, y, z);
-				player.setPositionAndUpdate(x + 0.5, y + 0.5, z + 0.5);
-			}
+	public static void teleport(World world, EntityPlayer player, int x, int y, int z, boolean allow) {
+		if(isServer(world) && allow) {
+			IBHelper.sound(world, "portal.trigger", x, y, z);
+			player.setPositionAndUpdate(x + 0.5, y + 0.5, z + 0.5);
 		}
 	}
 	
@@ -86,5 +90,17 @@ public class IBHelper {
 
 	public static boolean isWand(ItemStack is) {
 		return is != null && is.getItem() instanceof ItemInstantWand;
+	}
+
+	public static boolean isPositive(int i) {
+		if(i == 0) return true;
+		return i >> 31 == 0;
+	}
+
+	public static int toPositive(int i) {
+		if(i < 0) {
+			return -i;
+		}
+		return i;
 	}
 }

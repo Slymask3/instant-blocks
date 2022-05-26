@@ -2,7 +2,6 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstantLiquid;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
@@ -18,7 +17,7 @@ import java.util.Random;
 
 public class BlockInstantLava extends BlockInstantLiquid {
 	public BlockInstantLava() {
-		super(ModBlocks.ibLava, Names.Blocks.IB_LAVA, Material.lava, new SoundTypeLiquid("random.fizz", 1.0F, 1.0F), 0.5F, Blocks.air, Blocks.lava);
+		super(Names.Blocks.IB_LAVA, Material.lava, new SoundTypeLiquid("random.fizz", 1.0F, 1.0F), 0.5F, Blocks.air, Blocks.lava);
 		setTextures(Blocks.lava);
 		setTextureBooleans(false, false, false, false, false, false);
 		setLightLevel(1.0F);
