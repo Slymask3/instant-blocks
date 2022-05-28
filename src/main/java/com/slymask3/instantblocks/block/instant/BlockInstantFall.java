@@ -7,6 +7,8 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
 import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.ColorHelper;
+import com.slymask3.instantblocks.util.Coords;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -19,6 +21,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 public class BlockInstantFall extends BlockInstant {
     public BlockInstantFall() {
@@ -52,373 +57,80 @@ public class BlockInstantFall extends BlockInstant {
 		int meta = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 	}
-	
-    public void build(World world, int x, int y, int z, String playerS, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10, boolean tp) {
-    	EntityPlayer player = world.getPlayerEntityByName(playerS);
 
-		Block water = Blocks.water;
-		Block air = Blocks.air;
-		
+	public void build(World world, int x, int y, int z, String playerS, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10, int radius, boolean tp, boolean actualRainbow) {
+		EntityPlayer player = world.getPlayerEntityByName(playerS);
 		int meta = world.getBlockMetadata(x, y, z);
-		int min = 7;
 
-		/************************ Air ************************/
-		for(int c = 256; c >= min; c--) {
-			BuildHelper.buildClean(world, x-3, c, z-3, air, 7, 1, 7); //CENTER
-			BuildHelper.buildClean(world, x-4, c, z-2, air, 5, 1, 1); //WALL
-			BuildHelper.buildClean(world, x+4, c, z-2, air, 5, 1, 1); //WALL
-			BuildHelper.buildClean(world, x-2, c, z+4, air, 1, 1, 5); //WALL
-			BuildHelper.buildClean(world, x-2, c, z-4, air, 1, 1, 5); //WALL
-		}
-		
-		/************************ 0 : Red (14) ************************/
-		for(int c = 253; c >= min; c =  c - 33) {
-			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c0); //WALL
-			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c0); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c0); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c0); //WALL
-			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c0); //CORNER
-			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c0); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c0); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c0); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c0); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c0); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c0); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c0); //CORNER
-			
-			if(meta==0) {
-				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c0);
-			} else if(meta == 1) {
-				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c0);
-			} else if(meta == 2) {
-				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c0);
-			} else if(meta == 3) {
-				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c0);
-			}
-		}
-		
-		/************************ 1 : Orange (1) ************************/
-		for(int c = 250; c >= min; c =  c - 33) {
-			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c1); //WALL
-			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c1); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c1); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c1); //WALL
-			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c1); //CORNER
-			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c1); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c1); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c1); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c1); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c1); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c1); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c1); //CORNER
-			
-			if(meta==0) {
-				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c1);
-			} else if(meta == 1) {
-				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c1);
-			} else if(meta == 2) {
-				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c1);
-			} else if(meta == 3) {
-				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c1);
-			}
-		}
-		
-		/************************ 2 : Yellow (4) ************************/
-		for(int c = 247; c >= min; c =  c - 33) {
-			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c2); //WALL
-			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c2); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c2); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c2); //WALL
-			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c2); //CORNER
-			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c2); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c2); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c2); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c2); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c2); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c2); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c2); //CORNER
-			
-			if(meta==0) {
-				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c2);
-			} else if(meta == 1) {
-				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c2);
-			} else if(meta == 2) {
-				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c2);
-			} else if(meta == 3) {
-				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c2);
-			}
-		}
-		
-		/************************ 3 : Lime (5) ************************/
-		for(int c = 244; c >= min; c =  c - 33) {
-			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c3); //WALL
-			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c3); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c3); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c3); //WALL
-			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c3); //CORNER
-			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c3); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c3); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c3); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c3); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c3); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c3); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c3); //CORNER
-			
-			if(meta==0) {
-				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c3);
-			} else if(meta == 1) {
-				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c3);
-			} else if(meta == 2) {
-				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c3);
-			} else if(meta == 3) {
-				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c3);
-			}
-		}
-		
-		/************************ 4 : Green (13) ************************/
-		for(int c = 241; c >= min; c =  c - 33) {
-			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c4); //WALL
-			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c4); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c4); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c4); //WALL
-			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c4); //CORNER
-			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c4); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c4); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c4); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c4); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c4); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c4); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c4); //CORNER
-			
-			if(meta==0) {
-				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c4);
-			} else if(meta == 1) {
-				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c4);
-			} else if(meta == 2) {
-				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c4);
-			} else if(meta == 3) {
-				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c4);
-			}
-		}
-		
-		/************************ 5 : Cyan (9) ************************/
-		for(int c = 238; c >= min; c =  c - 33) {
-			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c5); //WALL
-			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c5); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c5); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c5); //WALL
-			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c5); //CORNER
-			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c5); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c5); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c5); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c5); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c5); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c5); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c5); //CORNER
-			
-			if(meta==0) {
-				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c5);
-			} else if(meta == 1) {
-				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c5);
-			} else if(meta == 2) {
-				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c5);
-			} else if(meta == 3) {
-				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c5);
-			}
-		}
-		
-		/************************ 6 : Light Blue (3) ************************/
-		for(int c = 235; c >= min; c =  c - 33) {
-			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c6); //WALL
-			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c6); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c6); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c6); //WALL
-			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c6); //CORNER
-			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c6); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c6); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c6); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c6); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c6); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c6); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c6); //CORNER
-			
-			if(meta==0) {
-				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c6);
-			} else if(meta == 1) {
-				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c6);
-			} else if(meta == 2) {
-				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c6);
-			} else if(meta == 3) {
-				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c6);
-			}
-		}
-		
-		/************************ 7 : Blue (11) ************************/
-		for(int c = 232; c >= min; c =  c - 33) {
-			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c7); //WALL
-			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c7); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c7); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c7); //WALL
-			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c7); //CORNER
-			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c7); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c7); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c7); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c7); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c7); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c7); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c7); //CORNER
-			
-			if(meta==0) {
-				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c7);
-			} else if(meta == 1) {
-				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c7);
-			} else if(meta == 2) {
-				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c7);
-			} else if(meta == 3) {
-				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c7);
-			}
-		}
-		
-		/************************ 8 : Purple (10) ************************/
-		for(int c = 229; c >= min; c =  c - 33) {
-			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c8); //WALL
-			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c8); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c8); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c8); //WALL
-			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c8); //CORNER
-			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c8); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c8); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c8); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c8); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c8); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c8); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c8); //CORNER
-			
-			if(meta==0) {
-				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c8);
-			} else if(meta == 1) {
-				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c8);
-			} else if(meta == 2) {
-				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c8);
-			} else if(meta == 3) {
-				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c8);
-			}
-		}
-		
-		/************************ 9 : Light Purple (2) ************************/
-		for(int c = 226; c >= min; c =  c - 33) {
-			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c9); //WALL
-			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c9); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c9); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c9); //WALL
-			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c9); //CORNER
-			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c9); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c9); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c9); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c9); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c9); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c9); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c9); //CORNER
-			
-			if(meta==0) {
-				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c9);
-			} else if(meta == 1) {
-				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c9);
-			} else if(meta == 2) {
-				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c9);
-			} else if(meta == 3) {
-				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c9);
-			}
-		}
-		
-		/************************ 10 : Pink (6) ************************/
-		for(int c = 223; c >= min; c =  c - 33) {
-			BuildHelper.buildColorBlock(world, x-5, c, z-2, 5, 3, 1, c10); //WALL
-			BuildHelper.buildColorBlock(world, x+5, c, z-2, 5, 3, 1, c10); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z+5, 1, 3, 5, c10); //WALL
-			BuildHelper.buildColorBlock(world, x-2, c, z-5, 1, 3, 5, c10); //WALL
-			BuildHelper.buildColorBlock(world, x+3, c, z+4, 1, 3, 1, c10); //CORNER
-			BuildHelper.buildColorBlock(world, x+3, c, z-4, 1, 3, 1, c10); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z+3, 1, 3, 1, c10); //CORNER
-			BuildHelper.buildColorBlock(world, x+4, c, z-3, 1, 3, 1, c10); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z+4, 1, 3, 1, c10); //CORNER
-			BuildHelper.buildColorBlock(world, x-3, c, z-4, 1, 3, 1, c10); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z+3, 1, 3, 1, c10); //CORNER
-			BuildHelper.buildColorBlock(world, x-4, c, z-3, 1, 3, 1, c10); //CORNER
-			
-			if(meta==0) {
-				BuildHelper.buildColorLadder(world, x-2, c, z-4, 1, 3, 5, 3, c10);
-			} else if(meta == 1) {
-				BuildHelper.buildColorLadder(world, x+4, c, z-2, 5, 3, 1, 4, c10);
-			} else if(meta == 2) {
-				BuildHelper.buildColorLadder(world, x-2, c, z+4, 1, 3, 5, 2, c10);
-			} else if(meta == 3) {
-				BuildHelper.buildColorLadder(world, x-4, c, z-2, 5, 3, 1, 5, c10);
+		ArrayList<Coords> coordsList = new ArrayList<>();
+		ArrayList<Coords> coordsAirList = new ArrayList<>();
+		double distance;
+		for (int row = 0; row <= 2 * radius; row++) {
+			for (int col = 0; col <= 2 * radius; col++) {
+				distance = Math.sqrt((row - radius) * (row - radius) + (col - radius) * (col - radius));
+				if(distance > radius - 0.4 && distance < radius + 0.5) {
+					coordsList.add(new Coords(x+row-radius,0,z+col-radius));
+				} else if(distance < radius - 0.3) {
+					coordsAirList.add(new Coords(x+row-radius,0,z+col-radius));
+				}
 			}
 		}
 
-		/************************ Stone (Prevent Lava Burning) ************************/
-//		for(int c = 50; c >= min; c--) {
-//			BuildHelper.buildClean(world, x-6, c, z-3, stone, 7, 1, 1); //WALL
-//			BuildHelper.buildClean(world, x+6, c, z-3, stone, 7, 1, 1); //WALL
-//			BuildHelper.buildClean(world, x-3, c, z+6, stone, 1, 1, 7); //WALL
-//			BuildHelper.buildClean(world, x-3, c, z-6, stone, 1, 1, 7); //WALL
-//			
-//			BuildHelper.buildClean(world, x-5, c, z-4, stone, 2, 1, 1); //PRE-CORNER
-//			BuildHelper.buildClean(world, x-5, c, z+3, stone, 2, 1, 1); //PRE-CORNER
-//
-//			BuildHelper.buildClean(world, x+5, c, z-4, stone, 2, 1, 1); //PRE-CORNER
-//			BuildHelper.buildClean(world, x+5, c, z+3, stone, 2, 1, 1); //PRE-CORNER
-//			
-//			BuildHelper.buildClean(world, x-4, c, z-5, stone, 1, 1, 2); //PRE-CORNER
-//			BuildHelper.buildClean(world, x+3, c, z-5, stone, 1, 1, 2); //PRE-CORNER
-//
-//			BuildHelper.buildClean(world, x-4, c, z+5, stone, 1, 1, 2); //PRE-CORNER
-//			BuildHelper.buildClean(world, x+3, c, z+5, stone, 1, 1, 2); //PRE-CORNER
-//
-//			BuildHelper.buildClean(world, x+4, c, z+4, stone, 1, 1, 1); //CORNER
-//			BuildHelper.buildClean(world, x+4, c, z-4, stone, 1, 1, 1); //CORNER
-//			BuildHelper.buildClean(world, x-4, c, z+4, stone, 1, 1, 1); //CORNER
-//			BuildHelper.buildClean(world, x-4, c, z-4, stone, 1, 1, 1); //CORNER
-//		}
-
-		/************************ Water ************************/
-		for(int c = min+3; c > min; c--) {
-			BuildHelper.buildClean(world, x-3, c, z-3, water, 7, 1, 7); //CENTER
-			BuildHelper.buildClean(world, x-4, c, z-2, water, 5, 1, 1); //WALL
-			BuildHelper.buildClean(world, x+4, c, z-2, water, 5, 1, 1); //WALL
-			BuildHelper.buildClean(world, x-2, c, z+4, water, 1, 1, 5); //WALL
-			BuildHelper.buildClean(world, x-2, c, z-4, water, 1, 1, 5); //WALL
+		Color[] colors;
+		if(actualRainbow) {
+			colors = ColorHelper.generateRainbow(100);
+		} else {
+			int index = 0;
+			int length = 3;
+			colors = new Color[33];
+			for(int i=0; i<length; i++) { colors[index] = new Color(c0); index++; }
+			for(int i=0; i<length; i++) { colors[index] = new Color(c1); index++; }
+			for(int i=0; i<length; i++) { colors[index] = new Color(c2); index++; }
+			for(int i=0; i<length; i++) { colors[index] = new Color(c3); index++; }
+			for(int i=0; i<length; i++) { colors[index] = new Color(c4); index++; }
+			for(int i=0; i<length; i++) { colors[index] = new Color(c5); index++; }
+			for(int i=0; i<length; i++) { colors[index] = new Color(c6); index++; }
+			for(int i=0; i<length; i++) { colors[index] = new Color(c7); index++; }
+			for(int i=0; i<length; i++) { colors[index] = new Color(c8); index++; }
+			for(int i=0; i<length; i++) { colors[index] = new Color(c9); index++; }
+			for(int i=0; i<length; i++) { colors[index] = new Color(c10); index++; }
 		}
-		
-		/************************ Floor (c5) ************************/
-		BuildHelper.buildColorBlock(world, x-3, min, z-3, 7, 1, 7, c5); //CENTER
-		BuildHelper.buildColorBlock(world, x-4, min, z-2, 5, 1, 1, c5); //WALL
-		BuildHelper.buildColorBlock(world, x+4, min, z-2, 5, 1, 1, c5); //WALL
-		BuildHelper.buildColorBlock(world, x-2, min, z+4, 1, 1, 5, c5); //WALL
-		BuildHelper.buildColorBlock(world, x-2, min, z-4, 1, 1, 5, c5); //WALL
 
-		/************************ Ladder ************************/
+		int i = 0;
+		int min = 5;
+		int max = 256;
+		int water = 3;
+		for(int c=max; c>=min; c--) {
+			for(Coords coords : coordsAirList) {
+				if(c == min) {
+					BuildHelper.setColorBlock(world,coords.getX(),c,coords.getZ(),colors[i].getRGB());
+				} else if(c < min+water+1) {
+					BuildHelper.setBlock(world,coords.getX(),c,coords.getZ(),Blocks.water);
+				} else {
+					BuildHelper.setBlock(world,coords.getX(),c,coords.getZ(),Blocks.air);
+				}
+			}
+			for(Coords coords : coordsList) {
+				if(i>=colors.length) {
+					i = 0;
+				}
+				if(c == min+water+1 && (((coords.getX()-radius==x || coords.getX()+radius==x) && coords.getZ()==z) || ((coords.getZ()-radius==z || coords.getZ()+radius==z) && coords.getX()==x))) {
+					BuildHelper.setBlock(world,coords.getX(),c,coords.getZ(),ModBlocks.skydiveTP);
+				} else {
+					BuildHelper.setColorBlock(world,coords.getX(),c,coords.getZ(),colors[i].getRGB());
+				}
+			}
+			i++;
+		}
+
 		if(meta == 0) {
-			BuildHelper.setBlock(world,x, min+4, z+5, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x+5, min+4, z, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x-5, min+4, z, ModBlocks.skydiveTP);
-			IBHelper.teleport(world,player,x,257,z+5, tp);
+			IBHelper.teleport(world,player,x,max+1,z+radius, tp);
 		} else if(meta == 1) {
-			BuildHelper.setBlock(world,x-5, min+4, z, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x, min+4, z+5, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x, min+4, z-5, ModBlocks.skydiveTP);
-			IBHelper.teleport(world,player,x-5,257,z, tp);
+			IBHelper.teleport(world,player,x-radius,max+1,z, tp);
 		} else if(meta == 2) {
-			BuildHelper.setBlock(world,x, min+4, z-5, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x+5, min+4, z, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x-5, min+4, z, ModBlocks.skydiveTP);
-			IBHelper.teleport(world,player,x,257,z-5, tp);
+			IBHelper.teleport(world,player,x,max+1,z-radius, tp);
 		} else if(meta == 3) {
-			BuildHelper.setBlock(world,x+5, min+4, z, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x, min+4, z+5, ModBlocks.skydiveTP);
-			BuildHelper.setBlock(world,x, min+4, z-5, ModBlocks.skydiveTP);
-			IBHelper.teleport(world,player,x+5,257,z, tp);
+			IBHelper.teleport(world,player,x+radius,max+1,z, tp);
 		}
 	}
 

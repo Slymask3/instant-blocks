@@ -93,10 +93,6 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("This block is used by Instant Skydive and Statue.");
 			list.add("When placed, will generate with a random color.");
 			list.add(Colors.c+"CREATIVE MODE ONLY");
-		} else if(block == ModBlocks.colorLadder) {
-			list.add("This block is used by Instant Skydive.");
-			list.add("When placed, will generate with a random color.");
-			list.add(Colors.c+"CREATIVE MODE ONLY");
 		} else if(block == ModBlocks.skydiveTP) {
 			list.add("This block is used by Instant Skydive.");
 			list.add("It simply teleports you up to layer 256.");

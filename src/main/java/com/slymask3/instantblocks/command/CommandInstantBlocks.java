@@ -254,10 +254,6 @@ public class CommandInstantBlocks extends CommandBase {
      		send(player,Colors._2 + "Block: " + Colors.a + "Color Block");
      		send(player,Colors._2 + "Description: " + Colors.a + "A block only available in creative, used for Instant Statue and Instant Skydive.");
      		send(player,Colors._2 + "Description: " + Colors.a + "When placed, will generate a random color.");
-     	} else if(held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.colorLadder)) {
-     		send(player,Colors._2 + "Block: " + Colors.a + "Color Ladder Block");
-     		send(player,Colors._2 + "Description: " + Colors.a + "A block only available in creative, used for Instant Skydive.");
-     		send(player,Colors._2 + "Description: " + Colors.a + "When placed, will generate a random color.");
      	} else if(held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.skydiveTP)) {
      		send(player,Colors._2 + "Block: " + Colors.a + "Skydive TP Block");
      		send(player,Colors._2 + "Description: " + Colors.a + "A block only available in creative, used for Instant Skydive.");

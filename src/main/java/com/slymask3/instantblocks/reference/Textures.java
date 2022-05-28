@@ -99,12 +99,6 @@ public class Textures {
         public static final String SIDE = "wool_colored_white";
     }
 
-    public static final class ColorLadder {
-        public static final String SIDE = "ladder";
-        public static final String ITEM = Reference.MOD_ID + ":colorLadderItem";
-        public static final String BLANK = Reference.MOD_ID + ":blank";
-    }
-
     public static final class SkydiveTP {
         public static final String SIDE = Reference.MOD_ID + ":skydiveTP_side";
         public static final String OTHER = Reference.MOD_ID + ":skydiveTP_other";

@@ -13,12 +13,13 @@ public class PacketSkydive extends AbstractPacket {
 	int _dim, _x, _y, _z;
 	String _player;
 	int _color0 , _color1, _color2, _color3, _color4, _color5, _color6, _color7, _color8, _color9, _color10;
-	boolean _tp;
+	int _radius;
+	boolean _tp, _actualRainbow;
 
 	public PacketSkydive() {
 		
 	}
-	public PacketSkydive(World world, int x, int y, int z, String player, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10, boolean tp) {
+	public PacketSkydive(World world, int x, int y, int z, String player, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10, int radius, boolean tp, boolean actualRainbow) {
 		_dim = world.provider.dimensionId;
 		_x = x;
 		_y = y;
@@ -35,7 +36,9 @@ public class PacketSkydive extends AbstractPacket {
 		_color8 = c8;
 		_color9 = c9;
 		_color10 = c10;
+		_radius = radius;
 		_tp = tp;
+		_actualRainbow = actualRainbow;
 	}
 
 	@Override
@@ -56,7 +59,9 @@ public class PacketSkydive extends AbstractPacket {
 		buffer.writeInt(_color8);
 		buffer.writeInt(_color9);
 		buffer.writeInt(_color10);
+		buffer.writeInt(_radius);
 		buffer.writeBoolean(_tp);
+		buffer.writeBoolean(_actualRainbow);
 	}
 
 	@Override
@@ -77,7 +82,9 @@ public class PacketSkydive extends AbstractPacket {
 		_color8 = buffer.readInt();
 		_color9 = buffer.readInt();
 		_color10 = buffer.readInt();
+		_radius = buffer.readInt();
 		_tp = buffer.readBoolean();
+		_actualRainbow = buffer.readBoolean();
 	}
 
 	@Override
@@ -89,6 +96,6 @@ public class PacketSkydive extends AbstractPacket {
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
 		BlockInstantFall block = (BlockInstantFall) BuildHelper.getBlock(world,_x, _y, _z);
-		block.build(world, _x, _y, _z, _player, _color0, _color1, _color2, _color3, _color4, _color5, _color6, _color7, _color8, _color9, _color10, _tp);
+		block.build(world, _x, _y, _z, _player, _color0, _color1, _color2, _color3, _color4, _color5, _color6, _color7, _color8, _color9, _color10, _radius, _tp, _actualRainbow);
 	}
 }

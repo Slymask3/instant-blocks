@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.init;
 
 import com.slymask3.instantblocks.block.BlockColor;
-import com.slymask3.instantblocks.block.BlockColorLadder;
 import com.slymask3.instantblocks.block.BlockSkydiveTP;
 import com.slymask3.instantblocks.block.instant.*;
 import com.slymask3.instantblocks.handler.Config;
@@ -29,7 +28,6 @@ public class ModBlocks {
 	public static Block ibSchematic = new BlockInstantSchematic();
 	public static Block ibTree = new BlockInstantTree();
 	public static Block color = new BlockColor();
-	public static Block colorLadder = new BlockColorLadder();
 	public static Block skydiveTP = new BlockSkydiveTP();
 	
 	public static void init() {
@@ -51,7 +49,6 @@ public class ModBlocks {
 		add(ibSchematic, Names.Blocks.IB_SCHEMATIC, Config.ADD_SCHEMATIC);
 		add(ibTree, Names.Blocks.IB_TREE, Config.ADD_TREE);
 		add(color, Names.Blocks.COLOR, Config.ADD_SKYDIVE || Config.ADD_STATUE);
-		add(colorLadder, Names.Blocks.COLOR_LADDER, Config.ADD_SKYDIVE);
 		add(skydiveTP, Names.Blocks.SKYDIVE_TP, Config.ADD_SKYDIVE);
 	}
 

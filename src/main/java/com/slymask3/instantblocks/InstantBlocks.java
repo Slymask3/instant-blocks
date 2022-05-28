@@ -45,7 +45,6 @@ public class InstantBlocks {
 		TileEntity.addMapping(TileEntityStatue.class, "TileEntityStatue");
 		TileEntity.addMapping(TileEntityHarvest.class, "TileEntityHarvest");
 		TileEntity.addMapping(TileEntitySkydive.class, "TileEntitySkydive");
-		TileEntity.addMapping(TileEntityColorLadder.class, "TileEntityColorLadder");
 		TileEntity.addMapping(TileEntitySchematic.class, "TileEntitySchematic");
 		TileEntity.addMapping(TileEntityTree.class, "TileEntityTree");
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());

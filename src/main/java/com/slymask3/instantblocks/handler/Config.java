@@ -33,6 +33,7 @@ public class Config {
 	public static int XP_AMOUNT;
 	public static int RAILS_AMOUNT;
 	public static String PARTICLE;
+	public static int SKYDIVE_RADIUS;
 
 	public static String BLOCKS = "blocks";
 	public static boolean ADD_WOODEN_HOUSE;
@@ -83,6 +84,7 @@ public class Config {
 		XP_AMOUNT = configuration.get(GENERAL, "XP_AMOUNT", 0, "How much experience activating Instant Blocks gives you.\n(Default = 0)").getInt();
 		RAILS_AMOUNT = configuration.get(GENERAL, "RAILS_AMOUNT", 37, "Amount of rail blocks to create for Instant Rail Block.\n(Default = 37)").getInt();
 		PARTICLE = configuration.get(GENERAL, "PARTICLE", "reddust", "Which particles are generated on activation.\n(Default = reddust)").getString();
+		SKYDIVE_RADIUS = configuration.get(GENERAL, "SKYDIVE_RADIUS", 5, "Default radius for the Instant Rainbow Skydive.\n(Default = 5)").getInt();
 
 		ADD_WOODEN_HOUSE = configuration.get(BLOCKS, "ADD_WOODEN_HOUSE", true, "Add Instant Wooden House\n(Default = true)").getBoolean();
 		ADD_MINING_LADDER = configuration.get(BLOCKS, "ADD_MINING_LADDER", true, "Add Instant Mining Ladder\n(Default = true)").getBoolean();
