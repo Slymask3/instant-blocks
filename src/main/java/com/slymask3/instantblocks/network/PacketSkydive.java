@@ -94,8 +94,21 @@ public class PacketSkydive extends AbstractPacket {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
+		int[] colors = new int[11];
+		colors[0] = _color0;
+		colors[1] = _color1;
+		colors[2] = _color2;
+		colors[3] = _color3;
+		colors[4] = _color4;
+		colors[5] = _color5;
+		colors[6] = _color6;
+		colors[7] = _color7;
+		colors[8] = _color8;
+		colors[9] = _color9;
+		colors[10] = _color10;
+
 		World world = DimensionManager.getWorld(_dim);
 		BlockInstantFall block = (BlockInstantFall) BuildHelper.getBlock(world,_x, _y, _z);
-		block.build(world, _x, _y, _z, _player, _color0, _color1, _color2, _color3, _color4, _color5, _color6, _color7, _color8, _color9, _color10, _radius, _tp, _actualRainbow);
+		block.build(world, _x, _y, _z, _player, colors, _radius, _tp, _actualRainbow);
 	}
 }

@@ -6,6 +6,7 @@ import com.slymask3.instantblocks.network.PacketSkydive;
 import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
+import com.slymask3.instantblocks.util.ColorHelper;
 import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.client.config.GuiButtonExt;
 import cpw.mods.fml.client.config.GuiCheckBox;
@@ -19,7 +20,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 
-import java.util.Random;
+import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class GuiSkydive extends GuiScreen {
@@ -51,7 +52,7 @@ public class GuiSkydive extends GuiScreen {
         this.buttonList.add(this.random = new GuiButtonExt(103, this.width / 2 - 4 - 150, this.height / 4 + 98 + 12, 308, 20, "Randomize"));
 
 		this.buttonList.add(this.tp = new GuiCheckBox(104, this.width / 2 + 4, this.height / 4 + 83 + 12, "Teleport to top", true));
-		this.buttonList.add(this.actualRainbow = new GuiCheckBox(105, this.width / 2 - 4 - 150, this.height / 4 + 83 + 12, "Use actual rainbow", true));
+		this.buttonList.add(this.actualRainbow = new GuiCheckBox(105, this.width / 2 - 4 - 150, this.height / 4 + 83 + 12, "Use actual rainbow", false));
 
 		this.radius = new GuiTextField(this.fontRendererObj, this.width / 2 + 4 + 50, 135, 60, 14);
 		this.radius.setText(String.valueOf(Config.SKYDIVE_RADIUS));
@@ -79,6 +80,18 @@ public class GuiSkydive extends GuiScreen {
 				mc.displayGuiScreen(null);
 			} else if(btn.id == random.id) {
 				setRandom();
+			} else if(btn.id == actualRainbow.id) {
+				if(actualRainbow.isChecked()) {
+					this.random.enabled = false;
+					for(int i=0; i<this.color.length; i++) {
+						this.color[i].setEnabled(false);
+					}
+				} else {
+					this.random.enabled = true;
+					for(int i=0; i<this.color.length; i++) {
+						this.color[i].setEnabled(true);
+					}
+				}
 			}
 		}
 	}
@@ -159,43 +172,45 @@ public class GuiSkydive extends GuiScreen {
 	}
 	
 	public int getHex(String input) {
-		int color = 0x00FFFFFF;
+		int color;
 		if(input.equalsIgnoreCase("red")) {
-			color = 0x00963430;
+			color = 0x00FF0000;
 		} else if(input.equalsIgnoreCase("orange")) {
-			color = 0x00DB7D3E;
+			color = 0x00FF8000;
 		} else if(input.equalsIgnoreCase("yellow")) {
-			color = 0x00B1A627;
+			color = 0x00FFFF00;
 		} else if(input.equalsIgnoreCase("lime")) {
-			color = 0x0041AE38;
+			color = 0x0080FF00;
 		} else if(input.equalsIgnoreCase("green")) {
-			color = 0x0035461B;
+			color = 0x0000FF00;
 		} else if(input.equalsIgnoreCase("cyan")) {
-			color = 0x002E6E89;
+			color = 0x0000FFFF;
 		} else if(input.equalsIgnoreCase("light blue") || input.equalsIgnoreCase("lightblue")) {
-			color = 0x006B8AC9;
+			color = 0x000080FF;
 		} else if(input.equalsIgnoreCase("blue")) {
-			color = 0x002E388D;
+			color = 0x000000FF;
 		} else if(input.equalsIgnoreCase("purple")) {
-			color = 0x007E3DB5;
+			color = 0x008000FF;
 		} else if(input.equalsIgnoreCase("magenta")) {
-			color = 0x00B350BC;
+			color = 0x00FF00FF;
 		} else if(input.equalsIgnoreCase("pink")) {
-			color = 0x00D08499;
+			color = 0x00FF0080;
 		} else if(input.equalsIgnoreCase("white")) {
-			color = 0x00DDDDDD;
+			color = 0x00FFFFFF;
 		} else if(input.equalsIgnoreCase("gray") || input.equalsIgnoreCase("grey")) {
-			color = 0x00404040;
+			color = 0x00808080;
 		} else if(input.equalsIgnoreCase("light gray") || input.equalsIgnoreCase("lightgray") || input.equalsIgnoreCase("light grey") || input.equalsIgnoreCase("lightgrey")) {
-			color = 0x009AA1A1;
+			color = 0x00C0C0C0;
 		} else if(input.equalsIgnoreCase("brown")) {
-			color = 0x004F321F;
+			color = 0x00663300;
 		} else if(input.equalsIgnoreCase("black")) {
-			color = 0x00191616;
+			color = 0x00000000;
 		} else {
 			try {
 				color = (int)Long.parseLong(input, 16);
-			} catch(Exception e) {}
+			} catch(Exception e) {
+				color = 0x00FFFFFF;
+			}
 		}
 		return color;
 	}
@@ -209,30 +224,7 @@ public class GuiSkydive extends GuiScreen {
 	}
 	
 	public String createRandomHex() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(getHexSingleValue());
-		sb.append(getHexSingleValue());
-		sb.append(getHexSingleValue());
-		sb.append(getHexSingleValue());
-		sb.append(getHexSingleValue());
-		sb.append(getHexSingleValue());
-		return sb.toString();
-	}
-	
-	public String getHexSingleValue() {
-		Random rand = new Random();
-		int i = rand.nextInt(16);
-		switch(i) {
-			case 0: case 1: case 2: case 3: case 4:
-			case 5: case 6: case 7: case 8: case 9:
-				return String.valueOf(i);
-			case 10: return "A";
-			case 11: return "B";
-			case 12: return "C";
-			case 13: return "D";
-			case 14: return "E";
-			case 15: return "F";
-			default: return "0";
-		}
+		Color color = ColorHelper.generateRandomColor();
+		return String.format("%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
 	}
 }

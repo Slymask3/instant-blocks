@@ -58,7 +58,7 @@ public class BlockInstantFall extends BlockInstant {
 		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 	}
 
-	public void build(World world, int x, int y, int z, String playerS, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10, int radius, boolean tp, boolean actualRainbow) {
+	public void build(World world, int x, int y, int z, String playerS, int[] selectedColors, int radius, boolean tp, boolean actualRainbow) {
 		EntityPlayer player = world.getPlayerEntityByName(playerS);
 		int meta = world.getBlockMetadata(x, y, z);
 
@@ -81,24 +81,31 @@ public class BlockInstantFall extends BlockInstant {
 			colors = ColorHelper.generateRainbow(100);
 		} else {
 			int index = 0;
-			int length = 3;
-			colors = new Color[33];
-			for(int i=0; i<length; i++) { colors[index] = new Color(c0); index++; }
-			for(int i=0; i<length; i++) { colors[index] = new Color(c1); index++; }
-			for(int i=0; i<length; i++) { colors[index] = new Color(c2); index++; }
-			for(int i=0; i<length; i++) { colors[index] = new Color(c3); index++; }
-			for(int i=0; i<length; i++) { colors[index] = new Color(c4); index++; }
-			for(int i=0; i<length; i++) { colors[index] = new Color(c5); index++; }
-			for(int i=0; i<length; i++) { colors[index] = new Color(c6); index++; }
-			for(int i=0; i<length; i++) { colors[index] = new Color(c7); index++; }
-			for(int i=0; i<length; i++) { colors[index] = new Color(c8); index++; }
-			for(int i=0; i<length; i++) { colors[index] = new Color(c9); index++; }
-			for(int i=0; i<length; i++) { colors[index] = new Color(c10); index++; }
+			colors = new Color[selectedColors.length*10];
+			for(int i=0; i<selectedColors.length; i++) {
+				Color after;
+				if(i+1 < selectedColors.length) {
+					after = new Color(selectedColors[i+1]);
+				} else {
+					after = new Color(selectedColors[0]);
+				}
+				Color base = new Color(selectedColors[i]);
+				colors[index] = base; index++;
+				colors[index] = ColorHelper.getColorBetween(base,after,90,10); index++;
+				colors[index] = ColorHelper.getColorBetween(base,after,80,20); index++;
+				colors[index] = ColorHelper.getColorBetween(base,after,70,30); index++;
+				colors[index] = ColorHelper.getColorBetween(base,after,60,40); index++;
+				colors[index] = ColorHelper.getColorBetween(base,after,50,50); index++;
+				colors[index] = ColorHelper.getColorBetween(base,after,40,60); index++;
+				colors[index] = ColorHelper.getColorBetween(base,after,30,70); index++;
+				colors[index] = ColorHelper.getColorBetween(base,after,20,80); index++;
+				colors[index] = ColorHelper.getColorBetween(base,after,10,90); index++;
+			}
 		}
 
 		int i = 0;
 		int min = 5;
-		int max = 256;
+		int max = 255;
 		int water = 3;
 		for(int c=max; c>=min; c--) {
 			for(Coords coords : coordsAirList) {

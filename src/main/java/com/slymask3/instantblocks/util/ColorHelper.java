@@ -2,6 +2,7 @@ package com.slymask3.instantblocks.util;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class ColorHelper {
 	
@@ -395,5 +396,18 @@ public class ColorHelper {
 		}
 		float m = v - c;
 		return ((int) ((r + m) * 255) << 16) | ((int) ((g + m) * 255) << 8) | ((int) ((b + m) * 255));
+	}
+
+	public static Color getColorBetween(Color one, Color two, int per1, int per2) {
+		double p1 = per1 / 100.0;
+		double p2 = per2 / 100.0;
+		return new Color((int)Math.floor(one.getRed()*p1+two.getRed()*p2),(int)Math.floor(one.getGreen()*p1+two.getGreen()*p2),(int)Math.floor(one.getBlue()*p1+two.getBlue()*p2));
+	}
+
+	public static Color generateRandomColor() {
+		Random rand = new Random();
+		int hue = rand.nextInt(360);
+		int color = hsvToRgb(hue,100,100);
+		return new Color(color);
 	}
 }
