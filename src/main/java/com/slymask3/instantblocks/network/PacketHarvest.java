@@ -18,10 +18,7 @@ public class PacketHarvest extends AbstractPacket {
 	boolean _cocoa, _mushroom, _netherwart;
 	boolean _replant;
 
-	public PacketHarvest() {
-		
-	}
-
+	public PacketHarvest() {}
 	public PacketHarvest(World world, int x, int y, int z, String player, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
 		_dim = world.provider.dimensionId;
 		_x = x;

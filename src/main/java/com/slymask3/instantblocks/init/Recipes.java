@@ -10,7 +10,7 @@ public class Recipes {
 	public static void init() {
 		if(Config.ALLOW_CRAFTING) {
 			if(Config.ADD_WOODEN_HOUSE) {
-				GameRegistry.addRecipe(new ItemStack(ModBlocks.ibWood, 1), new Object[] {
+				GameRegistry.addRecipe(new ItemStack(ModBlocks.ibWoodHouse, 1), new Object[] {
 					"WVW",
 					"GBG",	//Wooden House
 					"LDL",
@@ -24,7 +24,7 @@ public class Recipes {
 			}
 
 			if(Config.ADD_MINING_LADDER) {
-				GameRegistry.addRecipe(new ItemStack(ModBlocks.ibLadder, 1), new Object[] {
+				GameRegistry.addRecipe(new ItemStack(ModBlocks.ibMiningLadder, 1), new Object[] {
 					"LST",
 					"LSI",	//Mining Ladder
 					"LSW",
@@ -60,7 +60,7 @@ public class Recipes {
 			}
 
 			if(Config.ADD_SKYDIVE) {
-				GameRegistry.addRecipe(new ItemStack(ModBlocks.ibFall, 1), new Object[] {
+				GameRegistry.addRecipe(new ItemStack(ModBlocks.ibSkydive, 1), new Object[] {
 					"WWW",
 					"WDW", //Rainbow Skydive
 					"WWW",
@@ -125,7 +125,7 @@ public class Recipes {
 			}
 
 			if(Config.ADD_SUCTION) {
-				GameRegistry.addRecipe(new ItemStack(ModBlocks.ibSucker, 2), new Object[] {
+				GameRegistry.addRecipe(new ItemStack(ModBlocks.ibSuction, 2), new Object[] {
 					"III",
 					"IHI", //Absorb
 					"III",

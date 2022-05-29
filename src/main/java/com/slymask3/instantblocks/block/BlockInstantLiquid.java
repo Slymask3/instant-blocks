@@ -2,9 +2,9 @@ package com.slymask3.instantblocks.block;
 
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Coords;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
@@ -12,9 +12,11 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BlockInstantLiquid extends BlockInstant {
 	public ArrayList<Coords> coordsList;
@@ -23,6 +25,7 @@ public class BlockInstantLiquid extends BlockInstant {
 	public String create;
 	public String create1;
 	public boolean isSuction = false;
+	public String particle = null;
 
     public BlockInstantLiquid(String name, Material material, SoundType soundType, float hardness, Block blockCheck, Block blockReplace) {
         super(name, material, soundType, hardness);
@@ -30,6 +33,35 @@ public class BlockInstantLiquid extends BlockInstant {
 		this.blockCheck = blockCheck;
 		this.blockReplace = blockReplace;
     }
+
+	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+		if(this.particle != null && random.nextInt(10) == 0) {
+			for(int i=0; i<8; i++) {
+				world.spawnParticle(this.particle, (double)x + Math.random(), (double)y + 1.2D, (double)z + Math.random(), 0.0D, 0.0D, 0.0D);
+			}
+		}
+	}
+
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+		if(this.isSuction) {
+			return super.getCollisionBoundingBoxFromPool(world,x,y,z);
+		} else  {
+			float f = 0.0625F;
+			return AxisAlignedBB.getBoundingBox((double)((float)x + f), (double)y, (double)((float)z + f), (double)((float)(x + 1) - f), (double)((float)(y + 1) - f), (double)((float)(z + 1) - f));
+		}
+	}
+
+	public boolean renderAsNormalBlock() {
+		return this.isSuction;
+	}
+
+	public boolean isOpaqueCube() {
+		return this.isSuction;
+	}
+
+	public int getRenderBlockPass() {
+		return this.blockMaterial == Material.water ? 1 : 0;
+	}
 
 	private int getMax() {
 		return isSuction ? Config.MAX_FILL : Config.MAX_LIQUID;
@@ -57,7 +89,7 @@ public class BlockInstantLiquid extends BlockInstant {
 			return false;
 		}
 		if(coordsList.size() >= getMax()) {
-			IBHelper.msg(player, errorMsg, Colors.c);
+			IBHelper.msg(player, errorMessage, Colors.c);
 			coordsList = new ArrayList<>();
 			return false;
 		} else {
@@ -71,9 +103,9 @@ public class BlockInstantLiquid extends BlockInstant {
 		}
 		BuildHelper.setBlock(world,x, y, z, getMainReplaceBlock());
 		if(coordsList.size() > 0) {
-			setCreateMsg(create.replace("%i%",String.valueOf(isSuction ? coordsList.size() : coordsList.size()+1)).replace("%type%",blockCheck == Blocks.water ? "water" : "lava"));
+			setCreateMessage(create.replace("%i%",String.valueOf(isSuction ? coordsList.size() : coordsList.size()+1)).replace("%type%",blockCheck == Blocks.water ? "water" : "lava"));
 		} else {
-			setCreateMsg(create1.replace("%type%",blockCheck == Blocks.water ? "water" : "lava"));
+			setCreateMessage(create1.replace("%type%",blockCheck == Blocks.water ? "water" : "lava"));
 		}
 		coordsList = new ArrayList<>();
 		if(isSuction) {

@@ -14,7 +14,7 @@ public class BlockInstantSuction extends BlockInstantLiquid {
         super(Names.Blocks.IB_SUCTION, Material.rock, Block.soundTypeStone, 1.5F, null, Blocks.air);
         setTextures(Textures.Suction.SIDE);
         setBlockTextureName(Textures.Suction.SIDE);
-		setErrorMsg(Strings.ERROR_SUCTION.replace("%i%",String.valueOf(Config.MAX_FILL)));
+		setErrorMessage(Strings.ERROR_SUCTION.replace("%i%",String.valueOf(Config.MAX_FILL)));
 		this.create = Strings.CREATE_SUCTION;
 		this.create1 = Strings.CREATE_SUCTION_1;
         this.isSuction = true;

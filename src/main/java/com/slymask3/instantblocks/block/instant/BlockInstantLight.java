@@ -3,11 +3,11 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -24,7 +24,7 @@ import java.util.Random;
 public class BlockInstantLight extends BlockInstant {
     public BlockInstantLight() {
         super(Names.Blocks.IB_LIGHT, Material.wood, Block.soundTypeWood, 0.5F);
-        setCreateMsg(Strings.CREATE_LIGHT);
+        setCreateMessage(Strings.CREATE_LIGHT);
         setBlockTextureName(Textures.Light.SIDE);
         setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 0.90F, 0.625F);
         setLightLevel(1.0F);

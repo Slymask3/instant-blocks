@@ -3,10 +3,9 @@ package com.slymask3.instantblocks.gui;
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.network.PacketSkydive;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
-import com.slymask3.instantblocks.util.ColorHelper;
+import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.client.config.GuiButtonExt;
 import cpw.mods.fml.client.config.GuiCheckBox;
@@ -31,8 +30,10 @@ public class GuiSkydive extends GuiScreen {
 	
     private GuiButtonExt done, cancel, random;
 	private GuiTextField[] color = new GuiTextField[11];
-	private GuiCheckBox tp, actualRainbow;
+	private GuiCheckBox tp;
 	private GuiTextField radius;
+
+	private final int cutoff = 6;
 
 	public GuiSkydive(EntityPlayer player, TileEntitySkydive entity, World world, int x, int y, int z) {
 		this.player = player;
@@ -49,21 +50,20 @@ public class GuiSkydive extends GuiScreen {
 		this.buttonList.clear();
         this.buttonList.add(this.done = new GuiButtonExt(101, this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, "Generate"));
         this.buttonList.add(this.cancel = new GuiButtonExt(102, this.width / 2 + 4, this.height / 4 + 120 + 12, 150, 20, I18n.format("gui.cancel", new Object[0])));
-        this.buttonList.add(this.random = new GuiButtonExt(103, this.width / 2 - 4 - 150, this.height / 4 + 98 + 12, 308, 20, "Randomize"));
+        this.buttonList.add(this.random = new GuiButtonExt(103, this.width / 2 + 4, this.height / 4 + 98 + 12, 150, 20, "Randomize"));
 
 		this.buttonList.add(this.tp = new GuiCheckBox(104, this.width / 2 + 4, this.height / 4 + 83 + 12, "Teleport to top", true));
-		this.buttonList.add(this.actualRainbow = new GuiCheckBox(105, this.width / 2 - 4 - 150, this.height / 4 + 83 + 12, "Use actual rainbow", false));
+		//this.buttonList.add(this.actualRainbow = new GuiCheckBox(105, this.width / 2 - 4 - 150, this.height / 4 + 83 + 12, "Use actual rainbow", false));
 
-		this.radius = new GuiTextField(this.fontRendererObj, this.width / 2 + 4 + 50, 135, 60, 14);
+		this.radius = new GuiTextField(this.fontRendererObj, this.width / 2 - 4 - 100 - 12, this.height / 4 + 100 + 12, 110, 16);
 		this.radius.setText(String.valueOf(Config.SKYDIVE_RADIUS));
-        
-        for(int i=0; i<=5; i++) {
-        	this.color[i] = new GuiTextField(this.fontRendererObj, this.width / 2 - 4 - 100, 45 + (18*i), 60, 14);
+
+        for(int i=0; i<cutoff; i++) {
+        	this.color[i] = new GuiTextField(this.fontRendererObj, this.width / 2 - 4 - 100 + 6, 45 + (18*i), 60, 14);
 			this.color[i].setText(tileEntity.color[i]);
         }
-        
-        for(int i=6; i<=10; i++) {
-        	this.color[i] = new GuiTextField(this.fontRendererObj, this.width / 2 + 4 + 50, 45 + (18*(i-6)), 60, 14);
+        for(int i=cutoff; i<=10; i++) {
+        	this.color[i] = new GuiTextField(this.fontRendererObj, this.width / 2 + 4 + 50, 45 + (18*(i-cutoff)), 60, 14);
 			this.color[i].setText(tileEntity.color[i]);
         }
 	}
@@ -80,19 +80,20 @@ public class GuiSkydive extends GuiScreen {
 				mc.displayGuiScreen(null);
 			} else if(btn.id == random.id) {
 				setRandom();
-			} else if(btn.id == actualRainbow.id) {
-				if(actualRainbow.isChecked()) {
-					this.random.enabled = false;
-					for(int i=0; i<this.color.length; i++) {
-						this.color[i].setEnabled(false);
-					}
-				} else {
-					this.random.enabled = true;
-					for(int i=0; i<this.color.length; i++) {
-						this.color[i].setEnabled(true);
-					}
-				}
 			}
+//			} else if(btn.id == actualRainbow.id) {
+//				if(actualRainbow.isChecked()) {
+//					this.random.enabled = false;
+//					for(int i=0; i<this.color.length; i++) {
+//						this.color[i].setEnabled(false);
+//					}
+//				} else {
+//					this.random.enabled = true;
+//					for(int i=0; i<this.color.length; i++) {
+//						this.color[i].setEnabled(true);
+//					}
+//				}
+//			}
 		}
 	}
 	
@@ -140,15 +141,14 @@ public class GuiSkydive extends GuiScreen {
 		this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, "Instant Skydive Block", this.width / 2, 20, 16777215);
         this.drawString(this.fontRendererObj, "Enter colors by name or hexadecimal value.", this.width / 2 - 4 - 150, 33, 10526880); //aarrggbb
-		this.drawString(this.fontRendererObj, "Radius:", this.width / 2 + 4, 138,10526880);
+		this.drawString(this.fontRendererObj, "Radius:", this.width / 2 - 4 - 150, this.height / 4 + 104 + 12,10526880);
         
-        for(int i=0; i<=5; i++) {
+        for(int i=0; i<cutoff; i++) {
 			this.drawString(this.fontRendererObj, "Color "+(i+1)+":", this.width / 2 - 4 - 150, 48 + (18*i), tileEntity.colorCode[i]);
         	this.color[i].drawTextBox();
         }
-        
-        for(int i=6; i<=10; i++) {
-			this.drawString(this.fontRendererObj, "Color "+(i+1)+":", this.width / 2 + 4, 48 + (18*(i-6)), tileEntity.colorCode[i]);
+        for(int i=cutoff; i<=10; i++) {
+			this.drawString(this.fontRendererObj, "Color "+(i+1)+":", this.width / 2 + 4, 48 + (18*(i-cutoff)), tileEntity.colorCode[i]);
         	this.color[i].drawTextBox();
         }
 
@@ -164,55 +164,19 @@ public class GuiSkydive extends GuiScreen {
 		} catch (NumberFormatException e) {
 			radius = Config.SKYDIVE_RADIUS;
 		}
-		InstantBlocks.packetPipeline.sendToServer(new PacketSkydive(this.world, this.x, this.y, this.z, this.player.getDisplayName(), getHex(color[0].getText()), getHex(color[1].getText()), getHex(color[2].getText()), getHex(color[3].getText()), getHex(color[4].getText()), getHex(color[5].getText()), getHex(color[6].getText()), getHex(color[7].getText()), getHex(color[8].getText()), getHex(color[9].getText()), getHex(color[10].getText()), radius, tp.isChecked(), actualRainbow.isChecked()));
+		InstantBlocks.packetPipeline.sendToServer(new PacketSkydive(this.world, this.x, this.y, this.z, this.player.getDisplayName(), getColors(), radius, tp.isChecked()));
 		
 		IBHelper.xp(world, player, Config.XP_AMOUNT);
         IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
         IBHelper.msg(player, Strings.CREATE_SKYDIVE, Colors.a);
 	}
 	
-	public int getHex(String input) {
-		int color;
-		if(input.equalsIgnoreCase("red")) {
-			color = 0x00FF0000;
-		} else if(input.equalsIgnoreCase("orange")) {
-			color = 0x00FF8000;
-		} else if(input.equalsIgnoreCase("yellow")) {
-			color = 0x00FFFF00;
-		} else if(input.equalsIgnoreCase("lime")) {
-			color = 0x0080FF00;
-		} else if(input.equalsIgnoreCase("green")) {
-			color = 0x0000FF00;
-		} else if(input.equalsIgnoreCase("cyan")) {
-			color = 0x0000FFFF;
-		} else if(input.equalsIgnoreCase("light blue") || input.equalsIgnoreCase("lightblue")) {
-			color = 0x000080FF;
-		} else if(input.equalsIgnoreCase("blue")) {
-			color = 0x000000FF;
-		} else if(input.equalsIgnoreCase("purple")) {
-			color = 0x008000FF;
-		} else if(input.equalsIgnoreCase("magenta")) {
-			color = 0x00FF00FF;
-		} else if(input.equalsIgnoreCase("pink")) {
-			color = 0x00FF0080;
-		} else if(input.equalsIgnoreCase("white")) {
-			color = 0x00FFFFFF;
-		} else if(input.equalsIgnoreCase("gray") || input.equalsIgnoreCase("grey")) {
-			color = 0x00808080;
-		} else if(input.equalsIgnoreCase("light gray") || input.equalsIgnoreCase("lightgray") || input.equalsIgnoreCase("light grey") || input.equalsIgnoreCase("lightgrey")) {
-			color = 0x00C0C0C0;
-		} else if(input.equalsIgnoreCase("brown")) {
-			color = 0x00663300;
-		} else if(input.equalsIgnoreCase("black")) {
-			color = 0x00000000;
-		} else {
-			try {
-				color = (int)Long.parseLong(input, 16);
-			} catch(Exception e) {
-				color = 0x00FFFFFF;
-			}
+	public int[] getColors() {
+		int[] colors = new int[this.color.length];
+		for(int i=0; i<colors.length; i++) {
+			colors[i] = Colors.textToColor(this.color[i].getText()).getRGB();
 		}
-		return color;
+		return colors;
 	}
 	
 	public void setRandom() {
@@ -224,7 +188,7 @@ public class GuiSkydive extends GuiScreen {
 	}
 	
 	public String createRandomHex() {
-		Color color = ColorHelper.generateRandomColor();
+		Color color = Colors.generateRandomColor();
 		return String.format("%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
 	}
 }

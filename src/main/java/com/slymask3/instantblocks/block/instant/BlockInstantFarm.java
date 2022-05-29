@@ -1,9 +1,6 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
-import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
@@ -26,6 +23,7 @@ public class BlockInstantFarm extends BlockInstant {
     public BlockInstantFarm() {
         super(Names.Blocks.IB_FARM, Material.rock, Block.soundTypeStone, 1.5F);
         setBlockTextureName(Textures.Farm.TOP0);
+		setCreateMessage(Strings.CREATE_FARM);
 		setDirectional(true);
     }
 	
@@ -58,20 +56,8 @@ public class BlockInstantFarm extends BlockInstant {
 		return blockIcon;
 	}
 
-    public boolean onActivate(World world, int x, int y, int z, EntityPlayer player) {
-    	ItemStack is = player.getCurrentEquippedItem();
-    	
-		if(Config.USE_WANDS) {
-			if(IBHelper.isWand(is)) {
-				is.damageItem(1, player);
-			} else {
-				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
-				return true;
-			}
-		}
-
+	public void build(World world, int x, int y, int z, EntityPlayer player) {
 		Block crop = Blocks.wheat;
-		
 		if(IBHelper.isServer(world)) {
 			Random ran = new Random();
 			int r = ran.nextInt(20);
@@ -83,22 +69,7 @@ public class BlockInstantFarm extends BlockInstant {
 				crop = Blocks.wheat;
 			}
 		}
-		
-		build(world, x, y, z, crop);
-		
 
-		IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibFarm);
-		IBHelper.xp(world, player, Config.XP_AMOUNT);
-		
-		IBHelper.sound(world, Config.SOUND, x, y, z);
-		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
-		
-		IBHelper.msg(player, Strings.CREATE_FARM, Colors.a);
-		
-		return true;
-    }
-
-	public void build(World world, int x, int y, int z, Block crop) {
 		Block stone = Blocks.stonebrick;
 		Block farm = Blocks.farmland;
 		Block water = Blocks.water;

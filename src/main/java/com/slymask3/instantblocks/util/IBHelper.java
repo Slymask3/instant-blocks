@@ -50,7 +50,7 @@ public class IBHelper {
 		if(Config.SHOW_MESSAGES) {
 			World world = player.worldObj;
 			if(isClient(world)) {
-				player.addChatMessage(new ChatComponentText(Strings.PREFIX + ColorHelper.colorEveryWord(msg, color)));
+				player.addChatMessage(new ChatComponentText(Strings.PREFIX + Colors.colorEveryWord(msg, color)));
 			}
 		}
 	}
@@ -63,7 +63,7 @@ public class IBHelper {
 	
 	public static void teleport(World world, EntityPlayer player, int x, int y, int z, boolean allow) {
 		if(isServer(world) && allow) {
-			IBHelper.sound(world, "portal.trigger", x, y, z);
+			sound(world, "portal.trigger", x, y, z);
 			player.setPositionAndUpdate(x + 0.5, y + 0.5, z + 0.5);
 		}
 	}

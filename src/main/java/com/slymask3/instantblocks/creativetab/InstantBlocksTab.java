@@ -13,15 +13,15 @@ public class InstantBlocksTab {
 		public Item getTabIconItem() {
 			Item item;
 			if(Config.ADD_WOODEN_HOUSE) {
-				item = Item.getItemFromBlock(ModBlocks.ibWood);
+				item = Item.getItemFromBlock(ModBlocks.ibWoodHouse);
 			} else if(Config.ADD_MINING_LADDER) {
-				item = Item.getItemFromBlock(ModBlocks.ibLadder);
+				item = Item.getItemFromBlock(ModBlocks.ibMiningLadder);
 			} else if(Config.ADD_GLASS_DOME) {
 				item = Item.getItemFromBlock(ModBlocks.ibGlassDome);
 			} else if(Config.ADD_FARM) {
 				item = Item.getItemFromBlock(ModBlocks.ibFarm);
 			} else if(Config.ADD_SKYDIVE) {
-				item = Item.getItemFromBlock(ModBlocks.ibFall);
+				item = Item.getItemFromBlock(ModBlocks.ibSkydive);
 			} else if(Config.ADD_GRINDER) {
 				item = Item.getItemFromBlock(ModBlocks.ibGrinder);
 			} else if(Config.ADD_POOL) {
@@ -33,7 +33,7 @@ public class InstantBlocksTab {
 			} else if(Config.ADD_LAVA) {
 				item = Item.getItemFromBlock(ModBlocks.ibLava);
 			} else if(Config.ADD_SUCTION) {
-				item = Item.getItemFromBlock(ModBlocks.ibSucker);
+				item = Item.getItemFromBlock(ModBlocks.ibSuction);
 			} else if(Config.ADD_RAIL) {
 				item = Item.getItemFromBlock(ModBlocks.ibRail);
 			} else if(Config.ADD_STATUE) {

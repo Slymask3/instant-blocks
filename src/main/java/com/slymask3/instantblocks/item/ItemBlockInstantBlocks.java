@@ -2,7 +2,7 @@ package com.slymask3.instantblocks.item;
 
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.Colors;
+import com.slymask3.instantblocks.util.Colors;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -19,10 +19,10 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 	}
 	
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
-		if(block == ModBlocks.ibWood) {
+		if(block == ModBlocks.ibWoodHouse) {
 			list.add("Creates a simple wooden house.");
 			list.add("Right-click to activate.");
-		} else if(block == ModBlocks.ibLadder) {
+		} else if(block == ModBlocks.ibMiningLadder) {
 			list.add("Creates a ladder down to layer 12.");
 			list.add("Right-click to activate.");
 		} else if(block == ModBlocks.ibGlassDome) {
@@ -34,7 +34,7 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 			list.add("5% chance with carrots.");
 			list.add("5% chance with potatoes.");
 			list.add("Right-click to activate.");
-		} else if(block == ModBlocks.ibFall) {
+		} else if(block == ModBlocks.ibSkydive) {
 			list.add("Creates a structure from layer");
 			list.add("1 to 256 out of coloured wool.");
 			list.add("Right-click to activate.");
@@ -65,7 +65,7 @@ public class ItemBlockInstantBlocks extends ItemBlock {
 				list.add("Mode: Full.");
 			}
 			list.add("Right-click to activate.");
-		} else if(block == ModBlocks.ibSucker) {
+		} else if(block == ModBlocks.ibSuction) {
 			list.add("Sucks in water/lava.");
 			list.add("Maximum: " + Config.MAX_FILL + ".");
 			list.add("Right-click to activate.");

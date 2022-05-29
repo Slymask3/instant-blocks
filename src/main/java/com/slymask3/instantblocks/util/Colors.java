@@ -4,17 +4,40 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class ColorHelper {
+public class Colors {
+	public static final String _0 = "\u00a70";
+	public static final String _1 = "\u00a71";
+	public static final String _2 = "\u00a72";
+	public static final String _3 = "\u00a73";
+	public static final String _4 = "\u00a74";
+	public static final String _5 = "\u00a75";
+	public static final String _6 = "\u00a76";
+	public static final String _7 = "\u00a77";
+	public static final String _8 = "\u00a78";
+	public static final String _9 = "\u00a79";
+	public static final String a = "\u00a7a";
+	public static final String b = "\u00a7b";
+	public static final String c = "\u00a7c";
+	public static final String d = "\u00a7d";
+	public static final String e = "\u00a7e";
+	public static final String f = "\u00a7f";
+
+	public static final String OBFUSCATED = "\u00a7k";
+	public static final String BOLD = "\u00a7l";
+	public static final String STRIKETHROUGH = "\u00a7m";
+	public static final String UNDERLINE = "\u00a7n";
+	public static final String RESET = "\u00a7r";
 	
 	public static String colorEveryWord(String msg, String color) {
 	    StringBuilder builder = new StringBuilder(msg.length());
 		builder.append(color);
 	    for(int i = 0; i < msg.length(); i++) {
 	        char c = msg.charAt(i);
-	        switch(c) {
-	            case ' ': builder.append(" " + color); break;
-	            default: builder.append(c); break;
-	        }
+			if(c == ' ') {
+				builder.append(" " + color);
+			} else {
+				builder.append(c);
+			}
 	    }
 	    return builder.toString();
 	}
@@ -409,5 +432,66 @@ public class ColorHelper {
 		int hue = rand.nextInt(360);
 		int color = hsvToRgb(hue,100,100);
 		return new Color(color);
+	}
+
+	public static Color textToColor(String input) {
+		int color;
+		if(input.equalsIgnoreCase("red")) {
+			color = 0x00FF0000;
+		} else if(input.equalsIgnoreCase("orange")) {
+			color = 0x00FF8000;
+		} else if(input.equalsIgnoreCase("yellow")) {
+			color = 0x00FFFF00;
+		} else if(input.equalsIgnoreCase("lime")) {
+			color = 0x0080FF00;
+		} else if(input.equalsIgnoreCase("green")) {
+			color = 0x0000FF00;
+		} else if(input.equalsIgnoreCase("cyan")) {
+			color = 0x0000FFFF;
+		} else if(input.equalsIgnoreCase("light blue") || input.equalsIgnoreCase("lightblue")) {
+			color = 0x000080FF;
+		} else if(input.equalsIgnoreCase("blue")) {
+			color = 0x000000FF;
+		} else if(input.equalsIgnoreCase("purple")) {
+			color = 0x008000FF;
+		} else if(input.equalsIgnoreCase("magenta")) {
+			color = 0x00FF00FF;
+		} else if(input.equalsIgnoreCase("pink")) {
+			color = 0x00FF0080;
+		} else if(input.equalsIgnoreCase("white")) {
+			color = 0x00FFFFFF;
+		} else if(input.equalsIgnoreCase("gray") || input.equalsIgnoreCase("grey")) {
+			color = 0x00808080;
+		} else if(input.equalsIgnoreCase("light gray") || input.equalsIgnoreCase("lightgray") || input.equalsIgnoreCase("light grey") || input.equalsIgnoreCase("lightgrey")) {
+			color = 0x00C0C0C0;
+		} else if(input.equalsIgnoreCase("brown")) {
+			color = 0x00663300;
+		} else if(input.equalsIgnoreCase("black")) {
+			color = 0x00000000;
+		} else {
+			try {
+				color = (int)Long.parseLong(input, 16);
+			} catch(Exception e) {
+				color = 0x00FFFFFF;
+			}
+		}
+		return new Color(color);
+	}
+
+	public static String indexRainbowToString(int index) {
+		switch(index) {
+			case 0: return "red";
+			case 1: return "orange";
+			case 2: return "yellow";
+			case 3: return "lime";
+			case 4: return "green";
+			case 5: return "cyan";
+			case 6: return "light blue";
+			case 7: return "blue";
+			case 8: return "purple";
+			case 9: return "magenta";
+			case 10: return "pink";
+			default: return "white";
+		}
 	}
 }

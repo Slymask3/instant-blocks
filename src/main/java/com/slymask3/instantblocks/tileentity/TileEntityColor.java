@@ -7,7 +7,6 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityColor extends TileEntity {
-	
 	public int color;
 
 	public TileEntityColor() {

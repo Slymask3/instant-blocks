@@ -16,10 +16,7 @@ public class PacketStatue extends AbstractPacket {
 	boolean _head, _body, _armLeft, _armRight, _legLeft, _legRight;
 	boolean _rgb;
 
-	public PacketStatue() {
-		
-	}
-
+	public PacketStatue() {}
 	public PacketStatue(World world, int x, int y, int z, String player, /*double range*/ String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
 		_dim = world.provider.dimensionId;
 		_x = x;

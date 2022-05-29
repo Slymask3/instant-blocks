@@ -4,8 +4,12 @@ import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.*;
+import com.slymask3.instantblocks.reference.GuiID;
+import com.slymask3.instantblocks.reference.Reference;
+import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -27,7 +31,7 @@ public abstract class BlockInstant extends Block implements ITileEntityProvider 
 	Block bottomBl, topBl, leftBl, rightBl, frontBl, backBl;
 	IIcon bottomI, topI, leftI, rightI, frontI, backI;
 
-	public String createMsg, errorMsg;
+	public String createMessage, errorMessage;
 	boolean is_directional = false;
 	GuiID guiID = null;
 	
@@ -40,15 +44,15 @@ public abstract class BlockInstant extends Block implements ITileEntityProvider 
         setStepSound(soundType);
 		bottomB = topB = leftB = rightB = frontB = backB = true;
 		bottomS = topS = leftS = rightS = frontS = backS = Textures.WoodHouse.FRONT;
-		createMsg = errorMsg = "";
+		createMessage = errorMessage = "";
 	}
 
-	public void setCreateMsg(String msg) {
-		this.createMsg = msg;
+	public void setCreateMessage(String msg) {
+		this.createMessage = msg;
 	}
 
-	public void setErrorMsg(String msg) {
-		this.errorMsg = msg;
+	public void setErrorMessage(String msg) {
+		this.errorMessage = msg;
 	}
 
 	public void setDirectional(boolean directional) {
@@ -361,7 +365,6 @@ public abstract class BlockInstant extends Block implements ITileEntityProvider 
 			}
 		}
 
-		build(world, x, y, z);
 		build(world, x, y, z, player);
 
 		IBHelper.keepBlocks(world, x, y, z, this);
@@ -369,7 +372,7 @@ public abstract class BlockInstant extends Block implements ITileEntityProvider 
 
 		IBHelper.sound(world, Config.SOUND, x, y, z);
 		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
-		IBHelper.msg(player, this.createMsg, Colors.a);
+		IBHelper.msg(player, this.createMessage, Colors.a);
 
 		return true;
 	}
@@ -391,10 +394,6 @@ public abstract class BlockInstant extends Block implements ITileEntityProvider 
 		player.openGui(InstantBlocks.instance, this.guiID.ordinal(), world, x, y, z);
 
 		return true;
-	}
-	
-	public void build(World world, int x, int y, int z) {
-		//build structure
 	}
 	
 	public void build(World world, int x, int y, int z, EntityPlayer player) {

@@ -15,10 +15,7 @@ public class PacketSchematic extends AbstractPacket {
 	String _schematic;
 	boolean _center, _air;
 
-	public PacketSchematic() {
-		
-	}
-
+	public PacketSchematic() {}
 	public PacketSchematic(World world, int x, int y, int z, String player, String schematic, boolean center, boolean air) {
 		_dim = world.provider.dimensionId;
 		_x = x;

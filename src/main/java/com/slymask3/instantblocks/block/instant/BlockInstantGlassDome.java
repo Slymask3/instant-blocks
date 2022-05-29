@@ -7,6 +7,7 @@ import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
@@ -15,7 +16,7 @@ public class BlockInstantGlassDome extends BlockInstant {
         super(Names.Blocks.IB_GLASS_DOME, Material.glass, Block.soundTypeGlass, 0.5F);
         setTextures(Blocks.stone, Blocks.glass, Textures.GlassDome.SIDE);
         setTextureBooleans(false, false, true, true, true, true);
-        setCreateMsg(Strings.CREATE_DOME);
+        setCreateMessage(Strings.CREATE_DOME);
         setBlockTextureName(Textures.GlassDome.SIDE);
     }
 	
@@ -30,8 +31,8 @@ public class BlockInstantGlassDome extends BlockInstant {
     public boolean renderAsNormalBlock() {
         return false;
     }
-    
-	public void build(World world, int x, int y, int z) {
+
+	public void build(World world, int x, int y, int z, EntityPlayer player) {
 		Block glass = Blocks.glass;
 		Block stone = Blocks.stone;
 		Block torch = Blocks.torch;

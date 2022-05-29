@@ -4,10 +4,10 @@ import com.slymask3.instantblocks.block.BlockColor;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
+import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
@@ -172,11 +172,11 @@ public class CommandInstantBlocks extends CommandBase {
     	send(player,Colors._3 + Colors.BOLD + Reference.MOD_NAME + " - Info");
     	
     	//INSTANT BLOCKS
-    	if(held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibWood)) {
+    	if(held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibWoodHouse)) {
     		send(player,Colors._2 + "Block: " + Colors.a + "Instant Wooden House Block");
     		send(player,Colors._2 + "Description: " + Colors.a + "Creates a simple house with a bed, chests, furnaces, etc.");
     		send(player,Colors._2 + "Multi-Directional: " + Colors.a + "Yes.");
-    	} else if(held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibLadder)) {
+    	} else if(held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibMiningLadder)) {
     		send(player,Colors._2 + "Block: " + Colors.a + "Instant Mining Ladder Block");
     		send(player,Colors._2 + "Description: " + Colors.a + "Creates a ladder down to layer 12, which is the 'diamond' area.");
     		send(player,Colors._2 + "Multi-Directional: " + Colors.a + "Yes.");
@@ -188,7 +188,7 @@ public class CommandInstantBlocks extends CommandBase {
     		send(player,Colors._2 + "Block: " + Colors.a + "Instant Farm Block");
     		send(player,Colors._2 + "Description: " + Colors.a + "Creates a simple farm with 56 seeds. You also have a 5% chance that the farm will have carrots planted instead of wheat, and another 5% chance that the farm will have potatoes planted instead of wheat.");
     		send(player,Colors._2 + "Multi-Directional: " + Colors.a + "Yes.");
-    	} else if(held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibFall)) {
+    	} else if(held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibSkydive)) {
     		send(player,Colors._2 + "Block: " + Colors.a + "Instant Skydive Block");
     		send(player,Colors._2 + "Description: " + Colors.a + "Creates a structure from layer 1 to 256 out of coloured wool.");
     		send(player,Colors._2 + "Multi-Directional: " + Colors.a + "Yes.");
@@ -216,7 +216,7 @@ public class CommandInstantBlocks extends CommandBase {
     		send(player,Colors._2 + "Maximum: " + Colors.a + Config.MAX_LIQUID + " Lava Source Blocks.");
     		send(player,Colors._2 + "Mode: " + Colors.a+simpleWL+".");
     		send(player,Colors._2 + "Multi-Directional: " + Colors._7 + "N/A.");
-    	} else if(held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibSucker)) {
+    	} else if(held != null && held.getItem() == Item.getItemFromBlock(ModBlocks.ibSuction)) {
     		send(player,Colors._2 + "Block: " + Colors.a + "Instant Suction Block");
     		send(player,Colors._2 + "Description: " + Colors.a + "Sucks in all water/lava around it.");
     		send(player,Colors._2 + "Maximum: " + Colors.a + Config.MAX_FILL + ".");

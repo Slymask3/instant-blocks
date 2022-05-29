@@ -8,6 +8,7 @@ import com.slymask3.instantblocks.util.BuildHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -15,7 +16,7 @@ import net.minecraft.world.World;
 public class BlockInstantPool extends BlockInstant {
     public BlockInstantPool() {
         super(Names.Blocks.IB_POOL, Material.rock, Block.soundTypeStone, 1.5F);
-        setCreateMsg(Strings.CREATE_POOL);
+        setCreateMessage(Strings.CREATE_POOL);
         setBlockTextureName(Textures.Pool.TOP0);
 		setDirectional(true);
     }
@@ -59,8 +60,8 @@ public class BlockInstantPool extends BlockInstant {
 			return blockIcon;
 		}
 	}
-	
-	public void build(World world, int x, int y, int z) {
+
+	public void build(World world, int x, int y, int z, EntityPlayer player) {
 		Block stone = Blocks.double_stone_slab;
 		Block water = Blocks.water;
 		Block slab = Blocks.stone_slab;

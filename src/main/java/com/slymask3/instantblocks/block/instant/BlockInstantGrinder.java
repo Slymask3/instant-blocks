@@ -2,11 +2,11 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -18,7 +18,7 @@ public class BlockInstantGrinder extends BlockInstant {
 	public BlockInstantGrinder() {
         super(Names.Blocks.IB_GRINDER, Material.rock, Block.soundTypeMetal, 1.5F);
         setTextures(Textures.Grinder.SIDE);
-        setCreateMsg(Strings.CREATE_GRINDER);
+        setCreateMessage(Strings.CREATE_GRINDER);
         setBlockTextureName(Textures.Grinder.SIDE);
 		setDirectional(true);
     }

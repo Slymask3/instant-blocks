@@ -2,7 +2,6 @@ package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.block.instant.BlockInstantHouseWood;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import net.minecraft.block.Block;
@@ -161,13 +160,13 @@ public class BuildHelper {
     		}
 		
     		if(metaDirection==0) {
-        		setBlock(world, x+left-right, y, z-forward+back, Blocks.wool, ColorHelper.getWoolColor(ColorHelper.getColorAt(img, imgx, imgy)), 2);
+        		setBlock(world, x+left-right, y, z-forward+back, Blocks.wool, Colors.getWoolColor(Colors.getColorAt(img, imgx, imgy)), 2);
     		} else if(metaDirection==1) {
-    			setBlock(world, x+forward-back, y, z+left-right, Blocks.wool, ColorHelper.getWoolColor(ColorHelper.getColorAt(img, imgx, imgy)), 2);
+    			setBlock(world, x+forward-back, y, z+left-right, Blocks.wool, Colors.getWoolColor(Colors.getColorAt(img, imgx, imgy)), 2);
     		} else if(metaDirection==2) {
-    			setBlock(world, x-left+right, y, z+forward-back, Blocks.wool, ColorHelper.getWoolColor(ColorHelper.getColorAt(img, imgx, imgy)), 2);
+    			setBlock(world, x-left+right, y, z+forward-back, Blocks.wool, Colors.getWoolColor(Colors.getColorAt(img, imgx, imgy)), 2);
     		} else if(metaDirection==3) {
-    			setBlock(world, x-forward+back, y, z-left+right, Blocks.wool, ColorHelper.getWoolColor(ColorHelper.getColorAt(img, imgx, imgy)), 2);
+    			setBlock(world, x-forward+back, y, z-left+right, Blocks.wool, Colors.getWoolColor(Colors.getColorAt(img, imgx, imgy)), 2);
     		}
     		
 		}

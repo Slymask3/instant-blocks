@@ -15,10 +15,7 @@ public class PacketTree extends AbstractPacket {
 	int _type;
 	boolean _log, _leaves, _air;
 
-	public PacketTree() {
-		
-	}
-
+	public PacketTree() {}
 	public PacketTree(World world, int x, int y, int z, String player, int type, boolean fullLogs, boolean fullLeaves, boolean air) {
 		_dim = world.provider.dimensionId;
 		_x = x;

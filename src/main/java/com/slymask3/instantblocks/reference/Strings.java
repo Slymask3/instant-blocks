@@ -1,5 +1,7 @@
 package com.slymask3.instantblocks.reference;
 
+import com.slymask3.instantblocks.util.Colors;
+
 public class Strings {
 	public static final String PREFIX = Colors._8 + "[" + Colors._3 + "InstantBlocks" + Colors._8 + "] ";
 

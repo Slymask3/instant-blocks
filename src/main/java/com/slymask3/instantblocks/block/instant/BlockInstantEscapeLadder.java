@@ -1,11 +1,11 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,10 +20,10 @@ import net.minecraft.world.World;
 
 import static net.minecraftforge.common.util.ForgeDirection.*;
 
-public class BlockInstantUp extends BlockInstant {
+public class BlockInstantEscapeLadder extends BlockInstant {
 	public int side = 0;
 	
-    public BlockInstantUp() {
+    public BlockInstantEscapeLadder() {
         super(Names.Blocks.IB_ESCAPE_LADDER, Material.circuits, Block.soundTypeLadder, 0.4F);
         setTextures(Textures.EscapeLadder.SIDE);
         setTickRandomly(true);
@@ -89,7 +89,7 @@ public class BlockInstantUp extends BlockInstant {
 				}
 			}
 		}
-		setCreateMsg(Strings.CREATE_ESCAPE_LADDER.replace("%i%",String.valueOf(i-y)));
+		setCreateMessage(Strings.CREATE_ESCAPE_LADDER.replace("%i%",String.valueOf(i-y)));
 	}
 
 	// BlockLadder.class

@@ -34,6 +34,9 @@ public class Config {
 	public static int RAILS_AMOUNT;
 	public static String PARTICLE;
 	public static int SKYDIVE_RADIUS;
+	public static int SKYDIVE_MIN;
+	public static int SKYDIVE_MAX;
+	public static int SKYDIVE_WATER;
 
 	public static String BLOCKS = "blocks";
 	public static boolean ADD_WOODEN_HOUSE;
@@ -85,6 +88,9 @@ public class Config {
 		RAILS_AMOUNT = configuration.get(GENERAL, "RAILS_AMOUNT", 37, "Amount of rail blocks to create for Instant Rail Block.\n(Default = 37)").getInt();
 		PARTICLE = configuration.get(GENERAL, "PARTICLE", "reddust", "Which particles are generated on activation.\n(Default = reddust)").getString();
 		SKYDIVE_RADIUS = configuration.get(GENERAL, "SKYDIVE_RADIUS", 5, "Default radius for the Instant Rainbow Skydive.\n(Default = 5)").getInt();
+		SKYDIVE_MIN = configuration.get(GENERAL, "SKYDIVE_MIN", 5, "Minimum height for the Instant Rainbow Skydive.\n(Default = 5)").getInt();
+		SKYDIVE_MAX = configuration.get(GENERAL, "SKYDIVE_MAX", 255, "Maximum height for the Instant Rainbow Skydive.\n(Default = 255)").getInt();
+		SKYDIVE_WATER = configuration.get(GENERAL, "SKYDIVE_WATER", 1, "Water height for the Instant Rainbow Skydive.\n(Default = 1)").getInt();
 
 		ADD_WOODEN_HOUSE = configuration.get(BLOCKS, "ADD_WOODEN_HOUSE", true, "Add Instant Wooden House\n(Default = true)").getBoolean();
 		ADD_MINING_LADDER = configuration.get(BLOCKS, "ADD_MINING_LADDER", true, "Add Instant Mining Ladder\n(Default = true)").getBoolean();

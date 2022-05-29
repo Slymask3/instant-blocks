@@ -1,13 +1,14 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
 import com.slymask3.instantblocks.util.BuildHelper;
-import com.slymask3.instantblocks.util.ColorHelper;
+import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Coords;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
@@ -25,8 +26,8 @@ import net.minecraft.world.World;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class BlockInstantFall extends BlockInstant {
-    public BlockInstantFall() {
+public class BlockInstantSkydive extends BlockInstant {
+    public BlockInstantSkydive() {
 		super(Names.Blocks.IB_SKYDIVE, Material.cloth, Block.soundTypeCloth, 1.5F);
         setBlockTextureName(Textures.Harvest.SIDE0);
 		setGuiID(GuiID.SKYDIVE);
@@ -58,7 +59,7 @@ public class BlockInstantFall extends BlockInstant {
 		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 	}
 
-	public void build(World world, int x, int y, int z, String playerS, int[] selectedColors, int radius, boolean tp, boolean actualRainbow) {
+	public void build(World world, int x, int y, int z, String playerS, int[] selectedColors, int radius, boolean tp) {
 		EntityPlayer player = world.getPlayerEntityByName(playerS);
 		int meta = world.getBlockMetadata(x, y, z);
 
@@ -77,36 +78,32 @@ public class BlockInstantFall extends BlockInstant {
 		}
 
 		Color[] colors;
-		if(actualRainbow) {
-			colors = ColorHelper.generateRainbow(100);
-		} else {
-			int index = 0;
-			colors = new Color[selectedColors.length*10];
-			for(int i=0; i<selectedColors.length; i++) {
-				Color after;
-				if(i+1 < selectedColors.length) {
-					after = new Color(selectedColors[i+1]);
-				} else {
-					after = new Color(selectedColors[0]);
-				}
-				Color base = new Color(selectedColors[i]);
-				colors[index] = base; index++;
-				colors[index] = ColorHelper.getColorBetween(base,after,90,10); index++;
-				colors[index] = ColorHelper.getColorBetween(base,after,80,20); index++;
-				colors[index] = ColorHelper.getColorBetween(base,after,70,30); index++;
-				colors[index] = ColorHelper.getColorBetween(base,after,60,40); index++;
-				colors[index] = ColorHelper.getColorBetween(base,after,50,50); index++;
-				colors[index] = ColorHelper.getColorBetween(base,after,40,60); index++;
-				colors[index] = ColorHelper.getColorBetween(base,after,30,70); index++;
-				colors[index] = ColorHelper.getColorBetween(base,after,20,80); index++;
-				colors[index] = ColorHelper.getColorBetween(base,after,10,90); index++;
+		int index = 0;
+		colors = new Color[selectedColors.length*10];
+		for(int i=0; i<selectedColors.length; i++) {
+			Color after;
+			if(i+1 < selectedColors.length) {
+				after = new Color(selectedColors[i+1]);
+			} else {
+				after = new Color(selectedColors[0]);
 			}
+			Color base = new Color(selectedColors[i]);
+			colors[index] = base; index++;
+			colors[index] = Colors.getColorBetween(base,after,90,10); index++;
+			colors[index] = Colors.getColorBetween(base,after,80,20); index++;
+			colors[index] = Colors.getColorBetween(base,after,70,30); index++;
+			colors[index] = Colors.getColorBetween(base,after,60,40); index++;
+			colors[index] = Colors.getColorBetween(base,after,50,50); index++;
+			colors[index] = Colors.getColorBetween(base,after,40,60); index++;
+			colors[index] = Colors.getColorBetween(base,after,30,70); index++;
+			colors[index] = Colors.getColorBetween(base,after,20,80); index++;
+			colors[index] = Colors.getColorBetween(base,after,10,90); index++;
 		}
 
 		int i = 0;
-		int min = 5;
-		int max = 255;
-		int water = 3;
+		int min = Config.SKYDIVE_MIN;
+		int max = Config.SKYDIVE_MAX;
+		int water = Config.SKYDIVE_WATER;
 		for(int c=max; c>=min; c--) {
 			for(Coords coords : coordsAirList) {
 				if(c == min) {

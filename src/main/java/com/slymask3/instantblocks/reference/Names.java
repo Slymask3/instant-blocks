@@ -2,32 +2,32 @@ package com.slymask3.instantblocks.reference;
 
 public class Names {
 	public static final class Blocks {
-        public static final String IB_WOOD_HOUSE = "ibWood";
-        public static final String IB_MINING_LADDER = "ibLadder";
-        public static final String IB_GLASS_DOME = "ibGlassDome";
-        public static final String IB_FARM = "ibFarm";
-        public static final String IB_SKYDIVE = "ibFall";
-        public static final String IB_GRINDER = "ibGrinder";
-        public static final String IB_POOL = "ibPool";
-        public static final String IB_ESCAPE_LADDER = "ibUp";
-        public static final String IB_WATER = "ibWater";
-        public static final String IB_LAVA = "ibLava";
-        public static final String IB_SUCTION = "ibSucker";
-        public static final String IB_RAIL = "ibRail";
-        public static final String IB_STATUE = "ibStatue";
-        public static final String IB_HARVEST = "ibHarvest";
-        public static final String IB_LIGHT = "ibLight";
-        public static final String IB_SCHEMATIC = "ibSchematic";
-        public static final String IB_TREE = "ibTree";
+        public static final String IB_WOOD_HOUSE = "instantWoodHouse";
+        public static final String IB_MINING_LADDER = "instantMiningLadder";
+        public static final String IB_GLASS_DOME = "instantGlassDome";
+        public static final String IB_FARM = "instantFarm";
+        public static final String IB_SKYDIVE = "instantSkydive";
+        public static final String IB_GRINDER = "instantGrinder";
+        public static final String IB_POOL = "instantPool";
+        public static final String IB_ESCAPE_LADDER = "instantEscapeLadder";
+        public static final String IB_WATER = "water";
+        public static final String IB_LAVA = "instantLava";
+        public static final String IB_SUCTION = "instantSuction";
+        public static final String IB_RAIL = "instantRail";
+        public static final String IB_STATUE = "instantStatue";
+        public static final String IB_HARVEST = "instantHarvest";
+        public static final String IB_LIGHT = "instantLight";
+        public static final String IB_SCHEMATIC = "instantSchematic";
+        public static final String IB_TREE = "instantTree";
         public static final String COLOR = "color";
         public static final String SKYDIVE_TP = "skydiveTP";
     }
 
     public static final class Items {
-        public static final String IB_WAND_WOOD = "ibWandWood";
-        public static final String IB_WAND_STONE = "ibWandStone";
-        public static final String IB_WAND_IRON = "ibWandIron";
-        public static final String IB_WAND_GOLD = "ibWandGold";
-        public static final String IB_WAND_DIAMOND = "ibWandDiamond";
+        public static final String IB_WAND_WOOD = "wandWood";
+        public static final String IB_WAND_STONE = "wandStone";
+        public static final String IB_WAND_IRON = "wandIron";
+        public static final String IB_WAND_GOLD = "wandGold";
+        public static final String IB_WAND_DIAMOND = "wandDiamond";
     }
 }

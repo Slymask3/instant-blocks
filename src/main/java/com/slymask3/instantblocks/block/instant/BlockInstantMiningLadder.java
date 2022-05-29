@@ -1,11 +1,11 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -15,11 +15,11 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockInstantLadder extends BlockInstant {
-    public BlockInstantLadder() {
+public class BlockInstantMiningLadder extends BlockInstant {
+    public BlockInstantMiningLadder() {
         super(Names.Blocks.IB_MINING_LADDER, Material.rock, Block.soundTypeStone, 1.5F);
         setBlockTextureName(Textures.MiningLadder.TOP0);
-		setCreateMsg(Strings.CREATE_MINING_LADDER);
+		setCreateMessage(Strings.CREATE_MINING_LADDER);
 		setDirectional(true);
     }
 	
@@ -61,7 +61,7 @@ public class BlockInstantLadder extends BlockInstant {
 		return true;
 	}
 
-	public void build(World world, int x, int y, int z) {
+	public void build(World world, int x, int y, int z, EntityPlayer player) {
 		Block ladder = Blocks.ladder;
 		Block stone = Blocks.stone;
 		Block torch = Blocks.torch;

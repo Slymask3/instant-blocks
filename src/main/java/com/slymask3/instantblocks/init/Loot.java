@@ -13,17 +13,17 @@ public class Loot {
 
 	private static void setupBlocks() {
 		blocks = new ArrayList<>();
-		add(ModBlocks.ibWood,Config.ADD_WOODEN_HOUSE);
-		add(ModBlocks.ibLadder,Config.ADD_MINING_LADDER);
+		add(ModBlocks.ibWoodHouse,Config.ADD_WOODEN_HOUSE);
+		add(ModBlocks.ibMiningLadder,Config.ADD_MINING_LADDER);
 		add(ModBlocks.ibGlassDome,Config.ADD_GLASS_DOME);
 		add(ModBlocks.ibFarm,Config.ADD_FARM);
-		add(ModBlocks.ibFall,Config.ADD_SKYDIVE);
+		add(ModBlocks.ibSkydive,Config.ADD_SKYDIVE);
 		add(ModBlocks.ibGrinder,Config.ADD_GRINDER);
 		add(ModBlocks.ibPool,Config.ADD_POOL);
 		add(ModBlocks.ibUp,Config.ADD_ESCAPE_LADDER);
 		add(ModBlocks.ibWater,Config.ADD_WATER);
 		add(ModBlocks.ibLava,Config.ADD_LAVA);
-		add(ModBlocks.ibSucker,Config.ADD_SUCTION);
+		add(ModBlocks.ibSuction,Config.ADD_SUCTION);
 		add(ModBlocks.ibRail,Config.ADD_RAIL);
 		add(ModBlocks.ibStatue,Config.ADD_STATUE);
 		add(ModBlocks.ibHarvest,Config.ADD_HARVEST);
@@ -44,7 +44,7 @@ public class Loot {
 		if(blocks.size() > 0) {
 			if(Config.GENERATE_IN_CHESTS_BONUS) {
 				if(Config.ADD_WOODEN_HOUSE) {
-					ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(ModBlocks.ibWood), 1, 1, 4));
+					ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(ModBlocks.ibWoodHouse), 1, 1, 4));
 				}
 				ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(ModItems.ibWandWood), 1, 1, 4));
 				ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(ModItems.ibWandStone), 1, 1, 4));

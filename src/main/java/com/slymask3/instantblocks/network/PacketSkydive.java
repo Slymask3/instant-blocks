@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.network;
 
-import com.slymask3.instantblocks.block.instant.BlockInstantFall;
+import com.slymask3.instantblocks.block.instant.BlockInstantSkydive;
 import com.slymask3.instantblocks.util.BuildHelper;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
@@ -12,33 +12,21 @@ import net.minecraftforge.common.DimensionManager;
 public class PacketSkydive extends AbstractPacket {
 	int _dim, _x, _y, _z;
 	String _player;
-	int _color0 , _color1, _color2, _color3, _color4, _color5, _color6, _color7, _color8, _color9, _color10;
+	int[] _colors = new int[11];
 	int _radius;
-	boolean _tp, _actualRainbow;
+	boolean _tp;
 
-	public PacketSkydive() {
-		
-	}
-	public PacketSkydive(World world, int x, int y, int z, String player, int c0, int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8, int c9, int c10, int radius, boolean tp, boolean actualRainbow) {
+	public PacketSkydive() {}
+	public PacketSkydive(World world, int x, int y, int z, String player, int[] colors, int radius, boolean tp) {
 		_dim = world.provider.dimensionId;
 		_x = x;
 		_y = y;
 		_z = z;
 		_player = player;
-		_color0 = c0;
-		_color1 = c1;
-		_color2 = c2;
-		_color3 = c3;
-		_color4 = c4;
-		_color5 = c5;
-		_color6 = c6;
-		_color7 = c7;
-		_color8 = c8;
-		_color9 = c9;
-		_color10 = c10;
+		_colors = colors;
 		_radius = radius;
 		_tp = tp;
-		_actualRainbow = actualRainbow;
+		//_actualRainbow = actualRainbow;
 	}
 
 	@Override
@@ -48,20 +36,12 @@ public class PacketSkydive extends AbstractPacket {
 		buffer.writeInt(_y);
 		buffer.writeInt(_z);
 		ByteBufUtils.writeUTF8String(buffer, _player);
-		buffer.writeInt(_color0);
-		buffer.writeInt(_color1);
-		buffer.writeInt(_color2);
-		buffer.writeInt(_color3);
-		buffer.writeInt(_color4);
-		buffer.writeInt(_color5);
-		buffer.writeInt(_color6);
-		buffer.writeInt(_color7);
-		buffer.writeInt(_color8);
-		buffer.writeInt(_color9);
-		buffer.writeInt(_color10);
+		for(int i=0; i<_colors.length; i++) {
+			buffer.writeInt(_colors[i]);
+		}
 		buffer.writeInt(_radius);
 		buffer.writeBoolean(_tp);
-		buffer.writeBoolean(_actualRainbow);
+		//buffer.writeBoolean(_actualRainbow);
 	}
 
 	@Override
@@ -71,20 +51,12 @@ public class PacketSkydive extends AbstractPacket {
 		_y = buffer.readInt();
 		_z = buffer.readInt();
 		_player = ByteBufUtils.readUTF8String(buffer);
-		_color0 = buffer.readInt();
-		_color1 = buffer.readInt();
-		_color2 = buffer.readInt();
-		_color3 = buffer.readInt();
-		_color4 = buffer.readInt();
-		_color5 = buffer.readInt();
-		_color6 = buffer.readInt();
-		_color7 = buffer.readInt();
-		_color8 = buffer.readInt();
-		_color9 = buffer.readInt();
-		_color10 = buffer.readInt();
+		for(int i=0; i<_colors.length; i++) {
+			_colors[i] = buffer.readInt();
+		}
 		_radius = buffer.readInt();
 		_tp = buffer.readBoolean();
-		_actualRainbow = buffer.readBoolean();
+		//_actualRainbow = buffer.readBoolean();
 	}
 
 	@Override
@@ -94,21 +66,8 @@ public class PacketSkydive extends AbstractPacket {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		int[] colors = new int[11];
-		colors[0] = _color0;
-		colors[1] = _color1;
-		colors[2] = _color2;
-		colors[3] = _color3;
-		colors[4] = _color4;
-		colors[5] = _color5;
-		colors[6] = _color6;
-		colors[7] = _color7;
-		colors[8] = _color8;
-		colors[9] = _color9;
-		colors[10] = _color10;
-
 		World world = DimensionManager.getWorld(_dim);
-		BlockInstantFall block = (BlockInstantFall) BuildHelper.getBlock(world,_x, _y, _z);
-		block.build(world, _x, _y, _z, _player, colors, _radius, _tp, _actualRainbow);
+		BlockInstantSkydive block = (BlockInstantSkydive) BuildHelper.getBlock(world,_x, _y, _z);
+		block.build(world, _x, _y, _z, _player, _colors, _radius, _tp);
 	}
 }

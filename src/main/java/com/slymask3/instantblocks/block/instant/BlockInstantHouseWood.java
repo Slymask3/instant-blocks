@@ -3,11 +3,11 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.Colors;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -24,7 +24,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 	public BlockInstantHouseWood() {
 		super(Names.Blocks.IB_WOOD_HOUSE, Material.wood, Block.soundTypeWood, 1.5F);
         setBlockTextureName(Textures.WoodHouse.FRONT);
-		setCreateMsg(Strings.CREATE_WOODEN_HOUSE);
+		setCreateMessage(Strings.CREATE_WOODEN_HOUSE);
 		setDirectional(true);
 	}
 
@@ -90,7 +90,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 		check(world, x, y, z, meta);
 	}
 
-	public void build(World world, int x, int y, int z) {
+	public void build(World world, int x, int y, int z, EntityPlayer player) {
 		Block light = Blocks.planks;
 		Block dark = Blocks.planks;
 		Block log = Blocks.log;
@@ -237,7 +237,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 			//BuildHelper.setBlock(world,p_147449_1_, p_147449_2_, p_147449_3_, p_147449_4_); ////1.7.10 setBlock
 			
 			if(Config.PACK_HOUSE) {
-				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 4, 2);
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWoodHouse, 4, 2);
 			}
 		}
 		
@@ -357,7 +357,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 			BuildHelper.setBlock(world,x - 7, y + 4, z + 4, torch);
 			
 			if(Config.PACK_HOUSE) {
-				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 5, 2);
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWoodHouse, 5, 2);
 			}
 		}
 		
@@ -477,7 +477,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 			BuildHelper.setBlock(world,x+4, y + 4, z-7, torch);
 			
 			if(Config.PACK_HOUSE) {
-				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 6, 2);
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWoodHouse, 6, 2);
 			}
 		}
 		
@@ -597,7 +597,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 			BuildHelper.setBlock(world,x + 7, y + 4, z + 4, torch);
 			
 			if(Config.PACK_HOUSE) {
-				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 7, 2);
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWoodHouse, 7, 2);
 			}
 		}
 	}
@@ -661,7 +661,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 			BuildHelper.ifNoBlockThenStop(world, x, y+1, z+2, door, player, "Door");
 			
 			if(notThere) {
-				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 4, 2);
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWoodHouse, 4, 2);
 				notThere = false;
 				drop = 0;
 				return true;
@@ -685,7 +685,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 			BuildHelper.ifNoBlockThenStop(world, x-2, y+1, z, door, player, "Door");
 			
 			if(notThere) {
-				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 5, 2);
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWoodHouse, 5, 2);
 				notThere = false;
 				drop = 0;
 				return true;
@@ -709,7 +709,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 			BuildHelper.ifNoBlockThenStop(world, x, y+1, z-2, door, player, "Door");
 			
 			if(notThere) {
-				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 6, 2);
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWoodHouse, 6, 2);
 				notThere = false;
 				drop = 0;
 				return true;
@@ -733,7 +733,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 			BuildHelper.ifNoBlockThenStop(world, x+2, y+1, z, door, player, "Door");
 			
 			if(notThere) {
-				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 7, 2);
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWoodHouse, 7, 2);
 				notThere = false;
 				drop = 0;
 				return true;
@@ -860,7 +860,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 			BuildHelper.ifNoBlockThenStop(world, x, y+1, z+2, door, player, "Door");
 			
 			if(notThere) {
-				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 4, 2);
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWoodHouse, 4, 2);
 				notThere = false;
 				return 0;
 			}
@@ -882,7 +882,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 			BuildHelper.ifNoBlockThenStop(world, x-2, y+1, z, door, player, "Door");
 			
 			if(notThere) {
-				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 5, 2);
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWoodHouse, 5, 2);
 				notThere = false;
 				return 0;
 			}
@@ -904,7 +904,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 			BuildHelper.ifNoBlockThenStop(world, x, y+1, z-2, door, player, "Door");
 			
 			if(notThere) {
-				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 6, 2);
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWoodHouse, 6, 2);
 				notThere = false;
 				return 0;
 			}
@@ -924,7 +924,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 			BuildHelper.ifNoBlockThenStop(world, x+2, y+1, z, door, player, "Door");
 			
 			if(notThere) {
-				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWood, 7, 2);
+				BuildHelper.setBlock(world,x, y, z, ModBlocks.ibWoodHouse, 7, 2);
 				notThere = false;
 				return 0;
 			}

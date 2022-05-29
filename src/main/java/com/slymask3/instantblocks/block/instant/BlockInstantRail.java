@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -23,7 +24,7 @@ public class BlockInstantRail extends BlockInstant {
 	public BlockInstantRail() {
 		super(Names.Blocks.IB_RAIL, Material.circuits, Block.soundTypeMetal, 0.5F);
         setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
-        setCreateMsg(Strings.CREATE_RAIL);
+        setCreateMessage(Strings.CREATE_RAIL);
         setBlockTextureName(Textures.Rail.TOP0);
 	}
 	
@@ -86,8 +87,8 @@ public class BlockInstantRail extends BlockInstant {
     {
         return Textures.Rail.ITEM;
     }
-    
-    public void build(World world, int x, int y, int z) {
+
+	public void build(World world, int x, int y, int z, EntityPlayer player) {
     	int meta = world.getBlockMetadata(x, y, z);
     	for(int i = 0; i<= Config.RAILS_AMOUNT; i++) {
 	    	BuildHelper.setBlockDirectional(world, x, y-1, z, Blocks.stone, meta, i, 0, 0, 0);

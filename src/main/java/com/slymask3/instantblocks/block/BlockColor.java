@@ -84,4 +84,8 @@ public class BlockColor extends Block implements ITileEntityProvider {
         world.markAndNotifyBlock(x,y,z,world.getChunkFromBlockCoords(x,z),this,this,2);
         return false;
     }
+
+    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+        world.markBlockForUpdate(x,y,z);
+    }
 }
