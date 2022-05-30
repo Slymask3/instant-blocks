@@ -2,7 +2,6 @@ package com.slymask3.instantblocks.network;
 
 import com.slymask3.instantblocks.block.instant.BlockInstantSkydive;
 import com.slymask3.instantblocks.util.BuildHelper;
-import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,18 +10,16 @@ import net.minecraftforge.common.DimensionManager;
 
 public class PacketSkydive extends AbstractPacket {
 	int _dim, _x, _y, _z;
-	String _player;
 	int[] _colors = new int[11];
 	int _radius;
 	boolean _tp;
 
 	public PacketSkydive() {}
-	public PacketSkydive(World world, int x, int y, int z, String player, int[] colors, int radius, boolean tp) {
+	public PacketSkydive(World world, int x, int y, int z, int[] colors, int radius, boolean tp) {
 		_dim = world.provider.dimensionId;
 		_x = x;
 		_y = y;
 		_z = z;
-		_player = player;
 		_colors = colors;
 		_radius = radius;
 		_tp = tp;
@@ -35,7 +32,6 @@ public class PacketSkydive extends AbstractPacket {
 		buffer.writeInt(_x);
 		buffer.writeInt(_y);
 		buffer.writeInt(_z);
-		ByteBufUtils.writeUTF8String(buffer, _player);
 		for(int i=0; i<_colors.length; i++) {
 			buffer.writeInt(_colors[i]);
 		}
@@ -50,7 +46,6 @@ public class PacketSkydive extends AbstractPacket {
 		_x = buffer.readInt();
 		_y = buffer.readInt();
 		_z = buffer.readInt();
-		_player = ByteBufUtils.readUTF8String(buffer);
 		for(int i=0; i<_colors.length; i++) {
 			_colors[i] = buffer.readInt();
 		}
@@ -68,6 +63,7 @@ public class PacketSkydive extends AbstractPacket {
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
 		BlockInstantSkydive block = (BlockInstantSkydive) BuildHelper.getBlock(world,_x, _y, _z);
-		block.build(world, _x, _y, _z, _player, _colors, _radius, _tp);
+		block.build(world, _x, _y, _z, player, _colors, _radius, _tp);
+		block.afterBuild(world, _x, _y, _z, player);
 	}
 }

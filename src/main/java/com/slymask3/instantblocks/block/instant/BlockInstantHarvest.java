@@ -4,6 +4,7 @@ import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
 import com.slymask3.instantblocks.util.BuildHelper;
@@ -12,10 +13,8 @@ import com.slymask3.instantblocks.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.IIcon;
@@ -28,6 +27,7 @@ public class BlockInstantHarvest extends BlockInstant {
 		super(Names.Blocks.IB_HARVEST, Material.wood, Block.soundTypeWood, 1.5F);
         setBlockTextureName(Textures.Harvest.SIDE0);
 		setGuiID(GuiID.HARVEST);
+		setCreateMessage(Strings.CREATE_HARVEST);
 	}
 
 	public static IIcon top;
@@ -57,21 +57,9 @@ public class BlockInstantHarvest extends BlockInstant {
 		return new TileEntityHarvest();
 	}
 	
-	public void build(World world, int x, int y, int z, String playerS, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
-		EntityPlayer player = world.getPlayerEntityByName(playerS);
+	public void build(World world, int X, int Y, int Z, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
+		int radius = Config.RADIUS_HARVEST;
 
-		harvest(world, x, y, z, Config.RADIUS_HARVEST, logOak, logSpruce, logBirch, logJungle, logAcacia, logDark, wheat, carrot, potato, cactus, pumpkin, melon, sugarcane, cocoa, mushroom, netherwart, replant);
-
-		IBHelper.sound(world, Config.SOUND, x, y, z);
-
-		ItemStack is = player.getCurrentEquippedItem();
-
-		if(IBHelper.isWand(is)) {
-			is.damageItem(1, player);
-		}
-	}
-	
-	public void harvest(World world, int X, int Y, int Z, int radius, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
 		BuildHelper.setBlock(world,X, Y, Z, Blocks.chest);
 		TileEntityChest chest = (TileEntityChest)world.getTileEntity(X, Y, Z);
 		

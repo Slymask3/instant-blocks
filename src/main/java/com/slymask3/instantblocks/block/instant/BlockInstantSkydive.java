@@ -5,6 +5,7 @@ import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
 import com.slymask3.instantblocks.util.BuildHelper;
@@ -31,6 +32,7 @@ public class BlockInstantSkydive extends BlockInstant {
 		super(Names.Blocks.IB_SKYDIVE, Material.cloth, Block.soundTypeCloth, 1.5F);
         setBlockTextureName(Textures.Harvest.SIDE0);
 		setGuiID(GuiID.SKYDIVE);
+		setCreateMessage(Strings.CREATE_SKYDIVE);
     }
     
     public static IIcon bottom;
@@ -59,8 +61,7 @@ public class BlockInstantSkydive extends BlockInstant {
 		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 	}
 
-	public void build(World world, int x, int y, int z, String playerS, int[] selectedColors, int radius, boolean tp) {
-		EntityPlayer player = world.getPlayerEntityByName(playerS);
+	public void build(World world, int x, int y, int z, EntityPlayer player, int[] selectedColors, int radius, boolean tp) {
 		int meta = world.getBlockMetadata(x, y, z);
 
 		ArrayList<Coords> coordsList = new ArrayList<>();

@@ -12,7 +12,7 @@ public class GuiSchematicSlot extends GuiScrollingList
     private static int slotHeight = 15;
 
     public GuiSchematicSlot(GuiSchematic parent, ArrayList<String> files, int x, int y, int width, int height) {
-        super(parent.getMinecraftInstance(), width, height, y, y+height, x, slotHeight);
+        super(parent.mc, width, height, y, y+height, x, slotHeight);
         this.parent=parent;
         this.files=files;
     }

@@ -1,12 +1,10 @@
 package com.slymask3.instantblocks.gui;
 
 import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.network.PacketHarvest;
-import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
-import com.slymask3.instantblocks.util.Colors;
-import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.BuildHelper;
 import cpw.mods.fml.client.config.GuiButtonExt;
 import cpw.mods.fml.client.config.GuiCheckBox;
 import cpw.mods.fml.relauncher.Side;
@@ -102,11 +100,9 @@ public class GuiHarvest extends GuiScreen {
 	}
 	
 	public void sendInfo() {
-		InstantBlocks.packetPipeline.sendToServer(new PacketHarvest(this.world, this.x, this.y, this.z, this.player.getDisplayName(), logOak.isChecked(), logSpruce.isChecked(), logBirch.isChecked(), logJungle.isChecked(), logAcacia.isChecked(), logDark.isChecked(), wheat.isChecked(), carrot.isChecked(), potato.isChecked(), cactus.isChecked(), pumpkin.isChecked(), melon.isChecked(), sugarcane.isChecked(), cocoa.isChecked(), mushroom.isChecked(), netherwart.isChecked(), replant.isChecked()));
-	
-		IBHelper.xp(world, player, Config.XP_AMOUNT);
-        IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
-        IBHelper.msg(player, Strings.CREATE_HARVEST, Colors.a);
+		InstantBlocks.packetPipeline.sendToServer(new PacketHarvest(this.world, this.x, this.y, this.z, logOak.isChecked(), logSpruce.isChecked(), logBirch.isChecked(), logJungle.isChecked(), logAcacia.isChecked(), logDark.isChecked(), wheat.isChecked(), carrot.isChecked(), potato.isChecked(), cactus.isChecked(), pumpkin.isChecked(), melon.isChecked(), sugarcane.isChecked(), cocoa.isChecked(), mushroom.isChecked(), netherwart.isChecked(), replant.isChecked()));
+
+		BlockInstant block = (BlockInstant)BuildHelper.getBlock(world,x,y,z);
+		block.afterBuild(world,x,y,z,player);
 	}
-	
 }

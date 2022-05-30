@@ -2,7 +2,6 @@ package com.slymask3.instantblocks.network;
 
 import com.slymask3.instantblocks.block.instant.BlockInstantHarvest;
 import com.slymask3.instantblocks.util.BuildHelper;
-import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +10,6 @@ import net.minecraftforge.common.DimensionManager;
 
 public class PacketHarvest extends AbstractPacket {
 	int _dim, _x, _y, _z;
-	String _player;
 	boolean _logOak, _logSpruce, _logBirch, _logJungle, _logAcacia, _logDark;
 	boolean _wheat, _carrot, _potato;
 	boolean _cactus, _pumpkin, _melon, _sugarcane;
@@ -19,12 +17,11 @@ public class PacketHarvest extends AbstractPacket {
 	boolean _replant;
 
 	public PacketHarvest() {}
-	public PacketHarvest(World world, int x, int y, int z, String player, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
+	public PacketHarvest(World world, int x, int y, int z, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
 		_dim = world.provider.dimensionId;
 		_x = x;
 		_y = y;
 		_z = z;
-		_player = player;
 		_logOak = logOak;
 		_logSpruce = logSpruce;
 		_logBirch = logBirch;
@@ -50,7 +47,6 @@ public class PacketHarvest extends AbstractPacket {
 		buffer.writeInt(_x);
 		buffer.writeInt(_y);
 		buffer.writeInt(_z);
-		ByteBufUtils.writeUTF8String(buffer, _player);
 		buffer.writeBoolean(_logOak);
 		buffer.writeBoolean(_logSpruce);
 		buffer.writeBoolean(_logBirch);
@@ -76,7 +72,6 @@ public class PacketHarvest extends AbstractPacket {
 		_x = buffer.readInt();
 		_y = buffer.readInt();
 		_z = buffer.readInt();
-		_player = ByteBufUtils.readUTF8String(buffer);
 		_logOak = buffer.readBoolean();
 		_logSpruce = buffer.readBoolean();
 		_logBirch = buffer.readBoolean();
@@ -105,6 +100,7 @@ public class PacketHarvest extends AbstractPacket {
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
 		BlockInstantHarvest block = (BlockInstantHarvest) BuildHelper.getBlock(world,_x, _y, _z);
-		block.build(world, _x, _y, _z, _player, _logOak, _logSpruce, _logBirch, _logJungle, _logAcacia, _logDark, _wheat, _carrot, _potato, _cactus, _pumpkin, _melon, _sugarcane, _cocoa, _mushroom, _netherwart, _replant);
+		block.build(world, _x, _y, _z, _logOak, _logSpruce, _logBirch, _logJungle, _logAcacia, _logDark, _wheat, _carrot, _potato, _cactus, _pumpkin, _melon, _sugarcane, _cocoa, _mushroom, _netherwart, _replant);
+		block.afterBuild(world, _x, _y, _z, player);
 	}
 }

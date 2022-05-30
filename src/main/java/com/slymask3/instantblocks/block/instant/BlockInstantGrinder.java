@@ -20,7 +20,6 @@ public class BlockInstantGrinder extends BlockInstant {
         setTextures(Textures.Grinder.SIDE);
         setCreateMessage(Strings.CREATE_GRINDER);
         setBlockTextureName(Textures.Grinder.SIDE);
-		setDirectional(true);
     }
 
 	public boolean canActivate(World world, int x, int y, int z, EntityPlayer player) {

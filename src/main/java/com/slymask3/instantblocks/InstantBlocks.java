@@ -8,7 +8,6 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.init.Recipes;
 import com.slymask3.instantblocks.network.PacketPipeline;
-import com.slymask3.instantblocks.proxy.IProxy;
 import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.tileentity.*;
 import com.slymask3.instantblocks.util.LogHelper;
@@ -16,7 +15,6 @@ import com.slymask3.instantblocks.util.SchematicHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -32,10 +30,7 @@ public class InstantBlocks {
 	@Instance(Reference.MOD_ID)
 	public static InstantBlocks instance = new InstantBlocks();
 	
-	public static final PacketPipeline packetPipeline = new PacketPipeline(); 
-	
-	@SidedProxy(clientSide=Reference.CLIENT_PROXY_CLASS, serverSide=Reference.SERVER_PROXY_CLASS)
-	public static IProxy proxy;
+	public static final PacketPipeline packetPipeline = new PacketPipeline();
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -57,7 +52,6 @@ public class InstantBlocks {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		proxy.registerInformation();
 		Recipes.init();
 		Loot.init();
 		LogHelper.info("Initialization Complete!");

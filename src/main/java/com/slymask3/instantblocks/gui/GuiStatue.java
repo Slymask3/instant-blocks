@@ -1,10 +1,11 @@
 package com.slymask3.instantblocks.gui;
 
 import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.block.instant.BlockInstantStatue;
 import com.slymask3.instantblocks.network.PacketStatue;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
+import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.client.config.GuiButtonExt;
@@ -113,10 +114,14 @@ public class GuiStatue extends GuiScreen {
 	}
 	
 	public void sendInfo() {
-		InstantBlocks.packetPipeline.sendToServer(new PacketStatue(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
-		
-		IBHelper.xp(world, player, Config.XP_AMOUNT);
-        IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
-        IBHelper.msg(player, Strings.CREATE_STATUE.replace("%username%",input.getText()), Colors.a);
+		InstantBlocks.packetPipeline.sendToServer(new PacketStatue(this.world, this.x, this.y, this.z, input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
+
+		BlockInstantStatue block = (BlockInstantStatue) BuildHelper.getBlock(world,x,y,z);
+		if(block.getImage(input.getText()) != null) {
+			block.setCreateMessage(Strings.CREATE_STATUE.replace("%username%",input.getText()));
+			block.afterBuild(world,x,y,z,player);
+		} else {
+			IBHelper.msg(player, Strings.ERROR_STATUE.replace("%username%",input.getText()), Colors.c);
+		}
 	}
 }

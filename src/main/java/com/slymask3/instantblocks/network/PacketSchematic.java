@@ -11,17 +11,15 @@ import net.minecraftforge.common.DimensionManager;
 
 public class PacketSchematic extends AbstractPacket {
 	int _dim, _x, _y, _z;
-	String _player;
 	String _schematic;
 	boolean _center, _air;
 
 	public PacketSchematic() {}
-	public PacketSchematic(World world, int x, int y, int z, String player, String schematic, boolean center, boolean air) {
+	public PacketSchematic(World world, int x, int y, int z, String schematic, boolean center, boolean air) {
 		_dim = world.provider.dimensionId;
 		_x = x;
 		_y = y;
 		_z = z;
-		_player = player;
 		_schematic = schematic;
 		_center = center;
 		_air = air;
@@ -33,7 +31,6 @@ public class PacketSchematic extends AbstractPacket {
 		buffer.writeInt(_x);
 		buffer.writeInt(_y);
 		buffer.writeInt(_z);
-		ByteBufUtils.writeUTF8String(buffer, _player);
 		ByteBufUtils.writeUTF8String(buffer, _schematic);
 		buffer.writeBoolean(_center);
 		buffer.writeBoolean(_air);
@@ -45,7 +42,6 @@ public class PacketSchematic extends AbstractPacket {
 		_x = buffer.readInt();
 		_y = buffer.readInt();
 		_z = buffer.readInt();
-		_player = ByteBufUtils.readUTF8String(buffer);
 		_schematic = ByteBufUtils.readUTF8String(buffer);
 		_center = buffer.readBoolean();
 		_air = buffer.readBoolean();
@@ -60,6 +56,9 @@ public class PacketSchematic extends AbstractPacket {
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
 		BlockInstantSchematic block = (BlockInstantSchematic) BuildHelper.getBlock(world,_x, _y, _z);
-		block.build(world, _x, _y, _z, world.getTileEntity(_x, _y, _z).getBlockMetadata(), _player, this._schematic, this._center, this._air);
+		boolean built = block.build(world, _x, _y, _z, this._schematic, this._center, this._air);
+		if(built) {
+			block.afterBuild(world, _x, _y, _z, player);
+		}
 	}
 }

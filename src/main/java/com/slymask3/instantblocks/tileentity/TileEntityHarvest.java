@@ -1,12 +1,8 @@
 package com.slymask3.instantblocks.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityHarvest extends TileEntity {
+public class TileEntityHarvest extends TileEntityInstant {
 	boolean logOak, logSpruce, logBirch, logJungle, logAcacia, logDark;
 	boolean wheat, carrot, potato;
 	boolean cactus, pumpkin, melon, sugarcane;
@@ -32,32 +28,6 @@ public class TileEntityHarvest extends TileEntity {
 		this.mushroom=true;
 		this.netherwart=true;
 		this.replant=true;
-	}
-	
-	public void setLogs(boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark) {
-		this.logOak=logOak;
-		this.logSpruce=logSpruce;
-		this.logBirch=logBirch;
-		this.logJungle=logJungle;
-		this.logAcacia=logAcacia;
-		this.logDark=logDark;
-	}
-	
-	public void setOther(boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart) {
-		this.wheat=wheat;
-		this.carrot=carrot;
-		this.potato=potato;
-		this.cactus=cactus;
-		this.pumpkin=pumpkin;
-		this.melon=melon;
-		this.sugarcane=sugarcane;
-		this.cocoa=cocoa;
-		this.mushroom=mushroom;
-		this.netherwart=netherwart;
-	}
-	
-	public void setReplant(boolean replant) {
-		this.replant=replant;
 	}
 
 	@Override
@@ -103,16 +73,4 @@ public class TileEntityHarvest extends TileEntity {
 		nbt.setBoolean("Netherwart", netherwart);
 		nbt.setBoolean("Replant", replant);
 	}
-
-	@Override
-	public Packet getDescriptionPacket() {
-		NBTTagCompound tag = new NBTTagCompound();
-		writeToNBT(tag);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, tag);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-		readFromNBT(pkt.func_148857_g());
-    }
 }

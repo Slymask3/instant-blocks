@@ -66,7 +66,6 @@ public class BlockInstantPool extends BlockInstant {
 		Block water = Blocks.water;
 		Block slab = Blocks.stone_slab;
 		Block glow = Blocks.glowstone;
-		Block slabD = Blocks.double_stone_slab;
 		Block ladder = Blocks.ladder;
 		Block wood = Blocks.planks;
 		Block fence = Blocks.fence;
@@ -119,235 +118,69 @@ public class BlockInstantPool extends BlockInstant {
 		BuildHelper.setBlock(world,x-2, y-5, z+2, glow);
 		BuildHelper.setBlock(world,x+2, y-5, z-2, glow);
 		BuildHelper.setBlock(world,x+2, y-5, z+2, glow);
-		
-		/************************ Layer 1 to 3 : Diving Board ************************/
-		/*BuildHelper.setBlock(world,x, y+1, z+6, slabD);
-		BuildHelper.setBlock(world,x, y+2, z+6, slabD);
-		BuildHelper.setBlock(world,x, y+3, z+6, slabD);
-		BuildHelper.setBlock(world,x, y+3, z+5, slab, 8, 0);
-		BuildHelper.setBlock(world,x, y+3, z+4, slab, 8, 0);
-		BuildHelper.setBlock(world,x, y+3, z+3, slab, 8, 0);
-		BuildHelper.setBlock(world,x, y+1, z+7, ladder, 3, 0);
-		BuildHelper.setBlock(world,x, y+2, z+7, ladder, 3, 0);
-		BuildHelper.setBlock(world,x, y+3, z+7, ladder, 3, 0);*/
-		
+
 		/************************ Layer 1 to 5 : Diving Board v2.0 ************************/
-		if(meta == 0) {
-			BuildHelper.setBlock(world,x-2, y+1, z+6, wood, 0, 0);
-			BuildHelper.setBlock(world,x-2, y+2, z+6, wood, 0, 0);
-
-			BuildHelper.setBlock(world,x-2, y+1, z+7, ladder, 3, 0);
-			BuildHelper.setBlock(world,x-2, y+2, z+7, ladder, 3, 0);
-		
-			BuildHelper.setBlock(world,x-2, y+3, z+6, slab, 0, 0);
-			BuildHelper.setBlock(world,x-2, y+3, z+5, slab, 0, 0);
-			BuildHelper.setBlock(world,x-2, y+3, z+4, slab, 0, 0);
-			BuildHelper.setBlock(world,x-2, y+3, z+3, slab, 0, 0);
-		
-			BuildHelper.setBlock(world,x-1, y+1, z+6, fence);
-			BuildHelper.setBlock(world,x-1, y+2, z+6, fence);
-			BuildHelper.setBlock(world,x-1, y+3, z+6, fence);
-		
-			BuildHelper.setBlock(world,x-3, y+1, z+6, fence);
-			BuildHelper.setBlock(world,x-3, y+2, z+6, fence);
-			BuildHelper.setBlock(world,x-3, y+3, z+6, fence);
-
-			BuildHelper.setBlock(world,x-1, y+3, z+5, fence);
-			BuildHelper.setBlock(world,x-3, y+3, z+5, fence);
-		
-			///////////////////////////////////////////////////////////
-		
-			BuildHelper.setBlock(world,x+2, y+1, z+6, wood, 0, 0);
-			BuildHelper.setBlock(world,x+2, y+2, z+6, wood, 0, 0);
-			BuildHelper.setBlock(world,x+2, y+3, z+6, wood, 0, 0);
-			BuildHelper.setBlock(world,x+2, y+4, z+6, wood, 0, 0);
-
-			BuildHelper.setBlock(world,x+2, y+1, z+7, ladder, 3, 0);
-			BuildHelper.setBlock(world,x+2, y+2, z+7, ladder, 3, 0);
-			BuildHelper.setBlock(world,x+2, y+3, z+7, ladder, 3, 0);
-			BuildHelper.setBlock(world,x+2, y+4, z+7, ladder, 3, 0);
-		
-			BuildHelper.setBlock(world,x+2, y+5, z+6, slab, 0, 0);
-			BuildHelper.setBlock(world,x+2, y+5, z+5, slab, 0, 0);
-			BuildHelper.setBlock(world,x+2, y+5, z+4, slab, 0, 0);
-			BuildHelper.setBlock(world,x+2, y+5, z+3, slab, 0, 0);
-		
-			BuildHelper.setBlock(world,x+1, y+1, z+6, fence);
-			BuildHelper.setBlock(world,x+1, y+2, z+6, fence);
-			BuildHelper.setBlock(world,x+1, y+3, z+6, fence);
-			BuildHelper.setBlock(world,x+1, y+4, z+6, fence);
-			BuildHelper.setBlock(world,x+1, y+5, z+6, fence);
-		
-			BuildHelper.setBlock(world,x+3, y+1, z+6, fence);
-			BuildHelper.setBlock(world,x+3, y+2, z+6, fence);
-			BuildHelper.setBlock(world,x+3, y+3, z+6, fence);
-			BuildHelper.setBlock(world,x+3, y+4, z+6, fence);
-			BuildHelper.setBlock(world,x+3, y+5, z+6, fence);
-
-			BuildHelper.setBlock(world,x+1, y+5, z+5, fence);
-			BuildHelper.setBlock(world,x+3, y+5, z+5, fence);
-		} else if(meta == 1) {
-			BuildHelper.setBlock(world,x-6, y+1, z+2, wood, 0, 0);
-			BuildHelper.setBlock(world,x-6, y+2, z+2, wood, 0, 0);
-
-			BuildHelper.setBlock(world,x-7, y+1, z+2, ladder, 4, 0);
-			BuildHelper.setBlock(world,x-7, y+2, z+2, ladder, 4, 0);
-		
-			BuildHelper.setBlock(world,x-6, y+3, z+2, slab, 0, 0);
-			BuildHelper.setBlock(world,x-5, y+3, z+2, slab, 0, 0);
-			BuildHelper.setBlock(world,x-4, y+3, z+2, slab, 0, 0);
-			BuildHelper.setBlock(world,x-3, y+3, z+2, slab, 0, 0);
-		
-			BuildHelper.setBlock(world,x-6, y+1, z+1, fence);
-			BuildHelper.setBlock(world,x-6, y+2, z+1, fence);
-			BuildHelper.setBlock(world,x-6, y+3, z+1, fence);
-		
-			BuildHelper.setBlock(world,x-6, y+1, z+3, fence);
-			BuildHelper.setBlock(world,x-6, y+2, z+3, fence);
-			BuildHelper.setBlock(world,x-6, y+3, z+3, fence);
-
-			BuildHelper.setBlock(world,x-5, y+3, z+1, fence);
-			BuildHelper.setBlock(world,x-5, y+3, z+3, fence);
-		
-			///////////////////////////////////////////////////////////
-		
-			BuildHelper.setBlock(world,x-6, y+1, z-2, wood, 0, 0);
-			BuildHelper.setBlock(world,x-6, y+2, z-2, wood, 0, 0);
-			BuildHelper.setBlock(world,x-6, y+3, z-2, wood, 0, 0);
-			BuildHelper.setBlock(world,x-6, y+4, z-2, wood, 0, 0);
-
-			BuildHelper.setBlock(world,x-7, y+1, z-2, ladder, 4, 0);
-			BuildHelper.setBlock(world,x-7, y+2, z-2, ladder, 4, 0);
-			BuildHelper.setBlock(world,x-7, y+3, z-2, ladder, 4, 0);
-			BuildHelper.setBlock(world,x-7, y+4, z-2, ladder, 4, 0);
-		
-			BuildHelper.setBlock(world,x-6, y+5, z-2, slab, 0, 0);
-			BuildHelper.setBlock(world,x-5, y+5, z-2, slab, 0, 0);
-			BuildHelper.setBlock(world,x-4, y+5, z-2, slab, 0, 0);
-			BuildHelper.setBlock(world,x-3, y+5, z-2, slab, 0, 0);
-		
-			BuildHelper.setBlock(world,x-6, y+1, z-1, fence);
-			BuildHelper.setBlock(world,x-6, y+2, z-1, fence);
-			BuildHelper.setBlock(world,x-6, y+3, z-1, fence);
-			BuildHelper.setBlock(world,x-6, y+4, z-1, fence);
-			BuildHelper.setBlock(world,x-6, y+5, z-1, fence);
-		
-			BuildHelper.setBlock(world,x-6, y+1, z-3, fence);
-			BuildHelper.setBlock(world,x-6, y+2, z-3, fence);
-			BuildHelper.setBlock(world,x-6, y+3, z-3, fence);
-			BuildHelper.setBlock(world,x-6, y+4, z-3, fence);
-			BuildHelper.setBlock(world,x-6, y+5, z-3, fence);
-
-			BuildHelper.setBlock(world,x-5, y+5, z-1, fence);
-			BuildHelper.setBlock(world,x-5, y+5, z-3, fence);
-		} else if(meta == 2) {
-			BuildHelper.setBlock(world,x+2, y+1, z-6, wood, 0, 0);
-			BuildHelper.setBlock(world,x+2, y+2, z-6, wood, 0, 0);
-
-			BuildHelper.setBlock(world,x+2, y+1, z-7, ladder, 2, 0);
-			BuildHelper.setBlock(world,x+2, y+2, z-7, ladder, 2, 0);
-		
-			BuildHelper.setBlock(world,x+2, y+3, z-6, slab, 0, 0);
-			BuildHelper.setBlock(world,x+2, y+3, z-5, slab, 0, 0);
-			BuildHelper.setBlock(world,x+2, y+3, z-4, slab, 0, 0);
-			BuildHelper.setBlock(world,x+2, y+3, z-3, slab, 0, 0);
-		
-			BuildHelper.setBlock(world,x+1, y+1, z-6, fence);
-			BuildHelper.setBlock(world,x+1, y+2, z-6, fence);
-			BuildHelper.setBlock(world,x+1, y+3, z-6, fence);
-		
-			BuildHelper.setBlock(world,x+3, y+1, z-6, fence);
-			BuildHelper.setBlock(world,x+3, y+2, z-6, fence);
-			BuildHelper.setBlock(world,x+3, y+3, z-6, fence);
-
-			BuildHelper.setBlock(world,x+1, y+3, z-5, fence);
-			BuildHelper.setBlock(world,x+3, y+3, z-5, fence);
-		
-			///////////////////////////////////////////////////////////
-		
-			BuildHelper.setBlock(world,x-2, y+1, z-6, wood, 0, 0);
-			BuildHelper.setBlock(world,x-2, y+2, z-6, wood, 0, 0);
-			BuildHelper.setBlock(world,x-2, y+3, z-6, wood, 0, 0);
-			BuildHelper.setBlock(world,x-2, y+4, z-6, wood, 0, 0);
-
-			BuildHelper.setBlock(world,x-2, y+1, z-7, ladder, 2, 0);
-			BuildHelper.setBlock(world,x-2, y+2, z-7, ladder, 2, 0);
-			BuildHelper.setBlock(world,x-2, y+3, z-7, ladder, 2, 0);
-			BuildHelper.setBlock(world,x-2, y+4, z-7, ladder, 2, 0);
-		
-			BuildHelper.setBlock(world,x-2, y+5, z-6, slab, 0, 0);
-			BuildHelper.setBlock(world,x-2, y+5, z-5, slab, 0, 0);
-			BuildHelper.setBlock(world,x-2, y+5, z-4, slab, 0, 0);
-			BuildHelper.setBlock(world,x-2, y+5, z-3, slab, 0, 0);
-		
-			BuildHelper.setBlock(world,x-1, y+1, z-6, fence);
-			BuildHelper.setBlock(world,x-1, y+2, z-6, fence);
-			BuildHelper.setBlock(world,x-1, y+3, z-6, fence);
-			BuildHelper.setBlock(world,x-1, y+4, z-6, fence);
-			BuildHelper.setBlock(world,x-1, y+5, z-6, fence);
-		
-			BuildHelper.setBlock(world,x-3, y+1, z-6, fence);
-			BuildHelper.setBlock(world,x-3, y+2, z-6, fence);
-			BuildHelper.setBlock(world,x-3, y+3, z-6, fence);
-			BuildHelper.setBlock(world,x-3, y+4, z-6, fence);
-			BuildHelper.setBlock(world,x-3, y+5, z-6, fence);
-
-			BuildHelper.setBlock(world,x-1, y+5, z-5, fence);
-			BuildHelper.setBlock(world,x-3, y+5, z-5, fence);
-		} else if(meta == 3) {
-			BuildHelper.setBlock(world,x+6, y+1, z+2, wood, 0, 0);
-			BuildHelper.setBlock(world,x+6, y+2, z+2, wood, 0, 0);
-
-			BuildHelper.setBlock(world,x+7, y+1, z+2, ladder, 5, 0);
-			BuildHelper.setBlock(world,x+7, y+2, z+2, ladder, 5, 0);
-		
-			BuildHelper.setBlock(world,x+6, y+3, z+2, slab, 0, 0);
-			BuildHelper.setBlock(world,x+5, y+3, z+2, slab, 0, 0);
-			BuildHelper.setBlock(world,x+4, y+3, z+2, slab, 0, 0);
-			BuildHelper.setBlock(world,x+3, y+3, z+2, slab, 0, 0);
-		
-			BuildHelper.setBlock(world,x+6, y+1, z+1, fence);
-			BuildHelper.setBlock(world,x+6, y+2, z+1, fence);
-			BuildHelper.setBlock(world,x+6, y+3, z+1, fence);
-		
-			BuildHelper.setBlock(world,x+6, y+1, z+3, fence);
-			BuildHelper.setBlock(world,x+6, y+2, z+3, fence);
-			BuildHelper.setBlock(world,x+6, y+3, z+3, fence);
-
-			BuildHelper.setBlock(world,x+5, y+3, z+1, fence);
-			BuildHelper.setBlock(world,x+5, y+3, z+3, fence);
-		
-			///////////////////////////////////////////////////////////
-		
-			BuildHelper.setBlock(world,x+6, y+1, z-2, wood, 0, 0);
-			BuildHelper.setBlock(world,x+6, y+2, z-2, wood, 0, 0);
-			BuildHelper.setBlock(world,x+6, y+3, z-2, wood, 0, 0);
-			BuildHelper.setBlock(world,x+6, y+4, z-2, wood, 0, 0);
-
-			BuildHelper.setBlock(world,x+7, y+1, z-2, ladder, 5, 0);
-			BuildHelper.setBlock(world,x+7, y+2, z-2, ladder, 5, 0);
-			BuildHelper.setBlock(world,x+7, y+3, z-2, ladder, 5, 0);
-			BuildHelper.setBlock(world,x+7, y+4, z-2, ladder, 5, 0);
-		
-			BuildHelper.setBlock(world,x+6, y+5, z-2, slab, 0, 0);
-			BuildHelper.setBlock(world,x+5, y+5, z-2, slab, 0, 0);
-			BuildHelper.setBlock(world,x+4, y+5, z-2, slab, 0, 0);
-			BuildHelper.setBlock(world,x+3, y+5, z-2, slab, 0, 0);
-		
-			BuildHelper.setBlock(world,x+6, y+1, z-1, fence);
-			BuildHelper.setBlock(world,x+6, y+2, z-1, fence);
-			BuildHelper.setBlock(world,x+6, y+3, z-1, fence);
-			BuildHelper.setBlock(world,x+6, y+4, z-1, fence);
-			BuildHelper.setBlock(world,x+6, y+5, z-1, fence);
-		
-			BuildHelper.setBlock(world,x+6, y+1, z-3, fence);
-			BuildHelper.setBlock(world,x+6, y+2, z-3, fence);
-			BuildHelper.setBlock(world,x+6, y+3, z-3, fence);
-			BuildHelper.setBlock(world,x+6, y+4, z-3, fence);
-			BuildHelper.setBlock(world,x+6, y+5, z-3, fence);
-
-			BuildHelper.setBlock(world,x+5, y+5, z-1, fence);
-			BuildHelper.setBlock(world,x+5, y+5, z-3, fence);
+		int metaLadder;
+		switch(meta) {
+			default:
+			case 0: metaLadder = 3; break;
+			case 1: metaLadder = 4; break;
+			case 2: metaLadder = 2; break;
+			case 3: metaLadder = 5; break;
 		}
+
+		BuildHelper.setBlockDirectional(world,x,y+1,z,wood,meta,0,6,2,0);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,wood,meta,0,6,2,0);
+
+		BuildHelper.setBlockDirectional(world,x,y+1,z,ladder,meta,0,7,2,0,metaLadder,2);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,ladder,meta,0,7,2,0,metaLadder,2);
+
+		BuildHelper.setBlockDirectional(world,x,y+3,z,slab,meta,0,6,2,0);
+		BuildHelper.setBlockDirectional(world,x,y+3,z,slab,meta,0,5,2,0);
+		BuildHelper.setBlockDirectional(world,x,y+3,z,slab,meta,0,4,2,0);
+		BuildHelper.setBlockDirectional(world,x,y+3,z,slab,meta,0,3,2,0);
+
+		BuildHelper.setBlockDirectional(world,x,y+1,z,fence,meta,0,6,1,0);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,fence,meta,0,6,1,0);
+		BuildHelper.setBlockDirectional(world,x,y+3,z,fence,meta,0,6,1,0);
+
+		BuildHelper.setBlockDirectional(world,x,y+1,z,fence,meta,0,6,3,0);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,fence,meta,0,6,3,0);
+		BuildHelper.setBlockDirectional(world,x,y+3,z,fence,meta,0,6,3,0);
+
+		BuildHelper.setBlockDirectional(world,x,y+3,z,fence,meta,0,5,1,0);
+		BuildHelper.setBlockDirectional(world,x,y+3,z,fence,meta,0,5,3,0);
+
+		///////////////////////////////////////////////////////////
+
+		BuildHelper.setBlockDirectional(world,x,y+1,z,wood,meta,0,6,0,2);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,wood,meta,0,6,0,2);
+		BuildHelper.setBlockDirectional(world,x,y+3,z,wood,meta,0,6,0,2);
+		BuildHelper.setBlockDirectional(world,x,y+4,z,wood,meta,0,6,0,2);
+
+		BuildHelper.setBlockDirectional(world,x,y+1,z,ladder,meta,0,7,0,2,metaLadder,2);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,ladder,meta,0,7,0,2,metaLadder,2);
+		BuildHelper.setBlockDirectional(world,x,y+3,z,ladder,meta,0,7,0,2,metaLadder,2);
+		BuildHelper.setBlockDirectional(world,x,y+4,z,ladder,meta,0,7,0,2,metaLadder,2);
+
+		BuildHelper.setBlockDirectional(world,x,y+5,z,slab,meta,0,6,0,2);
+		BuildHelper.setBlockDirectional(world,x,y+5,z,slab,meta,0,5,0,2);
+		BuildHelper.setBlockDirectional(world,x,y+5,z,slab,meta,0,4,0,2);
+		BuildHelper.setBlockDirectional(world,x,y+5,z,slab,meta,0,3,0,2);
+
+		BuildHelper.setBlockDirectional(world,x,y+1,z,fence,meta,0,6,0,1);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,fence,meta,0,6,0,1);
+		BuildHelper.setBlockDirectional(world,x,y+3,z,fence,meta,0,6,0,1);
+		BuildHelper.setBlockDirectional(world,x,y+4,z,fence,meta,0,6,0,1);
+		BuildHelper.setBlockDirectional(world,x,y+5,z,fence,meta,0,6,0,1);
+
+		BuildHelper.setBlockDirectional(world,x,y+1,z,fence,meta,0,6,0,3);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,fence,meta,0,6,0,3);
+		BuildHelper.setBlockDirectional(world,x,y+3,z,fence,meta,0,6,0,3);
+		BuildHelper.setBlockDirectional(world,x,y+4,z,fence,meta,0,6,0,3);
+		BuildHelper.setBlockDirectional(world,x,y+5,z,fence,meta,0,6,0,3);
+
+		BuildHelper.setBlockDirectional(world,x,y+5,z,fence,meta,0,5,0,1);
+		BuildHelper.setBlockDirectional(world,x,y+5,z,fence,meta,0,5,0,3);
 	}
 }

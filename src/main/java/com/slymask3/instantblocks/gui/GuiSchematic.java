@@ -1,17 +1,18 @@
 package com.slymask3.instantblocks.gui;
 
 import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.block.instant.BlockInstantSchematic;
 import com.slymask3.instantblocks.network.PacketSchematic;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntitySchematic;
+import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.SchematicHelper;
 import cpw.mods.fml.client.config.GuiButtonExt;
 import cpw.mods.fml.client.config.GuiCheckBox;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -172,20 +173,18 @@ public class GuiSchematic extends GuiScreen {
     }
 	
 	public void sendInfo() {
-		InstantBlocks.packetPipeline.sendToServer(new PacketSchematic(this.world, this.x, this.y, this.z, this.player.getDisplayName(), input.getText(), center.isChecked(), ignoreAir.isChecked()));
-		
-		IBHelper.xp(world, player, Config.XP_AMOUNT);
-        IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
-        IBHelper.msg(player, Strings.CREATE_SCHEMATIC.replace("%schematic%",input.getText()), Colors.a);
+		InstantBlocks.packetPipeline.sendToServer(new PacketSchematic(this.world, this.x, this.y, this.z, input.getText(), center.isChecked(), ignoreAir.isChecked()));
+
+		BlockInstantSchematic block = (BlockInstantSchematic) BuildHelper.getBlock(world,x,y,z);
+		if(SchematicHelper.readSchematic(input.getText()) != null) {
+			block.setCreateMessage(Strings.CREATE_SCHEMATIC.replace("%schematic%",input.getText()));
+			block.afterBuild(world,x,y,z,player);
+		} else {
+			IBHelper.msg(player, Strings.ERROR_SCHEMATIC.replace("%schematic%",input.getText()), Colors.c);
+		}
 	}
-	
-	Minecraft getMinecraftInstance() {
-        /** Reference to the Minecraft object. */
-        return mc;
-    }
 
     FontRenderer getFontRenderer() {
-        /** The FontRenderer used by GuiScreen */
         return fontRendererObj;
     }
 
@@ -206,5 +205,4 @@ public class GuiSchematic extends GuiScreen {
     {
         return var1==selected;
     }
-	
 }

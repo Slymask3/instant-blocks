@@ -17,6 +17,7 @@ public class Strings {
 	public static final String ERROR_STATUE = "Couldn't find a skin from '%username%'.";
 	public static final String ERROR_SUCTION = "Prevented from filling in over %i% water/lava blocks.";
 	public static final String ERROR_MISSING = "Missing: %block% at (%x%x, %y%y, %z%z).";
+	public static final String ERROR_SCHEMATIC = "Error creating schematic from the file %schematic%.";
 
 	public static final String CREATE_WOODEN_HOUSE = "Instant Wooden House created.";
 	public static final String CREATE_SKYDIVE = "Instant " + Colors.c + "R" + Colors._6 + "a" + Colors.e + "i" + Colors.a + "n" + Colors._2 + "b" + Colors._3 + "o" + Colors.b + "w " + Colors.a + "Skydive created.";

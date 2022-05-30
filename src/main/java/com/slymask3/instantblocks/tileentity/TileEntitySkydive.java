@@ -2,12 +2,8 @@ package com.slymask3.instantblocks.tileentity;
 
 import com.slymask3.instantblocks.util.Colors;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntitySkydive extends TileEntity {
+public class TileEntitySkydive extends TileEntityInstant {
 	public String[] color = new String[11];
 	public int[] colorCode = new int[11];
 
@@ -37,18 +33,6 @@ public class TileEntitySkydive extends TileEntity {
 			nbt.setInteger("ColorCode" + i, colorCode[i]);
 		}
 	}
-
-	@Override
-	public Packet getDescriptionPacket() {
-		NBTTagCompound tag = new NBTTagCompound();
-		writeToNBT(tag);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, tag);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-		readFromNBT(pkt.func_148857_g());
-    }
 	
 	public void setColorCode(int i, String input) {
 		this.colorCode[i] = Colors.textToColor(input).getRGB();

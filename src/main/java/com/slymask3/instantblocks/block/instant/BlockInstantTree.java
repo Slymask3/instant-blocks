@@ -1,19 +1,15 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
-import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityTree;
 import com.slymask3.instantblocks.util.BuildHelper;
-import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -58,9 +54,7 @@ public class BlockInstantTree extends BlockInstant {
 		return new TileEntityTree();
 	}
 	
-	public void build(World world, int x, int y, int z, String playerS, int type, boolean fullLog, boolean fullLeaves, boolean air) {
-		EntityPlayer player = world.getPlayerEntityByName(playerS);
-		
+	public void build(World world, int x, int y, int z, int type, boolean fullLog, boolean fullLeaves, boolean air) {
 		if(type == 0) { //IF OAK
 			buildOak(world, x, y, z, fullLog, fullLeaves, air);
 		} else if(type == 1) { //IF SPRUCE
@@ -79,14 +73,6 @@ public class BlockInstantTree extends BlockInstant {
 //			buildReverse(world, x, y, z, fullLog, fullLeaves, air);
 		} else if(type == 6) { //IF GLASS
 			buildGlass(world, x, y, z, fullLog, fullLeaves, air);
-		}
-		
-		IBHelper.sound(world, Config.SOUND, x, y, z);
-		
-		ItemStack is = player.getCurrentEquippedItem();
-		
-		if(IBHelper.isWand(is)) {
-			is.damageItem(1, player);
 		}
 	}
 
@@ -492,10 +478,6 @@ public class BlockInstantTree extends BlockInstant {
 		buildLeaves(world, x+4*0, y+4*8, z-4*1, Blocks.leaves, 7, fullLeaves, air, true, false, true, false, true, true);
 
 		buildLeaves(world, x-4*1, y+4*8, z+4*0, Blocks.leaves, 7, fullLeaves, air, true, false, true, true, false, true);
-	}
-	
-	public void buildJungleBig(World world, int x, int y, int z, boolean fullLog, boolean fullLeaves, boolean air) {
-		
 	}
 	
 	public void buildAcacia(World world, int x, int y, int z, boolean fullLog, boolean fullLeaves, boolean air) {

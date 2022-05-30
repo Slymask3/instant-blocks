@@ -3,12 +3,10 @@ package com.slymask3.instantblocks.block;
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.creativetab.InstantBlocksTab;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
-import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.block.Block;
@@ -348,31 +346,18 @@ public abstract class BlockInstant extends Block implements ITileEntityProvider 
 	}
 
 	public boolean onActivate(World world, int x, int y, int z, EntityPlayer player) {
+		ItemStack is = player.getCurrentEquippedItem();
+		if(Config.USE_WANDS && !IBHelper.isWand(is)) {
+			IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
+			return true;
+		}
+
 		if(!canActivate(world,x,y,z,player)) {
 			return true;
 		}
 
-		ItemStack is = player.getCurrentEquippedItem();
-
-		if(Config.USE_WANDS) {
-			if(IBHelper.isWand(is)) {
-				if(BuildHelper.getBlock(world,x, y, z) != ModBlocks.ibStatue && BuildHelper.getBlock(world,x, y, z) != ModBlocks.ibLava && BuildHelper.getBlock(world,x, y, z) != ModBlocks.ibWater) {
-					is.damageItem(1, player);
-				}
-			} else {
-				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
-				return true;
-			}
-		}
-
 		build(world, x, y, z, player);
-
-		IBHelper.keepBlocks(world, x, y, z, this);
-		IBHelper.xp(world, player, Config.XP_AMOUNT);
-
-		IBHelper.sound(world, Config.SOUND, x, y, z);
-		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
-		IBHelper.msg(player, this.createMessage, Colors.a);
+		afterBuild(world, x, y, z, player);
 
 		return true;
 	}
@@ -395,8 +380,23 @@ public abstract class BlockInstant extends Block implements ITileEntityProvider 
 
 		return true;
 	}
-	
+
 	public void build(World world, int x, int y, int z, EntityPlayer player) {
 		//build structure
+	}
+
+	public void afterBuild(World world, int x, int y, int z, EntityPlayer player) {
+		IBHelper.keepBlocks(world, x, y, z, this);
+		IBHelper.xp(world, player, Config.XP_AMOUNT);
+		IBHelper.sound(world, Config.SOUND, x, y, z);
+		IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
+		IBHelper.msg(player, this.createMessage, Colors.a);
+
+		if(Config.USE_WANDS) {
+			ItemStack is = player.getCurrentEquippedItem();
+			if(IBHelper.isWand(is)) {
+				is.damageItem(1, player);
+			}
+		}
 	}
 }

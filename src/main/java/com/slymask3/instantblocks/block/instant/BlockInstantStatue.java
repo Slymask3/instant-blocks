@@ -4,17 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.slymask3.instantblocks.block.BlockInstant;
-import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
 import com.slymask3.instantblocks.util.BuildHelper;
-import com.slymask3.instantblocks.util.Colors;
-import com.slymask3.instantblocks.util.IBHelper;
-import com.slymask3.instantblocks.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -128,11 +122,7 @@ public class BlockInstantStatue extends BlockInstant {
 		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 	}
 
-	public void build(World world, int x, int y, int z, String playerS, int meta, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
-		EntityPlayer player = world.getPlayerEntityByName(playerS);
-		
-		LogHelper.info(player);
-		
+	public BufferedImage getImage(String username) {
 		if(!username.equalsIgnoreCase("")) {
 			try {
 				GsonBuilder builder = new GsonBuilder();
@@ -151,30 +141,29 @@ public class BlockInstantStatue extends BlockInstant {
 				JsonObject image_json = gson.fromJson(base64_decoded,JsonObject.class);
 				String image_url = image_json.get("textures").getAsJsonObject().get("SKIN").getAsJsonObject().get("url").getAsString();
 
-				BufferedImage img = ImageIO.read(new URL(image_url));
-
-				BuildHelper.setBlock(world,x, y, z, Blocks.air);
-		        
-		        buildHead(world, x, y, z, img, meta, head, rgb);
-		        buildBody(world, x, y, z, img, meta, body, rgb);
-		        buildArms(world, x, y, z, img, meta, armLeft, armRight, rgb);
-		        buildLegs(world, x, y, z, img, meta, legLeft, legRight, rgb);
-		        
-		        IBHelper.keepBlocks(world, x, y, z, ModBlocks.ibStatue);
-		        //IBHelper.xp(world, player, ConfigurationHandler.xp);
-		        IBHelper.sound(world, Config.SOUND, x, y, z);
-		        //IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
-				
-				ItemStack is = player.getCurrentEquippedItem();
-				
-				if(IBHelper.isWand(is)) {
-					is.damageItem(1, player);
-				}
+				return ImageIO.read(new URL(image_url));
 			} catch(Exception e) {
 				e.printStackTrace();
-				IBHelper.msg(player, Strings.ERROR_STATUE.replace("%username%",username), Colors.c);
 			}
 		}
+		return null;
+	}
+
+	public boolean build(World world, int x, int y, int z, EntityPlayer player, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
+		int meta = world.getBlockMetadata(x,y,z);
+
+		BufferedImage img = getImage(username);
+		if(img != null) {
+			BuildHelper.setBlock(world,x, y, z, Blocks.air);
+
+			buildHead(world, x, y, z, img, meta, head, rgb);
+			buildBody(world, x, y, z, img, meta, body, rgb);
+			buildArms(world, x, y, z, img, meta, armLeft, armRight, rgb);
+			buildLegs(world, x, y, z, img, meta, legLeft, legRight, rgb);
+
+			return true;
+		}
+		return false;
 	}
 
 	private static String get_contents(String url_string) {

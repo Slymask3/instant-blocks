@@ -37,6 +37,7 @@ public class Config {
 	public static int SKYDIVE_MIN;
 	public static int SKYDIVE_MAX;
 	public static int SKYDIVE_WATER;
+	public static int MINING_LADDER_LAYER;
 
 	public static String BLOCKS = "blocks";
 	public static boolean ADD_WOODEN_HOUSE;
@@ -91,6 +92,7 @@ public class Config {
 		SKYDIVE_MIN = configuration.get(GENERAL, "SKYDIVE_MIN", 5, "Minimum height for the Instant Rainbow Skydive.\n(Default = 5)").getInt();
 		SKYDIVE_MAX = configuration.get(GENERAL, "SKYDIVE_MAX", 255, "Maximum height for the Instant Rainbow Skydive.\n(Default = 255)").getInt();
 		SKYDIVE_WATER = configuration.get(GENERAL, "SKYDIVE_WATER", 1, "Water height for the Instant Rainbow Skydive.\n(Default = 1)").getInt();
+		MINING_LADDER_LAYER = configuration.get(GENERAL, "MINING_LADDER_LAYER", 12, "Mining layer for the Instant Mining Ladder.\n(Default = 12)").getInt();
 
 		ADD_WOODEN_HOUSE = configuration.get(BLOCKS, "ADD_WOODEN_HOUSE", true, "Add Instant Wooden House\n(Default = true)").getBoolean();
 		ADD_MINING_LADDER = configuration.get(BLOCKS, "ADD_MINING_LADDER", true, "Add Instant Mining Ladder\n(Default = true)").getBoolean();

@@ -1,12 +1,11 @@
 package com.slymask3.instantblocks.gui;
 
 import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.network.PacketTree;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityTree;
-import com.slymask3.instantblocks.util.Colors;
-import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.BuildHelper;
 import cpw.mods.fml.client.config.GuiButtonExt;
 import cpw.mods.fml.client.config.GuiCheckBox;
 import cpw.mods.fml.relauncher.Side;
@@ -127,11 +126,11 @@ public class GuiTree extends GuiScreen {
     }
 	
 	public void sendInfo() {
-		InstantBlocks.packetPipeline.sendToServer(new PacketTree(this.world, this.x, this.y, this.z, this.player.getDisplayName(), selectedTree, !fullLog.isChecked(), !fullLeaves.isChecked(), air.isChecked()));
-		
-		IBHelper.xp(world, player, Config.XP_AMOUNT);
-        IBHelper.effectFull(world, Config.PARTICLE, x, y, z);
-        IBHelper.msg(player, Strings.CREATE_TREE.replace("%tree%",treeToString(selectedTree)), Colors.a);
+		InstantBlocks.packetPipeline.sendToServer(new PacketTree(this.world, this.x, this.y, this.z, selectedTree, !fullLog.isChecked(), !fullLeaves.isChecked(), air.isChecked()));
+
+		BlockInstant block = (BlockInstant)BuildHelper.getBlock(world,x,y,z);
+		block.setCreateMessage(Strings.CREATE_TREE.replace("%tree%",treeToString(selectedTree)));
+		block.afterBuild(world,x,y,z,player);
 	}
 	
 	Minecraft getMinecraftInstance() {

@@ -11,18 +11,16 @@ import net.minecraftforge.common.DimensionManager;
 
 public class PacketStatue extends AbstractPacket {
 	int _dim, _x, _y, _z;
-	String _player;
 	String _username;
 	boolean _head, _body, _armLeft, _armRight, _legLeft, _legRight;
 	boolean _rgb;
 
 	public PacketStatue() {}
-	public PacketStatue(World world, int x, int y, int z, String player, /*double range*/ String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
+	public PacketStatue(World world, int x, int y, int z, /*double range*/ String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
 		_dim = world.provider.dimensionId;
 		_x = x;
 		_y = y;
 		_z = z;
-		_player = player;
 		_username = username;
 		_head = head;
 		_body = body;
@@ -39,7 +37,6 @@ public class PacketStatue extends AbstractPacket {
 		buffer.writeInt(_x);
 		buffer.writeInt(_y);
 		buffer.writeInt(_z);
-		ByteBufUtils.writeUTF8String(buffer, _player);
 		ByteBufUtils.writeUTF8String(buffer, _username);
 		buffer.writeBoolean(_head);
 		buffer.writeBoolean(_body);
@@ -56,7 +53,6 @@ public class PacketStatue extends AbstractPacket {
 		_x = buffer.readInt();
 		_y = buffer.readInt();
 		_z = buffer.readInt();
-		_player = ByteBufUtils.readUTF8String(buffer);
 		_username = ByteBufUtils.readUTF8String(buffer);
 		_head = buffer.readBoolean();
 		_body = buffer.readBoolean();
@@ -76,6 +72,9 @@ public class PacketStatue extends AbstractPacket {
 	public void handleServerSide(EntityPlayer player) {
 		World world = DimensionManager.getWorld(_dim);
 		BlockInstantStatue block = (BlockInstantStatue) BuildHelper.getBlock(world,_x, _y, _z);
-		block.build(world, _x, _y, _z, _player, world.getTileEntity(_x, _y, _z).getBlockMetadata(), this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight, this._rgb);
+		boolean built = block.build(world, _x, _y, _z, player, this._username, this._head, this._body, this._armLeft, this._armRight, this._legLeft, this._legRight, this._rgb);
+		if(built) {
+			block.afterBuild(world, _x, _y, _z, player);
+		}
 	}
 }
