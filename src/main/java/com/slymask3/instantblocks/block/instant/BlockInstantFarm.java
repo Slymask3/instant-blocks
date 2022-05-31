@@ -6,6 +6,7 @@ import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -78,178 +79,67 @@ public class BlockInstantFarm extends BlockInstant {
 		Block torch = Blocks.torch;
 		Block chest = Blocks.chest;
 		Block craft = Blocks.crafting_table;
-		
-		TileEntityChest chest1 = new TileEntityChest();
-    	TileEntityChest chest2 = new TileEntityChest();
-		
+		Block air = Blocks.air;
+
 		int meta = world.getBlockMetadata(x, y, z);
-		
-		if(meta == 0) { //NORTH
-			BuildHelper.build(world, x-7, y-1, z-4, Blocks.air, 9, 5, 15); //AIR
-			
-			BuildHelper.build(world, x+7, y+1, z-3, fence, 7, 1, 1); //FENCES
-			BuildHelper.build(world, x-7, y+1, z-3, fence, 7, 1, 1); //FENCES
-			BuildHelper.build(world, x-7, y+1, z-4, fence, 1, 1, 15); //FENCES
-			BuildHelper.build(world, x-7, y+1, z+4, fence, 1, 1, 15); //FENCES
-		
-			BuildHelper.setBlock(world,x+7, y+2, z-4, torch); //TORCH
-			BuildHelper.setBlock(world,x+2, y+2, z-4, torch); //TORCH
-			BuildHelper.setBlock(world,x-2, y+2, z-4, torch); //TORCH
-			BuildHelper.setBlock(world,x-7, y+2, z-4, torch); //TORCH
 
-			BuildHelper.setBlock(world,x-7, y+2, z, torch); //TORCH
-			BuildHelper.setBlock(world,x+7, y+2, z, torch); //TORCH
-		
-			BuildHelper.setBlock(world,x+7, y+2, z+4, torch); //TORCH
-			BuildHelper.setBlock(world,x+2, y+2, z+4, torch); //TORCH
-			BuildHelper.setBlock(world,x-2, y+2, z+4, torch); //TORCH
-			BuildHelper.setBlock(world,x-7, y+2, z+4, torch); //TORCH
-		
-			BuildHelper.build(world, x-7, y-1, z-4, stone, 9, 2, 15); //STONE
-		
-			BuildHelper.build(world, x-6, y, z-3, farm, 7, 1, 5); //DIRT
-			BuildHelper.build(world, x+2, y, z-3, farm, 7, 1, 5); //DIRT
+		LogHelper.info("meta: "+meta);
 
-			BuildHelper.build(world, x-4, y, z-3, water, 7, 1, 1); //WATER
-			BuildHelper.build(world, x+4, y, z-3, water, 7, 1, 1); //WATER
-		
-			BuildHelper.build(world, x-6, y+1, z-3, crop, 7, 1, 2); //CROP
-			BuildHelper.build(world, x-3, y+1, z-3, crop, 7, 1, 2); //CROP
-			BuildHelper.build(world, x+2, y+1, z-3, crop, 7, 1, 2); //CROP
-			BuildHelper.build(world, x+5, y+1, z-3, crop, 7, 1, 2); //CROP
-
-			BuildHelper.setBlock(world,x, y+1, z+4, gate, 0, 0); //GATE
-			BuildHelper.setBlock(world,x+1, y+1, z-3, chest, 5, 0); //CHEST
-			BuildHelper.setBlock(world,x, y+1, z-3, craft, 5, 0); //WORKBENCH
-			BuildHelper.setBlock(world,x-1, y+1, z-3, chest, 5, 0); //CHEST
-			
-			chest1 = (TileEntityChest)world.getTileEntity(x+1, y+1, z-3);
-			chest2 = (TileEntityChest)world.getTileEntity(x-1, y+1, z-3);
-		} else if(meta == 1) { //EAST
-			BuildHelper.build(world, x-4, y-1, z-7, Blocks.air, 15, 5, 9); //AIR
-		
-			BuildHelper.build(world, x-3, y+1, z+7, fence, 1, 1, 7); //FENCES
-			BuildHelper.build(world, x-3, y+1, z-7, fence, 1, 1, 7); //FENCES
-			BuildHelper.build(world, x-4, y+1, z-7, fence, 15, 1, 1); //FENCES
-			BuildHelper.build(world, x+4, y+1, z-7, fence, 15, 1, 1); //FENCES
-		
-			BuildHelper.setBlock(world,x-4, y+2, z+7, torch); //TORCH
-			BuildHelper.setBlock(world,x-4, y+2, z+2, torch); //TORCH
-			BuildHelper.setBlock(world,x-4, y+2, z-2, torch); //TORCH
-			BuildHelper.setBlock(world,x-4, y+2, z-7, torch); //TORCH
-
-			BuildHelper.setBlock(world,x, y+2, z-7, torch); //TORCH
-			BuildHelper.setBlock(world,x, y+2, z+7, torch); //TORCH
-		
-			BuildHelper.setBlock(world,x+4, y+2, z+7, torch); //TORCH
-			BuildHelper.setBlock(world,x+4, y+2, z+2, torch); //TORCH
-			BuildHelper.setBlock(world,x+4, y+2, z-2, torch); //TORCH
-			BuildHelper.setBlock(world,x+4, y+2, z-7, torch); //TORCH
-		
-			BuildHelper.build(world, x-4, y-1, z-7, stone, 15, 2, 9); //STONE
-		
-			BuildHelper.build(world, x-3, y, z-6, farm, 5, 1, 7); //DIRT
-			BuildHelper.build(world, x-3, y, z+2, farm, 5, 1, 7); //DIRT
-
-			BuildHelper.build(world, x-3, y, z-4, water, 1, 1, 7); //WATER
-			BuildHelper.build(world, x-3, y, z+4, water, 1, 1, 7); //WATER
-		
-			BuildHelper.build(world, x-3, y+1, z-6, crop, 2, 1, 7); //CROP
-			BuildHelper.build(world, x-3, y+1, z-3, crop, 2, 1, 7); //CROP
-			BuildHelper.build(world, x-3, y+1, z+2, crop, 2, 1, 7); //CROP
-			BuildHelper.build(world, x-3, y+1, z+5, crop, 2, 1, 7); //CROP
-
-			BuildHelper.setBlock(world,x-4, y+1, z, gate, 1, 0); //GATE
-			BuildHelper.setBlock(world,x+3, y+1, z+1, chest, 5, 0); //CHEST
-			BuildHelper.setBlock(world,x+3, y+1, z, craft, 5, 0); //WORKBENCH
-			BuildHelper.setBlock(world,x+3, y+1, z-1, chest, 5, 0); //CHEST
-			
-			chest1 = (TileEntityChest)world.getTileEntity(x+3, y+1, z+1);
-			chest2 = (TileEntityChest)world.getTileEntity(x+3, y+1, z-1);
-		} else if(meta == 2) { //SOUTH
-			BuildHelper.build(world, x-7, y-1, z-4, Blocks.air, 9, 5, 15); //AIR
-			
-			BuildHelper.build(world, x+7, y+1, z-3, fence, 7, 1, 1); //FENCES
-			BuildHelper.build(world, x-7, y+1, z-3, fence, 7, 1, 1); //FENCES
-			BuildHelper.build(world, x-7, y+1, z-4, fence, 1, 1, 15); //FENCES
-			BuildHelper.build(world, x-7, y+1, z+4, fence, 1, 1, 15); //FENCES
-		
-			BuildHelper.setBlock(world,x+7, y+2, z-4, torch); //TORCH
-			BuildHelper.setBlock(world,x+2, y+2, z-4, torch); //TORCH
-			BuildHelper.setBlock(world,x-2, y+2, z-4, torch); //TORCH
-			BuildHelper.setBlock(world,x-7, y+2, z-4, torch); //TORCH
-
-			BuildHelper.setBlock(world,x-7, y+2, z, torch); //TORCH
-			BuildHelper.setBlock(world,x+7, y+2, z, torch); //TORCH
-		
-			BuildHelper.setBlock(world,x+7, y+2, z+4, torch); //TORCH
-			BuildHelper.setBlock(world,x+2, y+2, z+4, torch); //TORCH
-			BuildHelper.setBlock(world,x-2, y+2, z+4, torch); //TORCH
-			BuildHelper.setBlock(world,x-7, y+2, z+4, torch); //TORCH
-		
-			BuildHelper.build(world, x-7, y-1, z-4, stone, 9, 2, 15); //STONE
-		
-			BuildHelper.build(world, x-6, y, z-3, farm, 7, 1, 5); //DIRT
-			BuildHelper.build(world, x+2, y, z-3, farm, 7, 1, 5); //DIRT
-
-			BuildHelper.build(world, x-4, y, z-3, water, 7, 1, 1); //WATER
-			BuildHelper.build(world, x+4, y, z-3, water, 7, 1, 1); //WATER
-		
-			BuildHelper.build(world, x-6, y+1, z-3, crop, 7, 1, 2); //CROP
-			BuildHelper.build(world, x-3, y+1, z-3, crop, 7, 1, 2); //CROP
-			BuildHelper.build(world, x+2, y+1, z-3, crop, 7, 1, 2); //CROP
-			BuildHelper.build(world, x+5, y+1, z-3, crop, 7, 1, 2); //CROP
-
-			BuildHelper.setBlock(world,x, y+1, z-4, gate, 0, 0); //GATE
-			BuildHelper.setBlock(world,x+1, y+1, z+3, chest, 5, 0); //CHEST
-			BuildHelper.setBlock(world,x, y+1, z+3, craft, 5, 0); //WORKBENCH
-			BuildHelper.setBlock(world,x-1, y+1, z+3, chest, 5, 0); //CHEST
-			
-			chest1 = (TileEntityChest)world.getTileEntity(x+1, y+1, z+3);
-			chest2 = (TileEntityChest)world.getTileEntity(x-1, y+1, z+3);
-		} else if(meta == 3) { //WEST (ORIGINAL)
-			BuildHelper.build(world, x-4, y-1, z-7, Blocks.air, 15, 5, 9); //AIR
-		
-			BuildHelper.build(world, x-3, y+1, z+7, fence, 1, 1, 7); //FENCES
-			BuildHelper.build(world, x-3, y+1, z-7, fence, 1, 1, 7); //FENCES
-			BuildHelper.build(world, x-4, y+1, z-7, fence, 15, 1, 1); //FENCES
-			BuildHelper.build(world, x+4, y+1, z-7, fence, 15, 1, 1); //FENCES
-		
-			BuildHelper.setBlock(world,x-4, y+2, z+7, torch); //TORCH
-			BuildHelper.setBlock(world,x-4, y+2, z+2, torch); //TORCH
-			BuildHelper.setBlock(world,x-4, y+2, z-2, torch); //TORCH
-			BuildHelper.setBlock(world,x-4, y+2, z-7, torch); //TORCH
-
-			BuildHelper.setBlock(world,x, y+2, z-7, torch); //TORCH
-			BuildHelper.setBlock(world,x, y+2, z+7, torch); //TORCH
-		
-			BuildHelper.setBlock(world,x+4, y+2, z+7, torch); //TORCH
-			BuildHelper.setBlock(world,x+4, y+2, z+2, torch); //TORCH
-			BuildHelper.setBlock(world,x+4, y+2, z-2, torch); //TORCH
-			BuildHelper.setBlock(world,x+4, y+2, z-7, torch); //TORCH
-		
-			BuildHelper.build(world, x-4, y-1, z-7, stone, 15, 2, 9); //STONE
-		
-			BuildHelper.build(world, x-3, y, z-6, farm, 5, 1, 7); //DIRT
-			BuildHelper.build(world, x-3, y, z+2, farm, 5, 1, 7); //DIRT
-
-			BuildHelper.build(world, x-3, y, z-4, water, 1, 1, 7); //WATER
-			BuildHelper.build(world, x-3, y, z+4, water, 1, 1, 7); //WATER
-		
-			BuildHelper.build(world, x-3, y+1, z-6, crop, 2, 1, 7); //CROP
-			BuildHelper.build(world, x-3, y+1, z-3, crop, 2, 1, 7); //CROP
-			BuildHelper.build(world, x-3, y+1, z+2, crop, 2, 1, 7); //CROP
-			BuildHelper.build(world, x-3, y+1, z+5, crop, 2, 1, 7); //CROP
-
-			BuildHelper.setBlock(world,x+4, y+1, z, gate, 1, 0); //GATE
-			BuildHelper.setBlock(world,x-3, y+1, z+1, chest, 5, 0); //CHEST
-			BuildHelper.setBlock(world,x-3, y+1, z, craft, 5, 0); //WORKBENCH
-			BuildHelper.setBlock(world,x-3, y+1, z-1, chest, 5, 0); //CHEST
-			
-			chest1 = (TileEntityChest)world.getTileEntity(x-3, y+1, z+1);
-			chest2 = (TileEntityChest)world.getTileEntity(x-3, y+1, z-1);
+		int metaChest;
+		switch(meta) {
+			default:
+			case 0: metaChest = 3; break;
+			case 1: metaChest = 4; break;
+			case 2: metaChest = 2; break;
+			case 3: metaChest = 5; break;
 		}
-		
+
+		int metaGate;
+		switch(meta) {
+			default:
+			case 0: case 2: metaGate = 0; break;
+			case 1: case 3: metaGate = 1; break;
+		}
+
+		BuildHelper.buildDirectional(world,x,y-1,z,air,meta,0,4,7,0,8,0,0,14,1,0);
+		BuildHelper.buildDirectional(world,x,y-1,z,stone,meta,0,4,7,0,8,0,0,14,1,0);
+
+		BuildHelper.buildDirectional(world,x,y+1,z,fence,meta,0,4,7,0,8,0,0,0,0,0);
+		BuildHelper.buildDirectional(world,x,y+1,z,fence,meta,0,4,0,7,8,0,0,0,0,0);
+		BuildHelper.buildDirectional(world,x,y+1,z,fence,meta,0,4,6,0,0,0,0,12,0,0);
+		BuildHelper.buildDirectional(world,x,y+1,z,fence,meta,4,0,6,0,0,0,0,12,0,0);
+
+		BuildHelper.buildDirectional(world,x,y,z,farm,meta,0,3,6,0,6,0,0,1,0,0);
+		BuildHelper.buildDirectional(world,x,y,z,farm,meta,0,3,3,0,6,0,0,1,0,0);
+		BuildHelper.buildDirectional(world,x,y,z,farm,meta,0,3,0,2,6,0,0,1,0,0);
+		BuildHelper.buildDirectional(world,x,y,z,farm,meta,0,3,0,5,6,0,0,1,0,0);
+
+		BuildHelper.buildDirectional(world,x,y,z,water,meta,0,3,4,0,6,0,0,0,0,0);
+		BuildHelper.buildDirectional(world,x,y,z,water,meta,0,3,0,4,6,0,0,0,0,0);
+
+		BuildHelper.buildDirectional(world,x,y+1,z,crop,meta,0,3,6,0,6,0,0,1,0,0);
+		BuildHelper.buildDirectional(world,x,y+1,z,crop,meta,0,3,3,0,6,0,0,1,0,0);
+		BuildHelper.buildDirectional(world,x,y+1,z,crop,meta,0,3,0,2,6,0,0,1,0,0);
+		BuildHelper.buildDirectional(world,x,y+1,z,crop,meta,0,3,0,5,6,0,0,1,0,0);
+
+		BuildHelper.setBlockDirectional(world,x,y+1,z,gate,meta,0,4,0,0,metaGate,2);
+		BuildHelper.setBlockDirectional(world,x,y+1,z,craft,meta,3,0,0,0);
+		BuildHelper.setBlockDirectional(world,x,y+1,z,chest,meta,3,0,1,0,metaChest,2);
+		BuildHelper.setBlockDirectional(world,x,y+1,z,chest,meta,3,0,0,1,metaChest,2);
+
+		BuildHelper.setBlockDirectional(world,x,y+2,z,torch,meta,0,4,7,0);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,torch,meta,0,0,7,0);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,torch,meta,4,0,7,0);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,torch,meta,0,4,0,7);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,torch,meta,0,0,0,7);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,torch,meta,4,0,0,7);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,torch,meta,0,4,2,0);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,torch,meta,4,0,2,0);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,torch,meta,0,4,0,2);
+		BuildHelper.setBlockDirectional(world,x,y+2,z,torch,meta,4,0,0,2);
+
+		TileEntityChest chest1 = (TileEntityChest)BuildHelper.getTileEntityDirectional(world,x,y+1,z,meta,3,0,1,0);
+		TileEntityChest chest2 = (TileEntityChest)BuildHelper.getTileEntityDirectional(world,x,y+1,z,meta,3,0,0,1);
 		chest1.setInventorySlotContents(0, new ItemStack(Items.stone_hoe, 1, 0));
 		chest2.setInventorySlotContents(0, new ItemStack(Items.stone_hoe, 1, 0));
 	}

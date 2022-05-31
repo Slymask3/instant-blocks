@@ -9,7 +9,6 @@ import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
-import com.slymask3.instantblocks.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -69,8 +68,8 @@ public class BlockInstantHarvest extends BlockInstant {
         int y = (int) (Y +radius);
         int z = (int) (Z -radius);
    
-        int bx = x;
-        int bz = z;
+        int x_base = x;
+        int z_base = z;
  
         for(int i=0; i<radius*2+1; i++) {
             for(int j=0; j<radius*2+1; j++) {
@@ -79,93 +78,37 @@ public class BlockInstantHarvest extends BlockInstant {
                     int meta = world.getBlockMetadata(x, y, z);
                     
                     if(chest.getStackInSlot(26) != null) {
-                    	if(BuildHelper.getBlock(world,X+1, Y, Z) == Blocks.air) {
-                    		BuildHelper.setBlock(world,X+1, Y, Z, Blocks.chest);
-                    		chest = (TileEntityChest)world.getTileEntity(X+1, Y, Z);
-                    		X++;
-                    	} else if(BuildHelper.getBlock(world,X-1, Y, Z) == Blocks.air) {
-                    		BuildHelper.setBlock(world,X-1, Y, Z, Blocks.chest);
-                    		chest = (TileEntityChest)world.getTileEntity(X-1, Y, Z);
-                    		X--;
-                    	} else if(BuildHelper.getBlock(world,X, Y, Z+1) == Blocks.air) {
-                    		BuildHelper.setBlock(world,X, Y, Z+1, Blocks.chest);
-                    		chest = (TileEntityChest)world.getTileEntity(X, Y, Z+1);
-                    		Z++;
-                    	} else if(BuildHelper.getBlock(world,X, Y, Z-1) == Blocks.air) {
-                    		BuildHelper.setBlock(world,X, Y, Z-1, Blocks.chest);
-                    		chest = (TileEntityChest)world.getTileEntity(X, Y, Z-1);
-                    		Z--;
-                    	} else {
-                    		BuildHelper.setBlock(world,X+1, Y, Z, Blocks.chest);
-                    		chest = (TileEntityChest)world.getTileEntity(X+1, Y, Z);
-                    		X++;
-                    	}
-                    	LogHelper.info("had to create another chest");
+						if(IBHelper.isDoubleChest(chest)) {
+							Y++;
+							X--;
+						} else {
+							X++;
+						}
+						BuildHelper.setBlock(world,X, Y, Z, Blocks.chest);
+						chest = (TileEntityChest)world.getTileEntity(X, Y, Z);
                     }
                     
                     if((block == Blocks.log && logOak) && (meta == 0 || meta == 4 || meta == 8 || meta == 12)) { //OAK
-                    	IBHelper.addItemsToChest(chest, block, 1, 0);
-                    	if((BuildHelper.getBlock(world,x, y-1, z) == Blocks.dirt || BuildHelper.getBlock(world,x, y-1, z) == Blocks.grass) && replant) {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.sapling, 0, 2);
-                    	} else {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.air);
-                    	}
+						addLog(chest,x,y,z,block,0,0,replant);
                     } else if((block == Blocks.log && logSpruce) && (meta == 1 || meta == 5 || meta == 9 || meta == 13)) { //SPRUCE
-                    	IBHelper.addItemsToChest(chest, block, 1, 1);
-                    	if((BuildHelper.getBlock(world,x, y-1, z) == Blocks.dirt || BuildHelper.getBlock(world,x, y-1, z) == Blocks.grass) && replant) {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.sapling, 1, 2);
-                    	} else {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.air);
-                    	}
+						addLog(chest,x,y,z,block,1,1,replant);
                     } else if((block == Blocks.log && logBirch) && (meta == 2 || meta == 6 || meta == 10 || meta == 14)) { //BIRCH
-                    	IBHelper.addItemsToChest(chest, block, 1, 2);
-                    	if((BuildHelper.getBlock(world,x, y-1, z) == Blocks.dirt || BuildHelper.getBlock(world,x, y-1, z) == Blocks.grass) && replant) {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.sapling, 2, 2);
-                    	} else {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.air);
-                    	}
+						addLog(chest,x,y,z,block,2,2,replant);
                     } else if((block == Blocks.log && logJungle) && (meta == 3 || meta == 7 || meta == 11 || meta == 15)) { //JUNGLE
-                    	IBHelper.addItemsToChest(chest, block, 1, 3);
-                    	if((BuildHelper.getBlock(world,x, y-1, z) == Blocks.dirt || BuildHelper.getBlock(world,x, y-1, z) == Blocks.grass) && replant) {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.sapling, 3, 2);
-                    	} else {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.air);
-                    	}
+						addLog(chest,x,y,z,block,3,3,replant);
                     } else if((block == Blocks.log2 && logAcacia) && (meta == 0 || meta == 4 || meta == 8 || meta == 12)) { //ACACIA
-                    	IBHelper.addItemsToChest(chest, block, 1, 0);
-                    	if((BuildHelper.getBlock(world,x, y-1, z) == Blocks.dirt || BuildHelper.getBlock(world,x, y-1, z) == Blocks.grass) && replant) {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.sapling, 4, 2);
-                    	} else {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.air);
-                    	}
+						addLog(chest,x,y,z,block,0,4,replant);
                     } else if((block == Blocks.log2 && logDark) && (meta == 1 || meta == 5 || meta == 9 || meta == 13)) { //DARK OAK
-                    	IBHelper.addItemsToChest(chest, block, 1, 1);
-                    	if((BuildHelper.getBlock(world,x, y-1, z) == Blocks.dirt || BuildHelper.getBlock(world,x, y-1, z) == Blocks.grass) && replant) {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.sapling, 5, 2);
-                    	} else {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.air);
-                    	}
+						addLog(chest,x,y,z,block,1,5,replant);
                     } else if(block == Blocks.wheat && meta == 7 && wheat) { //WHEAT
                     	IBHelper.addItemsToChest(chest, Items.wheat, 1, 0);
-                    	if(replant) {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.wheat, 0, 2);
-                    	} else {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.air);
-                    	}
+						replantBlock(world,x,y,z,Blocks.wheat,0,replant);
                     } else if(block == Blocks.carrots && meta == 7 && carrot) { //CARROT
                     	IBHelper.addItemsToChest(chest, Items.carrot, rand.nextInt(4)+1, 0);
-                    	if(replant) {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.carrots, 0, 2);
-                    	} else {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.air);
-                    	}
+						replantBlock(world,x,y,z,Blocks.carrots,0,replant);
                     } else if(block == Blocks.potatoes && meta == 7 && potato) { //POTATO
                     	IBHelper.addItemsToChest(chest, Items.potato, rand.nextInt(4)+1, 0);
-                    	if(replant) {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.potatoes, 0, 2);
-                    	} else {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.air);
-                    	}
+						replantBlock(world,x,y,z,Blocks.potatoes,0,replant);
                     } else if(block == Blocks.cactus && cactus) { //CACTUS
                     	if(BuildHelper.getBlock(world,x, y-1, z) == Blocks.sand && replant) {
                     		BuildHelper.setBlock(world,x, y, z, Blocks.cactus, 0, 2);
@@ -197,21 +140,31 @@ public class BlockInstantHarvest extends BlockInstant {
                     	BuildHelper.setBlock(world,x, y, z, Blocks.air);
                     } else if(block == Blocks.nether_wart && meta == 3 && netherwart) { //NETHERWART
                     	IBHelper.addItemsToChest(chest, Items.nether_wart, rand.nextInt(3)+2, 0);
-                    	if(replant) {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.nether_wart, 0, 2);
-                    	} else {
-                    		BuildHelper.setBlock(world,x, y, z, Blocks.air);
-                    	}
-                    }
-                    
+						replantBlock(world,x,y,z,Blocks.nether_wart,0,replant);
+                    } else if(block == Blocks.leaves || block == Blocks.leaves2) {
+						BuildHelper.setBlock(world,x,y,z,Blocks.air);
+					}
                     x++;
                 }
                 z++;
-                x = bx;
+                x = x_base;
             }
-            z = bz;
-            x = bx;
+            z = z_base;
             y--;
         }
     }
+
+	private void addLog(TileEntityChest chest, int x, int y, int z, Block block, int metaLog, int metaSapling, boolean replant) {
+		World world = chest.getWorldObj();
+		IBHelper.addItemsToChest(chest, block, 1, metaLog);
+		replantBlock(world,x,y,z,Blocks.sapling,metaSapling,(BuildHelper.getBlock(world,x, y-1, z) == Blocks.dirt || BuildHelper.getBlock(world,x, y-1, z) == Blocks.grass) && replant);
+	}
+
+	private void replantBlock(World world, int x, int y, int z, Block block, int meta, boolean replant) {
+		if(replant) {
+			BuildHelper.setBlock(world,x, y, z, block, meta, 2);
+		} else {
+			BuildHelper.setBlock(world,x, y, z, Blocks.air);
+		}
+	}
 }

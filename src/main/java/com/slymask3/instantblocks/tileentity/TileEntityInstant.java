@@ -6,7 +6,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityInstant extends TileEntity {
+public abstract class TileEntityInstant extends TileEntity {
 	private boolean built;
 
 	public TileEntityInstant() {

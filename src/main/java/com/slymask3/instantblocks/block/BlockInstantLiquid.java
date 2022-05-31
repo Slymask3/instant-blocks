@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockInstantLiquid extends BlockInstant {
+public abstract class BlockInstantLiquid extends BlockInstant {
 	public ArrayList<Coords> coordsList;
 	public Block blockCheck;
 	public Block blockReplace;

@@ -103,4 +103,9 @@ public class IBHelper {
 		}
 		return i;
 	}
+
+	public static boolean isDoubleChest(TileEntityChest chest) {
+		chest.checkForAdjacentChests();
+		return chest.adjacentChestXNeg != null || chest.adjacentChestXPos != null || chest.adjacentChestZNeg != null || chest.adjacentChestZPos != null;
+	}
 }

@@ -1,5 +1,6 @@
-package com.slymask3.instantblocks.gui;
+package com.slymask3.instantblocks.gui.module;
 
+import com.slymask3.instantblocks.gui.instant.GuiTree;
 import cpw.mods.fml.client.GuiScrollingList;
 import net.minecraft.client.renderer.Tessellator;
 
@@ -9,7 +10,7 @@ public class GuiTreeSlot extends GuiScrollingList {
     private static int slotHeight = 15;
 
     public GuiTreeSlot(GuiTree parent, int[] trees, int x, int y, int width, int height) {
-        super(parent.getMinecraftInstance(), width, height, y, y+height, x, slotHeight);
+        super(parent.mc, width, height, y, y+height, x, slotHeight);
         this.parent=parent;
         this.trees=trees;
     }

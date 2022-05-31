@@ -55,8 +55,8 @@ public class BlockInstantMiningLadder extends BlockInstant {
 	}
 
 	public boolean canActivate(World world, int x, int y, int z, EntityPlayer player) {
-		if(y <= 15) {
-			IBHelper.msg(player, Strings.ERROR_LADDER, Colors.c);
+		if(y <= Config.MINING_LADDER_LAYER + 4) {
+			IBHelper.msg(player, Strings.ERROR_LADDER.replace("%i%",String.valueOf(Config.MINING_LADDER_LAYER + 4)), Colors.c);
 			return false;
 		}
 		return true;

@@ -1,5 +1,6 @@
-package com.slymask3.instantblocks.gui;
+package com.slymask3.instantblocks.gui.module;
 
+import com.slymask3.instantblocks.gui.instant.GuiSchematic;
 import cpw.mods.fml.client.GuiScrollingList;
 import net.minecraft.client.renderer.Tessellator;
 
