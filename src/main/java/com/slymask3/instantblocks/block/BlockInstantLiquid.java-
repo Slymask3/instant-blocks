@@ -7,13 +7,13 @@ import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Coords;
 import com.slymask3.instantblocks.util.IBHelper;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,7 +34,7 @@ public abstract class BlockInstantLiquid extends BlockInstant {
 		this.blockReplace = blockReplace;
     }
 
-	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+	public void randomDisplayTick(Level world, int x, int y, int z, Random random) {
 		if(this.particle != null && random.nextInt(10) == 0) {
 			for(int i=0; i<8; i++) {
 				world.spawnParticle(this.particle, (double)x + Math.random(), (double)y + 1.2D, (double)z + Math.random(), 0.0D, 0.0D, 0.0D);
@@ -42,7 +42,7 @@ public abstract class BlockInstantLiquid extends BlockInstant {
 		}
 	}
 
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(Level world, int x, int y, int z) {
 		if(this.isSuction) {
 			return super.getCollisionBoundingBoxFromPool(world,x,y,z);
 		} else  {
@@ -74,7 +74,7 @@ public abstract class BlockInstantLiquid extends BlockInstant {
 		return blockReplace;
 	}
 
-	public boolean canActivate(World world, int x, int y, int z, EntityPlayer player) {
+	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(isSuction && Config.SHOW_EFFECTS) {
 			world.spawnParticle("cloud", (double)x + 0.5D, (double)y + 1.2D, (double)z + 0.5D, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("cloud", (double)x + 1.2D, (double)y + 0.5D, (double)z + 0.5D, 0.0D, 0.0D, 0.0D);
@@ -97,7 +97,7 @@ public abstract class BlockInstantLiquid extends BlockInstant {
 		}
 	}
 
-	public void build(World world, int x, int y, int z, EntityPlayer player) {
+	public void build(Level world, int x, int y, int z, Player player) {
 		for(Coords coords : coordsList) {
 			BuildHelper.setBlock(world, coords.getX(), coords.getY(), coords.getZ(), blockReplace);
 		}
@@ -113,7 +113,7 @@ public abstract class BlockInstantLiquid extends BlockInstant {
 		}
 	}
 
-	private void checkForBlock(World world, int x, int y, int z) {
+	private void checkForBlock(Level world, int x, int y, int z) {
 		check(world,x+1,y,z);
 		check(world,x-1,y,z);
 		check(world,x,y,z+1);
@@ -126,7 +126,7 @@ public abstract class BlockInstantLiquid extends BlockInstant {
 		}
 	}
 
-	private void check(World world, int x, int y, int z) {
+	private void check(Level world, int x, int y, int z) {
 		Block blockCurrent = BuildHelper.getBlock(world,x,y,z);
 		if(isCorrectBlock(blockCurrent) && coordsList.size() < getMax() && addCoords(x,y,z)) {
 			if(blockCheck == null) {

@@ -9,14 +9,14 @@ import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 import static net.minecraftforge.common.util.ForgeDirection.*;
 
@@ -30,7 +30,7 @@ public class BlockInstantEscapeLadder extends BlockInstant {
         setBlockTextureName(Textures.EscapeLadder.SIDE);
     }
 
-	public boolean canActivate(World world, int x, int y, int z, EntityPlayer player) {
+	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(world.canBlockSeeTheSky(x, y+1, z)) {
 			IBHelper.msg(player, Strings.ERROR_ESCAPE_LADDER, Colors.c);
 			return false;
@@ -38,7 +38,7 @@ public class BlockInstantEscapeLadder extends BlockInstant {
 		return true;
 	}
 
-	public void build(World world, int x, int y, int z, EntityPlayer player) {
+	public void build(Level world, int x, int y, int z, Player player) {
 		Block stone = Blocks.stone;
 		Block ladder = Blocks.ladder;
 		Block torch = Blocks.torch;

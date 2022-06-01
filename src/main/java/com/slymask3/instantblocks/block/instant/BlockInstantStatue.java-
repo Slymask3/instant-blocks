@@ -9,17 +9,17 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
 import com.slymask3.instantblocks.util.BuildHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -117,7 +117,7 @@ public class BlockInstantStatue extends BlockInstant {
 		return new TileEntityStatue();
 	}
 
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
+	public void onBlockPlacedBy(Level world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
 		int meta = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 	}
@@ -149,7 +149,7 @@ public class BlockInstantStatue extends BlockInstant {
 		return null;
 	}
 
-	public boolean build(World world, int x, int y, int z, EntityPlayer player, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
+	public boolean build(Level world, int x, int y, int z, Player player, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
 		int meta = world.getBlockMetadata(x,y,z);
 
 		BufferedImage img = getImage(username);
@@ -182,7 +182,7 @@ public class BlockInstantStatue extends BlockInstant {
 		return content.toString();
 	}
 
-	private static void buildHead(World world, int x, int y, int z, BufferedImage img, int meta, boolean build, boolean rgb) {
+	private static void buildHead(Level world, int x, int y, int z, BufferedImage img, int meta, boolean build, boolean rgb) {
 		if(build) {
 			//TOP
 			for(int xtimes=0; xtimes<8; xtimes++) {
@@ -228,7 +228,7 @@ public class BlockInstantStatue extends BlockInstant {
 		}
 	}
 
-	private static void buildBody(World world, int x, int y, int z, BufferedImage img, int meta, boolean build, boolean rgb) {
+	private static void buildBody(Level world, int x, int y, int z, BufferedImage img, int meta, boolean build, boolean rgb) {
 		if(build) {
 			//TOP
 			for(int xtimes=0; xtimes<8; xtimes++) {
@@ -274,7 +274,7 @@ public class BlockInstantStatue extends BlockInstant {
 		}
 	}
 
-	private static void buildArms(World world, int x, int y, int z, BufferedImage img, int meta, boolean buildLeft, boolean buildRight, boolean rgb) {
+	private static void buildArms(Level world, int x, int y, int z, BufferedImage img, int meta, boolean buildLeft, boolean buildRight, boolean rgb) {
 		if(buildLeft) {
 			//LEFT ARM
 
@@ -370,7 +370,7 @@ public class BlockInstantStatue extends BlockInstant {
 		}
 	}
 	
-	private static void buildLegs(World world, int x, int y, int z, BufferedImage img, int meta, boolean buildLeft, boolean buildRight, boolean rgb) {
+	private static void buildLegs(Level world, int x, int y, int z, BufferedImage img, int meta, boolean buildLeft, boolean buildRight, boolean rgb) {
 		if(buildLeft) {
 			//LEFT LEG
 

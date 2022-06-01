@@ -1,4 +1,4 @@
-Instant Blocks for 1.7.10
+Instant Blocks for 1.18.2
 =============
 Adds blocks that generate certain structures when activated.
 

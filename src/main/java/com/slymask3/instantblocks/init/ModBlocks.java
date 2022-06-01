@@ -1,60 +1,43 @@
 package com.slymask3.instantblocks.init;
 
-import com.slymask3.instantblocks.block.BlockColor;
-import com.slymask3.instantblocks.block.BlockSkydiveTP;
-import com.slymask3.instantblocks.block.instant.*;
-import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.block.instant.BlockInstantFarm;
+import com.slymask3.instantblocks.block.instant.BlockInstantGlassDome;
 import com.slymask3.instantblocks.item.ItemBlockInstantBlocks;
 import com.slymask3.instantblocks.reference.Names;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
+import com.slymask3.instantblocks.reference.Reference;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryObject;
 
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {
-	public static Block ibWoodHouse = new BlockInstantHouseWood();
-	public static Block ibMiningLadder = new BlockInstantMiningLadder();
-	public static Block ibGlassDome = new BlockInstantGlassDome();
-	public static Block ibFarm = new BlockInstantFarm();
-	public static Block ibSkydive = new BlockInstantSkydive();
-	public static Block ibGrinder = new BlockInstantGrinder();
-	public static Block ibPool = new BlockInstantPool();
-	public static Block ibUp = new BlockInstantEscapeLadder();
-	public static Block ibWater = new BlockInstantWater();
-	public static Block ibLava = new BlockInstantLava();
-	public static Block ibSuction = new BlockInstantSuction();
-	public static Block ibRail = new BlockInstantRail();
-	public static Block ibStatue = new BlockInstantStatue();
-	public static Block ibHarvest = new BlockInstantHarvest();
-	public static Block ibLight = new BlockInstantLight();
-	public static Block ibSchematic = new BlockInstantSchematic();
-	public static Block ibTree = new BlockInstantTree();
-	public static Block color = new BlockColor();
-	public static Block skydiveTP = new BlockSkydiveTP();
-	
-	public static void init() {
-		add(ibWoodHouse, Names.Blocks.IB_WOOD_HOUSE, Config.ADD_WOODEN_HOUSE);
-		add(ibMiningLadder, Names.Blocks.IB_MINING_LADDER, Config.ADD_MINING_LADDER);
-		add(ibGlassDome, Names.Blocks.IB_GLASS_DOME, Config.ADD_GLASS_DOME);
-		add(ibFarm, Names.Blocks.IB_FARM, Config.ADD_FARM);
-		add(ibSkydive, Names.Blocks.IB_SKYDIVE, Config.ADD_SKYDIVE);
-		add(ibGrinder, Names.Blocks.IB_GRINDER, Config.ADD_GRINDER);
-		add(ibPool, Names.Blocks.IB_POOL, Config.ADD_POOL);
-		add(ibUp, Names.Blocks.IB_ESCAPE_LADDER, Config.ADD_ESCAPE_LADDER);
-		add(ibWater, Names.Blocks.IB_WATER, Config.ADD_WATER);
-		add(ibLava, Names.Blocks.IB_LAVA, Config.ADD_LAVA);
-		add(ibSuction, Names.Blocks.IB_SUCTION, Config.ADD_SUCTION);
-		add(ibRail, Names.Blocks.IB_RAIL, Config.ADD_RAIL);
-		add(ibStatue, Names.Blocks.IB_STATUE, Config.ADD_STATUE);
-		add(ibHarvest, Names.Blocks.IB_HARVEST, Config.ADD_HARVEST);
-		add(ibLight, Names.Blocks.IB_LIGHT, Config.ADD_LIGHT);
-		add(ibSchematic, Names.Blocks.IB_SCHEMATIC, Config.ADD_SCHEMATIC);
-		add(ibTree, Names.Blocks.IB_TREE, Config.ADD_TREE);
-		add(color, Names.Blocks.COLOR, Config.ADD_SKYDIVE || Config.ADD_STATUE);
-		add(skydiveTP, Names.Blocks.SKYDIVE_TP, Config.ADD_SKYDIVE);
-	}
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MOD_ID);
 
-	private static void add(Block block, String name, Boolean add) {
-		if(add) {
-			GameRegistry.registerBlock(block, ItemBlockInstantBlocks.class, name);
-		}
+	public static final RegistryObject<Block> ibFarm = BLOCKS.register(Names.Blocks.IB_FARM, BlockInstantFarm::new);
+	public static final RegistryObject<Block> ibGlassDome = BLOCKS.register(Names.Blocks.IB_GLASS_DOME, BlockInstantGlassDome::new);
+
+	// automatically creates items for all your blocks
+	// you could do it manually instead by registering BlockItems in your ItemInit class
+	@SubscribeEvent
+	public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
+		final IForgeRegistry<Item> registry = event.getRegistry();
+
+		// for each block we registered above...
+		BLOCKS.getEntries().stream().map(RegistryObject::get).forEach( (block) -> {
+			// make a block item that places the block
+			// note, if you have a special block that needs a custom implementation for the BlockItem, just add an if statement here
+			final BlockItem blockItem = new ItemBlockInstantBlocks(block);
+
+			// register the block item with the same name as the block
+			blockItem.setRegistryName(block.getRegistryName());
+			registry.register(blockItem);
+		});
 	}
 }

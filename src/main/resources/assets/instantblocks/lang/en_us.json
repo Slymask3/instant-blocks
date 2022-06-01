@@ -1,0 +1,29 @@
+{
+  "itemGroup.instantblocks": "Instant Blocks",
+
+  "block.instantblocks.instant_wood_house": "§3Instant Wooden House Block§f",
+  "block.instantblocks.instant_mining_ladder": "§3Instant Mining Ladder Block§f",
+  "block.instantblocks.instant_glass_dome": "§3Instant Glass Dome Block§f",
+  "block.instantblocks.instant_farm": "§3Instant Farm Block§f",
+  "block.instantblocks.instant_skydive": "§3Instant Skydive Block§f",
+  "block.instantblocks.instant_grinder": "§3Instant Grinder Block§f",
+  "block.instantblocks.instant_pool": "§3Instant Pool Block§f",
+  "block.instantblocks.instant_escape_ladder": "§3Instant Escape Ladder§f",
+  "block.instantblocks.instant_water": "§3Instant Water Block§f",
+  "block.instantblocks.instant_lava": "§3Instant Lava Block§f",
+  "block.instantblocks.instant_suction": "§3Instant Suction Block§f",
+  "block.instantblocks.instant_rail": "§3Instant Rail Block§f",
+  "block.instantblocks.instant_statue": "§3Instant Statue Block§f",
+  "block.instantblocks.instant_harvest": "§3Instant Harvester Block§f",
+  "block.instantblocks.instant_light": "§3Instant Light Block§f",
+  "block.instantblocks.instant_schematic": "§3Instant Schematic Block§f",
+  "block.instantblocks.instant_tree": "§3Instant Huge Tree Block§f",
+  "block.instantblocks.color": "Color Block",
+  "block.instantblocks.skydive_tp": "Skydive TP Block",
+
+  "item.instantblocks.wand_wood": "Instant Wooden Wand",
+  "item.instantblocks.wand_stone": "Instant Stone Wand",
+  "item.instantblocks.wand_iron": "Instant Iron Wand",
+  "item.instantblocks.wand_gold": "Instant Golden Wand",
+  "item.instantblocks.wand_diamond": "Instant Diamond Wand"
+}

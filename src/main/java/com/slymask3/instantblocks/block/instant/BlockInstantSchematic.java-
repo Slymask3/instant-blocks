@@ -7,13 +7,13 @@ import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntitySchematic;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.SchematicHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.init.Blocks;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 public class BlockInstantSchematic extends BlockInstant {
 	public BlockInstantSchematic() {
@@ -45,7 +45,7 @@ public class BlockInstantSchematic extends BlockInstant {
 		return new TileEntitySchematic();
 	}
 
-	public boolean build(World world, int x, int y, int z, String schematicName, boolean center, boolean ignoreAir) {
+	public boolean build(Level world, int x, int y, int z, String schematicName, boolean center, boolean ignoreAir) {
 		SchematicHelper.Schematic schematic = SchematicHelper.readSchematic(schematicName);
 		if(schematic != null) {
 			BuildHelper.setBlock(world,x, y, z, Blocks.air);
@@ -55,7 +55,7 @@ public class BlockInstantSchematic extends BlockInstant {
 		return false;
 	}
 
-	public static void buildSchematic(World world, int X, int Y, int Z, SchematicHelper.Schematic schematic, boolean center, boolean ignoreAir) {
+	public static void buildSchematic(Level world, int X, int Y, int Z, SchematicHelper.Schematic schematic, boolean center, boolean ignoreAir) {
 		short width = schematic.width;
 		short height = schematic.height;
 		short length = schematic.length;

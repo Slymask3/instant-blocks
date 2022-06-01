@@ -9,15 +9,15 @@ import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.init.Blocks;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 import java.util.Random;
 
@@ -56,7 +56,7 @@ public class BlockInstantHarvest extends BlockInstant {
 		return new TileEntityHarvest();
 	}
 	
-	public void build(World world, int X, int Y, int Z, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
+	public void build(Level world, int X, int Y, int Z, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
 		int radius = Config.RADIUS_HARVEST;
 
 		BuildHelper.setBlock(world,X, Y, Z, Blocks.chest);
@@ -155,12 +155,12 @@ public class BlockInstantHarvest extends BlockInstant {
     }
 
 	private void addLog(TileEntityChest chest, int x, int y, int z, Block block, int metaLog, int metaSapling, boolean replant) {
-		World world = chest.getWorldObj();
+		Level world = chest.getWorldObj();
 		IBHelper.addItemsToChest(chest, block, 1, metaLog);
 		replantBlock(world,x,y,z,Blocks.sapling,metaSapling,(BuildHelper.getBlock(world,x, y-1, z) == Blocks.dirt || BuildHelper.getBlock(world,x, y-1, z) == Blocks.grass) && replant);
 	}
 
-	private void replantBlock(World world, int x, int y, int z, Block block, int meta, boolean replant) {
+	private void replantBlock(Level world, int x, int y, int z, Block block, int meta, boolean replant) {
 		if(replant) {
 			BuildHelper.setBlock(world,x, y, z, block, meta, 2);
 		} else {

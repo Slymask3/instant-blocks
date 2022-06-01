@@ -9,14 +9,14 @@ import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 import java.util.Random;
 
@@ -78,7 +78,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 		}
 	}
 
-	public boolean canActivate(World world, int x, int y, int z, EntityPlayer player) {
+	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(world.getBlockMetadata(x, y, z) >= 4 && world.getBlockMetadata(x, y, z) <= 7) {
 			IBHelper.msg(player, Strings.ERROR_WOODEN_HOUSE, Colors.c);
 			return false;
@@ -86,11 +86,11 @@ public class BlockInstantHouseWood extends BlockInstant {
 		return true;
 	}
 	
-	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
+	public void onBlockDestroyedByPlayer(Level world, int x, int y, int z, int meta) {
 		check(world, x, y, z, meta);
 	}
 
-	public void build(World world, int x, int y, int z, EntityPlayer player) {
+	public void build(Level world, int x, int y, int z, Player player) {
 		Block light = Blocks.planks;
 		Block dark = Blocks.planks;
 		Block log = Blocks.log;
@@ -604,7 +604,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 
 	public static boolean notThere = false;
 	
-	private boolean check(World world, int x, int y, int z, int meta) {
+	private boolean check(Level world, int x, int y, int z, int meta) {
 		/*int light = Block.planks.blockID;
 		int dark = Block.planks.blockID;
 		int log = Block.wood.blockID;
@@ -646,7 +646,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 		drop = 1;
 		//int meta = world.getBlockMetadata(x, y, z);
 		
-		EntityPlayer player = world.getClosestPlayer(x, y, z, 10);
+		Player player = world.getClosestPlayer(x, y, z, 10);
 		
 		if(meta == 4) {
 			//BuildHelper.ifNoBlockThenStop(world, x+4, y+1, z-4, bed, player, "Bed");
@@ -750,7 +750,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 	}
 	
 
-	private void pack(World world, int x, int y, int z, int meta) {
+	private void pack(Level world, int x, int y, int z, int meta) {
 		//int air = 0;
 		Block air = Blocks.air;
 		//int meta = world.getBlockMetadata(x, y, z);
@@ -824,7 +824,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 		}
 	}
 
-	private int checkDrop(World world, int x, int y, int z, int meta) {
+	private int checkDrop(Level world, int x, int y, int z, int meta) {
 		Block light = Blocks.planks;
 		Block dark = Blocks.planks;
 		Block log = Blocks.log;
@@ -846,7 +846,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 		
 		//int meta = world.getBlockMetadata(x, y, z);
 		
-		EntityPlayer player = world.getClosestPlayer(x, y, z, 10);
+		Player player = world.getClosestPlayer(x, y, z, 10);
 		
 		if(meta == 4) {
 			BuildHelper.ifNoBlockThenStop(world, x+3, y+1, z-4, bed, player, "Bed");

@@ -11,13 +11,13 @@ import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 import java.util.Random;
 
@@ -47,7 +47,7 @@ public class BlockInstantLight extends BlockInstant {
 	}
 	
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
+    public void randomDisplayTick(Level world, int x, int y, int z, Random rand) {
         double d0 = x + 0.5F;
         double d1 = y + 0.5F;
         double d2 = z + 0.5F;
@@ -73,15 +73,15 @@ public class BlockInstantLight extends BlockInstant {
         return false;
     }
     
-    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+    public boolean canPlaceBlockAt(Level world, int x, int y, int z) {
         return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z);
     }
     
-    public void build(World world, int x, int y, int z, EntityPlayer player) {
+    public void build(Level world, int x, int y, int z, Player player) {
 		lightUp(world, x, y, z, Config.RADIUS_LIGHT, player);
 	}
 	
-	public void lightUp(World world, int X, int Y, int Z, int radius, EntityPlayer player) {
+	public void lightUp(Level world, int X, int Y, int Z, int radius, Player player) {
 		BuildHelper.setBlock(world,X, Y, Z, Blocks.air);
 		
 		int amount = 0;

@@ -8,17 +8,17 @@ import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 public class BlockInstantRail extends BlockInstant {
 	public BlockInstantRail() {
@@ -61,7 +61,7 @@ public class BlockInstantRail extends BlockInstant {
     }
 	
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
+	public void onBlockPlacedBy(Level world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
 		int meta = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 	}
@@ -88,7 +88,7 @@ public class BlockInstantRail extends BlockInstant {
         return Textures.Rail.ITEM;
     }
 
-	public void build(World world, int x, int y, int z, EntityPlayer player) {
+	public void build(Level world, int x, int y, int z, Player player) {
     	int meta = world.getBlockMetadata(x, y, z);
     	for(int i = 0; i<= Config.RAILS_AMOUNT; i++) {
 	    	BuildHelper.setBlockDirectional(world, x, y-1, z, Blocks.stone, meta, i, 0, 0, 0);

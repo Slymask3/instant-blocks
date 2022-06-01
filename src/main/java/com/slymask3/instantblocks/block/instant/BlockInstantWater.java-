@@ -6,10 +6,10 @@ import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.sound.SoundTypeLiquid;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.Level;
 
 public class BlockInstantWater extends BlockInstantLiquid {
     public BlockInstantWater() {
@@ -24,7 +24,7 @@ public class BlockInstantWater extends BlockInstantLiquid {
         this.particle = "splash";
     }
 
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+	public void onEntityCollidedWithBlock(Level world, int x, int y, int z, Entity entity) {
         entity.extinguish();
     }
 }

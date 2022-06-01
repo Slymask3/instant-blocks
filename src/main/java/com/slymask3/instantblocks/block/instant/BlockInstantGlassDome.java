@@ -1,42 +1,75 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
-import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nonnull;
 
 public class BlockInstantGlassDome extends BlockInstant {
-    public BlockInstantGlassDome() {
-        super(Names.Blocks.IB_GLASS_DOME, Material.glass, Block.soundTypeGlass, 0.5F);
-        setTextures(Blocks.stone, Blocks.glass, Textures.GlassDome.SIDE);
-        setTextureBooleans(false, false, true, true, true, true);
-        setCreateMessage(Strings.CREATE_DOME);
-        setBlockTextureName(Textures.GlassDome.SIDE);
-    }
-	
-    public int getRenderBlockPass() {
-        return 0;
-    }
-
-    public boolean isOpaqueCube() {
-        return false;
+	public BlockInstantGlassDome() {
+		super(Block.Properties.of(Material.GLASS)
+				.strength(0.5F, 2000F)
+				.sound(SoundType.GLASS)
+				.noOcclusion()
+				.isSuffocating((state, world, pos) -> false)
+				.isValidSpawn((state, world, pos, entityType) -> false)
+				.isRedstoneConductor((state, world, pos) -> false)
+				.isViewBlocking((state, world, pos) -> false)
+		);
+		setCreateMessage(Strings.CREATE_DOME);
     }
 
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public boolean skipRendering(@Nonnull BlockState state, BlockState adjacentBlockState, @Nonnull Direction side) {
+		return adjacentBlockState.is(this) || super.skipRendering(state, adjacentBlockState, side);
+	}
 
-	public void build(World world, int x, int y, int z, EntityPlayer player) {
-		Block glass = Blocks.glass;
-		Block stone = Blocks.stone;
-		Block torch = Blocks.torch;
-		Block air = Blocks.air;
+	@Override
+	@Nonnull
+	public VoxelShape getVisualShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+		return Shapes.empty();
+	}
+
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public float getShadeBrightness(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos) {
+		return 1.0F;
+	}
+
+	@Override
+	public boolean propagatesSkylightDown(@Nonnull BlockState state, @Nonnull BlockGetter reader, @Nonnull BlockPos pos) {
+		return true;
+	}
+
+	@Override
+	public boolean shouldDisplayFluidOverlay(BlockState state, BlockAndTintGetter world, BlockPos pos, FluidState fluidState) {
+		return true;
+	}
+
+	public void build(Level world, int x, int y, int z, Player player) {
+		Block glass = Blocks.GLASS;
+		Block stone = Blocks.STONE;
+		Block torch = Blocks.TORCH;
+		Block air = Blocks.AIR;
 		
 		/************************ Layer 0 ************************/
 		BuildHelper.setBlock(world,x-4,y,z+2,stone);

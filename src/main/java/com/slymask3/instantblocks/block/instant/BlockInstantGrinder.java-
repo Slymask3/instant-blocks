@@ -8,11 +8,11 @@ import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.Level;
 
 public class BlockInstantGrinder extends BlockInstant {
 	public BlockInstantGrinder() {
@@ -22,7 +22,7 @@ public class BlockInstantGrinder extends BlockInstant {
         setBlockTextureName(Textures.Grinder.SIDE);
     }
 
-	public boolean canActivate(World world, int x, int y, int z, EntityPlayer player) {
+	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(BuildHelper.getBlock(world,x, y-1, z) != Blocks.mob_spawner) {
 			IBHelper.msg(player, Strings.ERROR_GRINDER, Colors.c);
 			return false;
@@ -30,7 +30,7 @@ public class BlockInstantGrinder extends BlockInstant {
 		return true;
 	}
 
-	public void build(World world, int x, int y, int z, EntityPlayer player) {
+	public void build(Level world, int x, int y, int z, Player player) {
 		Block stone = Blocks.stone;
 		Block water = Blocks.flowing_water;
 		Block torch = Blocks.torch;
