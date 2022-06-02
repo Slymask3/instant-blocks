@@ -28,7 +28,7 @@ public class ModItems {
 
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(ibWandDiamond.get());
+			return new ItemStack(ModBlocks.ibWoodHouse.get());
 		}
 	}
 }

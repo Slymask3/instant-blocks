@@ -23,7 +23,7 @@ public class Config {
 		public static IntValue MAX_FILL;
 		public static BooleanValue SIMPLE_LIQUID;
 		public static BooleanValue USE_WANDS;
-		public static BooleanValue PACK_HOUSE;
+		//public static BooleanValue PACK_HOUSE;
 		public static IntValue RADIUS_HARVEST;
 		public static IntValue RADIUS_LIGHT;
 		public static BooleanValue KEEP_BLOCKS;
@@ -65,9 +65,9 @@ public class Config {
 					.comment("Whether to teleport the player to the collection room of the Instant Grinder upon right-click.\n(Default = true)")
 					.define("TP_GRINDER", true);
 
-			PACK_HOUSE = builder
-					.comment("Whether to be able to pack up an Instant Wooden House.\n(Default = false)")
-					.define("PACK_HOUSE", false);
+//			PACK_HOUSE = builder
+//					.comment("Whether to be able to pack up an Instant Wooden House.\n(Default = false)")
+//					.define("PACK_HOUSE", false);
 
 			KEEP_BLOCKS = builder
 					.comment("Whether to keep Instant Blocks after activation.\n(Default = false)")

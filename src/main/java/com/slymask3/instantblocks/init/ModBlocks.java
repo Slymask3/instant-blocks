@@ -19,6 +19,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModBlocks {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MOD_ID);
 
+	public static final RegistryObject<Block> ibWoodHouse = BLOCKS.register(Names.Blocks.IB_WOOD_HOUSE, BlockInstantHouseWood::new);
 	public static final RegistryObject<Block> ibFarm = BLOCKS.register(Names.Blocks.IB_FARM, BlockInstantFarm::new);
 	public static final RegistryObject<Block> ibGlassDome = BLOCKS.register(Names.Blocks.IB_GLASS_DOME, BlockInstantGlassDome::new);
 	public static final RegistryObject<Block> ibEscapeLadder = BLOCKS.register(Names.Blocks.IB_ESCAPE_LADDER, BlockInstantEscapeLadder::new);

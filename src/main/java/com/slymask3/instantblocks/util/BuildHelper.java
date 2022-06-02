@@ -2,14 +2,18 @@ package com.slymask3.instantblocks.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class BuildHelper {
 	/***************
@@ -34,15 +38,30 @@ public class BuildHelper {
 	public static void setBlock(Level world, int x, int y, int z, Block block, Direction direction, int flag) {
 		if(getBlock(world,x,y,z) != Blocks.BEDROCK) {
 			BlockState state = block.defaultBlockState();
+			if(block instanceof CrossCollisionBlock) {
+				BlockPlaceContext context = new BlockPlaceContext(world,null, InteractionHand.MAIN_HAND, ItemStack.EMPTY,new BlockHitResult(Vec3.ZERO,Direction.DOWN,new BlockPos(x,y,z),false));
+				state = block.getStateForPlacement(context);
+				if(state == null) return;
+			}
+			if(block instanceof SlabBlock && direction == Direction.UP) {
+				direction = null;
+				state = state.setValue(SlabBlock.TYPE, SlabType.TOP);
+			}
 			if(direction != null && state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
 				state = state.setValue(BlockStateProperties.HORIZONTAL_FACING,direction);
 			}
 			if(block == Blocks.FARMLAND) {
 				state = state.setValue(FarmBlock.MOISTURE,FarmBlock.MAX_MOISTURE);
 			}
+			if(block instanceof BedBlock && direction != null) {
+				state = state.setValue(BedBlock.PART, BedPart.HEAD);
+			}
 			world.setBlock(new BlockPos(x,y,z),state,flag);
-			if(block == Blocks.OAK_DOOR) {
+			if(block instanceof DoorBlock) {
 				world.setBlock(new BlockPos(x,y,z).above(), state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER), 3);
+			}
+			if(block instanceof BedBlock && direction != null) {
+				world.setBlock(new BlockPos(x,y,z).relative(direction.getOpposite(),1), state.setValue(BedBlock.PART, BedPart.FOOT), 3);
 			}
 		}
 	}

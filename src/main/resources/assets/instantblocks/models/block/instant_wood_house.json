@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "instantblocks:blocks/woodhouse_top",
+    "front": "instantblocks:blocks/woodhouse_front",
+    "side": "instantblocks:blocks/woodhouse_side",
+    "bottom": "minecraft:block/spruce_planks"
+  }
+}
