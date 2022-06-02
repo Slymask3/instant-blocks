@@ -261,9 +261,6 @@ public class Config {
 		}
 	}
 
-	/**
-	 * Client specific configuration - only loaded clientside from tconstruct-client.toml
-	 */
 	public static class Client {
 		public static BooleanValue SHOW_MESSAGES;
 		public static BooleanValue SHOW_EFFECTS;
@@ -289,7 +286,7 @@ public class Config {
 			SOUND = builder
 					.comment("Which sound is played on activation.\nThe directory is .minecraft\\resources\\sound3\\.\nFor example, the default sound is .minecraft\\resources\\sound3\\random\\levelup.ogg\n(Default = random.levelup)")
 					.worldRestart()
-					.define("SOUND", "random.levelup");
+					.define("SOUND", "entity.player.levelup");
 
 			builder.pop();
 		}
@@ -316,7 +313,5 @@ public class Config {
 	public static void init() {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.commonSpec);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.clientSpec);
-
-		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 	}
 }

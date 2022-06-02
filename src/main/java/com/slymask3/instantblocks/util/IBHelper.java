@@ -1,16 +1,16 @@
 package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.item.ItemInstantWand;
 import com.slymask3.instantblocks.reference.Strings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -25,22 +25,20 @@ public class IBHelper {
 	}
 
 	public static void xp(Level world, Player player, int xpAmount) {
-		if(isServer(world)) {
-			if(xpAmount > 0) {
-				player.giveExperiencePoints(xpAmount);
-			}
+		if(xpAmount > 0 && isServer(world)) {
+			player.giveExperiencePoints(xpAmount);
 		}
 	}
 
-	public static void sound(Level world, String sound, int x, int y, int z) {
-		world.playSound(Minecraft.getInstance().player, new BlockPos(x,y,z), SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS,2.0F,1.0F);
+	public static void sound(Level world, int x, int y, int z) {
+		world.playSound(Minecraft.getInstance().player, new BlockPos(x,y,z), new SoundEvent(new ResourceLocation("minecraft",Config.Client.SOUND.get())), SoundSource.BLOCKS,0.4F,1.0F);
 	}
 
-	public static void effectFull(Level world, String particle, int x, int y, int z) {
+	public static void effectFull(Level world, int x, int y, int z) {
 		if(Config.Client.SHOW_EFFECTS.get()) {
-			for(double i = 0; i <= 1; i = i + 0.1) {
-				for(double n = 0; n <= 1; n = n + 0.1) {
-					for(double v = 0; v <= 1; v = v + 0.1) {
+			for(double i = 0; i <= 1; i = i + 0.2) {
+				for(double n = 0; n <= 1; n = n + 0.2) {
+					for(double v = 0; v <= 1; v = v + 0.2) {
 						world.addParticle(DustParticleOptions.REDSTONE,x+i, y+v, z+n, 0.0D, 0.0D, 0.0D);
 					}
 				}
@@ -49,11 +47,8 @@ public class IBHelper {
 	}
 	
 	public static void msg(Player player, String msg, String color) {
-		if(Config.Client.SHOW_MESSAGES.get()) {
-			Level world = player.getLevel();
-			if(isClient(world)) {
-				player.sendMessage(new TextComponent(Strings.PREFIX + Colors.colorEveryWord(msg, color)),player.getUUID());
-			}
+		if(Config.Client.SHOW_MESSAGES.get() && isClient(player.getLevel())) {
+			player.sendMessage(new TextComponent(Strings.PREFIX + Colors.colorEveryWord(msg, color)),player.getUUID());
 		}
 	}
 	
@@ -65,7 +60,7 @@ public class IBHelper {
 	
 	public static void teleport(Level world, Player player, int x, int y, int z, boolean allow) {
 		if(isServer(world) && allow) {
-			sound(world, "portal.trigger", x, y, z);
+			sound(world, x, y, z);
 			player.teleportTo(x + 0.5, y + 0.5, z + 0.5);
 		}
 	}
@@ -91,8 +86,7 @@ public class IBHelper {
 //	}
 
 	public static boolean isWand(ItemStack is) {
-		Item item = is.getItem();
-		return is != null && item == ModItems.ibWandGold.get();
+		return is.getItem() instanceof ItemInstantWand;
 	}
 
 	public static boolean isPositive(int i) {

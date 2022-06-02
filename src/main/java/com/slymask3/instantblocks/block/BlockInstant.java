@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public abstract class BlockInstant extends Block {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -34,7 +33,7 @@ public abstract class BlockInstant extends Block {
 	
 	protected BlockInstant(BlockBehaviour.Properties properties) {
 		super(properties);
-		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.EAST));
 		createMessage = errorMessage = "";
 	}
 
@@ -80,9 +79,15 @@ public abstract class BlockInstant extends Block {
 	}
 
 	public InteractionResult onActivate(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+		if(hand == InteractionHand.OFF_HAND) {
+			return InteractionResult.FAIL;
+		}
+
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
+
+		InstantBlocks.LOGGER.info("onActivate() client: " + world.isClientSide());
 
 		ItemStack is = player.getItemInHand(hand);
 		if(Config.Common.USE_WANDS.get() && !IBHelper.isWand(is)) {
@@ -101,6 +106,10 @@ public abstract class BlockInstant extends Block {
 	}
 
 	public InteractionResult onActivateGui(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+		if(hand == InteractionHand.OFF_HAND) {
+			return InteractionResult.FAIL;
+		}
+
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
@@ -129,14 +138,16 @@ public abstract class BlockInstant extends Block {
 	public void afterBuild(Level world, int x, int y, int z, Player player) {
 		IBHelper.keepBlocks(world, x, y, z, this);
 		IBHelper.xp(world, player, Config.Common.XP_AMOUNT.get());
-		IBHelper.sound(world, Config.Client.SOUND.get(), x, y, z);
-		IBHelper.effectFull(world, Config.Client.PARTICLE.get(), x, y, z);
+		IBHelper.sound(world, x, y, z);
+		IBHelper.effectFull(world, x, y, z);
 		IBHelper.msg(player, this.createMessage, Colors.a);
 
 		if(Config.Common.USE_WANDS.get()) {
 			ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
 			if(IBHelper.isWand(is)) {
-				is.setDamageValue(is.getDamageValue()-1);
+				is.hurtAndBreak(1, player, (entity) -> {
+					entity.broadcastBreakEvent(InteractionHand.MAIN_HAND);
+				});
 			}
 		}
 	}

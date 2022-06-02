@@ -26,6 +26,9 @@ public class ModBlocks {
 	public static final RegistryObject<Block> ibMiningLadder = BLOCKS.register(Names.Blocks.IB_MINING_LADDER, BlockInstantMiningLadder::new);
 	public static final RegistryObject<Block> ibRail = BLOCKS.register(Names.Blocks.IB_RAIL, BlockInstantRail::new);
 	public static final RegistryObject<Block> ibGrinder = BLOCKS.register(Names.Blocks.IB_GRINDER, BlockInstantGrinder::new);
+	public static final RegistryObject<Block> ibWater = BLOCKS.register(Names.Blocks.IB_WATER, BlockInstantWater::new);
+	public static final RegistryObject<Block> ibLava = BLOCKS.register(Names.Blocks.IB_LAVA, BlockInstantLava::new);
+	public static final RegistryObject<Block> ibSuction = BLOCKS.register(Names.Blocks.IB_SUCTION, BlockInstantSuction::new);
 
 	// automatically creates items for all your blocks
 	// you could do it manually instead by registering BlockItems in your ItemInit class
