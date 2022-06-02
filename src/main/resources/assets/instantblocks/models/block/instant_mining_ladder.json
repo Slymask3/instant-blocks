@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "instantblocks:blocks/mining_ladder_top",
+    "front": "minecraft:block/stone",
+    "side": "minecraft:block/stone",
+    "bottom": "minecraft:block/stone"
+  }
+}

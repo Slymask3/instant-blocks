@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks.block;
 
+import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
@@ -52,10 +53,10 @@ public abstract class BlockInstant extends Block {
 	public void setGuiID(GuiID guiID) {
 		this.guiID = guiID;
 	}
-    
-    public int quantityDropped(Random random) {
-        return 1;
-    }
+
+	public void onPlace(BlockState p_60566_, Level p_60567_, BlockPos p_60568_, BlockState p_60569_, boolean p_60570_) {
+		InstantBlocks.LOGGER.info("placed: " + p_60566_.getValue(FACING));
+	}
 
 	// adds all the block state properties you want to use
 	@Override

@@ -1,14 +1,15 @@
 package com.slymask3.instantblocks.util;
 
-import com.slymask3.instantblocks.InstantBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 
 public class BuildHelper {
 	/***************
@@ -25,6 +26,10 @@ public class BuildHelper {
 	public static void setBlock(Level world, int x, int y, int z, Block block) {
 		setBlock(world,x,y,z,block,null,2);
 	}
+
+	public static void setBlock(Level world, int x, int y, int z, Block block, Direction direction) {
+		setBlock(world,x,y,z,block,direction,2);
+	}
 	
 	public static void setBlock(Level world, int x, int y, int z, Block block, Direction direction, int flag) {
 		if(getBlock(world,x,y,z) != Blocks.BEDROCK) {
@@ -36,6 +41,9 @@ public class BuildHelper {
 				state = state.setValue(FarmBlock.MOISTURE,FarmBlock.MAX_MOISTURE);
 			}
 			world.setBlock(new BlockPos(x,y,z),state,flag);
+			if(block == Blocks.OAK_DOOR) {
+				world.setBlock(new BlockPos(x,y,z).above(), state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER), 3);
+			}
 		}
 	}
 
@@ -82,20 +90,24 @@ public class BuildHelper {
 //			BlockInstantHouseWood.notThere = true;
 //		}
 //	}
-	
-    public static void setBlockDirectional(Level world, int x, int y, int z, Block block, Direction direction, int forward, int back, int left, int right) {
-    	setBlockDirectional(world, x, y, z, block, direction, forward, back, left, right, direction, 1);
-    }
+
+	public static void setBlockDirectional(Level world, int x, int y, int z, Block block, Direction direction, int forward, int back, int left, int right) {
+		setBlockDirectional(world, x, y, z, block, direction, forward, back, left, right, direction, 2);
+	}
+
+	public static void setBlockDirectional(Level world, int x, int y, int z, Block block, Direction direction, int forward, int back, int left, int right, Direction directionBlock) {
+		setBlockDirectional(world, x, y, z, block, direction, forward, back, left, right, directionBlock, 2);
+	}
     
     public static void setBlockDirectional(Level world, int x, int y, int z, Block block, Direction direction, int forward, int back, int left, int right, Direction directionBlock, int flag) {
     	if(direction == Direction.SOUTH) {
     		setBlock(world, x-left+right, y, z-forward+back, block, directionBlock, flag);
 		} else if(direction == Direction.WEST) {
-			setBlock(world, x+forward-back, y, z+left-right, block, directionBlock, flag);
+			setBlock(world, x+forward-back, y, z-left+right, block, directionBlock, flag);
 		} else if(direction == Direction.NORTH) {
 			setBlock(world, x+left-right, y, z+forward-back, block, directionBlock, flag);
 		} else if(direction == Direction.EAST) {
-			setBlock(world, x-forward+back, y, z-left+right, block, directionBlock, flag);
+			setBlock(world, x-forward+back, y, z+left-right, block, directionBlock, flag);
 		}
     }
 
@@ -114,9 +126,9 @@ public class BuildHelper {
 			z2 = z1-forwardX+backX;
 		} else if(direction == Direction.WEST) {
 			x1 = x+forward-back;
-			z1 = z+left-right;
+			z1 = z-left+right;
 			x2 = x1+forwardX-backX;
-			z2 = z1+leftX-rightX;
+			z2 = z1-leftX+rightX;
 		} else if(direction == Direction.NORTH) {
 			x1 = x+left-right;
 			z1 = z+forward-back;
@@ -124,9 +136,9 @@ public class BuildHelper {
 			z2 = z1+forwardX-backX;
 		} else if(direction == Direction.EAST) {
 			x1 = x-forward+back;
-			z1 = z-left+right;
+			z1 = z+left-right;
 			x2 = x1-forwardX+backX;
-			z2 = z1-leftX+rightX;
+			z2 = z1+leftX-rightX;
 		}
 
 		int xDif = IBHelper.toPositive(x1 - x2);

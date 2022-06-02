@@ -4,9 +4,12 @@ import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.reference.Reference;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -20,7 +23,8 @@ public class InstantBlocks {
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		Config.init();
-		modEventBus.addListener(this::setup);
+		modEventBus.addListener(this::setupClient);
+		modEventBus.addListener(this::setupCommon);
 		ModItems.ITEMS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
 
@@ -28,7 +32,13 @@ public class InstantBlocks {
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
-	private void setup(final FMLCommonSetupEvent event) {
+	private void setupClient(final FMLClientSetupEvent event) {
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibGlassDome.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibEscapeLadder.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibRail.get(), RenderType.translucent());
+	}
+
+	private void setupCommon(final FMLCommonSetupEvent event) {
 		//AnvilHandler.initAnvilRecipes();
 	}
 }

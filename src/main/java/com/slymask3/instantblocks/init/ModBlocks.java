@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.init;
 
-import com.slymask3.instantblocks.block.instant.BlockInstantFarm;
-import com.slymask3.instantblocks.block.instant.BlockInstantGlassDome;
+import com.slymask3.instantblocks.block.instant.*;
 import com.slymask3.instantblocks.item.ItemBlockInstantBlocks;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Reference;
@@ -22,6 +21,11 @@ public class ModBlocks {
 
 	public static final RegistryObject<Block> ibFarm = BLOCKS.register(Names.Blocks.IB_FARM, BlockInstantFarm::new);
 	public static final RegistryObject<Block> ibGlassDome = BLOCKS.register(Names.Blocks.IB_GLASS_DOME, BlockInstantGlassDome::new);
+	public static final RegistryObject<Block> ibEscapeLadder = BLOCKS.register(Names.Blocks.IB_ESCAPE_LADDER, BlockInstantEscapeLadder::new);
+	public static final RegistryObject<Block> ibPool = BLOCKS.register(Names.Blocks.IB_POOL, BlockInstantPool::new);
+	public static final RegistryObject<Block> ibMiningLadder = BLOCKS.register(Names.Blocks.IB_MINING_LADDER, BlockInstantMiningLadder::new);
+	public static final RegistryObject<Block> ibRail = BLOCKS.register(Names.Blocks.IB_RAIL, BlockInstantRail::new);
+	public static final RegistryObject<Block> ibGrinder = BLOCKS.register(Names.Blocks.IB_GRINDER, BlockInstantGrinder::new);
 
 	// automatically creates items for all your blocks
 	// you could do it manually instead by registering BlockItems in your ItemInit class

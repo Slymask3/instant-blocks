@@ -2,28 +2,29 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.reference.Textures;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
 
 public class BlockInstantGrinder extends BlockInstant {
 	public BlockInstantGrinder() {
-        super(Names.Blocks.IB_GRINDER, Material.rock, Block.soundTypeMetal, 1.5F);
-        setTextures(Textures.Grinder.SIDE);
+		super(Block.Properties.of(Material.METAL)
+				.strength(1.5F, 2000F)
+				.sound(SoundType.METAL)
+		);
         setCreateMessage(Strings.CREATE_GRINDER);
-        setBlockTextureName(Textures.Grinder.SIDE);
     }
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
-		if(BuildHelper.getBlock(world,x, y-1, z) != Blocks.mob_spawner) {
+		if(BuildHelper.getBlock(world,x, y-1, z) != Blocks.SPAWNER) {
 			IBHelper.msg(player, Strings.ERROR_GRINDER, Colors.c);
 			return false;
 		}
@@ -31,17 +32,18 @@ public class BlockInstantGrinder extends BlockInstant {
 	}
 
 	public void build(Level world, int x, int y, int z, Player player) {
-		Block stone = Blocks.stone;
-		Block water = Blocks.flowing_water;
-		Block torch = Blocks.torch;
-		Block chest = Blocks.chest;
-		Block craft = Blocks.crafting_table;
-		Block door = Blocks.wooden_door;
-		Block glass = Blocks.glass;
-		Block pane = Blocks.glass_pane;
-		Block sign = Blocks.wall_sign;
-		Block air = Blocks.air;
-		
+		Block stone = Blocks.STONE;
+		Block water = Blocks.WATER;
+		Block torch = Blocks.WALL_TORCH;
+		Block chest = Blocks.CHEST;
+		Block craft = Blocks.CRAFTING_TABLE;
+		Block door = Blocks.OAK_DOOR;
+		Block glass = Blocks.GLASS;
+		Block pane = Blocks.GLASS_PANE;
+		Block sign = Blocks.OAK_WALL_SIGN;
+		Block plate = Blocks.OAK_PRESSURE_PLATE;
+		Block air = Blocks.AIR;
+
 		/************************ Layer -5 : Stone ************************/
 		BuildHelper.build(world, x-5, y-5, z-5, stone, 11, 1, 11);
 		BuildHelper.build(world, x+6, y-5, z-1, stone, 3, 1, 3);
@@ -93,17 +95,16 @@ public class BlockInstantGrinder extends BlockInstant {
 		BuildHelper.build(world, x+16, y-4, z-3, stone, 7, 1, 1);
 
 		BuildHelper.setBlock(world,x+5, y-4, z, air);
-		BuildHelper.setBlock(world,x+6, y-4, z, sign, 3, 0); //SIGN
-		//BuildHelper.setBlock(world,x+7, y-4, z, door, 5, 0); //DOOR
+		BuildHelper.setBlock(world,x+6, y-4, z, sign, Direction.NORTH); //SIGN
 		BuildHelper.setBlock(world,x+8, y-4, z, air);
-		BuildHelper.setBlock(world,x+9, y-4, z, door, 7, 0); //DOOR
+		BuildHelper.setBlock(world,x+9, y-4, z, door, Direction.WEST); //DOOR
 		BuildHelper.setBlock(world,x+10, y-4, z-2, stone);
 		BuildHelper.setBlock(world,x+10, y-4, z+2, stone);
-		BuildHelper.setBlock(world,x+15, y-4, z+2, chest);
-		BuildHelper.setBlock(world,x+15, y-4, z+1, chest);
+		BuildHelper.setBlock(world,x+15, y-4, z+2, chest, Direction.WEST);
+		BuildHelper.setBlock(world,x+15, y-4, z+1, chest, Direction.WEST);
 		BuildHelper.setBlock(world,x+15, y-4, z, craft);
-		BuildHelper.setBlock(world,x+15, y-4, z-1, chest);
-		BuildHelper.setBlock(world,x+15, y-4, z-2, chest);
+		BuildHelper.setBlock(world,x+15, y-4, z-1, chest, Direction.WEST);
+		BuildHelper.setBlock(world,x+15, y-4, z-2, chest, Direction.WEST);
 
 		/************************ Layer -3 ************************/
 		BuildHelper.build(world, x-5, y-3, z-5, stone, 11, 1, 1);
@@ -122,11 +123,10 @@ public class BlockInstantGrinder extends BlockInstant {
 		BuildHelper.build(world, x+10, y-3, z+3, stone, 1, 1, 6);
 		BuildHelper.build(world, x+16, y-3, z-3, stone, 7, 1, 1);
 
-		BuildHelper.setBlock(world,x+5, y-3, z, sign, 3, 0); //SIGN
-		//BuildHelper.setBlock(world,x+7, y-3, z, door, 11, 0); //DOOR
+		BuildHelper.setBlock(world,x+5, y-3, z, sign, Direction.NORTH, 0); //SIGN
 		BuildHelper.setBlock(world,x+8, y-3, z, air);
-		BuildHelper.setBlock(world,x+9, y-3, z, door, 9, 0); //DOOR
-		BuildHelper.setBlock(world,x+6, y-3, z, water, 0, 2);
+		//BuildHelper.setBlock(world,x+9, y-3, z, door, Direction.WEST); //DOOR
+		BuildHelper.setBlock(world,x+6, y-3, z, water);
 
 		/************************ Layer -2 to 2 : Stone (Spawn Room Walls) ************************/
 		BuildHelper.build(world, x-5, y-2, z-5, stone, 11, 5, 1);
@@ -142,8 +142,8 @@ public class BlockInstantGrinder extends BlockInstant {
 		BuildHelper.build(world, x+10, y-2, z+3, stone, 1, 1, 6);
 		BuildHelper.build(world, x+16, y-2, z-3, stone, 7, 1, 1);
 
-		BuildHelper.setBlock(world,x-4, y-2, z-4, water, 0, 2);
-		BuildHelper.setBlock(world,x-4, y-2, z+4, water, 0, 2);
+		BuildHelper.setBlock(world,x-4, y-2, z-4, water);
+		BuildHelper.setBlock(world,x-4, y-2, z+4, water);
 		BuildHelper.setBlock(world,x+10, y-2, z-1, pane);
 		BuildHelper.setBlock(world,x+10, y-2, z+1, pane);
 		BuildHelper.setBlock(world,x+11, y-2, z-2, pane);
@@ -155,7 +155,7 @@ public class BlockInstantGrinder extends BlockInstant {
 		BuildHelper.setBlock(world,x+12, y-2, z+2, torch);
 		BuildHelper.setBlock(world,x+15, y-2, z-1, torch);
 		BuildHelper.setBlock(world,x+15, y-2, z+1, torch);
-		BuildHelper.setBlock(world,x+6, y-2, z, sign, 3, 0); //SIGN
+		BuildHelper.setBlock(world,x+6, y-2, z, sign, Direction.NORTH, 0); //SIGN
 
 		/************************ Layer 3 : Stone (Spawn Room Roof) ************************/
 		BuildHelper.build(world, x-5, y+3, z-5, stone, 11, 1, 11);
@@ -191,40 +191,40 @@ public class BlockInstantGrinder extends BlockInstant {
 		BuildHelper.build(world, x+9, y+19, z+2, air, 1, 2, 2);
 
 		/************************ Layer 19 (Top Room) ************************/
-		BuildHelper.setBlock(world,x+8, y+19, z, sign, 4, 0);
-		BuildHelper.setBlock(world,x+8, y+19, z-1, water, 0, 2);
-		BuildHelper.setBlock(world,x+8, y+19, z+1, water, 0, 2);
-		BuildHelper.setBlock(world,x+10, y+19, z-2, sign, 4, 0);
-		BuildHelper.setBlock(world,x+10, y+19, z+2, sign, 4, 0);
+		BuildHelper.setBlock(world,x+8, y+19, z, plate);
+		BuildHelper.setBlock(world,x+8, y+19, z-1, water);
+		BuildHelper.setBlock(world,x+8, y+19, z+1, water);
+		BuildHelper.setBlock(world,x+10, y+19, z-2, sign, Direction.NORTH);
+		BuildHelper.setBlock(world,x+10, y+19, z+2, sign, Direction.NORTH);
 
 		/************************ Layer -1 to 19 (Input Tube) ************************/
-		BuildHelper.setBlock(world,x+6, y-1, z, water, 0, 2);
-		BuildHelper.setBlock(world,x+6, y, z, sign, 3, 0);
-		BuildHelper.setBlock(world,x+6, y+1, z, water, 0, 2);
-		BuildHelper.setBlock(world,x+6, y+2, z, sign, 3, 0);
-		BuildHelper.setBlock(world,x+6, y+3, z, water, 0, 2);
-		BuildHelper.setBlock(world,x+6, y+4, z, sign, 3, 0);
-		BuildHelper.setBlock(world,x+6, y+5, z, water, 0, 2);
-		BuildHelper.setBlock(world,x+6, y+6, z, sign, 3, 0);
-		BuildHelper.setBlock(world,x+6, y+7, z, water, 0, 2);
-		BuildHelper.setBlock(world,x+6, y+8, z, sign, 3, 0);
-		BuildHelper.setBlock(world,x+6, y+9, z, water, 0, 2);
-		BuildHelper.setBlock(world,x+6, y+10, z, sign, 3, 0);
-		BuildHelper.setBlock(world,x+6, y+11, z, water, 0, 2);
-		BuildHelper.setBlock(world,x+6, y+12, z, sign, 3, 0);
-		BuildHelper.setBlock(world,x+6, y+13, z, water, 0, 2);
-		BuildHelper.setBlock(world,x+6, y+14, z, sign, 3, 0);
-		BuildHelper.setBlock(world,x+6, y+15, z, water, 0, 2);
-		BuildHelper.setBlock(world,x+6, y+16, z, sign, 3, 0);
-		BuildHelper.setBlock(world,x+6, y+17, z, water, 0, 2);
-		BuildHelper.setBlock(world,x+6, y+18, z, sign, 3, 0);
-		BuildHelper.setBlock(world,x+6, y+19, z, water, 0, 2);
+		BuildHelper.setBlock(world,x+6, y-1, z, water);
+		BuildHelper.setBlock(world,x+6, y, z, sign, Direction.NORTH);
+		BuildHelper.setBlock(world,x+6, y+1, z, water);
+		BuildHelper.setBlock(world,x+6, y+2, z, sign, Direction.NORTH);
+		BuildHelper.setBlock(world,x+6, y+3, z, water);
+		BuildHelper.setBlock(world,x+6, y+4, z, sign, Direction.NORTH);
+		BuildHelper.setBlock(world,x+6, y+5, z, water);
+		BuildHelper.setBlock(world,x+6, y+6, z, sign, Direction.NORTH);
+		BuildHelper.setBlock(world,x+6, y+7, z, water);
+		BuildHelper.setBlock(world,x+6, y+8, z, sign, Direction.NORTH);
+		BuildHelper.setBlock(world,x+6, y+9, z, water);
+		BuildHelper.setBlock(world,x+6, y+10, z, sign, Direction.NORTH);
+		BuildHelper.setBlock(world,x+6, y+11, z, water);
+		BuildHelper.setBlock(world,x+6, y+12, z, sign, Direction.NORTH);
+		BuildHelper.setBlock(world,x+6, y+13, z, water);
+		BuildHelper.setBlock(world,x+6, y+14, z, sign, Direction.NORTH);
+		BuildHelper.setBlock(world,x+6, y+15, z, water);
+		BuildHelper.setBlock(world,x+6, y+16, z, sign, Direction.NORTH);
+		BuildHelper.setBlock(world,x+6, y+17, z, water);
+		BuildHelper.setBlock(world,x+6, y+18, z, sign, Direction.NORTH);
+		BuildHelper.setBlock(world,x+6, y+19, z, water);
 		
 		BuildHelper.setBlock(world,x, y, z, air);
 		
 		/************************ Teleport ************************/
-		IBHelper.teleport(world,player,x+13,y-4,z,Config.TP_GRINDER);
-		if(Config.TP_GRINDER) {
+		IBHelper.teleport(world,player,x+13,y-4,z,Config.Common.TP_GRINDER.get());
+		if(Config.Common.TP_GRINDER.get()) {
 			BuildHelper.setBlock(world,x+7, y-4, z, glass);
 			BuildHelper.setBlock(world,x+7, y-3, z, glass);
 		}
