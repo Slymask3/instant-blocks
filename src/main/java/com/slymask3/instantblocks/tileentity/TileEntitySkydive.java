@@ -1,36 +1,39 @@
 package com.slymask3.instantblocks.tileentity;
 
+import com.slymask3.instantblocks.init.ModTiles;
 import com.slymask3.instantblocks.util.Colors;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class TileEntitySkydive extends TileEntityInstant {
 	public String[] color = new String[11];
 	public int[] colorCode = new int[11];
 
-	public TileEntitySkydive() {
-		super();
+	public TileEntitySkydive(BlockPos pos, BlockState state) {
+		super(ModTiles.SKYDIVE.get(), pos, state);
 		for(int i=0; i<color.length; i++) {
 			String color = Colors.indexRainbowToString(i);
 			this.color[i] = color;
 			this.colorCode[i] = Colors.textToColor(color).getRGB();
 		}
 	}
-	
+
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
+	public void load(CompoundTag nbt) {
+		super.load(nbt);
 		for(int i=0; i<color.length; i++) {
 			this.color[i] = nbt.getString("Color" + i);
-			this.colorCode[i] = nbt.getInteger("ColorCode" + i);
+			this.colorCode[i] = nbt.getInt("ColorCode" + i);
 		}
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
+	protected void saveAdditional(CompoundTag nbt) {
+		super.saveAdditional(nbt);
 		for(int i=0; i<color.length; i++) {
-			nbt.setString("Color" + i, color[i]);
-			nbt.setInteger("ColorCode" + i, colorCode[i]);
+			nbt.putString("Color" + i, color[i]);
+			nbt.putInt("ColorCode" + i, colorCode[i]);
 		}
 	}
 	

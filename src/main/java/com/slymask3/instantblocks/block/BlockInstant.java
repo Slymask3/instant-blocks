@@ -1,11 +1,13 @@
 package com.slymask3.instantblocks.block;
 
 import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.gui.instant.GuiSkydive;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -126,7 +128,9 @@ public abstract class BlockInstant extends Block {
 			}
 		}
 
-		//player.openGui(InstantBlocks.instance, this.guiID.ordinal(), world, x, y, z);
+		if(IBHelper.isClient(world)) {
+			Minecraft.getInstance().setScreen(new GuiSkydive(player,world,pos.getX(),pos.getY(),pos.getZ()));
+		}
 
 		return InteractionResult.SUCCESS;
 	}

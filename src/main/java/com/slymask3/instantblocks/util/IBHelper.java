@@ -48,7 +48,8 @@ public class IBHelper {
 	
 	public static void msg(Player player, String msg, String color) {
 		if(Config.Client.SHOW_MESSAGES.get() && isClient(player.getLevel())) {
-			player.sendMessage(new TextComponent(Strings.PREFIX + Colors.colorEveryWord(msg, color)),player.getUUID());
+			//player.sendMessage(new TextComponent(Strings.PREFIX + Colors.colorEveryWord(msg, color)),player.getUUID());
+			player.displayClientMessage(new TextComponent(Strings.PREFIX + Colors.colorEveryWord(msg, color)),true);
 		}
 	}
 	

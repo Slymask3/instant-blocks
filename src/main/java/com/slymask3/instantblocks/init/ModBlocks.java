@@ -1,5 +1,7 @@
 package com.slymask3.instantblocks.init;
 
+import com.slymask3.instantblocks.block.BlockColor;
+import com.slymask3.instantblocks.block.BlockSkydiveTP;
 import com.slymask3.instantblocks.block.instant.*;
 import com.slymask3.instantblocks.item.ItemBlockInstantBlocks;
 import com.slymask3.instantblocks.reference.Names;
@@ -30,6 +32,10 @@ public class ModBlocks {
 	public static final RegistryObject<Block> ibWater = BLOCKS.register(Names.Blocks.IB_WATER, BlockInstantWater::new);
 	public static final RegistryObject<Block> ibLava = BLOCKS.register(Names.Blocks.IB_LAVA, BlockInstantLava::new);
 	public static final RegistryObject<Block> ibSuction = BLOCKS.register(Names.Blocks.IB_SUCTION, BlockInstantSuction::new);
+	public static final RegistryObject<Block> ibSkydive = BLOCKS.register(Names.Blocks.IB_SKYDIVE, BlockInstantSkydive::new);
+
+	public static final RegistryObject<Block> color = BLOCKS.register(Names.Blocks.COLOR, BlockColor::new);
+	public static final RegistryObject<Block> skydiveTP = BLOCKS.register(Names.Blocks.SKYDIVE_TP, BlockSkydiveTP::new);
 
 	// automatically creates items for all your blocks
 	// you could do it manually instead by registering BlockItems in your ItemInit class

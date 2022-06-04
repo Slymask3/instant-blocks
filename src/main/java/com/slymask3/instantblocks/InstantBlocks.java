@@ -1,8 +1,11 @@
 package com.slymask3.instantblocks;
 
+import com.slymask3.instantblocks.handler.Color;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.init.ModTiles;
+import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.reference.Reference;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -30,6 +33,7 @@ public class InstantBlocks {
 		modEventBus.addListener(this::setupCommon);
 		ModItems.ITEMS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
+		ModTiles.TILES.register(modEventBus);
 		modEventBus.addListener(this::registerBlockColors);
 		modEventBus.addListener(this::registerItemColors);
 
@@ -44,12 +48,13 @@ public class InstantBlocks {
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
-		//AnvilHandler.initAnvilRecipes();
+		PacketHandler.register();
 	}
 
 	@SubscribeEvent
 	public void registerBlockColors(ColorHandlerEvent.Block event) {
 		event.getBlockColors().register((state,world,pos,tintIndex) -> world != null && pos != null ? BiomeColors.getAverageWaterColor(world, pos) : -1, ModBlocks.ibWater.get());
+		event.getBlockColors().register(new Color(), ModBlocks.color.get());
 	}
 
 	@SubscribeEvent

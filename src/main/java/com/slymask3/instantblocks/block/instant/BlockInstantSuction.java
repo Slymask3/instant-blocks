@@ -1,15 +1,12 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.mojang.math.Vector3f;
 import com.slymask3.instantblocks.block.BlockInstantLiquid;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.Vec3;
 
 public class BlockInstantSuction extends BlockInstantLiquid {
     public BlockInstantSuction() {

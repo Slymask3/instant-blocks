@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "instantblocks:blocks/skydive_tp_other",
+    "side": "instantblocks:blocks/skydive_tp_side",
+    "bottom": "instantblocks:blocks/skydive_tp_other"
+  }
+}

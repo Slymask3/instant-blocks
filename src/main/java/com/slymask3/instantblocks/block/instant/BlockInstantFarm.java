@@ -2,7 +2,6 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.BlockInstant;
-import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.IBHelper;

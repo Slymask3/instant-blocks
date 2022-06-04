@@ -1,5 +1,8 @@
 package com.slymask3.instantblocks.util;
 
+import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.init.ModBlocks;
+import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -66,13 +69,15 @@ public class BuildHelper {
 		}
 	}
 
-//	public static void setColorBlock(Level world, int x, int y, int z, int color) {
-//		setBlock(world, x, y, z, ModBlocks.color);
-//		try {
-//			((TileEntityColor) world.getTileEntity(x, y, z)).color = color;
-//		} catch(Exception e) {LogHelper.info(e);}
-//		world.markBlockForUpdate(x, y, z);
-//	}
+	public static void setColorBlock(Level world, int x, int y, int z, int color) {
+		setBlock(world, x, y, z, ModBlocks.color.get());
+		try {
+			((TileEntityColor) world.getBlockEntity(new BlockPos(x, y, z))).color = color;
+		} catch(Exception e) {
+			InstantBlocks.LOGGER.info(e);
+		}
+		//world.markBlockForUpdate(x, y, z);
+	}
 
 	public static Block getBlock(Level world, int x, int y, int z) {
 		return world.getBlockState(new BlockPos(x,y,z)).getBlock();
