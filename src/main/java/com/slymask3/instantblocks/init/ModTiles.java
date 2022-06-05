@@ -17,5 +17,6 @@ public class ModTiles {
 
 	public static final RegistryObject<BlockEntityType<TileEntitySkydive>> SKYDIVE = TILES.register(Names.Blocks.IB_SKYDIVE, () -> BlockEntityType.Builder.of(TileEntitySkydive::new, ModBlocks.ibSkydive.get()).build(null));
 	public static final RegistryObject<BlockEntityType<TileEntityStatue>> STATUE = TILES.register(Names.Blocks.IB_STATUE, () -> BlockEntityType.Builder.of(TileEntityStatue::new, ModBlocks.ibStatue.get()).build(null));
+	public static final RegistryObject<BlockEntityType<TileEntityStatue>> HARVEST = TILES.register(Names.Blocks.IB_HARVEST, () -> BlockEntityType.Builder.of(TileEntityStatue::new, ModBlocks.ibHarvest.get()).build(null));
 	public static final RegistryObject<BlockEntityType<TileEntityColor>> COLOR = TILES.register(Names.Blocks.COLOR, () -> BlockEntityType.Builder.of(TileEntityColor::new, ModBlocks.color.get()).build(null));
 }

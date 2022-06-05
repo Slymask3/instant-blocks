@@ -36,6 +36,12 @@ public class BlockInstantStatue extends BlockInstant implements EntityBlock {
 		setGuiID(GuiID.STATUE);
 	}
 
+	@Nullable
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new TileEntityStatue(pos,state);
+	}
+
 	public BufferedImage getImage(String username) {
 		if(!username.equalsIgnoreCase("")) {
 			try {
@@ -376,11 +382,5 @@ public class BlockInstantStatue extends BlockInstant implements EntityBlock {
 				} //rightlegback starts at x+3, y+11, z+3
 			}
 		}
-	}
-
-	@Nullable
-	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new TileEntityStatue(pos,state);
 	}
 }

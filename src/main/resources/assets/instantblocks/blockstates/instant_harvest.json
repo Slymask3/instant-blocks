@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "instantblocks:block/instant_harvest",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "instantblocks:block/instant_harvest"
+    },
+    "facing=south": {
+      "model": "instantblocks:block/instant_harvest",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "instantblocks:block/instant_harvest",
+      "y": 270
+    }
+  }
+}

@@ -13,6 +13,7 @@ public class PacketHandler {
         int index = 100;
         INSTANCE.registerMessage(++index, PacketSkydive.class, PacketSkydive::encode, PacketSkydive::decode, PacketSkydive.Handler::handle);
         INSTANCE.registerMessage(++index, PacketStatue.class, PacketStatue::encode, PacketStatue::decode, PacketStatue.Handler::handle);
+        INSTANCE.registerMessage(++index, PacketHarvest.class, PacketHarvest::encode, PacketHarvest::decode, PacketHarvest.Handler::handle);
     }
 
     public static void sendToServer(Object message) {

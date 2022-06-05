@@ -10,6 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -266,16 +268,16 @@ public class BuildHelper {
 		}
     }
 
-//	public static TileEntity getTileEntityDirectional(Level world, int x, int y, int z, int metaDirection, int forward, int back, int left, int right) {
-//		if(metaDirection==0) {
-//			return world.getTileEntity(x-left+right, y, z-forward+back);
-//		} else if(metaDirection==1) {
-//			return world.getTileEntity(x+forward-back, y, z+left-right);
-//		} else if(metaDirection==2) {
-//			return world.getTileEntity(x+left-right, y, z+forward-back);
-//		} else if(metaDirection==3) {
-//			return world.getTileEntity(x-forward+back, y, z-left+right);
-//		}
-//		return null;
-//	}
+	public static BlockEntity getBlockEntityDirectional(Level world, int x, int y, int z, Direction direction, int forward, int back, int left, int right) {
+		if(direction == Direction.SOUTH) {
+			return world.getBlockEntity(new BlockPos(x-left+right, y, z-forward+back));
+		} else if(direction == Direction.WEST) {
+			return world.getBlockEntity(new BlockPos(x+forward-back, y, z+left-right));
+		} else if(direction == Direction.NORTH) {
+			return world.getBlockEntity(new BlockPos(x+left-right, y, z+forward-back));
+		} else if(direction == Direction.EAST) {
+			return world.getBlockEntity(new BlockPos(x-forward+back, y, z-left+right));
+		}
+		return null;
+	}
 }

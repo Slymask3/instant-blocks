@@ -8,10 +8,13 @@ import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.material.Material;
 
 import java.util.Random;
@@ -94,9 +97,9 @@ public class BlockInstantFarm extends BlockInstant {
 		BuildHelper.setBlockDirectional(world,x,y+2,z,torch,direction,0,4,0,2);
 		BuildHelper.setBlockDirectional(world,x,y+2,z,torch,direction,4,0,0,2);
 
-//		TileEntityChest chest1 = (TileEntityChest)BuildHelper.getTileEntityDirectional(world,x,y+1,z,direction,3,0,1,0);
-//		TileEntityChest chest2 = (TileEntityChest)BuildHelper.getTileEntityDirectional(world,x,y+1,z,direction,3,0,0,1);
-//		chest1.setInventorySlotContents(0, new ItemStack(Items.stone_hoe, 1, 0));
-//		chest2.setInventorySlotContents(0, new ItemStack(Items.stone_hoe, 1, 0));
+		ChestBlockEntity chest1 = (ChestBlockEntity)BuildHelper.getBlockEntityDirectional(world,x,y+1,z,direction,3,0,1,0);
+		ChestBlockEntity chest2 = (ChestBlockEntity)BuildHelper.getBlockEntityDirectional(world,x,y+1,z,direction,3,0,0,1);
+		chest1.setItem(0, new ItemStack(Items.STONE_HOE, 1));
+		chest2.setItem(0, new ItemStack(Items.STONE_HOE, 1));
 	}
 }

@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.block;
 
 import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.gui.instant.GuiHarvest;
 import com.slymask3.instantblocks.gui.instant.GuiSkydive;
 import com.slymask3.instantblocks.gui.instant.GuiStatue;
 import com.slymask3.instantblocks.handler.Config;
@@ -131,6 +132,7 @@ public abstract class BlockInstant extends Block {
 			switch(guiID) {
 				case SKYDIVE -> Minecraft.getInstance().setScreen(new GuiSkydive(player,world,pos.getX(),pos.getY(),pos.getZ()));
 				case STATUE -> Minecraft.getInstance().setScreen(new GuiStatue(player,world,pos.getX(),pos.getY(),pos.getZ()));
+				case HARVEST -> Minecraft.getInstance().setScreen(new GuiHarvest(player,world,pos.getX(),pos.getY(),pos.getZ()));
 			}
 		}
 

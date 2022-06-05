@@ -11,9 +11,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 
 public class IBHelper {
 	public static boolean isClient(Level world) {
@@ -66,25 +68,23 @@ public class IBHelper {
 		}
 	}
 	
-//	public static void addItemsToChest(TileEntityChest chest, Block block, int amount, int meta) {
-//		addItemsToChest(chest, Item.getItemFromBlock(block), amount, meta);
-//	}
+	public static void addItemsToChest(ChestBlockEntity chest, Block block, int amount) {
+		addItemsToChest(chest, block.asItem(), amount);
+	}
 	
-//	public static void addItemsToChest(TileEntityChest chest, Item item, int amount, int meta) {
-//		for(int i=0; i<chest.getSizeInventory(); i++) {
-//			ItemStack is = new ItemStack(item, amount, meta);
-//			if(chest.getStackInSlot(i) != null && chest.getStackInSlot(i).getItem() == is.getItem() && chest.getStackInSlot(i).getItemDamage() == is.getItemDamage() && chest.getStackInSlot(i).stackSize < 64) {
-//				chest.setInventorySlotContents(i, new ItemStack(item, amount + chest.getStackInSlot(i).stackSize, meta));
-//				break;
-//			} else if(chest.getStackInSlot(i) != null && chest.getStackInSlot(i).getItem() == is.getItem() && chest.getStackInSlot(i).getItemDamage() == is.getItemDamage() && chest.getStackInSlot(i).stackSize > 64) {
-//				chest.setInventorySlotContents(i+1, new ItemStack(item, amount, meta));
-//				break;
-//			} else if(chest.getStackInSlot(i) == null) {
-//				chest.setInventorySlotContents(i, new ItemStack(item, amount, meta));
-//				break;
-//			}
-//		}
-//	}
+	public static void addItemsToChest(ChestBlockEntity chest, Item item, int amount) {
+		ItemStack itemStack = new ItemStack(item, amount);
+		for(int i=0; i<chest.getContainerSize(); i++) {
+			ItemStack itemStackSlot = chest.getItem(i);
+			if(itemStackSlot.sameItem(itemStack) && itemStackSlot.getCount() < itemStackSlot.getMaxStackSize()) {
+				chest.setItem(i, new ItemStack(item, itemStackSlot.getCount() + amount));
+				break;
+			} else if(chest.getItem(i) == ItemStack.EMPTY) {
+				chest.setItem(i, new ItemStack(item, amount));
+				break;
+			}
+		}
+	}
 
 	public static boolean isWand(ItemStack is) {
 		return is.getItem() instanceof ItemInstantWand;
@@ -102,10 +102,9 @@ public class IBHelper {
 		return i;
 	}
 
-//	public static boolean isDoubleChest(TileEntityChest chest) {
-//		chest.checkForAdjacentChests();
-//		return chest.adjacentChestXNeg != null || chest.adjacentChestXPos != null || chest.adjacentChestZNeg != null || chest.adjacentChestZPos != null;
-//	}
+	public static boolean isDoubleChest(ChestBlockEntity chest) {
+		return chest.getContainerSize() == 54;
+	}
 
 	public static int getMaxSkydive(Level world) {
 		int max = Config.Common.SKYDIVE_MAX.get();
