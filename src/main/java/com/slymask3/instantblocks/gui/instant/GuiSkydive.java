@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.gui.instant;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.gui.GuiInstant;
-import com.slymask3.instantblocks.gui.module.ColorEditBox;
+import com.slymask3.instantblocks.gui.components.ColorEditBox;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.PacketSkydive;

@@ -78,7 +78,7 @@ public class BlockInstantSkydive extends BlockInstant implements EntityBlock {
 
 		int i = 0;
 		int min = Config.Common.SKYDIVE_MIN.get();
-		int max = Config.Common.SKYDIVE_MAX.get();
+		int max = IBHelper.getMaxSkydive(world);
 		int water = Config.Common.SKYDIVE_WATER.get();
 		for(int c=max; c>=min; c--) {
 			for(Coords coords : coordsAirList) {

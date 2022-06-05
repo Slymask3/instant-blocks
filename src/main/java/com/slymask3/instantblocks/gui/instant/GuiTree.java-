@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.gui.instant;
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.gui.GuiInstant;
-import com.slymask3.instantblocks.gui.module.GuiTreeSlot;
+import com.slymask3.instantblocks.gui.components.GuiTreeSlot;
 import com.slymask3.instantblocks.network.PacketTree;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityTree;

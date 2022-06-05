@@ -245,15 +245,15 @@ public class Config {
 
 			SKYDIVE_MIN = builder
 					.comment("Minimum height for the Instant Rainbow Skydive.\n(Default = 5)")
-					.defineInRange("SKYDIVE_MIN", 5,-64,255);
+					.defineInRange("SKYDIVE_MIN", -59,-64,320);
 
 			SKYDIVE_MAX = builder
 					.comment("Maximum height for the Instant Rainbow Skydive.\n(Default = 255)")
-					.defineInRange("SKYDIVE_MAX", 255,-64,255);
+					.defineInRange("SKYDIVE_MAX", 320,-64,320);
 
 			SKYDIVE_WATER = builder
 					.comment("Water height for the Instant Rainbow Skydive.\n(Default = 1)")
-					.defineInRange("SKYDIVE_WATER", 1,-64,255);
+					.defineInRange("SKYDIVE_WATER", 1,1,300);
 
 			builder.pop();
 		}

@@ -21,7 +21,7 @@ public class BlockSkydiveTP extends Block {
 	}
 
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		IBHelper.teleport(world,player,pos.getX(),257,pos.getZ(), true);
+		IBHelper.teleport(world,player,pos.getX(),IBHelper.getMaxSkydive(world) + 2,pos.getZ(), true);
 		return InteractionResult.SUCCESS;
 	}
 }

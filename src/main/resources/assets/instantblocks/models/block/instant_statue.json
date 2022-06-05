@@ -1,0 +1,19 @@
+{
+  "parent": "block/cube",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [ 0, 135, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 0.40, 0.40, 0.40 ]
+    }
+  },
+  "textures": {
+    "particle": "instantblocks:blocks/statue_front",
+    "down": "instantblocks:blocks/statue_bottom",
+    "up": "instantblocks:blocks/statue_top",
+    "north": "instantblocks:blocks/statue_front",
+    "east": "instantblocks:blocks/statue_side_r",
+    "south": "instantblocks:blocks/statue_back",
+    "west": "instantblocks:blocks/statue_side_l"
+  }
+}

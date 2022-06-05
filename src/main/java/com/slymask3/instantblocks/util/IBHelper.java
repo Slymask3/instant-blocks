@@ -106,4 +106,12 @@ public class IBHelper {
 //		chest.checkForAdjacentChests();
 //		return chest.adjacentChestXNeg != null || chest.adjacentChestXPos != null || chest.adjacentChestZNeg != null || chest.adjacentChestZPos != null;
 //	}
+
+	public static int getMaxSkydive(Level world) {
+		int max = Config.Common.SKYDIVE_MAX.get();
+		if(max > world.getMaxBuildHeight() - 3) {
+			max = world.getMaxBuildHeight() - 4;
+		}
+		return max;
+	}
 }

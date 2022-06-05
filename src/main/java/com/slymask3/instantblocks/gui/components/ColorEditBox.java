@@ -1,4 +1,4 @@
-package com.slymask3.instantblocks.gui.module;
+package com.slymask3.instantblocks.gui.components;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.slymask3.instantblocks.InstantBlocks;
