@@ -1,19 +1,15 @@
 package com.slymask3.instantblocks;
 
-import com.slymask3.instantblocks.handler.Color;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.init.ModTiles;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.reference.Reference;
-import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -34,8 +30,6 @@ public class InstantBlocks {
 		ModItems.ITEMS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
 		ModTiles.TILES.register(modEventBus);
-		modEventBus.addListener(this::registerBlockColors);
-		modEventBus.addListener(this::registerItemColors);
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}
@@ -49,16 +43,5 @@ public class InstantBlocks {
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
 		PacketHandler.register();
-	}
-
-	@SubscribeEvent
-	public void registerBlockColors(ColorHandlerEvent.Block event) {
-		event.getBlockColors().register((state,world,pos,tintIndex) -> world != null && pos != null ? BiomeColors.getAverageWaterColor(world, pos) : -1, ModBlocks.ibWater.get());
-		event.getBlockColors().register(new Color(), ModBlocks.color.get());
-	}
-
-	@SubscribeEvent
-	public void registerItemColors(ColorHandlerEvent.Item event) {
-		event.getItemColors().register((p_92702_, p_92703_) -> 0x00FF00, ModBlocks.ibWater.get().asItem());
 	}
 }

@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks.block;
 
+import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -16,7 +17,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlockColor extends Block implements EntityBlock {
     public static Block blockType = Blocks.WHITE_WOOL;
-    public static int blockMeta = 0;
 
     public BlockColor() {
         super(Block.Properties.of(blockType.defaultBlockState().getMaterial())
@@ -44,6 +44,8 @@ public class BlockColor extends Block implements EntityBlock {
 
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         world.markAndNotifyBlock(pos,world.getChunk(pos.getX(),pos.getZ()),state,state,2,0);
-        return InteractionResult.SUCCESS;
+        TileEntityColor tile = (TileEntityColor) world.getBlockEntity(pos);
+        InstantBlocks.LOGGER.info("color: " + tile.color);
+        return InteractionResult.FAIL;
     }
 }

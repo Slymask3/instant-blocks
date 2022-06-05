@@ -59,13 +59,11 @@ public abstract class BlockInstant extends Block {
 		InstantBlocks.LOGGER.info("placed: " + p_60566_.getValue(FACING));
 	}
 
-	// adds all the block state properties you want to use
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
 
-	// gets the correct block state for the player to place
 	@Nullable
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
@@ -129,7 +127,9 @@ public abstract class BlockInstant extends Block {
 		}
 
 		if(IBHelper.isClient(world)) {
-			Minecraft.getInstance().setScreen(new GuiSkydive(player,world,pos.getX(),pos.getY(),pos.getZ()));
+			switch(guiID) {
+				case SKYDIVE -> Minecraft.getInstance().setScreen(new GuiSkydive(player,world,pos.getX(),pos.getY(),pos.getZ()));
+			}
 		}
 
 		return InteractionResult.SUCCESS;

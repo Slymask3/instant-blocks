@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks.gui;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
@@ -42,30 +43,18 @@ public abstract class GuiInstant extends Screen {
 		addRenderableWidget(this.done);
 		addRenderableWidget(this.cancel);
 	}
-//
-//	public boolean keyPressed(int p_96552_, int p_96553_, int p_96554_) {
-//		if (p_96552_ == 256 && this.shouldCloseOnEsc()) {
-//			this.onClose();
-//			return true;
-//		} else if (p_96552_ == 258) {
-//			boolean flag = !hasShiftDown();
-//			if (!this.changeFocus(flag)) {
-//				this.changeFocus(flag);
-//			}
-//
-//			return false;
-//		} else {
-//			return super.keyPressed(p_96552_, p_96553_, p_96554_);
-//		}
-//	}
 
-//	@Override
-//	public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTicks) {
-//		this.renderBackground(poseStack);
-//		super.render(poseStack, mouseX, mouseY, partialTicks);
-//		poseStack.pushPose();
-//		poseStack.popPose();
-//	}
+	@Override
+	public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTicks) {
+		this.renderBackground(poseStack);
+		super.render(poseStack, mouseX, mouseY, partialTicks);
+		poseStack.pushPose();
+		this.font.drawShadow(poseStack, this.title, this.width / 2 - this.font.width(this.title) / 2, 20, 16777215);
+		this.renderLabels(poseStack,mouseX,mouseY);
+		poseStack.popPose();
+	}
+
+	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {}
 
 	public boolean isPauseScreen() {
 		return false;
