@@ -61,7 +61,6 @@ public class GuiStatue extends GuiInstant {
 		this.font.draw(poseStack, "Enter a Minecraft Username:", this.width / 2 - 4 - 150, 37, 10526880);
 		this.font.draw(poseStack, "Select parts to generate:", this.width / 2 - 3 - 150, this.height / 4 + 8 + 12, 10526880);
 		this.font.draw(poseStack, "Unchecking RGB Mode will use vanilla minecraft wool colors.", this.width / 2 - 3 - 150, this.height / 4 + 32 + 88, 10526880);
-
 	}
 	
 	public void sendInfo() {

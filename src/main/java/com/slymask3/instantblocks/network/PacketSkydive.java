@@ -11,16 +11,16 @@ import java.util.function.Supplier;
 
 public class PacketSkydive {
 	int _x, _y, _z;
+	int _colors_amount;
 	int[] _colors;
 	int _radius;
 	boolean _tp;
 
-	public static int COLORS_AMOUNT = 11;
-
-	public PacketSkydive(int x, int y, int z, int[] colors, int radius, boolean tp) {
+	public PacketSkydive(int x, int y, int z, int colors_amount, int[] colors, int radius, boolean tp) {
 		_x = x;
 		_y = y;
 		_z = z;
+		_colors_amount = colors_amount;
 		_colors = colors;
 		_radius = radius;
 		_tp = tp;
@@ -30,6 +30,7 @@ public class PacketSkydive {
 		buffer.writeInt(message._x);
 		buffer.writeInt(message._y);
 		buffer.writeInt(message._z);
+		buffer.writeInt(message._colors_amount);
 		for(int i=0; i < message._colors.length; i++) {
 			buffer.writeInt(message._colors[i]);
 		}
@@ -41,13 +42,14 @@ public class PacketSkydive {
 		int x = buffer.readInt();
 		int y = buffer.readInt();
 		int z = buffer.readInt();
-		int[] colors = new int[COLORS_AMOUNT];
-		for(int i=0; i < COLORS_AMOUNT; i++) {
+		int colors_amount = buffer.readInt();
+		int[] colors = new int[colors_amount];
+		for(int i=0; i < colors_amount; i++) {
 			colors[i] = buffer.readInt();
 		}
 		int radius = buffer.readInt();
 		boolean tp = buffer.readBoolean();
-		return new PacketSkydive(x,y,z,colors,radius,tp);
+		return new PacketSkydive(x,y,z,colors_amount,colors,radius,tp);
 	}
 
 	public static class Handler {

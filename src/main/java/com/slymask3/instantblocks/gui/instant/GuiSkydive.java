@@ -16,11 +16,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.util.ArrayList;
 
 
 public class GuiSkydive extends GuiInstant {
     private Button random;
 	private ColorEditBox[] color = new ColorEditBox[11];
+	private Button[] colorClear = new Button[11];
 	private Checkbox tp;
 	private EditBox radius;
 	private TileEntitySkydive tileEntity;
@@ -55,8 +59,10 @@ public class GuiSkydive extends GuiInstant {
 				color_y = 45 + (18*(i- cutoff));
 			}
 			this.color[i] = new ColorEditBox(this.font, color_x, color_y, 60, 14, i, tileEntity);
+			this.colorClear[i] = this.color[i].getClearButton();
 
 			this.addRenderableWidget(this.color[i]);
+			this.addRenderableWidget(this.colorClear[i]);
 		}
 
 		this.addRenderableWidget(this.random);
@@ -80,18 +86,22 @@ public class GuiSkydive extends GuiInstant {
 		} catch (NumberFormatException e) {
 			radius = Config.Common.SKYDIVE_RADIUS.get();
 		}
-		PacketHandler.sendToServer(new PacketSkydive(this.x, this.y, this.z, getColors(), radius, tp.selected()));
+		int[] colors = getColors();
+		PacketHandler.sendToServer(new PacketSkydive(this.x, this.y, this.z, colors.length, colors, radius, tp.selected()));
 
 		BlockInstant block = (BlockInstant) BuildHelper.getBlock(world,x,y,z);
 		block.afterBuild(world,x,y,z,player);
 	}
 	
 	private int[] getColors() {
-		int[] colors = new int[this.color.length];
-		for(int i=0; i<colors.length; i++) {
-			colors[i] = color[i].getColor().getRGB();
+		ArrayList<Integer> colorsBuilder = new ArrayList<>();
+		for(ColorEditBox colorEditBox : this.color) {
+			if(!colorEditBox.getValue().equals("")) {
+				colorsBuilder.add(colorEditBox.getColor().getRGB());
+			}
 		}
-		return colors;
+		Integer[] arr = colorsBuilder.toArray(new Integer[colorsBuilder.size()]);
+		return ArrayUtils.toPrimitive(arr);
 	}
 
 	private void setRandom() {

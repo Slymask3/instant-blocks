@@ -1,6 +1,8 @@
 package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.InstantBlocks;
+import com.slymask3.instantblocks.block.BlockInstant;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import net.minecraft.core.BlockPos;
@@ -11,7 +13,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -43,7 +44,11 @@ public class BuildHelper {
 	}
 	
 	public static void setBlock(Level world, int x, int y, int z, Block block, Direction direction, int flag) {
-		if(getBlock(world,x,y,z) != Blocks.BEDROCK) {
+		Block getBlock = getBlock(world,x,y,z);
+		if(Config.Common.KEEP_BLOCKS.get() && getBlock instanceof BlockInstant) {
+			return;
+		}
+		if(getBlock != Blocks.BEDROCK) {
 			BlockState state = block.defaultBlockState();
 			if(block instanceof CrossCollisionBlock) {
 				BlockPlaceContext context = new BlockPlaceContext(world,null, InteractionHand.MAIN_HAND, ItemStack.EMPTY,new BlockHitResult(Vec3.ZERO,Direction.DOWN,new BlockPos(x,y,z),false));
@@ -62,6 +67,9 @@ public class BuildHelper {
 			}
 			if(block instanceof BedBlock && direction != null) {
 				state = state.setValue(BedBlock.PART, BedPart.HEAD);
+			}
+			if(block instanceof LeavesBlock) {
+				state = state.setValue(LeavesBlock.PERSISTENT, Boolean.TRUE);
 			}
 			world.setBlock(new BlockPos(x,y,z),state,flag);
 			if(block instanceof DoorBlock) {

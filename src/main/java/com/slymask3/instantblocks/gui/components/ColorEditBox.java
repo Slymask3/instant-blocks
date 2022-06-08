@@ -1,14 +1,17 @@
 package com.slymask3.instantblocks.gui.components;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
 import com.slymask3.instantblocks.util.Colors;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 
 import java.awt.*;
+
 
 public class ColorEditBox extends EditBox {
     private int index;
@@ -30,17 +33,13 @@ public class ColorEditBox extends EditBox {
     @Override
     public void insertText(String textToWrite) {
         super.insertText(textToWrite);
-        tileEntity.setColorCode(index, getValue());
-        tileEntity.setColor(index, getValue());
-        InstantBlocks.LOGGER.info(getColor() + " - " + getColor().getRGB() + " - " + tileEntity.colorCode[index]);
+        this.updateColor();
     }
 
     @Override
     public void deleteChars(int pNum) {
         super.deleteChars(pNum);
-        tileEntity.setColorCode(index, getValue());
-        tileEntity.setColor(index, getValue());
-        InstantBlocks.LOGGER.info(getColor() + " - " + getColor().getRGB() + " - " + tileEntity.colorCode[index]);
+        this.updateColor();
     }
 
     public void renderLabel(PoseStack poseStack, int mouseX, int mouseY) {
@@ -56,5 +55,30 @@ public class ColorEditBox extends EditBox {
     private String createRandomHex() {
         Color color = Colors.generateRandomColor();
         return String.format("%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
+    }
+
+    private void updateColor() {
+        tileEntity.setColorCode(index, getValue());
+        tileEntity.setColor(index, getValue());
+    }
+
+    public Button getClearButton() {
+        return new ClearButton(this.x + this.width + 5, this.y + 1, (onPress) -> {
+            this.setValue("");
+            this.updateColor();
+        });
+    }
+
+    public class ClearButton extends Button {
+        public ClearButton(int x, int y, Button.OnPress onPress) {
+            super(x,y,12,12,new TextComponent("X"),onPress);
+        }
+
+        public void renderButton(PoseStack p_86777_, int p_86778_, int p_86779_, float p_86780_) {
+            RenderSystem.setShaderTexture(0, new ResourceLocation("realms", "textures/gui/realms/cross_icon.png"));
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            float f = this.isHoveredOrFocused() ? 12.0F : 0.0F;
+            blit(p_86777_, this.x, this.y, 0.0F, f, 12, 12, 12, 24);
+        }
     }
 }

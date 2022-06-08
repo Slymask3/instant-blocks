@@ -55,12 +55,6 @@ public class IBHelper {
 		}
 	}
 	
-	public static void keepBlocks(Level world, int x, int y, int z, Block block) {
-		if(Config.Common.KEEP_BLOCKS.get()) {
-			BuildHelper.setBlock(world, x, y, z, block);
-		}
-	}
-	
 	public static void teleport(Level world, Player player, int x, int y, int z, boolean allow) {
 		if(isServer(world) && allow) {
 			sound(world, x, y, z);

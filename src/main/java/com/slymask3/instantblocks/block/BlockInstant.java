@@ -4,6 +4,7 @@ import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.gui.instant.GuiHarvest;
 import com.slymask3.instantblocks.gui.instant.GuiSkydive;
 import com.slymask3.instantblocks.gui.instant.GuiStatue;
+import com.slymask3.instantblocks.gui.instant.GuiTree;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
@@ -133,6 +134,7 @@ public abstract class BlockInstant extends Block {
 				case SKYDIVE -> Minecraft.getInstance().setScreen(new GuiSkydive(player,world,pos.getX(),pos.getY(),pos.getZ()));
 				case STATUE -> Minecraft.getInstance().setScreen(new GuiStatue(player,world,pos.getX(),pos.getY(),pos.getZ()));
 				case HARVEST -> Minecraft.getInstance().setScreen(new GuiHarvest(player,world,pos.getX(),pos.getY(),pos.getZ()));
+				case TREE -> Minecraft.getInstance().setScreen(new GuiTree(player,world,pos.getX(),pos.getY(),pos.getZ()));
 			}
 		}
 
@@ -144,7 +146,6 @@ public abstract class BlockInstant extends Block {
 	}
 
 	public void afterBuild(Level world, int x, int y, int z, Player player) {
-		IBHelper.keepBlocks(world, x, y, z, this);
 		IBHelper.xp(world, player, Config.Common.XP_AMOUNT.get());
 		IBHelper.sound(world, x, y, z);
 		IBHelper.effectFull(world, x, y, z);

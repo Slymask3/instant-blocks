@@ -11,9 +11,9 @@
     "particle": "minecraft:block/crafting_table_front",
     "down": "minecraft:block/oak_planks",
     "up": "instantblocks:blocks/harvest_top",
-    "north": "instantblocks:blocks/harvest_side_0",
-    "east": "instantblocks:blocks/harvest_side_1",
-    "south": "instantblocks:blocks/harvest_side_0",
-    "west": "instantblocks:blocks/harvest_side_1"
+    "north": "instantblocks:blocks/harvest_side_1",
+    "east": "instantblocks:blocks/harvest_side_0",
+    "south": "instantblocks:blocks/harvest_side_1",
+    "west": "instantblocks:blocks/harvest_side_0"
   }
 }
