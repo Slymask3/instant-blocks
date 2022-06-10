@@ -59,8 +59,9 @@ public class PacketSkydive {
 				Level world = player.getLevel();
 
 				BlockInstantSkydive block = (BlockInstantSkydive)BuildHelper.getBlock(world,message._x, message._y, message._z);
-				block.build(world,message._x, message._y, message._z, player, message._colors, message._radius, message._tp);
-				block.afterBuild(world,message._x, message._y, message._z, player);
+				if(block.build(world,message._x, message._y, message._z, player, message._colors, message._radius, message._tp)) {
+					block.afterBuild(world,message._x, message._y, message._z, player);
+				}
 			});
 			context.get().setPacketHandled(true);
 		}

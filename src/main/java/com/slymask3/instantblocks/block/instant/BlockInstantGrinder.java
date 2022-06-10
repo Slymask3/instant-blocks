@@ -25,13 +25,13 @@ public class BlockInstantGrinder extends BlockInstant {
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(BuildHelper.getBlock(world,x, y-1, z) != Blocks.SPAWNER) {
-			IBHelper.msg(player, Strings.ERROR_GRINDER, Colors.c);
+			IBHelper.sendMessage(player, Strings.ERROR_GRINDER, Colors.c);
 			return false;
 		}
 		return true;
 	}
 
-	public void build(Level world, int x, int y, int z, Player player) {
+	public boolean build(Level world, int x, int y, int z, Player player) {
 		Block stone = Blocks.STONE;
 		Block water = Blocks.WATER;
 		Block torch = Blocks.WALL_TORCH;
@@ -228,5 +228,7 @@ public class BlockInstantGrinder extends BlockInstant {
 			BuildHelper.setBlock(world,x+7, y-4, z, glass);
 			BuildHelper.setBlock(world,x+7, y-3, z, glass);
 		}
+
+		return true;
 	}
 }

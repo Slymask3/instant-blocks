@@ -22,7 +22,7 @@ public class BlockInstantPool extends BlockInstant {
 		setDirectional(true);
     }
 
-	public void build(Level world, int x, int y, int z, Player player) {
+	public boolean build(Level world, int x, int y, int z, Player player) {
 		Block stone = Blocks.SMOOTH_STONE;
 		Block water = Blocks.WATER;
 		Block slab = Blocks.SMOOTH_STONE_SLAB;
@@ -136,5 +136,7 @@ public class BlockInstantPool extends BlockInstant {
 
 		BuildHelper.setBlockDirectional(world,x,y+5,z,fence,direction,0,5,0,1);
 		BuildHelper.setBlockDirectional(world,x,y+5,z,fence,direction,0,5,0,3);
+
+		return true;
 	}
 }

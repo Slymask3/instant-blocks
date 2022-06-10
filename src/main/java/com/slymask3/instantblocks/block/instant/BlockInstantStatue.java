@@ -5,8 +5,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.reference.GuiID;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityStatue;
 import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Colors;
+import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -81,8 +84,13 @@ public class BlockInstantStatue extends BlockInstant implements EntityBlock {
 			buildArms(world, x, y, z, img, direction, armLeft, armRight, rgb);
 			buildLegs(world, x, y, z, img, direction, legLeft, legRight, rgb);
 
+			setCreateMessage(Strings.CREATE_STATUE.replace("%username%",username));
+
 			return true;
+		} else {
+			IBHelper.sendMessage(player, Strings.ERROR_STATUE.replace("%username%",username), Colors.c);
 		}
+
 		return false;
 	}
 

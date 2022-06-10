@@ -22,7 +22,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 		setDirectional(true);
 	}
 
-	public void build(Level world, int x, int y, int z, Player player) {
+	public boolean build(Level world, int x, int y, int z, Player player) {
 		Block light = Blocks.BIRCH_PLANKS;
 		Block dark = Blocks.SPRUCE_PLANKS;
 		Block log = Blocks.BIRCH_LOG;
@@ -479,5 +479,7 @@ public class BlockInstantHouseWood extends BlockInstant {
 		BuildHelper.setBlockDirectional(world,x,y+4,z,torch_wall,direction,2,0,4,0,directionLeft);
 		BuildHelper.setBlockDirectional(world,x,y+4,z,torch_wall,direction,1,0,0,4,directionRight);
 		BuildHelper.setBlockDirectional(world,x,y+4,z,torch_wall,direction,2,0,0,4,directionRight);
+
+		return true;
 	}
 }

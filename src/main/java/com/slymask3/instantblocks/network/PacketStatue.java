@@ -65,8 +65,7 @@ public class PacketStatue {
 				Level world = player.getLevel();
 
 				BlockInstantStatue block = (BlockInstantStatue) BuildHelper.getBlock(world,message._x, message._y, message._z);
-				boolean built = block.build(world, message._x, message._y, message._z, player, message._username, message._head, message._body, message._armLeft, message._armRight, message._legLeft, message._legRight, message._rgb);
-				if(built) {
+				if(block.build(world, message._x, message._y, message._z, player, message._username, message._head, message._body, message._armLeft, message._armRight, message._legLeft, message._legRight, message._rgb)) {
 					block.afterBuild(world, message._x, message._y, message._z, player);
 				}
 			});

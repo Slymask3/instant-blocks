@@ -43,13 +43,13 @@ public class BlockInstantEscapeLadder extends BlockInstant implements SimpleWate
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(world.canSeeSky(new BlockPos(x, y+1, z))) {
-			IBHelper.msg(player, Strings.ERROR_ESCAPE_LADDER, Colors.c);
+			IBHelper.sendMessage(player, Strings.ERROR_ESCAPE_LADDER, Colors.c);
 			return false;
 		}
 		return true;
 	}
 
-	public void build(Level world, int x, int y, int z, Player player) {
+	public boolean build(Level world, int x, int y, int z, Player player) {
 		Block stone = Blocks.STONE;
 		Block ladder = Blocks.LADDER;
 		Block torch = Blocks.TORCH;
@@ -74,6 +74,8 @@ public class BlockInstantEscapeLadder extends BlockInstant implements SimpleWate
 			}
 		}
 		setCreateMessage(Strings.CREATE_ESCAPE_LADDER.replace("%i%",String.valueOf(i-y)));
+
+		return true;
 	}
 
 	// LadderBlock.class

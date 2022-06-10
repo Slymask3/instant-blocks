@@ -65,7 +65,7 @@ public class BlockInstantGlassDome extends BlockInstant {
 		return true;
 	}
 
-	public void build(Level world, int x, int y, int z, Player player) {
+	public boolean build(Level world, int x, int y, int z, Player player) {
 		Block glass = Blocks.GLASS;
 		Block stone = Blocks.STONE;
 		Block torch = Blocks.TORCH;
@@ -471,5 +471,7 @@ public class BlockInstantGlassDome extends BlockInstant {
 		BuildHelper.setBlock(world,x+1,y+5,z+1,glass);
 		BuildHelper.setBlock(world,x+1,y+5,z,glass);
 		BuildHelper.setBlock(world,x+1,y+5,z-1,glass);
+
+		return true;
 	}
 }

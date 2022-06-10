@@ -6,8 +6,10 @@ import com.slymask3.instantblocks.reference.Strings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,7 +38,6 @@ public class BlockInstantWater extends BlockInstantLiquid {
 		setErrorMessage(Strings.ERROR_WATER_MAX.replace("%i%",String.valueOf(Config.Common.MAX_LIQUID.get())));
 		this.create = Strings.CREATE_WATER;
 		this.create1 = Strings.CREATE_WATER_1;
-        this.particle = "splash";
     }
 
     @Override
@@ -67,7 +68,7 @@ public class BlockInstantWater extends BlockInstantLiquid {
         return true;
     }
 
-//	public void onEntityCollidedWithBlock(Level world, int x, int y, int z, Entity entity) {
-//        entity.extinguish();
-//    }
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+        entity.clearFire();
+    }
 }

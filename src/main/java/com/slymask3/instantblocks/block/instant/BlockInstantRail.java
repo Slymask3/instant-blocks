@@ -35,12 +35,13 @@ public class BlockInstantRail extends BlockInstant {
 		return Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 	}
 
-	public void build(Level world, int x, int y, int z, Player player) {
+	public boolean build(Level world, int x, int y, int z, Player player) {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
     	for(int i = 0; i<= Config.Common.RAILS_AMOUNT.get(); i++) {
 	    	BuildHelper.setBlockDirectional(world, x, y-1, z, Blocks.STONE, direction, i, 0, 0, 0);
 	    	BuildHelper.setBlockDirectional(world, x, y, z, Blocks.RAIL, direction, i, 0, 0, 0);
 	    	BuildHelper.setBlockDirectional(world, x, y+1, z, Blocks.AIR, direction, i, 0, 0, 0);
     	}
+		return true;
     }
 }

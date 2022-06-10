@@ -27,13 +27,13 @@ public class BlockInstantMiningLadder extends BlockInstant {
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(y <= Config.Common.MINING_LADDER_LAYER.get() + 4) {
-			IBHelper.msg(player, Strings.ERROR_LADDER.replace("%i%",String.valueOf(Config.Common.MINING_LADDER_LAYER.get() + 4)), Colors.c);
+			IBHelper.sendMessage(player, Strings.ERROR_LADDER.replace("%i%",String.valueOf(Config.Common.MINING_LADDER_LAYER.get() + 4)), Colors.c);
 			return false;
 		}
 		return true;
 	}
 
-	public void build(Level world, int x, int y, int z, Player player) {
+	public boolean build(Level world, int x, int y, int z, Player player) {
 		Block ladder = Blocks.LADDER;
 		Block stone = Blocks.STONE;
 		Block torch = Blocks.WALL_TORCH;
@@ -67,5 +67,7 @@ public class BlockInstantMiningLadder extends BlockInstant {
 		BuildHelper.setBlockDirectional(world,x, layer+2, z, water,direction,0,0,0,1); //WATER
 		BuildHelper.setBlockDirectional(world,x, layer+1, z, sign, direction, 0,0,0,1,directionSign);
 		BuildHelper.setBlock(world,x, layer-1, z, stone); //MIDDLE STONE
+
+		return true;
 	}
 }

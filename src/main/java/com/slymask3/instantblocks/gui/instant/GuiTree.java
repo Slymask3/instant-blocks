@@ -67,13 +67,9 @@ public class GuiTree extends GuiInstant {
 
 	public void sendInfo() {
 		PacketHandler.sendToServer(new PacketTree(this.x, this.y, this.z, selectedTree, !fullLog.selected(), !fullLeaves.selected(), air.selected()));
-
-		BlockInstant block = (BlockInstant)BuildHelper.getBlock(world,x,y,z);
-		block.setCreateMessage(Strings.CREATE_TREE.replace("%tree%",treeToString(selectedTree)));
-		block.afterBuild(world,x,y,z,player);
 	}
 	
-	public String treeToString(int tree) {
+	public static String treeToString(int tree) {
     	switch(tree) {
 			case 0: return "Huge Oak Tree";
 			case 1: return "Huge Spruce Tree";
@@ -172,7 +168,7 @@ public class GuiTree extends GuiInstant {
 
 			public void render(PoseStack poseStack, int entryIdx, int top, int left, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean p_194999_5_, float partialTick) {
 				if(top > GuiTree.TreeList.this.y0 - 5 && top + entryHeight < GuiTree.TreeList.this.y1 + 5) {
-					String string = GuiTree.this.treeToString(index);
+					String string = GuiTree.treeToString(index);
 					GuiTree.this.font.drawShadow(poseStack, string, (float)(left + entryWidth / 2 - GuiTree.this.font.width(string) / 2), top, GuiTree.this.getSelected() == this.index ? 0x00AA00 : 16777215, true);
 				}
 			}
@@ -188,7 +184,7 @@ public class GuiTree extends GuiInstant {
 			}
 
 			public Component getNarration() {
-				return new TranslatableComponent("narrator.select", GuiTree.this.treeToString(index));
+				return new TranslatableComponent("narrator.select", GuiTree.treeToString(index));
 			}
 		}
 	}

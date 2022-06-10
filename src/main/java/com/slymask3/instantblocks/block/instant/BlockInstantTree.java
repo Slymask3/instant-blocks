@@ -1,7 +1,9 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.BlockInstant;
+import com.slymask3.instantblocks.gui.instant.GuiTree;
 import com.slymask3.instantblocks.reference.GuiID;
+import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -29,7 +31,7 @@ public class BlockInstantTree extends BlockInstant {
 		return Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
 	}
 	
-	public void build(Level world, int x, int y, int z, int type, boolean fullLog, boolean fullLeaves, boolean air) {
+	public boolean build(Level world, int x, int y, int z, int type, boolean fullLog, boolean fullLeaves, boolean air) {
 		if(type == 0) { //IF OAK
 			buildOak(world, x, y, z, Blocks.OAK_LOG, Blocks.OAK_LEAVES, fullLog, fullLeaves, air);
 		} else if(type == 1) { //IF SPRUCE
@@ -45,6 +47,8 @@ public class BlockInstantTree extends BlockInstant {
 		} else if(type == 6) { //IF GLASS
 			buildOak(world, x, y, z, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, fullLog, fullLeaves, air);
 		}
+		setCreateMessage(Strings.CREATE_TREE.replace("%tree%", GuiTree.treeToString(type)));
+		return true;
 	}
 
 	private void buildOak(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {

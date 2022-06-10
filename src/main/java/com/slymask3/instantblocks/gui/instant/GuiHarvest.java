@@ -79,8 +79,5 @@ public class GuiHarvest extends GuiInstant {
 	
 	public void sendInfo() {
 		PacketHandler.sendToServer(new PacketHarvest(this.x, this.y, this.z, logOak.selected(), logSpruce.selected(), logBirch.selected(), logJungle.selected(), logAcacia.selected(), logDark.selected(), wheat.selected(), carrot.selected(), potato.selected(), cactus.selected(), pumpkin.selected(), melon.selected(), sugarcane.selected(), cocoa.selected(), mushroom.selected(), netherwart.selected(), replant.selected()));
-		
-		BlockInstant block = (BlockInstant)BuildHelper.getBlock(world,x,y,z);
-		block.afterBuild(world,x,y,z,player);
 	}
 }

@@ -88,9 +88,6 @@ public class GuiSkydive extends GuiInstant {
 		}
 		int[] colors = getColors();
 		PacketHandler.sendToServer(new PacketSkydive(this.x, this.y, this.z, colors.length, colors, radius, tp.selected()));
-
-		BlockInstant block = (BlockInstant) BuildHelper.getBlock(world,x,y,z);
-		block.afterBuild(world,x,y,z,player);
 	}
 	
 	private int[] getColors() {

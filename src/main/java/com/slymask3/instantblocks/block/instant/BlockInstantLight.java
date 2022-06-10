@@ -9,6 +9,7 @@ import com.slymask3.instantblocks.util.Coords;
 import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -21,6 +22,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BlockInstantLight extends BlockInstant {
     public ArrayList<Coords> coordsList;
@@ -33,7 +35,6 @@ public class BlockInstantLight extends BlockInstant {
                 .instabreak()
                 .lightLevel((par1) -> 14)
         );
-        //setCreateMessage(Strings.CREATE_LIGHT);
         this.coordsList = new ArrayList<>();
     }
 
@@ -41,30 +42,24 @@ public class BlockInstantLight extends BlockInstant {
         return Block.box(6.0D, 0.0D, 6.0D, 10.0D, 15.0D, 10.0D);
     }
 
-//    public boolean canActivate(Level world, int x, int y, int z, Player player) {
-//        checkForDarkness(world,x,y,z);
-//        if(coordsList.isEmpty()) {
-//            IBHelper.msg(player, Strings.ERROR_LIGHT.replace("%i%",String.valueOf(Config.Common.RADIUS_LIGHT.get())), Colors.c);
-//            return false;
-//        }
-//        return true;
-//    }
+    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+        double d0 = (double)pos.getX() + 0.6D;
+        double d1 = (double)pos.getY() + 0.8D;
+        double d2 = (double)pos.getZ() + 0.6D;
+        world.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+        world.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+    }
     
-    public void build(Level world, int x, int y, int z, Player player) {
-        //for(Coords coords : coordsList) {
-        //    BlockPos pos = coords.getBlockPos();
-        //    placeTorch(world,pos);
-        //}
-
-        if(IBHelper.isServer(world)) {
-            checkForDarkness(world,x,y,z);
-            if(coordsList.isEmpty()) {
-                IBHelper.sendMessage(player,Strings.ERROR_LIGHT.replace("%i%",String.valueOf(Config.Common.RADIUS_LIGHT.get())),Colors.c);
-                return;
-            }
-            IBHelper.sendMessage(player,Strings.CREATE_LIGHT_AMOUNT.replace("%i%",String.valueOf(coordsList.size())),Colors.a,x,y,z);
-            coordsList.clear();
+    public boolean build(Level world, int x, int y, int z, Player player) {
+        checkForDarkness(world,x,y,z);
+        if(coordsList.isEmpty()) {
+            IBHelper.sendMessage(player,Strings.ERROR_LIGHT.replace("%i%",String.valueOf(Config.Common.RADIUS_LIGHT.get())),Colors.c);
+            return false;
         }
+        IBHelper.sendMessage(player,Strings.CREATE_LIGHT_AMOUNT.replace("%i%",String.valueOf(coordsList.size())),Colors.a,x,y,z);
+        coordsList.clear();
+
+        return true;
 	}
 
     private void checkForDarkness(Level world, int x_center, int y_center, int z_center) {
@@ -105,7 +100,7 @@ public class BlockInstantLight extends BlockInstant {
         } else if(world.getBlockState(pos.west()).isFaceSturdy(world,pos,Direction.EAST)) {
             BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.EAST);
         }
-        world.markAndNotifyBlock(pos,world.getChunk(pos.getX(),pos.getZ()),world.getBlockState(pos),world.getBlockState(pos),2,3);
+        world.markAndNotifyBlock(pos,world.getChunkAt(pos),world.getBlockState(pos),world.getBlockState(pos),2,0);
     }
 
     private boolean addCoords(int x, int y, int z) {

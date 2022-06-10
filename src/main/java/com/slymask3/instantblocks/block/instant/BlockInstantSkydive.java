@@ -42,7 +42,7 @@ public class BlockInstantSkydive extends BlockInstant implements EntityBlock {
 		return new TileEntitySkydive(pos,state);
 	}
 
-	public void build(Level world, int x, int y, int z, Player player, int[] selectedColors, int radius, boolean tp) {
+	public boolean build(Level world, int x, int y, int z, Player player, int[] selectedColors, int radius, boolean tp) {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 
 		BuildHelper.setBlock(world,x,y,z,Blocks.AIR);
@@ -120,5 +120,7 @@ public class BlockInstantSkydive extends BlockInstant implements EntityBlock {
 		} else if(direction == Direction.EAST) {
 			IBHelper.teleport(world,player,x+radius,max+1,z, tp);
 		}
+
+		return true;
 	}
 }

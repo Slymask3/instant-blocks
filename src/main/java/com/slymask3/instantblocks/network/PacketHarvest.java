@@ -94,8 +94,9 @@ public class PacketHarvest {
 				Level world = player.getLevel();
 
 				BlockInstantHarvest block = (BlockInstantHarvest) BuildHelper.getBlock(world,message._x, message._y, message._z);
-				block.build(world, message._x, message._y, message._z, message._logOak, message._logSpruce, message._logBirch, message._logJungle, message._logAcacia, message._logDark, message._wheat, message._carrot, message._potato, message._cactus, message._pumpkin, message._melon, message._sugarcane, message._cocoa, message._mushroom, message._netherwart, message._replant);
-				block.afterBuild(world, message._x, message._y, message._z, player);
+				if(block.build(world, message._x, message._y, message._z, message._logOak, message._logSpruce, message._logBirch, message._logJungle, message._logAcacia, message._logDark, message._wheat, message._carrot, message._potato, message._cactus, message._pumpkin, message._melon, message._sugarcane, message._cocoa, message._mushroom, message._netherwart, message._replant)) {
+					block.afterBuild(world, message._x, message._y, message._z, player);
+				}
 			});
 			context.get().setPacketHandled(true);
 		}

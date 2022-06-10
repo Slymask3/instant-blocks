@@ -35,7 +35,7 @@ public class BlockInstantHarvest extends BlockInstant implements EntityBlock {
 		return null;
 	}
 	
-	public void build(Level world, int X, int Y, int Z, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
+	public boolean build(Level world, int X, int Y, int Z, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
 		int radius = Config.Common.RADIUS_HARVEST.get();
 
 		BuildHelper.setBlock(world,X, Y, Z, Blocks.CHEST);
@@ -132,6 +132,8 @@ public class BlockInstantHarvest extends BlockInstant implements EntityBlock {
             z = z_base;
             y--;
         }
+
+		return true;
     }
 
 	private void addLog(ChestBlockEntity chest, int x, int y, int z, Block block, Block sapling, boolean replant) {

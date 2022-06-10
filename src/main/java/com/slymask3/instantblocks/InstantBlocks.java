@@ -27,8 +27,8 @@ public class InstantBlocks {
 		Config.init();
 		modEventBus.addListener(this::setupClient);
 		modEventBus.addListener(this::setupCommon);
-		ModItems.ITEMS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
+		ModItems.ITEMS.register(modEventBus);
 		ModTiles.TILES.register(modEventBus);
 
 		MinecraftForge.EVENT_BUS.register(this);

@@ -65,13 +65,5 @@ public class GuiStatue extends GuiInstant {
 	
 	public void sendInfo() {
 		PacketHandler.sendToServer(new PacketStatue(this.x, this.y, this.z, input.getValue(), head.selected(), body.selected(), armLeft.selected(), armRight.selected(), legLeft.selected(), legRight.selected(), rgbMode.selected()));
-
-		BlockInstantStatue block = (BlockInstantStatue) BuildHelper.getBlock(world,x,y,z);
-		if(block.getImage(input.getValue()) != null) {
-			block.setCreateMessage(Strings.CREATE_STATUE.replace("%username%",input.getValue()));
-			block.afterBuild(world,x,y,z,player);
-		} else {
-			IBHelper.msg(player, Strings.ERROR_STATUE.replace("%username%",input.getValue()), Colors.c);
-		}
 	}
 }

@@ -29,7 +29,7 @@ public class BlockInstantFarm extends BlockInstant {
 		setDirectional(true);
     }
 
-	public void build(Level world, int x, int y, int z, Player player) {
+	public boolean build(Level world, int x, int y, int z, Player player) {
 		Block crop = Blocks.WHEAT;
 		if(IBHelper.isServer(world)) {
 			Random ran = new Random();
@@ -101,5 +101,7 @@ public class BlockInstantFarm extends BlockInstant {
 		ChestBlockEntity chest2 = (ChestBlockEntity)BuildHelper.getBlockEntityDirectional(world,x,y+1,z,direction,3,0,0,1);
 		chest1.setItem(0, new ItemStack(Items.STONE_HOE, 1));
 		chest2.setItem(0, new ItemStack(Items.STONE_HOE, 1));
+
+		return true;
 	}
 }

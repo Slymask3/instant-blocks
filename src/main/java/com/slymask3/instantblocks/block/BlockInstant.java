@@ -58,10 +58,6 @@ public abstract class BlockInstant extends Block {
 		this.guiID = guiID;
 	}
 
-	public void onPlace(BlockState p_60566_, Level p_60567_, BlockPos p_60568_, BlockState p_60569_, boolean p_60570_) {
-		InstantBlocks.LOGGER.info("placed: " + p_60566_.getValue(FACING));
-	}
-
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
@@ -82,50 +78,54 @@ public abstract class BlockInstant extends Block {
 	}
 
 	public InteractionResult onActivate(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		if(hand == InteractionHand.OFF_HAND) {
-			return InteractionResult.FAIL;
+		if(IBHelper.isServer(world)) {
+			if(hand == InteractionHand.OFF_HAND) {
+				return InteractionResult.FAIL;
+			}
+
+			int x = pos.getX();
+			int y = pos.getY();
+			int z = pos.getZ();
+
+			ItemStack is = player.getItemInHand(hand);
+			if(Config.Common.USE_WANDS.get() && !IBHelper.isWand(is)) {
+				IBHelper.sendMessage(player, Strings.ERROR_WAND, Colors.c);
+				return InteractionResult.FAIL;
+			}
+
+			if(!canActivate(world,x,y,z,player)) {
+				return InteractionResult.FAIL;
+			}
+
+			if(build(world, x, y, z, player)) {
+				afterBuild(world, x, y, z, player);
+			} else {
+				return InteractionResult.FAIL;
+			}
 		}
-
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
-
-		InstantBlocks.LOGGER.info("onActivate() client: " + world.isClientSide());
-
-		ItemStack is = player.getItemInHand(hand);
-		if(Config.Common.USE_WANDS.get() && !IBHelper.isWand(is)) {
-			IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
-			return InteractionResult.FAIL;
-		}
-
-		if(!canActivate(world,x,y,z,player)) {
-			return InteractionResult.FAIL;
-		}
-
-		build(world, x, y, z, player);
-		afterBuild(world, x, y, z, player);
-
 		return InteractionResult.SUCCESS;
 	}
 
 	public InteractionResult onActivateGui(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		if(hand == InteractionHand.OFF_HAND) {
-			return InteractionResult.FAIL;
-		}
-
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
-
-		if(!canActivate(world,x,y,z,player)) {
-			return InteractionResult.FAIL;
-		}
-
-		ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
-		if(Config.Common.USE_WANDS.get()) {
-			if(!IBHelper.isWand(is)) {
-				IBHelper.msg(player, Strings.ERROR_WAND, Colors.c);
+		if(IBHelper.isServer(world)) {
+			if(hand == InteractionHand.OFF_HAND) {
 				return InteractionResult.FAIL;
+			}
+
+			int x = pos.getX();
+			int y = pos.getY();
+			int z = pos.getZ();
+
+			if(!canActivate(world,x,y,z,player)) {
+				return InteractionResult.FAIL;
+			}
+
+			ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
+			if(Config.Common.USE_WANDS.get()) {
+				if(!IBHelper.isWand(is)) {
+					IBHelper.sendMessage(player, Strings.ERROR_WAND, Colors.c);
+					return InteractionResult.FAIL;
+				}
 			}
 		}
 
@@ -141,16 +141,14 @@ public abstract class BlockInstant extends Block {
 		return InteractionResult.SUCCESS;
 	}
 
-	public void build(Level world, int x, int y, int z, Player player) {
+	public boolean build(Level world, int x, int y, int z, Player player) {
 		//build structure
+		return true;
 	}
 
 	public void afterBuild(Level world, int x, int y, int z, Player player) {
+		IBHelper.sendMessage(player,this.createMessage,Colors.a,x,y,z);
 		IBHelper.xp(world, player, Config.Common.XP_AMOUNT.get());
-		IBHelper.sound(world, x, y, z);
-		IBHelper.effectFull(world, x, y, z);
-		IBHelper.msg(player, this.createMessage, Colors.a);
-
 		if(Config.Common.USE_WANDS.get()) {
 			ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
 			if(IBHelper.isWand(is)) {

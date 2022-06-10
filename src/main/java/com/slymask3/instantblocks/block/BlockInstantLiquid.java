@@ -11,6 +11,8 @@ import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
@@ -30,6 +32,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class BlockInstantLiquid extends BlockInstant {
 	public ArrayList<Coords> coordsList;
@@ -38,7 +41,7 @@ public abstract class BlockInstantLiquid extends BlockInstant {
 	public String create;
 	public String create1;
 	public boolean isSuction = false;
-	public String particle = null;
+	public ParticleOptions particle = null;
 
 	public static final DustParticleOptions WHITE_DUST = new DustParticleOptions(new Vector3f(Vec3.fromRGB24(0xFFFFFF)), 1.0F);
 
@@ -49,22 +52,15 @@ public abstract class BlockInstantLiquid extends BlockInstant {
 		this.blockReplace = blockReplace;
     }
 
-//	public void randomDisplayTick(Level world, int x, int y, int z, Random random) {
-//		if(this.particle != null && random.nextInt(10) == 0) {
-//			for(int i=0; i<8; i++) {
-//				world.spawnParticle(this.particle, (double)x + Math.random(), (double)y + 1.2D, (double)z + Math.random(), 0.0D, 0.0D, 0.0D);
-//			}
-//		}
-//	}
+	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+		for(int i=0; i<8; i++) {
+			world.addParticle(particle, (double)pos.getX() + Math.random(), (double)pos.getY() + 1.2D, (double)pos.getZ() + Math.random(), 0.0D, 0.0D, 0.0D);
+		}
+	}
 
-//	public AxisAlignedBB getCollisionBoundingBoxFromPool(Level world, int x, int y, int z) {
-//		if(this.isSuction) {
-//			return super.getCollisionBoundingBoxFromPool(world,x,y,z);
-//		} else  {
-//			float f = 0.0625F;
-//			return AxisAlignedBB.getBoundingBox((double)((float)x + f), (double)y, (double)((float)z + f), (double)((float)(x + 1) - f), (double)((float)(y + 1) - f), (double)((float)(z + 1) - f));
-//		}
-//	}
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+		return Block.box(1.0D, 0.0D, 1.0D, 15.0D, 15.0D, 15.0D);
+	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
@@ -116,11 +112,11 @@ public abstract class BlockInstantLiquid extends BlockInstant {
 		}
 		checkForBlock(world,x,y,z);
 		if(isSuction && coordsList.isEmpty()) {
-			IBHelper.msg(player, Strings.ERROR_NO_LIQUID, Colors.c);
+			IBHelper.sendMessage(player, Strings.ERROR_NO_LIQUID, Colors.c);
 			return false;
 		}
 		if(coordsList.size() >= getMax()) {
-			IBHelper.msg(player, errorMessage, Colors.c);
+			IBHelper.sendMessage(player, errorMessage, Colors.c);
 			coordsList = new ArrayList<>();
 			return false;
 		} else {
@@ -128,7 +124,7 @@ public abstract class BlockInstantLiquid extends BlockInstant {
 		}
 	}
 
-	public void build(Level world, int x, int y, int z, Player player) {
+	public boolean build(Level world, int x, int y, int z, Player player) {
 		for(Coords coords : coordsList) {
 			BuildHelper.setBlock(world, coords.getX(), coords.getY(), coords.getZ(), blockReplace);
 		}
@@ -142,6 +138,7 @@ public abstract class BlockInstantLiquid extends BlockInstant {
 		if(isSuction) {
 			this.blockCheck = null;
 		}
+		return true;
 	}
 
 	private void checkForBlock(Level world, int x, int y, int z) {
