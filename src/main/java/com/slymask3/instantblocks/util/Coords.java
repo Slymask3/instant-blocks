@@ -1,5 +1,7 @@
 package com.slymask3.instantblocks.util;
 
+import net.minecraft.core.BlockPos;
+
 public class Coords {
     private final int x;
     private final int y;
@@ -19,6 +21,9 @@ public class Coords {
     }
     public int getZ() {
         return z;
+    }
+    public BlockPos getBlockPos() {
+        return new BlockPos(x,y,z);
     }
 
     @Override

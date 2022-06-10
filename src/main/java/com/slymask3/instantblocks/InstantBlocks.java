@@ -39,7 +39,8 @@ public class InstantBlocks {
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibEscapeLadder.get(), RenderType.translucent());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibRail.get(), RenderType.translucent());
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibWater.get(), RenderType.translucent());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibTree.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibTree.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibLight.get(), RenderType.cutout());
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event) {

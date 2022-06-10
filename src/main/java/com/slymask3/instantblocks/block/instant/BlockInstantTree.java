@@ -25,7 +25,7 @@ public class BlockInstantTree extends BlockInstant {
 		setGuiID(GuiID.TREE);
 	}
 
-	public VoxelShape getShape(BlockState p_56008_, BlockGetter p_56009_, BlockPos p_56010_, CollisionContext p_56011_) {
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		return Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
 	}
 	
@@ -47,18 +47,7 @@ public class BlockInstantTree extends BlockInstant {
 		}
 	}
 
-	/***************
-	 * @INFO	   *
-	 * x+# = EAST  *
-	 * x-# = WEST  *
-	 * z+# = SOUTH *
-	 * z-# = NORTH *
-	 * 			   *
-	 * y+# = UP    *
-	 * y-# = DOWN  *
-	 ***************/
-	
-	public void buildOak(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
+	private void buildOak(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
 		/************************************************************* up   down  north south east  west */
 		buildLog(world, x+4*0, y+4*0, z+4*0, log, fullLog, air, false, true, true, true, true, true);
 		buildLog(world, x+4*0, y+4*1, z+4*0, log, fullLog, air, false, false, true, true, true, true);
@@ -139,8 +128,8 @@ public class BlockInstantTree extends BlockInstant {
 
 		buildLeaves(world, x-4*1, y+4*5, z+4*0, leaves, fullLeaves, air, true, false, true, true, false, true);
 	}
-	
-	public void buildSpruce(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
+
+	private void buildSpruce(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
 		/************************************************************* up   down  north south east  west */
 		buildLog(world, x+4*0, y+4*0, z+4*0, log, fullLog, air, false, true, true, true, true, true);
 		buildLog(world, x+4*0, y+4*1, z+4*0, log, fullLog, air, false, false, true, true, true, true);
@@ -283,8 +272,8 @@ public class BlockInstantTree extends BlockInstant {
 		/** eighth layer **/
 		buildLeaves(world, x+4*0, y+4*9, z+4*0, leaves, fullLeaves, air, true, false, true, true, true, true);
 	}
-	
-	public void buildBirch(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
+
+	private void buildBirch(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
 		/************************************************************* up   down  north south east  west */
 		buildLog(world, x+4*0, y+4*0, z+4*0, log, fullLog, air, false, true, true, true, true, true);
 		buildLog(world, x+4*0, y+4*1, z+4*0, log, fullLog, air, false, false, true, true, true, true);
@@ -365,8 +354,8 @@ public class BlockInstantTree extends BlockInstant {
 
 		buildLeaves(world, x-4*1, y+4*5, z+4*0, leaves, fullLeaves, air, true, false, true, true, false, true);
 	}
-	
-	public void buildJungle(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
+
+	private void buildJungle(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
 		/************************************************************* up   down  north south east  west */
 		buildLog(world, x+4*0, y+4*0, z+4*0, log, fullLog, air, false, true, true, true, true, true);
 		buildLog(world, x+4*0, y+4*1, z+4*0, log, fullLog, air, false, false, true, true, true, true);
@@ -450,8 +439,8 @@ public class BlockInstantTree extends BlockInstant {
 
 		buildLeaves(world, x-4*1, y+4*8, z+4*0, leaves, fullLeaves, air, true, false, true, true, false, true);
 	}
-	
-	public void buildAcacia(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
+
+	private void buildAcacia(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
 		/************************************************************* up   down  north south east  west */
 		buildLog(world, x+4*0, y+4*0, z+4*0, log, fullLog, air, false, true, true, true, true, true);
 		buildLog(world, x+4*0, y+4*1, z+4*0, log, fullLog, air, false, false, true, true, true, true);
@@ -576,8 +565,8 @@ public class BlockInstantTree extends BlockInstant {
 
 		buildLeaves(world, x-4*4, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, true, true, false, true);
 	}
-	
-	public void buildDarkOak(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
+
+	private void buildDarkOak(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
 		/************************************************************* up   down  north south east  west */
 		buildLog(world, x+4*0, y+4*0, z+4*0, log, fullLog, air, false, true, false, true, true, false);
 		buildLog(world, x+4*0, y+4*1, z+4*0, log, fullLog, air, false, false, false, true, true, false);
@@ -751,36 +740,16 @@ public class BlockInstantTree extends BlockInstant {
 		buildLeaves(world, x-4*1, y+4*7, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, true);
 	}
 
-	public void buildLog(Level world, int x, int y, int z, Block block, boolean fullLog, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		if(fullLog) {
-			BuildHelper.build(world, x-1, y, z-1, block, 4, 4, 4);
-		} else {
-			if(air) {
-				BuildHelper.build(world, x-1, y, z-1, Blocks.AIR, 4, 4, 4);
-			}
-			if(up) {
-				BuildHelper.build(world, x-1, y+3, z-1, block, 4, 1, 4);
-			}
-			if(down) {
-				BuildHelper.build(world, x-1, y, z-1, block, 4, 1, 4);
-			}
-			if(north) {
-				BuildHelper.build(world, x-1, y, z-1, block, 1, 4, 4);
-			}
-			if(south) {
-				BuildHelper.build(world, x-1, y, z+2, block, 1, 4, 4);
-			}
-			if(east) {
-				BuildHelper.build(world, x+2, y, z-1, block, 4, 4, 1);
-			}
-			if(west) {
-				BuildHelper.build(world, x-1, y, z-1, block, 4, 4, 1);
-			}
-		}
+	private void buildLog(Level world, int x, int y, int z, Block block, boolean fullLog, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
+		buildBlock(world,x,y,z,block,fullLog,air,up,down,north,south,east,west);
 	}
-	
-	public void buildLeaves(Level world, int x, int y, int z, Block block, boolean fullLeaves, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		if(fullLeaves) {
+
+	private void buildLeaves(Level world, int x, int y, int z, Block block, boolean fullLeaves, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
+		buildBlock(world,x,y,z,block,fullLeaves,air,up,down,north,south,east,west);
+	}
+
+	private void buildBlock(Level world, int x, int y, int z, Block block, boolean full, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
+		if(full) {
 			BuildHelper.build(world, x-1, y, z-1, block, 4, 4, 4);
 		} else {
 			if(air) {

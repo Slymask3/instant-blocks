@@ -36,6 +36,7 @@ public class ModBlocks {
 	public static final RegistryObject<Block> ibStatue = BLOCKS.register(Names.Blocks.IB_STATUE, BlockInstantStatue::new);
 	public static final RegistryObject<Block> ibHarvest = BLOCKS.register(Names.Blocks.IB_HARVEST, BlockInstantHarvest::new);
 	public static final RegistryObject<Block> ibTree = BLOCKS.register(Names.Blocks.IB_TREE, BlockInstantTree::new);
+	public static final RegistryObject<Block> ibLight = BLOCKS.register(Names.Blocks.IB_LIGHT, BlockInstantLight::new);
 
 	public static final RegistryObject<Block> color = BLOCKS.register(Names.Blocks.COLOR, BlockColor::new);
 	public static final RegistryObject<Block> skydiveTP = BLOCKS.register(Names.Blocks.SKYDIVE_TP, BlockSkydiveTP::new);

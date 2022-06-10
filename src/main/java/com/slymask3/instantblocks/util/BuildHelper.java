@@ -42,6 +42,14 @@ public class BuildHelper {
 	public static void setBlock(Level world, int x, int y, int z, Block block, Direction direction) {
 		setBlock(world,x,y,z,block,direction,2);
 	}
+
+	public static void setBlock(Level world, BlockPos pos, Block block) {
+		setBlock(world,pos.getX(),pos.getY(),pos.getZ(),block,null,2);
+	}
+
+	public static void setBlock(Level world, BlockPos pos, Block block, Direction direction) {
+		setBlock(world,pos.getX(),pos.getY(),pos.getZ(),block,direction,2);
+	}
 	
 	public static void setBlock(Level world, int x, int y, int z, Block block, Direction direction, int flag) {
 		Block getBlock = getBlock(world,x,y,z);

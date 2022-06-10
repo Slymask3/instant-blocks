@@ -2,12 +2,15 @@ package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.item.ItemInstantWand;
+import com.slymask3.instantblocks.network.PacketHandler;
+import com.slymask3.instantblocks.network.PacketMessage;
 import com.slymask3.instantblocks.reference.Strings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
@@ -106,5 +109,19 @@ public class IBHelper {
 			max = world.getMaxBuildHeight() - 4;
 		}
 		return max;
+	}
+
+	public static void sendMessage(Player player, String message, String color) {
+		sendMessage(player, message, color, 0, 0, 0, false);
+	}
+
+	public static void sendMessage(Player player, String message, String color, int x, int y, int z) {
+		sendMessage(player, message, color, x, y, z, true);
+	}
+
+	public static void sendMessage(Player player, String message, String color, int x, int y, int z, boolean effects) {
+		if(isServer(player.getLevel())) {
+			PacketHandler.sendToClient((ServerPlayer)player,new PacketMessage(message,color,x,y,z,effects));
+		}
 	}
 }
