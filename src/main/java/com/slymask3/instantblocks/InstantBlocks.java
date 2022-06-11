@@ -6,6 +6,7 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.init.ModTiles;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.reference.Reference;
+import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.common.MinecraftForge;
@@ -45,5 +46,6 @@ public class InstantBlocks {
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
 		PacketHandler.register();
+		SchematicHelper.createSchematicsDir();
 	}
 }

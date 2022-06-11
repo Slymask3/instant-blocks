@@ -18,6 +18,7 @@ public class PacketHandler {
         INSTANCE.registerMessage(++index, PacketStatue.class, PacketStatue::encode, PacketStatue::decode, PacketStatue.Handler::handle);
         INSTANCE.registerMessage(++index, PacketHarvest.class, PacketHarvest::encode, PacketHarvest::decode, PacketHarvest.Handler::handle);
         INSTANCE.registerMessage(++index, PacketTree.class, PacketTree::encode, PacketTree::decode, PacketTree.Handler::handle);
+        INSTANCE.registerMessage(++index, PacketSchematic.class, PacketSchematic::encode, PacketSchematic::decode, PacketSchematic.Handler::handle);
     }
 
     public static void sendToServer(Object message) {

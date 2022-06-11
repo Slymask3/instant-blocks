@@ -89,6 +89,14 @@ public class BuildHelper {
 		}
 	}
 
+	public static void setBlock(Level world, int x, int y, int z, BlockState state) {
+		setBlock(world,x,y,z,state,3);
+	}
+
+	public static void setBlock(Level world, int x, int y, int z, BlockState state, int flag) {
+		world.setBlock(new BlockPos(x,y,z),state,flag);
+	}
+
 	public static void setColorBlock(Level world, int x, int y, int z, int color) {
 		setBlock(world, x, y, z, ModBlocks.color.get());
 		try {

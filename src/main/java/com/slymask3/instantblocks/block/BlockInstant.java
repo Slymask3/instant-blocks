@@ -1,10 +1,6 @@
 package com.slymask3.instantblocks.block;
 
-import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.gui.instant.GuiHarvest;
-import com.slymask3.instantblocks.gui.instant.GuiSkydive;
-import com.slymask3.instantblocks.gui.instant.GuiStatue;
-import com.slymask3.instantblocks.gui.instant.GuiTree;
+import com.slymask3.instantblocks.gui.instant.*;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
@@ -107,25 +103,23 @@ public abstract class BlockInstant extends Block {
 	}
 
 	public InteractionResult onActivateGui(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		if(IBHelper.isServer(world)) {
-			if(hand == InteractionHand.OFF_HAND) {
+		if(hand == InteractionHand.OFF_HAND) {
+			return InteractionResult.FAIL;
+		}
+
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+
+		if(!canActivate(world,x,y,z,player)) {
+			return InteractionResult.FAIL;
+		}
+
+		ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
+		if(Config.Common.USE_WANDS.get()) {
+			if(!IBHelper.isWand(is)) {
+				IBHelper.sendMessage(player, Strings.ERROR_WAND, Colors.c);
 				return InteractionResult.FAIL;
-			}
-
-			int x = pos.getX();
-			int y = pos.getY();
-			int z = pos.getZ();
-
-			if(!canActivate(world,x,y,z,player)) {
-				return InteractionResult.FAIL;
-			}
-
-			ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
-			if(Config.Common.USE_WANDS.get()) {
-				if(!IBHelper.isWand(is)) {
-					IBHelper.sendMessage(player, Strings.ERROR_WAND, Colors.c);
-					return InteractionResult.FAIL;
-				}
 			}
 		}
 
@@ -135,6 +129,7 @@ public abstract class BlockInstant extends Block {
 				case STATUE -> Minecraft.getInstance().setScreen(new GuiStatue(player,world,pos.getX(),pos.getY(),pos.getZ()));
 				case HARVEST -> Minecraft.getInstance().setScreen(new GuiHarvest(player,world,pos.getX(),pos.getY(),pos.getZ()));
 				case TREE -> Minecraft.getInstance().setScreen(new GuiTree(player,world,pos.getX(),pos.getY(),pos.getZ()));
+				case SCHEMATIC -> Minecraft.getInstance().setScreen(new GuiSchematic(player,world,pos.getX(),pos.getY(),pos.getZ()));
 			}
 		}
 

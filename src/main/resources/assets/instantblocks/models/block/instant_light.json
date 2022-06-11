@@ -1,7 +1,7 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "torch": "instantblocks:blocks/light_side",
+    "torch": "instantblocks:blocks/light",
     "particle": "#torch"
   },
   "elements": [

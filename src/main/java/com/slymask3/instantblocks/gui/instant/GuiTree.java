@@ -35,7 +35,7 @@ public class GuiTree extends GuiInstant {
 	private Checkbox fullLog, fullLeaves, air;
 
 	public GuiTree(Player player, Level world, int x, int y, int z) {
-		super(player, world, x, y, z, "Instant Statue");
+		super(player, world, x, y, z, "Instant Huge Tree");
 		this.tileEntity = (TileEntityTree)world.getBlockEntity(new BlockPos(x,y,z));
 	}
 
@@ -47,7 +47,7 @@ public class GuiTree extends GuiInstant {
 		this.fullLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, new TextComponent("Hollow Leaves"), true);
 		this.air = new Checkbox(this.width / 2 + 4, 94, 150, 20, new TextComponent("Air Blocks Inside"), true);
 
-		this.treeList = new TreeList(this.minecraft);
+		this.treeList = new TreeList(this.width / 2 - 4 - 150,50,144,120);
 		this.addWidget(this.treeList);
 
 		InstantBlocks.LOGGER.info("treeList.children(): " + treeList.children());
@@ -100,9 +100,11 @@ public class GuiTree extends GuiInstant {
 
 	@OnlyIn(Dist.CLIENT)
 	class TreeList extends ObjectSelectionList<TreeList.Entry> {
-		public TreeList(Minecraft minecraft) {
-			super(minecraft, 144, 120, 50, 170, 18);
-			this.setLeftPos(GuiTree.this.width / 2 - 4 - 150);
+		public TreeList(int x, int y, int width, int height) {
+			//super(minecraft, 144, 120, 50, 170, 18);
+			//this.setLeftPos(GuiTree.this.width / 2 - 4 - 150);
+			super(GuiTree.this.minecraft, width, height, y, y + height, 18);
+			this.setLeftPos(x);
 			this.setRenderHeader(false, 0);
 			this.setRenderTopAndBottom(false);
 			this.setRenderSelection(true);

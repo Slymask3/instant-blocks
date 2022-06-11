@@ -46,6 +46,7 @@ public class GuiStatue extends GuiInstant {
 		this.rgbMode = new Checkbox(x_left, y+(slot*3), 150, 20, new TextComponent("RGB Mode"), true);
 
 		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 300+8, 20, new TextComponent("Input"));
+		this.input.setFocus(true);
 
 		this.addRenderableWidget(this.head);
 		this.addRenderableWidget(this.body);
