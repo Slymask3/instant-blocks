@@ -2,7 +2,7 @@ package com.slymask3.instantblocks.block;
 
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
-import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -36,7 +36,7 @@ public class BlockColor extends Block implements EntityBlock {
 
     public void onPlace(BlockState state, Level world, BlockPos pos, BlockState state1, boolean var5) {
         super.onPlace(state,world,pos,state1,var5);
-        if(IBHelper.isServer(world)) {
+        if(Helper.isServer(world)) {
             Random rand = new Random();
             int r = rand.nextInt(255);
             int g = rand.nextInt(255);

@@ -8,7 +8,7 @@ import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import com.slymask3.instantblocks.util.Colors;
-import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;

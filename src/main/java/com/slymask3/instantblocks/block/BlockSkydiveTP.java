@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.block;
 
-import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -21,7 +21,7 @@ public class BlockSkydiveTP extends Block {
 	}
 
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		IBHelper.teleport(world,player,pos.getX(),IBHelper.getMaxSkydive(world) + 2,pos.getZ(), true);
+		Helper.teleport(world,player,pos.getX(), Helper.getMaxSkydive(world) + 2,pos.getZ(), true);
 		return InteractionResult.SUCCESS;
 	}
 }

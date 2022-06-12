@@ -29,6 +29,7 @@ public class BlockInstantRail extends BlockInstant {
 				.isViewBlocking((state, world, pos) -> false)
 		);
         setCreateMessage(Strings.CREATE_RAIL);
+		setDirectional(true);
 	}
 
 	public VoxelShape getShape(BlockState p_54372_, BlockGetter p_54373_, BlockPos p_54374_, CollisionContext p_54375_) {

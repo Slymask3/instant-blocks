@@ -4,8 +4,9 @@ import com.slymask3.instantblocks.gui.instant.*;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Colors;
-import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,7 +35,6 @@ public abstract class BlockInstant extends Block {
 	
 	protected BlockInstant(BlockBehaviour.Properties properties) {
 		super(properties);
-		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.EAST));
 		createMessage = errorMessage = "";
 	}
 
@@ -48,6 +48,9 @@ public abstract class BlockInstant extends Block {
 
 	public void setDirectional(boolean directional) {
 		this.is_directional = directional;
+		if(directional) {
+			this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.EAST));
+		}
 	}
 
 	public void setGuiID(GuiID guiID) {
@@ -62,7 +65,7 @@ public abstract class BlockInstant extends Block {
 	@Nullable
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+		return this.is_directional ? this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()) : super.getStateForPlacement(context);
 	}
 
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
@@ -74,7 +77,7 @@ public abstract class BlockInstant extends Block {
 	}
 
 	public InteractionResult onActivate(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		if(IBHelper.isServer(world)) {
+		if(Helper.isServer(world)) {
 			if(hand == InteractionHand.OFF_HAND) {
 				return InteractionResult.FAIL;
 			}
@@ -84,8 +87,8 @@ public abstract class BlockInstant extends Block {
 			int z = pos.getZ();
 
 			ItemStack is = player.getItemInHand(hand);
-			if(Config.Common.USE_WANDS.get() && !IBHelper.isWand(is)) {
-				IBHelper.sendMessage(player, Strings.ERROR_WAND, Colors.c);
+			if(Config.Common.USE_WANDS.get() && !Helper.isWand(is)) {
+				Helper.sendMessage(player, Strings.ERROR_WAND, Colors.c);
 				return InteractionResult.FAIL;
 			}
 
@@ -117,13 +120,13 @@ public abstract class BlockInstant extends Block {
 
 		ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
 		if(Config.Common.USE_WANDS.get()) {
-			if(!IBHelper.isWand(is)) {
-				IBHelper.sendMessage(player, Strings.ERROR_WAND, Colors.c);
+			if(!Helper.isWand(is)) {
+				Helper.sendMessage(player, Strings.ERROR_WAND, Colors.c);
 				return InteractionResult.FAIL;
 			}
 		}
 
-		if(IBHelper.isClient(world)) {
+		if(ClientHelper.isClient(world)) {
 			switch(guiID) {
 				case SKYDIVE -> Minecraft.getInstance().setScreen(new GuiSkydive(player,world,pos.getX(),pos.getY(),pos.getZ()));
 				case STATUE -> Minecraft.getInstance().setScreen(new GuiStatue(player,world,pos.getX(),pos.getY(),pos.getZ()));
@@ -142,12 +145,12 @@ public abstract class BlockInstant extends Block {
 	}
 
 	public void afterBuild(Level world, int x, int y, int z, Player player) {
-		IBHelper.sendMessage(player,this.createMessage,Colors.a,x,y,z);
-		IBHelper.xp(world, player, Config.Common.XP_AMOUNT.get());
+		Helper.sendMessage(player,this.createMessage,Colors.a,x,y,z);
+		Helper.xp(world, player, Config.Common.XP_AMOUNT.get());
 		if(Config.Common.USE_WANDS.get()) {
 			ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
-			if(IBHelper.isWand(is)) {
-				is.hurtAndBreak(1, player, (entity) -> {
+			if(Helper.isWand(is)) {
+				is.hurtAndBreak(Helper.wandDamage(is), player, (entity) -> {
 					entity.broadcastBreakEvent(InteractionHand.MAIN_HAND);
 				});
 			}

@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WVW",
+    "GBG",
+    "LDL"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "V": {
+      "item": "minecraft:birch_planks"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "B": {
+      "tag": "minecraft:beds"
+    },
+    "L": {
+      "item": "minecraft:birch_log"
+    },
+    "D": {
+      "tag": "minecraft:doors"
+    }
+  },
+  "result": {
+    "item": "instantblocks:instant_wood_house"
+  }
+}

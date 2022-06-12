@@ -6,7 +6,7 @@ import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Coords;
-import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -43,9 +43,9 @@ public class BlockInstantLight extends BlockInstant {
     }
 
     public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
-        double d0 = (double)pos.getX() + 0.6D;
-        double d1 = (double)pos.getY() + 0.8D;
-        double d2 = (double)pos.getZ() + 0.6D;
+        double d0 = (double)pos.getX() + 0.5D;
+        double d1 = (double)pos.getY() + 1.0D;
+        double d2 = (double)pos.getZ() + 0.5D;
         world.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
         world.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
     }
@@ -53,27 +53,26 @@ public class BlockInstantLight extends BlockInstant {
     public boolean build(Level world, int x, int y, int z, Player player) {
         checkForDarkness(world,x,y,z);
         if(coordsList.isEmpty()) {
-            IBHelper.sendMessage(player,Strings.ERROR_LIGHT.replace("%i%",String.valueOf(Config.Common.RADIUS_LIGHT.get())),Colors.c);
+            Helper.sendMessage(player,Strings.ERROR_LIGHT.replace("%i%",String.valueOf(Config.Common.RADIUS_LIGHT.get())),Colors.c);
             return false;
         }
-        IBHelper.sendMessage(player,Strings.CREATE_LIGHT_AMOUNT.replace("%i%",String.valueOf(coordsList.size())),Colors.a,x,y,z);
+        BuildHelper.setBlock(world,x,y,z,Blocks.TORCH);
+        Helper.sendMessage(player,Strings.CREATE_LIGHT_AMOUNT.replace("%i%",String.valueOf(coordsList.size())),Colors.a,x,y,z);
         coordsList.clear();
-
         return true;
 	}
 
     private void checkForDarkness(Level world, int x_center, int y_center, int z_center) {
         int radius = Config.Common.RADIUS_LIGHT.get();
+        Random random = new Random();
 
-        for(int y=y_center+radius; y>y_center-radius*2; y--) {
-            for(int x=x_center-radius; x<x_center+radius*2; x++) {
-                for(int z=z_center-radius; z<z_center+radius*2; z++) {
+        for(int y=y_center+radius; y>y_center-radius*2; y-=(random.nextInt(3)+2)) {
+            for(int x=x_center-radius; x<x_center+radius*2; x+=(random.nextInt(3)+2)) {
+                for(int z=z_center-radius; z<z_center+radius*2; z+=(random.nextInt(3)+2)) {
                     BlockPos pos = new BlockPos(x,y,z);
-                    if(world.getBlockState(pos).getBlock() == Blocks.AIR && world.getRawBrightness(pos,0) < 8 && canPlaceTorch(world,pos)) {
+                    if(world.getBlockState(pos).getBlock() == Blocks.AIR && world.getRawBrightness(pos,0) < 10 && canPlaceTorch(world,pos)) {
                         addCoords(x,y,z);
-                        if(IBHelper.isServer(world)) {
-                            placeTorch(world, pos); //todo move to build
-                        }
+                        placeTorch(world, pos);
                     }
                 }
             }
@@ -90,17 +89,21 @@ public class BlockInstantLight extends BlockInstant {
 
     private void placeTorch(Level world, BlockPos pos) {
         if(world.getBlockState(pos.below()).isFaceSturdy(world,pos,Direction.UP)) {
-            BuildHelper.setBlock(world,pos,Blocks.TORCH);
+            BuildHelper.setBlockLight(world,pos,Blocks.TORCH, Direction.UP);
         } else if(world.getBlockState(pos.north()).isFaceSturdy(world,pos,Direction.SOUTH)) {
-            BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.SOUTH);
+            BuildHelper.setBlockLight(world,pos,Blocks.WALL_TORCH,Direction.SOUTH);
         } else if(world.getBlockState(pos.east()).isFaceSturdy(world,pos,Direction.WEST)) {
-            BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.WEST);
+            BuildHelper.setBlockLight(world,pos,Blocks.WALL_TORCH,Direction.WEST);
         } else if(world.getBlockState(pos.south()).isFaceSturdy(world,pos,Direction.NORTH)) {
-            BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.NORTH);
+            BuildHelper.setBlockLight(world,pos,Blocks.WALL_TORCH,Direction.NORTH);
         } else if(world.getBlockState(pos.west()).isFaceSturdy(world,pos,Direction.EAST)) {
-            BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.EAST);
+            BuildHelper.setBlockLight(world,pos,Blocks.WALL_TORCH,Direction.EAST);
         }
-        world.markAndNotifyBlock(pos,world.getChunkAt(pos),world.getBlockState(pos),world.getBlockState(pos),2,0);
+        //world.getLightEngine().updateSectionStatus(pos,true);
+        //world.getLightEngine().enableLightSources(new ChunkPos(pos),true);
+        //world.getLightEngine().checkBlock(pos);
+        //world.markAndNotifyBlock(pos,world.getChunkAt(pos),world.getBlockState(pos),world.getBlockState(pos),2,3);
+        //world.sendBlockUpdated(pos,world.getBlockState(pos),world.getBlockState(pos),0);
     }
 
     private boolean addCoords(int x, int y, int z) {

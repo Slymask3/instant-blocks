@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WPW",
+    "GDG",
+    "CBC"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:water_bucket"
+    },
+    "P": {
+      "item": "minecraft:iron_pickaxe"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "D": {
+      "tag": "minecraft:doors"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "B": {
+      "item": "minecraft:crafting_table"
+    }
+  },
+  "result": {
+    "item": "instantblocks:instant_grinder"
+  }
+}

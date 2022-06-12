@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.item;
 
 import com.slymask3.instantblocks.init.ModItems;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.*;
@@ -15,8 +16,9 @@ public class ItemInstantWand extends TieredItem {
 	}
 
 	public void appendHoverText(ItemStack is, @Nullable Level world, List<Component> list, TooltipFlag flag) {
-		int max = (is.getMaxDamage()) + 1;
-		int dmg = (is.getMaxDamage() - is.getDamageValue()) + 1;
+		int toolDamage = Helper.wandDamage(is);
+		int max = (int)Math.floor(is.getMaxDamage() / toolDamage) + 1;
+		int dmg = max - (int)Math.floor(is.getDamageValue()/toolDamage);
 		list.add(new TextComponent("Uses: " + dmg + "/" + max));
 	}
 }

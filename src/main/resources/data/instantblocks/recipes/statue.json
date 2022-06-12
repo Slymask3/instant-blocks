@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "WHW",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:wool"
+    },
+    "H": {
+      "item": "minecraft:player_head"
+    }
+  },
+  "result": {
+    "item": "instantblocks:instant_statue"
+  }
+}

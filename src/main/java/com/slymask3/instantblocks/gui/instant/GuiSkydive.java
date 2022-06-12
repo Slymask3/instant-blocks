@@ -1,14 +1,12 @@
 package com.slymask3.instantblocks.gui.instant;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.gui.GuiInstant;
 import com.slymask3.instantblocks.gui.components.ColorEditBox;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.PacketSkydive;
 import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
-import com.slymask3.instantblocks.util.BuildHelper;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.EditBox;

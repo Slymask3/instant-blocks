@@ -25,14 +25,9 @@ public class SchematicHelper {
 
 			HashMap<Integer,BlockState> map = new HashMap<>();
 			CompoundTag palette = nbtdata.getCompound("Palette");
-			InstantBlocks.LOGGER.info("palette: " + palette);
 			for(String blockStateString : palette.getAllKeys()) {
-				InstantBlocks.LOGGER.info("key: " + blockStateString);
-				InstantBlocks.LOGGER.info("value: " + palette.getInt(blockStateString));
-
 				int key = palette.getInt(blockStateString);
-				BlockState state = getBlockState(blockStateString);
-				InstantBlocks.LOGGER.info("state: " + state);
+				BlockState state = readBlockState(blockStateString);
 				map.put(key,state);
 			}
 
@@ -44,18 +39,8 @@ public class SchematicHelper {
 		return null;
 	}
 
-	private static BlockState getBlockState(String string) {
+	private static BlockState readBlockState(String string) {
 		CompoundTag tag = new CompoundTag();
-
-		//minecraft:acacia_stairs[facing=west,half=top,shape=straight,waterlogged=false]
-		//minecraft:stripped_acacia_wood[axis=x]
-
-//		{
-//			"Name": "minecraft:stone",
-//			"Properties": {
-//				"variant": "granite"
-//			}
-//		}
 
 		String[] split = string.split("\\[",2);
 
@@ -115,8 +100,8 @@ public class SchematicHelper {
 			this.blocks = blocks;
 			this.map = map;
 		}
-		public BlockState getBlockState(int key) {
-			return this.map.get(key);
+		public BlockState getBlockState(int index) {
+			return this.map.get((int)this.blocks[index]);
 		}
 	}
 }

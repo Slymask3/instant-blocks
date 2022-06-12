@@ -7,12 +7,11 @@ import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Coords;
-import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
@@ -112,11 +111,11 @@ public abstract class BlockInstantLiquid extends BlockInstant {
 		}
 		checkForBlock(world,x,y,z);
 		if(isSuction && coordsList.isEmpty()) {
-			IBHelper.sendMessage(player, Strings.ERROR_NO_LIQUID, Colors.c);
+			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID, Colors.c);
 			return false;
 		}
 		if(coordsList.size() >= getMax()) {
-			IBHelper.sendMessage(player, errorMessage, Colors.c);
+			Helper.sendMessage(player, errorMessage, Colors.c);
 			coordsList = new ArrayList<>();
 			return false;
 		} else {

@@ -47,6 +47,10 @@ public class BuildHelper {
 		setBlock(world,pos.getX(),pos.getY(),pos.getZ(),block,null,2);
 	}
 
+	public static void setBlock(Level world, BlockPos pos, BlockState state) {
+		setBlock(world,pos.getX(),pos.getY(),pos.getZ(),state,2);
+	}
+
 	public static void setBlock(Level world, BlockPos pos, Block block, Direction direction) {
 		setBlock(world,pos.getX(),pos.getY(),pos.getZ(),block,direction,2);
 	}
@@ -95,6 +99,14 @@ public class BuildHelper {
 
 	public static void setBlock(Level world, int x, int y, int z, BlockState state, int flag) {
 		world.setBlock(new BlockPos(x,y,z),state,flag);
+	}
+
+	public static void setBlockLight(Level world, BlockPos pos, Block block, Direction direction) {
+		BlockState state = block.defaultBlockState();
+		if(direction != null && state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+			state = state.setValue(BlockStateProperties.HORIZONTAL_FACING,direction);
+		}
+		world.setBlockAndUpdate(pos,state);
 	}
 
 	public static void setColorBlock(Level world, int x, int y, int z, int color) {
@@ -186,9 +198,9 @@ public class BuildHelper {
 			z2 = z1+leftX-rightX;
 		}
 
-		int xDif = IBHelper.toPositive(x1 - x2);
-		int yDif = IBHelper.toPositive(y1 - y2);
-		int zDif = IBHelper.toPositive(z1 - z2);
+		int xDif = Helper.toPositive(x1 - x2);
+		int yDif = Helper.toPositive(y1 - y2);
+		int zDif = Helper.toPositive(z1 - z2);
 
 		int x_cur = x1;
 		int y_cur = y1;
@@ -203,7 +215,7 @@ public class BuildHelper {
 
 					BuildHelper.setBlock(world,x_cur, y_cur, z_cur, block, directionBlock, flag);
 
-					if(IBHelper.isPositive(x1 - x2)) {
+					if(Helper.isPositive(x1 - x2)) {
 						x_cur--;
 					} else {
 						x_cur++;
@@ -211,7 +223,7 @@ public class BuildHelper {
 				}
 				x_cur = bx;
 
-				if(IBHelper.isPositive(z1 - z2)) {
+				if(Helper.isPositive(z1 - z2)) {
 					z_cur--;
 				} else {
 					z_cur++;
@@ -220,7 +232,7 @@ public class BuildHelper {
 			z_cur = bz;
 			x_cur = bx;
 
-			if(IBHelper.isPositive(y1 - y2)) {
+			if(Helper.isPositive(y1 - y2)) {
 				y_cur--;
 			} else {
 				y_cur++;
@@ -234,18 +246,18 @@ public class BuildHelper {
 		int left;
 		int right;
     	if(rgb) {
-    		if(IBHelper.isPositive(forwardBack)) {
+    		if(Helper.isPositive(forwardBack)) {
     			back = forwardBack;
     			forward = 0;
     		} else {
     			back = 0;
-    			forward = IBHelper.toPositive(forwardBack);
+    			forward = Helper.toPositive(forwardBack);
     		}
-    		if(IBHelper.isPositive(leftRight)) {
+    		if(Helper.isPositive(leftRight)) {
     			right = 0;
     			left = leftRight;
     		} else {
-    			right = IBHelper.toPositive(leftRight);
+    			right = Helper.toPositive(leftRight);
     			left = 0;
     		}
     		if(direction == Direction.SOUTH) {
@@ -258,18 +270,18 @@ public class BuildHelper {
 				setColorBlock(world,x-forward+back, y, z-left+right,img.getRGB(imgx, imgy));
     		}
 		} else {
-    		if(IBHelper.isPositive(forwardBack)) {
+    		if(Helper.isPositive(forwardBack)) {
     			back = forwardBack;
     			forward = 0;
     		} else {
     			back = 0;
-    			forward = IBHelper.toPositive(forwardBack);
+    			forward = Helper.toPositive(forwardBack);
     		}
-    		if(IBHelper.isPositive(leftRight)) {
+    		if(Helper.isPositive(leftRight)) {
     			right = 0;
     			left = leftRight;
     		} else {
-    			right = IBHelper.toPositive(leftRight);
+    			right = Helper.toPositive(leftRight);
     			left = 0;
     		}
     		if(direction == Direction.SOUTH) {

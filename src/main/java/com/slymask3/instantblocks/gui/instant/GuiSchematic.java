@@ -114,7 +114,6 @@ public class GuiSchematic extends GuiInstant {
             this.input.setValue(schematics.get(selected));
         }
 		this.checkForSchematic();
-		SchematicHelper.Schematic schematic = SchematicHelper.readSchematic(schematics.get(selected));
     }
 
 	public int getSelected() {

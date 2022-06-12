@@ -20,6 +20,7 @@ public class BlockInstantLava extends BlockInstantLiquid {
 		super(Block.Properties.of(Material.LAVA)
 				.strength(1.5F, 2000F)
 				.sound(new ForgeSoundType(1.0F,1.0F, () -> SoundEvents.BUCKET_FILL_LAVA,() -> SoundEvents.BUCKET_EMPTY_LAVA,() -> SoundEvents.BUCKET_EMPTY_LAVA,() -> SoundEvents.BUCKET_EMPTY_LAVA,() -> SoundEvents.BUCKET_EMPTY_LAVA))
+				.lightLevel((par1) -> 15)
 		, Blocks.AIR, Blocks.LAVA);
 		setErrorMessage(Strings.ERROR_LAVA_MAX.replace("%i%",String.valueOf(Config.Common.MAX_LIQUID.get())));
 		this.create = Strings.CREATE_LAVA;

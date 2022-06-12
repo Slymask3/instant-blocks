@@ -12,7 +12,6 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.awt.*;
 
-
 public class ColorEditBox extends EditBox {
     private int index;
     private TileEntitySkydive tileEntity;

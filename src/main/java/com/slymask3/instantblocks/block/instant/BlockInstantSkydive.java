@@ -9,7 +9,7 @@ import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Coords;
-import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -34,6 +34,7 @@ public class BlockInstantSkydive extends BlockInstant implements EntityBlock {
 		);
 		setGuiID(GuiID.SKYDIVE);
 		setCreateMessage(Strings.CREATE_SKYDIVE);
+		setDirectional(true);
     }
 
 	@Nullable
@@ -86,7 +87,7 @@ public class BlockInstantSkydive extends BlockInstant implements EntityBlock {
 
 		int i = 0;
 		int min = Config.Common.SKYDIVE_MIN.get();
-		int max = IBHelper.getMaxSkydive(world);
+		int max = Helper.getMaxSkydive(world);
 		int water = Config.Common.SKYDIVE_WATER.get();
 		for(int c=max; c>=min; c--) {
 			for(Coords coords : coordsAirList) {
@@ -112,13 +113,13 @@ public class BlockInstantSkydive extends BlockInstant implements EntityBlock {
 		}
 
 		if(direction == Direction.SOUTH) {
-			IBHelper.teleport(world,player,x,max+1,z+radius, tp);
+			Helper.teleport(world,player,x,max+1,z+radius, tp);
 		} else if(direction == Direction.WEST) {
-			IBHelper.teleport(world,player,x-radius,max+1,z, tp);
+			Helper.teleport(world,player,x-radius,max+1,z, tp);
 		} else if(direction == Direction.NORTH) {
-			IBHelper.teleport(world,player,x,max+1,z-radius, tp);
+			Helper.teleport(world,player,x,max+1,z-radius, tp);
 		} else if(direction == Direction.EAST) {
-			IBHelper.teleport(world,player,x+radius,max+1,z, tp);
+			Helper.teleport(world,player,x+radius,max+1,z, tp);
 		}
 
 		return true;

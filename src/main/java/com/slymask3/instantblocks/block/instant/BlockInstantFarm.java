@@ -4,7 +4,6 @@ import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
-import com.slymask3.instantblocks.util.IBHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -31,16 +30,12 @@ public class BlockInstantFarm extends BlockInstant {
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		Block crop = Blocks.WHEAT;
-		if(IBHelper.isServer(world)) {
-			Random ran = new Random();
-			int r = ran.nextInt(20);
-			if(r == 0) {
-				crop = Blocks.POTATOES;
-			} else if(r == 1) {
-				crop = Blocks.CARROTS;
-			} else {
-				crop = Blocks.WHEAT;
-			}
+		Random ran = new Random();
+		int r = ran.nextInt(20);
+		if(r == 0) {
+			crop = Blocks.POTATOES;
+		} else if(r == 1) {
+			crop = Blocks.CARROTS;
 		}
 
 		Block stone = Blocks.STONE_BRICKS;

@@ -5,7 +5,7 @@ import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Colors;
-import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -25,7 +25,7 @@ public class BlockInstantGrinder extends BlockInstant {
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(BuildHelper.getBlock(world,x, y-1, z) != Blocks.SPAWNER) {
-			IBHelper.sendMessage(player, Strings.ERROR_GRINDER, Colors.c);
+			Helper.sendMessage(player, Strings.ERROR_GRINDER, Colors.c);
 			return false;
 		}
 		return true;
@@ -223,7 +223,7 @@ public class BlockInstantGrinder extends BlockInstant {
 		BuildHelper.setBlock(world,x, y, z, air);
 		
 		/************************ Teleport ************************/
-		IBHelper.teleport(world,player,x+13,y-4,z,Config.Common.TP_GRINDER.get());
+		Helper.teleport(world,player,x+13,y-4,z,Config.Common.TP_GRINDER.get());
 		if(Config.Common.TP_GRINDER.get()) {
 			BuildHelper.setBlock(world,x+7, y-4, z, glass);
 			BuildHelper.setBlock(world,x+7, y-3, z, glass);

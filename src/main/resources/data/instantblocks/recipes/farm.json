@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S S",
+    "DWD",
+    "BBB"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:wheat_seeds"
+    },
+    "D": {
+      "tag": "minecraft:dirt"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    },
+    "B": {
+      "tag": "minecraft:stone_bricks"
+    }
+  },
+  "result": {
+    "item": "instantblocks:instant_farm"
+  }
+}

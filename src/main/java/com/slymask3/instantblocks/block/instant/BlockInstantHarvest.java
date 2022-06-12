@@ -5,7 +5,7 @@ import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
-import com.slymask3.instantblocks.util.IBHelper;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -57,7 +57,7 @@ public class BlockInstantHarvest extends BlockInstant implements EntityBlock {
 					BlockState state = world.getBlockState(new BlockPos(x,y,z));
                     
                     if(chest.getItem(chest.getContainerSize()-1) != ItemStack.EMPTY) {
-						if(IBHelper.isDoubleChest(chest)) {
+						if(Helper.isDoubleChest(chest)) {
 							Y++;
 							X--;
 						} else {
@@ -80,46 +80,46 @@ public class BlockInstantHarvest extends BlockInstant implements EntityBlock {
                     } else if(block == Blocks.DARK_OAK_LOG && logDark) { //DARK OAK
 						addLog(chest,x,y,z,block,Blocks.DARK_OAK_SAPLING,replant);
                     } else if(block == Blocks.WHEAT && state.getValue(CropBlock.AGE) == CropBlock.MAX_AGE && wheat) { //WHEAT
-                    	IBHelper.addItemsToChest(chest, Items.WHEAT, 1);
+                    	Helper.addItemsToChest(chest, Items.WHEAT, 1);
 						replantBlock(world,x,y,z,Blocks.WHEAT,replant);
                     } else if(block == Blocks.CARROTS && state.getValue(CarrotBlock.AGE) == CarrotBlock.MAX_AGE && carrot) { //CARROT
-                    	IBHelper.addItemsToChest(chest, Items.CARROT, rand.nextInt(4)+1);
+                    	Helper.addItemsToChest(chest, Items.CARROT, rand.nextInt(4)+1);
 						replantBlock(world,x,y,z,Blocks.CARROTS,replant);
                     } else if(block == Blocks.POTATOES && state.getValue(PotatoBlock.AGE) == PotatoBlock.MAX_AGE && potato) { //POTATO
-                    	IBHelper.addItemsToChest(chest, Items.POTATO, rand.nextInt(4)+1);
+                    	Helper.addItemsToChest(chest, Items.POTATO, rand.nextInt(4)+1);
 						replantBlock(world,x,y,z,Blocks.POTATOES,replant);
                     } else if(block == Blocks.CACTUS && cactus) { //CACTUS
 						Block blockBelow = BuildHelper.getBlock(world,x, y-1, z);
                     	if((blockBelow == Blocks.SAND || blockBelow == Blocks.RED_SAND) && replant) {
                     		BuildHelper.setBlock(world,x, y, z, Blocks.CACTUS);
                     	} else {
-                        	IBHelper.addItemsToChest(chest, block, 1);
+                        	Helper.addItemsToChest(chest, block, 1);
                     		BuildHelper.setBlock(world,x, y, z, Blocks.AIR);
                     	}
                     } else if(block == Blocks.PUMPKIN && pumpkin) { //PUMPKIN
-                    	IBHelper.addItemsToChest(chest, block, 1);
+                    	Helper.addItemsToChest(chest, block, 1);
                     	BuildHelper.setBlock(world,x, y, z, Blocks.AIR);
                     } else if(block == Blocks.MELON && melon) { //MELON
-                    	IBHelper.addItemsToChest(chest, Items.MELON_SLICE, rand.nextInt(5)+3);
+                    	Helper.addItemsToChest(chest, Items.MELON_SLICE, rand.nextInt(5)+3);
                     	BuildHelper.setBlock(world,x, y, z, Blocks.AIR);
                     } else if(block == Blocks.SUGAR_CANE && sugarcane) { //SUGARCANE
                     	if(canPlaceSugarCane(BuildHelper.getBlock(world,x, y-1, z)) && replant) {
                     		BuildHelper.setBlock(world,x, y, z, block);
                     	} else {
-                        	IBHelper.addItemsToChest(chest, Items.SUGAR_CANE, 1);
+                        	Helper.addItemsToChest(chest, Items.SUGAR_CANE, 1);
                     		BuildHelper.setBlock(world,x, y, z, Blocks.AIR);
                     	}
                     } else if(block == Blocks.COCOA && state.getValue(CocoaBlock.AGE) == CocoaBlock.MAX_AGE && cocoa) { //COCOA
-                    	IBHelper.addItemsToChest(chest, Items.COCOA_BEANS, 3);
+                    	Helper.addItemsToChest(chest, Items.COCOA_BEANS, 3);
                     	BuildHelper.setBlock(world,x, y, z, Blocks.AIR);
                     } else if((block == Blocks.RED_MUSHROOM_BLOCK || block == Blocks.RED_MUSHROOM) && mushroom) { //MUSHROOM RED
-                    	IBHelper.addItemsToChest(chest, Blocks.RED_MUSHROOM, 1);
+                    	Helper.addItemsToChest(chest, Blocks.RED_MUSHROOM, 1);
                     	BuildHelper.setBlock(world,x, y, z, Blocks.AIR);
                     } else if((block == Blocks.BROWN_MUSHROOM_BLOCK || block == Blocks.BROWN_MUSHROOM) && mushroom) { //MUSHROOM BROWN
-                    	IBHelper.addItemsToChest(chest, Blocks.BROWN_MUSHROOM, 1);
+                    	Helper.addItemsToChest(chest, Blocks.BROWN_MUSHROOM, 1);
                     	BuildHelper.setBlock(world,x, y, z, Blocks.AIR);
                     } else if(block == Blocks.NETHER_WART && state.getValue(NetherWartBlock.AGE) == NetherWartBlock.MAX_AGE && netherwart) { //NETHERWART
-                    	IBHelper.addItemsToChest(chest, Items.NETHER_WART, rand.nextInt(3)+2);
+                    	Helper.addItemsToChest(chest, Items.NETHER_WART, rand.nextInt(3)+2);
 						replantBlock(world,x,y,z,Blocks.NETHER_WART,replant);
                     } else if(block instanceof LeavesBlock) {
 						BuildHelper.setBlock(world,x,y,z,Blocks.AIR);
@@ -138,7 +138,7 @@ public class BlockInstantHarvest extends BlockInstant implements EntityBlock {
 
 	private void addLog(ChestBlockEntity chest, int x, int y, int z, Block block, Block sapling, boolean replant) {
 		Level world = chest.getLevel();
-		IBHelper.addItemsToChest(chest, block, 1);
+		Helper.addItemsToChest(chest, block, 1);
 		replantBlock(world,x,y,z,sapling,(BuildHelper.getBlock(world,x, y-1, z) == Blocks.DIRT || BuildHelper.getBlock(world,x, y-1, z) == Blocks.GRASS_BLOCK) && replant);
 	}
 

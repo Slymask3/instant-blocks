@@ -1,12 +1,10 @@
 package com.slymask3.instantblocks.gui.instant;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.slymask3.instantblocks.block.BlockInstant;
 import com.slymask3.instantblocks.gui.GuiInstant;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.PacketHarvest;
 import com.slymask3.instantblocks.tileentity.TileEntityHarvest;
-import com.slymask3.instantblocks.util.BuildHelper;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
