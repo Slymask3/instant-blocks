@@ -1,10 +1,10 @@
 package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.block.BlockInstant;
+import com.slymask3.instantblocks.block.InstantBlock;
+import com.slymask3.instantblocks.block.entity.ColorBlockEntity;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.tileentity.TileEntityColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -57,7 +57,7 @@ public class BuildHelper {
 	
 	public static void setBlock(Level world, int x, int y, int z, Block block, Direction direction, int flag) {
 		Block getBlock = getBlock(world,x,y,z);
-		if(Config.Common.KEEP_BLOCKS.get() && getBlock instanceof BlockInstant) {
+		if(Config.Common.KEEP_BLOCKS.get() && getBlock instanceof InstantBlock) {
 			return;
 		}
 		if(getBlock != Blocks.BEDROCK) {
@@ -110,9 +110,9 @@ public class BuildHelper {
 	}
 
 	public static void setColorBlock(Level world, int x, int y, int z, int color) {
-		setBlock(world, x, y, z, ModBlocks.color.get());
+		setBlock(world, x, y, z, ModBlocks.COLOR.get());
 		try {
-			((TileEntityColor) world.getBlockEntity(new BlockPos(x, y, z))).color = color;
+			((ColorBlockEntity) world.getBlockEntity(new BlockPos(x, y, z))).color = color;
 		} catch(Exception e) {
 			InstantBlocks.LOGGER.info(e);
 		}

@@ -36,12 +36,12 @@ public class InstantBlocks {
 	}
 
 	private void setupClient(final FMLClientSetupEvent event) {
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibGlassDome.get(), RenderType.translucent());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibEscapeLadder.get(), RenderType.translucent());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibRail.get(), RenderType.translucent());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibWater.get(), RenderType.translucent());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibTree.get(), RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.ibLight.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_GLASS_DOME.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_ESCAPE_LADDER.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_RAIL.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_WATER.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_TREE.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_LIGHT.get(), RenderType.cutout());
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event) {

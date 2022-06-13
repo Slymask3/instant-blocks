@@ -2,7 +2,7 @@ package com.slymask3.instantblocks.gui.components;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.slymask3.instantblocks.tileentity.TileEntitySkydive;
+import com.slymask3.instantblocks.block.entity.SkydiveBlockEntity;
 import com.slymask3.instantblocks.util.Colors;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
@@ -14,10 +14,10 @@ import java.awt.*;
 
 public class ColorEditBox extends EditBox {
     private int index;
-    private TileEntitySkydive tileEntity;
+    private SkydiveBlockEntity tileEntity;
     private Font font;
 
-    public ColorEditBox(Font font, int x, int y, int width, int length, int index, TileEntitySkydive tileEntity) {
+    public ColorEditBox(Font font, int x, int y, int width, int length, int index, SkydiveBlockEntity tileEntity) {
         super(font, x, y, width, length, new TextComponent("Color "+(index+1)+":"));
         this.font = font;
         this.index = index;

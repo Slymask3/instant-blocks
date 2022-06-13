@@ -2,9 +2,9 @@ package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.item.ItemInstantWand;
+import com.slymask3.instantblocks.item.InstantWandItem;
 import com.slymask3.instantblocks.network.PacketHandler;
-import com.slymask3.instantblocks.network.PacketMessage;
+import com.slymask3.instantblocks.network.packet.MessagePacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -18,9 +18,9 @@ public class Helper {
 		return !world.isClientSide();
 	}
 
-	public static void xp(Level world, Player player, int xpAmount) {
-		if(xpAmount > 0 && isServer(world)) {
-			player.giveExperiencePoints(xpAmount);
+	public static void giveExp(Level world, Player player, int amount) {
+		if(amount > 0 && isServer(world)) {
+			player.giveExperiencePoints(amount);
 		}
 	}
 	
@@ -50,20 +50,20 @@ public class Helper {
 	}
 
 	public static boolean isWand(ItemStack is) {
-		return is.getItem() instanceof ItemInstantWand;
+		return is.getItem() instanceof InstantWandItem;
 	}
 
 	public static int wandDamage(ItemStack is) {
 		Item item = is.getItem();
-		if(ModItems.ibWandWood.get().equals(item)) {
+		if(ModItems.WAND_WOOD.get().equals(item)) {
 			return 60;
-		} else if(ModItems.ibWandStone.get().equals(item)) {
+		} else if(ModItems.WAND_STONE.get().equals(item)) {
 			return 44;
-		} else if(ModItems.ibWandIron.get().equals(item)) {
+		} else if(ModItems.WAND_IRON.get().equals(item)) {
 			return 35;
-		} else if(ModItems.ibWandGold.get().equals(item)) {
+		} else if(ModItems.WAND_GOLD.get().equals(item)) {
 			return 2;
-		} else if(ModItems.ibWandDiamond.get().equals(item)) {
+		} else if(ModItems.WAND_DIAMOND.get().equals(item)) {
 			return 30;
 		}
 		return 1;
@@ -103,7 +103,7 @@ public class Helper {
 
 	public static void sendMessage(Player player, String message, String color, int x, int y, int z, boolean effects) {
 		if(isServer(player.getLevel())) {
-			PacketHandler.sendToClient((ServerPlayer)player,new PacketMessage(message,color,x,y,z,effects));
+			PacketHandler.sendToClient((ServerPlayer)player,new MessagePacket(message,color,x,y,z,effects));
 		}
 	}
 }

@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.init;
 
-import com.slymask3.instantblocks.item.ItemInstantWand;
+import com.slymask3.instantblocks.item.InstantWandItem;
 import com.slymask3.instantblocks.reference.Names;
 import com.slymask3.instantblocks.reference.Reference;
 import net.minecraft.world.item.CreativeModeTab;
@@ -16,11 +16,11 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MOD_ID);
 
-	public static final RegistryObject<Item> ibWandWood = ITEMS.register(Names.Items.IB_WAND_WOOD, () -> new ItemInstantWand(Tiers.WOOD));
-	public static final RegistryObject<Item> ibWandStone = ITEMS.register(Names.Items.IB_WAND_STONE, () -> new ItemInstantWand(Tiers.STONE));
-	public static final RegistryObject<Item> ibWandIron = ITEMS.register(Names.Items.IB_WAND_IRON, () -> new ItemInstantWand(Tiers.IRON));
-	public static final RegistryObject<Item> ibWandGold = ITEMS.register(Names.Items.IB_WAND_GOLD, () -> new ItemInstantWand(Tiers.GOLD));
-	public static final RegistryObject<Item> ibWandDiamond = ITEMS.register(Names.Items.IB_WAND_DIAMOND, () -> new ItemInstantWand(Tiers.DIAMOND));
+	public static final RegistryObject<Item> WAND_WOOD = ITEMS.register(Names.Items.IB_WAND_WOOD, () -> new InstantWandItem(Tiers.WOOD));
+	public static final RegistryObject<Item> WAND_STONE = ITEMS.register(Names.Items.IB_WAND_STONE, () -> new InstantWandItem(Tiers.STONE));
+	public static final RegistryObject<Item> WAND_IRON = ITEMS.register(Names.Items.IB_WAND_IRON, () -> new InstantWandItem(Tiers.IRON));
+	public static final RegistryObject<Item> WAND_GOLD = ITEMS.register(Names.Items.IB_WAND_GOLD, () -> new InstantWandItem(Tiers.GOLD));
+	public static final RegistryObject<Item> WAND_DIAMOND = ITEMS.register(Names.Items.IB_WAND_DIAMOND, () -> new InstantWandItem(Tiers.DIAMOND));
 
 	public static class ModCreativeTab extends CreativeModeTab {
 		public static final ModCreativeTab instance = new ModCreativeTab(CreativeModeTab.TABS.length, Reference.MOD_ID);
@@ -30,7 +30,7 @@ public class ModItems {
 
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(ModBlocks.ibWoodHouse.get());
+			return new ItemStack(ModBlocks.INSTANT_WOOD_HOUSE.get());
 		}
 	}
 }
