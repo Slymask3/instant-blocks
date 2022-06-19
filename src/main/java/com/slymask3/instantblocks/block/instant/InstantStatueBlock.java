@@ -46,7 +46,7 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 		return new StatueBlockEntity(pos,state);
 	}
 
-	public BufferedImage getImage(String username) {
+	public Skin getSkin(String username) {
 		if(!username.equalsIgnoreCase("")) {
 			try {
 				GsonBuilder builder = new GsonBuilder();
@@ -63,9 +63,18 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 
 				String base64_decoded = new String(Base64.getDecoder().decode(base64));
 				JsonObject image_json = gson.fromJson(base64_decoded,JsonObject.class);
-				String image_url = image_json.get("textures").getAsJsonObject().get("SKIN").getAsJsonObject().get("url").getAsString();
+				JsonObject skin_json = image_json.get("textures").getAsJsonObject().get("SKIN").getAsJsonObject();
+				String image_url = skin_json.get("url").getAsString();
 
-				return ImageIO.read(new URL(image_url));
+				Skin skin = new Skin(ImageIO.read(new URL(image_url)));
+				if(skin_json.has("metadata")) {
+					JsonObject metadata = skin_json.get("metadata").getAsJsonObject();
+					if(metadata.has("model") && metadata.get("model").getAsString().equalsIgnoreCase("slim")) {
+						skin.setSlim(true);
+					}
+				}
+
+				return skin;
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -76,22 +85,26 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 	public boolean build(Level world, int x, int y, int z, Player player, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 
-		BufferedImage img = getImage(username);
+		Skin skin = getSkin(username);
+		BufferedImage img = skin.getImage();
 		if(img != null) {
 			BuildHelper.setBlock(world,x, y, z, Blocks.AIR);
 
 			buildHead(world, x, y, z, img, direction, head, rgb);
 			buildBody(world, x, y, z, img, direction, body, rgb);
-			buildArms(world, x, y, z, img, direction, armLeft, armRight, rgb);
 			buildLegs(world, x, y, z, img, direction, legLeft, legRight, rgb);
 
-			setCreateMessage(Strings.CREATE_STATUE.replace("%username%",username));
+			if(skin.isSlim()) {
+				buildArmsSlim(world, x, y, z, img, direction, armLeft, armRight, rgb);
+			} else {
+				buildArms(world, x, y, z, img, direction, armLeft, armRight, rgb);
+			}
 
+			setCreateMessage(Strings.CREATE_STATUE.replace("%username%",username));
 			return true;
 		} else {
 			Helper.sendMessage(player, Strings.ERROR_STATUE.replace("%username%",username), Colors.c);
 		}
-
 		return false;
 	}
 
@@ -298,6 +311,96 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 			}
 		}
 	}
+
+	private static void buildArmsSlim(Level world, int x, int y, int z, BufferedImage img, Direction direction, boolean buildLeft, boolean buildRight, boolean rgb) {
+		if(buildLeft) {
+			//LEFT
+			for(int xtimes=0; xtimes<4; xtimes++) {
+				for(int ytimes=0; ytimes<12; ytimes++) { //rightarmleft is 4x12
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 47+xtimes, 20+ytimes, direction, -xtimes, +4, rgb);
+				} //rightarmleft starts at 47, 20
+			}
+
+			//RIGHT
+			for(int xtimes=0; xtimes<4; xtimes++) {
+				for(int ytimes=0; ytimes<12; ytimes++) { //rightarmright is 4x12
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 40+xtimes, 20+ytimes, direction, -3+xtimes, +6, rgb);
+				} //rightarmright starts at 40, 20
+			}
+
+			//TOP
+			for(int xtimes=0; xtimes<3; xtimes++) {
+				for(int ytimes=0; ytimes<4; ytimes++) { //shoulderleft is 3x4
+					BuildHelper.setColorBlockComplex(world, x, y+23, z, img, 44+xtimes, 16+ytimes, direction, -3+ytimes, +4+xtimes, rgb);
+				} //shoulderleft starts at 44, 16
+			}
+
+			//BOTTOM
+			for(int xtimes=0; xtimes<3; xtimes++) {
+				for(int ytimes=0; ytimes<4; ytimes++) { //fistleft is 3x4
+					BuildHelper.setColorBlockComplex(world, x, y+12, z, img, 47+xtimes, 16+ytimes, direction, -3+ytimes, +4+xtimes, rgb);
+				} //fistleft starts at 47, 16
+			}
+
+			//FRONT
+			for(int xtimes=0; xtimes<3; xtimes++) {
+				for(int ytimes=0; ytimes<12; ytimes++) { //rightarmfront is 3x12
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 44+xtimes, 20+ytimes, direction, 0, +6-xtimes, rgb);
+				} //rightarmfront starts at 44, 20 DONE?
+			}
+
+			//BACK
+			for(int xtimes=0; xtimes<3; xtimes++) {
+				for(int ytimes=0; ytimes<12; ytimes++) { //rightarmback is 3x12
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 51+xtimes, 20+ytimes, direction, -3, +4+xtimes, rgb);
+				} //rightarmback starts at 51, 20
+			}
+		}
+
+		if(buildRight) {
+			//LEFT
+			for(int xtimes=0; xtimes<4; xtimes++) {
+				for(int ytimes=0; ytimes<12; ytimes++) { //leftarmleft is 4x12
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 48+xtimes, 20+ytimes, direction, -xtimes, -5, rgb);
+				} //leftarmleft starts at 48, 20
+			}
+
+			//RIGHT
+			for(int xtimes=0; xtimes<4; xtimes++) {
+				for(int ytimes=0; ytimes<12; ytimes++) { //leftarmright is 4x12
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 40+xtimes, 20+ytimes, direction, -3+xtimes, -7, rgb);
+				} //leftarmright starts at 40, 20
+			}
+
+			//TOP
+			for(int xtimes=0; xtimes<3; xtimes++) {
+				for(int ytimes=0; ytimes<4; ytimes++) { //shoulderright is 4x4
+					BuildHelper.setColorBlockComplex(world, x, y+23, z, img, 44+xtimes, 16+ytimes, direction, -3+ytimes, -5-xtimes, rgb);
+				} //shoulderright starts at 44, 16
+			}
+
+			//BOTTOM
+			for(int xtimes=0; xtimes<3; xtimes++) {
+				for(int ytimes=0; ytimes<4; ytimes++) { //fistright is 4x4
+					BuildHelper.setColorBlockComplex(world, x, y+12, z, img, 47+xtimes, 16+ytimes, direction, -3+ytimes, -5-xtimes, rgb);
+				} //fistright starts at 44, 16
+			}
+
+			//FRONT
+			for(int xtimes=0; xtimes<3; xtimes++) {
+				for(int ytimes=0; ytimes<12; ytimes++) { //leftarmfront is 4x12
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 44+xtimes, 20+ytimes, direction, 0, -7+xtimes, rgb);
+				} //leftarmfront starts at 44, 20
+			}
+
+			//BACK
+			for(int xtimes=0; xtimes<3; xtimes++) {
+				for(int ytimes=0; ytimes<12; ytimes++) { //leftarmback is 4x12
+					BuildHelper.setColorBlockComplex(world, x, y+23-ytimes, z, img, 51+xtimes, 20+ytimes, direction, -3, -5-xtimes, rgb);
+				} //leftarmback starts at 52, 20
+			}
+		}
+	}
 	
 	private static void buildLegs(Level world, int x, int y, int z, BufferedImage img, Direction direction, boolean buildLeft, boolean buildRight, boolean rgb) {
 		if(buildLeft) {
@@ -390,6 +493,24 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 					BuildHelper.setColorBlockComplex(world, x, y+11-ytimes, z, img, 12+xtimes, 20+ytimes, direction, -3, -4+xtimes, rgb); //rightlegback starts at 12, 20
 				} //rightlegback starts at x+3, y+11, z+3
 			}
+		}
+	}
+
+	private static class Skin {
+		private final BufferedImage image;
+		private boolean slim;
+		public Skin(BufferedImage image) {
+			this.image = image;
+			this.slim = false;
+		}
+		public BufferedImage getImage() {
+			return this.image;
+		}
+		public boolean isSlim() {
+			return this.slim;
+		}
+		public void setSlim(boolean slim) {
+			this.slim = slim;
 		}
 	}
 }

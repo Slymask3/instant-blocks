@@ -42,7 +42,7 @@ public class SkydiveScreen extends InstantScreen {
 		this.tp = new Checkbox(this.width / 2 + 4, this.height / 4 + 76 + 12, 150, 20, new TextComponent("Teleport to top"), true);
 
 		EditBox radiusField = new EditBox(this.font, this.width / 2 - 4 - 100 - 12, this.height / 4 + 100 + 12, 110, 16, new TextComponent("radius"));
-		radiusField.setValue(String.valueOf(Config.Common.SKYDIVE_RADIUS.get()));
+		radiusField.setValue(String.valueOf(Config.Client.SKYDIVE_RADIUS.get()));
 		this.radius = radiusField;
 
 		int cutoff = 6;
@@ -80,8 +80,9 @@ public class SkydiveScreen extends InstantScreen {
 		int radius;
 		try {
 			radius = Integer.parseInt(this.radius.getValue());
+			//Config.Client.SKYDIVE_RADIUS.set(radius);
 		} catch (NumberFormatException e) {
-			radius = Config.Common.SKYDIVE_RADIUS.get();
+			radius = Config.Client.SKYDIVE_RADIUS.get();
 		}
 		int[] colors = getColors();
 		PacketHandler.sendToServer(new SkydivePacket(this.x, this.y, this.z, colors.length, colors, radius, tp.selected()));

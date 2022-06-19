@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks.util;
 
+import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.item.InstantWandItem;
@@ -11,7 +12,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+
+import java.util.List;
+import java.util.Random;
 
 public class Helper {
 	public static boolean isServer(Level world) {
@@ -31,20 +36,22 @@ public class Helper {
 		}
 	}
 	
-	public static void addItemsToChest(ChestBlockEntity chest, Block block, int amount) {
-		addItemsToChest(chest, block.asItem(), amount);
+	public static void addToChest(ChestBlockEntity chest, Block block, int amount) {
+		addToChest(chest, block.asItem(), amount);
 	}
 	
-	public static void addItemsToChest(ChestBlockEntity chest, Item item, int amount) {
-		ItemStack itemStack = new ItemStack(item, amount);
-		for(int i=0; i<chest.getContainerSize(); i++) {
-			ItemStack itemStackSlot = chest.getItem(i);
-			if(itemStackSlot.sameItem(itemStack) && itemStackSlot.getCount() < itemStackSlot.getMaxStackSize()) {
-				chest.setItem(i, new ItemStack(item, itemStackSlot.getCount() + amount));
-				break;
-			} else if(chest.getItem(i) == ItemStack.EMPTY) {
-				chest.setItem(i, new ItemStack(item, amount));
-				break;
+	public static void addToChest(ChestBlockEntity chest, Item item, int amount) {
+		if(chest != null) {
+			ItemStack itemStack = new ItemStack(item, amount);
+			for(int i=0; i<chest.getContainerSize(); i++) {
+				ItemStack itemStackSlot = chest.getItem(i);
+				if(itemStackSlot.sameItem(itemStack) && itemStackSlot.getCount() < itemStackSlot.getMaxStackSize()) {
+					chest.setItem(i, new ItemStack(item, itemStackSlot.getCount() + amount));
+					break;
+				} else if(chest.getItem(i) == ItemStack.EMPTY) {
+					chest.setItem(i, new ItemStack(item, amount));
+					break;
+				}
 			}
 		}
 	}
@@ -104,6 +111,40 @@ public class Helper {
 	public static void sendMessage(Player player, String message, String color, int x, int y, int z, boolean effects) {
 		if(isServer(player.getLevel())) {
 			PacketHandler.sendToClient((ServerPlayer)player,new MessagePacket(message,color,x,y,z,effects));
+		}
+	}
+
+	public static Block getRandomBlock(List<WeightedBlock> blocks) {
+		Random random = new Random();
+		int total = 0;
+		for (WeightedBlock block : blocks) {
+			total += block.getWeight();
+		}
+		int r = random.nextInt(total) + 1;
+		InstantBlocks.LOGGER.info(r);
+		int count = 0;
+		for (WeightedBlock block : blocks) {
+			count += block.getWeight();
+			if(count >= r) {
+				return block.getBlock();
+			}
+		}
+		return Blocks.MELON_STEM;
+		//return blocks.get(0).getBlock();
+	}
+
+	public static class WeightedBlock {
+		private final Block block;
+		private final int weight;
+		public WeightedBlock(Block block, int weight) {
+			this.block = block;
+			this.weight = weight;
+		}
+		public Block getBlock() {
+			return this.block;
+		}
+		public int getWeight() {
+			return this.weight;
 		}
 	}
 }

@@ -36,9 +36,7 @@ public class InstantBlockItem extends BlockItem {
 			list.add(new TextComponent("Useful for underwater."));
 			list.add(new TextComponent("Right-click to activate."));
 		} else if(block == ModBlocks.INSTANT_FARM.get()) {
-			list.add(new TextComponent("Creates a simple wheat farm."));
-			list.add(new TextComponent("5% chance with carrots."));
-			list.add(new TextComponent("5% chance with potatoes."));
+			list.add(new TextComponent("Creates a simple farm."));
 			list.add(new TextComponent("Right-click to activate."));
 		} else if(block == ModBlocks.INSTANT_SKYDIVE.get()) {
 			list.add(new TextComponent("Creates a structure from layer"));

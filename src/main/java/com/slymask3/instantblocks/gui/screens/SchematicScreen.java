@@ -64,7 +64,6 @@ public class SchematicScreen extends InstantScreen {
 				SchematicScreen.this.checkForSchematic();
 			}
 		};
-		this.input.setFocus(true);
 
 		this.schematicList = new SchematicList(this.width / 2 - 4 - 150, this.height / 4 + 42 + 12, 300+8, 62);
 		this.addWidget(this.schematicList);
@@ -75,6 +74,8 @@ public class SchematicScreen extends InstantScreen {
 		this.addRenderableWidget(this.ignoreAir);
 		this.addRenderableWidget(this.input);
 		this.addRenderableWidget(this.schematicList);
+
+		this.setInitialFocus(this.input);
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {

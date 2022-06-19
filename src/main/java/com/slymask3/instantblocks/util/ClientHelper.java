@@ -1,6 +1,8 @@
 package com.slymask3.instantblocks.util;
 
+import com.slymask3.instantblocks.gui.screens.*;
 import com.slymask3.instantblocks.handler.Config;
+import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -11,7 +13,10 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class ClientHelper {
     public static boolean isClient(Level world) {
         return world.isClientSide();
@@ -37,6 +42,18 @@ public class ClientHelper {
         if(Config.Client.SHOW_MESSAGES.get() && isClient(player.getLevel())) {
             //player.sendMessage(new TextComponent(Strings.PREFIX + Colors.colorEveryWord(msg, color)),player.getUUID());
             player.displayClientMessage(new TextComponent(Strings.PREFIX + Colors.colorEveryWord(msg, color)),true);
+        }
+    }
+
+    public static void showScreen(GuiID guiID, Player player, Level world, BlockPos pos) {
+        if(isClient(world)) {
+            switch(guiID) {
+                case SKYDIVE -> Minecraft.getInstance().setScreen(new SkydiveScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
+                case STATUE -> Minecraft.getInstance().setScreen(new StatueScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
+                case HARVEST -> Minecraft.getInstance().setScreen(new HarvestScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
+                case TREE -> Minecraft.getInstance().setScreen(new TreeScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
+                case SCHEMATIC -> Minecraft.getInstance().setScreen(new SchematicScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
+            }
         }
     }
 }

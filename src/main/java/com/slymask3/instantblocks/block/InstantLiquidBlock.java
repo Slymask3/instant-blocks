@@ -52,8 +52,10 @@ public abstract class InstantLiquidBlock extends InstantBlock {
     }
 
 	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
-		for(int i=0; i<8; i++) {
-			world.addParticle(particle, (double)pos.getX() + Math.random(), (double)pos.getY() + 1.2D, (double)pos.getZ() + Math.random(), 0.0D, 0.0D, 0.0D);
+		if(this.particle != null) {
+			for(int i=0; i<8; i++) {
+				world.addParticle(this.particle, (double)pos.getX() + Math.random(), (double)pos.getY() + 1.2D, (double)pos.getZ() + Math.random(), 0.0D, 0.0D, 0.0D);
+			}
 		}
 	}
 

@@ -1,13 +1,11 @@
 package com.slymask3.instantblocks.block;
 
-import com.slymask3.instantblocks.gui.screens.*;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Helper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -126,15 +124,7 @@ public abstract class InstantBlock extends Block {
 			}
 		}
 
-		if(ClientHelper.isClient(world)) {
-			switch(guiID) {
-				case SKYDIVE -> Minecraft.getInstance().setScreen(new SkydiveScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
-				case STATUE -> Minecraft.getInstance().setScreen(new StatueScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
-				case HARVEST -> Minecraft.getInstance().setScreen(new HarvestScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
-				case TREE -> Minecraft.getInstance().setScreen(new TreeScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
-				case SCHEMATIC -> Minecraft.getInstance().setScreen(new SchematicScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
-			}
-		}
+		ClientHelper.showScreen(this.guiID,player,world,pos);
 
 		return InteractionResult.SUCCESS;
 	}

@@ -26,11 +26,14 @@ public class Config {
 		public static BooleanValue KEEP_BLOCKS;
 		public static IntValue XP_AMOUNT;
 		public static IntValue RAILS_AMOUNT;
-		public static IntValue SKYDIVE_RADIUS;
 		public static IntValue SKYDIVE_MIN;
 		public static IntValue SKYDIVE_MAX;
 		public static IntValue SKYDIVE_WATER;
 		public static IntValue MINING_LADDER_LAYER;
+		public static IntValue WEIGHT_WHEAT;
+		public static IntValue WEIGHT_POTATOES;
+		public static IntValue WEIGHT_CARROTS;
+		public static IntValue WEIGHT_BEETROOTS;
 
 		public static BooleanValue ALLOW_CRAFTING;
 		public static BooleanValue ADD_WOODEN_HOUSE;
@@ -234,10 +237,6 @@ public class Config {
 
 			builder.comment("Instant skydive block settings").push("skydive");
 
-			SKYDIVE_RADIUS = builder
-					.comment("Default radius for the Instant Rainbow Skydive.\nDefault: 5")
-					.defineInRange("SKYDIVE_RADIUS", 5,1,1000);
-
 			SKYDIVE_MIN = builder
 					.comment("Minimum height for the Instant Rainbow Skydive.\nDefault: 5")
 					.defineInRange("SKYDIVE_MIN", -59,-64,320);
@@ -251,6 +250,26 @@ public class Config {
 					.defineInRange("SKYDIVE_WATER", 1,1,300);
 
 			builder.pop();
+
+			builder.comment("Instant farm block settings").push("farm");
+
+			WEIGHT_WHEAT = builder
+					.comment("Weight for wheat to be chosen to plant.\nDefault: 70")
+					.defineInRange("WEIGHT_WHEAT", 70,0,100);
+
+			WEIGHT_POTATOES = builder
+					.comment("Weight for potatoes to be chosen to plant.\nDefault: 10")
+					.defineInRange("WEIGHT_POTATOES", 10,0,100);
+
+			WEIGHT_CARROTS = builder
+					.comment("Weight for carrots to be chosen to plant.\nDefault: 10")
+					.defineInRange("WEIGHT_CARROTS", 10,0,100);
+
+			WEIGHT_BEETROOTS = builder
+					.comment("Weight for beetroot to be chosen to plant.\nDefault: 10")
+					.defineInRange("WEIGHT_BEETROOTS", 10,0,100);
+
+			builder.pop();
 		}
 	}
 
@@ -259,6 +278,7 @@ public class Config {
 		public static BooleanValue SHOW_EFFECTS;
 		public static ConfigValue<String> PARTICLE;
 		public static ConfigValue<String> SOUND;
+		public static IntValue SKYDIVE_RADIUS;
 
 		Client(ForgeConfigSpec.Builder builder) {
 			builder.comment("Client only settings").push("client");
@@ -280,6 +300,10 @@ public class Config {
 					.comment("Which sound is played on activation.\nThe directory is .minecraft\\resources\\sound3\\.\nFor example, the default sound is .minecraft\\resources\\sound3\\random\\levelup.ogg\nDefault: random.levelup")
 					.worldRestart()
 					.define("SOUND", "entity.player.levelup");
+
+			SKYDIVE_RADIUS = builder
+					.comment("Default radius for the Instant Rainbow Skydive GUI.\nDefault: 5")
+					.defineInRange("SKYDIVE_RADIUS", 5,1,1000);
 
 			builder.pop();
 		}
