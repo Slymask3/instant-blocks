@@ -43,7 +43,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 		return new SkydiveBlockEntity(pos,state);
 	}
 
-	public boolean build(Level world, int x, int y, int z, Player player, int[] selectedColors, int radius, boolean tp) {
+	public boolean build(Level world, int x, int y, int z, Player player, int[] selectedColors, int radius, boolean teleportToTop) {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 
 		BuildHelper.setBlock(world,x,y,z,Blocks.AIR);
@@ -112,14 +112,16 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 			i++;
 		}
 
-		if(direction == Direction.SOUTH) {
-			Helper.teleport(world,player,x,max+1,z+radius, tp);
-		} else if(direction == Direction.WEST) {
-			Helper.teleport(world,player,x-radius,max+1,z, tp);
-		} else if(direction == Direction.NORTH) {
-			Helper.teleport(world,player,x,max+1,z-radius, tp);
-		} else if(direction == Direction.EAST) {
-			Helper.teleport(world,player,x+radius,max+1,z, tp);
+		if(teleportToTop) {
+			if(direction == Direction.SOUTH) {
+				Helper.teleport(world,player,x,max+1,z+radius);
+			} else if(direction == Direction.WEST) {
+				Helper.teleport(world,player,x-radius,max+1,z);
+			} else if(direction == Direction.NORTH) {
+				Helper.teleport(world,player,x,max+1,z-radius);
+			} else if(direction == Direction.EAST) {
+				Helper.teleport(world,player,x+radius,max+1,z);
+			}
 		}
 
 		return true;

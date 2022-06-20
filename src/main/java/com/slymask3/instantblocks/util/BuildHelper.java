@@ -14,10 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BedPart;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
@@ -45,10 +42,6 @@ public class BuildHelper {
 
 	public static void setBlock(Level world, BlockPos pos, Block block) {
 		setBlock(world,pos.getX(),pos.getY(),pos.getZ(),block,null,2);
-	}
-
-	public static void setBlock(Level world, BlockPos pos, BlockState state) {
-		setBlock(world,pos.getX(),pos.getY(),pos.getZ(),state,2);
 	}
 
 	public static void setBlock(Level world, BlockPos pos, Block block, Direction direction) {
@@ -83,6 +76,19 @@ public class BuildHelper {
 			if(block instanceof LeavesBlock) {
 				state = state.setValue(LeavesBlock.PERSISTENT, Boolean.TRUE);
 			}
+			if(block instanceof ChestBlock && direction != null) {
+				BlockPos left_pos = new BlockPos(x,y,z).relative(direction.getCounterClockWise(),1);
+				BlockPos right_pos = new BlockPos(x,y,z).relative(direction.getClockWise(),1);
+				BlockState left = world.getBlockState(left_pos);
+				BlockState right = world.getBlockState(right_pos);
+				if(left.getBlock() == Blocks.CHEST && left.getValue(ChestBlock.TYPE) == ChestType.SINGLE && left.getValue(ChestBlock.FACING) == direction) {
+					world.setBlock(left_pos,state.setValue(ChestBlock.TYPE,ChestType.LEFT),flag);
+					state = state.setValue(ChestBlock.TYPE, ChestType.RIGHT);
+				} else if(right.getBlock() == Blocks.CHEST && right.getValue(ChestBlock.TYPE) == ChestType.SINGLE && right.getValue(ChestBlock.FACING) == direction) {
+					world.setBlock(left_pos,state.setValue(ChestBlock.TYPE,ChestType.RIGHT),flag);
+					state = state.setValue(ChestBlock.TYPE, ChestType.LEFT);
+				}
+			}
 			world.setBlock(new BlockPos(x,y,z),state,flag);
 			if(block instanceof DoorBlock) {
 				world.setBlock(new BlockPos(x,y,z).above(), state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER), 3);
@@ -91,6 +97,10 @@ public class BuildHelper {
 				world.setBlock(new BlockPos(x,y,z).relative(direction.getOpposite(),1), state.setValue(BedBlock.PART, BedPart.FOOT), 3);
 			}
 		}
+	}
+
+	public static void setBlock(Level world, BlockPos pos, BlockState state) {
+		setBlock(world,pos.getX(),pos.getY(),pos.getZ(),state,2);
 	}
 
 	public static void setBlock(Level world, int x, int y, int z, BlockState state) {

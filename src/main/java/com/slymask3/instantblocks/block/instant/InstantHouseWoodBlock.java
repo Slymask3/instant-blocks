@@ -143,8 +143,8 @@ public class InstantHouseWoodBlock extends InstantBlock {
 			BuildHelper.setBlock(world,x + 4, y + 1, z - 2, furnace, directionRight); //FURNACE
 			BuildHelper.setBlock(world,x + 4, y + 1, z - 1, furnace, directionRight); //FURNACE
 			
-			BuildHelper.setBlock(world,x-4, y + 1, z+1, stair, directionStairLeft); //CHAIR
-			BuildHelper.setBlock(world,x + 4, y + 1, z + 1, stair, directionStairRight); //CHAIR
+			BuildHelper.setBlock(world,x-4, y + 1, z+1, stair, directionStairRight); //CHAIR
+			BuildHelper.setBlock(world,x + 4, y + 1, z + 1, stair, directionStairLeft); //CHAIR
 			BuildHelper.setBlock(world,x-4, y + 1, z, sign, directionBack); //CHAIR
 			BuildHelper.setBlock(world,x+4, y + 1, z, sign, directionBack); //CHAIR
 			
@@ -244,8 +244,8 @@ public class InstantHouseWoodBlock extends InstantBlock {
 			BuildHelper.setBlock(world,x + 2, y + 1, z + 4, furnace, directionRight); //FURNACE //NOT 3
 			BuildHelper.setBlock(world,x + 1, y + 1, z + 4, furnace, directionRight); //FURNACE //NOT 3
 
-			BuildHelper.setBlock(world,x - 1, y + 1, z - 4, stair, directionStairLeft); //CHAIR
-			BuildHelper.setBlock(world,x - 1, y + 1, z + 4, stair, directionStairRight); //CHAIR
+			BuildHelper.setBlock(world,x - 1, y + 1, z - 4, stair, directionStairRight); //CHAIR
+			BuildHelper.setBlock(world,x - 1, y + 1, z + 4, stair, directionStairLeft); //CHAIR
 			BuildHelper.setBlock(world,x, y + 1, z - 4, sign, directionBack); //CHAIR //NOT 4, 3
 			BuildHelper.setBlock(world,x, y + 1, z + 4, sign, directionBack); //CHAIR //NOT 4, 3
 			

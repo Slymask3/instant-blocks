@@ -150,11 +150,11 @@ public class InstantGrinderBlock extends InstantBlock {
 		BuildHelper.setBlock(world,x+11, y-2, z-1, pane);
 		BuildHelper.setBlock(world,x+11, y-2, z+2, pane);
 		BuildHelper.setBlock(world,x+11, y-2, z+1, pane);
-		BuildHelper.setBlock(world,x+10, y-2, z, torch);
-		BuildHelper.setBlock(world,x+12, y-2, z-2, torch);
-		BuildHelper.setBlock(world,x+12, y-2, z+2, torch);
-		BuildHelper.setBlock(world,x+15, y-2, z-1, torch);
-		BuildHelper.setBlock(world,x+15, y-2, z+1, torch);
+		BuildHelper.setBlock(world,x+10, y-2, z, torch, Direction.EAST);
+		BuildHelper.setBlock(world,x+12, y-2, z-2, torch, Direction.SOUTH);
+		BuildHelper.setBlock(world,x+12, y-2, z+2, torch, Direction.NORTH);
+		BuildHelper.setBlock(world,x+15, y-2, z-1, torch, Direction.WEST);
+		BuildHelper.setBlock(world,x+15, y-2, z+1, torch, Direction.WEST);
 		BuildHelper.setBlock(world,x+6, y-2, z, sign, Direction.NORTH, 0); //SIGN
 
 		/************************ Layer 3 : Stone (Spawn Room Roof) ************************/
@@ -223,10 +223,10 @@ public class InstantGrinderBlock extends InstantBlock {
 		BuildHelper.setBlock(world,x, y, z, air);
 		
 		/************************ Teleport ************************/
-		Helper.teleport(world,player,x+13,y-4,z,Config.Common.TP_GRINDER.get());
 		if(Config.Common.TP_GRINDER.get()) {
 			BuildHelper.setBlock(world,x+7, y-4, z, glass);
 			BuildHelper.setBlock(world,x+7, y-3, z, glass);
+			Helper.teleport(world,player,x+13,y-4,z);
 		}
 
 		return true;

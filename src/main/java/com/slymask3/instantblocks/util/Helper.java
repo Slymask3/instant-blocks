@@ -29,9 +29,8 @@ public class Helper {
 		}
 	}
 	
-	public static void teleport(Level world, Player player, int x, int y, int z, boolean allow) {
-		if(isServer(world) && allow) {
-			//sound(world, x, y, z);
+	public static void teleport(Level world, Player player, int x, int y, int z) {
+		if(isServer(world)) {
 			player.teleportTo(x + 0.5, y + 0.5, z + 0.5);
 		}
 	}

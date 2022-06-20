@@ -1,6 +1,5 @@
 package com.slymask3.instantblocks.block;
 
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.entity.ColorBlockEntity;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Helper;
@@ -16,8 +15,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 public class ColorBlock extends Block implements EntityBlock {
     public static Block blockType = Blocks.WHITE_WOOL;

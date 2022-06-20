@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.InstantBlock;
+import com.slymask3.instantblocks.block.entity.HarvestBlockEntity;
 import com.slymask3.instantblocks.gui.screens.TreeScreen;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
@@ -10,13 +11,16 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
-public class InstantTreeBlock extends InstantBlock {
+public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 	public InstantTreeBlock() {
 		super(Block.Properties.of(Material.PLANT)
 				.strength(0.1F, 2000F)
@@ -25,6 +29,12 @@ public class InstantTreeBlock extends InstantBlock {
 				.instabreak()
 		);
 		setGuiID(GuiID.TREE);
+	}
+
+	@Nullable
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new HarvestBlockEntity(pos,state);
 	}
 
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {

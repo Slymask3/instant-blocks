@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.InstantBlock;
+import com.slymask3.instantblocks.block.entity.HarvestBlockEntity;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
@@ -32,7 +33,7 @@ public class InstantHarvestBlock extends InstantBlock implements EntityBlock {
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return null;
+		return new HarvestBlockEntity(pos,state);
 	}
 	
 	public boolean build(Level world, int X, int Y, int Z, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {

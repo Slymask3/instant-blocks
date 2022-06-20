@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks.block;
 
+import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
@@ -64,6 +65,11 @@ public abstract class InstantBlock extends Block {
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.is_directional ? this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()) : super.getStateForPlacement(context);
+	}
+
+	public void onPlace(BlockState state, Level world, BlockPos pos, BlockState state1, boolean var5) {
+		super.onPlace(state,world,pos,state1,var5);
+		InstantBlocks.LOGGER.info(state.getValue(FACING));
 	}
 
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {

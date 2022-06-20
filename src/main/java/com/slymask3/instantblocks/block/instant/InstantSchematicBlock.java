@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
 import com.slymask3.instantblocks.reference.GuiID;
@@ -9,6 +10,7 @@ import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Helper;
 import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -67,6 +69,14 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 					BlockPos pos = new BlockPos(x+X-x_offset,y+Y,z+Z-z_offset);
 					if(!(ignoreAir && state.getBlock() == Blocks.AIR)) {
 						BuildHelper.setBlock(world,pos,state);
+						CompoundTag tag = schematic.getBlockEntityTag(x,y,z);
+						BlockEntity entity = world.getBlockEntity(pos);
+						if(tag != null && entity != null) {
+							entity.load(tag);
+						}
+						if(entity != null) {
+							InstantBlocks.LOGGER.info("buildSchematic: " + x + "," + y + "," + z);
+						}
 					}
 				}
 			}

@@ -5,10 +5,13 @@ import com.slymask3.instantblocks.util.ClientHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
+@OnlyIn(Dist.CLIENT)
 public class ClientPacketHandler {
     public static void handle(MessagePacket message, Supplier<NetworkEvent.Context> context) {
         Player player = Minecraft.getInstance().player;

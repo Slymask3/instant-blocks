@@ -2,9 +2,7 @@ package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.reference.Reference;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtIo;
-import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.*;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.io.File;
@@ -17,51 +15,14 @@ public class SchematicHelper {
 		try {
 			File file = new File(Reference.SCHEMATICS_DIR + "/" + schematicName);
 			FileInputStream fis = new FileInputStream(file);
-			CompoundTag nbtdata = NbtIo.readCompressed(fis);
-			short width = nbtdata.getShort("Width");
-			short height = nbtdata.getShort("Height");
-			short length = nbtdata.getShort("Length");
-			byte[] blocks = nbtdata.getByteArray("BlockData");
-
-			HashMap<Integer,BlockState> map = new HashMap<>();
-			CompoundTag palette = nbtdata.getCompound("Palette");
-			for(String blockStateString : palette.getAllKeys()) {
-				int key = palette.getInt(blockStateString);
-				BlockState state = readBlockState(blockStateString);
-				map.put(key,state);
-			}
-
+			CompoundTag tag = NbtIo.readCompressed(fis);
 			fis.close();
-			return new Schematic(width,height,length,blocks,map);
+			return new Schematic(tag);
 		} catch(Exception e) {
 			InstantBlocks.LOGGER.info("Couldn't read schematic.");
 		}
 		return null;
 	}
-
-	private static BlockState readBlockState(String string) {
-		CompoundTag tag = new CompoundTag();
-
-		String[] split = string.split("\\[",2);
-
-		tag.putString("Name",split[0]);
-
-		if(split.length == 2) {
-			CompoundTag propertiesTag = new CompoundTag();
-			String[] properties = split[1].replace("]","").split(",");
-			for(String property : properties) {
-				String[] values = property.split("=");
-				if(values.length == 2) {
-					propertiesTag.putString(values[0],values[1]);
-				}
-			}
-			tag.put("Properties",propertiesTag);
-		}
-
-		return NbtUtils.readBlockState(tag);
-	}
-
-
 
 	public static void createSchematicsDir() {
 		File dir = new File(Reference.SCHEMATICS_DIR);
@@ -93,15 +54,51 @@ public class SchematicHelper {
 		public short length;
 		public byte[] blocks;
 		private final HashMap<Integer,BlockState> map;
-		public Schematic(short width, short height, short length, byte[] blocks, HashMap<Integer,BlockState> map) {
-			this.width = width;
-			this.height = height;
-			this.length = length;
-			this.blocks = blocks;
-			this.map = map;
+		private final HashMap<Coords,CompoundTag> blockEntities;
+		public Schematic(CompoundTag tag) {
+			this.width = tag.getShort("Width");
+			this.height = tag.getShort("Height");
+			this.length = tag.getShort("Length");
+			this.blocks = tag.getByteArray("BlockData");
+			this.map = new HashMap<>();
+			CompoundTag palette = tag.getCompound("Palette");
+			for(String blockStateString : palette.getAllKeys()) {
+				int key = palette.getInt(blockStateString);
+				BlockState state = readBlockState(blockStateString);
+				this.map.put(key,state);
+			}
+			this.blockEntities = new HashMap<>();
+			ListTag entities = tag.getList("BlockEntities",net.minecraft.nbt.Tag.TAG_COMPOUND);
+			for(Tag entity : entities) {
+				CompoundTag entityTag = (CompoundTag)entity;
+				int[] pos = entityTag.getIntArray("Pos");
+				Coords entityPos = new Coords(pos[0],pos[1],pos[2]);
+				InstantBlocks.LOGGER.info("Schematic.class: " + pos[0] + "," + pos[1] + "," + pos[2]);
+				this.blockEntities.put(entityPos,entityTag);
+			}
 		}
 		public BlockState getBlockState(int index) {
 			return this.map.get((int)this.blocks[index]);
+		}
+		public CompoundTag getBlockEntityTag(int x, int y, int z) {
+			return this.blockEntities.get(new Coords(x,y,z));
+		}
+		private BlockState readBlockState(String string) {
+			CompoundTag tag = new CompoundTag();
+			String[] split = string.split("\\[",2);
+			tag.putString("Name",split[0]);
+			if(split.length == 2) {
+				CompoundTag propertiesTag = new CompoundTag();
+				String[] properties = split[1].replace("]","").split(",");
+				for(String property : properties) {
+					String[] values = property.split("=");
+					if(values.length == 2) {
+						propertiesTag.putString(values[0],values[1]);
+					}
+				}
+				tag.put("Properties",propertiesTag);
+			}
+			return NbtUtils.readBlockState(tag);
 		}
 	}
 }
