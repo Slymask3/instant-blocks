@@ -8,8 +8,8 @@ import com.slymask3.instantblocks.block.entity.StatueBlockEntity;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
-import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Helper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -103,7 +103,7 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 			setCreateMessage(Strings.CREATE_STATUE.replace("%username%",username));
 			return true;
 		} else {
-			Helper.sendMessage(player, Strings.ERROR_STATUE.replace("%username%",username), Colors.c);
+			Helper.sendMessage(player, Strings.ERROR_STATUE.replace("%username%",username), ChatFormatting.RED);
 		}
 		return false;
 	}

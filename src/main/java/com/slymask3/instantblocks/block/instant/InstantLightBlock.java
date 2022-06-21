@@ -4,9 +4,8 @@ import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
-import com.slymask3.instantblocks.util.Colors;
-import com.slymask3.instantblocks.util.Coords;
 import com.slymask3.instantblocks.util.Helper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -25,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class InstantLightBlock extends InstantBlock {
-    public ArrayList<Coords> coordsList;
+    public ArrayList<Helper.Coords> coordsList;
 
     public InstantLightBlock() {
         super(Block.Properties.of(Material.DECORATION)
@@ -53,7 +52,7 @@ public class InstantLightBlock extends InstantBlock {
     public boolean build(Level world, int x, int y, int z, Player player) {
         checkForDarkness(world,x,y,z);
         if(coordsList.isEmpty()) {
-            Helper.sendMessage(player,Strings.ERROR_LIGHT.replace("%i%",String.valueOf(Config.Common.RADIUS_LIGHT.get())),Colors.c);
+            Helper.sendMessage(player,Strings.ERROR_LIGHT.replace("%i%",String.valueOf(Config.Common.RADIUS_LIGHT.get())), ChatFormatting.RED);
             return false;
         }
         BuildHelper.setBlock(world,x,y,z,Blocks.TORCH);
@@ -108,7 +107,7 @@ public class InstantLightBlock extends InstantBlock {
     }
 
     private boolean addCoords(int x, int y, int z) {
-        Coords coords = new Coords(x,y,z);
+        Helper.Coords coords = new Helper.Coords(x,y,z);
         if(!coordsList.contains(coords)) {
             coordsList.add(coords);
             return true;

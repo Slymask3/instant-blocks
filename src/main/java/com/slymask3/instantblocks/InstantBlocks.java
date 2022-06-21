@@ -5,7 +5,6 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.init.ModTiles;
 import com.slymask3.instantblocks.network.PacketHandler;
-import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -18,8 +17,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(Reference.MOD_ID)
+@Mod(InstantBlocks.MOD_ID)
 public class InstantBlocks {
+	public static final String MOD_ID = "instantblocks";
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	public InstantBlocks() {

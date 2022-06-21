@@ -1,11 +1,11 @@
 package com.slymask3.instantblocks.init;
 
+import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.ColorBlock;
 import com.slymask3.instantblocks.block.SkydiveTPBlock;
 import com.slymask3.instantblocks.block.instant.*;
 import com.slymask3.instantblocks.item.InstantBlockItem;
 import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Reference;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +19,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {
-	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MOD_ID);
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, InstantBlocks.MOD_ID);
 
 	public static final RegistryObject<Block> INSTANT_WOOD_HOUSE = BLOCKS.register(Names.Blocks.IB_WOOD_HOUSE, InstantHouseWoodBlock::new);
 	public static final RegistryObject<Block> INSTANT_MINING_LADDER = BLOCKS.register(Names.Blocks.IB_MINING_LADDER, InstantMiningLadderBlock::new);

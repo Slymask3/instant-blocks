@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.InstantBlocks;
-import com.slymask3.instantblocks.reference.Reference;
 import net.minecraft.nbt.*;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -11,9 +10,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SchematicHelper {
+	public static final String SCHEMATICS_DIR = "schematics";
+
 	public static Schematic readSchematic(String schematicName) {
 		try {
-			File file = new File(Reference.SCHEMATICS_DIR + "/" + schematicName);
+			File file = new File(SCHEMATICS_DIR + "/" + schematicName);
 			FileInputStream fis = new FileInputStream(file);
 			CompoundTag tag = NbtIo.readCompressed(fis);
 			fis.close();
@@ -25,7 +26,7 @@ public class SchematicHelper {
 	}
 
 	public static void createSchematicsDir() {
-		File dir = new File(Reference.SCHEMATICS_DIR);
+		File dir = new File(SCHEMATICS_DIR);
 		if(!dir.exists()) {
 			try {
 				dir.mkdir();
@@ -38,7 +39,7 @@ public class SchematicHelper {
 
 	public static ArrayList<String> getSchematics() {
 		ArrayList<String> schematics = new ArrayList<>();
-		File dir = new File(Reference.SCHEMATICS_DIR + "/");
+		File dir = new File(SCHEMATICS_DIR + "/");
 		File[] files = dir.listFiles(file -> file.isFile() && (file.getName().toLowerCase().endsWith(".schematic") || file.getName().toLowerCase().endsWith(".schem")));
 		if(files != null) {
 			for(File file : files) {
@@ -54,7 +55,8 @@ public class SchematicHelper {
 		public short length;
 		public byte[] blocks;
 		private final HashMap<Integer,BlockState> map;
-		private final HashMap<Coords,CompoundTag> blockEntities;
+		private final HashMap<Helper.Coords,CompoundTag> blockEntities;
+		private final ArrayList<CompoundTag> entities;
 		public Schematic(CompoundTag tag) {
 			this.width = tag.getShort("Width");
 			this.height = tag.getShort("Height");
@@ -68,20 +70,28 @@ public class SchematicHelper {
 				this.map.put(key,state);
 			}
 			this.blockEntities = new HashMap<>();
-			ListTag entities = tag.getList("BlockEntities",net.minecraft.nbt.Tag.TAG_COMPOUND);
-			for(Tag entity : entities) {
+			ListTag blockEntities = tag.getList("BlockEntities",Tag.TAG_COMPOUND);
+			for(Tag entity : blockEntities) {
 				CompoundTag entityTag = (CompoundTag)entity;
 				int[] pos = entityTag.getIntArray("Pos");
-				Coords entityPos = new Coords(pos[0],pos[1],pos[2]);
-				InstantBlocks.LOGGER.info("Schematic.class: " + pos[0] + "," + pos[1] + "," + pos[2]);
+				Helper.Coords entityPos = new Helper.Coords(pos[0],pos[1],pos[2]);
 				this.blockEntities.put(entityPos,entityTag);
+			}
+			this.entities = new ArrayList<>();
+			ListTag entities = tag.getList("Entities",Tag.TAG_COMPOUND);
+			for(Tag entity : entities) {
+				CompoundTag entityTag = (CompoundTag)entity;
+				this.entities.add(entityTag);
 			}
 		}
 		public BlockState getBlockState(int index) {
 			return this.map.get((int)this.blocks[index]);
 		}
 		public CompoundTag getBlockEntityTag(int x, int y, int z) {
-			return this.blockEntities.get(new Coords(x,y,z));
+			return this.blockEntities.get(new Helper.Coords(x,y,z));
+		}
+		public ArrayList<CompoundTag> getEntityTags() {
+			return this.entities;
 		}
 		private BlockState readBlockState(String string) {
 			CompoundTag tag = new CompoundTag();

@@ -4,8 +4,8 @@ import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
-import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Helper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -27,7 +27,7 @@ public class InstantMiningLadderBlock extends InstantBlock {
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(y <= Config.Common.MINING_LADDER_LAYER.get() + 4) {
-			Helper.sendMessage(player, Strings.ERROR_LADDER.replace("%i%",String.valueOf(Config.Common.MINING_LADDER_LAYER.get() + 4)), Colors.c);
+			Helper.sendMessage(player, Strings.ERROR_LADDER.replace("%i%",String.valueOf(Config.Common.MINING_LADDER_LAYER.get() + 4)), ChatFormatting.RED);
 			return false;
 		}
 		return true;

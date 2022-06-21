@@ -293,12 +293,10 @@ public class Config {
 
 			PARTICLE = builder
 					.comment("Which particles are generated on activation.\nDefault: reddust")
-					.worldRestart()
 					.define("PARTICLE", "reddust");
 
 			SOUND = builder
 					.comment("Which sound is played on activation.\nThe directory is .minecraft\\resources\\sound3\\.\nFor example, the default sound is .minecraft\\resources\\sound3\\random\\levelup.ogg\nDefault: random.levelup")
-					.worldRestart()
 					.define("SOUND", "entity.player.levelup");
 
 			SKYDIVE_RADIUS = builder

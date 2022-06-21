@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block;
 
 import com.slymask3.instantblocks.block.entity.ColorBlockEntity;
-import com.slymask3.instantblocks.util.Colors;
+import com.slymask3.instantblocks.util.ColorHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -37,7 +37,7 @@ public class ColorBlock extends Block implements EntityBlock {
         if(Helper.isServer(world)) {
             BlockEntity entity = world.getBlockEntity(pos);
             if(entity instanceof ColorBlockEntity) {
-                ((ColorBlockEntity)entity).color = Colors.generateRandomColor().getRGB();
+                ((ColorBlockEntity)entity).color = ColorHelper.generateRandomColor().getRGB();
             }
         }
         world.markAndNotifyBlock(pos,world.getChunkAt(pos),state,state,2,0);

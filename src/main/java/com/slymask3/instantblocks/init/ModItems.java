@@ -1,8 +1,8 @@
 package com.slymask3.instantblocks.init;
 
+import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.item.InstantWandItem;
 import com.slymask3.instantblocks.reference.Names;
-import com.slymask3.instantblocks.reference.Reference;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +14,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems {
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MOD_ID);
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, InstantBlocks.MOD_ID);
 
 	public static final RegistryObject<Item> WAND_WOOD = ITEMS.register(Names.Items.IB_WAND_WOOD, () -> new InstantWandItem(Tiers.WOOD));
 	public static final RegistryObject<Item> WAND_STONE = ITEMS.register(Names.Items.IB_WAND_STONE, () -> new InstantWandItem(Tiers.STONE));
@@ -23,7 +23,7 @@ public class ModItems {
 	public static final RegistryObject<Item> WAND_DIAMOND = ITEMS.register(Names.Items.IB_WAND_DIAMOND, () -> new InstantWandItem(Tiers.DIAMOND));
 
 	public static class ModCreativeTab extends CreativeModeTab {
-		public static final ModCreativeTab instance = new ModCreativeTab(CreativeModeTab.TABS.length, Reference.MOD_ID);
+		public static final ModCreativeTab instance = new ModCreativeTab(CreativeModeTab.TABS.length, InstantBlocks.MOD_ID);
 		private ModCreativeTab(int index, String label) {
 			super(index, label);
 		}

@@ -1,16 +1,17 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
-import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Helper;
 import com.slymask3.instantblocks.util.SchematicHelper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -21,6 +22,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 	public InstantSchematicBlock() {
@@ -45,7 +48,7 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 			setCreateMessage(Strings.CREATE_SCHEMATIC.replace("%schematic%",schematicName));
 			return true;
 		}
-		Helper.sendMessage(player, Strings.ERROR_SCHEMATIC.replace("%schematic%",schematicName), Colors.c);
+		Helper.sendMessage(player, Strings.ERROR_SCHEMATIC.replace("%schematic%",schematicName), ChatFormatting.RED);
 		return false;
 	}
 
@@ -74,11 +77,15 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 						if(tag != null && entity != null) {
 							entity.load(tag);
 						}
-						if(entity != null) {
-							InstantBlocks.LOGGER.info("buildSchematic: " + x + "," + y + "," + z);
-						}
 					}
 				}
+			}
+		}
+		for(CompoundTag entityTag : schematic.getEntityTags()) {
+			Optional<Entity> optional = EntityType.create(entityTag,world);
+			if(optional.isPresent()) {
+				Entity entity = optional.get();
+				world.addFreshEntity(entity);
 			}
 		}
 	}

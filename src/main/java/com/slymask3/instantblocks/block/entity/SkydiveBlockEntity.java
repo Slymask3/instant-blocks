@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.entity;
 
 import com.slymask3.instantblocks.init.ModTiles;
-import com.slymask3.instantblocks.util.Colors;
+import com.slymask3.instantblocks.util.ColorHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,9 +13,9 @@ public class SkydiveBlockEntity extends InstantBlockEntity {
 	public SkydiveBlockEntity(BlockPos pos, BlockState state) {
 		super(ModTiles.SKYDIVE.get(), pos, state);
 		for(int i=0; i<color.length; i++) {
-			String color = Colors.indexRainbowToString(i);
+			String color = ColorHelper.indexRainbowToString(i);
 			this.color[i] = color;
-			this.colorCode[i] = Colors.textToColor(color).getRGB();
+			this.colorCode[i] = ColorHelper.textToColor(color).getRGB();
 		}
 	}
 
@@ -38,7 +38,7 @@ public class SkydiveBlockEntity extends InstantBlockEntity {
 	}
 	
 	public void setColorCode(int i, String input) {
-		this.colorCode[i] = Colors.textToColor(input).getRGB();
+		this.colorCode[i] = ColorHelper.textToColor(input).getRGB();
 	}
 	
 	public void setColor(int i, String input) {

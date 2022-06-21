@@ -5,9 +5,8 @@ import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
-import com.slymask3.instantblocks.util.Colors;
-import com.slymask3.instantblocks.util.Coords;
 import com.slymask3.instantblocks.util.Helper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -34,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class InstantLiquidBlock extends InstantBlock {
-	public ArrayList<Coords> coordsList;
+	public ArrayList<Helper.Coords> coordsList;
 	public Block blockCheck;
 	public Block blockReplace;
 	public String create;
@@ -113,11 +112,11 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		}
 		checkForBlock(world,x,y,z);
 		if(isSuction && coordsList.isEmpty()) {
-			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID, Colors.c);
+			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID, ChatFormatting.RED);
 			return false;
 		}
 		if(coordsList.size() >= getMax()) {
-			Helper.sendMessage(player, errorMessage, Colors.c);
+			Helper.sendMessage(player, errorMessage, ChatFormatting.RED);
 			coordsList = new ArrayList<>();
 			return false;
 		} else {
@@ -126,7 +125,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		for(Coords coords : coordsList) {
+		for(Helper.Coords coords : coordsList) {
 			BuildHelper.setBlock(world, coords.getX(), coords.getY(), coords.getZ(), blockReplace);
 		}
 		BuildHelper.setBlock(world,x, y, z, getMainReplaceBlock());
@@ -175,7 +174,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	private boolean addCoords(int x, int y, int z) {
-		Coords coords = new Coords(x,y,z);
+		Helper.Coords coords = new Helper.Coords(x,y,z);
 		if(!coordsList.contains(coords)) {
 			coordsList.add(coords);
 			return true;

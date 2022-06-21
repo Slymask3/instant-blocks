@@ -295,13 +295,13 @@ public class BuildHelper {
     			left = 0;
     		}
     		if(direction == Direction.SOUTH) {
-        		setBlock(world, x+left-right, y, z-forward+back, Colors.getWoolColor(Colors.getColorAt(img, imgx, imgy)));
+        		setBlock(world, x+left-right, y, z-forward+back, ColorHelper.getWoolColor(ColorHelper.getColorAt(img, imgx, imgy)));
     		} else if(direction == Direction.WEST) {
-    			setBlock(world, x+forward-back, y, z+left-right, Colors.getWoolColor(Colors.getColorAt(img, imgx, imgy)));
+    			setBlock(world, x+forward-back, y, z+left-right, ColorHelper.getWoolColor(ColorHelper.getColorAt(img, imgx, imgy)));
     		} else if(direction == Direction.NORTH) {
-    			setBlock(world, x-left+right, y, z+forward-back, Colors.getWoolColor(Colors.getColorAt(img, imgx, imgy)));
+    			setBlock(world, x-left+right, y, z+forward-back, ColorHelper.getWoolColor(ColorHelper.getColorAt(img, imgx, imgy)));
     		} else if(direction == Direction.EAST) {
-    			setBlock(world, x-forward+back, y, z-left+right, Colors.getWoolColor(Colors.getColorAt(img, imgx, imgy)));
+    			setBlock(world, x-forward+back, y, z-left+right, ColorHelper.getWoolColor(ColorHelper.getColorAt(img, imgx, imgy)));
     		}
 		}
     }

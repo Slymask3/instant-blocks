@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.gui.components;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.slymask3.instantblocks.block.entity.SkydiveBlockEntity;
-import com.slymask3.instantblocks.util.Colors;
+import com.slymask3.instantblocks.util.ColorHelper;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
@@ -26,7 +26,7 @@ public class ColorEditBox extends EditBox {
     }
 
     public Color getColor() {
-        return Colors.textToColor(getValue());
+        return ColorHelper.textToColor(getValue());
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ColorEditBox extends EditBox {
     }
 
     private String createRandomHex() {
-        Color color = Colors.generateRandomColor();
+        Color color = ColorHelper.generateRandomColor();
         return String.format("%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
     }
 

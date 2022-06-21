@@ -1,8 +1,8 @@
 package com.slymask3.instantblocks.handler;
 
+import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.entity.ColorBlockEntity;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.Reference;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;
@@ -14,7 +14,7 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = InstantBlocks.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class Client {
     @SubscribeEvent
     public static void registerBlockColors(ColorHandlerEvent.Block event) {

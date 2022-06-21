@@ -4,7 +4,7 @@ import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
-import com.slymask3.instantblocks.util.Colors;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.BlockItem;
@@ -73,11 +73,11 @@ public class InstantBlockItem extends BlockItem {
 		} else if(block == ModBlocks.COLOR.get()) {
 			list.add(new TextComponent("This block is used by Instant Skydive and Statue."));
 			list.add(new TextComponent("When placed, will generate with a random color."));
-			list.add(new TextComponent(Colors.c+"CREATIVE MODE ONLY"));
+			list.add(new TextComponent(ChatFormatting.RED + "CREATIVE MODE ONLY"));
 		} else if(block == ModBlocks.SKYDIVE_TP.get()) {
 			list.add(new TextComponent("This block is used by Instant Skydive."));
 			list.add(new TextComponent("Teleports you up to layer " + (Config.Common.SKYDIVE_MAX.get() + 2) + "."));
-			list.add(new TextComponent(Colors.c+"CREATIVE MODE ONLY"));
+			list.add(new TextComponent(ChatFormatting.RED + "CREATIVE MODE ONLY"));
 		}
 		if(block instanceof InstantBlock) {
 			list.add(new TextComponent("Right-click to activate."));

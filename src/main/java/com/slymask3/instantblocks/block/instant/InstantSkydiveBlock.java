@@ -7,8 +7,7 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
-import com.slymask3.instantblocks.util.Colors;
-import com.slymask3.instantblocks.util.Coords;
+import com.slymask3.instantblocks.util.ColorHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -48,16 +47,16 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 
 		BuildHelper.setBlock(world,x,y,z,Blocks.AIR);
 
-		ArrayList<Coords> coordsList = new ArrayList<>();
-		ArrayList<Coords> coordsAirList = new ArrayList<>();
+		ArrayList<Helper.Coords> coordsList = new ArrayList<>();
+		ArrayList<Helper.Coords> coordsAirList = new ArrayList<>();
 		double distance;
 		for (int row = 0; row <= 2 * radius; row++) {
 			for (int col = 0; col <= 2 * radius; col++) {
 				distance = Math.sqrt((row - radius) * (row - radius) + (col - radius) * (col - radius));
 				if(distance > radius - 0.4 && distance < radius + 0.5) {
-					coordsList.add(new Coords(x+row-radius,0,z+col-radius));
+					coordsList.add(new Helper.Coords(x+row-radius,0,z+col-radius));
 				} else if(distance < radius - 0.3) {
-					coordsAirList.add(new Coords(x+row-radius,0,z+col-radius));
+					coordsAirList.add(new Helper.Coords(x+row-radius,0,z+col-radius));
 				}
 			}
 		}
@@ -74,15 +73,15 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 			}
 			Color base = new Color(selectedColors[i]);
 			colors[index] = base; index++;
-			colors[index] = Colors.getColorBetween(base,after,90,10); index++;
-			colors[index] = Colors.getColorBetween(base,after,80,20); index++;
-			colors[index] = Colors.getColorBetween(base,after,70,30); index++;
-			colors[index] = Colors.getColorBetween(base,after,60,40); index++;
-			colors[index] = Colors.getColorBetween(base,after,50,50); index++;
-			colors[index] = Colors.getColorBetween(base,after,40,60); index++;
-			colors[index] = Colors.getColorBetween(base,after,30,70); index++;
-			colors[index] = Colors.getColorBetween(base,after,20,80); index++;
-			colors[index] = Colors.getColorBetween(base,after,10,90); index++;
+			colors[index] = ColorHelper.getColorBetween(base,after,90,10); index++;
+			colors[index] = ColorHelper.getColorBetween(base,after,80,20); index++;
+			colors[index] = ColorHelper.getColorBetween(base,after,70,30); index++;
+			colors[index] = ColorHelper.getColorBetween(base,after,60,40); index++;
+			colors[index] = ColorHelper.getColorBetween(base,after,50,50); index++;
+			colors[index] = ColorHelper.getColorBetween(base,after,40,60); index++;
+			colors[index] = ColorHelper.getColorBetween(base,after,30,70); index++;
+			colors[index] = ColorHelper.getColorBetween(base,after,20,80); index++;
+			colors[index] = ColorHelper.getColorBetween(base,after,10,90); index++;
 		}
 
 		int i = 0;
@@ -90,7 +89,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 		int max = Helper.getMaxSkydive(world);
 		int water = Config.Common.SKYDIVE_WATER.get();
 		for(int c=max; c>=min; c--) {
-			for(Coords coords : coordsAirList) {
+			for(Helper.Coords coords : coordsAirList) {
 				if(c == min) {
 					BuildHelper.setColorBlock(world,coords.getX(),c,coords.getZ(),colors[i].getRGB());
 				} else if(c < min+water+1) {
@@ -99,7 +98,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 					BuildHelper.setBlock(world,coords.getX(),c,coords.getZ(),Blocks.AIR);
 				}
 			}
-			for(Coords coords : coordsList) {
+			for(Helper.Coords coords : coordsList) {
 				if(i>=colors.length) {
 					i = 0;
 				}

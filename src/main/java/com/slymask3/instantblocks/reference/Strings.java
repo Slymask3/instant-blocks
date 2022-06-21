@@ -1,9 +1,9 @@
 package com.slymask3.instantblocks.reference;
 
-import com.slymask3.instantblocks.util.Colors;
+import net.minecraft.ChatFormatting;
 
 public class Strings {
-	public static final String PREFIX = Colors._8 + "[" + Colors._3 + "InstantBlocks" + Colors._8 + "] ";
+	public static final String PREFIX = ChatFormatting.DARK_GRAY + "[" + ChatFormatting.DARK_AQUA + "InstantBlocks" + ChatFormatting.DARK_GRAY + "] ";
 
 	public static final String ERROR_WAND = "You must use an Instant Wand.";
 	public static final String ERROR_GRINDER = "You must place this above a Zombie/Skeleton spawner.";
@@ -18,7 +18,7 @@ public class Strings {
 	public static final String ERROR_SCHEMATIC = "Error creating schematic from the file %schematic%.";
 
 	public static final String CREATE_WOODEN_HOUSE = "Instant Wooden House created.";
-	public static final String CREATE_SKYDIVE = "Instant " + Colors.c + "R" + Colors._6 + "a" + Colors.e + "i" + Colors.a + "n" + Colors._2 + "b" + Colors._3 + "o" + Colors.b + "w " + Colors.a + "Skydive created.";
+	public static final String CREATE_SKYDIVE = "Instant " + ChatFormatting.RED + "R" + ChatFormatting.GOLD + "a" + ChatFormatting.YELLOW + "i" + ChatFormatting.GREEN + "n" + ChatFormatting.DARK_GREEN + "b" + ChatFormatting.DARK_AQUA + "o" + ChatFormatting.AQUA + "w " + ChatFormatting.GREEN + "Skydive created.";
 	public static final String CREATE_FARM = "Instant Farm created.";
 	public static final String CREATE_DOME = "Instant Glass Dome created.";
 	public static final String CREATE_GRINDER = "Instant Grinder created.";

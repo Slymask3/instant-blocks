@@ -6,13 +6,14 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.item.InstantWandItem;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.MessagePacket;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 
 import java.util.List;
@@ -99,17 +100,17 @@ public class Helper {
 		return max;
 	}
 
-	public static void sendMessage(Player player, String message, String color) {
+	public static void sendMessage(Player player, String message, ChatFormatting color) {
 		sendMessage(player, message, color, 0, 0, 0, false);
 	}
 
-	public static void sendMessage(Player player, String message, String color, int x, int y, int z) {
+	public static void sendMessage(Player player, String message, ChatFormatting color, int x, int y, int z) {
 		sendMessage(player, message, color, x, y, z, true);
 	}
 
-	public static void sendMessage(Player player, String message, String color, int x, int y, int z, boolean effects) {
+	public static void sendMessage(Player player, String message, ChatFormatting color, int x, int y, int z, boolean effects) {
 		if(isServer(player.getLevel())) {
-			PacketHandler.sendToClient((ServerPlayer)player,new MessagePacket(message,color,x,y,z,effects));
+			PacketHandler.sendToClient((ServerPlayer)player,new MessagePacket(message,color.toString(),x,y,z,effects));
 		}
 	}
 
@@ -128,8 +129,7 @@ public class Helper {
 				return block.getBlock();
 			}
 		}
-		return Blocks.MELON_STEM;
-		//return blocks.get(0).getBlock();
+		return blocks.get(0).getBlock();
 	}
 
 	public static class WeightedBlock {
@@ -144,6 +144,53 @@ public class Helper {
 		}
 		public int getWeight() {
 			return this.weight;
+		}
+	}
+
+	public static class Coords {
+		private final int x;
+		private final int y;
+		private final int z;
+
+		public Coords(int x, int y, int z) {
+			this.x = x;
+			this.y = y;
+			this.z = z;
+		}
+
+		public int getX() {
+			return x;
+		}
+		public int getY() {
+			return y;
+		}
+		public int getZ() {
+			return z;
+		}
+		public BlockPos getBlockPos() {
+			return new BlockPos(x,y,z);
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + x;
+			result = prime * result + y;
+			result = prime * result + z;
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if(this == obj)
+				return true;
+			if(obj == null)
+				return false;
+			if(getClass() != obj.getClass())
+				return false;
+			Coords other = (Coords)obj;
+			return x == other.getX() && y == other.getY() && z == other.getZ();
 		}
 	}
 }

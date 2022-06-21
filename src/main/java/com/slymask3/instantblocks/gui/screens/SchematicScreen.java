@@ -7,7 +7,6 @@ import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.SchematicPacket;
-import com.slymask3.instantblocks.reference.Reference;
 import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.EditBox;
@@ -103,7 +102,7 @@ public class SchematicScreen extends InstantScreen {
 	}
 
 	public boolean checkForSchematic() {
-		File file = new File(Reference.SCHEMATICS_DIR + "/" + input.getValue());
+		File file = new File(SchematicHelper.SCHEMATICS_DIR + "/" + input.getValue());
 		SchematicScreen.this.done.active = file.isFile();
 		return file.isFile();
 	}

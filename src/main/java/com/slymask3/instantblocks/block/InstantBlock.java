@@ -5,8 +5,8 @@ import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
-import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.Helper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -92,7 +92,7 @@ public abstract class InstantBlock extends Block {
 
 			ItemStack is = player.getItemInHand(hand);
 			if(Config.Common.USE_WANDS.get() && !Helper.isWand(is)) {
-				Helper.sendMessage(player, Strings.ERROR_WAND, Colors.c);
+				Helper.sendMessage(player, Strings.ERROR_WAND, ChatFormatting.RED);
 				return InteractionResult.FAIL;
 			}
 
@@ -125,7 +125,7 @@ public abstract class InstantBlock extends Block {
 		ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
 		if(Config.Common.USE_WANDS.get()) {
 			if(!Helper.isWand(is)) {
-				Helper.sendMessage(player, Strings.ERROR_WAND, Colors.c);
+				Helper.sendMessage(player, Strings.ERROR_WAND, ChatFormatting.RED);
 				return InteractionResult.FAIL;
 			}
 		}
@@ -141,7 +141,7 @@ public abstract class InstantBlock extends Block {
 	}
 
 	public void afterBuild(Level world, int x, int y, int z, Player player) {
-		Helper.sendMessage(player,this.createMessage,Colors.a,x,y,z);
+		Helper.sendMessage(player,this.createMessage,ChatFormatting.GREEN,x,y,z);
 		Helper.giveExp(world, player, Config.Common.XP_AMOUNT.get());
 		if(Config.Common.USE_WANDS.get()) {
 			ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);

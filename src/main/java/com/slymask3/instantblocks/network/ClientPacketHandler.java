@@ -16,12 +16,14 @@ public class ClientPacketHandler {
     public static void handle(MessagePacket message, Supplier<NetworkEvent.Context> context) {
         Player player = Minecraft.getInstance().player;
         if(player != null) {
-            Level world = player.getLevel();
             if(message.effects) {
+                Level world = player.getLevel();
                 ClientHelper.playSound(world, message.x, message.y, message.z);
                 ClientHelper.showParticles(world, message.x, message.y, message.z);
             }
-            ClientHelper.sendMessage(player, message.message, message.color);
+            if(!message.message.isEmpty()) {
+                ClientHelper.sendMessage(player, message.message, message.color);
+            }
         }
     }
 }
