@@ -140,7 +140,7 @@ public class BuildHelper {
 	public static void build(Level world, int x, int y, int z, Block block, Direction direction, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
 		build(world, x, y, z, block, direction, 2, xTimesTotal, yTimesTotal, zTimesTotal);
 	}
-	
+
 	public static void build(Level world, int x, int y, int z, Block block, Direction direction, int flag, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
 		int z2 = z;
 		int x2 = x;
@@ -148,6 +148,23 @@ public class BuildHelper {
 			for(int zTimes = 0; zTimes < zTimesTotal; zTimes++) {
 				for(int xTimes = 0; xTimes < xTimesTotal; xTimes++) {
 					setBlock(world, x2, y, z2, block, direction, flag);
+					z2++;
+				}
+				z2 = z;
+				x2++;
+			}
+			x2 = x;
+			y++;
+		}
+	}
+
+	public static void build(Level world, int x, int y, int z, BlockState state, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
+		int z2 = z;
+		int x2 = x;
+		for(int yTimes = 0; yTimes < yTimesTotal; yTimes++) {
+			for(int zTimes = 0; zTimes < zTimesTotal; zTimes++) {
+				for(int xTimes = 0; xTimes < xTimesTotal; xTimes++) {
+					setBlock(world, x2, y, z2, state, 2);
 					z2++;
 				}
 				z2 = z;

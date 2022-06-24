@@ -8,6 +8,8 @@ import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.MessagePacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -15,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 import java.util.Random;
@@ -72,6 +75,8 @@ public class Helper {
 			return 2;
 		} else if(ModItems.WAND_DIAMOND.get().equals(item)) {
 			return 30;
+		} else if(ModItems.WAND_NETHERITE.get().equals(item)) {
+			return 25;
 		}
 		return 1;
 	}
@@ -130,6 +135,24 @@ public class Helper {
 			}
 		}
 		return blocks.get(0).getBlock();
+	}
+
+	public static BlockState readBlockState(String string) {
+		CompoundTag tag = new CompoundTag();
+		String[] split = string.split("\\[",2);
+		tag.putString("Name",split[0]);
+		if(split.length == 2) {
+			CompoundTag propertiesTag = new CompoundTag();
+			String[] properties = split[1].replace("]","").split(",");
+			for(String property : properties) {
+				String[] values = property.split("=");
+				if(values.length == 2) {
+					propertiesTag.putString(values[0],values[1]);
+				}
+			}
+			tag.put("Properties",propertiesTag);
+		}
+		return NbtUtils.readBlockState(tag);
 	}
 
 	public static class WeightedBlock {

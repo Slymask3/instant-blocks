@@ -1,7 +1,10 @@
 package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.InstantBlocks;
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.io.File;
@@ -66,7 +69,7 @@ public class SchematicHelper {
 			CompoundTag palette = tag.getCompound("Palette");
 			for(String blockStateString : palette.getAllKeys()) {
 				int key = palette.getInt(blockStateString);
-				BlockState state = readBlockState(blockStateString);
+				BlockState state = Helper.readBlockState(blockStateString);
 				this.map.put(key,state);
 			}
 			this.blockEntities = new HashMap<>();
@@ -92,23 +95,6 @@ public class SchematicHelper {
 		}
 		public ArrayList<CompoundTag> getEntityTags() {
 			return this.entities;
-		}
-		private BlockState readBlockState(String string) {
-			CompoundTag tag = new CompoundTag();
-			String[] split = string.split("\\[",2);
-			tag.putString("Name",split[0]);
-			if(split.length == 2) {
-				CompoundTag propertiesTag = new CompoundTag();
-				String[] properties = split[1].replace("]","").split(",");
-				for(String property : properties) {
-					String[] values = property.split("=");
-					if(values.length == 2) {
-						propertiesTag.putString(values[0],values[1]);
-					}
-				}
-				tag.put("Properties",propertiesTag);
-			}
-			return NbtUtils.readBlockState(tag);
 		}
 	}
 }

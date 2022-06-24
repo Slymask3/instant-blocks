@@ -23,8 +23,13 @@ public class InstantHouseWoodBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
+		//Block light = Helper.readBlockState("acacia_planks").getBlock();
+		//Block dark = Helper.readBlockState("dark_oak_planks").getBlock();
+		//Block slabD = Helper.readBlockState("dark_oak_slab").getBlock();
+
 		Block light = Blocks.BIRCH_PLANKS;
 		Block dark = Blocks.SPRUCE_PLANKS;
+		Block slabD = Blocks.SPRUCE_SLAB;
 		Block log = Blocks.BIRCH_LOG;
 		Block craft = Blocks.CRAFTING_TABLE;
 		Block chest = Blocks.CHEST;
@@ -39,8 +44,6 @@ public class InstantHouseWoodBlock extends InstantBlock {
 		Block torch = Blocks.TORCH;
 		Block torch_wall = Blocks.WALL_TORCH;
 		Block plate = Blocks.SPRUCE_PRESSURE_PLATE;
-		Block slabL = Blocks.BIRCH_SLAB;
-		Block slabD = Blocks.SPRUCE_SLAB;
 		Block air = Blocks.AIR;
 
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);

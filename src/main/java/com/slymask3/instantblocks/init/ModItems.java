@@ -21,6 +21,7 @@ public class ModItems {
 	public static final RegistryObject<Item> WAND_IRON = ITEMS.register(Names.Items.IB_WAND_IRON, () -> new InstantWandItem(Tiers.IRON));
 	public static final RegistryObject<Item> WAND_GOLD = ITEMS.register(Names.Items.IB_WAND_GOLD, () -> new InstantWandItem(Tiers.GOLD));
 	public static final RegistryObject<Item> WAND_DIAMOND = ITEMS.register(Names.Items.IB_WAND_DIAMOND, () -> new InstantWandItem(Tiers.DIAMOND));
+	public static final RegistryObject<Item> WAND_NETHERITE = ITEMS.register(Names.Items.IB_WAND_NETHERITE, () -> new InstantWandItem(Tiers.NETHERITE));
 
 	public static class ModCreativeTab extends CreativeModeTab {
 		public static final ModCreativeTab instance = new ModCreativeTab(CreativeModeTab.TABS.length, InstantBlocks.MOD_ID);

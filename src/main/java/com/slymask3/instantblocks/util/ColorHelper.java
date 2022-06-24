@@ -8,13 +8,32 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class ColorHelper {
+	public static final VanillaColor[] VANILLA_COLORS = new VanillaColor[]{
+		new VanillaColor(new Color(221,221,221), Blocks.WHITE_WOOL),
+		new VanillaColor(new Color(219,125,62), Blocks.ORANGE_WOOL),
+		new VanillaColor(new Color(179,80,188), Blocks.MAGENTA_WOOL),
+		new VanillaColor(new Color(107,138,201), Blocks.LIGHT_BLUE_WOOL),
+		new VanillaColor(new Color(177,166,39), Blocks.YELLOW_WOOL),
+		new VanillaColor(new Color(65,174,56), Blocks.LIME_WOOL),
+		new VanillaColor(new Color(208,132,153), Blocks.PINK_WOOL),
+		new VanillaColor(new Color(64,64,64), Blocks.GRAY_WOOL),
+		new VanillaColor(new Color(154,161,161), Blocks.LIGHT_GRAY_WOOL),
+		new VanillaColor(new Color(46,110,137), Blocks.CYAN_WOOL),
+		new VanillaColor(new Color(126,61,181), Blocks.PURPLE_WOOL),
+		new VanillaColor(new Color(46,56,141), Blocks.BLUE_WOOL),
+		new VanillaColor(new Color(79,50,31), Blocks.BROWN_WOOL),
+		new VanillaColor(new Color(53,70,27), Blocks.GREEN_WOOL),
+		new VanillaColor(new Color(150,52,48), Blocks.RED_WOOL),
+		new VanillaColor(new Color(25,22,22), Blocks.BLACK_WOOL)
+	};
+
 	public static String colorEveryWord(String msg, String color) {
 	    StringBuilder builder = new StringBuilder(msg.length());
 		builder.append(color);
 	    for(int i = 0; i < msg.length(); i++) {
 	        char c = msg.charAt(i);
 			if(c == ' ') {
-				builder.append(" " + color);
+				builder.append(" ").append(color);
 			} else {
 				builder.append(c);
 			}
@@ -23,318 +42,49 @@ public class ColorHelper {
 	}
 	
 	public static Block getWoolColor(Color color) {
-		double r = color.getRed();
-		double g = color.getGreen();
-		double b = color.getBlue();
-		
-		int r4 = (int)Math.round(r/64);
-		int g4 = (int)Math.round(g/64);
-		int b4 = (int)Math.round(b/64);
-		
-		StringBuilder sb = new StringBuilder();
+		VanillaColor inputColor = new VanillaColor(color);
 
-		sb.append(r4);
-		sb.append(g4);
-		sb.append(b4);
-		
-		/** @myValues
-		 * red = 255 0 0
-		 * orange = 255 127 0
-		 * yellow = 255 255 0
-		 * green(lime) = 0 255 0
-		 * cyan = 0 255 255
-		 * blue = 0 0 255
-		 * purple = 255 0 255
-		 */
-		
-		/** @realValues
-		 * white = 221 221 221
-		 * orange = 219 125 62
-		 * magenta = 179 80 188
-		 * light blue = 107 138 201
-		 * yellow = 177 166 39
-		 * lime = 65 174 56
-		 * pink = 208 132 153
-		 * gray = 64 64 64
-		 * light gray = 154 161 161
-		 * cyan = 46 110 137
-		 * purple = 126 61 181
-		 * blue =  46 56 141
-		 * brown = 79 50 31
-		 * green = 53 70 27
-		 * red = 150 52 48
-		 * black = 25 22 22
-		 */
-		
-		if(sb.toString().equals("000")) {
-			return Blocks.BLACK_WOOL; //black
-		} else if(sb.toString().equals("001")) {
-			return Blocks.BLUE_WOOL; //blue
-		} else if(sb.toString().equals("002")) {
-			return Blocks.BLACK_WOOL; //blue
-		} else if(sb.toString().equals("003")) {
-			return Blocks.BLACK_WOOL; //blue
-		} else if(sb.toString().equals("004")) {
-			return Blocks.BLUE_WOOL; //blue
-		} else if(sb.toString().equals("010")) {
-			return Blocks.GREEN_WOOL; //green
-		} else if(sb.toString().equals("011")) {
-			return Blocks.CYAN_WOOL; //cyan COULD ALSO BE BLUE OR GREEN
-		} else if(sb.toString().equals("012")) {
-			return Blocks.BLUE_WOOL; //blue COULD ALSO BE CYAN
-		} else if(sb.toString().equals("013")) {
-			return Blocks.BLUE_WOOL; //blue
-		} else if(sb.toString().equals("014")) {
-			return Blocks.BLUE_WOOL; //blue MAYBE CYAN? OR LIGHT?
-		} else if(sb.toString().equals("020")) {
-			return Blocks.GREEN_WOOL; //green
-		} else if(sb.toString().equals("021")) {
-			return Blocks.GREEN_WOOL; //green COUDL ALSO BE CYAN
-		} else if(sb.toString().equals("022")) {
-			return Blocks.CYAN_WOOL; //cyan COULD ALSO BE BLUE OR GREEN
-		} else if(sb.toString().equals("023")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("024")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("030")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("031")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("032")) {
-			return Blocks.CYAN_WOOL; //cyan ??
-		} else if(sb.toString().equals("033")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("034")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("040")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("041")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("042")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("043")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("044")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
+		VanillaColor woolColor = null;
+		float diff_lowest = 1F;
+		for(VanillaColor vanillaColor : VANILLA_COLORS) {
+			float diff = vanillaColor.diff(inputColor);
+			if(diff_lowest == 1F || diff < diff_lowest) {
+				diff_lowest = diff;
+				woolColor = vanillaColor;
+			}
 		}
-		
-		//--------------------- 1 series
-		
-		else if(sb.toString().equals("100")) {
-			return Blocks.RED_WOOL; //red DARK RED ALMOST BLACK
-		} else if(sb.toString().equals("101")) {
-			return Blocks.PURPLE_WOOL; //purple
-		} else if(sb.toString().equals("102")) {
-			return Blocks.PURPLE_WOOL; //purple
-		} else if(sb.toString().equals("103")) {
-			return Blocks.PURPLE_WOOL; //purple COULD BE BLUE
-		} else if(sb.toString().equals("104")) {
-			return Blocks.BLUE_WOOL; //blue
-		} else if(sb.toString().equals("110")) {
-			return Blocks.BROWN_WOOL; //brown COULD BE YELLOW
-		} else if(sb.toString().equals("111")) {
-			return Blocks.GRAY_WOOL; //dark gray
-		} else if(sb.toString().equals("112")) {
-			return Blocks.BLUE_WOOL; //blue
-		} else if(sb.toString().equals("113")) {
-			return Blocks.BLUE_WOOL; //blue
-		} else if(sb.toString().equals("114")) {
-			return Blocks.BLUE_WOOL; //blue COULD BE LIGHT BLUE
-		} else if(sb.toString().equals("120")) {
-			return Blocks.GREEN_WOOL; //green
-		} else if(sb.toString().equals("121")) {
-			return Blocks.GREEN_WOOL; //green COULD BE GRAY
-		} else if(sb.toString().equals("122")) {
-			return Blocks.CYAN_WOOL; //cyan COULD ALSO BE BLUE OR GREEN
-		} else if(sb.toString().equals("123")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("124")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("130")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("131")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("132")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("133")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("134")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("140")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("141")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("142")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("143")) {
-			return Blocks.CYAN_WOOL; //cyan
-		} else if(sb.toString().equals("144")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		}
-		
-		//------------------- 2 series
-		
-		else if(sb.toString().equals("200")) {
-			return Blocks.RED_WOOL; //red
-		} else if(sb.toString().equals("201")) {
-			return Blocks.MAGENTA_WOOL; //magenta
-		} else if(sb.toString().equals("202")) {
-			return Blocks.PURPLE_WOOL; //purple
-		} else if(sb.toString().equals("203")) {
-			return Blocks.PURPLE_WOOL; //purple
-		} else if(sb.toString().equals("204")) {
-			return Blocks.PURPLE_WOOL; //purple
-		} else if(sb.toString().equals("210")) {
-			return Blocks.ORANGE_WOOL; //orange COULD BE BROWN
-		} else if(sb.toString().equals("211")) {
-			return Blocks.RED_WOOL; //red
-		} else if(sb.toString().equals("212")) {
-			return Blocks.MAGENTA_WOOL; //magenta
-		} else if(sb.toString().equals("213")) {
-			return Blocks.MAGENTA_WOOL; //magenta
-		} else if(sb.toString().equals("214")) {
-			return Blocks.PURPLE_WOOL; //purple
-		} else if(sb.toString().equals("220")) {
-			return Blocks.YELLOW_WOOL; //yellow
-		} else if(sb.toString().equals("221")) {
-			return Blocks.YELLOW_WOOL; //yellow
-		} else if(sb.toString().equals("222")) {
-			return Blocks.LIGHT_GRAY_WOOL; //light gray
-		} else if(sb.toString().equals("223")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue ??
-		} else if(sb.toString().equals("224")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("230")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("231")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("232")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("233")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("234")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("240")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("241")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("242")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("243")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("244")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		}
-		
-		//----------------- 3 series
-		
-		else if(sb.toString().equals("300")) {
-			return Blocks.RED_WOOL; //red
-		} else if(sb.toString().equals("301")) {
-			return Blocks.RED_WOOL; //red COULD BE MAGENTA OR PINK
-		} else if(sb.toString().equals("302")) {
-			return Blocks.MAGENTA_WOOL; //magenta
-		} else if(sb.toString().equals("303")) {
-			return Blocks.MAGENTA_WOOL; //magenta
-		} else if(sb.toString().equals("304")) {
-			return Blocks.PURPLE_WOOL; //purple
-		} else if(sb.toString().equals("310")) {
-			return Blocks.ORANGE_WOOL; //orange
-		} else if(sb.toString().equals("311")) {
-			return Blocks.PINK_WOOL; //pink ??
-		} else if(sb.toString().equals("312")) {
-			return Blocks.PINK_WOOL; //pink ??
-		} else if(sb.toString().equals("313")) {
-			return Blocks.MAGENTA_WOOL; //magenta
-		} else if(sb.toString().equals("314")) {
-			return Blocks.PURPLE_WOOL; //purple
-		} else if(sb.toString().equals("320")) {
-			return Blocks.ORANGE_WOOL; //orange
-		} else if(sb.toString().equals("321")) {
-			return Blocks.ORANGE_WOOL; //orange
-		} else if(sb.toString().equals("322")) {
-			return Blocks.PINK_WOOL; //pink
-		} else if(sb.toString().equals("323")) {
-			return Blocks.MAGENTA_WOOL; //magenta
-		} else if(sb.toString().equals("324")) {
-			return Blocks.MAGENTA_WOOL; //magenta
-		} else if(sb.toString().equals("330")) {
-			return Blocks.YELLOW_WOOL; //yellow
-		} else if(sb.toString().equals("331")) {
-			return Blocks.YELLOW_WOOL; //yellow
-		} else if(sb.toString().equals("332")) {
-			return Blocks.YELLOW_WOOL; //yellow
-		} else if(sb.toString().equals("333")) {
-			return Blocks.LIGHT_GRAY_WOOL; //light gray
-		} else if(sb.toString().equals("334")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		} else if(sb.toString().equals("340")) {
-			return Blocks.YELLOW_WOOL; //yellow
-		} else if(sb.toString().equals("341")) {
-			return Blocks.YELLOW_WOOL; //yellow
-		} else if(sb.toString().equals("342")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("343")) {
-			return Blocks.LIME_WOOL; //lime
-		} else if(sb.toString().equals("344")) {
-			return Blocks.LIGHT_BLUE_WOOL; //light blue
-		}
-		
-		//--------------- 4 series
-		
-		else if(sb.toString().equals("400")) {
-			return Blocks.RED_WOOL; //red
-		} else if(sb.toString().equals("401")) {
-			return Blocks.RED_WOOL; //red
-		} else if(sb.toString().equals("402")) {
-			return Blocks.PINK_WOOL; //pink COULD BE MAGENTA
-		} else if(sb.toString().equals("403")) {
-			return Blocks.MAGENTA_WOOL; //magenta
-		} else if(sb.toString().equals("404")) {
-			return Blocks.MAGENTA_WOOL; //magenta
-		} else if(sb.toString().equals("410")) {
-			return Blocks.ORANGE_WOOL; //orange
-		} else if(sb.toString().equals("411")) {
-			return Blocks.PINK_WOOL; //pink
-		} else if(sb.toString().equals("412")) {
-			return Blocks.PINK_WOOL; //pink
-		} else if(sb.toString().equals("413")) {
-			return Blocks.MAGENTA_WOOL; //magenta
-		} else if(sb.toString().equals("414")) {
-			return Blocks.MAGENTA_WOOL; //magenta
-		} else if(sb.toString().equals("420")) {
-			return Blocks.ORANGE_WOOL; //orange
-		} else if(sb.toString().equals("421")) {
-			return Blocks.ORANGE_WOOL; //orange
-		} else if(sb.toString().equals("422")) {
-			return Blocks.PINK_WOOL; //pink
-		} else if(sb.toString().equals("423")) {
-			return Blocks.PINK_WOOL; //pink
-		} else if(sb.toString().equals("424")) {
-			return Blocks.PINK_WOOL; //pink
-		} else if(sb.toString().equals("430")) {
-			return Blocks.YELLOW_WOOL; //yellow
-		} else if(sb.toString().equals("431")) {
-			return Blocks.ORANGE_WOOL; //orange
-		} else if(sb.toString().equals("432")) {
-			return Blocks.ORANGE_WOOL; //orange
-		} else if(sb.toString().equals("433")) {
-			return Blocks.PINK_WOOL; //pink
-		} else if(sb.toString().equals("434")) {
-			return Blocks.PINK_WOOL; //pink
-		} else if(sb.toString().equals("440")) {
-			return Blocks.YELLOW_WOOL; //yellow
-		} else if(sb.toString().equals("441")) {
-			return Blocks.YELLOW_WOOL; //yellow
-		} else if(sb.toString().equals("442")) {
-			return Blocks.YELLOW_WOOL; //yellow
-		} else if(sb.toString().equals("443")) {
-			return Blocks.YELLOW_WOOL; //yellow
-		} else if(sb.toString().equals("444")) {
-			return Blocks.WHITE_WOOL; //white
-		} else {
-			return Blocks.WHITE_WOOL;
-		}
+
+		return woolColor.getBlock();
+
+
+//		double r = color.getRed();
+//		double g = color.getGreen();
+//		double b = color.getBlue();
+//
+//		int r4 = (int)Math.round(r/64);
+//		int g4 = (int)Math.round(g/64);
+//		int b4 = (int)Math.round(b/64);
+//
+//		String sb = String.valueOf(r4) + g4 + b4;
+//
+//		return switch (sb) {
+//			case "000", "002", "003" -> Blocks.BLACK_WOOL;
+//			case "001", "112", "104", "013", "012", "004", "114", "113", "014" -> Blocks.BLUE_WOOL;
+//			case "010", "120", "021", "121", "020" -> Blocks.GREEN_WOOL;
+//			case "011", "122", "032", "143", "022" -> Blocks.CYAN_WOOL;
+//			case "023", "123", "024", "234", "134", "124", "044", "034", "033", "224", "223", "334", "144", "043", "344", "244", "233", "133" -> Blocks.LIGHT_BLUE_WOOL;
+//			case "030", "240", "230", "140", "130", "040", "031", "343", "243", "242", "241", "232", "231", "142", "141", "132", "131", "042", "041", "342" -> Blocks.LIME_WOOL;
+//			case "100", "300", "301", "401", "400", "211", "200" -> Blocks.RED_WOOL;
+//			case "101", "202", "314", "304", "214", "102", "204", "203", "103" -> Blocks.PURPLE_WOOL;
+//			case "110" -> Blocks.BROWN_WOOL;
+//			case "111" -> Blocks.GRAY_WOOL;
+//			case "201", "212", "302", "313", "403", "323", "413", "213", "414", "404", "324", "303" -> Blocks.MAGENTA_WOOL;
+//			case "210", "320", "310", "321", "432", "421", "410", "420", "431" -> Blocks.ORANGE_WOOL;
+//			case "220", "330", "430", "440", "221", "443", "442", "441", "341", "332", "331", "340" -> Blocks.YELLOW_WOOL;
+//			case "222", "333" -> Blocks.LIGHT_GRAY_WOOL;
+//			case "311", "433", "422", "411", "322", "312", "412", "434", "424", "423", "402" -> Blocks.PINK_WOOL;
+//			default -> Blocks.WHITE_WOOL;
+//		};
 	}
 	
 	public static Color getColorAt(BufferedImage img, int x, int y) {
@@ -345,16 +95,7 @@ public class ColorHelper {
 		return new Color(red,green,blue);
 	}
 
-	public static Color[] generateRainbow(int array_size) {
-		double jump = 360.0 / array_size;
-		Color[] colors = new Color[array_size];
-		for (int i = 0; i < colors.length; i++) {
-			colors[i] = new Color(hsvToRgb((int)Math.ceil(jump*i), 100, 100));
-		}
-		return colors;
-	}
-
-	public static int hsvToRgb(int hue, int saturation, int value) {
+	public static int hsvToRgb(int hue, float saturation, float value) {
 		// Source: en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB#From_HSV
 		hue %= 360;
 		float s = (float) saturation / 100;
@@ -410,7 +151,7 @@ public class ColorHelper {
 	public static Color generateRandomColor() {
 		Random rand = new Random();
 		int hue = rand.nextInt(360);
-		int color = hsvToRgb(hue,100,100);
+		int color = hsvToRgb(hue,100F,100F);
 		return new Color(color);
 	}
 
@@ -459,19 +200,109 @@ public class ColorHelper {
 	}
 
 	public static String indexRainbowToString(int index) {
-		switch(index) {
-			case 0: return "red";
-			case 1: return "orange";
-			case 2: return "yellow";
-			case 3: return "lime";
-			case 4: return "green";
-			case 5: return "cyan";
-			case 6: return "light blue";
-			case 7: return "blue";
-			case 8: return "purple";
-			case 9: return "magenta";
-			case 10: return "pink";
-			default: return "white";
+		return switch (index) {
+			case 0 -> "red";
+			case 1 -> "orange";
+			case 2 -> "yellow";
+			case 3 -> "lime";
+			case 4 -> "green";
+			case 5 -> "cyan";
+			case 6 -> "light blue";
+			case 7 -> "blue";
+			case 8 -> "purple";
+			case 9 -> "magenta";
+			case 10 -> "pink";
+			default -> "white";
+		};
+	}
+
+	public static class VanillaColor {
+		private float hue;
+		private float saturation;
+		private float value;
+		private final Color color;
+		private final Block block;
+		public VanillaColor(float hue, float saturation, float value, Block block) {
+			this.hue = hue;
+			this.saturation = saturation;
+			this.value = value;
+			this.color = Color.getHSBColor(hue,saturation,value);
+			this.block = block;
+		}
+		public VanillaColor(Color color, Block block) {
+			this.color = color;
+			this.block = block;
+			this.setHsvFromColor(color);
+		}
+		public VanillaColor(Color color) {
+			this(color,null);
+		}
+		public float getHue() {
+			return this.hue;
+		}
+		public float getSaturation() {
+			return this.saturation;
+		}
+		public float getValue() {
+			return this.value;
+		}
+		public Color getColor() {
+			return this.color;
+		}
+		public Block getBlock() {
+			return this.block != null ? this.block : Blocks.WHITE_WOOL;
+		}
+		public float diff(VanillaColor other) {
+			float hue_diff = Math.abs(this.hue - other.getHue()) / 360 * 0.475F;
+			float saturation_diff = Math.abs(this.saturation - other.getSaturation()) / 100 * 0.2875F;
+			float value_diff = Math.abs(this.value - other.getValue()) / 100 * 0.2375F;
+			return hue_diff + saturation_diff + value_diff;
+		}
+		private void setHsvFromColor(Color color) {
+			double r = color.getRed();
+			double g = color.getGreen();
+			double b = color.getBlue();
+
+			// R, G, B values are divided by 255
+			// to change the range from 0..255 to 0..1
+			r = r / 255.0;
+			g = g / 255.0;
+			b = b / 255.0;
+
+			// h, s, v = hue, saturation, value
+			double cmax = Math.max(r, Math.max(g, b)); // maximum of r, g, b
+			double cmin = Math.min(r, Math.min(g, b)); // minimum of r, g, b
+			double diff = cmax - cmin; // diff of cmax and cmin.
+			double h = -1, s = -1;
+
+			// if cmax and cmax are equal then h = 0
+			if (cmax == cmin)
+				h = 0;
+
+				// if cmax equal r then compute h
+			else if (cmax == r)
+				h = (60 * ((g - b) / diff) + 360) % 360;
+
+				// if cmax equal g then compute h
+			else if (cmax == g)
+				h = (60 * ((b - r) / diff) + 120) % 360;
+
+				// if cmax equal b then compute h
+			else if (cmax == b)
+				h = (60 * ((r - g) / diff) + 240) % 360;
+
+			// if cmax equal zero
+			if (cmax == 0)
+				s = 0;
+			else
+				s = (diff / cmax) * 100;
+
+			// compute v
+			double v = cmax * 100;
+
+			this.hue = (float)h;
+			this.saturation = (float)s;
+			this.value = (float)v;
 		}
 	}
 }
