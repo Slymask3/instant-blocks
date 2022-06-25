@@ -23,7 +23,7 @@ public class InstantWaterBlock extends InstantLiquidBlock {
                 .isValidSpawn((state, world, pos, entityType) -> false)
                 .isRedstoneConductor((state, world, pos) -> false)
                 .isViewBlocking((state, world, pos) -> false)
-        , Blocks.AIR, Blocks.WATER);
+        , Config.Common.DISABLE_WATER, Blocks.AIR, Blocks.WATER);
 		setErrorMessage(Strings.ERROR_WATER_MAX.replace("%i%",String.valueOf(Config.Common.MAX_LIQUID.get())));
 		this.create = Strings.CREATE_WATER;
 		this.create1 = Strings.CREATE_WATER_1;

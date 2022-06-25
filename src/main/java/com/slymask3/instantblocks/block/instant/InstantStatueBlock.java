@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.StatueBlockEntity;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
@@ -35,7 +36,7 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 		super(Block.Properties.of(Material.WOOD)
 				.strength(1.5F, 2000F)
 				.sound(SoundType.WOOD)
-		);
+		, Config.Common.DISABLE_STATUE);
 		setGuiID(GuiID.STATUE);
 		setDirectional(true);
 	}

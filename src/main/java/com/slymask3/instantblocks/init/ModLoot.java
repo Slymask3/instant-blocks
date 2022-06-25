@@ -20,7 +20,8 @@ public class ModLoot {
         String name = event.getName().toString();
         if(Config.Common.GENERATE_IN_CHESTS_BONUS.get() && name.equals("minecraft:chests/spawn_bonus_chest")) {
             event.getTable().addPool(injectPool(STARTER));
-        } else if(Config.Common.GENERATE_IN_CHESTS.get() && name.contains("minecraft:chests/")) {
+        }
+        if(Config.Common.GENERATE_IN_CHESTS.get() && name.contains("minecraft:chests/") && !name.equals("minecraft:chests/spawn_bonus_chest")) {
             event.getTable().addPool(injectPool(BLOCKS));
         }
     }

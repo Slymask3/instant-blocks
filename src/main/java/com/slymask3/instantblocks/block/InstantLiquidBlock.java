@@ -27,6 +27,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -43,8 +44,8 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 
 	public static final DustParticleOptions WHITE_DUST = new DustParticleOptions(new Vector3f(Vec3.fromRGB24(0xFFFFFF)), 1.0F);
 
-    public InstantLiquidBlock(BlockBehaviour.Properties properties, Block blockCheck, Block blockReplace) {
-        super(properties);
+    public InstantLiquidBlock(BlockBehaviour.Properties properties, ForgeConfigSpec.BooleanValue isDisabled, Block blockCheck, Block blockReplace) {
+        super(properties,isDisabled);
 		this.coordsList = new ArrayList<>();
 		this.blockCheck = blockCheck;
 		this.blockReplace = blockReplace;

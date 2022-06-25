@@ -19,7 +19,7 @@ public class InstantGrinderBlock extends InstantBlock {
 		super(Block.Properties.of(Material.METAL)
 				.strength(1.5F, 2000F)
 				.sound(SoundType.METAL)
-		);
+		, Config.Common.DISABLE_GRINDER);
         setCreateMessage(Strings.CREATE_GRINDER);
     }
 

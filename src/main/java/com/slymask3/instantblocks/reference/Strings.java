@@ -6,6 +6,7 @@ public class Strings {
 	public static final String PREFIX = ChatFormatting.DARK_GRAY + "[" + ChatFormatting.DARK_AQUA + "InstantBlocks" + ChatFormatting.DARK_GRAY + "] ";
 
 	public static final String ERROR_WAND = "You must use an Instant Wand.";
+	public static final String ERROR_DISABLED = "This instant block is disabled in the config.";
 	public static final String ERROR_GRINDER = "You must place this above a Zombie/Skeleton spawner.";
 	public static final String ERROR_LADDER = "Instant Mining Ladder cannot be created below layer %i%.";
 	public static final String ERROR_ESCAPE_LADDER = "This block only works underground.";

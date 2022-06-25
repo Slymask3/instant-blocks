@@ -33,7 +33,7 @@ public class InstantLightBlock extends InstantBlock {
                 .noCollission()
                 .instabreak()
                 .lightLevel((par1) -> 14)
-        );
+        , Config.Common.DISABLE_LIGHT);
         this.coordsList = new ArrayList<>();
     }
 

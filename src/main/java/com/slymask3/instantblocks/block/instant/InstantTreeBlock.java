@@ -3,6 +3,7 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.HarvestBlockEntity;
 import com.slymask3.instantblocks.gui.screens.TreeScreen;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.GuiID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
@@ -27,7 +28,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 				.sound(SoundType.GRASS)
 				.noCollission()
 				.instabreak()
-		);
+		, Config.Common.DISABLE_TREE);
 		setGuiID(GuiID.TREE);
 	}
 

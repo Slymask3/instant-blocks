@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.InstantBlock;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import net.minecraft.core.BlockPos;
@@ -33,7 +34,7 @@ public class InstantGlassDomeBlock extends InstantBlock {
 				.isValidSpawn((state, world, pos, entityType) -> false)
 				.isRedstoneConductor((state, world, pos) -> false)
 				.isViewBlocking((state, world, pos) -> false)
-		);
+		, Config.Common.DISABLE_GLASS_DOME);
 		setCreateMessage(Strings.CREATE_DOME);
     }
 

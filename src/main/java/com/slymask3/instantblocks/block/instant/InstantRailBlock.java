@@ -27,7 +27,7 @@ public class InstantRailBlock extends InstantBlock {
 				.isValidSpawn((state, world, pos, entityType) -> false)
 				.isRedstoneConductor((state, world, pos) -> false)
 				.isViewBlocking((state, world, pos) -> false)
-		);
+		, Config.Common.DISABLE_RAIL);
         setCreateMessage(Strings.CREATE_RAIL);
 		setDirectional(true);
 	}

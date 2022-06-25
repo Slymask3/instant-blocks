@@ -25,7 +25,7 @@ public class InstantHarvestBlock extends InstantBlock implements EntityBlock {
 		super(Block.Properties.of(Material.WOOD)
 				.strength(1.5F, 2000F)
 				.sound(SoundType.WOOD)
-		);
+		, Config.Common.DISABLE_HARVEST);
 		setGuiID(GuiID.HARVEST);
 		setCreateMessage(Strings.CREATE_HARVEST);
 	}

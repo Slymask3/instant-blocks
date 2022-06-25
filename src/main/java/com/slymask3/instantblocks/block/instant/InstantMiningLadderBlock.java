@@ -20,7 +20,7 @@ public class InstantMiningLadderBlock extends InstantBlock {
 		super(Block.Properties.of(Material.STONE)
 				.strength(1.5F, 2000F)
 				.sound(SoundType.STONE)
-		);
+		, Config.Common.DISABLE_MINING_LADDER);
 		setCreateMessage(Strings.CREATE_MINING_LADDER);
 		setDirectional(true);
     }

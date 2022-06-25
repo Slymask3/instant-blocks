@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nullable;
 
@@ -29,12 +30,14 @@ public abstract class InstantBlock extends Block {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
 	public String createMessage, errorMessage;
-	boolean is_directional = false;
+	boolean isDirectional = false;
 	GuiID guiID = null;
+	ForgeConfigSpec.BooleanValue isDisabled;
 	
-	protected InstantBlock(BlockBehaviour.Properties properties) {
+	protected InstantBlock(BlockBehaviour.Properties properties, ForgeConfigSpec.BooleanValue isDisabled) {
 		super(properties);
-		createMessage = errorMessage = "";
+		this.createMessage = this.errorMessage = "";
+		this.isDisabled = isDisabled;
 	}
 
 	public void setCreateMessage(String msg) {
@@ -46,7 +49,7 @@ public abstract class InstantBlock extends Block {
 	}
 
 	public void setDirectional(boolean directional) {
-		this.is_directional = directional;
+		this.isDirectional = directional;
 		if(directional) {
 			this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.EAST));
 		}
@@ -64,7 +67,7 @@ public abstract class InstantBlock extends Block {
 	@Nullable
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return this.is_directional ? this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()) : super.getStateForPlacement(context);
+		return this.isDirectional ? this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()) : super.getStateForPlacement(context);
 	}
 
 	public void onPlace(BlockState state, Level world, BlockPos pos, BlockState state1, boolean var5) {
@@ -80,10 +83,22 @@ public abstract class InstantBlock extends Block {
 		return true;
 	}
 
+	private boolean isDisabled(Player player) {
+		if(this.isDisabled.get()) {
+			Helper.sendMessage(player,Strings.ERROR_DISABLED,ChatFormatting.RED);
+			return true;
+		}
+		return false;
+	}
+
 	public InteractionResult onActivate(Level world, BlockPos pos, Player player, InteractionHand hand) {
 		if(Helper.isServer(world)) {
 			if(hand == InteractionHand.OFF_HAND) {
 				return InteractionResult.FAIL;
+			}
+
+			if(isDisabled(player)) {
+				return InteractionResult.SUCCESS;
 			}
 
 			int x = pos.getX();
@@ -93,17 +108,17 @@ public abstract class InstantBlock extends Block {
 			ItemStack is = player.getItemInHand(hand);
 			if(Config.Common.USE_WANDS.get() && !Helper.isWand(is)) {
 				Helper.sendMessage(player, Strings.ERROR_WAND, ChatFormatting.RED);
-				return InteractionResult.FAIL;
+				return InteractionResult.SUCCESS;
 			}
 
 			if(!canActivate(world,x,y,z,player)) {
-				return InteractionResult.FAIL;
+				return InteractionResult.SUCCESS;
 			}
 
 			if(build(world, x, y, z, player)) {
 				afterBuild(world, x, y, z, player);
 			} else {
-				return InteractionResult.FAIL;
+				return InteractionResult.SUCCESS;
 			}
 		}
 		return InteractionResult.SUCCESS;
@@ -114,19 +129,23 @@ public abstract class InstantBlock extends Block {
 			return InteractionResult.FAIL;
 		}
 
+		if(isDisabled(player)) {
+			return InteractionResult.SUCCESS;
+		}
+
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
 
 		if(!canActivate(world,x,y,z,player)) {
-			return InteractionResult.FAIL;
+			return InteractionResult.SUCCESS;
 		}
 
 		ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
 		if(Config.Common.USE_WANDS.get()) {
 			if(!Helper.isWand(is)) {
 				Helper.sendMessage(player, Strings.ERROR_WAND, ChatFormatting.RED);
-				return InteractionResult.FAIL;
+				return InteractionResult.SUCCESS;
 			}
 		}
 

@@ -23,7 +23,7 @@ public class InstantFarmBlock extends InstantBlock {
 		super(Block.Properties.of(Material.STONE)
 				.strength(1.5F, 2000F)
 				.sound(SoundType.STONE)
-		);
+		, Config.Common.DISABLE_FARM);
 		setCreateMessage(Strings.CREATE_FARM);
 		setDirectional(true);
     }

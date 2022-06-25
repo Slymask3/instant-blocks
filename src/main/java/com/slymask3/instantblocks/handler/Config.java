@@ -31,24 +31,23 @@ public class Config {
 		public static IntValue WEIGHT_CARROTS;
 		public static IntValue WEIGHT_BEETROOTS;
 
-		public static BooleanValue ALLOW_CRAFTING;
-		public static BooleanValue ADD_WOODEN_HOUSE;
-		public static BooleanValue ADD_MINING_LADDER;
-		public static BooleanValue ADD_GLASS_DOME;
-		public static BooleanValue ADD_FARM;
-		public static BooleanValue ADD_SKYDIVE;
-		public static BooleanValue ADD_GRINDER;
-		public static BooleanValue ADD_POOL;
-		public static BooleanValue ADD_ESCAPE_LADDER;
-		public static BooleanValue ADD_WATER;
-		public static BooleanValue ADD_LAVA;
-		public static BooleanValue ADD_SUCTION;
-		public static BooleanValue ADD_RAIL;
-		public static BooleanValue ADD_STATUE;
-		public static BooleanValue ADD_HARVEST;
-		public static BooleanValue ADD_LIGHT;
-		public static BooleanValue ADD_SCHEMATIC;
-		public static BooleanValue ADD_TREE;
+		public static BooleanValue DISABLE_WOODEN_HOUSE;
+		public static BooleanValue DISABLE_MINING_LADDER;
+		public static BooleanValue DISABLE_GLASS_DOME;
+		public static BooleanValue DISABLE_FARM;
+		public static BooleanValue DISABLE_SKYDIVE;
+		public static BooleanValue DISABLE_GRINDER;
+		public static BooleanValue DISABLE_POOL;
+		public static BooleanValue DISABLE_ESCAPE_LADDER;
+		public static BooleanValue DISABLE_WATER;
+		public static BooleanValue DISABLE_LAVA;
+		public static BooleanValue DISABLE_SUCTION;
+		public static BooleanValue DISABLE_RAIL;
+		public static BooleanValue DISABLE_STATUE;
+		public static BooleanValue DISABLE_HARVEST;
+		public static BooleanValue DISABLE_LIGHT;
+		public static BooleanValue DISABLE_SCHEMATIC;
+		public static BooleanValue DISABLE_TREE;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.comment("General settings").push("general");
@@ -87,97 +86,92 @@ public class Config {
 
 			builder.pop();
 
-			builder.comment("Everything to do with crafting").push("crafting");
+			builder.comment("Toggling instant blocks").push("toggle");
 
-			ALLOW_CRAFTING = builder
-					.comment("Whether to allow crafting of Instant Blocks.\nDefault: true")
+			DISABLE_WOODEN_HOUSE = builder
+					.comment("Disable Instant Wooden House\nDefault: false")
 					.worldRestart()
-					.define("ALLOW_CRAFTING", true);
+					.define("DISABLE_WOODEN_HOUSE", false);
 
-			ADD_WOODEN_HOUSE = builder
-					.comment("Add Instant Wooden House\nDefault: true")
+			DISABLE_MINING_LADDER = builder
+					.comment("Disable Instant Mining Ladder\nDefault: false")
 					.worldRestart()
-					.define("ADD_WOODEN_HOUSE", true);
+					.define("DISABLE_MINING_LADDER", false);
 
-			ADD_MINING_LADDER = builder
-					.comment("Add Instant Mining Ladder\nDefault: true")
+			DISABLE_GLASS_DOME = builder
+					.comment("Disable Instant Glass Dome\nDefault: false")
 					.worldRestart()
-					.define("ADD_MINING_LADDER", true);
+					.define("DISABLE_GLASS_DOME", false);
 
-			ADD_GLASS_DOME = builder
-					.comment("Add Instant Glass Dome\nDefault: true")
+			DISABLE_FARM = builder
+					.comment("Disable Instant Farm\nDefault: false")
 					.worldRestart()
-					.define("ADD_GLASS_DOME", true);
+					.define("DISABLE_FARM", false);
 
-			ADD_FARM = builder
-					.comment("Add Instant Farm\nDefault: true")
+			DISABLE_SKYDIVE = builder
+					.comment("Disable Instant Rainbow Skydive\nDefault: false")
 					.worldRestart()
-					.define("ADD_FARM", true);
+					.define("DISABLE_SKYDIVE", false);
 
-			ADD_SKYDIVE = builder
-					.comment("Add Instant Rainbow Skydive\nDefault: true")
+			DISABLE_GRINDER = builder
+					.comment("Disable Instant Grinder\nDefault: false")
 					.worldRestart()
-					.define("ADD_SKYDIVE", true);
+					.define("DISABLE_GRINDER", false);
 
-			ADD_GRINDER = builder
-					.comment("Add Instant Grinder\nDefault: true")
+			DISABLE_POOL = builder
+					.comment("Disable Instant Pool\nDefault: false")
 					.worldRestart()
-					.define("ADD_GRINDER", true);
+					.define("DISABLE_POOL", false);
 
-			ADD_POOL = builder
-					.comment("Add Instant Pool\nDefault: true")
+			DISABLE_ESCAPE_LADDER = builder
+					.comment("Disable Instant Escape Ladder\nDefault: false")
 					.worldRestart()
-					.define("ADD_POOL", true);
+					.define("DISABLE_ESCAPE_LADDER", false);
 
-			ADD_ESCAPE_LADDER = builder
-					.comment("Add Instant Escape Ladder\nDefault: true")
+			DISABLE_WATER = builder
+					.comment("Disable Instant Water\nDefault: false")
 					.worldRestart()
-					.define("ADD_ESCAPE_LADDER", true);
+					.define("DISABLE_WATER", false);
 
-			ADD_WATER = builder
-					.comment("Add Instant Water\nDefault: true")
+			DISABLE_LAVA = builder
+					.comment("Disable Instant Lava\nDefault: false")
 					.worldRestart()
-					.define("ADD_WATER", true);
+					.define("DISABLE_LAVA", false);
 
-			ADD_LAVA = builder
-					.comment("Add Instant Lava\nDefault: true")
+			DISABLE_SUCTION = builder
+					.comment("Disable Instant Suction\nDefault: false")
 					.worldRestart()
-					.define("ADD_LAVA", true);
+					.define("DISABLE_SUCTION", false);
 
-			ADD_SUCTION = builder
-					.comment("Add Instant Suction\nDefault: true")
+			DISABLE_RAIL = builder
+					.comment("Disable Instant Rail\nDefault: false")
 					.worldRestart()
-					.define("ADD_SUCTION", true);
+					.define("DISABLE_RAIL", false);
 
-			ADD_RAIL = builder
-					.comment("Add Instant Rail\nDefault: true")
+			DISABLE_STATUE = builder
+					.comment("Disable Instant Statue\nDefault: false")
 					.worldRestart()
-					.define("ADD_RAIL", true);
+					.define("DISABLE_STATUE", false);
 
-			ADD_STATUE = builder
-					.comment("Add Instant Statue\nDefault: true")
+			DISABLE_HARVEST = builder
+					.comment("Disable Instant Harvest\nDefault: false")
 					.worldRestart()
-					.define("ADD_STATUE", true);
+					.define("DISABLE_HARVEST", false);
 
-			ADD_HARVEST = builder
-					.comment("Add Instant Harvest\nDefault: true")
+			DISABLE_LIGHT = builder
+					.comment("Disable Instant Light\nDefault: false")
 					.worldRestart()
-					.define("ADD_HARVEST", true);
+					.define("DISABLE_LIGHT", false);
 
-			ADD_LIGHT = builder
-					.comment("Add Instant Light\nDefault: true")
+			DISABLE_SCHEMATIC = builder
+					.comment("Disable Instant Schematic\nDefault: false")
 					.worldRestart()
-					.define("ADD_LIGHT", true);
+					.define("DISABLE_SCHEMATIC", false);
 
-			ADD_SCHEMATIC = builder
-					.comment("Add Instant Schematic\nDefault: true")
+			DISABLE_TREE = builder
+					.comment("Disable Instant Tree\nDefault: false")
 					.worldRestart()
-					.define("ADD_SCHEMATIC", true);
-
-			ADD_TREE = builder
-					.comment("Add Instant Tree\nDefault: true")
-					.worldRestart()
-					.define("ADD_TREE", true);
+					.define("DISABLE_TREE", false);
 
 			builder.pop();
 

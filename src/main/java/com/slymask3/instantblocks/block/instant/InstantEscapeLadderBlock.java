@@ -2,6 +2,7 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.InstantBlock;
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Helper;
@@ -37,7 +38,7 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 				.isValidSpawn((state, world, pos, entityType) -> false)
 				.isRedstoneConductor((state, world, pos) -> false)
 				.isViewBlocking((state, world, pos) -> false)
-		);
+		, Config.Common.DISABLE_ESCAPE_LADDER);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.FALSE));
     }
 

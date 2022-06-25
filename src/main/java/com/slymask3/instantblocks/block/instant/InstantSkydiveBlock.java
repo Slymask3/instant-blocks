@@ -30,7 +30,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 		super(Block.Properties.of(Material.WOOL)
 				.strength(1.5F, 2000F)
 				.sound(SoundType.WOOL)
-		);
+		, Config.Common.DISABLE_SKYDIVE);
 		setGuiID(GuiID.SKYDIVE);
 		setCreateMessage(Strings.CREATE_SKYDIVE);
 		setDirectional(true);
