@@ -10,12 +10,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class Config {
 	public static class Common {
-		public static BooleanValue GENERATE_IN_CHESTS_DUNGEON;
+		public static BooleanValue GENERATE_IN_CHESTS;
 		public static BooleanValue GENERATE_IN_CHESTS_BONUS;
-		public static BooleanValue GENERATE_IN_CHESTS_VILLAGE;
-		public static BooleanValue GENERATE_IN_CHESTS_MINESHAFT;
-		public static BooleanValue GENERATE_IN_CHESTS_STRONGHOLD;
-		public static BooleanValue GENERATE_IN_CHESTS_TEMPLE;
 		public static BooleanValue TP_GRINDER;
 		public static IntValue MAX_LIQUID;
 		public static IntValue MAX_FILL;
@@ -187,35 +183,15 @@ public class Config {
 
 			builder.comment("Generating items in structure chests").push("structures");
 
-			GENERATE_IN_CHESTS_DUNGEON = builder
-					.comment("Whether to generate Instant Blocks in Dungeon Chests.\nDefault: true")
+			GENERATE_IN_CHESTS = builder
+					.comment("Whether to add Instant Blocks in loot chests.\nDefault: true")
 					.worldRestart()
-					.define("GENERATE_IN_CHESTS_DUNGEON", true);
+					.define("GENERATE_IN_CHESTS", true);
 
 			GENERATE_IN_CHESTS_BONUS = builder
-					.comment("Whether to generate the Instant Wooden House Block in the Bonus Chest.\nDefault: true")
+					.comment("Whether to add an Instant Wooden House in the bonus chest.\nDefault: true")
 					.worldRestart()
 					.define("GENERATE_IN_CHESTS_BONUS", true);
-
-			GENERATE_IN_CHESTS_VILLAGE = builder
-					.comment("Whether to generate Instant Blocks in Village Chests.\nDefault: true")
-					.worldRestart()
-					.define("GENERATE_IN_CHESTS_VILLAGE", true);
-
-			GENERATE_IN_CHESTS_MINESHAFT = builder
-					.comment("Whether to generate Instant Blocks in Mineshaft Chests.\nDefault: true")
-					.worldRestart()
-					.define("GENERATE_IN_CHESTS_MINESHAFT", true);
-
-			GENERATE_IN_CHESTS_STRONGHOLD = builder
-					.comment("Whether to generate Instant Blocks in  Stronghold Chests.\nDefault: true")
-					.worldRestart()
-					.define("GENERATE_IN_CHESTS_STRONGHOLD", true);
-
-			GENERATE_IN_CHESTS_TEMPLE = builder
-					.comment("Whether to generate Instant Blocks in Desert/Jungle Temple Chests.\nDefault: true")
-					.worldRestart()
-					.define("GENERATE_IN_CHESTS_TEMPLE", true);
 
 			builder.pop();
 

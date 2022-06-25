@@ -45,46 +45,16 @@ public class ColorHelper {
 		VanillaColor inputColor = new VanillaColor(color);
 
 		VanillaColor woolColor = null;
-		float diff_lowest = 1F;
+		float diff_lowest = -1F;
 		for(VanillaColor vanillaColor : VANILLA_COLORS) {
 			float diff = vanillaColor.diff(inputColor);
-			if(diff_lowest == 1F || diff < diff_lowest) {
+			if(diff_lowest == -1F || diff < diff_lowest) {
 				diff_lowest = diff;
 				woolColor = vanillaColor;
 			}
 		}
 
 		return woolColor.getBlock();
-
-
-//		double r = color.getRed();
-//		double g = color.getGreen();
-//		double b = color.getBlue();
-//
-//		int r4 = (int)Math.round(r/64);
-//		int g4 = (int)Math.round(g/64);
-//		int b4 = (int)Math.round(b/64);
-//
-//		String sb = String.valueOf(r4) + g4 + b4;
-//
-//		return switch (sb) {
-//			case "000", "002", "003" -> Blocks.BLACK_WOOL;
-//			case "001", "112", "104", "013", "012", "004", "114", "113", "014" -> Blocks.BLUE_WOOL;
-//			case "010", "120", "021", "121", "020" -> Blocks.GREEN_WOOL;
-//			case "011", "122", "032", "143", "022" -> Blocks.CYAN_WOOL;
-//			case "023", "123", "024", "234", "134", "124", "044", "034", "033", "224", "223", "334", "144", "043", "344", "244", "233", "133" -> Blocks.LIGHT_BLUE_WOOL;
-//			case "030", "240", "230", "140", "130", "040", "031", "343", "243", "242", "241", "232", "231", "142", "141", "132", "131", "042", "041", "342" -> Blocks.LIME_WOOL;
-//			case "100", "300", "301", "401", "400", "211", "200" -> Blocks.RED_WOOL;
-//			case "101", "202", "314", "304", "214", "102", "204", "203", "103" -> Blocks.PURPLE_WOOL;
-//			case "110" -> Blocks.BROWN_WOOL;
-//			case "111" -> Blocks.GRAY_WOOL;
-//			case "201", "212", "302", "313", "403", "323", "413", "213", "414", "404", "324", "303" -> Blocks.MAGENTA_WOOL;
-//			case "210", "320", "310", "321", "432", "421", "410", "420", "431" -> Blocks.ORANGE_WOOL;
-//			case "220", "330", "430", "440", "221", "443", "442", "441", "341", "332", "331", "340" -> Blocks.YELLOW_WOOL;
-//			case "222", "333" -> Blocks.LIGHT_GRAY_WOOL;
-//			case "311", "433", "422", "411", "322", "312", "412", "434", "424", "423", "402" -> Blocks.PINK_WOOL;
-//			default -> Blocks.WHITE_WOOL;
-//		};
 	}
 	
 	public static Color getColorAt(BufferedImage img, int x, int y) {
