@@ -1,10 +1,10 @@
 package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.InstantBlock;
-import com.slymask3.instantblocks.block.entity.HarvestBlockEntity;
+import com.slymask3.instantblocks.block.entity.TreeBlockEntity;
 import com.slymask3.instantblocks.gui.screens.TreeScreen;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.reference.GuiID;
+import com.slymask3.instantblocks.reference.ScreenID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import net.minecraft.core.BlockPos;
@@ -29,13 +29,13 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 				.noCollission()
 				.instabreak()
 		, Config.Common.DISABLE_TREE);
-		setGuiID(GuiID.TREE);
+		setScreenID(ScreenID.TREE);
 	}
 
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new HarvestBlockEntity(pos,state);
+		return new TreeBlockEntity(pos,state);
 	}
 
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {

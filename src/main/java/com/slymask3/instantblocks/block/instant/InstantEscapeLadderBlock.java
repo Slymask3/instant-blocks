@@ -51,7 +51,6 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Block stone = Blocks.STONE;
 		Block ladder = Blocks.LADDER;
 		Block torch = Blocks.TORCH;
 		Block air = Blocks.AIR;
@@ -60,11 +59,25 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 
 		InstantBlocks.LOGGER.info(direction);
 
-		int i = y - 1;
-		while(!world.canSeeSky(new BlockPos(x,i+1,z))) {
-			i++;
-			BuildHelper.build(world, x-1, y-1, z-1, stone, 3, 1, 3);
-			BuildHelper.build(world, x-1, i, z-1, stone, 3, 1, 3);
+		int y_top;
+		if(world.dimension().equals(Level.NETHER)) {
+			y_top = world.getMaxBuildHeight();
+			for(int i=y+3; i<world.getMaxBuildHeight(); i++) {
+				if(BuildHelper.getBlock(world,x,i,z).equals(Blocks.AIR) && BuildHelper.getBlock(world,x,i+1,z).equals(Blocks.AIR) && BuildHelper.getBlock(world,x,i+2,z).equals(Blocks.AIR) && BuildHelper.getBlock(world,x,i+3,z).equals(Blocks.AIR)) {
+					y_top = i;
+					break;
+				}
+			}
+		} else {
+			y_top = y - 1;
+			while(!world.canSeeSky(new BlockPos(x,y_top+1,z))) {
+				y_top++;
+			}
+		}
+
+		for(int i=y-1; i<y_top; i++) {
+			BuildHelper.buildStone(world, x-1, y-1, z-1, 3, 1, 3);
+			BuildHelper.buildStone(world, x-1, i, z-1, 3, 1, 3);
 			BuildHelper.setBlock(world,x, i, z, air);
 
 			BuildHelper.setBlock(world,x, i, z, ladder, direction);
@@ -74,7 +87,8 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 				BuildHelper.setBlockDirectional(world,x,m,z,torch,direction,0,1,0,0);
 			}
 		}
-		setCreateMessage(Strings.CREATE_ESCAPE_LADDER.replace("%i%",String.valueOf(i-y)));
+
+		setCreateMessage(Strings.CREATE_ESCAPE_LADDER.replace("%i%",String.valueOf(y_top-y)));
 
 		return true;
 	}

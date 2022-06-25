@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.HarvestBlockEntity;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.reference.GuiID;
+import com.slymask3.instantblocks.reference.ScreenID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Helper;
@@ -26,7 +26,7 @@ public class InstantHarvestBlock extends InstantBlock implements EntityBlock {
 				.strength(1.5F, 2000F)
 				.sound(SoundType.WOOD)
 		, Config.Common.DISABLE_HARVEST);
-		setGuiID(GuiID.HARVEST);
+		setScreenID(ScreenID.HARVEST);
 		setCreateMessage(Strings.CREATE_HARVEST);
 	}
 

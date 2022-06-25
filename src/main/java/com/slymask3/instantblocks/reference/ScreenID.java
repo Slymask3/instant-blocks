@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.reference;
 
-public enum GuiID {
+public enum ScreenID {
     STATUE,
     HARVEST,
     SKYDIVE,

@@ -30,7 +30,6 @@ public class Config {
 		public static IntValue WEIGHT_POTATOES;
 		public static IntValue WEIGHT_CARROTS;
 		public static IntValue WEIGHT_BEETROOTS;
-
 		public static BooleanValue DISABLE_WOODEN_HOUSE;
 		public static BooleanValue DISABLE_MINING_LADDER;
 		public static BooleanValue DISABLE_GLASS_DOME;
@@ -53,27 +52,27 @@ public class Config {
 			builder.comment("General settings").push("general");
 
 			USE_WANDS = builder
-					.comment("Whether to use wands to create Instant Blocks.\nDefault: true")
+					.comment("Use wands to activate instant blocks.\nDefault: true")
 					.define("USE_WANDS", true);
 
 			TP_GRINDER = builder
-					.comment("Whether to teleport the player to the collection room of the Instant Grinder upon right-click.\nDefault: true")
+					.comment("Teleport the player to the collection room of the Instant Grinder.\nDefault: true")
 					.define("TP_GRINDER", true);
 
 			KEEP_BLOCKS = builder
-					.comment("Whether to keep Instant Blocks after activation.\nDefault: false")
+					.comment("Keep instant blocks after activation.\nDefault: false")
 					.define("KEEP_BLOCKS", false);
 
 			RADIUS_HARVEST = builder
-					.comment("Radius to Harvest blocks around Instant Harvester.\nDefault: 50")
+					.comment("Radius to harvest blocks around Instant Harvest.\nDefault: 25")
 					.defineInRange("RADIUS_HARVEST", 25,1,1000);
 
 			RADIUS_LIGHT = builder
-					.comment("Radius to light up dark areas around Instant Light Block.\nDefault: 25")
+					.comment("Radius to light up dark areas around Instant Light.\nDefault: 25")
 					.defineInRange("RADIUS_LIGHT", 25,1,1000);
 
 			RAILS_AMOUNT = builder
-					.comment("Amount of rail blocks to create for Instant Rail Block.\nDefault: 37")
+					.comment("Amount of rail blocks to create for Instant Rail.\nDefault: 37")
 					.defineInRange("RAILS_AMOUNT", 37,1,10000);
 
 			MINING_LADDER_LAYER = builder
@@ -81,7 +80,7 @@ public class Config {
 					.defineInRange("MINING_LADDER_LAYER", 12,-50,255);
 
 			XP_AMOUNT = builder
-					.comment("How much experience activating Instant Blocks gives you.\nDefault: 0")
+					.comment("How much experience activating instant blocks gives you.\nDefault: 0")
 					.defineInRange("XP_AMOUNT", 0,0,10000);
 
 			builder.pop();
@@ -178,12 +177,12 @@ public class Config {
 			builder.comment("Generating items in structure chests").push("structures");
 
 			GENERATE_IN_CHESTS = builder
-					.comment("Whether to add Instant Blocks in loot chests.\nDefault: true")
+					.comment("Add instant blocks in loot chests.\nDefault: true")
 					.worldRestart()
 					.define("GENERATE_IN_CHESTS", true);
 
 			GENERATE_IN_CHESTS_BONUS = builder
-					.comment("Whether to add an Instant Wooden House in the bonus chest.\nDefault: true")
+					.comment("Add an Instant Wooden House and wand in the bonus chest.\nDefault: true")
 					.worldRestart()
 					.define("GENERATE_IN_CHESTS_BONUS", true);
 
@@ -192,7 +191,7 @@ public class Config {
 			builder.comment("Instant liquid blocks settings").push("liquid");
 
 			MAX_LIQUID = builder
-					.comment("Maximum amount of liquid blocks to create.\nDefault: 1000")
+					.comment("Maximum amount of liquid blocks to generate.\nDefault: 1000")
 					.defineInRange("MAX_LIQUID", 1000,1,100000);
 
 			MAX_FILL = builder
@@ -200,7 +199,7 @@ public class Config {
 					.defineInRange("MAX_FILL", 1000,1,100000);
 
 			SIMPLE_LIQUID = builder
-					.comment("Only create liquid source blocks on the block's layer, instead of the whole area.\nDefault: false")
+					.comment("Only generate liquid blocks on the block's layer, not below it.\nDefault: false")
 					.define("SIMPLE_LIQUID", false);
 
 			builder.pop();
@@ -208,11 +207,11 @@ public class Config {
 			builder.comment("Instant skydive block settings").push("skydive");
 
 			SKYDIVE_MIN = builder
-					.comment("Minimum height for the Instant Rainbow Skydive.\nDefault: 5")
+					.comment("Minimum height for the Instant Rainbow Skydive.\nDefault: -59")
 					.defineInRange("SKYDIVE_MIN", -59,-64,320);
 
 			SKYDIVE_MAX = builder
-					.comment("Maximum height for the Instant Rainbow Skydive.\nDefault: 255")
+					.comment("Maximum height for the Instant Rainbow Skydive.\nDefault: 320")
 					.defineInRange("SKYDIVE_MAX", 320,-64,320);
 
 			SKYDIVE_WATER = builder
@@ -246,7 +245,6 @@ public class Config {
 	public static class Client {
 		public static BooleanValue SHOW_MESSAGES;
 		public static BooleanValue SHOW_EFFECTS;
-		public static ConfigValue<String> PARTICLE;
 		public static ConfigValue<String> SOUND;
 		public static IntValue SKYDIVE_RADIUS;
 
@@ -254,19 +252,15 @@ public class Config {
 			builder.comment("Client only settings").push("client");
 
 			SHOW_MESSAGES = builder
-					.comment("Whether to show mod messages.\nDefault: true")
+					.comment("Show messages.\nDefault: true")
 					.define("SHOW_MESSAGES", true);
 
 			SHOW_EFFECTS = builder
-					.comment("Whether to show particle effects on activation.\nDefault: true")
+					.comment("Show particle effects.\nDefault: true")
 					.define("SHOW_EFFECTS", true);
 
-			PARTICLE = builder
-					.comment("Which particles are generated on activation.\nDefault: reddust")
-					.define("PARTICLE", "reddust");
-
 			SOUND = builder
-					.comment("Which sound is played on activation.\nThe directory is .minecraft\\resources\\sound3\\.\nFor example, the default sound is .minecraft\\resources\\sound3\\random\\levelup.ogg\nDefault: random.levelup")
+					.comment("Sound that is played on activation.\nList of sounds can be found here: https://www.digminecraft.com/lists/sound_list_pc.php or by using the /playsound command in-game.\nDefault: entity.player.levelup")
 					.define("SOUND", "entity.player.levelup");
 
 			SKYDIVE_RADIUS = builder

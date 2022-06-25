@@ -39,7 +39,7 @@ public class InstantRailBlock extends InstantBlock {
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
     	for(int i = 0; i<= Config.Common.RAILS_AMOUNT.get(); i++) {
-	    	BuildHelper.setBlockDirectional(world, x, y-1, z, Blocks.STONE, direction, i, 0, 0, 0);
+	    	BuildHelper.setStoneDirectional(world, x, y-1, z, direction, i, 0, 0, 0);
 	    	BuildHelper.setBlockDirectional(world, x, y, z, Blocks.RAIL, direction, i, 0, 0, 0);
 	    	BuildHelper.setBlockDirectional(world, x, y+1, z, Blocks.AIR, direction, i, 0, 0, 0);
     	}

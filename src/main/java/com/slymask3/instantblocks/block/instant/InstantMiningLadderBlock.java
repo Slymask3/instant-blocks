@@ -35,7 +35,6 @@ public class InstantMiningLadderBlock extends InstantBlock {
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		Block ladder = Blocks.LADDER;
-		Block stone = Blocks.STONE;
 		Block torch = Blocks.WALL_TORCH;
 		Block water = Blocks.WATER;
 		Block sign = Blocks.OAK_WALL_SIGN;
@@ -48,7 +47,7 @@ public class InstantMiningLadderBlock extends InstantBlock {
 		Direction directionSign = direction.getClockWise();
 
 		for(int c = y; c > layer-2; c--) {
-			BuildHelper.buildDirectional(world,x,c,z,stone,direction,0,1,2,0,2,0,0,4,0,0);
+			BuildHelper.buildStoneDirectional(world,x,c,z,direction,0,1,2,0,2,0,0,4,0,0);
 		}
 		for(int c = y; c > layer-1; c--) {
 			BuildHelper.setBlockDirectional(world,x, c, z, ladder, direction, 0,0,1,0,directionLadder);
@@ -63,10 +62,10 @@ public class InstantMiningLadderBlock extends InstantBlock {
 
 		BuildHelper.setBlock(world,x, layer, z, air); //MIDDLE AIR
 		BuildHelper.setBlock(world,x, layer+1, z, torch); //MIDDLE TORCH
-		BuildHelper.setBlock(world,x, layer+2, z, stone); //ABOVE MIDDLE TORCH
+		BuildHelper.setStone(world,x, layer+2, z); //ABOVE MIDDLE TORCH
 		BuildHelper.setBlockDirectional(world,x, layer+2, z, water,direction,0,0,0,1); //WATER
 		BuildHelper.setBlockDirectional(world,x, layer+1, z, sign, direction, 0,0,0,1,directionSign);
-		BuildHelper.setBlock(world,x, layer-1, z, stone); //MIDDLE STONE
+		BuildHelper.setStone(world,x, layer-1, z); //MIDDLE STONE
 
 		return true;
 	}

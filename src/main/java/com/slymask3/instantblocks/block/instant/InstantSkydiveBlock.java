@@ -4,7 +4,7 @@ import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SkydiveBlockEntity;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.GuiID;
+import com.slymask3.instantblocks.reference.ScreenID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.ColorHelper;
@@ -31,7 +31,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 				.strength(1.5F, 2000F)
 				.sound(SoundType.WOOL)
 		, Config.Common.DISABLE_SKYDIVE);
-		setGuiID(GuiID.SKYDIVE);
+		setScreenID(ScreenID.SKYDIVE);
 		setCreateMessage(Strings.CREATE_SKYDIVE);
 		setDirectional(true);
     }

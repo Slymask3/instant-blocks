@@ -2,7 +2,7 @@ package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.gui.screens.*;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.reference.GuiID;
+import com.slymask3.instantblocks.reference.ScreenID;
 import com.slymask3.instantblocks.reference.Strings;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -50,9 +50,9 @@ public class ClientHelper {
         }
     }
 
-    public static void showScreen(GuiID guiID, Player player, Level world, BlockPos pos) {
+    public static void showScreen(ScreenID screenID, Player player, Level world, BlockPos pos) {
         if(isClient(world)) {
-            switch(guiID) {
+            switch(screenID) {
                 case SKYDIVE -> Minecraft.getInstance().setScreen(new SkydiveScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
                 case STATUE -> Minecraft.getInstance().setScreen(new StatueScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
                 case HARVEST -> Minecraft.getInstance().setScreen(new HarvestScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));

@@ -45,17 +45,9 @@ public class InstantGrinderBlock extends InstantBlock {
 		Block air = Blocks.AIR;
 
 		/************************ Layer -5 : Stone ************************/
-		BuildHelper.build(world, x-5, y-5, z-5, stone, 11, 1, 11);
-		BuildHelper.build(world, x+6, y-5, z-1, stone, 3, 1, 3);
-		BuildHelper.build(world, x+9, y-5, z-3, stone, 7, 1, 8);
-
-		//BuildHelper.buildMulti2(world, x, y, z, -5, -5, -5, stone, 11, 1, 11);
-		//BuildHelper.buildMulti2(world, x, y, z, +6, -5, -1, stone, 3, 1, 3);
-		//BuildHelper.buildMulti2(world, x, y, z, +9, -5, -3, stone, 7, 1, 8);
-
-		//BuildHelper.buildDirectionalSimple(world, x, y-5, z, stone, dir, -5, -5, 11, 1, 11);
-		//BuildHelper.buildDirectionalSimple(world, x, y-5, z, stone, dir, +6, -1, 3, 1, 3);
-		//BuildHelper.buildDirectionalSimple(world, x, y-5, z, stone, dir, +9, -3, 7, 1, 8);
+		BuildHelper.buildStone(world, x-5, y-5, z-5, 11, 1, 11);
+		BuildHelper.buildStone(world, x+6, y-5, z-1, 3, 1, 3);
+		BuildHelper.buildStone(world, x+9, y-5, z-3, 7, 1, 8);
 
 		/************************ Layer -4 to -2 : Air (Spawn Room) ************************/
 		BuildHelper.build(world, x-4, y-4, z-4, air, 9, 3, 9);
@@ -73,33 +65,33 @@ public class InstantGrinderBlock extends InstantBlock {
 		BuildHelper.build(world, x+10, y-4, z-2, air, 5, 3, 6);
 		
 		/************************ Layer -4 ************************/
-		BuildHelper.build(world, x-5, y-4, z-5, stone, 11, 1, 5);
-		BuildHelper.build(world, x, y-4, z-5, stone, 5, 1, 1);
-		BuildHelper.build(world, x, y-4, z+1, stone, 5, 1, 1);
-		BuildHelper.build(world, x+1, y-4, z-5, stone, 4, 1, 1);
-		BuildHelper.build(world, x+1, y-4, z+2, stone, 4, 1, 1);
-		BuildHelper.build(world, x+2, y-4, z-5, stone, 3, 1, 1);
-		BuildHelper.build(world, x+2, y-4, z+3, stone, 3, 1, 1);
-		BuildHelper.build(world, x+3, y-4, z-5, stone, 2, 1, 1);
-		BuildHelper.build(world, x+3, y-4, z+4, stone, 2, 1, 1);
-		BuildHelper.build(world, x+4, y-4, z-5, stone, 1, 1, 1);
-		BuildHelper.build(world, x+4, y-4, z+5, stone, 1, 1, 1);
-		BuildHelper.build(world, x+5, y-4, z-5, stone, 5, 1, 1);
-		BuildHelper.build(world, x+5, y-4, z+1, stone, 5, 1, 1);
-		BuildHelper.build(world, x+6, y-4, z-1, stone, 1, 1, 4);
-		BuildHelper.build(world, x+6, y-4, z+1, stone, 1, 1, 4);
-		BuildHelper.build(world, x+9, y-4, z-3, stone, 2, 1, 1);
-		BuildHelper.build(world, x+9, y-4, z+2, stone, 2, 1, 1);
-		BuildHelper.build(world, x+10, y-4, z-3, stone, 1, 1, 6);
-		BuildHelper.build(world, x+10, y-4, z+3, stone, 1, 1, 6);
-		BuildHelper.build(world, x+16, y-4, z-3, stone, 7, 1, 1);
+		BuildHelper.buildStone(world, x-5, y-4, z-5, 11, 1, 5);
+		BuildHelper.buildStone(world, x, y-4, z-5, 5, 1, 1);
+		BuildHelper.buildStone(world, x, y-4, z+1, 5, 1, 1);
+		BuildHelper.buildStone(world, x+1, y-4, z-5, 4, 1, 1);
+		BuildHelper.buildStone(world, x+1, y-4, z+2, 4, 1, 1);
+		BuildHelper.buildStone(world, x+2, y-4, z-5, 3, 1, 1);
+		BuildHelper.buildStone(world, x+2, y-4, z+3, 3, 1, 1);
+		BuildHelper.buildStone(world, x+3, y-4, z-5, 2, 1, 1);
+		BuildHelper.buildStone(world, x+3, y-4, z+4, 2, 1, 1);
+		BuildHelper.buildStone(world, x+4, y-4, z-5, 1, 1, 1);
+		BuildHelper.buildStone(world, x+4, y-4, z+5, 1, 1, 1);
+		BuildHelper.buildStone(world, x+5, y-4, z-5, 5, 1, 1);
+		BuildHelper.buildStone(world, x+5, y-4, z+1, 5, 1, 1);
+		BuildHelper.buildStone(world, x+6, y-4, z-1, 1, 1, 4);
+		BuildHelper.buildStone(world, x+6, y-4, z+1, 1, 1, 4);
+		BuildHelper.buildStone(world, x+9, y-4, z-3, 2, 1, 1);
+		BuildHelper.buildStone(world, x+9, y-4, z+2, 2, 1, 1);
+		BuildHelper.buildStone(world, x+10, y-4, z-3, 1, 1, 6);
+		BuildHelper.buildStone(world, x+10, y-4, z+3, 1, 1, 6);
+		BuildHelper.buildStone(world, x+16, y-4, z-3, 7, 1, 1);
 
 		BuildHelper.setBlock(world,x+5, y-4, z, air);
 		BuildHelper.setBlock(world,x+6, y-4, z, sign, Direction.NORTH); //SIGN
 		BuildHelper.setBlock(world,x+8, y-4, z, air);
 		BuildHelper.setBlock(world,x+9, y-4, z, door, Direction.WEST); //DOOR
-		BuildHelper.setBlock(world,x+10, y-4, z-2, stone);
-		BuildHelper.setBlock(world,x+10, y-4, z+2, stone);
+		BuildHelper.setStone(world,x+10, y-4, z-2);
+		BuildHelper.setStone(world,x+10, y-4, z+2);
 		BuildHelper.setBlock(world,x+15, y-4, z+2, chest, Direction.WEST);
 		BuildHelper.setBlock(world,x+15, y-4, z+1, chest, Direction.WEST);
 		BuildHelper.setBlock(world,x+15, y-4, z, craft);
@@ -107,21 +99,21 @@ public class InstantGrinderBlock extends InstantBlock {
 		BuildHelper.setBlock(world,x+15, y-4, z-2, chest, Direction.WEST);
 
 		/************************ Layer -3 ************************/
-		BuildHelper.build(world, x-5, y-3, z-5, stone, 11, 1, 1);
-		BuildHelper.build(world, x-4, y-3, z-5, stone, 3, 1, 1);
-		BuildHelper.build(world, x-4, y-3, z+3, stone, 3, 1, 1);
-		BuildHelper.build(world, x-3, y-3, z-5, stone, 2, 1, 1);
-		BuildHelper.build(world, x-3, y-3, z+4, stone, 2, 1, 1);
-		BuildHelper.build(world, x-2, y-3, z-5, stone, 1, 1, 7);
-		BuildHelper.build(world, x-2, y-3, z+5, stone, 1, 1, 7);
-		BuildHelper.build(world, x+5, y-3, z-5, stone, 11, 1, 1);
-		BuildHelper.build(world, x+6, y-3, z-1, stone, 1, 1, 4);
-		BuildHelper.build(world, x+6, y-3, z+1, stone, 1, 1, 4);
-		BuildHelper.build(world, x+9, y-3, z-3, stone, 2, 1, 1);
-		BuildHelper.build(world, x+9, y-3, z+2, stone, 2, 1, 1);
-		BuildHelper.build(world, x+10, y-3, z-3, stone, 1, 1, 6);
-		BuildHelper.build(world, x+10, y-3, z+3, stone, 1, 1, 6);
-		BuildHelper.build(world, x+16, y-3, z-3, stone, 7, 1, 1);
+		BuildHelper.buildStone(world, x-5, y-3, z-5, 11, 1, 1);
+		BuildHelper.buildStone(world, x-4, y-3, z-5, 3, 1, 1);
+		BuildHelper.buildStone(world, x-4, y-3, z+3, 3, 1, 1);
+		BuildHelper.buildStone(world, x-3, y-3, z-5, 2, 1, 1);
+		BuildHelper.buildStone(world, x-3, y-3, z+4, 2, 1, 1);
+		BuildHelper.buildStone(world, x-2, y-3, z-5, 1, 1, 7);
+		BuildHelper.buildStone(world, x-2, y-3, z+5, 1, 1, 7);
+		BuildHelper.buildStone(world, x+5, y-3, z-5, 11, 1, 1);
+		BuildHelper.buildStone(world, x+6, y-3, z-1, 1, 1, 4);
+		BuildHelper.buildStone(world, x+6, y-3, z+1, 1, 1, 4);
+		BuildHelper.buildStone(world, x+9, y-3, z-3, 2, 1, 1);
+		BuildHelper.buildStone(world, x+9, y-3, z+2, 2, 1, 1);
+		BuildHelper.buildStone(world, x+10, y-3, z-3, 1, 1, 6);
+		BuildHelper.buildStone(world, x+10, y-3, z+3, 1, 1, 6);
+		BuildHelper.buildStone(world, x+16, y-3, z-3, 7, 1, 1);
 
 		BuildHelper.setBlock(world,x+5, y-3, z, sign, Direction.NORTH, 0); //SIGN
 		BuildHelper.setBlock(world,x+8, y-3, z, air);
@@ -129,18 +121,18 @@ public class InstantGrinderBlock extends InstantBlock {
 		BuildHelper.setBlock(world,x+6, y-3, z, water);
 
 		/************************ Layer -2 to 2 : Stone (Spawn Room Walls) ************************/
-		BuildHelper.build(world, x-5, y-2, z-5, stone, 11, 5, 1);
-		BuildHelper.build(world, x-4, y-2, z-5, stone, 1, 5, 9);
-		BuildHelper.build(world, x-4, y-2, z+5, stone, 1, 5, 9);
-		BuildHelper.build(world, x+5, y-2, z-5, stone, 11, 5, 1);
+		BuildHelper.buildStone(world, x-5, y-2, z-5, 11, 5, 1);
+		BuildHelper.buildStone(world, x-4, y-2, z-5, 1, 5, 9);
+		BuildHelper.buildStone(world, x-4, y-2, z+5, 1, 5, 9);
+		BuildHelper.buildStone(world, x+5, y-2, z-5, 11, 5, 1);
 
 		/************************ Layer -2 ************************/
-		BuildHelper.build(world, x+6, y-2, z-1, stone, 3, 1, 4);
-		BuildHelper.build(world, x+9, y-2, z-3, stone, 2, 1, 1);
-		BuildHelper.build(world, x+9, y-2, z+2, stone, 2, 1, 1);
-		BuildHelper.build(world, x+10, y-2, z-3, stone, 1, 1, 6);
-		BuildHelper.build(world, x+10, y-2, z+3, stone, 1, 1, 6);
-		BuildHelper.build(world, x+16, y-2, z-3, stone, 7, 1, 1);
+		BuildHelper.buildStone(world, x+6, y-2, z-1, 3, 1, 4);
+		BuildHelper.buildStone(world, x+9, y-2, z-3, 2, 1, 1);
+		BuildHelper.buildStone(world, x+9, y-2, z+2, 2, 1, 1);
+		BuildHelper.buildStone(world, x+10, y-2, z-3, 1, 1, 6);
+		BuildHelper.buildStone(world, x+10, y-2, z+3, 1, 1, 6);
+		BuildHelper.buildStone(world, x+16, y-2, z-3, 7, 1, 1);
 
 		BuildHelper.setBlock(world,x-4, y-2, z-4, water);
 		BuildHelper.setBlock(world,x-4, y-2, z+4, water);
@@ -158,22 +150,22 @@ public class InstantGrinderBlock extends InstantBlock {
 		BuildHelper.setBlock(world,x+6, y-2, z, sign, Direction.NORTH, 0); //SIGN
 
 		/************************ Layer 3 : Stone (Spawn Room Roof) ************************/
-		BuildHelper.build(world, x-5, y+3, z-5, stone, 11, 1, 11);
+		BuildHelper.buildStone(world, x-5, y+3, z-5, 11, 1, 11);
 
 		/************************ Layer -1 : Stone (Output Room Roof) ************************/
-		BuildHelper.build(world, x+9, y-1, z-3, stone, 7, 1, 8);
+		BuildHelper.buildStone(world, x+9, y-1, z-3, 7, 1, 8);
 
 		/************************ Layer -1 to 21 : Stone (Input Tube) ************************/
-		BuildHelper.build(world, x+5, y-1, z-1, stone, 3, 23, 3);
+		BuildHelper.buildStone(world, x+5, y-1, z-1, 3, 23, 3);
 
 		/************************ Layer -1 to 21 : Stone (Output Tube 1) ************************/
-		BuildHelper.build(world, x+9, y-1, z+1, stone, 3, 23, 3);
+		BuildHelper.buildStone(world, x+9, y-1, z+1, 3, 23, 3);
 
 		/************************ Layer -1 to 21 : Stone (Output Tube 1) ************************/
-		BuildHelper.build(world, x+9, y-1, z-3, stone, 3, 23, 3);
+		BuildHelper.buildStone(world, x+9, y-1, z-3, 3, 23, 3);
 
 		/************************ Layer 18 to 21 : Stone (Top Room) ************************/
-		BuildHelper.build(world, x+7, y+18, z-3, stone, 7, 4, 4);
+		BuildHelper.buildStone(world, x+7, y+18, z-3, 7, 4, 4);
 
 		/************************ Layer -1 to 20 : Air (Input Tube) ************************/
 		BuildHelper.build(world, x+6, y-1, z, air, 1, 22, 1);

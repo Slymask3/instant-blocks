@@ -2,7 +2,7 @@ package com.slymask3.instantblocks.block;
 
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.reference.GuiID;
+import com.slymask3.instantblocks.reference.ScreenID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
@@ -31,7 +31,7 @@ public abstract class InstantBlock extends Block {
 
 	public String createMessage, errorMessage;
 	boolean isDirectional = false;
-	GuiID guiID = null;
+	ScreenID screenID = null;
 	ForgeConfigSpec.BooleanValue isDisabled;
 	
 	protected InstantBlock(BlockBehaviour.Properties properties, ForgeConfigSpec.BooleanValue isDisabled) {
@@ -55,8 +55,8 @@ public abstract class InstantBlock extends Block {
 		}
 	}
 
-	public void setGuiID(GuiID guiID) {
-		this.guiID = guiID;
+	public void setScreenID(ScreenID screenID) {
+		this.screenID = screenID;
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public abstract class InstantBlock extends Block {
 	}
 
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		return guiID == null ? onActivate(world,pos,player,hand) : onActivateGui(world,pos,player,hand);
+		return screenID == null ? onActivate(world,pos,player,hand) : onActivateGui(world,pos,player,hand);
 	}
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
@@ -149,7 +149,7 @@ public abstract class InstantBlock extends Block {
 			}
 		}
 
-		ClientHelper.showScreen(this.guiID,player,world,pos);
+		ClientHelper.showScreen(this.screenID,player,world,pos);
 
 		return InteractionResult.SUCCESS;
 	}
