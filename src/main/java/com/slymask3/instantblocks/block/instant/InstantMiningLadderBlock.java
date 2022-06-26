@@ -27,7 +27,7 @@ public class InstantMiningLadderBlock extends InstantBlock {
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(y <= Config.Common.MINING_LADDER_LAYER.get() + 4) {
-			Helper.sendMessage(player, Strings.ERROR_LADDER.replace("%i%",String.valueOf(Config.Common.MINING_LADDER_LAYER.get() + 4)), ChatFormatting.RED);
+			Helper.sendMessage(player, Strings.ERROR_LADDER, ChatFormatting.RED + String.valueOf(Config.Common.MINING_LADDER_LAYER.get() + 4));
 			return false;
 		}
 		return true;

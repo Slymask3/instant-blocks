@@ -22,7 +22,7 @@ public class ClientPacketHandler {
                 ClientHelper.showParticles(world, message.x, message.y, message.z);
             }
             if(!message.message.isEmpty()) {
-                ClientHelper.sendMessage(player, message.message, message.color);
+                ClientHelper.sendMessage(player, message.message, message.variable);
             }
         }
     }

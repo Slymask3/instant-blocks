@@ -10,13 +10,13 @@ import java.util.function.Supplier;
 
 public class MessagePacket {
 	public String message;
-	public String color;
+	public String variable;
 	public int x,y,z;
 	public boolean effects;
 
-	public MessagePacket(String message, String color, int x, int y, int z, boolean effects) {
+	public MessagePacket(String message, String variable, int x, int y, int z, boolean effects) {
 		this.message = message;
-		this.color = color;
+		this.variable = variable;
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -25,7 +25,7 @@ public class MessagePacket {
 
 	public static void encode(MessagePacket message, FriendlyByteBuf buffer) {
 		buffer.writeUtf(message.message);
-		buffer.writeUtf(message.color);
+		buffer.writeUtf(message.variable);
 		buffer.writeInt(message.x);
 		buffer.writeInt(message.y);
 		buffer.writeInt(message.z);
@@ -34,12 +34,12 @@ public class MessagePacket {
 
 	public static MessagePacket decode(FriendlyByteBuf buffer) {
 		String message = buffer.readUtf();
-		String color = buffer.readUtf();
+		String variable = buffer.readUtf();
 		int x = buffer.readInt();
 		int y = buffer.readInt();
 		int z = buffer.readInt();
 		boolean effects = buffer.readBoolean();
-		return new MessagePacket(message,color,x,y,z,effects);
+		return new MessagePacket(message,variable,x,y,z,effects);
 	}
 
 	public static class Handler {

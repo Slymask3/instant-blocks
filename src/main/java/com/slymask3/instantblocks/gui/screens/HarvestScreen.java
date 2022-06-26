@@ -6,7 +6,7 @@ import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.HarvestPacket;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -17,7 +17,7 @@ public class HarvestScreen extends InstantScreen {
 	private final HarvestBlockEntity tileEntity;
 
 	public HarvestScreen(Player player, Level world, int x, int y, int z) {
-		super(player, world, x, y, z, "Instant Harvest");
+		super(player, world, x, y, z, "ib.gui.harvest.title");
 		this.tileEntity = (HarvestBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
 	}
 
@@ -31,25 +31,25 @@ public class HarvestScreen extends InstantScreen {
 		int y = this.height / 4 - 8;
 		int slot = 22;
 
-		this.logOak = new Checkbox(x_left, y, 150, 20, new TextComponent("Oak Log"), true);
-		this.logSpruce = new Checkbox(x_left, y+slot, 150, 20, new TextComponent("Spruce Log"), true);
-		this.logBirch = new Checkbox(x_left, y+(slot*2), 150, 20, new TextComponent("Birch Log"), true);
-		this.logJungle = new Checkbox(x_left, y+(slot*3), 150, 20, new TextComponent("Jungle Log"), true);
-		this.logAcacia = new Checkbox(x_left, y+(slot*4), 150, 20, new TextComponent("Acacia Log"), true);
-		this.logDark = new Checkbox(x_left, y+(slot*5), 150, 20, new TextComponent("Dark Oak Log"), true);
+		this.logOak = new Checkbox(x_left, y, 150, 20, new TranslatableComponent("block.minecraft.oak_log"), true);
+		this.logSpruce = new Checkbox(x_left, y+slot, 150, 20, new TranslatableComponent("block.minecraft.spruce_log"), true);
+		this.logBirch = new Checkbox(x_left, y+(slot*2), 150, 20, new TranslatableComponent("block.minecraft.birch_log"), true);
+		this.logJungle = new Checkbox(x_left, y+(slot*3), 150, 20, new TranslatableComponent("block.minecraft.jungle_log"), true);
+		this.logAcacia = new Checkbox(x_left, y+(slot*4), 150, 20, new TranslatableComponent("block.minecraft.acacia_log"), true);
+		this.logDark = new Checkbox(x_left, y+(slot*5), 150, 20, new TranslatableComponent("block.minecraft.dark_oak_log"), true);
 
-		this.wheat = new Checkbox(x_middle, y, 150, 20, new TextComponent("Wheat"), true);
-		this.carrot = new Checkbox(x_middle, y+slot, 150, 20, new TextComponent("Carrot"), true);
-		this.potato = new Checkbox(x_middle, y+(slot*2), 150, 20, new TextComponent("Potato"), true);
-		this.cactus = new Checkbox(x_middle, y+(slot*3), 150, 20, new TextComponent("Cactus"), true);
-		this.pumpkin = new Checkbox(x_middle, y+(slot*4), 150, 20, new TextComponent("Pumpkin"), true);
-		this.melon = new Checkbox(x_middle, y+(slot*5), 150, 20, new TextComponent("Melon"), true);
+		this.wheat = new Checkbox(x_middle, y, 150, 20, new TranslatableComponent("item.minecraft.wheat"), true);
+		this.carrot = new Checkbox(x_middle, y+slot, 150, 20, new TranslatableComponent("item.minecraft.carrot"), true);
+		this.potato = new Checkbox(x_middle, y+(slot*2), 150, 20, new TranslatableComponent("item.minecraft.potato"), true);
+		this.cactus = new Checkbox(x_middle, y+(slot*3), 150, 20, new TranslatableComponent("block.minecraft.cactus"), true);
+		this.pumpkin = new Checkbox(x_middle, y+(slot*4), 150, 20, new TranslatableComponent("block.minecraft.pumpkin"), true);
+		this.melon = new Checkbox(x_middle, y+(slot*5), 150, 20, new TranslatableComponent("block.minecraft.melon"), true);
 
-		this.sugarcane = new Checkbox(x_right, y, 150, 20, new TextComponent("Sugar Cane"), true);
-		this.cocoa = new Checkbox(x_right, y+slot, 150, 20, new TextComponent("Pumpkin"), true);
-		this.mushroom = new Checkbox(x_right, y+(slot*2), 150, 20, new TextComponent("Melon"), true);
-		this.netherwart = new Checkbox(x_right, y+(slot*3), 150, 20, new TextComponent("Sugar Cane"), true);
-		this.replant = new Checkbox(x_right, y+(slot*4), 150, 20, new TextComponent("Re-Plant"), true);
+		this.sugarcane = new Checkbox(x_right, y, 150, 20, new TranslatableComponent("block.minecraft.sugar_cane"), true);
+		this.cocoa = new Checkbox(x_right, y+slot, 150, 20, new TranslatableComponent("block.minecraft.cocoa"), true);
+		this.mushroom = new Checkbox(x_right, y+(slot*2), 150, 20, new TranslatableComponent("ib.gui.harvest.mushroom"), true);
+		this.netherwart = new Checkbox(x_right, y+(slot*3), 150, 20, new TranslatableComponent("block.minecraft.nether_wart"), true);
+		this.replant = new Checkbox(x_right, y+(slot*4), 150, 20, new TranslatableComponent("ib.gui.harvest.replant"), true);
 
 		this.addRenderableWidget(this.logOak);
 		this.addRenderableWidget(this.logSpruce);
@@ -71,7 +71,7 @@ public class HarvestScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, "Select blocks to harvest:", this.width / 2 - 3 - 150, this.height / 4 - 30 + 12, 10526880);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.harvest.select"), this.width / 2 - 3 - 150, this.height / 4 - 30 + 12, 10526880);
 	}
 	
 	public void sendInfo() {

@@ -7,6 +7,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -19,13 +20,13 @@ public abstract class InstantScreen extends Screen {
 	private String doneText;
 
 	public InstantScreen(Player player, Level world, int x, int y, int z, String title) {
-		super(new TextComponent(title));
+		super(new TranslatableComponent(title));
 		this.player = player;
 		this.world = world;
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.doneText = "Generate";
+		this.doneText = "ib.gui.generate";
 	}
 
 	public void setDoneText(String doneText) {
@@ -34,7 +35,7 @@ public abstract class InstantScreen extends Screen {
 
 	@Override
 	public void init() {
-		this.done = this.addRenderableWidget(new Button(this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, new TextComponent(doneText), (p_88642_) -> {
+		this.done = this.addRenderableWidget(new Button(this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, new TranslatableComponent(doneText), (p_88642_) -> {
 			this.sendInfo();
 			this.onClose();
 		}));
@@ -68,6 +69,10 @@ public abstract class InstantScreen extends Screen {
 
 	public Font getFontRenderer() {
 		return this.font;
+	}
+
+	public Player getPlayer() {
+		return this.player;
 	}
 
 	public void sendInfo() {}

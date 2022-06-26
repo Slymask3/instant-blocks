@@ -8,6 +8,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import java.awt.*;
@@ -18,7 +19,7 @@ public class ColorEditBox extends EditBox {
     private Font font;
 
     public ColorEditBox(Font font, int x, int y, int width, int length, int index, SkydiveBlockEntity tileEntity) {
-        super(font, x, y, width, length, new TextComponent("Color "+(index+1)+":"));
+        super(font, x, y, width, length, new TranslatableComponent("ib.gui.skydive.color",(index+1)));
         this.font = font;
         this.index = index;
         this.tileEntity = tileEntity;
@@ -42,7 +43,7 @@ public class ColorEditBox extends EditBox {
     }
 
     public void renderLabel(PoseStack poseStack, int mouseX, int mouseY) {
-        this.font.drawShadow(poseStack, "Color "+(index+1)+":", this.x - 50, this.y + 3, tileEntity.colorCode[index]);
+        this.font.drawShadow(poseStack, new TranslatableComponent("ib.gui.skydive.color",(index+1)), this.x - 50, this.y + 3, tileEntity.colorCode[index]);
     }
 
     public void setRandomHex() {

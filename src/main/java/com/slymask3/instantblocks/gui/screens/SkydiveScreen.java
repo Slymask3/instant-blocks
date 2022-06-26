@@ -11,6 +11,7 @@ import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.ArrayUtils;
@@ -27,7 +28,7 @@ public class SkydiveScreen extends InstantScreen {
 	private SkydiveBlockEntity tileEntity;
 
 	public SkydiveScreen(Player player, Level world, int x, int y, int z) {
-		super(player, world, x, y, z, "Instant Skydive");
+		super(player, world, x, y, z, "ib.gui.skydive.title");
 		this.tileEntity = (SkydiveBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
 	}
 
@@ -35,11 +36,11 @@ public class SkydiveScreen extends InstantScreen {
 	public void init() {
 		super.init();
 
-		this.random = new Button(this.width / 2 + 4, this.height / 4 + 98 + 12, 150, 20, new TextComponent("Randomize"), (p_88642_) -> {
+		this.random = new Button(this.width / 2 + 4, this.height / 4 + 98 + 12, 150, 20, new TranslatableComponent("ib.gui.skydive.random"), (p_88642_) -> {
 			this.setRandom();
 		});
 
-		this.tp = new Checkbox(this.width / 2 + 4, this.height / 4 + 76 + 12, 150, 20, new TextComponent("Teleport to top"), true);
+		this.tp = new Checkbox(this.width / 2 + 4, this.height / 4 + 76 + 12, 150, 20, new TranslatableComponent("ib.gui.skydive.teleport"), true);
 
 		EditBox radiusField = new EditBox(this.font, this.width / 2 - 4 - 100 - 12, this.height / 4 + 100 + 12, 110, 16, new TextComponent("radius"));
 		radiusField.setValue(String.valueOf(Config.Client.SKYDIVE_RADIUS.get()));
@@ -68,8 +69,8 @@ public class SkydiveScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, "Enter colors by name or hexadecimal value.", this.width / 2 - 4 - 150, 33, 10526880); //aarrggbb
-		this.font.draw(poseStack, "Radius:", this.width / 2 - 4 - 150, this.height / 4 + 104 + 12,14737632);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.skydive.input"), this.width / 2 - 4 - 150, 33, 10526880); //aarrggbb
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.skydive.radius"), this.width / 2 - 4 - 150, this.height / 4 + 104 + 12,14737632);
 
 		for(ColorEditBox colorEditBox : color) {
 			colorEditBox.renderLabel(poseStack,mouseX,mouseY);

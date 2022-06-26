@@ -6,7 +6,6 @@ import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Helper;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -113,11 +112,11 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		}
 		checkForBlock(world,x,y,z);
 		if(isSuction && coordsList.isEmpty()) {
-			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID, ChatFormatting.RED);
+			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID);
 			return false;
 		}
 		if(coordsList.size() >= getMax()) {
-			Helper.sendMessage(player, errorMessage, ChatFormatting.RED);
+			Helper.sendMessage(player, errorMessage);
 			coordsList = new ArrayList<>();
 			return false;
 		} else {
@@ -131,9 +130,9 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		}
 		BuildHelper.setBlock(world,x, y, z, getMainReplaceBlock());
 		if(coordsList.size() > 0) {
-			setCreateMessage(create.replace("%i%",String.valueOf(isSuction ? coordsList.size() : coordsList.size()+1)).replace("%type%",blockCheck == Blocks.WATER ? "water" : "lava"));
+			setCreateMessage(create, String.valueOf(isSuction ? coordsList.size() : coordsList.size()+1));
 		} else {
-			setCreateMessage(create1.replace("%type%",blockCheck == Blocks.WATER ? "water" : "lava"));
+			setCreateMessage(create1);
 		}
 		coordsList = new ArrayList<>();
 		if(isSuction) {

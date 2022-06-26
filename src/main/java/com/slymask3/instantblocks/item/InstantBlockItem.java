@@ -4,9 +4,8 @@ import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.init.ModItems;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -27,60 +26,58 @@ public class InstantBlockItem extends BlockItem {
 
 	public void appendHoverText(ItemStack is, @Nullable Level world, List<Component> list, TooltipFlag flag) {
 		if(block == ModBlocks.INSTANT_WOOD_HOUSE.get()) {
-			list.add(new TextComponent("Creates a small wooden house."));
+			list.add(new TranslatableComponent("ib.tooltip.wooden_house"));
 		} else if(block == ModBlocks.INSTANT_MINING_LADDER.get()) {
-			list.add(new TextComponent("Creates a ladder down to layer " + Config.Common.MINING_LADDER_LAYER.get() + "."));
+			list.add(new TranslatableComponent("ib.tooltip.mining_ladder", Config.Common.MINING_LADDER_LAYER.get()));
 		} else if(block == ModBlocks.INSTANT_GLASS_DOME.get()) {
-			list.add(new TextComponent("Creates a small glass dome."));
-			list.add(new TextComponent("Useful for underwater."));
+			list.add(new TranslatableComponent("ib.tooltip.glass_dome.1"));
+			list.add(new TranslatableComponent("ib.tooltip.glass_dome.2"));
 		} else if(block == ModBlocks.INSTANT_FARM.get()) {
-			list.add(new TextComponent("Creates a small farm."));
+			list.add(new TranslatableComponent("ib.tooltip.farm"));
 		} else if(block == ModBlocks.INSTANT_SKYDIVE.get()) {
-			list.add(new TextComponent("Creates a structure from layer"));
-			list.add(new TextComponent(Config.Common.SKYDIVE_MIN.get() + " to " + Config.Common.SKYDIVE_MAX.get() + " out of coloured wool."));
+			list.add(new TranslatableComponent("ib.tooltip.skydive.1"));
+			list.add(new TranslatableComponent("ib.tooltip.skydive.2", Config.Common.SKYDIVE_MIN.get(), Config.Common.SKYDIVE_MAX.get()));
 		} else if(block == ModBlocks.INSTANT_GRINDER.get()) {
-			list.add(new TextComponent("Creates a simple grinder."));
-			list.add(new TextComponent("Place above a Zombie/Skeleton spawner."));
+			list.add(new TranslatableComponent("ib.tooltip.grinder.1"));
+			list.add(new TranslatableComponent("ib.tooltip.grinder.2"));
 		} else if(block == ModBlocks.INSTANT_POOL.get()) {
-			list.add(new TextComponent("Creates a small pool."));
+			list.add(new TranslatableComponent("ib.tooltip.pool"));
 		} else if(block == ModBlocks.INSTANT_ESCAPE_LADDER.get()) {
-			list.add(new TextComponent("Creates a ladder to the surface."));
+			list.add(new TranslatableComponent("ib.tooltip.escape_ladder"));
 		} else if(block == ModBlocks.INSTANT_WATER.get()) {
-			list.add(new TextComponent("Fills an area with water."));
-			list.add(new TextComponent("Maximum: " + Config.Common.MAX_LIQUID.get() + " Water Blocks."));
-			list.add(new TextComponent("Mode: " + (Config.Common.SIMPLE_LIQUID.get() ? "Simple" : "Full") + "."));
+			list.add(new TranslatableComponent("ib.tooltip.water"));
+			list.add(new TranslatableComponent("ib.tooltip.water.max", Config.Common.MAX_LIQUID.get()));
+			list.add(new TranslatableComponent("ib.tooltip.liquid.mode", (Config.Common.SIMPLE_LIQUID.get() ? "Simple" : "Full")));
 		} else if(block == ModBlocks.INSTANT_LAVA.get()) {
-			list.add(new TextComponent("Fills an area with lava."));
-			list.add(new TextComponent("Maximum: " + Config.Common.MAX_LIQUID.get() + " Lava Blocks."));
-			list.add(new TextComponent("Mode: " + (Config.Common.SIMPLE_LIQUID.get() ? "Simple" : "Full") + "."));
+			list.add(new TranslatableComponent("ib.tooltip.lava"));
+			list.add(new TranslatableComponent("ib.tooltip.lava.max", Config.Common.MAX_LIQUID.get()));
+			list.add(new TranslatableComponent("ib.tooltip.liquid.mode", (Config.Common.SIMPLE_LIQUID.get() ? "Simple" : "Full")));
 		} else if(block == ModBlocks.INSTANT_SUCTION.get()) {
-			list.add(new TextComponent("Sucks in water/lava."));
-			list.add(new TextComponent("Maximum: " + Config.Common.MAX_FILL.get() + "."));
+			list.add(new TranslatableComponent("ib.tooltip.suction"));
+			list.add(new TranslatableComponent("ib.tooltip.suction.max", Config.Common.MAX_FILL.get()));
 		} else if(block == ModBlocks.INSTANT_RAIL.get()) {
-			list.add(new TextComponent("Creates a railway going forward " + Config.Common.RAILS_AMOUNT.get() + " blocks."));
+			list.add(new TranslatableComponent("ib.tooltip.rail", Config.Common.RAILS_AMOUNT.get()));
 		} else if(block == ModBlocks.INSTANT_STATUE.get()) {
-			list.add(new TextComponent("Creates a statue from a Minecraft username."));
+			list.add(new TranslatableComponent("ib.tooltip.statue"));
 		} else if(block == ModBlocks.INSTANT_HARVEST.get()) {
-			list.add(new TextComponent("Harvests renewable resources in a radius."));
-			list.add(new TextComponent("Radius: " + Config.Common.RADIUS_HARVEST.get()));
+			list.add(new TranslatableComponent("ib.tooltip.harvest"));
+			list.add(new TranslatableComponent("ib.tooltip.radius", Config.Common.RADIUS_HARVEST.get()));
 		} else if(block == ModBlocks.INSTANT_LIGHT.get()) {
-			list.add(new TextComponent("Lights up dark areas in a radius."));
-			list.add(new TextComponent("Radius: " + Config.Common.RADIUS_LIGHT.get()));
+			list.add(new TranslatableComponent("ib.tooltip.light"));
+			list.add(new TranslatableComponent("ib.tooltip.radius", Config.Common.RADIUS_LIGHT.get()));
 		} else if(block == ModBlocks.INSTANT_SCHEMATIC.get()) {
-			list.add(new TextComponent("Creates a structure from a schematic file."));
+			list.add(new TranslatableComponent("ib.tooltip.schematic"));
 		} else if(block == ModBlocks.INSTANT_TREE.get()) {
-			list.add(new TextComponent("Creates a huge tree."));
+			list.add(new TranslatableComponent("ib.tooltip.tree"));
 		} else if(block == ModBlocks.COLOR.get()) {
-			list.add(new TextComponent("This block is used by Instant Skydive and Statue."));
-			list.add(new TextComponent("When placed, will generate with a random color."));
-			list.add(new TextComponent(ChatFormatting.RED + "CREATIVE MODE ONLY"));
+			list.add(new TranslatableComponent("ib.tooltip.color.1"));
+			list.add(new TranslatableComponent("ib.tooltip.color.2"));
 		} else if(block == ModBlocks.SKYDIVE_TP.get()) {
-			list.add(new TextComponent("This block is used by Instant Skydive."));
-			list.add(new TextComponent("Teleports you up to layer " + (Config.Common.SKYDIVE_MAX.get() + 2) + "."));
-			list.add(new TextComponent(ChatFormatting.RED + "CREATIVE MODE ONLY"));
+			list.add(new TranslatableComponent("ib.tooltip.skydive_tp.1"));
+			list.add(new TranslatableComponent("ib.tooltip.skydive_tp.2", Config.Common.SKYDIVE_MAX.get() + 2));
 		}
 		if(block instanceof InstantBlock) {
-			list.add(new TextComponent("Right-click to activate."));
+			list.add(new TranslatableComponent("ib.tooltip.activate"));
 		}
 	}
 }

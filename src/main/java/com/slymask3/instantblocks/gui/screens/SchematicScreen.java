@@ -3,7 +3,6 @@ package com.slymask3.instantblocks.gui.screens;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.SchematicPacket;
@@ -35,20 +34,17 @@ public class SchematicScreen extends InstantScreen {
 	private Checkbox center, ignoreAir;
 
 	public SchematicScreen(Player player, Level world, int x, int y, int z) {
-		super(player, world, x, y, z, "Instant Schematic");
+		super(player, world, x, y, z, "ib.gui.schematic.title");
 		this.tileEntity = (SchematicBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
 		this.schematics = SchematicHelper.getSchematics();
-		for(String name : schematics) {
-			InstantBlocks.LOGGER.info("schematic: " + name);
-		}
 	}
 
 	@Override
 	public void init() {
 		super.init();
 
-		this.center = new Checkbox(this.width / 2 - 4 - 150, this.height / 4 + 4 + 12, 150, 20, new TextComponent("Generate from center"), false);
-		this.ignoreAir = new Checkbox(this.width / 2 + 4, this.height / 4 + 4 + 12, 150, 20, new TextComponent("Ignore generating air"), false);
+		this.center = new Checkbox(this.width / 2 - 4 - 150, this.height / 4 + 4 + 12, 150, 20, new TranslatableComponent("ib.gui.schematic.center"), false);
+		this.ignoreAir = new Checkbox(this.width / 2 + 4, this.height / 4 + 4 + 12, 150, 20, new TranslatableComponent("ib.gui.schematic.ignore"), false);
 
 		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 300+8, 20, new TextComponent("Input")) {
 			@Override
@@ -78,16 +74,16 @@ public class SchematicScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, "Enter a Schematic File Name:", this.width / 2 - 4 - 150, 37, 10526880);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 10526880);
 
-		this.font.draw(poseStack, "File: '.minecraft/schematics/"+input.getValue()+"'", this.width / 2 - 2 - 150, this.height / 4 + 41 + 12 +(65), this.checkForSchematic() ? 0x00FF00 : 0xAA0000);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.file", input.getValue()), this.width / 2 - 2 - 150, this.height / 4 + 41 + 12 +(65), this.checkForSchematic() ? 0x00FF00 : 0xAA0000);
 
-		this.font.draw(poseStack, "Found " + this.schematics.size() + " schematic files:", this.width / 2 - 2 - 150, this.height / 4 + 31 + 12, 0xFFFFFF);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.found", this.schematics.size()), this.width / 2 - 2 - 150, this.height / 4 + 31 + 12, 0xFFFFFF);
 
 		if(this.schematics.size() == 0) {
-			this.font.draw(poseStack, "Put .schem files into the 'schematics' folder in .minecraft.", this.width / 2 - 3 - 150, this.height / 4 +60 + 12, 0xAA0000);
-			this.font.draw(poseStack, "If the 'schematics' folder doesn't exit, create it.", this.width / 2 - 3 - 150, this.height / 4 +70 + 12, 0xAA0000);
-			this.font.draw(poseStack, "Files will update here right away, no need to restart.", this.width / 2 - 3 - 150, this.height / 4 +80 + 12, 0xAA0000);
+			this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.instructions.1"), this.width / 2 - 3 - 150, this.height / 4 +60 + 12, 0xAA0000);
+			this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.instructions.2"), this.width / 2 - 3 - 150, this.height / 4 +70 + 12, 0xAA0000);
+			this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.instructions.3"), this.width / 2 - 3 - 150, this.height / 4 +80 + 12, 0xAA0000);
 		}
 
 		//background behind found files
@@ -195,7 +191,6 @@ public class SchematicScreen extends InstantScreen {
 			}
 
 			public boolean mouseClicked(double p_96122_, double p_96123_, int p_96124_) {
-				InstantBlocks.LOGGER.info("mouseClicked: " + p_96124_);
 				if (p_96124_ == 0) {
 					SchematicScreen.this.setSelected(this.index);
 					return true;

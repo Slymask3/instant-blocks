@@ -3,12 +3,10 @@ package com.slymask3.instantblocks.util;
 import com.slymask3.instantblocks.gui.screens.*;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.ScreenID;
-import com.slymask3.instantblocks.reference.Strings;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -39,14 +37,9 @@ public class ClientHelper {
         }
     }
 
-    public static void sendMessage(Player player, String msg, ChatFormatting color) {
-        sendMessage(player,msg,color.toString());
-    }
-
-    public static void sendMessage(Player player, String msg, String color) {
+    public static void sendMessage(Player player, String message, String variable) {
         if(Config.Client.SHOW_MESSAGES.get() && isClient(player.getLevel())) {
-            //player.sendMessage(new TextComponent(Strings.PREFIX + Colors.colorEveryWord(msg, color)),player.getUUID());
-            player.displayClientMessage(new TextComponent(Strings.PREFIX + ColorHelper.colorEveryWord(msg, color)),true);
+            player.displayClientMessage(new TranslatableComponent(message, variable.isEmpty() ? new Object[0] : variable),true);
         }
     }
 

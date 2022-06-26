@@ -7,17 +7,18 @@ import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.entity.TreeBlockEntity;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.TreePacket;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.server.command.TextComponentHelper;
 
 public class TreeScreen extends InstantScreen {
 	protected final TreeBlockEntity tileEntity;
@@ -30,7 +31,7 @@ public class TreeScreen extends InstantScreen {
 	private Checkbox fullLog, fullLeaves, air;
 
 	public TreeScreen(Player player, Level world, int x, int y, int z) {
-		super(player, world, x, y, z, "Instant Huge Tree");
+		super(player, world, x, y, z, "ib.gui.tree.title");
 		this.tileEntity = (TreeBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
 	}
 
@@ -38,14 +39,12 @@ public class TreeScreen extends InstantScreen {
 	public void init() {
 		super.init();
 
-		this.fullLog = new Checkbox(this.width / 2 + 4, 50, 150, 20, new TextComponent("Hollow Logs"), true);
-		this.fullLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, new TextComponent("Hollow Leaves"), true);
-		this.air = new Checkbox(this.width / 2 + 4, 94, 150, 20, new TextComponent("Air Blocks Inside"), true);
+		this.fullLog = new Checkbox(this.width / 2 + 4, 50, 150, 20, new TranslatableComponent("ib.gui.tree.logs"), true);
+		this.fullLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, new TranslatableComponent("ib.gui.tree.leaves"), true);
+		this.air = new Checkbox(this.width / 2 + 4, 94, 150, 20, new TranslatableComponent("ib.gui.tree.air"), true);
 
 		this.treeList = new TreeList(this.width / 2 - 4 - 150,50,144,120);
 		this.addWidget(this.treeList);
-
-		InstantBlocks.LOGGER.info("treeList.children(): " + treeList.children());
 
 		this.done.active = false;
 
@@ -56,8 +55,8 @@ public class TreeScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, "Options:", this.width / 2 + 4, 40, 10526880);
-		this.font.draw(poseStack, "Tree Type:", this.width / 2 - 2 - 150, 40, 10526880);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.tree.options"), this.width / 2 + 4, 40, 10526880);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.tree.type"), this.width / 2 - 2 - 150, 40, 10526880);
 	}
 
 	public void sendInfo() {
@@ -65,20 +64,19 @@ public class TreeScreen extends InstantScreen {
 	}
 	
 	public static String treeToString(int tree) {
-    	switch(tree) {
-			case 0: return "Huge Oak Tree";
-			case 1: return "Huge Spruce Tree";
-			case 2: return "Huge Birch Tree";
-			case 3: return "Huge Jungle Tree";
-			case 4: return "Huge Acacia Tree";
-			case 5: return "Huge Dark Oak Tree";
-			case 6: return "Huge Glass Tree";
-			default: return "Error";
-    	}
+		return switch (tree) {
+			case 0 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.oak").getString();
+			case 1 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.spruce").getString();
+			case 2 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.birch").getString();
+			case 3 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.jungle").getString();
+			case 4 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.acacia").getString();
+			case 5 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.dark_oak").getString();
+			case 6 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.glass").getString();
+			default -> "Error";
+		};
     }
 
     public void setSelected(int index) {
-		InstantBlocks.LOGGER.info("setSelected: " + index);
         this.selected=index;
         if((index>=0 && index<=6)) {
             this.selectedTree=trees[selected];

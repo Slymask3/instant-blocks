@@ -33,7 +33,7 @@ public class BuildHelper {
 	 * y+# = UP    *
 	 * y-# = DOWN  *
 	 ***************/
-	
+
 	public static void setBlock(Level world, int x, int y, int z, Block block) {
 		setBlock(world,x,y,z,block,null,2);
 	}
@@ -55,7 +55,7 @@ public class BuildHelper {
 		if(Config.Common.KEEP_BLOCKS.get() && getBlock instanceof InstantBlock) {
 			return;
 		}
-		if(getBlock.defaultDestroyTime() > 0F) {
+		if(canSet(getBlock)) {
 			BlockState state = block.defaultBlockState();
 			if(block instanceof CrossCollisionBlock) {
 				BlockPlaceContext context = new BlockPlaceContext(world,null, InteractionHand.MAIN_HAND, ItemStack.EMPTY,new BlockHitResult(Vec3.ZERO,Direction.DOWN,new BlockPos(x,y,z),false));
@@ -459,5 +459,9 @@ public class BuildHelper {
 				y_cur++;
 			}
 		}
+	}
+
+	private static boolean canSet(Block block) {
+		return block.defaultDestroyTime() >= 0F || block.equals(Blocks.AIR);
 	}
 }

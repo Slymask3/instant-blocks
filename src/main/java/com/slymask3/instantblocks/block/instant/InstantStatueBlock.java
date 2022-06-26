@@ -101,10 +101,10 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 				buildArms(world, x, y, z, img, direction, armLeft, armRight, rgb);
 			}
 
-			setCreateMessage(Strings.CREATE_STATUE.replace("%username%",username));
+			setCreateMessage(Strings.CREATE_STATUE, username);
 			return true;
 		} else {
-			Helper.sendMessage(player, Strings.ERROR_STATUE.replace("%username%",username), ChatFormatting.RED);
+			Helper.sendMessage(player, Strings.ERROR_STATUE, ChatFormatting.RED + username);
 		}
 		return false;
 	}

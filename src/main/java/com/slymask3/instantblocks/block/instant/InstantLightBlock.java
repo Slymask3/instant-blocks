@@ -52,11 +52,11 @@ public class InstantLightBlock extends InstantBlock {
     public boolean build(Level world, int x, int y, int z, Player player) {
         checkForDarkness(world,x,y,z);
         if(coordsList.isEmpty()) {
-            Helper.sendMessage(player,Strings.ERROR_LIGHT.replace("%i%",String.valueOf(Config.Common.RADIUS_LIGHT.get())), ChatFormatting.RED);
+            Helper.sendMessage(player,Strings.ERROR_LIGHT, ChatFormatting.RED + String.valueOf(Config.Common.RADIUS_LIGHT.get()));
             return false;
         }
         BuildHelper.setBlock(world,x,y,z,Blocks.TORCH);
-        setCreateMessage(Strings.CREATE_LIGHT_AMOUNT.replace("%i%",String.valueOf(coordsList.size())));
+        setCreateMessage(Strings.CREATE_LIGHT_AMOUNT, String.valueOf(coordsList.size()));
         coordsList.clear();
         return true;
 	}

@@ -46,10 +46,10 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 		if(schematic != null) {
 			BuildHelper.setBlock(world,x, y, z, Blocks.AIR);
 			buildSchematic(world, x, y, z, schematic, center, ignoreAir);
-			setCreateMessage(Strings.CREATE_SCHEMATIC.replace("%schematic%",schematicName));
+			setCreateMessage(Strings.CREATE_SCHEMATIC, schematicName);
 			return true;
 		}
-		Helper.sendMessage(player, Strings.ERROR_SCHEMATIC.replace("%schematic%",schematicName), ChatFormatting.RED);
+		Helper.sendMessage(player, Strings.ERROR_SCHEMATIC, ChatFormatting.RED + schematicName);
 		return false;
 	}
 

@@ -58,7 +58,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		} else if(type == 6) { //IF GLASS
 			buildOak(world, x, y, z, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, fullLog, fullLeaves, air);
 		}
-		setCreateMessage(Strings.CREATE_TREE.replace("%tree%", TreeScreen.treeToString(type)));
+		setCreateMessage(Strings.CREATE_TREE, TreeScreen.treeToString(type));
 		return true;
 	}
 

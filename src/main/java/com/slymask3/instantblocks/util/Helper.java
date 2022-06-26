@@ -6,10 +6,10 @@ import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.item.InstantWandItem;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.MessagePacket;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -25,6 +25,10 @@ import java.util.Random;
 public class Helper {
 	public static boolean isServer(Level world) {
 		return !world.isClientSide();
+	}
+
+	public static String translate(String key) {
+		return new TranslatableComponent(key).getString();
 	}
 
 	public static void giveExp(Level world, Player player, int amount) {
@@ -105,17 +109,21 @@ public class Helper {
 		return max;
 	}
 
-	public static void sendMessage(Player player, String message, ChatFormatting color) {
-		sendMessage(player, message, color, 0, 0, 0, false);
+	public static void sendMessage(Player player, String message) {
+		sendMessage(player, message, "", 0, 0, 0, false);
 	}
 
-	public static void sendMessage(Player player, String message, ChatFormatting color, int x, int y, int z) {
-		sendMessage(player, message, color, x, y, z, true);
+	public static void sendMessage(Player player, String message, String variable) {
+		sendMessage(player, message, variable, 0, 0, 0, false);
 	}
 
-	public static void sendMessage(Player player, String message, ChatFormatting color, int x, int y, int z, boolean effects) {
+	public static void sendMessage(Player player, String message, String variable, int x, int y, int z) {
+		sendMessage(player, message, variable, x, y, z, true);
+	}
+
+	public static void sendMessage(Player player, String message, String variable, int x, int y, int z, boolean effects) {
 		if(isServer(player.getLevel())) {
-			PacketHandler.sendToClient((ServerPlayer)player,new MessagePacket(message,color.toString(),x,y,z,effects));
+			PacketHandler.sendToClient((ServerPlayer)player,new MessagePacket(message,variable,x,y,z,effects));
 		}
 	}
 

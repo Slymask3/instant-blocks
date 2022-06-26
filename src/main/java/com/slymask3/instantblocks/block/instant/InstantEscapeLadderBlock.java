@@ -6,7 +6,6 @@ import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Helper;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -44,7 +43,7 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(world.canSeeSky(new BlockPos(x, y+1, z))) {
-			Helper.sendMessage(player, Strings.ERROR_ESCAPE_LADDER, ChatFormatting.RED);
+			Helper.sendMessage(player, Strings.ERROR_ESCAPE_LADDER);
 			return false;
 		}
 		return true;
@@ -88,7 +87,7 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 			}
 		}
 
-		setCreateMessage(Strings.CREATE_ESCAPE_LADDER.replace("%i%",String.valueOf(y_top-y)));
+		setCreateMessage(Strings.CREATE_ESCAPE_LADDER, String.valueOf(y_top-y));
 
 		return true;
 	}
