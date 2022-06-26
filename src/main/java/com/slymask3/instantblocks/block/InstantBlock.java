@@ -175,7 +175,7 @@ public abstract class InstantBlock extends Block {
 		if(Config.Common.USE_WANDS.get()) {
 			ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
 			if(Helper.isWand(is)) {
-				is.hurtAndBreak(Helper.wandDamage(is), player, (entity) -> {
+				is.hurtAndBreak(Helper.wandDamage(this), player, (entity) -> {
 					entity.broadcastBreakEvent(InteractionHand.MAIN_HAND);
 				});
 			}

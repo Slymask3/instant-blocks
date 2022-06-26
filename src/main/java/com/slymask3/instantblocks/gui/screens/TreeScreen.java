@@ -3,7 +3,6 @@ package com.slymask3.instantblocks.gui.screens;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.entity.TreeBlockEntity;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.TreePacket;
@@ -169,7 +168,6 @@ public class TreeScreen extends InstantScreen {
 			}
 
 			public boolean mouseClicked(double p_96122_, double p_96123_, int p_96124_) {
-				InstantBlocks.LOGGER.info("mouseClicked: " + p_96124_);
 				if (p_96124_ == 0) {
 					TreeScreen.this.setSelected(this.index);
 					return true;

@@ -2,14 +2,13 @@ package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.init.ModItems;
 import com.slymask3.instantblocks.item.InstantWandItem;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.MessagePacket;
+import com.slymask3.instantblocks.reference.Names;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -25,10 +24,6 @@ import java.util.Random;
 public class Helper {
 	public static boolean isServer(Level world) {
 		return !world.isClientSide();
-	}
-
-	public static String translate(String key) {
-		return new TranslatableComponent(key).getString();
 	}
 
 	public static void giveExp(Level world, Player player, int amount) {
@@ -67,22 +62,27 @@ public class Helper {
 		return is.getItem() instanceof InstantWandItem;
 	}
 
-	public static int wandDamage(ItemStack is) {
-		Item item = is.getItem();
-		if(ModItems.WAND_WOOD.get().equals(item)) {
-			return 60;
-		} else if(ModItems.WAND_STONE.get().equals(item)) {
-			return 44;
-		} else if(ModItems.WAND_IRON.get().equals(item)) {
-			return 35;
-		} else if(ModItems.WAND_GOLD.get().equals(item)) {
-			return 2;
-		} else if(ModItems.WAND_DIAMOND.get().equals(item)) {
-			return 30;
-		} else if(ModItems.WAND_NETHERITE.get().equals(item)) {
-			return 25;
-		}
-		return 1;
+	public static int wandDamage(Block block) {
+		return switch(block.getDescriptionId().substring(InstantBlocks.MOD_ID.length()+7)) {
+			case Names.Blocks.IB_WOOD_HOUSE -> Config.Common.DAMAGE_WOODEN_HOUSE.get();
+			case Names.Blocks.IB_MINING_LADDER -> Config.Common.DAMAGE_MINING_LADDER.get();
+			case Names.Blocks.IB_GLASS_DOME -> Config.Common.DAMAGE_GLASS_DOME.get();
+			case Names.Blocks.IB_FARM -> Config.Common.DAMAGE_FARM.get();
+			case Names.Blocks.IB_SKYDIVE -> Config.Common.DAMAGE_SKYDIVE.get();
+			case Names.Blocks.IB_GRINDER -> Config.Common.DAMAGE_GRINDER.get();
+			case Names.Blocks.IB_POOL -> Config.Common.DAMAGE_POOL.get();
+			case Names.Blocks.IB_ESCAPE_LADDER -> Config.Common.DAMAGE_ESCAPE_LADDER.get();
+			case Names.Blocks.IB_WATER -> Config.Common.DAMAGE_WATER.get();
+			case Names.Blocks.IB_LAVA -> Config.Common.DAMAGE_LAVA.get();
+			case Names.Blocks.IB_SUCTION -> Config.Common.DAMAGE_SUCTION.get();
+			case Names.Blocks.IB_RAIL -> Config.Common.DAMAGE_RAIL.get();
+			case Names.Blocks.IB_STATUE -> Config.Common.DAMAGE_STATUE.get();
+			case Names.Blocks.IB_HARVEST -> Config.Common.DAMAGE_HARVEST.get();
+			case Names.Blocks.IB_LIGHT -> Config.Common.DAMAGE_LIGHT.get();
+			case Names.Blocks.IB_SCHEMATIC -> Config.Common.DAMAGE_SCHEMATIC.get();
+			case Names.Blocks.IB_TREE -> Config.Common.DAMAGE_TREE.get();
+			default -> 1;
+		};
 	}
 
 	public static boolean isPositive(int i) {
@@ -134,7 +134,6 @@ public class Helper {
 			total += block.getWeight();
 		}
 		int r = random.nextInt(total) + 1;
-		InstantBlocks.LOGGER.info(r);
 		int count = 0;
 		for (WeightedBlock block : blocks) {
 			count += block.getWeight();

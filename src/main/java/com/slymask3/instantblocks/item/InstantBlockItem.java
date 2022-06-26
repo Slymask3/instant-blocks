@@ -72,9 +72,11 @@ public class InstantBlockItem extends BlockItem {
 		} else if(block == ModBlocks.COLOR.get()) {
 			list.add(new TranslatableComponent("ib.tooltip.color.1"));
 			list.add(new TranslatableComponent("ib.tooltip.color.2"));
+			list.add(new TranslatableComponent("ib.tooltip.creative"));
 		} else if(block == ModBlocks.SKYDIVE_TP.get()) {
 			list.add(new TranslatableComponent("ib.tooltip.skydive_tp.1"));
 			list.add(new TranslatableComponent("ib.tooltip.skydive_tp.2", Config.Common.SKYDIVE_MAX.get() + 2));
+			list.add(new TranslatableComponent("ib.tooltip.creative"));
 		}
 		if(block instanceof InstantBlock) {
 			list.add(new TranslatableComponent("ib.tooltip.activate"));

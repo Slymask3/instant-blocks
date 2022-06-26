@@ -461,6 +461,24 @@ public class BuildHelper {
 		}
 	}
 
+	public static void buildCircle(Level world, int x, int y, int z, int radius, Block block) {
+		buildCircle(world,x,y,z,radius,block,block);
+	}
+
+	public static void buildCircle(Level world, int x, int y, int z, int radius, Block outer, Block inner) {
+		double distance;
+		for(int row = 0; row <= 2 * radius; row++) {
+			for(int col = 0; col <= 2 * radius; col++) {
+				distance = Math.sqrt((row - radius) * (row - radius) + (col - radius) * (col - radius));
+				if(distance > radius - 0.4 && distance < radius + 0.5) {
+					BuildHelper.setBlock(world,x+row-radius,y,z+col-radius,outer);
+				} else if(distance < radius - 0.3) {
+					BuildHelper.setBlock(world,x+row-radius,y,z+col-radius,inner);
+				}
+			}
+		}
+	}
+
 	private static boolean canSet(Block block) {
 		return block.defaultDestroyTime() >= 0F || block.equals(Blocks.AIR);
 	}

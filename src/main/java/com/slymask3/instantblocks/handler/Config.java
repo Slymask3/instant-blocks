@@ -47,6 +47,23 @@ public class Config {
 		public static BooleanValue DISABLE_LIGHT;
 		public static BooleanValue DISABLE_SCHEMATIC;
 		public static BooleanValue DISABLE_TREE;
+		public static IntValue DAMAGE_WOODEN_HOUSE;
+		public static IntValue DAMAGE_MINING_LADDER;
+		public static IntValue DAMAGE_GLASS_DOME;
+		public static IntValue DAMAGE_FARM;
+		public static IntValue DAMAGE_SKYDIVE;
+		public static IntValue DAMAGE_GRINDER;
+		public static IntValue DAMAGE_POOL;
+		public static IntValue DAMAGE_ESCAPE_LADDER;
+		public static IntValue DAMAGE_WATER;
+		public static IntValue DAMAGE_LAVA;
+		public static IntValue DAMAGE_SUCTION;
+		public static IntValue DAMAGE_RAIL;
+		public static IntValue DAMAGE_STATUE;
+		public static IntValue DAMAGE_HARVEST;
+		public static IntValue DAMAGE_LIGHT;
+		public static IntValue DAMAGE_SCHEMATIC;
+		public static IntValue DAMAGE_TREE;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.comment("General settings").push("general");
@@ -88,87 +105,87 @@ public class Config {
 			builder.comment("Toggling instant blocks").push("toggle");
 
 			DISABLE_WOODEN_HOUSE = builder
-					.comment("Disable Instant Wooden House\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_WOODEN_HOUSE", false);
 
 			DISABLE_MINING_LADDER = builder
-					.comment("Disable Instant Mining Ladder\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_MINING_LADDER", false);
 
 			DISABLE_GLASS_DOME = builder
-					.comment("Disable Instant Glass Dome\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_GLASS_DOME", false);
 
 			DISABLE_FARM = builder
-					.comment("Disable Instant Farm\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_FARM", false);
 
 			DISABLE_SKYDIVE = builder
-					.comment("Disable Instant Rainbow Skydive\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_SKYDIVE", false);
 
 			DISABLE_GRINDER = builder
-					.comment("Disable Instant Grinder\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_GRINDER", false);
 
 			DISABLE_POOL = builder
-					.comment("Disable Instant Pool\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_POOL", false);
 
 			DISABLE_ESCAPE_LADDER = builder
-					.comment("Disable Instant Escape Ladder\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_ESCAPE_LADDER", false);
 
 			DISABLE_WATER = builder
-					.comment("Disable Instant Water\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_WATER", false);
 
 			DISABLE_LAVA = builder
-					.comment("Disable Instant Lava\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_LAVA", false);
 
 			DISABLE_SUCTION = builder
-					.comment("Disable Instant Suction\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_SUCTION", false);
 
 			DISABLE_RAIL = builder
-					.comment("Disable Instant Rail\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_RAIL", false);
 
 			DISABLE_STATUE = builder
-					.comment("Disable Instant Statue\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_STATUE", false);
 
 			DISABLE_HARVEST = builder
-					.comment("Disable Instant Harvest\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_HARVEST", false);
 
 			DISABLE_LIGHT = builder
-					.comment("Disable Instant Light\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_LIGHT", false);
 
 			DISABLE_SCHEMATIC = builder
-					.comment("Disable Instant Schematic\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_SCHEMATIC", false);
 
 			DISABLE_TREE = builder
-					.comment("Disable Instant Tree\nDefault: false")
+					.comment("Default: false")
 					.worldRestart()
 					.define("DISABLE_TREE", false);
 
@@ -237,6 +254,78 @@ public class Config {
 			WEIGHT_BEETROOTS = builder
 					.comment("Weight for beetroot to be chosen to plant.\nDefault: 10")
 					.defineInRange("WEIGHT_BEETROOTS", 10,0,100);
+
+			builder.pop();
+
+			builder.comment("Instant wand damage amount for activating instant blocks").push("damage");
+
+			DAMAGE_WOODEN_HOUSE = builder
+					.comment("Default: 40")
+					.defineInRange("DAMAGE_WOODEN_HOUSE", 40,0,2000);
+
+			DAMAGE_MINING_LADDER = builder
+					.comment("Default: 30;")
+					.defineInRange("DAMAGE_MINING_LADDER", 30,0,2000);
+
+			DAMAGE_GLASS_DOME = builder
+					.comment("Default: 10")
+					.defineInRange("DAMAGE_GLASS_DOME", 10,0,2000);
+
+			DAMAGE_FARM = builder
+					.comment("Default: 50")
+					.defineInRange("DAMAGE_FARM", 50,0,2000);
+
+			DAMAGE_SKYDIVE = builder
+					.comment("Default: 100")
+					.defineInRange("DAMAGE_SKYDIVE", 100,0,2000);
+
+			DAMAGE_GRINDER = builder
+					.comment("Default: 100")
+					.defineInRange("DAMAGE_GRINDER", 100,0,2000);
+
+			DAMAGE_POOL = builder
+					.comment("Default: 40")
+					.defineInRange("DAMAGE_POOL", 40,0,2000);
+
+			DAMAGE_ESCAPE_LADDER = builder
+					.comment("Default: 30")
+					.defineInRange("DAMAGE_ESCAPE_LADDER", 30,0,2000);
+
+			DAMAGE_WATER = builder
+					.comment("Default: 20")
+					.defineInRange("DAMAGE_WATER", 20,0,2000);
+
+			DAMAGE_LAVA = builder
+					.comment("Default: 20")
+					.defineInRange("DAMAGE_LAVA", 20,0,2000);
+
+			DAMAGE_SUCTION = builder
+					.comment("Default: 20")
+					.defineInRange("DAMAGE_SUCTION", 20,0,2000);
+
+			DAMAGE_RAIL = builder
+					.comment("Default: 10")
+					.defineInRange("DAMAGE_RAIL", 10,0,2000);
+
+			DAMAGE_STATUE = builder
+					.comment("Default: 100")
+					.defineInRange("DAMAGE_STATUE", 100,0,2000);
+
+			DAMAGE_HARVEST = builder
+					.comment("Default: 60")
+					.defineInRange("DAMAGE_HARVEST", 60,0,2000);
+
+			DAMAGE_LIGHT = builder
+					.comment("Default: 60")
+					.defineInRange("DAMAGE_LIGHT", 60,0,2000);
+
+			DAMAGE_SCHEMATIC = builder
+					.comment("Default: 200")
+					.defineInRange("DAMAGE_SCHEMATIC", 200,0,2000);
+
+			DAMAGE_TREE = builder
+					.comment("Default: 50")
+					.defineInRange("DAMAGE_TREE", 50,0,2000);
 
 			builder.pop();
 		}

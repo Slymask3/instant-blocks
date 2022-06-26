@@ -1,6 +1,5 @@
 package com.slymask3.instantblocks.block.instant;
 
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
@@ -55,8 +54,6 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 		Block air = Blocks.AIR;
 
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
-
-		InstantBlocks.LOGGER.info(direction);
 
 		int y_top;
 		if(world.dimension().equals(Level.NETHER)) {
