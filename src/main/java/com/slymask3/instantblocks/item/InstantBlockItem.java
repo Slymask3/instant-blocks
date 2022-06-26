@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class InstantBlockItem extends BlockItem {
-	public Block block;
+	private final Block block;
 	
 	public InstantBlockItem(Block block) {
          super(block,new Item.Properties().tab(ModItems.ModCreativeTab.instance));

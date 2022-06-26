@@ -20,6 +20,7 @@ public class Config {
 		public static IntValue RADIUS_HARVEST;
 		public static IntValue RADIUS_LIGHT;
 		public static BooleanValue KEEP_BLOCKS;
+		public static BooleanValue ALLOW_WATER_IN_NETHER;
 		public static IntValue XP_AMOUNT;
 		public static IntValue RAILS_AMOUNT;
 		public static IntValue SKYDIVE_MIN;
@@ -80,6 +81,10 @@ public class Config {
 					.comment("Keep instant blocks after activation.\nDefault: false")
 					.define("KEEP_BLOCKS", false);
 
+			ALLOW_WATER_IN_NETHER = builder
+					.comment("Allow generating water in the nether.\nDefault: false")
+					.define("ALLOW_WATER_IN_NETHER", false);
+
 			RADIUS_HARVEST = builder
 					.comment("Radius to harvest blocks around Instant Harvest.\nDefault: 25")
 					.defineInRange("RADIUS_HARVEST", 25,1,1000);
@@ -93,8 +98,8 @@ public class Config {
 					.defineInRange("RAILS_AMOUNT", 37,1,10000);
 
 			MINING_LADDER_LAYER = builder
-					.comment("Mining layer for the Instant Mining Ladder.\nDefault: 12")
-					.defineInRange("MINING_LADDER_LAYER", 12,-50,255);
+					.comment("Mining layer for the Instant Mining Ladder.\nDefault: -59")
+					.defineInRange("MINING_LADDER_LAYER", -59,-59,320);
 
 			XP_AMOUNT = builder
 					.comment("How much experience activating instant blocks gives you.\nDefault: 0")

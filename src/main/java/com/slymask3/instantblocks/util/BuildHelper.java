@@ -55,6 +55,9 @@ public class BuildHelper {
 		if(Config.Common.KEEP_BLOCKS.get() && getBlock instanceof InstantBlock) {
 			return;
 		}
+		if(world.dimension().equals(Level.NETHER) && block.equals(Blocks.WATER) && !Config.Common.ALLOW_WATER_IN_NETHER.get()) {
+			block = Blocks.AIR; //replace water with air in the nether
+		}
 		if(canSet(getBlock)) {
 			BlockState state = block.defaultBlockState();
 			if(block instanceof CrossCollisionBlock) {
@@ -124,11 +127,13 @@ public class BuildHelper {
 	public static void setColorBlock(Level world, int x, int y, int z, int color) {
 		setBlock(world, x, y, z, ModBlocks.COLOR.get());
 		try {
-			((ColorBlockEntity) world.getBlockEntity(new BlockPos(x, y, z))).color = color;
+			ColorBlockEntity entity = (ColorBlockEntity)world.getBlockEntity(new BlockPos(x, y, z));
+			if(entity != null) {
+				entity.color = color;
+			}
 		} catch(Exception e) {
 			InstantBlocks.LOGGER.info(e);
 		}
-		//world.markBlockForUpdate(x, y, z);
 	}
 
 	public static Block getBlock(Level world, int x, int y, int z) {
@@ -160,23 +165,6 @@ public class BuildHelper {
 		}
 	}
 
-	public static void build(Level world, int x, int y, int z, BlockState state, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
-		int z2 = z;
-		int x2 = x;
-		for(int yTimes = 0; yTimes < yTimesTotal; yTimes++) {
-			for(int zTimes = 0; zTimes < zTimesTotal; zTimes++) {
-				for(int xTimes = 0; xTimes < xTimesTotal; xTimes++) {
-					setBlock(world, x2, y, z2, state, 2);
-					z2++;
-				}
-				z2 = z;
-				x2++;
-			}
-			x2 = x;
-			y++;
-		}
-	}
-
 	public static void setBlockDirectional(Level world, int x, int y, int z, Block block, Direction direction, int forward, int back, int left, int right) {
 		setBlockDirectional(world, x, y, z, block, direction, forward, back, left, right, direction, 2);
 	}
@@ -198,10 +186,10 @@ public class BuildHelper {
     }
 
 	public static void buildDirectional(Level world, int x, int y, int z, Block block, Direction direction, int forward, int back, int left, int right, int forwardX, int backX, int leftX, int rightX, int upX, int downX) {
-		buildDirectional(world, x, y, z, block, direction, forward, back, left, right, forwardX, backX, leftX, rightX, upX, downX, null, 2);
+		buildDirectional(world, x, y, z, block, direction, forward, back, left, right, forwardX, backX, leftX, rightX, upX, downX, null, 2, false);
 	}
 
-	public static void buildDirectional(Level world, int x, int y, int z, Block block, Direction direction, int forward, int back, int left, int right, int forwardX, int backX, int leftX, int rightX, int upX, int downX, Direction directionBlock, int flag) {
+	public static void buildDirectional(Level world, int x, int y, int z, Block block, Direction direction, int forward, int back, int left, int right, int forwardX, int backX, int leftX, int rightX, int upX, int downX, Direction directionBlock, int flag, boolean setStone) {
 		int x1 = x, z1 = z, x2 = x, z2 = z;
 		int y1 = y;
 		int y2 = y1+upX-downX;
@@ -242,7 +230,11 @@ public class BuildHelper {
 			for (int j=0; j<zDif+1; j++) {
 				for (int k=0; k<xDif+1; k++) {
 
-					BuildHelper.setBlock(world,x_cur, y_cur, z_cur, block, directionBlock, flag);
+					if(setStone) {
+						setStone(world,x_cur, y_cur, z_cur);
+					} else {
+						setBlock(world,x_cur, y_cur, z_cur, block, directionBlock, flag);
+					}
 
 					if(Helper.isPositive(x1 - x2)) {
 						x_cur--;
@@ -269,7 +261,7 @@ public class BuildHelper {
 		}
 	}
     
-    public static void setColorBlockComplex(Level world, int x, int y, int z, BufferedImage img, int imgx, int imgy, Direction direction, int forwardBack, int leftRight, boolean rgb) {
+    public static void buildColorBlock(Level world, int x, int y, int z, BufferedImage img, int imgx, int imgy, Direction direction, int forwardBack, int leftRight, boolean rgb) {
 		int forward;
 		int back;
 		int left;
@@ -394,71 +386,7 @@ public class BuildHelper {
 	}
 
 	public static void buildStoneDirectional(Level world, int x, int y, int z, Direction direction, int forward, int back, int left, int right, int forwardX, int backX, int leftX, int rightX, int upX, int downX) {
-		int x1 = x, z1 = z, x2 = x, z2 = z;
-		int y1 = y;
-		int y2 = y1+upX-downX;
-		if(direction == Direction.SOUTH) {
-			x1 = x-left+right;
-			z1 = z-forward+back;
-			x2 = x1-leftX+rightX;
-			z2 = z1-forwardX+backX;
-		} else if(direction == Direction.WEST) {
-			x1 = x+forward-back;
-			z1 = z-left+right;
-			x2 = x1+forwardX-backX;
-			z2 = z1-leftX+rightX;
-		} else if(direction == Direction.NORTH) {
-			x1 = x+left-right;
-			z1 = z+forward-back;
-			x2 = x1+leftX-rightX;
-			z2 = z1+forwardX-backX;
-		} else if(direction == Direction.EAST) {
-			x1 = x-forward+back;
-			z1 = z+left-right;
-			x2 = x1-forwardX+backX;
-			z2 = z1+leftX-rightX;
-		}
-
-		int xDif = Helper.toPositive(x1 - x2);
-		int yDif = Helper.toPositive(y1 - y2);
-		int zDif = Helper.toPositive(z1 - z2);
-
-		int x_cur = x1;
-		int y_cur = y1;
-		int z_cur = z1;
-
-		int bx = x1;
-		int bz = z1;
-
-		for (int i=0; i<yDif+1; i++) {
-			for (int j=0; j<zDif+1; j++) {
-				for (int k=0; k<xDif+1; k++) {
-
-					setStone(world,x_cur, y_cur, z_cur);
-
-					if(Helper.isPositive(x1 - x2)) {
-						x_cur--;
-					} else {
-						x_cur++;
-					}
-				}
-				x_cur = bx;
-
-				if(Helper.isPositive(z1 - z2)) {
-					z_cur--;
-				} else {
-					z_cur++;
-				}
-			}
-			z_cur = bz;
-			x_cur = bx;
-
-			if(Helper.isPositive(y1 - y2)) {
-				y_cur--;
-			} else {
-				y_cur++;
-			}
-		}
+		buildDirectional(world, x, y, z, null, direction, forward, back, left, right, forwardX, backX, leftX, rightX, upX, downX, null, 2, true);
 	}
 
 	public static void buildCircle(Level world, int x, int y, int z, int radius, Block block) {

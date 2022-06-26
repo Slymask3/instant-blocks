@@ -110,6 +110,10 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 			world.addParticle(WHITE_DUST, (double)x - 0.2D, (double)y + 0.5D, (double)z + 0.5D, 0.0D, 0.0D, 0.0D);
 			world.addParticle(WHITE_DUST, (double)x + 0.5D, (double)y + 0.5D, (double)z - 0.2D, 0.0D, 0.0D, 0.0D);
 		}
+		if(world.dimension().equals(Level.NETHER) && blockReplace.equals(Blocks.WATER) && !Config.Common.ALLOW_WATER_IN_NETHER.get()) {
+			Helper.sendMessage(player, Strings.ERROR_WATER_DISABLED);
+			return false;
+		}
 		checkForBlock(world,x,y,z);
 		if(isSuction && coordsList.isEmpty()) {
 			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID);

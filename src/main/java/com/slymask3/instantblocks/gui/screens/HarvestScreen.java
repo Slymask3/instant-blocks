@@ -19,6 +19,7 @@ public class HarvestScreen extends InstantScreen {
 	public HarvestScreen(Player player, Level world, int x, int y, int z) {
 		super(player, world, x, y, z, "ib.gui.harvest.title");
 		this.tileEntity = (HarvestBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
+		this.setDoneText("ib.gui.harvest.done");
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.slymask3.instantblocks.gui.screens;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.SchematicPacket;
@@ -43,8 +44,22 @@ public class SchematicScreen extends InstantScreen {
 	public void init() {
 		super.init();
 
-		this.center = new Checkbox(this.width / 2 - 4 - 150, this.height / 4 + 4 + 12, 150, 20, new TranslatableComponent("ib.gui.schematic.center"), false);
-		this.ignoreAir = new Checkbox(this.width / 2 + 4, this.height / 4 + 4 + 12, 150, 20, new TranslatableComponent("ib.gui.schematic.ignore"), false);
+		this.center = new Checkbox(this.width / 2 - 4 - 150, this.height / 4 + 4 + 12, 150, 20, new TranslatableComponent("ib.gui.schematic.center"), tileEntity.center) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.center = this.selected();
+				InstantBlocks.LOGGER.info("center: " + tileEntity.center);
+				tileEntity.saveWithoutMetadata();
+			}
+		};
+		this.ignoreAir = new Checkbox(this.width / 2 + 4, this.height / 4 + 4 + 12, 150, 20, new TranslatableComponent("ib.gui.schematic.ignore"), tileEntity.ignoreAir) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.ignoreAir = this.selected();
+				InstantBlocks.LOGGER.info("ignoreAir: " + tileEntity.ignoreAir);
+				tileEntity.saveWithoutMetadata();
+			}
+		};
 
 		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 300+8, 20, new TextComponent("Input")) {
 			@Override
@@ -60,7 +75,7 @@ public class SchematicScreen extends InstantScreen {
 			}
 		};
 
-		this.schematicList = new SchematicList(this.width / 2 - 4 - 150, this.height / 4 + 42 + 12, 300+8, 62);
+		this.schematicList = new SchematicList(this.width / 2 - 4 - 150, this.height / 4 + 42 + 12, 302, 62);
 		this.addWidget(this.schematicList);
 
 		this.done.active = false;

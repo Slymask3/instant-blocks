@@ -8,11 +8,13 @@ import net.minecraft.world.level.block.state.BlockState;
 public class SchematicBlockEntity extends InstantBlockEntity {
 	public String schematic;
 	public boolean center;
+	public boolean ignoreAir;
 
 	public SchematicBlockEntity(BlockPos pos, BlockState state) {
 		super(ModTiles.SCHEMATIC.get(), pos, state);
 		this.schematic = "";
 		this.center = false;
+		this.ignoreAir = false;
 	}
 
 	@Override
@@ -20,6 +22,7 @@ public class SchematicBlockEntity extends InstantBlockEntity {
 		super.load(nbt);
 		schematic = nbt.getString("Schematic");
 		center = nbt.getBoolean("Center");
+		ignoreAir = nbt.getBoolean("IgnoreAir");
 	}
 
 	@Override
@@ -27,5 +30,6 @@ public class SchematicBlockEntity extends InstantBlockEntity {
 		super.saveAdditional(nbt);
 		nbt.putString("Schematic", schematic);
 		nbt.putBoolean("Center", center);
+		nbt.putBoolean("IgnoreAir", ignoreAir);
 	}
 }
