@@ -40,7 +40,12 @@ public class SkydiveScreen extends InstantScreen {
 			this.setRandom();
 		});
 
-		this.tp = new Checkbox(this.width / 2 + 4, this.height / 4 + 76 + 12, 150, 20, new TranslatableComponent("ib.gui.skydive.teleport"), true);
+		this.tp = new Checkbox(this.width / 2 + 4, this.height / 4 + 76 + 12, 150, 20, new TranslatableComponent("ib.gui.skydive.teleport"), tileEntity.teleport) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.teleport = this.selected();
+			}
+		};
 
 		EditBox radiusField = new EditBox(this.font, this.width / 2 - 4 - 100 - 12, this.height / 4 + 100 + 12, 110, 16, new TextComponent("radius"));
 		radiusField.setValue(String.valueOf(Config.Client.SKYDIVE_RADIUS.get()));

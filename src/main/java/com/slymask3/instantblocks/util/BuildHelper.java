@@ -113,7 +113,17 @@ public class BuildHelper {
 	}
 
 	public static void setBlock(Level world, int x, int y, int z, BlockState state, int flag) {
-		world.setBlock(new BlockPos(x,y,z),state,flag);
+		Block block = state.getBlock();
+		Block getBlock = getBlock(world,x,y,z);
+		if(Config.Common.KEEP_BLOCKS.get() && getBlock instanceof InstantBlock) {
+			return;
+		}
+		if(world.dimension().equals(Level.NETHER) && block.equals(Blocks.WATER) && !Config.Common.ALLOW_WATER_IN_NETHER.get()) {
+			state = Blocks.AIR.defaultBlockState(); //replace water with air in the nether
+		}
+		if(canSet(getBlock)) {
+			world.setBlock(new BlockPos(x,y,z),state,flag);
+		}
 	}
 
 	public static void setBlockLight(Level world, BlockPos pos, Block block, Direction direction) {
@@ -140,28 +150,21 @@ public class BuildHelper {
 		return world.getBlockState(new BlockPos(x,y,z)).getBlock();
 	}
 
-	public static void build(Level world, int x, int y, int z, Block block, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
-		build(world, x, y, z, block, null, 2, xTimesTotal, yTimesTotal, zTimesTotal);
+	public static void build(Level world, int x_start, int y_start, int z_start, Block block, int x_times, int y_times, int z_times) {
+		build(world, x_start, y_start, z_start, block, null, 2, x_times, y_times, z_times);
 	}
 	
-	public static void build(Level world, int x, int y, int z, Block block, Direction direction, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
-		build(world, x, y, z, block, direction, 2, xTimesTotal, yTimesTotal, zTimesTotal);
+	public static void build(Level world, int x_start, int y_start, int z_start, Block block, Direction direction, int x_times, int y_times, int z_times) {
+		build(world, x_start, y_start, z_start, block, direction, 2, x_times, y_times, z_times);
 	}
 
-	public static void build(Level world, int x, int y, int z, Block block, Direction direction, int flag, int xTimesTotal, int yTimesTotal, int zTimesTotal) {
-		int z2 = z;
-		int x2 = x;
-		for(int yTimes = 0; yTimes < yTimesTotal; yTimes++) {
-			for(int zTimes = 0; zTimes < zTimesTotal; zTimes++) {
-				for(int xTimes = 0; xTimes < xTimesTotal; xTimes++) {
-					setBlock(world, x2, y, z2, block, direction, flag);
-					z2++;
+	public static void build(Level world, int x_start, int y_start, int z_start, Block block, Direction direction, int flag, int x_times, int y_times, int z_times) {
+		for(int y=y_start; y<y_start+y_times; y++) {
+			for(int x=x_start; x<x_start+x_times; x++) {
+				for(int z=z_start; z<z_start+z_times; z++) {
+					setBlock(world, x, y, z, block, direction, flag);
 				}
-				z2 = z;
-				x2++;
 			}
-			x2 = x;
-			y++;
 		}
 	}
 
@@ -186,79 +189,16 @@ public class BuildHelper {
     }
 
 	public static void buildDirectional(Level world, int x, int y, int z, Block block, Direction direction, int forward, int back, int left, int right, int forwardX, int backX, int leftX, int rightX, int upX, int downX) {
-		buildDirectional(world, x, y, z, block, direction, forward, back, left, right, forwardX, backX, leftX, rightX, upX, downX, null, 2, false);
+		Directional builder = new Directional(world, x, y, z, direction, forward, back, left, right, forwardX, backX, leftX, rightX, upX, downX);
+		builder.setBlock(block);
+		builder.build();
 	}
 
 	public static void buildDirectional(Level world, int x, int y, int z, Block block, Direction direction, int forward, int back, int left, int right, int forwardX, int backX, int leftX, int rightX, int upX, int downX, Direction directionBlock, int flag, boolean setStone) {
-		int x1 = x, z1 = z, x2 = x, z2 = z;
-		int y1 = y;
-		int y2 = y1+upX-downX;
-		if(direction == Direction.SOUTH) {
-			x1 = x-left+right;
-			z1 = z-forward+back;
-			x2 = x1-leftX+rightX;
-			z2 = z1-forwardX+backX;
-		} else if(direction == Direction.WEST) {
-			x1 = x+forward-back;
-			z1 = z-left+right;
-			x2 = x1+forwardX-backX;
-			z2 = z1-leftX+rightX;
-		} else if(direction == Direction.NORTH) {
-			x1 = x+left-right;
-			z1 = z+forward-back;
-			x2 = x1+leftX-rightX;
-			z2 = z1+forwardX-backX;
-		} else if(direction == Direction.EAST) {
-			x1 = x-forward+back;
-			z1 = z+left-right;
-			x2 = x1-forwardX+backX;
-			z2 = z1+leftX-rightX;
-		}
-
-		int xDif = Helper.toPositive(x1 - x2);
-		int yDif = Helper.toPositive(y1 - y2);
-		int zDif = Helper.toPositive(z1 - z2);
-
-		int x_cur = x1;
-		int y_cur = y1;
-		int z_cur = z1;
-
-		int bx = x1;
-		int bz = z1;
-
-		for (int i=0; i<yDif+1; i++) {
-			for (int j=0; j<zDif+1; j++) {
-				for (int k=0; k<xDif+1; k++) {
-
-					if(setStone) {
-						setStone(world,x_cur, y_cur, z_cur);
-					} else {
-						setBlock(world,x_cur, y_cur, z_cur, block, directionBlock, flag);
-					}
-
-					if(Helper.isPositive(x1 - x2)) {
-						x_cur--;
-					} else {
-						x_cur++;
-					}
-				}
-				x_cur = bx;
-
-				if(Helper.isPositive(z1 - z2)) {
-					z_cur--;
-				} else {
-					z_cur++;
-				}
-			}
-			z_cur = bz;
-			x_cur = bx;
-
-			if(Helper.isPositive(y1 - y2)) {
-				y_cur--;
-			} else {
-				y_cur++;
-			}
-		}
+		Directional builder = new Directional(world, x, y, z, direction, forward, back, left, right, forwardX, backX, leftX, rightX, upX, downX);
+		builder.setBlock(block);
+		builder.setStone(setStone);
+		builder.build();
 	}
     
     public static void buildColorBlock(Level world, int x, int y, int z, BufferedImage img, int imgx, int imgy, Direction direction, int forwardBack, int leftRight, boolean rgb) {
@@ -386,28 +326,157 @@ public class BuildHelper {
 	}
 
 	public static void buildStoneDirectional(Level world, int x, int y, int z, Direction direction, int forward, int back, int left, int right, int forwardX, int backX, int leftX, int rightX, int upX, int downX) {
-		buildDirectional(world, x, y, z, null, direction, forward, back, left, right, forwardX, backX, leftX, rightX, upX, downX, null, 2, true);
+		Directional builder = new Directional(world, x, y, z, direction, forward, back, left, right, forwardX, backX, leftX, rightX, upX, downX);
+		builder.setStone(true);
+		builder.build();
 	}
 
-	public static void buildCircle(Level world, int x, int y, int z, int radius, Block block) {
-		buildCircle(world,x,y,z,radius,block,block);
+	private static boolean canSet(Block block) {
+		return block.defaultDestroyTime() >= 0F || block.equals(Blocks.AIR);
 	}
 
-	public static void buildCircle(Level world, int x, int y, int z, int radius, Block outer, Block inner) {
-		double distance;
-		for(int row = 0; row <= 2 * radius; row++) {
-			for(int col = 0; col <= 2 * radius; col++) {
-				distance = Math.sqrt((row - radius) * (row - radius) + (col - radius) * (col - radius));
-				if(distance > radius - 0.4 && distance < radius + 0.5) {
-					BuildHelper.setBlock(world,x+row-radius,y,z+col-radius,outer);
-				} else if(distance < radius - 0.3) {
-					BuildHelper.setBlock(world,x+row-radius,y,z+col-radius,inner);
+	public static class Directional {
+		Level world;
+		int x,y,z;
+		Direction direction;
+		int forward,back,left,right;
+		int forwardX,backX,leftX,rightX,upX,downX;
+		Block block;
+		Direction blockDirection;
+		int flag;
+		boolean setStone;
+		public Directional(Level world, int x, int y, int z, Direction direction, int forward, int back, int left, int right, int forwardX, int backX, int leftX, int rightX, int upX, int downX) {
+			this.world = world;
+			this.x = x;
+			this.y = y;
+			this.z = z;
+			this.direction = direction;
+			this.forward = forward;
+			this.back = back;
+			this.left = left;
+			this.right = right;
+			this.forwardX = forwardX;
+			this.backX = backX;
+			this.leftX = leftX;
+			this.rightX = rightX;
+			this.upX = upX;
+			this.downX = downX;
+			this.block = null;
+			this.blockDirection = null;
+			this.setStone = false;
+			this.flag = 2;
+		}
+		public void setBlock(Block block) {
+			this.block = block;
+		}
+		public void setStone(boolean setStone) {
+			this.setStone = setStone;
+		}
+		public void build() {
+			int x1 = x, z1 = z, x2 = x, z2 = z;
+			int y1 = y;
+			int y2 = y1+upX-downX;
+			if(direction == Direction.SOUTH) {
+				x1 = x-left+right;
+				z1 = z-forward+back;
+				x2 = x1-leftX+rightX;
+				z2 = z1-forwardX+backX;
+			} else if(direction == Direction.WEST) {
+				x1 = x+forward-back;
+				z1 = z-left+right;
+				x2 = x1+forwardX-backX;
+				z2 = z1-leftX+rightX;
+			} else if(direction == Direction.NORTH) {
+				x1 = x+left-right;
+				z1 = z+forward-back;
+				x2 = x1+leftX-rightX;
+				z2 = z1+forwardX-backX;
+			} else if(direction == Direction.EAST) {
+				x1 = x-forward+back;
+				z1 = z+left-right;
+				x2 = x1-forwardX+backX;
+				z2 = z1+leftX-rightX;
+			}
+
+			int xDif = Helper.toPositive(x1 - x2);
+			int yDif = Helper.toPositive(y1 - y2);
+			int zDif = Helper.toPositive(z1 - z2);
+
+			int x_cur = x1;
+			int y_cur = y1;
+			int z_cur = z1;
+
+			int bx = x1;
+			int bz = z1;
+
+			for (int i=0; i<yDif+1; i++) {
+				for (int j=0; j<zDif+1; j++) {
+					for (int k=0; k<xDif+1; k++) {
+
+						if(setStone) {
+							BuildHelper.setStone(world,x_cur, y_cur, z_cur);
+						} else {
+							BuildHelper.setBlock(world,x_cur, y_cur, z_cur, block, blockDirection, flag);
+						}
+
+						if(Helper.isPositive(x1 - x2)) {
+							x_cur--;
+						} else {
+							x_cur++;
+						}
+					}
+					x_cur = bx;
+
+					if(Helper.isPositive(z1 - z2)) {
+						z_cur--;
+					} else {
+						z_cur++;
+					}
+				}
+				z_cur = bz;
+				x_cur = bx;
+
+				if(Helper.isPositive(y1 - y2)) {
+					y_cur--;
+				} else {
+					y_cur++;
 				}
 			}
 		}
 	}
 
-	private static boolean canSet(Block block) {
-		return block.defaultDestroyTime() >= 0F || block.equals(Blocks.AIR);
+	public static class Circle {
+		Level world;
+		int x,y,z;
+		int radius;
+		Block outer, inner;
+		public Circle(Level world, int x, int y, int z, int radius, Block outer, Block inner) {
+			this.world = world;
+			this.x = x;
+			this.y = y;
+			this.z = z;
+			this.radius = radius;
+			this.outer = outer;
+			this.inner = inner;
+		}
+		public static Circle setup (Level world, int x, int y, int z, int radius, Block outer, Block inner) {
+			return new Circle(world, x, y, z, radius, outer, inner);
+		}
+		public static Circle setup (Level world, int x, int y, int z, int radius, Block block) {
+			return new Circle(world, x, y, z, radius, block, block);
+		}
+		public void build() {
+			double distance;
+			for(int row = 0; row <= 2 * radius; row++) {
+				for(int col = 0; col <= 2 * radius; col++) {
+					distance = Math.sqrt((row - radius) * (row - radius) + (col - radius) * (col - radius));
+					if(distance > radius - 0.4 && distance < radius + 0.5) {
+						BuildHelper.setBlock(world,x+row-radius,y,z+col-radius,outer);
+					} else if(distance < radius - 0.3) {
+						BuildHelper.setBlock(world,x+row-radius,y,z+col-radius,inner);
+					}
+				}
+			}
+		}
 	}
 }

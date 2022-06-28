@@ -6,11 +6,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class HarvestBlockEntity extends InstantBlockEntity {
-	boolean logOak, logSpruce, logBirch, logJungle, logAcacia, logDark;
-	boolean wheat, carrot, potato;
-	boolean cactus, pumpkin, melon, sugarcane;
-	boolean cocoa, mushroom, netherwart;
-	boolean replant;
+	public boolean logOak, logSpruce, logBirch, logJungle, logAcacia, logDark;
+	public boolean wheat, carrot, potato;
+	public boolean cactus, pumpkin, melon, sugarcane;
+	public boolean cocoa, mushroom, netherwart;
+	public boolean replant;
 
 	public HarvestBlockEntity(BlockPos pos, BlockState state) {
 		super(ModTiles.HARVEST.get(), pos, state);

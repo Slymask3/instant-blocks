@@ -777,16 +777,16 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 				BuildHelper.build(world, x-1, y, z-1, block, 4, 1, 4);
 			}
 			if(north) {
-				BuildHelper.build(world, x-1, y, z-1, block, 1, 4, 4);
+				BuildHelper.build(world, x-1, y, z-1, block, 4, 4, 1);
 			}
 			if(south) {
-				BuildHelper.build(world, x-1, y, z+2, block, 1, 4, 4);
+				BuildHelper.build(world, x-1, y, z+2, block, 4, 4, 1);
 			}
 			if(east) {
-				BuildHelper.build(world, x+2, y, z-1, block, 4, 4, 1);
+				BuildHelper.build(world, x+2, y, z-1, block, 1, 4, 4);
 			}
 			if(west) {
-				BuildHelper.build(world, x-1, y, z-1, block, 4, 4, 1);
+				BuildHelper.build(world, x-1, y, z-1, block, 1, 4, 4);
 			}
 		}
 	}

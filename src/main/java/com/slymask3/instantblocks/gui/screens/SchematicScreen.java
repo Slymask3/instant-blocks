@@ -3,7 +3,6 @@ package com.slymask3.instantblocks.gui.screens;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.SchematicPacket;
@@ -48,16 +47,12 @@ public class SchematicScreen extends InstantScreen {
 			public void onPress() {
 				super.onPress();
 				tileEntity.center = this.selected();
-				InstantBlocks.LOGGER.info("center: " + tileEntity.center);
-				tileEntity.saveWithoutMetadata();
 			}
 		};
 		this.ignoreAir = new Checkbox(this.width / 2 + 4, this.height / 4 + 4 + 12, 150, 20, new TranslatableComponent("ib.gui.schematic.ignore"), tileEntity.ignoreAir) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.ignoreAir = this.selected();
-				InstantBlocks.LOGGER.info("ignoreAir: " + tileEntity.ignoreAir);
-				tileEntity.saveWithoutMetadata();
 			}
 		};
 

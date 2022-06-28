@@ -7,14 +7,14 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TreeBlockEntity extends InstantBlockEntity {
 	public int type;
-	public boolean fullLog;
-	public boolean fullLeaves;
+	public boolean fullLog, fullLeaves, air;
 
 	public TreeBlockEntity(BlockPos pos, BlockState state) {
 		super(ModTiles.TREE.get(), pos, state);
 		this.type = 0;
-		this.fullLog = false;
-		this.fullLeaves = false;
+		this.fullLog = true;
+		this.fullLeaves = true;
+		this.air = true;
 	}
 
 	@Override
@@ -23,6 +23,7 @@ public class TreeBlockEntity extends InstantBlockEntity {
 		type = nbt.getInt("Type");
 		fullLog = nbt.getBoolean("FullLog");
 		fullLeaves = nbt.getBoolean("FullLeaves");
+		air = nbt.getBoolean("Air");
 	}
 
 	@Override
@@ -31,5 +32,6 @@ public class TreeBlockEntity extends InstantBlockEntity {
 		nbt.putInt("Type", type);
 		nbt.putBoolean("FullLog", fullLog);
 		nbt.putBoolean("FullLeaves", fullLeaves);
+		nbt.putBoolean("Air", air);
 	}
 }

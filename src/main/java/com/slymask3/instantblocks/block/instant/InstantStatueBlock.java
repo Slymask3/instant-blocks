@@ -87,8 +87,9 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 
 		Skin skin = getSkin(username);
-		BufferedImage img = skin.getImage();
-		if(img != null) {
+		if(skin != null) {
+			BufferedImage img = skin.getImage();
+
 			BuildHelper.setBlock(world,x, y, z, Blocks.AIR);
 
 			buildHead(world, x, y, z, img, direction, head, rgb);

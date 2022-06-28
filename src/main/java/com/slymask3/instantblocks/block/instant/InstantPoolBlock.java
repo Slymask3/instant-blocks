@@ -45,10 +45,10 @@ public class InstantPoolBlock extends InstantBlock {
 		BuildHelper.build(world, x-5, y-4, z-5, water, 11, 5, 11);
 		
 		/************************ Layer 1 : Stone Slab ************************/
-		BuildHelper.build(world, x-6, y+1, z-6, slab, 13, 1, 1);
-		BuildHelper.build(world, x+6, y+1, z-6, slab, 13, 1, 1);
-		BuildHelper.build(world, x-5, y+1, z-6, slab, 1, 1, 11);
-		BuildHelper.build(world, x-5, y+1, z+6, slab, 1, 1, 11);
+		BuildHelper.build(world, x-6, y+1, z-6, slab, 1, 1, 13);
+		BuildHelper.build(world, x+6, y+1, z-6, slab, 1, 1, 13);
+		BuildHelper.build(world, x-5, y+1, z-6, slab, 11, 1, 1);
+		BuildHelper.build(world, x-5, y+1, z+6, slab, 11, 1, 1);
 		
 		/************************ Layer -2 : Glowstone ************************/
 		BuildHelper.setBlock(world,x-6, y-2, z-4, glow);

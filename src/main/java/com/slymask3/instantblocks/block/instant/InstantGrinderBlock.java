@@ -52,16 +52,16 @@ public class InstantGrinderBlock extends InstantBlock {
 		BuildHelper.build(world, x-4, y-4, z-4, air, 9, 3, 9);
 
 		/************************ Layer -1 to 0 : Air (Spawn Room) ************************/
-		BuildHelper.build(world, x-4, y-1, z-4, air, 4, 2, 9);
-		BuildHelper.build(world, x-4, y-1, z+1, air, 4, 2, 9);
-		BuildHelper.build(world, x-4, y-1, z, air, 1, 2, 4);
-		BuildHelper.build(world, x+1, y-1, z, air, 1, 2, 4);
+		BuildHelper.build(world, x-4, y-1, z-4, air, 9, 2, 4);
+		BuildHelper.build(world, x-4, y-1, z+1, air, 9, 2, 4);
+		BuildHelper.build(world, x-4, y-1, z, air, 4, 2, 1);
+		BuildHelper.build(world, x+1, y-1, z, air, 4, 2, 1);
 
 		/************************ Layer 1 to 2 : Air (Spawn Room) ************************/
 		BuildHelper.build(world, x-4, y+1, z-4, air, 9, 2, 9);
 
 		/************************ Layer -4 to -1 : Air (Output Room) ************************/
-		BuildHelper.build(world, x+10, y-4, z-2, air, 5, 3, 6);
+		BuildHelper.build(world, x+10, y-4, z-2, air, 6, 3, 5);
 		
 		/************************ Layer -4 ************************/
 		BuildHelper.buildStone(world, x-5, y-4, z-5, 11, 1, 5);
@@ -177,9 +177,9 @@ public class InstantGrinderBlock extends InstantBlock {
 
 		/************************ Layer 19 to 20 : Stone (Top Room) ************************/
 		BuildHelper.build(world, x+7, y+19, z, air, 1, 2, 1);
-		BuildHelper.build(world, x+8, y+19, z-2, air, 5, 2, 1);
-		BuildHelper.build(world, x+9, y+19, z-2, air, 1, 2, 2);
-		BuildHelper.build(world, x+9, y+19, z+2, air, 1, 2, 2);
+		BuildHelper.build(world, x+8, y+19, z-2, air, 1, 2, 5);
+		BuildHelper.build(world, x+9, y+19, z-2, air, 2, 2, 1);
+		BuildHelper.build(world, x+9, y+19, z+2, air, 2, 2, 1);
 
 		/************************ Layer 19 (Top Room) ************************/
 		BuildHelper.setBlock(world,x+8, y+19, z, plate);

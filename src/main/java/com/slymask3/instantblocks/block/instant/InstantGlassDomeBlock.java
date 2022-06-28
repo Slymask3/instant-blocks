@@ -72,12 +72,12 @@ public class InstantGlassDomeBlock extends InstantBlock {
 		Block torch = Blocks.TORCH;
 		Block air = Blocks.AIR;
 
-		BuildHelper.buildCircle(world,x,y,z,4,stone);
-		BuildHelper.buildCircle(world,x,y+1,z,4,glass,air);
-		BuildHelper.buildCircle(world,x,y+2,z,4,glass,air);
-		BuildHelper.buildCircle(world,x,y+3,z,4,glass,air);
-		BuildHelper.buildCircle(world,x,y+4,z,3,glass,air);
-		BuildHelper.buildCircle(world,x,y+5,z,2,glass);
+		BuildHelper.Circle.setup(world,x,y,z,4,stone).build();
+		BuildHelper.Circle.setup(world,x,y+1,z,4,glass,air).build();
+		BuildHelper.Circle.setup(world,x,y+2,z,4,glass,air).build();
+		BuildHelper.Circle.setup(world,x,y+3,z,4,glass,air).build();
+		BuildHelper.Circle.setup(world,x,y+4,z,3,glass,air).build();
+		BuildHelper.Circle.setup(world,x,y+5,z,2,glass).build();
 
 		BuildHelper.setBlock(world,x-3,y+1,z,torch);
 		BuildHelper.setBlock(world,x,y+1,z+3,torch);

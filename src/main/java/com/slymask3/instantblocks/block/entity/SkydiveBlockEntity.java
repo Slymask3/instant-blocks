@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class SkydiveBlockEntity extends InstantBlockEntity {
 	public String[] color = new String[11];
 	public int[] colorCode = new int[11];
+	public boolean teleport;
 
 	public SkydiveBlockEntity(BlockPos pos, BlockState state) {
 		super(ModTiles.SKYDIVE.get(), pos, state);
@@ -17,6 +18,7 @@ public class SkydiveBlockEntity extends InstantBlockEntity {
 			this.color[i] = color;
 			this.colorCode[i] = ColorHelper.textToColor(color).getRGB();
 		}
+		this.teleport = true;
 	}
 
 	@Override
@@ -26,6 +28,7 @@ public class SkydiveBlockEntity extends InstantBlockEntity {
 			this.color[i] = nbt.getString("Color" + i);
 			this.colorCode[i] = nbt.getInt("ColorCode" + i);
 		}
+		this.teleport = nbt.getBoolean("Teleport");
 	}
 
 	@Override
@@ -35,6 +38,7 @@ public class SkydiveBlockEntity extends InstantBlockEntity {
 			nbt.putString("Color" + i, color[i]);
 			nbt.putInt("ColorCode" + i, colorCode[i]);
 		}
+		nbt.putBoolean("Teleport", teleport);
 	}
 	
 	public void setColorCode(int i, String input) {

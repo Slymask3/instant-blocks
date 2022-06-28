@@ -32,13 +32,48 @@ public class StatueScreen extends InstantScreen {
 		int y = this.height / 4 + 32;
 		int slot = 22;
 
-		this.head = new Checkbox(x_left, y, 150, 20, new TranslatableComponent("ib.gui.statue.head"), true);
-		this.body = new Checkbox(x_right, y, 150, 20, new TranslatableComponent("ib.gui.statue.body"), true);
-		this.armLeft = new Checkbox(x_left, y+(slot), 150, 20, new TranslatableComponent("ib.gui.statue.arm.left"), true);
-		this.armRight = new Checkbox(x_right, y+(slot), 150, 20, new TranslatableComponent("ib.gui.statue.arm.right"), true);
-		this.legLeft = new Checkbox(x_left, y+(slot*2), 150, 20, new TranslatableComponent("ib.gui.statue.leg.left"), true);
-		this.legRight = new Checkbox(x_right, y+(slot*2), 150, 20, new TranslatableComponent("ib.gui.statue.leg.right"), true);
-		this.rgbMode = new Checkbox(x_left, y+(slot*3), 150, 20, new TranslatableComponent("ib.gui.statue.rgb"), true);
+		this.head = new Checkbox(x_left, y, 150, 20, new TranslatableComponent("ib.gui.statue.head"), tileEntity.head) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.head = this.selected();
+			}
+		};
+		this.body = new Checkbox(x_right, y, 150, 20, new TranslatableComponent("ib.gui.statue.body"), tileEntity.body) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.body = this.selected();
+			}
+		};
+		this.armLeft = new Checkbox(x_left, y+(slot), 150, 20, new TranslatableComponent("ib.gui.statue.arm.left"), tileEntity.armLeft) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.armLeft = this.selected();
+			}
+		};
+		this.armRight = new Checkbox(x_right, y+(slot), 150, 20, new TranslatableComponent("ib.gui.statue.arm.right"), tileEntity.armRight) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.armRight = this.selected();
+			}
+		};
+		this.legLeft = new Checkbox(x_left, y+(slot*2), 150, 20, new TranslatableComponent("ib.gui.statue.leg.left"), tileEntity.legLeft) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.legLeft = this.selected();
+			}
+		};
+		this.legRight = new Checkbox(x_right, y+(slot*2), 150, 20, new TranslatableComponent("ib.gui.statue.leg.right"), tileEntity.legRight) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.legRight = this.selected();
+			}
+		};
+		this.rgbMode = new Checkbox(x_left, y+(slot*3), 150, 20, new TranslatableComponent("ib.gui.statue.rgb"), tileEntity.rgb) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.rgb = this.selected();
+			}
+		};
 
 		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 300+8, 20, new TextComponent("Input"));
 

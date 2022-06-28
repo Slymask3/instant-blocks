@@ -38,9 +38,24 @@ public class TreeScreen extends InstantScreen {
 	public void init() {
 		super.init();
 
-		this.fullLog = new Checkbox(this.width / 2 + 4, 50, 150, 20, new TranslatableComponent("ib.gui.tree.logs"), true);
-		this.fullLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, new TranslatableComponent("ib.gui.tree.leaves"), true);
-		this.air = new Checkbox(this.width / 2 + 4, 94, 150, 20, new TranslatableComponent("ib.gui.tree.air"), true);
+		this.fullLog = new Checkbox(this.width / 2 + 4, 50, 150, 20, new TranslatableComponent("ib.gui.tree.logs"), tileEntity.fullLog) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.fullLog = this.selected();
+			}
+		};
+		this.fullLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, new TranslatableComponent("ib.gui.tree.leaves"), tileEntity.fullLeaves) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.fullLeaves = this.selected();
+			}
+		};
+		this.air = new Checkbox(this.width / 2 + 4, 94, 150, 20, new TranslatableComponent("ib.gui.tree.air"), tileEntity.air) {
+			public void onPress() {
+				super.onPress();
+				tileEntity.air = this.selected();
+			}
+		};
 
 		this.treeList = new TreeList(this.width / 2 - 4 - 150,50,144,120);
 		this.addWidget(this.treeList);
