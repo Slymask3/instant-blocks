@@ -77,7 +77,7 @@ public class GuiStatue extends GuiInstant {
 		InstantBlocks.packetPipeline.sendToServer(new PacketStatue(this.world, this.x, this.y, this.z, input.getText(), head.isChecked(), body.isChecked(), armLeft.isChecked(), armRight.isChecked(), legLeft.isChecked(), legRight.isChecked(), rgbMode.isChecked()));
 
 		BlockInstantStatue block = (BlockInstantStatue) BuildHelper.getBlock(world,x,y,z);
-		if(block.getImage(input.getText()) != null) {
+		if(block.getSkin(input.getText()) != null) {
 			block.setCreateMessage(Strings.CREATE_STATUE.replace("%username%",input.getText()));
 			block.afterBuild(world,x,y,z,player);
 		} else {

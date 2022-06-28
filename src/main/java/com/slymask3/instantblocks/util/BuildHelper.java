@@ -86,11 +86,11 @@ public class BuildHelper {
     	if(metaDirection==0) {
     		setBlock(world, x-left+right, y, z-forward+back, block, meta, flag);
 		} else if(metaDirection==1) {
-			setBlock(world, x+forward-back, y, z+left-right, block, meta, flag);
+			setBlock(world, x+forward-back, y, z-left+right, block, meta, flag);
 		} else if(metaDirection==2) {
 			setBlock(world, x+left-right, y, z+forward-back, block, meta, flag);
 		} else if(metaDirection==3) {
-			setBlock(world, x-forward+back, y, z-left+right, block, meta, flag);
+			setBlock(world, x-forward+back, y, z+left-right, block, meta, flag);
 		}
     }
 
@@ -106,12 +106,12 @@ public class BuildHelper {
 			x1 = x-left+right;
 			z1 = z-forward+back;
 			x2 = x1-leftX+rightX;
-			z2 = z1-forward+back;
+			z2 = z1-forwardX+backX;
 		} else if(metaDirection == 1) {
 			x1 = x+forward-back;
-			z1 = z+left-right;
+			z1 = z-left+right;
 			x2 = x1+forwardX-backX;
-			z2 = z1+leftX-rightX;
+			z2 = z1-leftX+rightX;
 		} else if(metaDirection == 2) {
 			x1 = x+left-right;
 			z1 = z+forward-back;
@@ -119,9 +119,9 @@ public class BuildHelper {
 			z2 = z1+forwardX-backX;
 		} else if(metaDirection == 3) {
 			x1 = x-forward+back;
-			z1 = z-left+right;
+			z1 = z+left-right;
 			x2 = x1-forwardX+backX;
-			z2 = z1-leftX+rightX;
+			z2 = z1+leftX-rightX;
 		}
 
 		int xDif = IBHelper.toPositive(x1 - x2);
@@ -156,7 +156,6 @@ public class BuildHelper {
 				}
 			}
 			z_cur = bz;
-			x_cur = bx;
 
 			if(IBHelper.isPositive(y1 - y2)) {
 				y_cur--;

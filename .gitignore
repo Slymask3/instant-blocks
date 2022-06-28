@@ -1,6 +1,5 @@
 /\.gradle/
 /\.idea/
 /build/
-/gradle/
-/minecraft/
+/run/
 /gradlew
