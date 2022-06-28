@@ -1,6 +1,6 @@
 Instant Blocks for 1.18.2
 =============
-Adds blocks that generate certain structures when activated.
+This mod adds 'Instant Blocks' to the game. These blocks could be obtained from crafting, dungeon chests, village chests, etc. Each block generates a different structure upon right-clicking on the block with an Instant Wand.
 
 <b>CurseForge:</b> https://www.curseforge.com/minecraft/mc-mods/instant-blocks
 

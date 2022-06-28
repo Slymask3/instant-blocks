@@ -89,15 +89,15 @@ public class InstantLightBlock extends InstantBlock {
 
     private void placeTorch(Level world, BlockPos pos) {
         if(world.getBlockState(pos.below()).isFaceSturdy(world,pos,Direction.UP)) {
-            BuildHelper.setBlockLight(world,pos,Blocks.TORCH, Direction.UP);
+            BuildHelper.setBlock(world,pos,Blocks.TORCH, Direction.UP);
         } else if(world.getBlockState(pos.north()).isFaceSturdy(world,pos,Direction.SOUTH)) {
-            BuildHelper.setBlockLight(world,pos,Blocks.WALL_TORCH,Direction.SOUTH);
+            BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.SOUTH);
         } else if(world.getBlockState(pos.east()).isFaceSturdy(world,pos,Direction.WEST)) {
-            BuildHelper.setBlockLight(world,pos,Blocks.WALL_TORCH,Direction.WEST);
+            BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.WEST);
         } else if(world.getBlockState(pos.south()).isFaceSturdy(world,pos,Direction.NORTH)) {
-            BuildHelper.setBlockLight(world,pos,Blocks.WALL_TORCH,Direction.NORTH);
+            BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.NORTH);
         } else if(world.getBlockState(pos.west()).isFaceSturdy(world,pos,Direction.EAST)) {
-            BuildHelper.setBlockLight(world,pos,Blocks.WALL_TORCH,Direction.EAST);
+            BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.EAST);
         }
         //world.getLightEngine().updateSectionStatus(pos,true);
         //world.getLightEngine().enableLightSources(new ChunkPos(pos),true);

@@ -61,7 +61,7 @@ public class InstantMiningLadderBlock extends InstantBlock {
 		}
 
 		BuildHelper.setBlock(world,x, layer, z, air); //MIDDLE AIR
-		BuildHelper.setBlockLight(world,new BlockPos(x,layer+1,z),Blocks.WALL_TORCH,direction); //MIDDLE TORCH
+		BuildHelper.setBlock(world,new BlockPos(x,layer+1,z),Blocks.WALL_TORCH,direction); //MIDDLE TORCH
 		BuildHelper.setStone(world,x, layer+2, z); //ABOVE MIDDLE TORCH
 		BuildHelper.setBlockDirectional(world,x, layer+2, z, water,direction,0,0,0,1); //WATER
 		BuildHelper.setBlockDirectional(world,x, layer+1, z, sign, direction, 0,0,0,1,directionSign);
