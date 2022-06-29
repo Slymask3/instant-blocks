@@ -5,6 +5,7 @@ import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
+import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -102,13 +103,8 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
-		if(isSuction && Config.Client.SHOW_EFFECTS.get()) {
-			world.addParticle(WHITE_DUST, (double)x + 0.5D, (double)y + 1.2D, (double)z + 0.5D, 0.0D, 0.0D, 0.0D);
-			world.addParticle(WHITE_DUST, (double)x + 1.2D, (double)y + 0.5D, (double)z + 0.5D, 0.0D, 0.0D, 0.0D);
-			world.addParticle(WHITE_DUST, (double)x + 0.5D, (double)y + 0.5D, (double)z + 1.2D, 0.0D, 0.0D, 0.0D);
-			world.addParticle(WHITE_DUST, (double)x + 0.5D, (double)y - 0.2D, (double)z + 0.5D, 0.0D, 0.0D, 0.0D);
-			world.addParticle(WHITE_DUST, (double)x - 0.2D, (double)y + 0.5D, (double)z + 0.5D, 0.0D, 0.0D, 0.0D);
-			world.addParticle(WHITE_DUST, (double)x + 0.5D, (double)y + 0.5D, (double)z - 0.2D, 0.0D, 0.0D, 0.0D);
+		if(isSuction) {
+			Helper.sendMessage(player, "","",x,y,z,ClientHelper.Particles.NO_LIQUID);
 		}
 		if(world.dimension().equals(Level.NETHER) && blockReplace.equals(Blocks.WATER) && !Config.Common.ALLOW_WATER_IN_NETHER.get()) {
 			Helper.sendMessage(player, Strings.ERROR_WATER_DISABLED);

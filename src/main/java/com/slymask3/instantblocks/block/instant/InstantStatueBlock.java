@@ -6,9 +6,9 @@ import com.google.gson.JsonObject;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.StatueBlockEntity;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.reference.ScreenID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
+import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -37,7 +37,7 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 				.strength(1.5F, 2000F)
 				.sound(SoundType.WOOD)
 		, Config.Common.DISABLE_STATUE);
-		setScreenID(ScreenID.STATUE);
+		setScreen(ClientHelper.Screen.STATUE);
 		setDirectional(true);
 	}
 

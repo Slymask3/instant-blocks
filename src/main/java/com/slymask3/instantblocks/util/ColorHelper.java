@@ -26,20 +26,6 @@ public class ColorHelper {
 		new VanillaColor(new Color(150,52,48), Blocks.RED_WOOL),
 		new VanillaColor(new Color(25,22,22), Blocks.BLACK_WOOL)
 	};
-
-	public static String colorEveryWord(String msg, String color) {
-	    StringBuilder builder = new StringBuilder(msg.length());
-		builder.append(color);
-	    for(int i = 0; i < msg.length(); i++) {
-	        char c = msg.charAt(i);
-			if(c == ' ') {
-				builder.append(" ").append(color);
-			} else {
-				builder.append(c);
-			}
-	    }
-	    return builder.toString();
-	}
 	
 	public static Block getWoolColor(Color color) {
 		VanillaColor inputColor = new VanillaColor(color);

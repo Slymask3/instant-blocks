@@ -16,10 +16,10 @@ public class ClientPacketHandler {
     public static void handle(MessagePacket message, Supplier<NetworkEvent.Context> context) {
         Player player = Minecraft.getInstance().player;
         if(player != null) {
-            if(message.effects) {
+            if(message.particles != ClientHelper.Particles.NONE.ordinal()) {
                 Level world = player.getLevel();
-                ClientHelper.playSound(world, message.x, message.y, message.z);
-                ClientHelper.showParticles(world, message.x, message.y, message.z);
+                ClientHelper.playSound(world, message.x, message.y, message.z, ClientHelper.Particles.values()[message.particles]);
+                ClientHelper.showParticles(world, message.x, message.y, message.z, ClientHelper.Particles.values()[message.particles]);
             }
             if(!message.message.isEmpty()) {
                 ClientHelper.sendMessage(player, message.message, message.variable);

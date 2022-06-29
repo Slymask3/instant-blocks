@@ -110,20 +110,20 @@ public class Helper {
 	}
 
 	public static void sendMessage(Player player, String message) {
-		sendMessage(player, message, "", 0, 0, 0, false);
+		sendMessage(player, message, "", 0, 0, 0, ClientHelper.Particles.NONE);
 	}
 
 	public static void sendMessage(Player player, String message, String variable) {
-		sendMessage(player, message, variable, 0, 0, 0, false);
+		sendMessage(player, message, variable, 0, 0, 0, ClientHelper.Particles.NONE);
 	}
 
 	public static void sendMessage(Player player, String message, String variable, int x, int y, int z) {
-		sendMessage(player, message, variable, x, y, z, true);
+		sendMessage(player, message, variable, x, y, z, ClientHelper.Particles.GENERATE);
 	}
 
-	public static void sendMessage(Player player, String message, String variable, int x, int y, int z, boolean effects) {
+	public static void sendMessage(Player player, String message, String variable, int x, int y, int z, ClientHelper.Particles particles) {
 		if(isServer(player.getLevel())) {
-			PacketHandler.sendToClient((ServerPlayer)player,new MessagePacket(message,variable,x,y,z,effects));
+			PacketHandler.sendToClient((ServerPlayer)player,new MessagePacket(message,variable,x,y,z,particles.ordinal()));
 		}
 	}
 

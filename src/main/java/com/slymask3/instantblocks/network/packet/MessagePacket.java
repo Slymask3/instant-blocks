@@ -12,15 +12,15 @@ public class MessagePacket {
 	public String message;
 	public String variable;
 	public int x,y,z;
-	public boolean effects;
+	public int particles;
 
-	public MessagePacket(String message, String variable, int x, int y, int z, boolean effects) {
+	public MessagePacket(String message, String variable, int x, int y, int z, int particles) {
 		this.message = message;
 		this.variable = variable;
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.effects = effects;
+		this.particles = particles;
 	}
 
 	public static void encode(MessagePacket message, FriendlyByteBuf buffer) {
@@ -29,7 +29,7 @@ public class MessagePacket {
 		buffer.writeInt(message.x);
 		buffer.writeInt(message.y);
 		buffer.writeInt(message.z);
-		buffer.writeBoolean(message.effects);
+		buffer.writeInt(message.particles);
 	}
 
 	public static MessagePacket decode(FriendlyByteBuf buffer) {
@@ -38,8 +38,8 @@ public class MessagePacket {
 		int x = buffer.readInt();
 		int y = buffer.readInt();
 		int z = buffer.readInt();
-		boolean effects = buffer.readBoolean();
-		return new MessagePacket(message,variable,x,y,z,effects);
+		int particles = buffer.readInt();
+		return new MessagePacket(message,variable,x,y,z,particles);
 	}
 
 	public static class Handler {

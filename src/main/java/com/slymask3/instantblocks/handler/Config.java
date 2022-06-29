@@ -31,6 +31,7 @@ public class Config {
 		public static IntValue WEIGHT_POTATOES;
 		public static IntValue WEIGHT_CARROTS;
 		public static IntValue WEIGHT_BEETROOTS;
+		public static IntValue TREE_SIZE;
 		public static BooleanValue DISABLE_WOODEN_HOUSE;
 		public static BooleanValue DISABLE_MINING_LADDER;
 		public static BooleanValue DISABLE_GLASS_DOME;
@@ -104,6 +105,10 @@ public class Config {
 			XP_AMOUNT = builder
 					.comment("How much experience activating instant blocks gives you.\nDefault: 0")
 					.defineInRange("XP_AMOUNT", 0,0,10000);
+
+			TREE_SIZE = builder
+					.comment("Block size for the huge tree.\nDefault: 4")
+					.defineInRange("TREE_SIZE", 4,1,24);
 
 			builder.pop();
 
@@ -339,7 +344,8 @@ public class Config {
 	public static class Client {
 		public static BooleanValue SHOW_MESSAGES;
 		public static BooleanValue SHOW_EFFECTS;
-		public static ConfigValue<String> SOUND;
+		public static ConfigValue<String> SOUND_GENERATE;
+		public static ConfigValue<String> SOUND_NO_LIQUID;
 		public static IntValue SKYDIVE_RADIUS;
 
 		Client(ForgeConfigSpec.Builder builder) {
@@ -353,9 +359,13 @@ public class Config {
 					.comment("Show particle effects.\nDefault: true")
 					.define("SHOW_EFFECTS", true);
 
-			SOUND = builder
+			SOUND_GENERATE = builder
 					.comment("Sound that is played on activation.\nList of sounds can be found here: https://www.digminecraft.com/lists/sound_list_pc.php or by using the /playsound command in-game.\nDefault: entity.player.levelup")
-					.define("SOUND", "entity.player.levelup");
+					.define("SOUND_GENERATE", "entity.player.levelup");
+
+			SOUND_NO_LIQUID = builder
+					.comment("Sound that is played when no liquid is found.\nList of sounds can be found here: https://www.digminecraft.com/lists/sound_list_pc.php or by using the /playsound command in-game.\nDefault: entity.player.levelup")
+					.define("SOUND_NO_LIQUID", "entity.panda.sneeze");
 
 			SKYDIVE_RADIUS = builder
 					.comment("Default radius for the Instant Rainbow Skydive GUI.\nDefault: 5")

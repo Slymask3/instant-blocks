@@ -31,7 +31,6 @@ public class InstantGrinderBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Block stone = Blocks.STONE;
 		Block water = Blocks.WATER;
 		Block torch = Blocks.WALL_TORCH;
 		Block chest = Blocks.CHEST;

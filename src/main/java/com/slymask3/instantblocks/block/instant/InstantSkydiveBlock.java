@@ -4,9 +4,9 @@ import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SkydiveBlockEntity;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
-import com.slymask3.instantblocks.reference.ScreenID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
+import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.ColorHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
@@ -31,7 +31,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 				.strength(1.5F, 2000F)
 				.sound(SoundType.WOOL)
 		, Config.Common.DISABLE_SKYDIVE);
-		setScreenID(ScreenID.SKYDIVE);
+		setScreen(ClientHelper.Screen.SKYDIVE);
 		setCreateMessage(Strings.CREATE_SKYDIVE);
 		setDirectional(true);
     }

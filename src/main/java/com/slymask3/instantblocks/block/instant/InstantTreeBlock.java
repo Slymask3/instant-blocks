@@ -4,9 +4,9 @@ import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.TreeBlockEntity;
 import com.slymask3.instantblocks.gui.screens.TreeScreen;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.reference.ScreenID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
+import com.slymask3.instantblocks.util.ClientHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -29,7 +29,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 				.noCollission()
 				.instabreak()
 		, Config.Common.DISABLE_TREE);
-		setScreenID(ScreenID.TREE);
+		setScreen(ClientHelper.Screen.TREE);
 	}
 
 	@Nullable
@@ -42,751 +42,743 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		return Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
 	}
 	
-	public boolean build(Level world, int x, int y, int z, int type, boolean fullLog, boolean fullLeaves, boolean air) {
-		if(type == 0) { //IF OAK
-			buildOak(world, x, y, z, Blocks.OAK_LOG, Blocks.OAK_LEAVES, fullLog, fullLeaves, air);
-		} else if(type == 1) { //IF SPRUCE
-			buildSpruce(world, x, y, z, Blocks.SPRUCE_LOG, Blocks.SPRUCE_LEAVES, fullLog, fullLeaves, air);
-		} else if(type == 2) { //IF BIRCH
-			buildBirch(world, x, y, z, Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES, fullLog, fullLeaves, air);
-		} else if(type == 3) { //IF JUNGLE
-			buildJungle(world, x, y, z, Blocks.JUNGLE_LOG, Blocks.JUNGLE_LEAVES, fullLog, fullLeaves, air);
-		} else if(type == 4) { //IF ACACIA
-			buildAcacia(world, x, y, z, Blocks.ACACIA_LOG, Blocks.ACACIA_LEAVES, fullLog, fullLeaves, air);
-		} else if(type == 5) { //IF DARK OAK
-			buildDarkOak(world, x, y, z, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_LEAVES, fullLog, fullLeaves, air);
-		} else if(type == 6) { //IF GLASS
-			buildOak(world, x, y, z, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, fullLog, fullLeaves, air);
+	public boolean build(Level world, int x_center, int y, int z_center, int type, boolean fullLog, boolean fullLeaves, boolean air) {
+		int size = Config.Common.TREE_SIZE.get();
+		int half = (int)Math.floor(size / 2);
+		int x = x_center - half;
+		int z = z_center - half;
+		switch(type) {
+			case 0 -> buildOak(world, x, y, z, Blocks.OAK_LOG, Blocks.OAK_LEAVES, size, fullLog, fullLeaves, air);
+			case 1 -> buildSpruce(world, x, y, z, Blocks.SPRUCE_LOG, Blocks.SPRUCE_LEAVES, size, fullLog, fullLeaves, air);
+			case 2 -> buildBirch(world, x, y, z, Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES, size, fullLog, fullLeaves, air);
+			case 3 -> buildJungle(world, x, y, z, Blocks.JUNGLE_LOG, Blocks.JUNGLE_LEAVES, size, fullLog, fullLeaves, air);
+			case 4 -> buildAcacia(world, x, y, z, Blocks.ACACIA_LOG, Blocks.ACACIA_LEAVES, size, fullLog, fullLeaves, air);
+			case 5 -> buildDarkOak(world, x, y, z, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_LEAVES, size, fullLog, fullLeaves, air);
+			case 6 -> buildOak(world, x, y, z, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, size, fullLog, fullLeaves, air);
 		}
 		setCreateMessage(Strings.CREATE_TREE, TreeScreen.treeToString(type));
 		return true;
 	}
 
-	private void buildOak(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
-		/************************************************************* up   down  north south east  west */
-		buildLog(world, x+4*0, y+4*0, z+4*0, log, fullLog, air, false, true, true, true, true, true);
-		buildLog(world, x+4*0, y+4*1, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*2, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*3, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*4, z+4*0, log, fullLog, air, true, false, true, true, true, true);
+	private void buildOak(Level world, int x, int y, int z, Block log, Block leaves, int size, boolean fullLog, boolean fullLeaves, boolean air) {
+		buildLog(world, x+size*0, y+size*0, z+size*0, log, size, fullLog, air, false, true, true, true, true, true);
+		buildLog(world, x+size*0, y+size*1, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*2, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*3, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*4, z+size*0, log, size, fullLog, air, true, false, true, true, true, true);
 		
 		/** first layer **/
-		buildLeaves(world, x+4*2, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+4*2, y+4*2, z+4*0, leaves, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+4*2, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, true, false, true, false);
 		
-		buildLeaves(world, x+4*1, y+4*2, z+4*2, leaves, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+4*1, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*2, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*2, z-4*2, leaves, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size*1, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, true, false);
+		buildLeaves(world, x+size*1, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, true, false);
 		
-		buildLeaves(world, x+4*0, y+4*2, z+4*2, leaves, fullLeaves, air, false, true, false, true, false, false);
-		buildLeaves(world, x+4*0, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*2, z-4*2, leaves, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, false, false);
 
-		buildLeaves(world, x-4*1, y+4*2, z+4*2, leaves, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-4*1, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*2, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*2, z-4*2, leaves, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x-size*1, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, false, false);
 
-		buildLeaves(world, x-4*2, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-4*2, y+4*2, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*2, z-4*2, leaves, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
 		
 		/** second layer **/
-		buildLeaves(world, x+4*2, y+4*3, z+4*1, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*2, y+4*3, z+4*0, leaves, fullLeaves, air, true, false, false, false, true, false);
-		buildLeaves(world, x+4*2, y+4*3, z-4*1, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 		
-		buildLeaves(world, x+4*1, y+4*3, z+4*2, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*1, y+4*3, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*3, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*3, z-4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*3, z-4*2, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*1, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*1, y+size*3, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*3, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*3, z-size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 		
-		buildLeaves(world, x+4*0, y+4*3, z+4*2, leaves, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x+4*0, y+4*3, z+4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*3, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*3, z-4*2, leaves, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x+size*0, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x+size*0, y+size*3, z+size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*3, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, false);
 
-		buildLeaves(world, x-4*1, y+4*3, z+4*2, leaves, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x-4*1, y+4*3, z+4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*3, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*3, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*3, z-4*2, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*1, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x-size*1, y+size*3, z+size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*3, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*3, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 
-		buildLeaves(world, x-4*2, y+4*3, z+4*2, leaves, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-4*2, y+4*3, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*3, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*3, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 		
 		/** third layer **/
-		buildLeaves(world, x+4*1, y+4*4, z+4*0, leaves, fullLeaves, air, false, false, true, true, true, false);
+		buildLeaves(world, x+size*1, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, false, true, true, true, false);
 
-		buildLeaves(world, x+4*0, y+4*4, z+4*1, leaves, fullLeaves, air, false, false, false, true, true, false);
-		buildLeaves(world, x+4*0, y+4*4, z-4*1, leaves, fullLeaves, air, false, false, true, false, true, false);
+		buildLeaves(world, x+size*0, y+size*4, z+size*1, leaves, size, fullLeaves, air, false, false, false, true, true, false);
+		buildLeaves(world, x+size*0, y+size*4, z-size*1, leaves, size, fullLeaves, air, false, false, true, false, true, false);
 
-		buildLeaves(world, x-4*1, y+4*4, z+4*1, leaves, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-4*1, y+4*4, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, true);
-		buildLeaves(world, x-4*1, y+4*4, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*1, y+size*4, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, false, true);
+		buildLeaves(world, x-size*1, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, true);
+		buildLeaves(world, x-size*1, y+size*4, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 		
 		/** fourth layer **/
-		buildLeaves(world, x+4*1, y+4*5, z+4*0, leaves, fullLeaves, air, true, false, true, true, true, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, false, true, true, true, false);
 
-		buildLeaves(world, x+4*0, y+4*5, z+4*1, leaves, fullLeaves, air, true, false, false, true, true, true);
-		buildLeaves(world, x+4*0, y+4*5, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z-4*1, leaves, fullLeaves, air, true, false, true, false, true, true);
+		buildLeaves(world, x+size*0, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, true, true);
+		buildLeaves(world, x+size*0, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, true, true);
 
-		buildLeaves(world, x-4*1, y+4*5, z+4*0, leaves, fullLeaves, air, true, false, true, true, false, true);
+		buildLeaves(world, x-size*1, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, false, true, true, false, true);
 	}
 
-	private void buildSpruce(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
-		/************************************************************* up   down  north south east  west */
-		buildLog(world, x+4*0, y+4*0, z+4*0, log, fullLog, air, false, true, true, true, true, true);
-		buildLog(world, x+4*0, y+4*1, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*2, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*3, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*4, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*5, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*6, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*7, z+4*0, log, fullLog, air, true, false, true, true, true, true);
+	private void buildSpruce(Level world, int x, int y, int z, Block log, Block leaves, int size, boolean fullLog, boolean fullLeaves, boolean air) {
+		buildLog(world, x+size*0, y+size*0, z+size*0, log, size, fullLog, air, false, true, true, true, true, true);
+		buildLog(world, x+size*0, y+size*1, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*2, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*3, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*4, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*5, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*6, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*7, z+size*0, log, size, fullLog, air, true, false, true, true, true, true);
 		
 		/** first layer **/
-		buildLeaves(world, x+4*3, y+4*2, z+4*2, leaves, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+4*3, y+4*2, z+4*1, leaves, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+4*3, y+4*2, z+4*0, leaves, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+4*3, y+4*2, z-4*1, leaves, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+4*3, y+4*2, z-4*2, leaves, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*3, y+size*2, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, true, false);
+		buildLeaves(world, x+size*3, y+size*2, z+size*1, leaves, size, fullLeaves, air, true, true, false, false, true, false);
+		buildLeaves(world, x+size*3, y+size*2, z+size*0, leaves, size, fullLeaves, air, true, true, false, false, true, false);
+		buildLeaves(world, x+size*3, y+size*2, z-size*1, leaves, size, fullLeaves, air, true, true, false, false, true, false);
+		buildLeaves(world, x+size*3, y+size*2, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, true, false);
 
-		buildLeaves(world, x+4*2, y+4*2, z+4*3, leaves, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+4*2, y+4*2, z+4*2, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x+4*2, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*2, y+4*2, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*2, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*2, y+4*2, z-4*2, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x+4*2, y+4*2, z-4*3, leaves, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*2, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*2, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, true, false);
 
-		buildLeaves(world, x+4*1, y+4*2, z+4*3, leaves, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x+4*1, y+4*2, z+4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*2, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*2, z-4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*2, z-4*3, leaves, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, false);
 
-		buildLeaves(world, x+4*0, y+4*2, z+4*3, leaves, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x+4*0, y+4*2, z+4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*2, z-4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*2, z-4*3, leaves, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, false);
 
-		buildLeaves(world, x-4*1, y+4*2, z+4*3, leaves, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x-4*1, y+4*2, z+4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*2, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*2, z-4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*2, z-4*3, leaves, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, false);
 
-		buildLeaves(world, x-4*2, y+4*2, z+4*3, leaves, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-4*2, y+4*2, z+4*2, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*2, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*2, z-4*2, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*2, z-4*3, leaves, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z+size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*2, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*2, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*2, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, true);
 
-		buildLeaves(world, x-4*3, y+4*2, z+4*2, leaves, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-4*3, y+4*2, z+4*1, leaves, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-4*3, y+4*2, z+4*0, leaves, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-4*3, y+4*2, z-4*1, leaves, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-4*3, y+4*2, z-4*2, leaves, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*3, y+size*2, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-size*3, y+size*2, z+size*1, leaves, size, fullLeaves, air, true, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*2, z+size*0, leaves, size, fullLeaves, air, true, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*2, z-size*1, leaves, size, fullLeaves, air, true, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*2, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
 		
 		/** second layer **/
-		buildLeaves(world, x+4*2, y+4*3, z+4*1, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*2, y+4*3, z+4*0, leaves, fullLeaves, air, true, false, false, false, true, false);
-		buildLeaves(world, x+4*2, y+4*3, z-4*1, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 
-		buildLeaves(world, x+4*1, y+4*3, z+4*2, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*1, y+4*3, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*3, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*3, z-4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*3, z-4*2, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*1, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*1, y+size*3, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*3, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*3, z-size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 
-		buildLeaves(world, x+4*0, y+4*3, z+4*2, leaves, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x+4*0, y+4*3, z+4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*3, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*3, z-4*2, leaves, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x+size*0, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x+size*0, y+size*3, z+size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*3, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, false);
 
-		buildLeaves(world, x-4*1, y+4*3, z+4*2, leaves, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-4*1, y+4*3, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*3, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*3, z-4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*3, z-4*2, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*1, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, true);
+		buildLeaves(world, x-size*1, y+size*3, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*3, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*3, z-size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 
-		buildLeaves(world, x-4*2, y+4*3, z+4*1, leaves, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-4*2, y+4*3, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*3, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 
 		/** third layer **/
-		buildLeaves(world, x+4*1, y+4*4, z+4*0, leaves, fullLeaves, air, false, false, true, true, true, false);
+		buildLeaves(world, x+size*1, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, false, true, true, true, false);
 
-		buildLeaves(world, x+4*0, y+4*4, z+4*1, leaves, fullLeaves, air, false, false, false, true, true, true);
-		buildLeaves(world, x+4*0, y+4*4, z-4*1, leaves, fullLeaves, air, false, false, true, false, true, true);
+		buildLeaves(world, x+size*0, y+size*4, z+size*1, leaves, size, fullLeaves, air, false, false, false, true, true, true);
+		buildLeaves(world, x+size*0, y+size*4, z-size*1, leaves, size, fullLeaves, air, false, false, true, false, true, true);
 
-		buildLeaves(world, x-4*1, y+4*4, z+4*0, leaves, fullLeaves, air, false, false, true, true, false, true);
+		buildLeaves(world, x-size*1, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, false, true, true, false, true);
 		
 		/** fourth layer **/
-		buildLeaves(world, x+4*2, y+4*5, z+4*1, leaves, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+4*2, y+4*5, z+4*0, leaves, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+4*2, y+4*5, z-4*1, leaves, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, true, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, true, true, false, true, false);
 
-		buildLeaves(world, x+4*1, y+4*5, z+4*2, leaves, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+4*1, y+4*5, z+4*1, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z-4*1, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z-4*2, leaves, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, true, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, true, false);
 
-		buildLeaves(world, x+4*0, y+4*5, z+4*2, leaves, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z+4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z-4*2, leaves, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, false);
 
-		buildLeaves(world, x-4*1, y+4*5, z+4*2, leaves, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-4*1, y+4*5, z+4*1, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z-4*1, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z-4*2, leaves, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*1, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-size*1, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
 
-		buildLeaves(world, x-4*2, y+4*5, z+4*1, leaves, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-4*2, y+4*5, z+4*0, leaves, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*5, z-4*1, leaves, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, true, true, false, false, true);
 
 		/** fifth layer **/
-		buildLeaves(world, x+4*1, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, true, true, true, false);
+		buildLeaves(world, x+size*1, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, true, true, true, false);
 
-		buildLeaves(world, x+4*0, y+4*6, z+4*1, leaves, fullLeaves, air, true, false, false, true, true, true);
-		buildLeaves(world, x+4*0, y+4*6, z-4*1, leaves, fullLeaves, air, true, false, true, false, true, true);
+		buildLeaves(world, x+size*0, y+size*6, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, true, true);
+		buildLeaves(world, x+size*0, y+size*6, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, true, true);
 
-		buildLeaves(world, x-4*1, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, true, true, false, true);
+		buildLeaves(world, x-size*1, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, true, true, false, true);
 
 		/** seventh layer **/
-		buildLeaves(world, x+4*1, y+4*8, z+4*0, leaves, fullLeaves, air, true, true, true, true, true, false);
+		buildLeaves(world, x+size*1, y+size*8, z+size*0, leaves, size, fullLeaves, air, true, true, true, true, true, false);
 
-		buildLeaves(world, x+4*0, y+4*8, z+4*1, leaves, fullLeaves, air, true, true, false, true, true, true);
-		buildLeaves(world, x+4*0, y+4*8, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*8, z-4*1, leaves, fullLeaves, air, true, true, true, false, true, true);
+		buildLeaves(world, x+size*0, y+size*8, z+size*1, leaves, size, fullLeaves, air, true, true, false, true, true, true);
+		buildLeaves(world, x+size*0, y+size*8, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*8, z-size*1, leaves, size, fullLeaves, air, true, true, true, false, true, true);
 
-		buildLeaves(world, x-4*1, y+4*8, z+4*0, leaves, fullLeaves, air, true, true, true, true, false, true);
+		buildLeaves(world, x-size*1, y+size*8, z+size*0, leaves, size, fullLeaves, air, true, true, true, true, false, true);
 
 		/** eighth layer **/
-		buildLeaves(world, x+4*0, y+4*9, z+4*0, leaves, fullLeaves, air, true, false, true, true, true, true);
+		buildLeaves(world, x+size*0, y+size*9, z+size*0, leaves, size, fullLeaves, air, true, false, true, true, true, true);
 	}
 
-	private void buildBirch(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
-		/************************************************************* up   down  north south east  west */
-		buildLog(world, x+4*0, y+4*0, z+4*0, log, fullLog, air, false, true, true, true, true, true);
-		buildLog(world, x+4*0, y+4*1, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*2, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*3, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*4, z+4*0, log, fullLog, air, true, false, true, true, true, true);
+	private void buildBirch(Level world, int x, int y, int z, Block log, Block leaves, int size, boolean fullLog, boolean fullLeaves, boolean air) {
+		buildLog(world, x+size*0, y+size*0, z+size*0, log, size, fullLog, air, false, true, true, true, true, true);
+		buildLog(world, x+size*0, y+size*1, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*2, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*3, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*4, z+size*0, log, size, fullLog, air, true, false, true, true, true, true);
 		
 		/** first layer **/
-		buildLeaves(world, x+4*2, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+4*2, y+4*2, z+4*0, leaves, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+4*2, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, true, false, true, false);
 		
-		buildLeaves(world, x+4*1, y+4*2, z+4*2, leaves, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+4*1, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*2, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*2, z-4*2, leaves, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size*1, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, true, false);
+		buildLeaves(world, x+size*1, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, true, false);
 		
-		buildLeaves(world, x+4*0, y+4*2, z+4*2, leaves, fullLeaves, air, false, true, false, true, false, false);
-		buildLeaves(world, x+4*0, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*2, z-4*2, leaves, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, false, false);
 
-		buildLeaves(world, x-4*1, y+4*2, z+4*2, leaves, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-4*1, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*2, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*2, z-4*2, leaves, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x-size*1, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, false, false);
 
-		buildLeaves(world, x-4*2, y+4*2, z+4*1, leaves, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-4*2, y+4*2, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*2, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*2, z-4*2, leaves, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z+size*1, leaves, size, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
 		
 		/** second layer **/
-		buildLeaves(world, x+4*2, y+4*3, z+4*1, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*2, y+4*3, z+4*0, leaves, fullLeaves, air, true, false, false, false, true, false);
-		buildLeaves(world, x+4*2, y+4*3, z-4*1, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 		
-		buildLeaves(world, x+4*1, y+4*3, z+4*2, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*1, y+4*3, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*3, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*3, z-4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*3, z-4*2, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*1, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*1, y+size*3, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*3, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*3, z-size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 		
-		buildLeaves(world, x+4*0, y+4*3, z+4*2, leaves, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x+4*0, y+4*3, z+4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*3, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*3, z-4*2, leaves, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x+size*0, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x+size*0, y+size*3, z+size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*3, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, false);
 
-		buildLeaves(world, x-4*1, y+4*3, z+4*2, leaves, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x-4*1, y+4*3, z+4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*3, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*3, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*3, z-4*2, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*1, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x-size*1, y+size*3, z+size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*3, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*3, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 
-		buildLeaves(world, x-4*2, y+4*3, z+4*2, leaves, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-4*2, y+4*3, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*3, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*3, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 		
 		/** third layer **/
-		buildLeaves(world, x+4*1, y+4*4, z+4*0, leaves, fullLeaves, air, false, false, true, true, true, false);
+		buildLeaves(world, x+size*1, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, false, true, true, true, false);
 
-		buildLeaves(world, x+4*0, y+4*4, z+4*1, leaves, fullLeaves, air, false, false, false, true, true, false);
-		buildLeaves(world, x+4*0, y+4*4, z-4*1, leaves, fullLeaves, air, false, false, true, false, true, false);
+		buildLeaves(world, x+size*0, y+size*4, z+size*1, leaves, size, fullLeaves, air, false, false, false, true, true, false);
+		buildLeaves(world, x+size*0, y+size*4, z-size*1, leaves, size, fullLeaves, air, false, false, true, false, true, false);
 
-		buildLeaves(world, x-4*1, y+4*4, z+4*1, leaves, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-4*1, y+4*4, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, true);
-		buildLeaves(world, x-4*1, y+4*4, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*1, y+size*4, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, false, true);
+		buildLeaves(world, x-size*1, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, true);
+		buildLeaves(world, x-size*1, y+size*4, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 		
 		/** fourth layer **/
-		buildLeaves(world, x+4*1, y+4*5, z+4*0, leaves, fullLeaves, air, true, false, true, true, true, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, false, true, true, true, false);
 
-		buildLeaves(world, x+4*0, y+4*5, z+4*1, leaves, fullLeaves, air, true, false, false, true, true, true);
-		buildLeaves(world, x+4*0, y+4*5, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z-4*1, leaves, fullLeaves, air, true, false, true, false, true, true);
+		buildLeaves(world, x+size*0, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, true, true);
+		buildLeaves(world, x+size*0, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, true, true);
 
-		buildLeaves(world, x-4*1, y+4*5, z+4*0, leaves, fullLeaves, air, true, false, true, true, false, true);
+		buildLeaves(world, x-size*1, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, false, true, true, false, true);
 	}
 
-	private void buildJungle(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
-		/************************************************************* up   down  north south east  west */
-		buildLog(world, x+4*0, y+4*0, z+4*0, log, fullLog, air, false, true, true, true, true, true);
-		buildLog(world, x+4*0, y+4*1, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*2, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*3, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*4, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*5, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*6, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*7, z+4*0, log, fullLog, air, true, false, true, true, true, true);
+	private void buildJungle(Level world, int x, int y, int z, Block log, Block leaves, int size, boolean fullLog, boolean fullLeaves, boolean air) {
+		buildLog(world, x+size*0, y+size*0, z+size*0, log, size, fullLog, air, false, true, true, true, true, true);
+		buildLog(world, x+size*0, y+size*1, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*2, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*3, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*4, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*5, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*6, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*7, z+size*0, log, size, fullLog, air, true, false, true, true, true, true);
 		
 		/** first layer **/
-		buildLeaves(world, x+4*2, y+4*5, z+4*1, leaves, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+4*2, y+4*5, z+4*0, leaves, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+4*2, y+4*5, z-4*1, leaves, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, true, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, true, true, false, true, false);
 		
-		buildLeaves(world, x+4*1, y+4*5, z+4*2, leaves, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+4*1, y+4*5, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z-4*2, leaves, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, true, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, true, false);
 		
-		buildLeaves(world, x+4*0, y+4*5, z+4*2, leaves, fullLeaves, air, false, true, false, true, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z-4*2, leaves, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, false, false);
 
-		buildLeaves(world, x-4*1, y+4*5, z+4*2, leaves, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-4*1, y+4*5, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z-4*2, leaves, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x-size*1, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, false, false);
 
-		buildLeaves(world, x-4*2, y+4*5, z+4*1, leaves, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-4*2, y+4*5, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*5, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*5, z-4*2, leaves, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
 		
 		/** second layer **/
-		buildLeaves(world, x+4*2, y+4*6, z+4*1, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*2, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, false, false, true, false);
-		buildLeaves(world, x+4*2, y+4*6, z-4*1, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*6, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*6, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 		
-		buildLeaves(world, x+4*1, y+4*6, z+4*2, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*1, y+4*6, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*6, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*6, z-4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*6, z-4*2, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*1, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*1, y+size*6, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*6, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*6, z-size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 		
-		buildLeaves(world, x+4*0, y+4*6, z+4*2, leaves, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x+4*0, y+4*6, z+4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*6, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*6, z-4*2, leaves, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x+size*0, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x+size*0, y+size*6, z+size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*6, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, false);
 
-		buildLeaves(world, x-4*1, y+4*6, z+4*2, leaves, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x-4*1, y+4*6, z+4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*6, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*6, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*6, z-4*2, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*1, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x-size*1, y+size*6, z+size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*6, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*6, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 
-		buildLeaves(world, x-4*2, y+4*6, z+4*2, leaves, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-4*2, y+4*6, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-4*2, y+4*6, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*6, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*6, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 		
 		/** third layer **/
-		buildLeaves(world, x+4*1, y+4*7, z+4*0, leaves, fullLeaves, air, false, false, true, true, true, false);
+		buildLeaves(world, x+size*1, y+size*7, z+size*0, leaves, size, fullLeaves, air, false, false, true, true, true, false);
 
-		buildLeaves(world, x+4*0, y+4*7, z+4*1, leaves, fullLeaves, air, false, false, false, true, true, false);
-		buildLeaves(world, x+4*0, y+4*7, z-4*1, leaves, fullLeaves, air, false, false, true, false, true, false);
+		buildLeaves(world, x+size*0, y+size*7, z+size*1, leaves, size, fullLeaves, air, false, false, false, true, true, false);
+		buildLeaves(world, x+size*0, y+size*7, z-size*1, leaves, size, fullLeaves, air, false, false, true, false, true, false);
 
-		buildLeaves(world, x-4*1, y+4*7, z+4*1, leaves, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-4*1, y+4*7, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, true);
-		buildLeaves(world, x-4*1, y+4*7, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*1, y+size*7, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, false, true);
+		buildLeaves(world, x-size*1, y+size*7, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, true);
+		buildLeaves(world, x-size*1, y+size*7, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 		
 		/** fourth layer **/
-		buildLeaves(world, x+4*1, y+4*8, z+4*0, leaves, fullLeaves, air, true, false, true, true, true, false);
+		buildLeaves(world, x+size*1, y+size*8, z+size*0, leaves, size, fullLeaves, air, true, false, true, true, true, false);
 
-		buildLeaves(world, x+4*0, y+4*8, z+4*1, leaves, fullLeaves, air, true, false, false, true, true, true);
-		buildLeaves(world, x+4*0, y+4*8, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*8, z-4*1, leaves, fullLeaves, air, true, false, true, false, true, true);
+		buildLeaves(world, x+size*0, y+size*8, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, true, true);
+		buildLeaves(world, x+size*0, y+size*8, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*8, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, true, true);
 
-		buildLeaves(world, x-4*1, y+4*8, z+4*0, leaves, fullLeaves, air, true, false, true, true, false, true);
+		buildLeaves(world, x-size*1, y+size*8, z+size*0, leaves, size, fullLeaves, air, true, false, true, true, false, true);
 	}
 
-	private void buildAcacia(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
-		/************************************************************* up   down  north south east  west */
-		buildLog(world, x+4*0, y+4*0, z+4*0, log, fullLog, air, false, true, true, true, true, true);
-		buildLog(world, x+4*0, y+4*1, z+4*0, log, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x+4*0, y+4*2, z+4*0, log, fullLog, air, true, false, true, true, false, true);
+	private void buildAcacia(Level world, int x, int y, int z, Block log, Block leaves, int size, boolean fullLog, boolean fullLeaves, boolean air) {
+		buildLog(world, x+size*0, y+size*0, z+size*0, log, size, fullLog, air, false, true, true, true, true, true);
+		buildLog(world, x+size*0, y+size*1, z+size*0, log, size, fullLog, air, false, false, true, true, true, true);
+		buildLog(world, x+size*0, y+size*2, z+size*0, log, size, fullLog, air, true, false, true, true, false, true);
 
-		buildLog(world, x+4*1, y+4*2, z+4*0, log, fullLog, air, true, true, true, true, true, false);
+		buildLog(world, x+size*1, y+size*2, z+size*0, log, size, fullLog, air, true, true, true, true, true, false);
 
-		buildLog(world, x+4*2, y+4*3, z+4*0, log, fullLog, air, true, true, true, true, true, true);
-		buildLog(world, x-4*1, y+4*3, z+4*0, log, fullLog, air, true, true, true, true, true, true);
+		buildLog(world, x+size*2, y+size*3, z+size*0, log, size, fullLog, air, true, true, true, true, true, true);
+		buildLog(world, x-size*1, y+size*3, z+size*0, log, size, fullLog, air, true, true, true, true, true, true);
 
-		buildLog(world, x+4*3, y+4*4, z+4*0, log, fullLog, air, true, true, true, true, true, true);
-		buildLog(world, x-4*2, y+4*4, z+4*0, log, fullLog, air, false, true, true, true, true, true);
+		buildLog(world, x+size*3, y+size*4, z+size*0, log, size, fullLog, air, true, true, true, true, true, true);
+		buildLog(world, x-size*2, y+size*4, z+size*0, log, size, fullLog, air, false, true, true, true, true, true);
 
-		buildLog(world, x-4*2, y+4*5, z+4*0, log, fullLog, air, true, false, true, true, true, true);
+		buildLog(world, x-size*2, y+size*5, z+size*0, log, size, fullLog, air, true, false, true, true, true, true);
 		
 		/** first layer **/
-		buildLeaves(world, x+4*5, y+4*4, z+4*1, leaves, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+4*5, y+4*4, z+4*0, leaves, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+4*5, y+4*4, z-4*1, leaves, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*5, y+size*4, z+size*1, leaves, size, fullLeaves, air, true, true, false, true, true, false);
+		buildLeaves(world, x+size*5, y+size*4, z+size*0, leaves, size, fullLeaves, air, true, true, false, false, true, false);
+		buildLeaves(world, x+size*5, y+size*4, z-size*1, leaves, size, fullLeaves, air, true, true, true, false, true, false);
 
-		buildLeaves(world, x+4*4, y+4*4, z+4*2, leaves, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+4*4, y+4*4, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*4, y+4*4, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*4, y+4*4, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*4, y+4*4, z-4*2, leaves, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*4, y+size*4, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, true, false);
+		buildLeaves(world, x+size*4, y+size*4, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*4, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*4, y+size*4, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*4, y+size*4, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, true, false);
 
-		buildLeaves(world, x+4*3, y+4*4, z+4*2, leaves, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x+4*3, y+4*4, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*3, y+4*4, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*3, y+4*4, z-4*2, leaves, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x+size*3, y+size*4, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, false);
+		buildLeaves(world, x+size*3, y+size*4, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*3, y+size*4, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*3, y+size*4, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, false);
 
-		buildLeaves(world, x+4*2, y+4*4, z+4*2, leaves, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x+4*2, y+4*4, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*2, y+4*4, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*2, y+4*4, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*2, y+4*4, z-4*2, leaves, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x+size*2, y+size*4, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x+size*2, y+size*4, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*4, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*4, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
 
-		buildLeaves(world, x+4*1, y+4*4, z+4*1, leaves, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x+4*1, y+4*4, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x+4*1, y+4*4, z-4*1, leaves, fullLeaves, air, false, true, true, false, false, true);
+		buildLeaves(world, x+size*1, y+size*4, z+size*1, leaves, size, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x+size*1, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x+size*1, y+size*4, z-size*1, leaves, size, fullLeaves, air, false, true, true, false, false, true);
 		
 		/** second layer **/
-		buildLeaves(world, x+4*4, y+4*5, z+4*1, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*4, y+4*5, z+4*0, leaves, fullLeaves, air, true, false, false, false, true, false);
-		buildLeaves(world, x+4*4, y+4*5, z-4*1, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*4, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*4, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, true, false);
+		buildLeaves(world, x+size*4, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 		
-		buildLeaves(world, x+4*3, y+4*5, z+4*1, leaves, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x+4*3, y+4*5, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*3, y+4*5, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x+size*3, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x+size*3, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*3, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, false, false);
 		
-		buildLeaves(world, x+4*2, y+4*5, z+4*1, leaves, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x+4*2, y+4*5, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*2, y+4*5, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, false, false);
 
-		buildLeaves(world, x+4*1, y+4*5, z+4*2, leaves, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+4*1, y+4*5, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z-4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z-4*2, leaves, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, true, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, true, false);
 
-		buildLeaves(world, x+4*0, y+4*5, z+4*3, leaves, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+4*0, y+4*5, z+4*2, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z+4*1, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z-4*1, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z-4*2, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z-4*3, leaves, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*0, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, true, false);
+		buildLeaves(world, x+size*0, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, true, false);
 
-		buildLeaves(world, x-4*1, y+4*5, z+4*3, leaves, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z+4*2, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z-4*2, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z-4*3, leaves, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, false);
 
-		buildLeaves(world, x-4*2, y+4*5, z+4*3, leaves, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z+4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z-4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z-4*3, leaves, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, false);
 
-		buildLeaves(world, x-4*3, y+4*5, z+4*3, leaves, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x-4*3, y+4*5, z+4*2, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-4*3, y+4*5, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*3, y+4*5, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*3, y+4*5, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*3, y+4*5, z-4*2, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-4*3, y+4*5, z-4*3, leaves, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, false);
 
-		buildLeaves(world, x-4*4, y+4*5, z+4*3, leaves, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-4*4, y+4*5, z+4*2, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-4*4, y+4*5, z+4*1, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-4*4, y+4*5, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*4, y+4*5, z-4*1, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-4*4, y+4*5, z-4*2, leaves, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-4*4, y+4*5, z-4*3, leaves, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x-size*4, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x-size*4, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*4, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x-size*4, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
+		buildLeaves(world, x-size*4, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, true);
 
-		buildLeaves(world, x-4*5, y+4*5, z+4*2, leaves, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-4*5, y+4*5, z+4*1, leaves, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-4*5, y+4*5, z+4*0, leaves, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-4*5, y+4*5, z-4*1, leaves, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-4*5, y+4*5, z-4*2, leaves, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*5, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-size*5, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, true, false, false, false, true);
+		buildLeaves(world, x-size*5, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, true, false, false, false, true);
+		buildLeaves(world, x-size*5, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, true, false, false, false, true);
+		buildLeaves(world, x-size*5, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
 		
 		/** third layer **/
-		buildLeaves(world, x+4*0, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, true, true, true, false);
+		buildLeaves(world, x+size*0, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, true, true, true, false);
 
-		buildLeaves(world, x-4*1, y+4*6, z+4*1, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x-4*1, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*6, z-4*1, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x-size*1, y+size*6, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x-size*1, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*6, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 
-		buildLeaves(world, x-4*2, y+4*6, z+4*2, leaves, fullLeaves, air, true, false, false, true, true, true);
-		buildLeaves(world, x-4*2, y+4*6, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*6, z-4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*6, z-4*2, leaves, fullLeaves, air, true, false, true, false, true, true);
+		buildLeaves(world, x-size*2, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, true, true);
+		buildLeaves(world, x-size*2, y+size*6, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*6, z-size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, true, true);
 
-		buildLeaves(world, x-4*3, y+4*6, z+4*1, leaves, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-4*3, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*3, y+4*6, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*3, y+size*6, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, false, true);
+		buildLeaves(world, x-size*3, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*6, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 
-		buildLeaves(world, x-4*4, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, true, true, false, true);
+		buildLeaves(world, x-size*4, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, true, true, false, true);
 	}
 
-	private void buildDarkOak(Level world, int x, int y, int z, Block log, Block leaves, boolean fullLog, boolean fullLeaves, boolean air) {
-		/************************************************************* up   down  north south east  west */
-		buildLog(world, x+4*0, y+4*0, z+4*0, log, fullLog, air, false, true, false, true, true, false);
-		buildLog(world, x+4*0, y+4*1, z+4*0, log, fullLog, air, false, false, false, true, true, false);
-		buildLog(world, x+4*0, y+4*2, z+4*0, log, fullLog, air, false, false, false, false, true, false);
-		buildLog(world, x+4*0, y+4*3, z+4*0, log, fullLog, air, false, false, false, false, true, false);
-		buildLog(world, x+4*0, y+4*4, z+4*0, log, fullLog, air, false, false, false, false, true, false);
-		buildLog(world, x+4*0, y+4*5, z+4*0, log, fullLog, air, true, false, false, true, true, false);
+	private void buildDarkOak(Level world, int x, int y, int z, Block log, Block leaves, int size, boolean fullLog, boolean fullLeaves, boolean air) {
+		buildLog(world, x+size*0, y+size*0, z+size*0, log, size, fullLog, air, false, true, false, true, true, false);
+		buildLog(world, x+size*0, y+size*1, z+size*0, log, size, fullLog, air, false, false, false, true, true, false);
+		buildLog(world, x+size*0, y+size*2, z+size*0, log, size, fullLog, air, false, false, false, false, true, false);
+		buildLog(world, x+size*0, y+size*3, z+size*0, log, size, fullLog, air, false, false, false, false, true, false);
+		buildLog(world, x+size*0, y+size*4, z+size*0, log, size, fullLog, air, false, false, false, false, true, false);
+		buildLog(world, x+size*0, y+size*5, z+size*0, log, size, fullLog, air, true, false, false, true, true, false);
 
-		buildLog(world, x+4*0, y+4*0, z-4*1, log, fullLog, air, false, true, true, false, true, false);
-		buildLog(world, x+4*0, y+4*1, z-4*1, log, fullLog, air, false, false, true, false, true, false);
-		buildLog(world, x+4*0, y+4*2, z-4*1, log, fullLog, air, false, false, true, false, true, false);
-		buildLog(world, x+4*0, y+4*3, z-4*1, log, fullLog, air, false, false, true, false, true, false);
-		buildLog(world, x+4*0, y+4*4, z-4*1, log, fullLog, air, false, false, true, false, true, false);
-		buildLog(world, x+4*0, y+4*5, z-4*1, log, fullLog, air, true, false, true, false, true, false);
+		buildLog(world, x+size*0, y+size*0, z-size*1, log, size, fullLog, air, false, true, true, false, true, false);
+		buildLog(world, x+size*0, y+size*1, z-size*1, log, size, fullLog, air, false, false, true, false, true, false);
+		buildLog(world, x+size*0, y+size*2, z-size*1, log, size, fullLog, air, false, false, true, false, true, false);
+		buildLog(world, x+size*0, y+size*3, z-size*1, log, size, fullLog, air, false, false, true, false, true, false);
+		buildLog(world, x+size*0, y+size*4, z-size*1, log, size, fullLog, air, false, false, true, false, true, false);
+		buildLog(world, x+size*0, y+size*5, z-size*1, log, size, fullLog, air, true, false, true, false, true, false);
 
-		buildLog(world, x-4*1, y+4*0, z+4*0, log, fullLog, air, false, true, false, true, false, true);
-		buildLog(world, x-4*1, y+4*1, z+4*0, log, fullLog, air, false, false, false, true, false, true);
-		buildLog(world, x-4*1, y+4*2, z+4*0, log, fullLog, air, false, false, false, true, false, true);
-		buildLog(world, x-4*1, y+4*3, z+4*0, log, fullLog, air, false, false, false, true, false, true);
-		buildLog(world, x-4*1, y+4*4, z+4*0, log, fullLog, air, false, false, false, true, false, true);
-		buildLog(world, x-4*1, y+4*5, z+4*0, log, fullLog, air, true, false, false, true, false, true);
+		buildLog(world, x-size*1, y+size*0, z+size*0, log, size, fullLog, air, false, true, false, true, false, true);
+		buildLog(world, x-size*1, y+size*1, z+size*0, log, size, fullLog, air, false, false, false, true, false, true);
+		buildLog(world, x-size*1, y+size*2, z+size*0, log, size, fullLog, air, false, false, false, true, false, true);
+		buildLog(world, x-size*1, y+size*3, z+size*0, log, size, fullLog, air, false, false, false, true, false, true);
+		buildLog(world, x-size*1, y+size*4, z+size*0, log, size, fullLog, air, false, false, false, true, false, true);
+		buildLog(world, x-size*1, y+size*5, z+size*0, log, size, fullLog, air, true, false, false, true, false, true);
 
-		buildLog(world, x-4*1, y+4*0, z-4*1, log, fullLog, air, false, true, true, false, false, true);
-		buildLog(world, x-4*1, y+4*1, z-4*1, log, fullLog, air, false, false, true, false, false, true);
-		buildLog(world, x-4*1, y+4*2, z-4*1, log, fullLog, air, false, false, true, false, false, true);
-		buildLog(world, x-4*1, y+4*3, z-4*1, log, fullLog, air, false, false, true, false, false, true);
-		buildLog(world, x-4*1, y+4*4, z-4*1, log, fullLog, air, false, false, true, false, false, true);
-		buildLog(world, x-4*1, y+4*5, z-4*1, log, fullLog, air, true, false, true, false, false, true);
+		buildLog(world, x-size*1, y+size*0, z-size*1, log, size, fullLog, air, false, true, true, false, false, true);
+		buildLog(world, x-size*1, y+size*1, z-size*1, log, size, fullLog, air, false, false, true, false, false, true);
+		buildLog(world, x-size*1, y+size*2, z-size*1, log, size, fullLog, air, false, false, true, false, false, true);
+		buildLog(world, x-size*1, y+size*3, z-size*1, log, size, fullLog, air, false, false, true, false, false, true);
+		buildLog(world, x-size*1, y+size*4, z-size*1, log, size, fullLog, air, false, false, true, false, false, true);
+		buildLog(world, x-size*1, y+size*5, z-size*1, log, size, fullLog, air, true, false, true, false, false, true);
 
-		buildLog(world, x+4*0, y+4*2, z+4*1, log, fullLog, air, false, true, false, true, true, true);
-		buildLog(world, x+4*0, y+4*3, z+4*1, log, fullLog, air, false, false, false, true, true, true);
-		buildLog(world, x+4*0, y+4*4, z+4*1, log, fullLog, air, true, false, false, true, true, true);
+		buildLog(world, x+size*0, y+size*2, z+size*1, log, size, fullLog, air, false, true, false, true, true, true);
+		buildLog(world, x+size*0, y+size*3, z+size*1, log, size, fullLog, air, false, false, false, true, true, true);
+		buildLog(world, x+size*0, y+size*4, z+size*1, log, size, fullLog, air, true, false, false, true, true, true);
 		
 		/** first layer **/
-		buildLeaves(world, x+4*2, y+4*4, z+4*2, leaves, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+4*2, y+4*4, z+4*1, leaves, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+4*2, y+4*4, z+4*0, leaves, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+4*2, y+4*4, z-4*1, leaves, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+4*2, y+4*4, z-4*2, leaves, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+4*2, y+4*4, z-4*3, leaves, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*4, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*4, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*4, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*4, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*4, z-size*3, leaves, size, fullLeaves, air, false, true, true, false, true, false);
 
-		buildLeaves(world, x+4*1, y+4*4, z+4*3, leaves, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+4*1, y+4*4, z+4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*4, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*4, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*4, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*4, z-4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*4, z-4*3, leaves, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x+size*1, y+size*4, z+size*3, leaves, size, fullLeaves, air, false, true, false, true, true, false);
+		buildLeaves(world, x+size*1, y+size*4, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*4, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*4, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*4, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*4, z-size*3, leaves, size, fullLeaves, air, false, true, true, false, false, false);
 
-		buildLeaves(world, x+4*0, y+4*4, z+4*3, leaves, fullLeaves, air, false, true, false, true, false, false);
-		buildLeaves(world, x+4*0, y+4*4, z+4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*4, z-4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*4, z-4*3, leaves, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x+size*0, y+size*4, z+size*3, leaves, size, fullLeaves, air, false, true, false, true, false, false);
+		buildLeaves(world, x+size*0, y+size*4, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*4, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*4, z-size*3, leaves, size, fullLeaves, air, false, true, true, false, false, false);
 
-		buildLeaves(world, x-4*1, y+4*4, z+4*3, leaves, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-4*1, y+4*4, z+4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*4, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*4, z-4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*4, z-4*3, leaves, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x-size*1, y+size*4, z+size*3, leaves, size, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x-size*1, y+size*4, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*4, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*4, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*4, z-size*3, leaves, size, fullLeaves, air, false, true, true, false, false, false);
 
-		buildLeaves(world, x-4*2, y+4*4, z+4*2, leaves, fullLeaves, air, false, true, false, true, false, false);
-		buildLeaves(world, x-4*2, y+4*4, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*4, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*4, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*4, z-4*2, leaves, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*4, z-4*3, leaves, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x-size*2, y+size*4, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, false);
+		buildLeaves(world, x-size*2, y+size*4, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*4, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*4, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*4, z-size*3, leaves, size, fullLeaves, air, false, true, true, false, false, false);
 
-		buildLeaves(world, x-4*3, y+4*4, z+4*2, leaves, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-4*3, y+4*4, z+4*1, leaves, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-4*3, y+4*4, z+4*0, leaves, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-4*3, y+4*4, z-4*1, leaves, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-4*3, y+4*4, z-4*2, leaves, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-4*3, y+4*4, z-4*3, leaves, fullLeaves, air, false, true, true, false, false, true);
+		buildLeaves(world, x-size*3, y+size*4, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, true);
+		buildLeaves(world, x-size*3, y+size*4, z+size*1, leaves, size, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*4, z+size*0, leaves, size, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*4, z-size*1, leaves, size, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*4, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*4, z-size*3, leaves, size, fullLeaves, air, false, true, true, false, false, true);
 		
 		/** second layer **/
-		buildLeaves(world, x+4*3, y+4*5, z+4*1, leaves, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+4*3, y+4*5, z+4*0, leaves, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+4*3, y+4*5, z-4*1, leaves, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+4*3, y+4*5, z-4*2, leaves, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+4*3, y+4*5, z-4*3, leaves, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*3, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, true, false, true, true, false);
+		buildLeaves(world, x+size*3, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, true, false, false, true, false);
+		buildLeaves(world, x+size*3, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, true, false, false, true, false);
+		buildLeaves(world, x+size*3, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, true, false);
+		buildLeaves(world, x+size*3, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, true, false);
 
-		buildLeaves(world, x+4*2, y+4*5, z+4*1, leaves, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x+4*2, y+4*5, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*2, y+4*5, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*2, y+4*5, z-4*2, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*2, y+4*5, z-4*3, leaves, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, false, true, false, false, false);
 
-		buildLeaves(world, x+4*1, y+4*5, z+4*3, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*1, y+4*5, z+4*2, leaves, fullLeaves, air, true, false, false, false, true, false);
-		buildLeaves(world, x+4*1, y+4*5, z+4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z-4*2, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z-4*3, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*5, z-4*4, leaves, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, false, false, false, true, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*5, z-size*4, leaves, size, fullLeaves, air, true, true, true, false, true, false);
 
-		buildLeaves(world, x+4*0, y+4*5, z+4*3, leaves, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z+4*2, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z+4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z-4*2, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z-4*3, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*5, z-4*4, leaves, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z+size*2, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z-size*3, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*5, z-size*4, leaves, size, fullLeaves, air, true, true, true, false, false, false);
 
-		buildLeaves(world, x-4*1, y+4*5, z+4*3, leaves, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z+4*2, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z+4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z-4*2, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z-4*3, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*5, z-4*4, leaves, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, false, false, true, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z+size*2, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z-size*3, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*5, z-size*4, leaves, size, fullLeaves, air, true, true, true, false, false, false);
 
-		buildLeaves(world, x-4*2, y+4*5, z+4*3, leaves, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z+4*2, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z+4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z-4*2, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z-4*3, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z-4*4, leaves, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*4, leaves, size, fullLeaves, air, true, true, true, false, false, false);
 
-		buildLeaves(world, x-4*3, y+4*5, z+4*3, leaves, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-4*3, y+4*5, z+4*2, leaves, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-4*3, y+4*5, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*5, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*3, y+4*5, z-4*2, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*3, y+4*5, z-4*3, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*3, y+4*5, z-4*4, leaves, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*3, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-size*3, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, false, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z-size*4, leaves, size, fullLeaves, air, true, true, true, false, false, true);
 
-		buildLeaves(world, x-4*4, y+4*5, z+4*1, leaves, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-4*4, y+4*5, z+4*0, leaves, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-4*4, y+4*5, z-4*1, leaves, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-4*4, y+4*5, z-4*2, leaves, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-4*4, y+4*5, z-4*3, leaves, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z+size*1, leaves, size, fullLeaves, air, true, true, false, true, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z+size*0, leaves, size, fullLeaves, air, true, true, false, false, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z-size*1, leaves, size, fullLeaves, air, true, true, false, false, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, true);
 		
 		/** third layer **/
-		buildLeaves(world, x+4*2, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*2, y+4*6, z-4*1, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*6, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 
-		buildLeaves(world, x+4*1, y+4*6, z+4*1, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*1, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*6, z-4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*1, y+4*6, z-4*2, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*1, y+size*6, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*1, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*6, z-size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*1, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 
-		buildLeaves(world, x+4*0, y+4*6, z+4*2, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*0, y+4*6, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*6, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*6, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*6, z-4*2, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+4*0, y+4*6, z-4*3, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*0, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*0, y+size*6, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*6, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*6, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x+size*0, y+size*6, z-size*3, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 
-		buildLeaves(world, x-4*1, y+4*6, z+4*2, leaves, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-4*1, y+4*6, z+4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*6, z+4*0, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*6, z-4*1, leaves, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*6, z-4*2, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*1, y+4*6, z-4*3, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*1, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, true);
+		buildLeaves(world, x-size*1, y+size*6, z+size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*6, z+size*0, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*6, z-size*1, leaves, size, fullLeaves, air, false, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*1, y+size*6, z-size*3, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 
-		buildLeaves(world, x-4*2, y+4*6, z+4*1, leaves, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-4*2, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*6, z-4*1, leaves, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-4*2, y+4*6, z-4*2, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*6, z+size*1, leaves, size, fullLeaves, air, true, false, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*6, z-size*1, leaves, size, fullLeaves, air, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 
-		buildLeaves(world, x-4*3, y+4*6, z+4*0, leaves, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-4*3, y+4*6, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*3, y+size*6, z+size*0, leaves, size, fullLeaves, air, true, false, false, true, false, true);
+		buildLeaves(world, x-size*3, y+size*6, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 		
 		/** fourth layer **/
-		buildLeaves(world, x+4*0, y+4*7, z+4*0, leaves, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+4*0, y+4*7, z-4*1, leaves, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*0, y+size*7, z+size*0, leaves, size, fullLeaves, air, true, false, false, true, true, false);
+		buildLeaves(world, x+size*0, y+size*7, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, true, false);
 
-		buildLeaves(world, x-4*1, y+4*7, z+4*0, leaves, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-4*1, y+4*7, z-4*1, leaves, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*1, y+size*7, z+size*0, leaves, size, fullLeaves, air, true, false, false, true, false, true);
+		buildLeaves(world, x-size*1, y+size*7, z-size*1, leaves, size, fullLeaves, air, true, false, true, false, false, true);
 	}
 
-	private void buildLog(Level world, int x, int y, int z, Block block, boolean fullLog, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		buildBlock(world,x,y,z,block,fullLog,air,up,down,north,south,east,west);
+	private void buildLog(Level world, int x, int y, int z, Block block, int size, boolean fullLog, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
+		buildBlock(world,x,y,z,block,size,fullLog,air,up,down,north,south,east,west);
 	}
 
-	private void buildLeaves(Level world, int x, int y, int z, Block block, boolean fullLeaves, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		buildBlock(world,x,y,z,block,fullLeaves,air,up,down,north,south,east,west);
+	private void buildLeaves(Level world, int x, int y, int z, Block block, int size, boolean fullLeaves, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
+		buildBlock(world,x,y,z,block,size,fullLeaves,air,up,down,north,south,east,west);
 	}
 
-	private void buildBlock(Level world, int x, int y, int z, Block block, boolean full, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
+	private void buildBlock(Level world, int x, int y, int z, Block block, int size, boolean full, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
 		if(full) {
-			Builder.Multiple.setup(world,x-1,y,z-1,4,4,4).setBlock(block).build();
+			Builder.Multiple.setup(world,x,y,z,size,size,size).setBlock(block).build();
 		} else {
 			if(air) {
-				Builder.Multiple.setup(world,x-1,y,z-1,4,4,4).setBlock(Blocks.AIR).build();
+				Builder.Multiple.setup(world,x,y,z,size,size,size).setBlock(Blocks.AIR).build();
 			}
 			if(up) {
-				Builder.Multiple.setup(world,x-1,y+3,z-1,4,1,4).setBlock(block).build();
+				Builder.Multiple.setup(world,x,y+(size-1),z,size,1,size).setBlock(block).build();
 			}
 			if(down) {
-				Builder.Multiple.setup(world,x-1,y,z-1,4,1,4).setBlock(block).build();
+				Builder.Multiple.setup(world,x,y,z,size,1,size).setBlock(block).build();
 			}
 			if(north) {
-				Builder.Multiple.setup(world,x-1,y,z-1,4,4,1).setBlock(block).build();
+				Builder.Multiple.setup(world,x,y,z,size,size,1).setBlock(block).build();
 			}
 			if(south) {
-				Builder.Multiple.setup(world,x-1,y,z+2,4,4,1).setBlock(block).build();
+				Builder.Multiple.setup(world,x,y,z+(size-1),size,size,1).setBlock(block).build();
 			}
 			if(east) {
-				Builder.Multiple.setup(world,x+2,y,z-1,1,4,4).setBlock(block).build();
+				Builder.Multiple.setup(world,x+(size-1),y,z,1,size,size).setBlock(block).build();
 			}
 			if(west) {
-				Builder.Multiple.setup(world,x-1,y,z-1,1,4,4).setBlock(block).build();
+				Builder.Multiple.setup(world,x,y,z,1,size,size).setBlock(block).build();
 			}
 		}
 	}

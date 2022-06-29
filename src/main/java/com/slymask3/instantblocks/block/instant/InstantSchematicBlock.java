@@ -3,9 +3,9 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
 import com.slymask3.instantblocks.handler.Config;
-import com.slymask3.instantblocks.reference.ScreenID;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
+import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.ChatFormatting;
@@ -32,7 +32,7 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 				.strength(1.5F, 2000F)
 				.sound(SoundType.WOOD)
 		, Config.Common.DISABLE_SCHEMATIC);
-		setScreenID(ScreenID.SCHEMATIC);
+		setScreen(ClientHelper.Screen.SCHEMATIC);
 	}
 
 	@Nullable
