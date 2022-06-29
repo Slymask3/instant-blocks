@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Builder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -39,9 +39,9 @@ public class InstantRailBlock extends InstantBlock {
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
     	for(int i = 0; i<= Config.Common.RAILS_AMOUNT.get(); i++) {
-	    	BuildHelper.setStoneDirectional(world, x, y-1, z, direction, i, 0, 0, 0);
-	    	BuildHelper.setBlockDirectional(world, x, y, z, Blocks.RAIL, direction, i, 0, 0, 0);
-	    	BuildHelper.setBlockDirectional(world, x, y+1, z, Blocks.AIR, direction, i, 0, 0, 0);
+			Builder.Single.setup(world,x,y-1,z).offset(direction,i,0,0,0).setStone().build();
+			Builder.Single.setup(world,x,y,z).offset(direction,i,0,0,0).setBlock(Blocks.RAIL).build();
+			Builder.Single.setup(world,x,y+1,z).offset(direction,i,0,0,0).setBlock(Blocks.AIR).build();
     	}
 		return true;
     }

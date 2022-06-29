@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.network.packet;
 
 import com.slymask3.instantblocks.block.instant.InstantStatueBlock;
-import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Builder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -64,7 +64,7 @@ public class StatuePacket {
 				Player player = context.get().getSender();
 				Level world = player.getLevel();
 
-				InstantStatueBlock block = (InstantStatueBlock) BuildHelper.getBlock(world,message._x, message._y, message._z);
+				InstantStatueBlock block = (InstantStatueBlock) Builder.getBlock(world,message._x, message._y, message._z);
 				if(block.build(world, message._x, message._y, message._z, player, message._username, message._head, message._body, message._armLeft, message._armRight, message._legLeft, message._legRight, message._rgb)) {
 					block.afterBuild(world, message._x, message._y, message._z, player);
 				}

@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Builder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -36,107 +36,107 @@ public class InstantPoolBlock extends InstantBlock {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 		
 		/************************ Layer -5 to 5 : Air ************************/
-		BuildHelper.build(world, x-6, y-5, z-6, air, 13, 11, 13);
+		Builder.Multiple.setup(world,x-6,y-5,z-6,13,11,13).setBlock(air).build();
 		
 		/************************ Layer -5 to 0 : Stone ************************/
-		BuildHelper.build(world, x-6, y-5, z-6, stone, 13, 6, 13);
+		Builder.Multiple.setup(world,x-6,y-5,z-6,13,6,13).setBlock(stone).build();
 		
 		/************************ Layer -4 to 0 : Water ************************/
-		BuildHelper.build(world, x-5, y-4, z-5, water, 11, 5, 11);
+		Builder.Multiple.setup(world,x-5,y-4,z-5,11,5,11).setBlock(water).build();
 		
 		/************************ Layer 1 : Stone Slab ************************/
-		BuildHelper.build(world, x-6, y+1, z-6, slab, 1, 1, 13);
-		BuildHelper.build(world, x+6, y+1, z-6, slab, 1, 1, 13);
-		BuildHelper.build(world, x-5, y+1, z-6, slab, 11, 1, 1);
-		BuildHelper.build(world, x-5, y+1, z+6, slab, 11, 1, 1);
+		Builder.Multiple.setup(world,x-6,y+1,z-6,1,1,13).setBlock(slab).build();
+		Builder.Multiple.setup(world,x+6,y+1,z-6,1,1,13).setBlock(slab).build();
+		Builder.Multiple.setup(world,x-5,y+1,z-6,11,1,1).setBlock(slab).build();
+		Builder.Multiple.setup(world,x-5,y+1,z+6,11,1,1).setBlock(slab).build();
 		
 		/************************ Layer -2 : Glowstone ************************/
-		BuildHelper.setBlock(world,x-6, y-2, z-4, glow);
-		BuildHelper.setBlock(world,x-6, y-2, z-2, glow);
-		BuildHelper.setBlock(world,x-6, y-2, z, glow);
-		BuildHelper.setBlock(world,x-6, y-2, z+2, glow);
-		BuildHelper.setBlock(world,x-6, y-2, z+4, glow);
+		Builder.Single.setup(world,x-6,y-2,z-4).setBlock(glow).build();
+		Builder.Single.setup(world,x-6,y-2,z-2).setBlock(glow).build();
+		Builder.Single.setup(world,x-6,y-2,z).setBlock(glow).build();
+		Builder.Single.setup(world,x-6,y-2,z+2).setBlock(glow).build();
+		Builder.Single.setup(world,x-6,y-2,z+4).setBlock(glow).build();
 
-		BuildHelper.setBlock(world,x+6, y-2, z-4, glow);
-		BuildHelper.setBlock(world,x+6, y-2, z-2, glow);
-		BuildHelper.setBlock(world,x+6, y-2, z, glow);
-		BuildHelper.setBlock(world,x+6, y-2, z+2, glow);
-		BuildHelper.setBlock(world,x+6, y-2, z+4, glow);
+		Builder.Single.setup(world,x+6,y-2,z-4).setBlock(glow).build();
+		Builder.Single.setup(world,x+6,y-2,z-2).setBlock(glow).build();
+		Builder.Single.setup(world,x+6,y-2,z).setBlock(glow).build();
+		Builder.Single.setup(world,x+6,y-2,z+2).setBlock(glow).build();
+		Builder.Single.setup(world,x+6,y-2,z+4).setBlock(glow).build();
 
-		BuildHelper.setBlock(world,x-4, y-2, z-6, glow);
-		BuildHelper.setBlock(world,x-2, y-2, z-6, glow);
-		BuildHelper.setBlock(world,x, y-2, z-6, glow);
-		BuildHelper.setBlock(world,x+2, y-2, z-6, glow);
-		BuildHelper.setBlock(world,x+4, y-2, z-6, glow);
+		Builder.Single.setup(world,x-4,y-2,z-6).setBlock(glow).build();
+		Builder.Single.setup(world,x-2,y-2,z-6).setBlock(glow).build();
+		Builder.Single.setup(world,x,y-2,z-6).setBlock(glow).build();
+		Builder.Single.setup(world,x+2,y-2,z-6).setBlock(glow).build();
+		Builder.Single.setup(world,x+4,y-2,z-6).setBlock(glow).build();
 
-		BuildHelper.setBlock(world,x-4, y-2, z+6, glow);
-		BuildHelper.setBlock(world,x-2, y-2, z+6, glow);
-		BuildHelper.setBlock(world,x, y-2, z+6, glow);
-		BuildHelper.setBlock(world,x+2, y-2, z+6, glow);
-		BuildHelper.setBlock(world,x+4, y-2, z+6, glow);
+		Builder.Single.setup(world,x-4,y-2,z+6).setBlock(glow).build();
+		Builder.Single.setup(world,x-2,y-2,z+6).setBlock(glow).build();
+		Builder.Single.setup(world,x,y-2,z+6).setBlock(glow).build();
+		Builder.Single.setup(world,x+2,y-2,z+6).setBlock(glow).build();
+		Builder.Single.setup(world,x+4,y-2,z+6).setBlock(glow).build();
 		
 		/************************ Layer -5 : Glowstone ************************/
-		BuildHelper.setBlock(world,x-2, y-5, z-2, glow);
-		BuildHelper.setBlock(world,x-2, y-5, z+2, glow);
-		BuildHelper.setBlock(world,x+2, y-5, z-2, glow);
-		BuildHelper.setBlock(world,x+2, y-5, z+2, glow);
+		Builder.Single.setup(world,x-2,y-5,z-2).setBlock(glow).build();
+		Builder.Single.setup(world,x-2,y-5,z+2).setBlock(glow).build();
+		Builder.Single.setup(world,x+2,y-5,z-2).setBlock(glow).build();
+		Builder.Single.setup(world,x+2,y-5,z+2).setBlock(glow).build();
 
 		/************************ Layer 1 to 5 : Diving Board v2.0 ************************/
 		Direction directionLadder = direction;
 
-		BuildHelper.setBlockDirectional(world,x,y+1,z,wood,direction,0,6,2,0);
-		BuildHelper.setBlockDirectional(world,x,y+2,z,wood,direction,0,6,2,0);
+		Builder.Single.setup(world,x,y+1,z).offset(direction,0,6,2,0).setBlock(wood).build();
+		Builder.Single.setup(world,x,y+2,z).offset(direction,0,6,2,0).setBlock(wood).build();
 
-		BuildHelper.setBlockDirectional(world,x,y+1,z,ladder,direction,0,7,2,0, directionLadder,2);
-		BuildHelper.setBlockDirectional(world,x,y+2,z,ladder,direction,0,7,2,0, directionLadder,2);
+		Builder.Single.setup(world,x,y+1,z).offset(direction,0,7,2,0).setBlock(ladder).setDirection(directionLadder).build();
+		Builder.Single.setup(world,x,y+2,z).offset(direction,0,7,2,0).setBlock(ladder).setDirection(directionLadder).build();
 
-		BuildHelper.setBlockDirectional(world,x,y+3,z,slab,direction,0,6,2,0);
-		BuildHelper.setBlockDirectional(world,x,y+3,z,slab,direction,0,5,2,0);
-		BuildHelper.setBlockDirectional(world,x,y+3,z,slab,direction,0,4,2,0);
-		BuildHelper.setBlockDirectional(world,x,y+3,z,slab,direction,0,3,2,0);
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,6,2,0).setBlock(slab).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,5,2,0).setBlock(slab).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,4,2,0).setBlock(slab).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,3,2,0).setBlock(slab).build();
 
-		BuildHelper.setBlockDirectional(world,x,y+1,z,fence,direction,0,6,1,0);
-		BuildHelper.setBlockDirectional(world,x,y+2,z,fence,direction,0,6,1,0);
-		BuildHelper.setBlockDirectional(world,x,y+3,z,fence,direction,0,6,1,0);
+		Builder.Single.setup(world,x,y+1,z).offset(direction,0,6,1,0).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+2,z).offset(direction,0,6,1,0).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,6,1,0).setBlock(fence).build();
 
-		BuildHelper.setBlockDirectional(world,x,y+1,z,fence,direction,0,6,3,0);
-		BuildHelper.setBlockDirectional(world,x,y+2,z,fence,direction,0,6,3,0);
-		BuildHelper.setBlockDirectional(world,x,y+3,z,fence,direction,0,6,3,0);
+		Builder.Single.setup(world,x,y+1,z).offset(direction,0,6,3,0).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+2,z).offset(direction,0,6,3,0).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,6,3,0).setBlock(fence).build();
 
-		BuildHelper.setBlockDirectional(world,x,y+3,z,fence,direction,0,5,1,0);
-		BuildHelper.setBlockDirectional(world,x,y+3,z,fence,direction,0,5,3,0);
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,5,1,0).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,5,3,0).setBlock(fence).build();
 
 		///////////////////////////////////////////////////////////
 
-		BuildHelper.setBlockDirectional(world,x,y+1,z,wood,direction,0,6,0,2);
-		BuildHelper.setBlockDirectional(world,x,y+2,z,wood,direction,0,6,0,2);
-		BuildHelper.setBlockDirectional(world,x,y+3,z,wood,direction,0,6,0,2);
-		BuildHelper.setBlockDirectional(world,x,y+4,z,wood,direction,0,6,0,2);
+		Builder.Single.setup(world,x,y+1,z).offset(direction,0,6,0,2).setBlock(wood).build();
+		Builder.Single.setup(world,x,y+2,z).offset(direction,0,6,0,2).setBlock(wood).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,6,0,2).setBlock(wood).build();
+		Builder.Single.setup(world,x,y+4,z).offset(direction,0,6,0,2).setBlock(wood).build();
 
-		BuildHelper.setBlockDirectional(world,x,y+1,z,ladder,direction,0,7,0,2,directionLadder,2);
-		BuildHelper.setBlockDirectional(world,x,y+2,z,ladder,direction,0,7,0,2,directionLadder,2);
-		BuildHelper.setBlockDirectional(world,x,y+3,z,ladder,direction,0,7,0,2,directionLadder,2);
-		BuildHelper.setBlockDirectional(world,x,y+4,z,ladder,direction,0,7,0,2,directionLadder,2);
+		Builder.Single.setup(world,x,y+1,z).offset(direction,0,7,0,2).setBlock(ladder).setDirection(directionLadder).build();
+		Builder.Single.setup(world,x,y+2,z).offset(direction,0,7,0,2).setBlock(ladder).setDirection(directionLadder).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,7,0,2).setBlock(ladder).setDirection(directionLadder).build();
+		Builder.Single.setup(world,x,y+4,z).offset(direction,0,7,0,2).setBlock(ladder).setDirection(directionLadder).build();
 
-		BuildHelper.setBlockDirectional(world,x,y+5,z,slab,direction,0,6,0,2);
-		BuildHelper.setBlockDirectional(world,x,y+5,z,slab,direction,0,5,0,2);
-		BuildHelper.setBlockDirectional(world,x,y+5,z,slab,direction,0,4,0,2);
-		BuildHelper.setBlockDirectional(world,x,y+5,z,slab,direction,0,3,0,2);
+		Builder.Single.setup(world,x,y+5,z).offset(direction,0,6,0,2).setBlock(slab).build();
+		Builder.Single.setup(world,x,y+5,z).offset(direction,0,5,0,2).setBlock(slab).build();
+		Builder.Single.setup(world,x,y+5,z).offset(direction,0,4,0,2).setBlock(slab).build();
+		Builder.Single.setup(world,x,y+5,z).offset(direction,0,3,0,2).setBlock(slab).build();
 
-		BuildHelper.setBlockDirectional(world,x,y+1,z,fence,direction,0,6,0,1);
-		BuildHelper.setBlockDirectional(world,x,y+2,z,fence,direction,0,6,0,1);
-		BuildHelper.setBlockDirectional(world,x,y+3,z,fence,direction,0,6,0,1);
-		BuildHelper.setBlockDirectional(world,x,y+4,z,fence,direction,0,6,0,1);
-		BuildHelper.setBlockDirectional(world,x,y+5,z,fence,direction,0,6,0,1);
+		Builder.Single.setup(world,x,y+1,z).offset(direction,0,6,0,1).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+2,z).offset(direction,0,6,0,1).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,6,0,1).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+4,z).offset(direction,0,6,0,1).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+5,z).offset(direction,0,6,0,1).setBlock(fence).build();
 
-		BuildHelper.setBlockDirectional(world,x,y+1,z,fence,direction,0,6,0,3);
-		BuildHelper.setBlockDirectional(world,x,y+2,z,fence,direction,0,6,0,3);
-		BuildHelper.setBlockDirectional(world,x,y+3,z,fence,direction,0,6,0,3);
-		BuildHelper.setBlockDirectional(world,x,y+4,z,fence,direction,0,6,0,3);
-		BuildHelper.setBlockDirectional(world,x,y+5,z,fence,direction,0,6,0,3);
+		Builder.Single.setup(world,x,y+1,z).offset(direction,0,6,0,3).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+2,z).offset(direction,0,6,0,3).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,6,0,3).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+4,z).offset(direction,0,6,0,3).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+5,z).offset(direction,0,6,0,3).setBlock(fence).build();
 
-		BuildHelper.setBlockDirectional(world,x,y+5,z,fence,direction,0,5,0,1);
-		BuildHelper.setBlockDirectional(world,x,y+5,z,fence,direction,0,5,0,3);
+		Builder.Single.setup(world,x,y+5,z).offset(direction,0,5,0,1).setBlock(fence).build();
+		Builder.Single.setup(world,x,y+5,z).offset(direction,0,5,0,3).setBlock(fence).build();
 
 		return true;
 	}

@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Builder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -72,17 +72,17 @@ public class InstantGlassDomeBlock extends InstantBlock {
 		Block torch = Blocks.TORCH;
 		Block air = Blocks.AIR;
 
-		BuildHelper.Circle.setup(world,x,y,z,4,stone).build();
-		BuildHelper.Circle.setup(world,x,y+1,z,4,glass,air).build();
-		BuildHelper.Circle.setup(world,x,y+2,z,4,glass,air).build();
-		BuildHelper.Circle.setup(world,x,y+3,z,4,glass,air).build();
-		BuildHelper.Circle.setup(world,x,y+4,z,3,glass,air).build();
-		BuildHelper.Circle.setup(world,x,y+5,z,2,glass).build();
+		Builder.Circle.setup(world,x,y,z,4,stone).build();
+		Builder.Circle.setup(world,x,y+1,z,4,glass,air).build();
+		Builder.Circle.setup(world,x,y+2,z,4,glass,air).build();
+		Builder.Circle.setup(world,x,y+3,z,4,glass,air).build();
+		Builder.Circle.setup(world,x,y+4,z,3,glass,air).build();
+		Builder.Circle.setup(world,x,y+5,z,2,glass).build();
 
-		BuildHelper.setBlock(world,x-3,y+1,z,torch);
-		BuildHelper.setBlock(world,x,y+1,z+3,torch);
-		BuildHelper.setBlock(world,x,y+1,z-3,torch);
-		BuildHelper.setBlock(world,x+3,y+1,z,torch);
+		Builder.Single.setup(world,x-3,y+1,z).setBlock(torch).build();
+		Builder.Single.setup(world,x,y+1,z+3).setBlock(torch).build();
+		Builder.Single.setup(world,x,y+1,z-3).setBlock(torch).build();
+		Builder.Single.setup(world,x+3,y+1,z).setBlock(torch).build();
 
 		return true;
 	}

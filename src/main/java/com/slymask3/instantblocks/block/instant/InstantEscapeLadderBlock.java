@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -59,7 +59,7 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 		if(world.dimension().equals(Level.NETHER)) {
 			y_top = world.getMaxBuildHeight();
 			for(int i=y+3; i<world.getMaxBuildHeight(); i++) {
-				if(BuildHelper.getBlock(world,x,i,z).equals(Blocks.AIR) && BuildHelper.getBlock(world,x,i+1,z).equals(Blocks.AIR) && BuildHelper.getBlock(world,x,i+2,z).equals(Blocks.AIR) && BuildHelper.getBlock(world,x,i+3,z).equals(Blocks.AIR)) {
+				if(Builder.getBlock(world,x,i,z).equals(Blocks.AIR) && Builder.getBlock(world,x,i+1,z).equals(Blocks.AIR) && Builder.getBlock(world,x,i+2,z).equals(Blocks.AIR) && Builder.getBlock(world,x,i+3,z).equals(Blocks.AIR)) {
 					y_top = i;
 					break;
 				}
@@ -72,15 +72,15 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 		}
 
 		for(int i=y-1; i<y_top; i++) {
-			BuildHelper.buildStone(world, x-1, y-1, z-1, 3, 1, 3);
-			BuildHelper.buildStone(world, x-1, i, z-1, 3, 1, 3);
-			BuildHelper.setBlock(world,x, i, z, air);
+			Builder.Multiple.setup(world,x-1,y-1,z-1,3,1,3).setStone().build();
+			Builder.Multiple.setup(world,x-1,i,z-1,3,1,3).setStone().build();
+			Builder.Single.setup(world,x,i,z).setBlock(air).build();
 
-			BuildHelper.setBlock(world,x, i, z, ladder, direction);
-			BuildHelper.setBlockDirectional(world,x,y,z,air,direction,0,1,0,0);
-			BuildHelper.setBlockDirectional(world,x,y+1,z,air,direction,0,1,0,0);
+			Builder.Single.setup(world,x,i,z).setBlock(ladder).setDirection(direction).build();
+			Builder.Single.setup(world,x,y,z).offset(direction,0,1,0,0).setBlock(air).build();
+			Builder.Single.setup(world,x,y+1,z).offset(direction,0,1,0,0).setBlock(air).build();
 			for(int m = y + 6; m < i; m = m + 6) {
-				BuildHelper.setBlockDirectional(world,x,m,z,torch,direction,0,1,0,0);
+				Builder.Single.setup(world,x,m,z).offset(direction,0,1,0,0).setBlock(torch).build();
 			}
 		}
 

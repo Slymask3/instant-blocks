@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.network.packet;
 
 import com.slymask3.instantblocks.block.instant.InstantSchematicBlock;
-import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Builder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -48,7 +48,7 @@ public class SchematicPacket {
 				Player player = context.get().getSender();
 				Level world = player.getLevel();
 
-				InstantSchematicBlock block = (InstantSchematicBlock)BuildHelper.getBlock(world,message._x, message._y, message._z);
+				InstantSchematicBlock block = (InstantSchematicBlock) Builder.getBlock(world,message._x, message._y, message._z);
 				if(block.build(world,message._x, message._y, message._z, player, message._schematic, message._center, message._air)) {
 					block.afterBuild(world,message._x, message._y, message._z, player);
 				}

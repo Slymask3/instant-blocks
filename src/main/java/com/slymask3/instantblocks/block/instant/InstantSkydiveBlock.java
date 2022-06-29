@@ -6,7 +6,7 @@ import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.ScreenID;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ColorHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
@@ -45,7 +45,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 	public boolean build(Level world, int x, int y, int z, Player player, int[] selectedColors, int radius, boolean teleportToTop) {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 
-		BuildHelper.setBlock(world,x,y,z,Blocks.AIR);
+		Builder.Single.setup(world,x,y,z).setBlock(Blocks.AIR).build();
 
 		ArrayList<Helper.Coords> coordsList = new ArrayList<>();
 		ArrayList<Helper.Coords> coordsAirList = new ArrayList<>();
@@ -91,11 +91,11 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 		for(int c=max; c>=min; c--) {
 			for(Helper.Coords coords : coordsAirList) {
 				if(c == min) {
-					BuildHelper.setColorBlock(world,coords.getX(),c,coords.getZ(),colors[i].getRGB());
+					Builder.Single.setup(world,coords.getX(),c,coords.getZ()).setColor(colors[i].getRGB()).build();
 				} else if(c < min+water+1) {
-					BuildHelper.setBlock(world,coords.getX(),c,coords.getZ(),Blocks.WATER);
+					Builder.Single.setup(world,coords.getX(),c,coords.getZ()).setBlock(Blocks.WATER).build();
 				} else {
-					BuildHelper.setBlock(world,coords.getX(),c,coords.getZ(),Blocks.AIR);
+					Builder.Single.setup(world,coords.getX(),c,coords.getZ()).setBlock(Blocks.AIR).build();
 				}
 			}
 			for(Helper.Coords coords : coordsList) {
@@ -103,9 +103,9 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 					i = 0;
 				}
 				if(c == min+water+1 && (((coords.getX()-radius==x || coords.getX()+radius==x) && coords.getZ()==z) || ((coords.getZ()-radius==z || coords.getZ()+radius==z) && coords.getX()==x))) {
-					BuildHelper.setBlock(world,coords.getX(),c,coords.getZ(),ModBlocks.SKYDIVE_TP.get());
+					Builder.Single.setup(world,coords.getX(),c,coords.getZ()).setBlock(ModBlocks.SKYDIVE_TP.get()).build();
 				} else {
-					BuildHelper.setColorBlock(world,coords.getX(),c,coords.getZ(),colors[i].getRGB());
+					Builder.Single.setup(world,coords.getX(),c,coords.getZ()).setColor(colors[i].getRGB()).build();
 				}
 			}
 			i++;

@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -47,25 +47,25 @@ public class InstantMiningLadderBlock extends InstantBlock {
 		Direction directionSign = direction.getClockWise();
 
 		for(int c = y; c > layer-2; c--) {
-			BuildHelper.buildStoneDirectional(world,x,c,z,direction,0,1,2,0,2,0,0,4,0,0);
+			Builder.Multiple.setup(world,x,c,z,direction,0,1,2,0,2,0,0,4,0,0).build();
 		}
 		for(int c = y; c > layer-1; c--) {
-			BuildHelper.setBlockDirectional(world,x, c, z, ladder, direction, 0,0,1,0,directionLadder);
+			Builder.Single.setup(world,x,c,z).offset(direction,0,0,1,0).setBlock(ladder).setDirection(directionLadder).build();
 		}
 		for(int c = y; c > layer-1; c--) {
-			BuildHelper.setBlockDirectional(world,x, c, z, air, direction, 0,0,0,1);
+			Builder.Single.setup(world,x,c,z).offset(direction,0,0,0,1).setBlock(air).build();
 		}
 		for(int c = y; c > layer+1; c = c - 3) {
 			c = c - 3;
-			BuildHelper.setBlock(world,x, c, z, torch);
+			Builder.Single.setup(world,x,c,z).setBlock(torch).build();
 		}
 
-		BuildHelper.setBlock(world,x, layer, z, air); //MIDDLE AIR
-		BuildHelper.setBlock(world,new BlockPos(x,layer+1,z),Blocks.WALL_TORCH,direction); //MIDDLE TORCH
-		BuildHelper.setStone(world,x, layer+2, z); //ABOVE MIDDLE TORCH
-		BuildHelper.setBlockDirectional(world,x, layer+2, z, water,direction,0,0,0,1); //WATER
-		BuildHelper.setBlockDirectional(world,x, layer+1, z, sign, direction, 0,0,0,1,directionSign);
-		BuildHelper.setStone(world,x, layer-1, z); //MIDDLE STONE
+		Builder.Single.setup(world,x,layer,z).setBlock(air).build(); //MIDDLE AIR
+		Builder.Single.setup(world,x,layer+1,z).setBlock(Blocks.WALL_TORCH).setDirection(direction).build(); //MIDDLE TORCH
+		Builder.Single.setup(world,x,layer+2,z).setStone().build(); //ABOVE MIDDLE TORCH
+		Builder.Single.setup(world,x,layer+2,z).offset(direction,0,0,0,1).setBlock(water).build(); //WATER
+		Builder.Single.setup(world,x,layer+1,z).offset(direction,0,0,0,1).setBlock(sign).setDirection(directionSign).build();
+		Builder.Single.setup(world,x,layer-1,z).setStone().build(); //MIDDLE STONE
 
 		return true;
 	}

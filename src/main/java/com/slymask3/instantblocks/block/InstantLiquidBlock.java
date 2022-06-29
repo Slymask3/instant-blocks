@@ -4,7 +4,7 @@ import com.mojang.math.Vector3f;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModBlocks;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -130,9 +130,9 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		for(Helper.Coords coords : coordsList) {
-			BuildHelper.setBlock(world, coords.getX(), coords.getY(), coords.getZ(), blockReplace);
+			Builder.Single.setup(world,coords.getX(),coords.getY(),coords.getZ()).setBlock(blockReplace).build();
 		}
-		BuildHelper.setBlock(world,x, y, z, getMainReplaceBlock());
+		Builder.Single.setup(world,x,y,z).setBlock(getMainReplaceBlock()).build();
 		if(coordsList.size() > 0) {
 			setCreateMessage(create, String.valueOf(isSuction ? coordsList.size() : coordsList.size()+1));
 		} else {
@@ -159,7 +159,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	private void check(Level world, int x, int y, int z) {
-		Block blockCurrent = BuildHelper.getBlock(world,x,y,z);
+		Block blockCurrent = Builder.getBlock(world,x,y,z);
 		if(isCorrectBlock(blockCurrent) && coordsList.size() < getMax() && addCoords(x,y,z)) {
 			if(blockCheck == null) {
 				blockCheck = blockCurrent;

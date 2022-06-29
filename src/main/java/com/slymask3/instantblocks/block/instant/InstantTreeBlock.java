@@ -6,7 +6,7 @@ import com.slymask3.instantblocks.gui.screens.TreeScreen;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.ScreenID;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Builder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -765,28 +765,28 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 
 	private void buildBlock(Level world, int x, int y, int z, Block block, boolean full, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
 		if(full) {
-			BuildHelper.build(world, x-1, y, z-1, block, 4, 4, 4);
+			Builder.Multiple.setup(world,x-1,y,z-1,4,4,4).setBlock(block).build();
 		} else {
 			if(air) {
-				BuildHelper.build(world, x-1, y, z-1, Blocks.AIR, 4, 4, 4);
+				Builder.Multiple.setup(world,x-1,y,z-1,4,4,4).setBlock(Blocks.AIR).build();
 			}
 			if(up) {
-				BuildHelper.build(world, x-1, y+3, z-1, block, 4, 1, 4);
+				Builder.Multiple.setup(world,x-1,y+3,z-1,4,1,4).setBlock(block).build();
 			}
 			if(down) {
-				BuildHelper.build(world, x-1, y, z-1, block, 4, 1, 4);
+				Builder.Multiple.setup(world,x-1,y,z-1,4,1,4).setBlock(block).build();
 			}
 			if(north) {
-				BuildHelper.build(world, x-1, y, z-1, block, 4, 4, 1);
+				Builder.Multiple.setup(world,x-1,y,z-1,4,4,1).setBlock(block).build();
 			}
 			if(south) {
-				BuildHelper.build(world, x-1, y, z+2, block, 4, 4, 1);
+				Builder.Multiple.setup(world,x-1,y,z+2,4,4,1).setBlock(block).build();
 			}
 			if(east) {
-				BuildHelper.build(world, x+2, y, z-1, block, 1, 4, 4);
+				Builder.Multiple.setup(world,x+2,y,z-1,1,4,4).setBlock(block).build();
 			}
 			if(west) {
-				BuildHelper.build(world, x-1, y, z-1, block, 1, 4, 4);
+				Builder.Multiple.setup(world,x-1,y,z-1,1,4,4).setBlock(block).build();
 			}
 		}
 	}

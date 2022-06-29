@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.BuildHelper;
+import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -55,7 +55,7 @@ public class InstantLightBlock extends InstantBlock {
             Helper.sendMessage(player,Strings.ERROR_LIGHT, ChatFormatting.RED + String.valueOf(Config.Common.RADIUS_LIGHT.get()));
             return false;
         }
-        BuildHelper.setBlock(world,x,y,z,Blocks.TORCH);
+        Builder.Single.setup(world,x,y,z).setBlock(Blocks.TORCH).build();
         setCreateMessage(Strings.CREATE_LIGHT_AMOUNT, String.valueOf(coordsList.size()));
         coordsList.clear();
         return true;
@@ -89,15 +89,15 @@ public class InstantLightBlock extends InstantBlock {
 
     private void placeTorch(Level world, BlockPos pos) {
         if(world.getBlockState(pos.below()).isFaceSturdy(world,pos,Direction.UP)) {
-            BuildHelper.setBlock(world,pos,Blocks.TORCH, Direction.UP);
+            Builder.Single.setup(world,pos).setBlock(Blocks.TORCH).setDirection(Direction.UP).build();
         } else if(world.getBlockState(pos.north()).isFaceSturdy(world,pos,Direction.SOUTH)) {
-            BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.SOUTH);
+            Builder.Single.setup(world,pos).setBlock(Blocks.WALL_TORCH).setDirection(Direction.SOUTH).build();
         } else if(world.getBlockState(pos.east()).isFaceSturdy(world,pos,Direction.WEST)) {
-            BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.WEST);
+            Builder.Single.setup(world,pos).setBlock(Blocks.WALL_TORCH).setDirection(Direction.WEST).build();
         } else if(world.getBlockState(pos.south()).isFaceSturdy(world,pos,Direction.NORTH)) {
-            BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.NORTH);
+            Builder.Single.setup(world,pos).setBlock(Blocks.WALL_TORCH).setDirection(Direction.NORTH).build();
         } else if(world.getBlockState(pos.west()).isFaceSturdy(world,pos,Direction.EAST)) {
-            BuildHelper.setBlock(world,pos,Blocks.WALL_TORCH,Direction.EAST);
+            Builder.Single.setup(world,pos).setBlock(Blocks.WALL_TORCH).setDirection(Direction.EAST).build();
         }
         //world.getLightEngine().updateSectionStatus(pos,true);
         //world.getLightEngine().enableLightSources(new ChunkPos(pos),true);
