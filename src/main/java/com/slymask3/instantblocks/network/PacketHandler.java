@@ -14,7 +14,7 @@ public class PacketHandler {
 
     public static void register() {
         int index = 100;
-        INSTANCE.registerMessage(++index, MessagePacket.class, MessagePacket::encode, MessagePacket::decode, MessagePacket.Handler::handle);
+        INSTANCE.registerMessage(++index, ClientPacket.class, ClientPacket::encode, ClientPacket::decode, ClientPacket.Handler::handle);
         INSTANCE.registerMessage(++index, SkydivePacket.class, SkydivePacket::encode, SkydivePacket::decode, SkydivePacket.Handler::handle);
         INSTANCE.registerMessage(++index, StatuePacket.class, StatuePacket::encode, StatuePacket::decode, StatuePacket.Handler::handle);
         INSTANCE.registerMessage(++index, HarvestPacket.class, HarvestPacket::encode, HarvestPacket::decode, HarvestPacket.Handler::handle);

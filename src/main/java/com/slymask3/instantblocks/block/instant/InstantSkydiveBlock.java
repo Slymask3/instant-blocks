@@ -85,7 +85,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 		}
 
 		int i = 0;
-		int min = Config.Common.SKYDIVE_MIN.get();
+		int min = Helper.getMinSkydive(world);
 		int max = Helper.getMaxSkydive(world);
 		int water = Config.Common.SKYDIVE_WATER.get();
 		for(int c=max; c>=min; c--) {

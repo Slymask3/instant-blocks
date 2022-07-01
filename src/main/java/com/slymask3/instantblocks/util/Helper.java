@@ -4,7 +4,7 @@ import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.item.InstantWandItem;
 import com.slymask3.instantblocks.network.PacketHandler;
-import com.slymask3.instantblocks.network.packet.MessagePacket;
+import com.slymask3.instantblocks.network.packet.ClientPacket;
 import com.slymask3.instantblocks.reference.Names;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -101,6 +101,14 @@ public class Helper {
 		return chest.getContainerSize() == 54;
 	}
 
+	public static int getMinSkydive(Level world) {
+		int min = Config.Common.SKYDIVE_MIN.get();
+		if(min < world.getMinBuildHeight() - 4) {
+			min = world.getMinBuildHeight() - 5;
+		}
+		return min;
+	}
+
 	public static int getMaxSkydive(Level world) {
 		int max = Config.Common.SKYDIVE_MAX.get();
 		if(max > world.getMaxBuildHeight() - 3) {
@@ -123,7 +131,7 @@ public class Helper {
 
 	public static void sendMessage(Player player, String message, String variable, int x, int y, int z, ClientHelper.Particles particles) {
 		if(isServer(player.getLevel())) {
-			PacketHandler.sendToClient((ServerPlayer)player,new MessagePacket(message,variable,x,y,z,particles.ordinal()));
+			PacketHandler.sendToClient((ServerPlayer)player,new ClientPacket(message,variable,x,y,z,particles.ordinal()));
 		}
 	}
 

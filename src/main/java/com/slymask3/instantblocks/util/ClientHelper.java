@@ -4,7 +4,6 @@ import com.slymask3.instantblocks.block.InstantLiquidBlock;
 import com.slymask3.instantblocks.gui.screens.*;
 import com.slymask3.instantblocks.handler.Config;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.network.chat.TranslatableComponent;

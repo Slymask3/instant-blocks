@@ -312,4 +312,50 @@ public class Builder {
 			}
 		}
 	}
+
+	public static class Sphere {
+		Level world;
+		int x,y,z;
+		int radius;
+		Block outer, inner;
+		boolean half;
+		private Sphere(Level world, int x, int y, int z, int radius, Block outer, Block inner) {
+			this.world = world;
+			this.x = x;
+			this.y = y;
+			this.z = z;
+			this.radius = radius;
+			this.outer = outer;
+			this.inner = inner;
+			this.half = false;
+		}
+		public static Sphere setup(Level world, int x, int y, int z, int radius, Block outer, Block inner) {
+			return new Sphere(world, x, y, z, radius, outer, inner);
+		}
+		public static Sphere setup(Level world, int x, int y, int z, int radius, Block block) {
+			return new Sphere(world, x, y, z, radius, block, block);
+		}
+		public Sphere setHalf() {
+			this.half = true;
+			return this;
+		}
+		public void build() {
+			double distance;
+			for(int xc = 0; xc <= 2 * radius; xc++) {
+				for(int zc = 0; zc <= 2 * radius; zc++) {
+					for(int yc = 0; yc <= 2 * radius; yc++) {
+						distance = Math.sqrt((xc - radius) * (xc - radius) + (zc - radius) * (zc - radius) + (yc - radius) * (yc - radius));
+						int y_pos = y+yc-radius;
+						if(y_pos >= y || !this.half) {
+							if(distance > radius - 0.4 && distance < radius + 0.5) {
+								Single.setup(world,x+xc-radius,y+yc-radius,z+zc-radius).setBlock(outer).build();
+							} else if(distance < radius - 0.3) {
+								Single.setup(world,x+xc-radius,y+yc-radius,z+zc-radius).setBlock(inner).build();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

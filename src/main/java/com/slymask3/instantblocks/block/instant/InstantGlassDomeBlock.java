@@ -72,17 +72,17 @@ public class InstantGlassDomeBlock extends InstantBlock {
 		Block torch = Blocks.TORCH;
 		Block air = Blocks.AIR;
 
-		Builder.Circle.setup(world,x,y,z,4,stone).build();
-		Builder.Circle.setup(world,x,y+1,z,4,glass,air).build();
-		Builder.Circle.setup(world,x,y+2,z,4,glass,air).build();
-		Builder.Circle.setup(world,x,y+3,z,4,glass,air).build();
-		Builder.Circle.setup(world,x,y+4,z,3,glass,air).build();
-		Builder.Circle.setup(world,x,y+5,z,2,glass).build();
+		int radius = Config.Common.RADIUS_DOME.get();
 
-		Builder.Single.setup(world,x-3,y+1,z).setBlock(torch).build();
-		Builder.Single.setup(world,x,y+1,z+3).setBlock(torch).build();
-		Builder.Single.setup(world,x,y+1,z-3).setBlock(torch).build();
-		Builder.Single.setup(world,x+3,y+1,z).setBlock(torch).build();
+		Builder.Circle.setup(world,x,y,z,radius,stone).build();
+		Builder.Sphere.setup(world,x,y+1,z,radius,glass,air).setHalf().build();
+
+		for(int i=3; i<radius; i=i+6) {
+			Builder.Single.setup(world,x+i,y+1,z).setBlock(torch).build();
+			Builder.Single.setup(world,x-i,y+1,z).setBlock(torch).build();
+			Builder.Single.setup(world,x,y+1,z+i).setBlock(torch).build();
+			Builder.Single.setup(world,x,y+1,z-i).setBlock(torch).build();
+		}
 
 		return true;
 	}

@@ -32,6 +32,7 @@ public class Config {
 		public static IntValue WEIGHT_CARROTS;
 		public static IntValue WEIGHT_BEETROOTS;
 		public static IntValue TREE_SIZE;
+		public static IntValue RADIUS_DOME;
 		public static BooleanValue DISABLE_WOODEN_HOUSE;
 		public static BooleanValue DISABLE_MINING_LADDER;
 		public static BooleanValue DISABLE_GLASS_DOME;
@@ -109,6 +110,10 @@ public class Config {
 			TREE_SIZE = builder
 					.comment("Block size for the huge tree.\nDefault: 4")
 					.defineInRange("TREE_SIZE", 4,1,24);
+
+			RADIUS_DOME = builder
+					.comment("Glass dome radius.\nDefault: 4")
+					.defineInRange("RADIUS_DOME", 4,1,200);
 
 			builder.pop();
 

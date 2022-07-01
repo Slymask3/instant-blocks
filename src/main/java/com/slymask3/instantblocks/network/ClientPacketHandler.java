@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.network;
 
-import com.slymask3.instantblocks.network.packet.MessagePacket;
+import com.slymask3.instantblocks.network.packet.ClientPacket;
 import com.slymask3.instantblocks.util.ClientHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
 public class ClientPacketHandler {
-    public static void handle(MessagePacket message, Supplier<NetworkEvent.Context> context) {
+    public static void handle(ClientPacket message, Supplier<NetworkEvent.Context> context) {
         Player player = Minecraft.getInstance().player;
         if(player != null) {
             if(message.particles != ClientHelper.Particles.NONE.ordinal()) {
