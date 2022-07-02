@@ -10,29 +10,39 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class Config {
 	public static class Common {
-		public static BooleanValue GENERATE_IN_CHESTS;
-		public static BooleanValue GENERATE_IN_CHESTS_BONUS;
+		public static BooleanValue USE_WANDS;
 		public static BooleanValue TP_GRINDER;
+		public static BooleanValue KEEP_BLOCKS;
+		public static BooleanValue ALLOW_WATER_IN_NETHER;
+		public static IntValue RADIUS_HARVEST;
+		public static IntValue RADIUS_LIGHT;
+		public static IntValue RAILS_AMOUNT;
+		public static IntValue MINING_LADDER_LAYER;
+		public static IntValue XP_AMOUNT;
+		public static IntValue TREE_SIZE;
+		public static IntValue RADIUS_DOME;
+
 		public static IntValue MAX_LIQUID;
 		public static IntValue MAX_FILL;
 		public static BooleanValue SIMPLE_LIQUID;
-		public static BooleanValue USE_WANDS;
-		public static IntValue RADIUS_HARVEST;
-		public static IntValue RADIUS_LIGHT;
-		public static BooleanValue KEEP_BLOCKS;
-		public static BooleanValue ALLOW_WATER_IN_NETHER;
-		public static IntValue XP_AMOUNT;
-		public static IntValue RAILS_AMOUNT;
+
 		public static IntValue SKYDIVE_MIN;
 		public static IntValue SKYDIVE_MAX;
 		public static IntValue SKYDIVE_WATER;
-		public static IntValue MINING_LADDER_LAYER;
+
 		public static IntValue WEIGHT_WHEAT;
 		public static IntValue WEIGHT_POTATOES;
 		public static IntValue WEIGHT_CARROTS;
 		public static IntValue WEIGHT_BEETROOTS;
-		public static IntValue TREE_SIZE;
-		public static IntValue RADIUS_DOME;
+
+		public static ConfigValue<String> HOUSE_PLANKS_ONE;
+		public static ConfigValue<String> HOUSE_PLANKS_TWO;
+		public static ConfigValue<String> HOUSE_LOG;
+		public static ConfigValue<String> HOUSE_DOOR;
+
+		public static BooleanValue GENERATE_IN_CHESTS;
+		public static BooleanValue GENERATE_IN_CHESTS_BONUS;
+
 		public static BooleanValue DISABLE_WOODEN_HOUSE;
 		public static BooleanValue DISABLE_MINING_LADDER;
 		public static BooleanValue DISABLE_GLASS_DOME;
@@ -50,6 +60,7 @@ public class Config {
 		public static BooleanValue DISABLE_LIGHT;
 		public static BooleanValue DISABLE_SCHEMATIC;
 		public static BooleanValue DISABLE_TREE;
+
 		public static IntValue DAMAGE_WOODEN_HOUSE;
 		public static IntValue DAMAGE_MINING_LADDER;
 		public static IntValue DAMAGE_GLASS_DOME;
@@ -236,7 +247,7 @@ public class Config {
 
 			builder.pop();
 
-			builder.comment("Instant skydive block settings").push("skydive");
+			builder.comment("Instant skydive settings").push("skydive");
 
 			SKYDIVE_MIN = builder
 					.comment("Minimum height for the Instant Rainbow Skydive.\nDefault: -59")
@@ -252,7 +263,7 @@ public class Config {
 
 			builder.pop();
 
-			builder.comment("Instant farm block settings").push("farm");
+			builder.comment("Instant farm settings").push("farm");
 
 			WEIGHT_WHEAT = builder
 					.comment("Weight for wheat to be chosen to plant.\nDefault: 70")
@@ -269,6 +280,26 @@ public class Config {
 			WEIGHT_BEETROOTS = builder
 					.comment("Weight for beetroot to be chosen to plant.\nDefault: 10")
 					.defineInRange("WEIGHT_BEETROOTS", 10,0,100);
+
+			builder.pop();
+
+			builder.comment("Instant wooden house settings").push("house");
+
+			HOUSE_PLANKS_ONE = builder
+					.comment("First set of planks.\nDefault: birch")
+					.define("HOUSE_PLANKS_ONE", "birch");
+
+			HOUSE_PLANKS_TWO = builder
+					.comment("Second set of planks.\nDefault: spruce")
+					.define("HOUSE_PLANKS_TWO", "spruce");
+
+			HOUSE_LOG = builder
+					.comment("Log.\nDefault: birch")
+					.define("HOUSE_LOG", "birch");
+
+			HOUSE_DOOR = builder
+					.comment("Door.\nDefault: dark_oak")
+					.define("HOUSE_DOOR", "dark_oak");
 
 			builder.pop();
 

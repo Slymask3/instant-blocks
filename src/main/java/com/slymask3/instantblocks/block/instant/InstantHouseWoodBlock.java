@@ -4,6 +4,7 @@ import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -24,27 +25,27 @@ public class InstantHouseWoodBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		//Block light = Helper.readBlockState("acacia_planks").getBlock();
-		//Block dark = Helper.readBlockState("dark_oak_planks").getBlock();
-		//Block slabD = Helper.readBlockState("dark_oak_slab").getBlock();
+		String planks_one = Config.Common.HOUSE_PLANKS_ONE.get();
+		String planks_two = Config.Common.HOUSE_PLANKS_TWO.get();
 
-		Block light = Blocks.BIRCH_PLANKS;
-		Block dark = Blocks.SPRUCE_PLANKS;
-		Block slabD = Blocks.SPRUCE_SLAB;
-		Block log = Blocks.BIRCH_LOG;
+		Block light = Helper.readBlock(planks_one + "_planks",Blocks.BIRCH_PLANKS);
+		Block dark = Helper.readBlock(planks_two + "_planks",Blocks.SPRUCE_PLANKS);
+		Block slabD = Helper.readBlock( planks_two + "_slab",Blocks.SPRUCE_SLAB);
+		Block fence = Helper.readBlock( planks_two + "_fence",Blocks.SPRUCE_FENCE);
+		Block gate = Helper.readBlock( planks_two + "_fence_gate",Blocks.SPRUCE_FENCE_GATE);
+		Block stair = Helper.readBlock( planks_two + "_stairs",Blocks.SPRUCE_STAIRS);
+		Block sign = Helper.readBlock( planks_two + "_wall_sign",Blocks.SPRUCE_WALL_SIGN);
+		Block plate = Helper.readBlock( planks_two + "_pressure_plate",Blocks.SPRUCE_PRESSURE_PLATE);
+		Block log = Helper.readBlock( Config.Common.HOUSE_LOG.get() + "_log",Blocks.BIRCH_LOG);
+		Block door = Helper.readBlock( Config.Common.HOUSE_DOOR.get() + "_door",Blocks.DARK_OAK_DOOR);
+
 		Block craft = Blocks.CRAFTING_TABLE;
 		Block chest = Blocks.CHEST;
 		Block furnace = Blocks.FURNACE;
-		Block fence = Blocks.SPRUCE_FENCE;
-		Block gate = Blocks.SPRUCE_FENCE_GATE;
-		Block stair = Blocks.SPRUCE_STAIRS;
-		Block sign = Blocks.SPRUCE_WALL_SIGN;
 		Block bed = Blocks.RED_BED;
-		Block door = Blocks.DARK_OAK_DOOR;
 		Block pane = Blocks.GLASS_PANE;
 		Block torch = Blocks.TORCH;
 		Block torch_wall = Blocks.WALL_TORCH;
-		Block plate = Blocks.SPRUCE_PRESSURE_PLATE;
 		Block air = Blocks.AIR;
 
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);

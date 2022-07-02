@@ -5,22 +5,37 @@ import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+
+import java.util.Random;
 
 public class InstantGrinderBlock extends InstantBlock {
 	public InstantGrinderBlock() {
 		super(Block.Properties.of(Material.METAL)
 				.strength(1.5F, 2000F)
 				.sound(SoundType.METAL)
+				.noOcclusion()
 		, Config.Common.DISABLE_GRINDER);
         setCreateMessage(Strings.CREATE_GRINDER);
     }
+
+	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+		for(int i=0; i<4; i++) {
+			double d0 = (double)pos.getX() + random.nextDouble();
+			double d1 = (double)pos.getY() + random.nextDouble();
+			double d2 = (double)pos.getZ() + random.nextDouble();
+			world.addParticle(ParticleTypes.HAPPY_VILLAGER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+		}
+	}
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(Builder.getBlock(world,x, y-1, z) != Blocks.SPAWNER) {

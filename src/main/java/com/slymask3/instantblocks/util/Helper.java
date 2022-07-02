@@ -15,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -152,7 +153,15 @@ public class Helper {
 		return blocks.get(0).getBlock();
 	}
 
+	public static Block readBlock(String string, Block fallback) {
+		return readBlockState(string, fallback.defaultBlockState()).getBlock();
+	}
+
 	public static BlockState readBlockState(String string) {
+		return readBlockState(string, Blocks.AIR.defaultBlockState());
+	}
+
+	public static BlockState readBlockState(String string, BlockState fallback) {
 		CompoundTag tag = new CompoundTag();
 		String[] split = string.split("\\[",2);
 		tag.putString("Name",split[0]);
@@ -167,7 +176,11 @@ public class Helper {
 			}
 			tag.put("Properties",propertiesTag);
 		}
-		return NbtUtils.readBlockState(tag);
+		BlockState state = NbtUtils.readBlockState(tag);
+		if(state.getBlock().equals(Blocks.AIR)) {
+			return fallback;
+		}
+		return state;
 	}
 
 	public static class WeightedBlock {

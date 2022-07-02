@@ -107,7 +107,7 @@ public abstract class InstantBlock extends Block {
 			}
 
 			if(isDisabled(player)) {
-				return InteractionResult.SUCCESS;
+				return InteractionResult.FAIL;
 			}
 
 			int x = pos.getX();
@@ -117,20 +117,21 @@ public abstract class InstantBlock extends Block {
 			ItemStack is = player.getItemInHand(hand);
 			if(Config.Common.USE_WANDS.get() && !Helper.isWand(is)) {
 				Helper.sendMessage(player, Strings.ERROR_WAND);
-				return InteractionResult.SUCCESS;
+				return InteractionResult.FAIL;
 			}
 
 			if(!canActivate(world,x,y,z,player)) {
-				return InteractionResult.SUCCESS;
+				return InteractionResult.FAIL;
 			}
 
 			if(build(world, x, y, z, player)) {
 				afterBuild(world, x, y, z, player);
-			} else {
 				return InteractionResult.SUCCESS;
+			} else {
+				return InteractionResult.FAIL;
 			}
 		}
-		return InteractionResult.SUCCESS;
+		return InteractionResult.FAIL;
 	}
 
 	public InteractionResult onActivateGui(Level world, BlockPos pos, Player player, InteractionHand hand) {
@@ -139,7 +140,7 @@ public abstract class InstantBlock extends Block {
 		}
 
 		if(isDisabled(player)) {
-			return InteractionResult.SUCCESS;
+			return InteractionResult.FAIL;
 		}
 
 		int x = pos.getX();
@@ -147,14 +148,14 @@ public abstract class InstantBlock extends Block {
 		int z = pos.getZ();
 
 		if(!canActivate(world,x,y,z,player)) {
-			return InteractionResult.SUCCESS;
+			return InteractionResult.FAIL;
 		}
 
 		ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
 		if(Config.Common.USE_WANDS.get()) {
 			if(!Helper.isWand(is)) {
 				Helper.sendMessage(player, Strings.ERROR_WAND);
-				return InteractionResult.SUCCESS;
+				return InteractionResult.FAIL;
 			}
 		}
 
