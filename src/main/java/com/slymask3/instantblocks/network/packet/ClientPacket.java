@@ -9,10 +9,12 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class ClientPacket {
-	public String message;
-	public String variable;
-	public int x,y,z;
-	public int particles;
+	public final String message;
+	public final String variable;
+	public final int x;
+	public final int y;
+	public final int z;
+	public final int particles;
 
 	public ClientPacket(String message, String variable, int x, int y, int z, int particles) {
 		this.message = message;

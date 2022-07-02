@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class InstantLightBlock extends InstantBlock {
-    public ArrayList<Helper.Coords> coordsList;
+    public final ArrayList<Helper.Coords> coordsList;
 
     public InstantLightBlock() {
         super(Block.Properties.of(Material.DECORATION)

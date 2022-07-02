@@ -24,9 +24,9 @@ public class ModItems {
 	public static final RegistryObject<Item> WAND_NETHERITE = ITEMS.register(Names.Items.IB_WAND_NETHERITE, () -> new InstantWandItem(Tiers.NETHERITE));
 
 	public static class ModCreativeTab extends CreativeModeTab {
-		public static final ModCreativeTab instance = new ModCreativeTab(CreativeModeTab.TABS.length, InstantBlocks.MOD_ID);
-		private ModCreativeTab(int index, String label) {
-			super(index, label);
+		public static final ModCreativeTab instance = new ModCreativeTab(CreativeModeTab.TABS.length);
+		private ModCreativeTab(int index) {
+			super(index, InstantBlocks.MOD_ID);
 		}
 
 		@Override

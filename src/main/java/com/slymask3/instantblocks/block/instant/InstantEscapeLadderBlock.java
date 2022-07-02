@@ -92,14 +92,13 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 	// LadderBlock.class
 
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-	protected static final float AABB_OFFSET = 3.0F;
 	protected static final VoxelShape EAST_AABB = Block.box(0.0D, 0.0D, 0.0D, 3.0D, 16.0D, 16.0D);
 	protected static final VoxelShape WEST_AABB = Block.box(13.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 	protected static final VoxelShape SOUTH_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 3.0D);
 	protected static final VoxelShape NORTH_AABB = Block.box(0.0D, 0.0D, 13.0D, 16.0D, 16.0D, 16.0D);
 
 	public VoxelShape getShape(BlockState p_54372_, BlockGetter p_54373_, BlockPos p_54374_, CollisionContext p_54375_) {
-		switch((Direction)p_54372_.getValue(FACING)) {
+		switch(p_54372_.getValue(FACING)) {
 			case NORTH:
 				return NORTH_AABB;
 			case SOUTH:

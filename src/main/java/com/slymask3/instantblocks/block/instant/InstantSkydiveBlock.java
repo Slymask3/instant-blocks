@@ -23,7 +23,6 @@ import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
     public InstantSkydiveBlock() {
@@ -43,23 +42,14 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player, int[] selectedColors, int radius, boolean teleportToTop) {
+		if(selectedColors.length == 0) {
+			Helper.sendMessage(player,Strings.ERROR_NO_COLORS);
+			return false;
+		}
+
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 
 		Builder.Single.setup(world,x,y,z).setBlock(Blocks.AIR).build();
-
-		ArrayList<Helper.Coords> coordsList = new ArrayList<>();
-		ArrayList<Helper.Coords> coordsAirList = new ArrayList<>();
-		double distance;
-		for (int row = 0; row <= 2 * radius; row++) {
-			for (int col = 0; col <= 2 * radius; col++) {
-				distance = Math.sqrt((row - radius) * (row - radius) + (col - radius) * (col - radius));
-				if(distance > radius - 0.4 && distance < radius + 0.5) {
-					coordsList.add(new Helper.Coords(x+row-radius,0,z+col-radius));
-				} else if(distance < radius - 0.3) {
-					coordsAirList.add(new Helper.Coords(x+row-radius,0,z+col-radius));
-				}
-			}
-		}
 
 		Color[] colors;
 		int index = 0;
@@ -89,24 +79,22 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 		int max = Helper.getMaxSkydive(world);
 		int water = Config.Common.SKYDIVE_WATER.get();
 		for(int c=max; c>=min; c--) {
-			for(Helper.Coords coords : coordsAirList) {
-				if(c == min) {
-					Builder.Single.setup(world,coords.getX(),c,coords.getZ()).setColor(colors[i].getRGB()).build();
-				} else if(c < min+water+1) {
-					Builder.Single.setup(world,coords.getX(),c,coords.getZ()).setBlock(Blocks.WATER).build();
-				} else {
-					Builder.Single.setup(world,coords.getX(),c,coords.getZ()).setBlock(Blocks.AIR).build();
-				}
+			if(i>=colors.length) {
+				i = 0;
 			}
-			for(Helper.Coords coords : coordsList) {
-				if(i>=colors.length) {
-					i = 0;
-				}
-				if(c == min+water+1 && (((coords.getX()-radius==x || coords.getX()+radius==x) && coords.getZ()==z) || ((coords.getZ()-radius==z || coords.getZ()+radius==z) && coords.getX()==x))) {
-					Builder.Single.setup(world,coords.getX(),c,coords.getZ()).setBlock(ModBlocks.SKYDIVE_TP.get()).build();
-				} else {
-					Builder.Single.setup(world,coords.getX(),c,coords.getZ()).setColor(colors[i].getRGB()).build();
-				}
+			int color = colors[i].getRGB();
+			if(c == min) {
+				Builder.Circle.setup(world,x,c,z,radius).setColor(color).build();
+			} else if(c < min+water+1) {
+				Builder.Circle.setup(world,x,c,z,radius,Blocks.WATER).setOuterColor(color).build();
+			} else {
+				Builder.Circle.setup(world,x,c,z,radius,Blocks.AIR).setOuterColor(color).build();
+			}
+			if(c == min+water+1) {
+				Builder.Single.setup(world,x+radius,c,z).setBlock(ModBlocks.SKYDIVE_TP.get()).build();
+				Builder.Single.setup(world,x-radius,c,z).setBlock(ModBlocks.SKYDIVE_TP.get()).build();
+				Builder.Single.setup(world,x,c,z+radius).setBlock(ModBlocks.SKYDIVE_TP.get()).build();
+				Builder.Single.setup(world,x,c,z-radius).setBlock(ModBlocks.SKYDIVE_TP.get()).build();
 			}
 			i++;
 		}

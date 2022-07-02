@@ -7,8 +7,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class SkydiveBlockEntity extends InstantBlockEntity {
-	public String[] color = new String[11];
-	public int[] colorCode = new int[11];
+	public final String[] color = new String[11];
+	public final int[] colorCode = new int[11];
 	public boolean teleport;
 
 	public SkydiveBlockEntity(BlockPos pos, BlockState state) {

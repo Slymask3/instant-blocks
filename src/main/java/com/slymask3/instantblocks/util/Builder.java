@@ -30,12 +30,12 @@ public class Builder {
 	public static class Single {
 		enum Type { BLOCK,COLOR,STONE }
 		Type type;
-		Level world;
+		final Level world;
 		int x,y,z;
 		BlockState state;
 		Direction direction;
 		int color;
-		int flag;
+		final int flag;
 		private Single(Level world, int x, int y, int z) {
 			this.world = world;
 			this.x = x;
@@ -195,13 +195,19 @@ public class Builder {
 	}
 
 	public static class Multiple {
-		Level world;
-		int x,y,z;
-		int x1,y1,z1;
-		int x2,y2,z2;
+		final Level world;
+		final int x;
+		final int y;
+		final int z;
+		final int x1;
+		final int y1;
+		final int z1;
+		final int x2;
+		final int y2;
+		final int z2;
 		Block block;
 		Direction direction;
-		int flag;
+		final int flag;
 		boolean setStone;
 		private Multiple(Level world, int x, int y, int z, int x1, int y1, int z1, int x2, int y2, int z2) {
 			this.world = world;
@@ -279,10 +285,16 @@ public class Builder {
 	}
 
 	public static class Circle {
-		Level world;
-		int x,y,z;
-		int radius;
-		Block outer, inner;
+		enum Type { BLOCK,COLOR }
+		Type innerType, outerType;
+		final Level world;
+		final int x;
+		final int y;
+		final int z;
+		final int radius;
+		final Block outer;
+		final Block inner;
+		int innerColor, outerColor;
 		private Circle(Level world, int x, int y, int z, int radius, Block outer, Block inner) {
 			this.world = world;
 			this.x = x;
@@ -291,6 +303,13 @@ public class Builder {
 			this.radius = radius;
 			this.outer = outer;
 			this.inner = inner;
+			this.innerColor = -1;
+			this.outerColor = -1;
+			this.innerType = Type.BLOCK;
+			this.outerType = Type.BLOCK;
+		}
+		public static Circle setup(Level world, int x, int y, int z, int radius) {
+			return new Circle(world, x, y, z, radius, null, null);
 		}
 		public static Circle setup(Level world, int x, int y, int z, int radius, Block outer, Block inner) {
 			return new Circle(world, x, y, z, radius, outer, inner);
@@ -298,15 +317,35 @@ public class Builder {
 		public static Circle setup(Level world, int x, int y, int z, int radius, Block block) {
 			return new Circle(world, x, y, z, radius, block, block);
 		}
+		public Circle setColor(int color) {
+			this.innerType = Type.COLOR;
+			this.outerType = Type.COLOR;
+			this.innerColor = color;
+			this.outerColor = color;
+			return this;
+		}
+		public Circle setOuterColor(int color) {
+			this.outerType = Type.COLOR;
+			this.outerColor = color;
+			return this;
+		}
 		public void build() {
 			double distance;
 			for(int row = 0; row <= 2 * radius; row++) {
 				for(int col = 0; col <= 2 * radius; col++) {
 					distance = Math.sqrt((row - radius) * (row - radius) + (col - radius) * (col - radius));
 					if(distance > radius - 0.4 && distance < radius + 0.5) {
-						Single.setup(world,x+row-radius,y,z+col-radius).setBlock(outer).build();
+						if(this.outerType == Type.COLOR) {
+							Single.setup(world,x+row-radius,y,z+col-radius).setColor(outerColor).build();
+						} else {
+							Single.setup(world,x+row-radius,y,z+col-radius).setBlock(outer).build();
+						}
 					} else if(distance < radius - 0.3) {
-						Single.setup(world,x+row-radius,y,z+col-radius).setBlock(inner).build();
+						if(this.innerType == Type.COLOR) {
+							Single.setup(world,x+row-radius,y,z+col-radius).setColor(innerColor).build();
+						} else {
+							Single.setup(world,x+row-radius,y,z+col-radius).setBlock(inner).build();
+						}
 					}
 				}
 			}
@@ -314,10 +353,13 @@ public class Builder {
 	}
 
 	public static class Sphere {
-		Level world;
-		int x,y,z;
-		int radius;
-		Block outer, inner;
+		final Level world;
+		final int x;
+		final int y;
+		final int z;
+		final int radius;
+		final Block outer;
+		final Block inner;
 		boolean half;
 		private Sphere(Level world, int x, int y, int z, int radius, Block outer, Block inner) {
 			this.world = world;

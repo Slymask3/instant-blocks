@@ -10,12 +10,26 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class HarvestPacket {
-	public int _x, _y, _z;
-	public boolean _logOak, _logSpruce, _logBirch, _logJungle, _logAcacia, _logDark;
-	public boolean _wheat, _carrot, _potato;
-	public boolean _cactus, _pumpkin, _melon, _sugarcane;
-	public boolean _cocoa, _mushroom, _netherwart;
-	public boolean _replant;
+	public final int _x;
+	public final int _y;
+	public final int _z;
+	public final boolean _logOak;
+	public final boolean _logSpruce;
+	public final boolean _logBirch;
+	public final boolean _logJungle;
+	public final boolean _logAcacia;
+	public final boolean _logDark;
+	public final boolean _wheat;
+	public final boolean _carrot;
+	public final boolean _potato;
+	public final boolean _cactus;
+	public final boolean _pumpkin;
+	public final boolean _melon;
+	public final boolean _sugarcane;
+	public final boolean _cocoa;
+	public final boolean _mushroom;
+	public final boolean _netherwart;
+	public final boolean _replant;
 
 	public HarvestPacket(int x, int y, int z, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
 		_x = x;

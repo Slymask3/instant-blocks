@@ -24,8 +24,7 @@ public class TreeScreen extends InstantScreen {
 
 	private TreeList treeList;
     private int selected = -1;
-    private int selectedTree;
-    private int[] trees = {0, 1, 2, 3, 4, 5, 6};
+    private final int[] trees = {0, 1, 2, 3, 4, 5, 6};
 
 	private Checkbox fullLog, fullLeaves, air;
 
@@ -74,7 +73,7 @@ public class TreeScreen extends InstantScreen {
 	}
 
 	public void sendInfo() {
-		PacketHandler.sendToServer(new TreePacket(this.x, this.y, this.z, selectedTree, !fullLog.selected(), !fullLeaves.selected(), air.selected()));
+		PacketHandler.sendToServer(new TreePacket(this.x, this.y, this.z, trees[selected], !fullLog.selected(), !fullLeaves.selected(), air.selected()));
 	}
 	
 	public static String treeToString(int tree) {
@@ -91,14 +90,8 @@ public class TreeScreen extends InstantScreen {
     }
 
     public void setSelected(int index) {
-        this.selected=index;
-        if((index>=0 && index<=6)) {
-            this.selectedTree=trees[selected];
-            this.done.active = true;
-        } else {
-            this.selectedTree=-1;
-            this.done.active = false;
-        }
+        this.selected = index;
+		this.done.active = index >= 0 && index < this.trees.length;
     }
 
 	public int getSelected() {
@@ -108,14 +101,11 @@ public class TreeScreen extends InstantScreen {
 	@OnlyIn(Dist.CLIENT)
 	class TreeList extends ObjectSelectionList<TreeList.Entry> {
 		public TreeList(int x, int y, int width, int height) {
-			//super(minecraft, 144, 120, 50, 170, 18);
-			//this.setLeftPos(GuiTree.this.width / 2 - 4 - 150);
 			super(TreeScreen.this.minecraft, width, height, y, y + height, 18);
 			this.setLeftPos(x);
 			this.setRenderHeader(false, 0);
 			this.setRenderTopAndBottom(false);
 			this.setRenderSelection(true);
-			//this.setRenderBackground(false);
 			for(int tree : TreeScreen.this.trees) {
 				TreeScreen.TreeList.Entry entry = new TreeScreen.TreeList.Entry(tree);
 				this.addEntry(entry);
@@ -136,7 +126,6 @@ public class TreeScreen extends InstantScreen {
 			BufferBuilder bufferbuilder = tesselator.getBuilder();
 
 			RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
-			//RenderSystem.setShaderTexture(0, GuiComponent.BACKGROUND_LOCATION);
 			RenderSystem.enableDepthTest();
 			RenderSystem.depthFunc(515);
 			RenderSystem.disableDepthTest();
@@ -145,21 +134,21 @@ public class TreeScreen extends InstantScreen {
 			RenderSystem.disableTexture();
 			RenderSystem.setShader(GameRenderer::getPositionColorShader);
 			bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-			bufferbuilder.vertex((double)this.x0, (double)(this.y0 + 4), 0.0D).color(0, 0, 0, 0).endVertex();
-			bufferbuilder.vertex((double)this.x1, (double)(this.y0 + 4), 0.0D).color(0, 0, 0, 0).endVertex();
-			bufferbuilder.vertex((double)this.x1, (double)this.y0, 0.0D).color(0, 0, 0, 255).endVertex();
-			bufferbuilder.vertex((double)this.x0, (double)this.y0, 0.0D).color(0, 0, 0, 255).endVertex();
-			bufferbuilder.vertex((double)this.x0, (double)this.y1, 0.0D).color(0, 0, 0, 255).endVertex();
-			bufferbuilder.vertex((double)this.x1, (double)this.y1, 0.0D).color(0, 0, 0, 255).endVertex();
-			bufferbuilder.vertex((double)this.x1, (double)(this.y1 - 4), 0.0D).color(0, 0, 0, 0).endVertex();
-			bufferbuilder.vertex((double)this.x0, (double)(this.y1 - 4), 0.0D).color(0, 0, 0, 0).endVertex();
+			bufferbuilder.vertex(this.x0, this.y0 + 4, 0.0D).color(0, 0, 0, 0).endVertex();
+			bufferbuilder.vertex(this.x1, this.y0 + 4, 0.0D).color(0, 0, 0, 0).endVertex();
+			bufferbuilder.vertex(this.x1, this.y0, 0.0D).color(0, 0, 0, 255).endVertex();
+			bufferbuilder.vertex(this.x0, this.y0, 0.0D).color(0, 0, 0, 255).endVertex();
+			bufferbuilder.vertex(this.x0, this.y1, 0.0D).color(0, 0, 0, 255).endVertex();
+			bufferbuilder.vertex(this.x1, this.y1, 0.0D).color(0, 0, 0, 255).endVertex();
+			bufferbuilder.vertex(this.x1, this.y1 - 4, 0.0D).color(0, 0, 0, 0).endVertex();
+			bufferbuilder.vertex(this.x0, this.y1 - 4, 0.0D).color(0, 0, 0, 0).endVertex();
 			tesselator.end();
 
 			bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-			bufferbuilder.vertex((double)this.x0, (double)(this.y0 - 10), 0.0D).color(255, 255, 255, 0).endVertex();
-			bufferbuilder.vertex((double)this.x1, (double)(this.y0 - 10), 0.0D).color(255, 255, 255, 0).endVertex();
-			bufferbuilder.vertex((double)this.x1, (double)(this.y0), 0.0D).color(255, 255, 255, 0).endVertex();
-			bufferbuilder.vertex((double)this.x0, (double)(this.y0), 0.0D).color(255, 255, 255, 0).endVertex();
+			bufferbuilder.vertex(this.x0, this.y0 - 10, 0.0D).color(255, 255, 255, 0).endVertex();
+			bufferbuilder.vertex(this.x1, this.y0 - 10, 0.0D).color(255, 255, 255, 0).endVertex();
+			bufferbuilder.vertex(this.x1, this.y0, 0.0D).color(255, 255, 255, 0).endVertex();
+			bufferbuilder.vertex(this.x0, this.y0, 0.0D).color(255, 255, 255, 0).endVertex();
 			tesselator.end();
 		}
 

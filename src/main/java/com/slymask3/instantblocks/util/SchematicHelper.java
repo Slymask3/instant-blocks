@@ -53,10 +53,10 @@ public class SchematicHelper {
 	}
 
 	public static class Schematic {
-		public short width;
-		public short height;
-		public short length;
-		public byte[] blocks;
+		public final short width;
+		public final short height;
+		public final short length;
+		public final byte[] blocks;
 		private final HashMap<Integer,BlockState> map;
 		private final HashMap<Helper.Coords,CompoundTag> blockEntities;
 		private final ArrayList<CompoundTag> entities;

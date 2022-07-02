@@ -36,7 +36,7 @@ import java.util.Random;
 public abstract class InstantLiquidBlock extends InstantBlock {
 	public ArrayList<Helper.Coords> coordsList;
 	public Block blockCheck;
-	public Block blockReplace;
+	public final Block blockReplace;
 	public String create;
 	public String create1;
 	public boolean isSuction = false;

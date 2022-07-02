@@ -14,9 +14,9 @@ import net.minecraft.resources.ResourceLocation;
 import java.awt.*;
 
 public class ColorEditBox extends EditBox {
-    private int index;
-    private SkydiveBlockEntity tileEntity;
-    private Font font;
+    private final int index;
+    private final SkydiveBlockEntity tileEntity;
+    private final Font font;
 
     public ColorEditBox(Font font, int x, int y, int width, int length, int index, SkydiveBlockEntity tileEntity) {
         super(font, x, y, width, length, new TranslatableComponent("ib.gui.skydive.color",(index+1)));
@@ -69,7 +69,7 @@ public class ColorEditBox extends EditBox {
         });
     }
 
-    public class ClearButton extends Button {
+    public static class ClearButton extends Button {
         public ClearButton(int x, int y, Button.OnPress onPress) {
             super(x,y,12,12,new TextComponent("X"),onPress);
         }

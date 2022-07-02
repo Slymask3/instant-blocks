@@ -82,13 +82,11 @@ public class InstantPoolBlock extends InstantBlock {
 		Builder.Single.setup(world,x+2,y-5,z+2).setBlock(glow).build();
 
 		/************************ Layer 1 to 5 : Diving Board v2.0 ************************/
-		Direction directionLadder = direction;
-
 		Builder.Single.setup(world,x,y+1,z).offset(direction,0,6,2,0).setBlock(wood).build();
 		Builder.Single.setup(world,x,y+2,z).offset(direction,0,6,2,0).setBlock(wood).build();
 
-		Builder.Single.setup(world,x,y+1,z).offset(direction,0,7,2,0).setBlock(ladder).setDirection(directionLadder).build();
-		Builder.Single.setup(world,x,y+2,z).offset(direction,0,7,2,0).setBlock(ladder).setDirection(directionLadder).build();
+		Builder.Single.setup(world,x,y+1,z).offset(direction,0,7,2,0).setBlock(ladder).setDirection(direction).build();
+		Builder.Single.setup(world,x,y+2,z).offset(direction,0,7,2,0).setBlock(ladder).setDirection(direction).build();
 
 		Builder.Single.setup(world,x,y+3,z).offset(direction,0,6,2,0).setBlock(slab).build();
 		Builder.Single.setup(world,x,y+3,z).offset(direction,0,5,2,0).setBlock(slab).build();
@@ -113,10 +111,10 @@ public class InstantPoolBlock extends InstantBlock {
 		Builder.Single.setup(world,x,y+3,z).offset(direction,0,6,0,2).setBlock(wood).build();
 		Builder.Single.setup(world,x,y+4,z).offset(direction,0,6,0,2).setBlock(wood).build();
 
-		Builder.Single.setup(world,x,y+1,z).offset(direction,0,7,0,2).setBlock(ladder).setDirection(directionLadder).build();
-		Builder.Single.setup(world,x,y+2,z).offset(direction,0,7,0,2).setBlock(ladder).setDirection(directionLadder).build();
-		Builder.Single.setup(world,x,y+3,z).offset(direction,0,7,0,2).setBlock(ladder).setDirection(directionLadder).build();
-		Builder.Single.setup(world,x,y+4,z).offset(direction,0,7,0,2).setBlock(ladder).setDirection(directionLadder).build();
+		Builder.Single.setup(world,x,y+1,z).offset(direction,0,7,0,2).setBlock(ladder).setDirection(direction).build();
+		Builder.Single.setup(world,x,y+2,z).offset(direction,0,7,0,2).setBlock(ladder).setDirection(direction).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,7,0,2).setBlock(ladder).setDirection(direction).build();
+		Builder.Single.setup(world,x,y+4,z).offset(direction,0,7,0,2).setBlock(ladder).setDirection(direction).build();
 
 		Builder.Single.setup(world,x,y+5,z).offset(direction,0,6,0,2).setBlock(slab).build();
 		Builder.Single.setup(world,x,y+5,z).offset(direction,0,5,0,2).setBlock(slab).build();

@@ -10,9 +10,12 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class SchematicPacket {
-	public int _x, _y, _z;
-	public String _schematic;
-	public boolean _center, _air;
+	public final int _x;
+	public final int _y;
+	public final int _z;
+	public final String _schematic;
+	public final boolean _center;
+	public final boolean _air;
 
 	public SchematicPacket(int x, int y, int z, String schematic, boolean center, boolean air) {
 		_x = x;

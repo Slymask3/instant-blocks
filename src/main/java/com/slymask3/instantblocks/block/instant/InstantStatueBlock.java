@@ -117,7 +117,7 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
 			String line;
 			while((line = bufferedReader.readLine()) != null) {
-				content.append(line + "\n");
+				content.append(line).append("\n");
 			}
 			bufferedReader.close();
 		} catch(Exception e) {
@@ -131,28 +131,28 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 			//TOP
 			for(int xtimes=0; xtimes<8; xtimes++) {
 				for(int ytimes=0; ytimes<8; ytimes++) {
-					Builder.Single.setup(world,x,y+31,z).offset(direction,-5+ytimes,-4+xtimes).setImageColor(img,8+xtimes,0+ytimes,rgb).build();
+					Builder.Single.setup(world,x,y+31,z).offset(direction,-5+ytimes,-4+xtimes).setImageColor(img,8+xtimes, ytimes,rgb).build();
 				}
 			}
 
 			//BOTTOM
 			for(int xtimes=0; xtimes<8; xtimes++) {
 				for(int ytimes=0; ytimes<8; ytimes++) {
-					Builder.Single.setup(world,x,y+24,z).offset(direction,-5+ytimes,-4+xtimes).setImageColor(img,16+xtimes,0+ytimes,rgb).build();
+					Builder.Single.setup(world,x,y+24,z).offset(direction,-5+ytimes,-4+xtimes).setImageColor(img,16+xtimes, ytimes,rgb).build();
 				}
 			}
 
 			//RIGHT
 			for(int xtimes=0; xtimes<8; xtimes++) {
 				for(int ytimes=0; ytimes<8; ytimes++) {
-					Builder.Single.setup(world,x,y+31-ytimes,z).offset(direction,-5+xtimes,-4).setImageColor(img,0+xtimes,8+ytimes,rgb).build();
+					Builder.Single.setup(world,x,y+31-ytimes,z).offset(direction,-5+xtimes,-4).setImageColor(img, xtimes,8+ytimes,rgb).build();
 				}
 			}
 
 			//LEFT
 			for(int xtimes=0; xtimes<8; xtimes++) {
 				for(int ytimes=0; ytimes<8; ytimes++) {
-					Builder.Single.setup(world,x,y+31-ytimes,z).offset(direction,+2-xtimes,+3).setImageColor(img,16+xtimes,8+ytimes,rgb).build();
+					Builder.Single.setup(world,x,y+31-ytimes,z).offset(direction, 2 -xtimes,+3).setImageColor(img,16+xtimes,8+ytimes,rgb).build();
 				}
 			}
 
@@ -166,7 +166,7 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 			//BACK
 			for(int xtimes=0; xtimes<8; xtimes++) {
 				for(int ytimes=0; ytimes<8; ytimes++) {
-					Builder.Single.setup(world,x,y+31-ytimes,z).offset(direction,-5,+3-xtimes).setImageColor(img,24+xtimes,8+ytimes,rgb).build();
+					Builder.Single.setup(world,x,y+31-ytimes,z).offset(direction,-5, 3 -xtimes).setImageColor(img,24+xtimes,8+ytimes,rgb).build();
 				}
 			}
 		}
@@ -212,7 +212,7 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 			//BACK
 			for(int xtimes=0; xtimes<8; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //back is 8x12
-					Builder.Single.setup(world,x,y+23-ytimes,z).offset(direction,-3,+3-xtimes).setImageColor(img,32+xtimes,20+ytimes,rgb).build(); //back starts at 32, 20
+					Builder.Single.setup(world,x,y+23-ytimes,z).offset(direction,-3, 3 -xtimes).setImageColor(img,32+xtimes,20+ytimes,rgb).build(); //back starts at 32, 20
 				} //back starts at x+3, y+23, z-3
 			}
 		}
@@ -239,28 +239,28 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 			//TOP
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<4; ytimes++) { //shoulderleft is 4x4
-					Builder.Single.setup(world,x,y+23,z).offset(direction,-3+ytimes,+4+xtimes).setImageColor(img,44+xtimes,16+ytimes,rgb).build(); //shoulderleft starts at 44, 16
+					Builder.Single.setup(world,x,y+23,z).offset(direction,-3+ytimes, 4 +xtimes).setImageColor(img,44+xtimes,16+ytimes,rgb).build(); //shoulderleft starts at 44, 16
 				} //shoulderleft starts
 			}
 	
 			//BOTTOM
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<4; ytimes++) { //fistleft is 4x4
-					Builder.Single.setup(world,x,y+12,z).offset(direction,-3+ytimes,+4+xtimes).setImageColor(img,48+xtimes,16+ytimes,rgb).build(); //fistleft starts at 44, 16
+					Builder.Single.setup(world,x,y+12,z).offset(direction,-3+ytimes, 4 +xtimes).setImageColor(img,48+xtimes,16+ytimes,rgb).build(); //fistleft starts at 44, 16
 				} //fistleft starts
 			}
 			
 			//FRONT
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //rightarmfront is 4x12
-					Builder.Single.setup(world,x,y+23-ytimes,z).offset(direction,0,+7-xtimes).setImageColor(img,44+xtimes,20+ytimes,rgb).build(); //rightarmfront starts at 44, 20 DONE?
+					Builder.Single.setup(world,x,y+23-ytimes,z).offset(direction,0, 7 -xtimes).setImageColor(img,44+xtimes,20+ytimes,rgb).build(); //rightarmfront starts at 44, 20 DONE?
 				} //rightarmfront starts
 			}
 
 			//BACK
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //rightarmback is 4x12
-					Builder.Single.setup(world,x,y+23-ytimes,z).offset(direction,-3,+4+xtimes).setImageColor(img,52+xtimes,20+ytimes,rgb).build(); //rightarmback starts at 52, 20
+					Builder.Single.setup(world,x,y+23-ytimes,z).offset(direction,-3, 4 +xtimes).setImageColor(img,52+xtimes,20+ytimes,rgb).build(); //rightarmback starts at 52, 20
 				} //rightarmback starts 
 			}
 		}
@@ -333,28 +333,28 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 			//TOP
 			for(int xtimes=0; xtimes<3; xtimes++) {
 				for(int ytimes=0; ytimes<4; ytimes++) { //shoulderleft is 3x4
-					Builder.Single.setup(world,x,y+23,z).offset(direction,-3+ytimes,+4+xtimes).setImageColor(img,44+xtimes,16+ytimes,rgb).build();
+					Builder.Single.setup(world,x,y+23,z).offset(direction,-3+ytimes, 4 +xtimes).setImageColor(img,44+xtimes,16+ytimes,rgb).build();
 				} //shoulderleft starts at 44, 16
 			}
 
 			//BOTTOM
 			for(int xtimes=0; xtimes<3; xtimes++) {
 				for(int ytimes=0; ytimes<4; ytimes++) { //fistleft is 3x4
-					Builder.Single.setup(world,x,y+12,z).offset(direction,-3+ytimes,+4+xtimes).setImageColor(img,47+xtimes,16+ytimes,rgb).build();
+					Builder.Single.setup(world,x,y+12,z).offset(direction,-3+ytimes, 4 +xtimes).setImageColor(img,47+xtimes,16+ytimes,rgb).build();
 				} //fistleft starts at 47, 16
 			}
 
 			//FRONT
 			for(int xtimes=0; xtimes<3; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //rightarmfront is 3x12
-					Builder.Single.setup(world,x,y+23-ytimes,z).offset(direction,0,+6-xtimes).setImageColor(img,44+xtimes,20+ytimes,rgb).build();
+					Builder.Single.setup(world,x,y+23-ytimes,z).offset(direction,0, 6 -xtimes).setImageColor(img,44+xtimes,20+ytimes,rgb).build();
 				} //rightarmfront starts at 44, 20 DONE?
 			}
 
 			//BACK
 			for(int xtimes=0; xtimes<3; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //rightarmback is 3x12
-					Builder.Single.setup(world,x,y+23-ytimes,z).offset(direction,-3,+4+xtimes).setImageColor(img,51+xtimes,20+ytimes,rgb).build();
+					Builder.Single.setup(world,x,y+23-ytimes,z).offset(direction,-3, 4 +xtimes).setImageColor(img,51+xtimes,20+ytimes,rgb).build();
 				} //rightarmback starts at 51, 20
 			}
 		}
@@ -432,7 +432,7 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 			//RIGHT
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //leftlegright is 4x12
-					Builder.Single.setup(world,x,y+11-ytimes,z).offset(direction,-3+xtimes,0).setImageColor(img,0+xtimes,20+ytimes,rgb).build(); //leftlegright starts at 0, 20
+					Builder.Single.setup(world,x,y+11-ytimes,z).offset(direction,-3+xtimes,0).setImageColor(img, xtimes,20+ytimes,rgb).build(); //leftlegright starts at 0, 20
 				} //leftlegright starts at x, y+11, z-3
 			}
 
@@ -446,7 +446,7 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 			//BACK
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //leftlegback is 4x12
-					Builder.Single.setup(world,x,y+11-ytimes,z).offset(direction,-3,+3-xtimes).setImageColor(img,12+xtimes,20+ytimes,rgb).build(); //leftlegback starts at 12, 20
+					Builder.Single.setup(world,x,y+11-ytimes,z).offset(direction,-3, 3 -xtimes).setImageColor(img,12+xtimes,20+ytimes,rgb).build(); //leftlegback starts at 12, 20
 				} //leftlegback starts at x+3, y+11, z+3
 			}
 		}
@@ -478,7 +478,7 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 			//RIGHT
 			for(int xtimes=0; xtimes<4; xtimes++) {
 				for(int ytimes=0; ytimes<12; ytimes++) { //rightlegright is 4x12
-					Builder.Single.setup(world,x,y+11-ytimes,z).offset(direction,-3+xtimes,-4).setImageColor(img,0+xtimes,20+ytimes,rgb).build(); //rightlegright starts at 0, 20
+					Builder.Single.setup(world,x,y+11-ytimes,z).offset(direction,-3+xtimes,-4).setImageColor(img, xtimes,20+ytimes,rgb).build(); //rightlegright starts at 0, 20
 				} //rightlegright starts at x, y+11, z-3
 			}
 

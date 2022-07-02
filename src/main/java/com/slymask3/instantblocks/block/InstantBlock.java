@@ -31,7 +31,7 @@ public abstract class InstantBlock extends Block {
 	public String createMessage, errorMessage, createVariable, errorVariable;
 	boolean isDirectional = false;
 	ClientHelper.Screen screen = null;
-	ForgeConfigSpec.BooleanValue isDisabled;
+	final ForgeConfigSpec.BooleanValue isDisabled;
 	
 	protected InstantBlock(BlockBehaviour.Properties properties, ForgeConfigSpec.BooleanValue isDisabled) {
 		super(properties);

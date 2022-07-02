@@ -51,12 +51,9 @@ public class InstantHouseWoodBlock extends InstantBlock {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 
 		Direction directionDoor = direction.getOpposite();
-		Direction directionGate = direction;
-		Direction directionChestFront = direction;
 		Direction directionChestLeft = direction.getCounterClockWise();
 		Direction directionStairLeft = direction.getCounterClockWise();
 		Direction directionStairRight = direction.getClockWise();
-		Direction directionFront = direction;
 		Direction directionBack = direction.getOpposite();
 		Direction directionLeft = direction.getCounterClockWise();
 		Direction directionRight = direction.getClockWise();
@@ -116,7 +113,7 @@ public class InstantHouseWoodBlock extends InstantBlock {
 			Builder.Multiple.setup(world,x-4,y+1,z+4,1,1,2).setBlock(fence).build(); //PORCH SIDE 1
 			Builder.Multiple.setup(world,x+4,y+1,z+4,1,1,2).setBlock(fence).build(); //PORCH SIDE 2
 			Builder.Multiple.setup(world,x-3,y+1,z+6,7,1,1).setBlock(fence).build(); //PORCH SIDE 3 (FRONT)
-			Builder.Single.setup(world,x,y+1,z+6).setBlock(gate).setDirection(directionGate).build(); //PORCH GATE
+			Builder.Single.setup(world,x,y+1,z+6).setBlock(gate).setDirection(direction).build(); //PORCH GATE
 			
 			/************************ Layer 5 to 6 : ROOF ************************/
 			Builder.Multiple.setup(world,x-5,y+5,z-5,11,1,1).setBlock(slabD).build(); //HOUSE ROOF 1
@@ -139,8 +136,8 @@ public class InstantHouseWoodBlock extends InstantBlock {
 			/************************ Layer 1 to 4 : INSIDE ************************/
 			Builder.Single.setup(world,x + 4,y + 1,z - 4).setBlock(bed).setDirection(directionLeft).build(); //BED //NOT 2 //GOOD
 			
-			Builder.Single.setup(world,x-2,y + 1,z-4).setBlock(chest).setDirection(directionChestFront).build(); //CHEST
-			Builder.Single.setup(world,x-3,y + 1,z-4).setBlock(chest).setDirection(directionChestFront).build(); //CHEST
+			Builder.Single.setup(world,x-2,y + 1,z-4).setBlock(chest).setDirection(direction).build(); //CHEST
+			Builder.Single.setup(world,x-3,y + 1,z-4).setBlock(chest).setDirection(direction).build(); //CHEST
 			Builder.Single.setup(world,x-4,y + 1,z-3).setBlock(chest).setDirection(directionChestLeft).build(); //CHEST
 			Builder.Single.setup(world,x-4,y + 1,z-2).setBlock(chest).setDirection(directionChestLeft).build(); //CHEST
 			
@@ -217,7 +214,7 @@ public class InstantHouseWoodBlock extends InstantBlock {
 			Builder.Multiple.setup(world,x-5,y+1,z-4,2,1,1).setBlock(fence).build(); //PORCH SIDE 1
 			Builder.Multiple.setup(world,x-5,y+1,z+4,2,1,1).setBlock(fence).build(); //PORCH SIDE 2
 			Builder.Multiple.setup(world,x-6,y+1,z-3,1,1,7).setBlock(fence).build(); //PORCH SIDE 3 (FRONT)
-			Builder.Single.setup(world,x-6,y+1,z).setBlock(gate).setDirection(directionGate).build(); //PORCH GATE
+			Builder.Single.setup(world,x-6,y+1,z).setBlock(gate).setDirection(direction).build(); //PORCH GATE
 			
 			/************************ Layer 5 to 6 : ROOF ************************/ //GOOD
 			Builder.Multiple.setup(world,x+5,y+5,z-5,1,1,11).setBlock(slabD).build(); //HOUSE ROOF 1
@@ -240,8 +237,8 @@ public class InstantHouseWoodBlock extends InstantBlock {
 			/************************ Layer 1 to 4 : INSIDE ************************/
 			Builder.Single.setup(world,x + 4,y + 1,z + 4).setBlock(bed).setDirection(directionLeft).build(); //BED //NOT 2, 1, 3 //GOOD
 			
-			Builder.Single.setup(world,x + 4,y + 1,z - 2).setBlock(chest).setDirection(directionChestFront).build(); //CHEST
-			Builder.Single.setup(world,x + 4,y + 1,z - 3).setBlock(chest).setDirection(directionChestFront).build(); //CHEST
+			Builder.Single.setup(world,x + 4,y + 1,z - 2).setBlock(chest).setDirection(direction).build(); //CHEST
+			Builder.Single.setup(world,x + 4,y + 1,z - 3).setBlock(chest).setDirection(direction).build(); //CHEST
 			Builder.Single.setup(world,x + 3,y + 1,z - 4).setBlock(chest).setDirection(directionChestLeft).build(); //CHEST
 			Builder.Single.setup(world,x + 2,y + 1,z - 4).setBlock(chest).setDirection(directionChestLeft).build(); //CHEST
 			
@@ -318,7 +315,7 @@ public class InstantHouseWoodBlock extends InstantBlock {
 			Builder.Multiple.setup(world,x-4,y+1,z-5,1,1,2).setBlock(fence).build(); //PORCH SIDE 1
 			Builder.Multiple.setup(world,x+4,y+1,z-5,1,1,2).setBlock(fence).build(); //PORCH SIDE 2
 			Builder.Multiple.setup(world,x-3,y+1,z-6,7,1,1).setBlock(fence).build(); //PORCH SIDE 3 (FRONT)
-			Builder.Single.setup(world,x,y+1,z-6).setBlock(gate).setDirection(directionGate).build(); //PORCH GATE
+			Builder.Single.setup(world,x,y+1,z-6).setBlock(gate).setDirection(direction).build(); //PORCH GATE
 			
 			/************************ Layer 5 to 6 : ROOF ************************/ //DONE
 			Builder.Multiple.setup(world,x-5,y+5,z+5,11,1,1).setBlock(slabD).build(); //HOUSE ROOF 1
@@ -341,8 +338,8 @@ public class InstantHouseWoodBlock extends InstantBlock {
 			/************************ Layer 1 to 4 : INSIDE ************************/
 			Builder.Single.setup(world,x - 4,y + 1,z + 4).setBlock(bed).setDirection(directionLeft).build(); //BED //NOT 2, 1, 3, 0
 			
-			Builder.Single.setup(world,x+2,y + 1,z+4).setBlock(chest).setDirection(directionChestFront).build(); //CHEST
-			Builder.Single.setup(world,x+3,y + 1,z+4).setBlock(chest).setDirection(directionChestFront).build(); //CHEST
+			Builder.Single.setup(world,x+2,y + 1,z+4).setBlock(chest).setDirection(direction).build(); //CHEST
+			Builder.Single.setup(world,x+3,y + 1,z+4).setBlock(chest).setDirection(direction).build(); //CHEST
 			Builder.Single.setup(world,x+4,y + 1,z+3).setBlock(chest).setDirection(directionChestLeft).build(); //CHEST
 			Builder.Single.setup(world,x+4,y + 1,z+2).setBlock(chest).setDirection(directionChestLeft).build(); //CHEST
 			
@@ -419,7 +416,7 @@ public class InstantHouseWoodBlock extends InstantBlock {
 			Builder.Multiple.setup(world,x+4,y+1,z-4,2,1,1).setBlock(fence).build(); //PORCH SIDE 1
 			Builder.Multiple.setup(world,x+4,y+1,z+4,2,1,1).setBlock(fence).build(); //PORCH SIDE 2
 			Builder.Multiple.setup(world,x+6,y+1,z-3,1,1,7).setBlock(fence).build(); //PORCH SIDE 3 (FRONT)
-			Builder.Single.setup(world,x+6,y+1,z).setBlock(gate).setDirection(directionGate).build(); //PORCH GATE
+			Builder.Single.setup(world,x+6,y+1,z).setBlock(gate).setDirection(direction).build(); //PORCH GATE
 			
 			/************************ Layer 5 tp 6 : ROOF ************************/
 			Builder.Multiple.setup(world,x-5,y+5,z-5,1,1,11).setBlock(slabD).build(); //HOUSE ROOF 1
@@ -442,8 +439,8 @@ public class InstantHouseWoodBlock extends InstantBlock {
 			/************************ Layer 1 to 4 : INSIDE ************************/
 			Builder.Single.setup(world,x - 4,y + 1,z - 4).setBlock(bed).setDirection(directionLeft).build(); //BED
 			
-			Builder.Single.setup(world,x - 4,y + 1,z + 2).setBlock(chest).setDirection(directionChestFront).build(); //CHEST
-			Builder.Single.setup(world,x - 4,y + 1,z + 3).setBlock(chest).setDirection(directionChestFront).build(); //CHEST
+			Builder.Single.setup(world,x - 4,y + 1,z + 2).setBlock(chest).setDirection(direction).build(); //CHEST
+			Builder.Single.setup(world,x - 4,y + 1,z + 3).setBlock(chest).setDirection(direction).build(); //CHEST
 			Builder.Single.setup(world,x - 3,y + 1,z + 4).setBlock(chest).setDirection(directionChestLeft).build(); //CHEST
 			Builder.Single.setup(world,x - 2,y + 1,z + 4).setBlock(chest).setDirection(directionChestLeft).build(); //CHEST
 			
@@ -466,20 +463,20 @@ public class InstantHouseWoodBlock extends InstantBlock {
 		}
 
 		//above door torches
-		Builder.Single.setup(world,x,y+3,z).offset(direction,0,3,1,0).setBlock(torch_wall).setDirection(directionFront).build();
-		Builder.Single.setup(world,x,y+3,z).offset(direction,0,3,0,1).setBlock(torch_wall).setDirection(directionFront).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,3,1,0).setBlock(torch_wall).setDirection(direction).build();
+		Builder.Single.setup(world,x,y+3,z).offset(direction,0,3,0,1).setBlock(torch_wall).setDirection(direction).build();
 
 		//outdoor torches
-		Builder.Single.setup(world,x,y+4,z).offset(direction,0,7,4,0).setBlock(torch_wall).setDirection(directionFront).build();
-		Builder.Single.setup(world,x,y+4,z).offset(direction,0,7,0,4).setBlock(torch_wall).setDirection(directionFront).build();
+		Builder.Single.setup(world,x,y+4,z).offset(direction,0,7,4,0).setBlock(torch_wall).setDirection(direction).build();
+		Builder.Single.setup(world,x,y+4,z).offset(direction,0,7,0,4).setBlock(torch_wall).setDirection(direction).build();
 		Builder.Single.setup(world,x,y+4,z).offset(direction,0,6,5,0).setBlock(torch_wall).setDirection(directionRight).build();
 		Builder.Single.setup(world,x,y+4,z).offset(direction,0,6,0,5).setBlock(torch_wall).setDirection(directionLeft).build();
 
 		//indoor torches
 		Builder.Single.setup(world,x,y+4,z).offset(direction,0,1,2,0).setBlock(torch_wall).setDirection(directionBack).build();
 		Builder.Single.setup(world,x,y+4,z).offset(direction,0,1,0,2).setBlock(torch_wall).setDirection(directionBack).build();
-		Builder.Single.setup(world,x,y+4,z).offset(direction,4,0,2,0).setBlock(torch_wall).setDirection(directionFront).build();
-		Builder.Single.setup(world,x,y+4,z).offset(direction,4,0,0,2).setBlock(torch_wall).setDirection(directionFront).build();
+		Builder.Single.setup(world,x,y+4,z).offset(direction,4,0,2,0).setBlock(torch_wall).setDirection(direction).build();
+		Builder.Single.setup(world,x,y+4,z).offset(direction,4,0,0,2).setBlock(torch_wall).setDirection(direction).build();
 		Builder.Single.setup(world,x,y+4,z).offset(direction,1,0,4,0).setBlock(torch_wall).setDirection(directionLeft).build();
 		Builder.Single.setup(world,x,y+4,z).offset(direction,2,0,4,0).setBlock(torch_wall).setDirection(directionLeft).build();
 		Builder.Single.setup(world,x,y+4,z).offset(direction,1,0,0,4).setBlock(torch_wall).setDirection(directionRight).build();

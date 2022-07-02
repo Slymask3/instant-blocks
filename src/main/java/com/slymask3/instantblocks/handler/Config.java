@@ -400,7 +400,7 @@ public class Config {
 					.define("SOUND_GENERATE", "entity.player.levelup");
 
 			SOUND_NO_LIQUID = builder
-					.comment("Sound that is played when no liquid is found.\nList of sounds can be found here: https://www.digminecraft.com/lists/sound_list_pc.php or by using the /playsound command in-game.\nDefault: entity.player.levelup")
+					.comment("Sound that is played when no liquid is found.\nList of sounds can be found here: https://www.digminecraft.com/lists/sound_list_pc.php or by using the /playsound command in-game.\nDefault: entity.panda.sneeze")
 					.define("SOUND_NO_LIQUID", "entity.panda.sneeze");
 
 			SKYDIVE_RADIUS = builder

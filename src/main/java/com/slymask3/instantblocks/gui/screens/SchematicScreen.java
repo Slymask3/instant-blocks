@@ -28,7 +28,7 @@ public class SchematicScreen extends InstantScreen {
 
 	private SchematicList schematicList;
     private int selected = -1;
-    private ArrayList<String> schematics;
+    private final ArrayList<String> schematics;
 
 	private EditBox input;
 	private Checkbox center, ignoreAir;
@@ -43,13 +43,13 @@ public class SchematicScreen extends InstantScreen {
 	public void init() {
 		super.init();
 
-		this.center = new Checkbox(this.width / 2 - 4 - 150, this.height / 4 + 4 + 12, 150, 20, new TranslatableComponent("ib.gui.schematic.center"), tileEntity.center) {
+		this.center = new Checkbox(this.width / 2 - 4 - 150, 75, 150, 20, new TranslatableComponent("ib.gui.schematic.center"), tileEntity.center) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.center = this.selected();
 			}
 		};
-		this.ignoreAir = new Checkbox(this.width / 2 + 4, this.height / 4 + 4 + 12, 150, 20, new TranslatableComponent("ib.gui.schematic.ignore"), tileEntity.ignoreAir) {
+		this.ignoreAir = new Checkbox(this.width / 2 + 4, 75, 150, 20, new TranslatableComponent("ib.gui.schematic.ignore"), tileEntity.ignoreAir) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.ignoreAir = this.selected();
@@ -70,7 +70,7 @@ public class SchematicScreen extends InstantScreen {
 			}
 		};
 
-		this.schematicList = new SchematicList(this.width / 2 - 4 - 150, this.height / 4 + 42 + 12, 302, 62);
+		this.schematicList = new SchematicList(this.width / 2 - 4 - 150, 111, 302, this.height / 4);
 		this.addWidget(this.schematicList);
 
 		this.done.active = false;
@@ -86,21 +86,15 @@ public class SchematicScreen extends InstantScreen {
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
 		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 10526880);
 
-		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.file", input.getValue()), this.width / 2 - 2 - 150, this.height / 4 + 41 + 12 +(65), this.checkForSchematic() ? 0x00FF00 : 0xAA0000);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.file", input.getValue()), this.width / 2 - 2 - 150, this.height / 4 + 115, this.checkForSchematic() ? 0x00FF00 : 0xAA0000);
 
-		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.found", this.schematics.size()), this.width / 2 - 2 - 150, this.height / 4 + 31 + 12, 0xFFFFFF);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.found", this.schematics.size()), this.width / 2 - 2 - 150, 100, 0xFFFFFF);
 
 		if(this.schematics.size() == 0) {
-			this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.instructions.1"), this.width / 2 - 3 - 150, this.height / 4 +60 + 12, 0xAA0000);
-			this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.instructions.2"), this.width / 2 - 3 - 150, this.height / 4 +70 + 12, 0xAA0000);
-			this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.instructions.3"), this.width / 2 - 3 - 150, this.height / 4 +80 + 12, 0xAA0000);
+			this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.instructions.1"), this.width / 2 - 3 - 150, 120, 0xAA0000);
+			this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.instructions.2"), this.width / 2 - 3 - 150, 130, 0xAA0000);
+			this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.instructions.3"), this.width / 2 - 3 - 150, 140, 0xAA0000);
 		}
-
-		//background behind found files
-		//this.drawRect(this.width / 2 - 4 - 150, this.height / 4 + 29 + 12, this.width / 2 - 4 - 150 +(300+8), this.height / 4 + 29 + 12 +(13), -16777216);
-
-		//background behind schematic file
-		//this.drawRect(this.width / 2 - 4 - 150, this.height / 4 + 29 + 12 +(75), this.width / 2 - 4 - 150 +(300+8), this.height / 4 + 29 + 12 +(75+13), -16777216);
 	}
 	
 	public void sendInfo() {
@@ -154,7 +148,6 @@ public class SchematicScreen extends InstantScreen {
 			BufferBuilder bufferbuilder = tesselator.getBuilder();
 
 			RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
-			//RenderSystem.setShaderTexture(0, GuiComponent.BACKGROUND_LOCATION);
 			RenderSystem.enableDepthTest();
 			RenderSystem.depthFunc(515);
 			RenderSystem.disableDepthTest();
@@ -163,21 +156,21 @@ public class SchematicScreen extends InstantScreen {
 			RenderSystem.disableTexture();
 			RenderSystem.setShader(GameRenderer::getPositionColorShader);
 			bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-			bufferbuilder.vertex((double)this.x0, (double)(this.y0 + 4), 0.0D).color(0, 0, 0, 0).endVertex();
-			bufferbuilder.vertex((double)this.x1, (double)(this.y0 + 4), 0.0D).color(0, 0, 0, 0).endVertex();
-			bufferbuilder.vertex((double)this.x1, (double)this.y0, 0.0D).color(0, 0, 0, 255).endVertex();
-			bufferbuilder.vertex((double)this.x0, (double)this.y0, 0.0D).color(0, 0, 0, 255).endVertex();
-			bufferbuilder.vertex((double)this.x0, (double)this.y1, 0.0D).color(0, 0, 0, 255).endVertex();
-			bufferbuilder.vertex((double)this.x1, (double)this.y1, 0.0D).color(0, 0, 0, 255).endVertex();
-			bufferbuilder.vertex((double)this.x1, (double)(this.y1 - 4), 0.0D).color(0, 0, 0, 0).endVertex();
-			bufferbuilder.vertex((double)this.x0, (double)(this.y1 - 4), 0.0D).color(0, 0, 0, 0).endVertex();
+			bufferbuilder.vertex(this.x0, this.y0 + 4, 0.0D).color(0, 0, 0, 0).endVertex();
+			bufferbuilder.vertex(this.x1, this.y0 + 4, 0.0D).color(0, 0, 0, 0).endVertex();
+			bufferbuilder.vertex(this.x1, this.y0, 0.0D).color(0, 0, 0, 255).endVertex();
+			bufferbuilder.vertex(this.x0, this.y0, 0.0D).color(0, 0, 0, 255).endVertex();
+			bufferbuilder.vertex(this.x0, this.y1, 0.0D).color(0, 0, 0, 255).endVertex();
+			bufferbuilder.vertex(this.x1, this.y1, 0.0D).color(0, 0, 0, 255).endVertex();
+			bufferbuilder.vertex(this.x1, this.y1 - 4, 0.0D).color(0, 0, 0, 0).endVertex();
+			bufferbuilder.vertex(this.x0, this.y1 - 4, 0.0D).color(0, 0, 0, 0).endVertex();
 			tesselator.end();
 
 			bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-			bufferbuilder.vertex((double)this.x0, (double)(this.y0 - 10), 0.0D).color(255, 255, 255, 0).endVertex();
-			bufferbuilder.vertex((double)this.x1, (double)(this.y0 - 10), 0.0D).color(255, 255, 255, 0).endVertex();
-			bufferbuilder.vertex((double)this.x1, (double)(this.y0), 0.0D).color(255, 255, 255, 0).endVertex();
-			bufferbuilder.vertex((double)this.x0, (double)(this.y0), 0.0D).color(255, 255, 255, 0).endVertex();
+			bufferbuilder.vertex(this.x0, this.y0 - 10, 0.0D).color(255, 255, 255, 0).endVertex();
+			bufferbuilder.vertex(this.x1, this.y0 - 10, 0.0D).color(255, 255, 255, 0).endVertex();
+			bufferbuilder.vertex(this.x1, this.y0, 0.0D).color(255, 255, 255, 0).endVertex();
+			bufferbuilder.vertex(this.x0, this.y0, 0.0D).color(255, 255, 255, 0).endVertex();
 			tesselator.end();
 		}
 

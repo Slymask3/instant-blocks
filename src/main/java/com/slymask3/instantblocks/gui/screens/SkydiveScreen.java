@@ -21,11 +21,11 @@ import java.util.ArrayList;
 
 public class SkydiveScreen extends InstantScreen {
     private Button random;
-	private ColorEditBox[] color = new ColorEditBox[11];
-	private Button[] colorClear = new Button[11];
+	private final ColorEditBox[] color = new ColorEditBox[11];
+	private final Button[] colorClear = new Button[11];
 	private Checkbox tp;
 	private EditBox radius;
-	private SkydiveBlockEntity tileEntity;
+	private final SkydiveBlockEntity tileEntity;
 
 	public SkydiveScreen(Player player, Level world, int x, int y, int z) {
 		super(player, world, x, y, z, "ib.gui.skydive.title");
@@ -101,7 +101,7 @@ public class SkydiveScreen extends InstantScreen {
 				colorsBuilder.add(colorEditBox.getColor().getRGB());
 			}
 		}
-		Integer[] arr = colorsBuilder.toArray(new Integer[colorsBuilder.size()]);
+		Integer[] arr = colorsBuilder.toArray(new Integer[0]);
 		return ArrayUtils.toPrimitive(arr);
 	}
 

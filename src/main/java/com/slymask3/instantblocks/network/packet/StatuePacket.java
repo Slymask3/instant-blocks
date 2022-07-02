@@ -10,10 +10,17 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class StatuePacket {
-	public int _x, _y, _z;
-	public String _username;
-	public boolean _head, _body, _armLeft, _armRight, _legLeft, _legRight;
-	public boolean _rgb;
+	public final int _x;
+	public final int _y;
+	public final int _z;
+	public final String _username;
+	public final boolean _head;
+	public final boolean _body;
+	public final boolean _armLeft;
+	public final boolean _armRight;
+	public final boolean _legLeft;
+	public final boolean _legRight;
+	public final boolean _rgb;
 
 	public StatuePacket(int x, int y, int z, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
 		_x = x;

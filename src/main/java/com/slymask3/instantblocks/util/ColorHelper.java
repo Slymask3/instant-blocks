@@ -54,8 +54,8 @@ public class ColorHelper {
 	public static int hsvToRgb(int hue, float saturation, float value) {
 		// Source: en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB#From_HSV
 		hue %= 360;
-		float s = (float) saturation / 100;
-		float v = (float) value / 100;
+		float s = saturation / 100;
+		float v = value / 100;
 		float c = v * s;
 		float h = (float) hue / 60;
 		float x = c * (1 - Math.abs(h % 2 - 1));

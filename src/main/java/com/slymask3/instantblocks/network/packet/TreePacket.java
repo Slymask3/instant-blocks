@@ -10,9 +10,13 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class TreePacket {
-	public int _x, _y, _z;
-	public int _type;
-	public boolean _log, _leaves, _air;
+	public final int _x;
+	public final int _y;
+	public final int _z;
+	public final int _type;
+	public final boolean _log;
+	public final boolean _leaves;
+	public final boolean _air;
 
 	public TreePacket(int x, int y, int z, int type, boolean fullLogs, boolean fullLeaves, boolean air) {
 		_x = x;

@@ -10,11 +10,13 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class SkydivePacket {
-	public int _x, _y, _z;
-	public int _colors_amount;
-	public int[] _colors;
-	public int _radius;
-	public boolean _tp;
+	public final int _x;
+	public final int _y;
+	public final int _z;
+	public final int _colors_amount;
+	public final int[] _colors;
+	public final int _radius;
+	public final boolean _tp;
 
 	public SkydivePacket(int x, int y, int z, int colors_amount, int[] colors, int radius, boolean tp) {
 		_x = x;

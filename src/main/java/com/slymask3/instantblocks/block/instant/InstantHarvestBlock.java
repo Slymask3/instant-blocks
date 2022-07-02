@@ -44,9 +44,9 @@ public class InstantHarvestBlock extends InstantBlock implements EntityBlock {
 
 		Random rand = new Random();
     	
-        int x = (int) (X -radius);
-        int y = (int) (Y +radius);
-        int z = (int) (Z -radius);
+        int x = X -radius;
+        int y = Y +radius;
+        int z = Z -radius;
    
         int x_base = x;
         int z_base = z;
