@@ -47,7 +47,7 @@ public class InstantMiningLadderBlock extends InstantBlock {
 		Direction directionSign = direction.getClockWise();
 
 		for(int c = y; c > layer-2; c--) {
-			Builder.Multiple.setup(world,x,c,z,direction,0,1,2,0,2,0,0,4,0,0).build();
+			Builder.Multiple.setup(world,x,c,z,direction,0,1,2,0,2,0,0,4,0,0).setStone().build();
 		}
 		for(int c = y; c > layer-1; c--) {
 			Builder.Single.setup(world,x,c,z).offset(direction,0,0,1,0).setBlock(ladder).setDirection(directionLadder).build();

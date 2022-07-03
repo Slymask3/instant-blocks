@@ -54,7 +54,7 @@ public class InstantHarvestBlock extends InstantBlock implements EntityBlock {
         for(int i=0; i<radius*2+1; i++) {
             for(int j=0; j<radius*2+1; j++) {
                 for(int k=0; k<radius*2+1; k++) {
-                    Block block = Builder.getBlock(world,x, y, z);
+                    Block block = Helper.getBlock(world,x, y, z);
 					BlockState state = world.getBlockState(new BlockPos(x,y,z));
                     
                     if(chest.getItem(chest.getContainerSize()-1) != ItemStack.EMPTY) {
@@ -90,7 +90,7 @@ public class InstantHarvestBlock extends InstantBlock implements EntityBlock {
                     	Helper.addToChest(chest, Items.POTATO, rand.nextInt(4)+1);
 						replantBlock(world,x,y,z,Blocks.POTATOES,replant);
                     } else if(block == Blocks.CACTUS && cactus) { //CACTUS
-						Block blockBelow = Builder.getBlock(world,x, y-1, z);
+						Block blockBelow = Helper.getBlock(world,x, y-1, z);
                     	if((blockBelow == Blocks.SAND || blockBelow == Blocks.RED_SAND) && replant) {
                     		Builder.Single.setup(world,x,y,z).setBlock(Blocks.CACTUS).build();
                     	} else {
@@ -104,7 +104,7 @@ public class InstantHarvestBlock extends InstantBlock implements EntityBlock {
                     	Helper.addToChest(chest, Items.MELON_SLICE, rand.nextInt(5)+3);
                     	Builder.Single.setup(world,x,y,z).setBlock(Blocks.AIR).build();
                     } else if(block == Blocks.SUGAR_CANE && sugarcane) { //SUGARCANE
-                    	if(canPlaceSugarCane(Builder.getBlock(world,x, y-1, z)) && replant) {
+                    	if(canPlaceSugarCane(Helper.getBlock(world,x, y-1, z)) && replant) {
                     		Builder.Single.setup(world,x,y,z).setBlock(block).build();
                     	} else {
                         	Helper.addToChest(chest, Items.SUGAR_CANE, 1);
@@ -140,7 +140,7 @@ public class InstantHarvestBlock extends InstantBlock implements EntityBlock {
 	private void addLog(ChestBlockEntity chest, int x, int y, int z, Block block, Block sapling, boolean replant) {
 		Level world = chest.getLevel();
 		Helper.addToChest(chest, block, 1);
-		replantBlock(world,x,y,z,sapling,(Builder.getBlock(world,x, y-1, z) == Blocks.DIRT || Builder.getBlock(world,x, y-1, z) == Blocks.GRASS_BLOCK) && replant);
+		replantBlock(world,x,y,z,sapling,(Helper.getBlock(world,x, y-1, z) == Blocks.DIRT || Helper.getBlock(world,x, y-1, z) == Blocks.GRASS_BLOCK) && replant);
 	}
 
 	private void replantBlock(Level world, int x, int y, int z, Block block, boolean replant) {

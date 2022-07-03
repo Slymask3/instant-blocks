@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.network.packet;
 
 import com.slymask3.instantblocks.block.instant.InstantTreeBlock;
-import com.slymask3.instantblocks.util.Builder;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -55,7 +55,7 @@ public class TreePacket {
 				Player player = context.get().getSender();
 				Level world = player.getLevel();
 
-				InstantTreeBlock block = (InstantTreeBlock) Builder.getBlock(world,message._x, message._y, message._z);
+				InstantTreeBlock block = (InstantTreeBlock) Helper.getBlock(world,message._x, message._y, message._z);
 				if(block.build(world, message._x, message._y, message._z, message._type, message._log, message._leaves, message._air)) {
 					block.afterBuild(world, message._x, message._y, message._z, player);
 				}

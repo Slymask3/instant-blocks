@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.network.packet;
 
 import com.slymask3.instantblocks.block.instant.InstantSkydiveBlock;
-import com.slymask3.instantblocks.util.Builder;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -60,7 +60,7 @@ public class SkydivePacket {
 				Player player = context.get().getSender();
 				Level world = player.getLevel();
 
-				InstantSkydiveBlock block = (InstantSkydiveBlock) Builder.getBlock(world,message._x, message._y, message._z);
+				InstantSkydiveBlock block = (InstantSkydiveBlock) Helper.getBlock(world,message._x, message._y, message._z);
 				if(block.build(world,message._x, message._y, message._z, player, message._colors, message._radius, message._tp)) {
 					block.afterBuild(world,message._x, message._y, message._z, player);
 				}

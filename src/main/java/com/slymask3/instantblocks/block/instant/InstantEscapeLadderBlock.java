@@ -59,7 +59,7 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 		if(world.dimension().equals(Level.NETHER)) {
 			y_top = world.getMaxBuildHeight();
 			for(int i=y+3; i<world.getMaxBuildHeight(); i++) {
-				if(Builder.getBlock(world,x,i,z).equals(Blocks.AIR) && Builder.getBlock(world,x,i+1,z).equals(Blocks.AIR) && Builder.getBlock(world,x,i+2,z).equals(Blocks.AIR) && Builder.getBlock(world,x,i+3,z).equals(Blocks.AIR)) {
+				if(Helper.getBlock(world,x,i,z).equals(Blocks.AIR) && Helper.getBlock(world,x,i+1,z).equals(Blocks.AIR) && Helper.getBlock(world,x,i+2,z).equals(Blocks.AIR) && Helper.getBlock(world,x,i+3,z).equals(Blocks.AIR)) {
 					y_top = i;
 					break;
 				}

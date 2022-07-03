@@ -68,14 +68,13 @@ public class InstantGlassDomeBlock extends InstantBlock {
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		Block glass = Blocks.GLASS;
-		Block stone = Blocks.STONE;
 		Block torch = Blocks.TORCH;
 		Block air = Blocks.AIR;
 
 		int radius = Config.Common.RADIUS_DOME.get();
 
-		Builder.Circle.setup(world,x,y,z,radius,stone).build();
-		Builder.Sphere.setup(world,x,y+1,z,radius,glass,air).setHalf().build();
+		Builder.Circle.setup(world,x,y,z,radius).setBlock(Builder.BlockType.stone()).build();
+		Builder.Sphere.setup(world,x,y+1,z,radius).setOuter(Builder.BlockType.block(glass)).setInner(Builder.BlockType.block(air)).setHalf().build();
 
 		for(int i=3; i<radius; i=i+6) {
 			Builder.Single.setup(world,x+i,y+1,z).setBlock(torch).build();

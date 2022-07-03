@@ -155,7 +155,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	private void check(Level world, int x, int y, int z) {
-		Block blockCurrent = Builder.getBlock(world,x,y,z);
+		Block blockCurrent = Helper.getBlock(world,x,y,z);
 		if(isCorrectBlock(blockCurrent) && coordsList.size() < getMax() && addCoords(x,y,z)) {
 			if(blockCheck == null) {
 				blockCheck = blockCurrent;

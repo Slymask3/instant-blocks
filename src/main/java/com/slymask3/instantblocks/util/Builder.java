@@ -23,69 +23,110 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Builder {
-	public static Block getBlock(Level world, int x, int y, int z) {
-		return Single.setup(world,x,y,z).getBlock();
-	}
-
-	public static class Single {
+	public static class BlockType {
 		enum Type { BLOCK,COLOR,STONE }
 		Type type;
-		final Level world;
-		int x,y,z;
 		BlockState state;
-		Direction direction;
 		int color;
+		private BlockType(Type type, BlockState state, int color) {
+			this.type = type;
+			this.state = state;
+			this.color = color;
+		}
+		public static BlockType block(Block block) {
+			return block(block.defaultBlockState());
+		}
+		public static BlockType block(BlockState state) {
+			return new BlockType(Type.BLOCK,state,0);
+		}
+		public static BlockType color(int color) {
+			return new BlockType(Type.COLOR,ModBlocks.COLOR.get().defaultBlockState(),color);
+		}
+		public static BlockType stone() {
+			return new BlockType(Type.STONE,null,0);
+		}
+		public Type getType() {
+			return this.type;
+		}
+		public boolean isColor() {
+			return this.type == Type.COLOR;
+		}
+		public Block getBlock(Level world, int y) {
+			return getBlockState(world,y).getBlock();
+		}
+		public BlockState getBlockState(Level world, int y) {
+			if(this.type == Type.STONE) {
+				BlockState state;
+				ResourceKey<Level> dimension = world.dimension();
+				if(dimension.equals(Level.OVERWORLD)) {
+					if (y > 8) {
+						state = Blocks.STONE.defaultBlockState();
+					} else if (y < 0) {
+						state = Blocks.DEEPSLATE.defaultBlockState();
+					} else { //0,1,2,3,4,5,6,7,8
+						ArrayList<Helper.WeightedBlock> blocks = new ArrayList<>();
+						blocks.add(new Helper.WeightedBlock(Blocks.STONE, y + 1));          //1,2,3,4,5,6,7,8,9
+						blocks.add(new Helper.WeightedBlock(Blocks.DEEPSLATE, 10 - y + 1)); //9,8,7,6,5,4,3,2,1
+						state = Helper.getRandomBlock(blocks).defaultBlockState();
+					}
+				} else if(dimension.equals(Level.NETHER)) {
+					state = Blocks.NETHERRACK.defaultBlockState();
+				} else if(dimension.equals(Level.END)) {
+					state = Blocks.END_STONE.defaultBlockState();
+				} else {
+					state = Blocks.STONE.defaultBlockState();
+				}
+				return state;
+			}
+			return this.state;
+		}
+		public int getColor() {
+			return this.color;
+		}
+	}
+
+	public static abstract class Base<T extends Base<T>> {
+		final Level world;
+		int x, y, z;
+		BlockType blockType;
+		Direction direction;
 		final int flag;
-		private Single(Level world, int x, int y, int z) {
+		private Base(Level world, int x, int y, int z) {
 			this.world = world;
 			this.x = x;
 			this.y = y;
 			this.z = z;
 			this.flag = 2;
 		}
-		public Single setBlock(Block block) {
+		public T setBlock(BlockType blockType) {
+			this.blockType = blockType;
+			return (T)this;
+		}
+		public T setBlock(Block block) {
 			return setBlock(block.defaultBlockState());
 		}
-		public Single setBlock(BlockState state) {
-			this.state = state;
-			this.type = Type.BLOCK;
-			return this;
+		public T setBlock(BlockState state) {
+			return setBlock(BlockType.block(state));
 		}
-		public Single setColor(int color) {
-			this.color = color;
-			this.state = ModBlocks.COLOR.get().defaultBlockState();
-			this.type = Type.COLOR;
-			return this;
+		public T setColor(int color) {
+			return setBlock(BlockType.color(color));
 		}
-		public Single setStone() {
-			this.type = Type.STONE;
-			ResourceKey<Level> dimension = world.dimension();
-			if(dimension.equals(Level.OVERWORLD)) {
-				if (y > 8) {
-					this.state = Blocks.STONE.defaultBlockState();
-				} else if (y < 0) {
-					this.state = Blocks.DEEPSLATE.defaultBlockState();
-				} else { //0,1,2,3,4,5,6,7,8
-					ArrayList<Helper.WeightedBlock> blocks = new ArrayList<>();
-					blocks.add(new Helper.WeightedBlock(Blocks.STONE, y + 1));          //1,2,3,4,5,6,7,8,9
-					blocks.add(new Helper.WeightedBlock(Blocks.DEEPSLATE, 10 - y + 1)); //9,8,7,6,5,4,3,2,1
-					this.state = Helper.getRandomBlock(blocks).defaultBlockState();
-				}
-			} else if(dimension.equals(Level.NETHER)) {
-				this.state = Blocks.NETHERRACK.defaultBlockState();
-			} else if(dimension.equals(Level.END)) {
-				this.state = Blocks.END_STONE.defaultBlockState();
-			} else {
-				this.state = Blocks.STONE.defaultBlockState();
-			}
-			return this;
-		}
-		public Single setImageColor(BufferedImage image, int x, int y, boolean useRGB) {
+		public T setImageColor(BufferedImage image, int x, int y, boolean useRGB) {
 			return useRGB ? setColor(image.getRGB(x,y)) : setBlock(ColorHelper.getWoolColor(ColorHelper.getColorAt(image,x,y)));
 		}
-		public Single setDirection(Direction direction) {
+		public T setStone() {
+			return setBlock(BlockType.stone());
+		}
+		public T setDirection(Direction direction) {
 			this.direction = direction;
-			return this;
+			return (T)this;
+		}
+		public void build() {}
+	}
+
+	public static class Single extends Base<Single> {
+		private Single(Level world, int x, int y, int z) {
+			super(world,x,y,z);
 		}
 		public Single offset(Direction direction, int forwardBack, int leftRight) {
 			int forward = Helper.isPositive(forwardBack) ? 0 : Helper.toPositive(forwardBack);
@@ -121,7 +162,8 @@ public class Builder {
 			return new Single(world,pos.getX(),pos.getY(),pos.getZ());
 		}
 		public void build() {
-			Block block = state.getBlock();
+			BlockState state = blockType.getBlockState(world,y);
+			Block block = blockType.getBlock(world,y);
 			Block getBlock = getBlock();
 			if(Config.Common.KEEP_BLOCKS.get() && getBlock instanceof InstantBlock) {
 				return;
@@ -171,11 +213,11 @@ public class Builder {
 				if(block instanceof BedBlock && direction != null) {
 					world.setBlock(new BlockPos(x,y,z).relative(direction.getOpposite(),1), state.setValue(BedBlock.PART, BedPart.FOOT), 3);
 				}
-				if(type == Type.COLOR) {
+				if(blockType.isColor()) {
 					try {
 						ColorBlockEntity entity = (ColorBlockEntity)world.getBlockEntity(new BlockPos(x, y, z));
 						if(entity != null) {
-							entity.color = color;
+							entity.color = blockType.getColor();
 						}
 					} catch(Exception e) {
 						InstantBlocks.LOGGER.info(e);
@@ -194,48 +236,17 @@ public class Builder {
 		}
 	}
 
-	public static class Multiple {
-		final Level world;
-		final int x;
-		final int y;
-		final int z;
-		final int x1;
-		final int y1;
-		final int z1;
-		final int x2;
-		final int y2;
-		final int z2;
-		Block block;
-		Direction direction;
-		final int flag;
-		boolean setStone;
+	public static class Multiple extends Base<Multiple> {
+		final int x1, y1, z1;
+		final int x2, y2, z2;
 		private Multiple(Level world, int x, int y, int z, int x1, int y1, int z1, int x2, int y2, int z2) {
-			this.world = world;
-			this.x = x;
-			this.y = y;
-			this.z = z;
+			super(world,x,y,z);
 			this.x1 = x1;
 			this.y1 = y1;
 			this.z1 = z1;
 			this.x2 = x2;
 			this.y2 = y2;
 			this.z2 = z2;
-			this.block = null;
-			this.direction = null;
-			this.setStone = false;
-			this.flag = 2;
-		}
-		public Multiple setBlock(Block block) {
-			this.block = block;
-			return this;
-		}
-		public Multiple setStone() {
-			this.setStone = true;
-			return this;
-		}
-		public Multiple setDirection(Direction direction) {
-			this.direction = direction;
-			return this;
 		}
 		public static Multiple setup(Level world, int x, int y, int z, Direction direction, int forward, int back, int left, int right, int forwardX, int backX, int leftX, int rightX, int upX, int downX) {
 			int x1 = x, z1 = z, x2 = x, z2 = z;
@@ -273,60 +284,34 @@ public class Builder {
 			for(int y_cur=y1; (y_dir?y_cur>=y2:y_cur<=y2); y_cur=y_cur+(y_dir?-1:1)) {
 				for(int z_cur=z1; (z_dir?z_cur>=z2:z_cur<=z2); z_cur=z_cur+(z_dir?-1:1)) {
 					for(int x_cur=x1; (x_dir?x_cur>=x2:x_cur<=x2); x_cur=x_cur+(x_dir?-1:1)) {
-						if(setStone) {
-							Single.setup(world,x_cur,y_cur,z_cur).setStone().build();
-						} else {
-							Single.setup(world,x_cur,y_cur,z_cur).setBlock(block).setDirection(direction).build();
-						}
+						Single.setup(world,x_cur,y_cur,z_cur).setBlock(blockType).setDirection(direction).build();
 					}
 				}
 			}
 		}
 	}
 
-	public static class Circle {
-		enum Type { BLOCK,COLOR }
-		Type innerType, outerType;
-		final Level world;
-		final int x;
-		final int y;
-		final int z;
+	public static class Circle extends Base<Circle> {
+		BlockType outerBlockType, innerBlockType;
 		final int radius;
-		final Block outer;
-		final Block inner;
-		int innerColor, outerColor;
-		private Circle(Level world, int x, int y, int z, int radius, Block outer, Block inner) {
-			this.world = world;
-			this.x = x;
-			this.y = y;
-			this.z = z;
+		private Circle(Level world, int x, int y, int z, int radius) {
+			super(world,x,y,z);
 			this.radius = radius;
-			this.outer = outer;
-			this.inner = inner;
-			this.innerColor = -1;
-			this.outerColor = -1;
-			this.innerType = Type.BLOCK;
-			this.outerType = Type.BLOCK;
 		}
 		public static Circle setup(Level world, int x, int y, int z, int radius) {
-			return new Circle(world, x, y, z, radius, null, null);
+			return new Circle(world, x, y, z, radius);
 		}
-		public static Circle setup(Level world, int x, int y, int z, int radius, Block outer, Block inner) {
-			return new Circle(world, x, y, z, radius, outer, inner);
-		}
-		public static Circle setup(Level world, int x, int y, int z, int radius, Block block) {
-			return new Circle(world, x, y, z, radius, block, block);
-		}
-		public Circle setColor(int color) {
-			this.innerType = Type.COLOR;
-			this.outerType = Type.COLOR;
-			this.innerColor = color;
-			this.outerColor = color;
+		public Circle setBlock(BlockType type) {
+			this.outerBlockType = type;
+			this.innerBlockType = type;
 			return this;
 		}
-		public Circle setOuterColor(int color) {
-			this.outerType = Type.COLOR;
-			this.outerColor = color;
+		public Circle setOuter(BlockType type) {
+			this.outerBlockType = type;
+			return this;
+		}
+		public Circle setInner(BlockType type) {
+			this.innerBlockType = type;
 			return this;
 		}
 		public void build() {
@@ -335,47 +320,39 @@ public class Builder {
 				for(int col = 0; col <= 2 * radius; col++) {
 					distance = Math.sqrt((row - radius) * (row - radius) + (col - radius) * (col - radius));
 					if(distance > radius - 0.4 && distance < radius + 0.5) {
-						if(this.outerType == Type.COLOR) {
-							Single.setup(world,x+row-radius,y,z+col-radius).setColor(outerColor).build();
-						} else {
-							Single.setup(world,x+row-radius,y,z+col-radius).setBlock(outer).build();
-						}
+						Single.setup(world,x+row-radius,y,z+col-radius).setBlock(outerBlockType).build();
 					} else if(distance < radius - 0.3) {
-						if(this.innerType == Type.COLOR) {
-							Single.setup(world,x+row-radius,y,z+col-radius).setColor(innerColor).build();
-						} else {
-							Single.setup(world,x+row-radius,y,z+col-radius).setBlock(inner).build();
-						}
+						Single.setup(world,x+row-radius,y,z+col-radius).setBlock(innerBlockType).build();
 					}
 				}
 			}
 		}
 	}
 
-	public static class Sphere {
-		final Level world;
-		final int x;
-		final int y;
-		final int z;
+	public static class Sphere extends Base<Sphere> {
 		final int radius;
-		final Block outer;
-		final Block inner;
+		BlockType outerBlockType, innerBlockType;
 		boolean half;
-		private Sphere(Level world, int x, int y, int z, int radius, Block outer, Block inner) {
-			this.world = world;
-			this.x = x;
-			this.y = y;
-			this.z = z;
+		private Sphere(Level world, int x, int y, int z, int radius) {
+			super(world,x,y,z);
 			this.radius = radius;
-			this.outer = outer;
-			this.inner = inner;
 			this.half = false;
 		}
-		public static Sphere setup(Level world, int x, int y, int z, int radius, Block outer, Block inner) {
-			return new Sphere(world, x, y, z, radius, outer, inner);
+		public static Sphere setup(Level world, int x, int y, int z, int radius) {
+			return new Sphere(world, x, y, z, radius);
 		}
-		public static Sphere setup(Level world, int x, int y, int z, int radius, Block block) {
-			return new Sphere(world, x, y, z, radius, block, block);
+		public Sphere setBlock(BlockType type) {
+			this.outerBlockType = type;
+			this.innerBlockType = type;
+			return this;
+		}
+		public Sphere setOuter(BlockType type) {
+			this.outerBlockType = type;
+			return this;
+		}
+		public Sphere setInner(BlockType type) {
+			this.innerBlockType = type;
+			return this;
 		}
 		public Sphere setHalf() {
 			this.half = true;
@@ -390,9 +367,9 @@ public class Builder {
 						int y_pos = y+yc-radius;
 						if(y_pos >= y || !this.half) {
 							if(distance > radius - 0.4 && distance < radius + 0.5) {
-								Single.setup(world,x+xc-radius,y+yc-radius,z+zc-radius).setBlock(outer).build();
+								Single.setup(world,x+xc-radius,y+yc-radius,z+zc-radius).setBlock(outerBlockType).build();
 							} else if(distance < radius - 0.3) {
-								Single.setup(world,x+xc-radius,y+yc-radius,z+zc-radius).setBlock(inner).build();
+								Single.setup(world,x+xc-radius,y+yc-radius,z+zc-radius).setBlock(innerBlockType).build();
 							}
 						}
 					}

@@ -38,7 +38,7 @@ public class InstantGrinderBlock extends InstantBlock {
 	}
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
-		if(Builder.getBlock(world,x, y-1, z) != Blocks.SPAWNER) {
+		if(Helper.getBlock(world,x, y-1, z) != Blocks.SPAWNER) {
 			Helper.sendMessage(player, Strings.ERROR_GRINDER);
 			return false;
 		}

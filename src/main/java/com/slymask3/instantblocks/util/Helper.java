@@ -136,6 +136,10 @@ public class Helper {
 		}
 	}
 
+	public static Block getBlock(Level world, int x, int y, int z) {
+		return Builder.Single.setup(world,x,y,z).getBlock();
+	}
+
 	public static Block getRandomBlock(List<WeightedBlock> blocks) {
 		Random random = new Random();
 		int total = 0;
