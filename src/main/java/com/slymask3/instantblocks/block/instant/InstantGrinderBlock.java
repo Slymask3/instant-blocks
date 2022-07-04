@@ -21,7 +21,7 @@ import java.util.Random;
 public class InstantGrinderBlock extends InstantBlock {
 	public InstantGrinderBlock() {
 		super(Block.Properties.of(Material.METAL)
-				.strength(1.5F, 2000F)
+				.strength(1.5F)
 				.sound(SoundType.METAL)
 				.noOcclusion()
 		, Config.Common.DISABLE_GRINDER);

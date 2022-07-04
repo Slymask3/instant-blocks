@@ -16,7 +16,7 @@ import net.minecraft.world.level.material.Material;
 public class InstantPoolBlock extends InstantBlock {
     public InstantPoolBlock() {
 		super(Block.Properties.of(Material.STONE)
-				.strength(1.5F, 2000F)
+				.strength(1.5F)
 				.sound(SoundType.STONE)
 		, Config.Common.DISABLE_POOL);
         setCreateMessage(Strings.CREATE_POOL);

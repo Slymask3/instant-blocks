@@ -27,6 +27,10 @@ public class Helper {
 		return !world.isClientSide();
 	}
 
+	public static boolean isClient(Level world) {
+		return world.isClientSide();
+	}
+
 	public static void giveExp(Level world, Player player, int amount) {
 		if(amount > 0 && isServer(world)) {
 			player.giveExperiencePoints(amount);

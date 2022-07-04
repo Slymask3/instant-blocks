@@ -3,6 +3,7 @@ package com.slymask3.instantblocks.block.instant;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.slymask3.instantblocks.InstantBlocks;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.StatueBlockEntity;
 import com.slymask3.instantblocks.handler.Config;
@@ -34,7 +35,7 @@ import java.util.Base64;
 public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 	public InstantStatueBlock() {
 		super(Block.Properties.of(Material.WOOD)
-				.strength(1.5F, 2000F)
+				.strength(1.5F)
 				.sound(SoundType.WOOD)
 		, Config.Common.DISABLE_STATUE);
 		setScreen(ClientHelper.Screen.STATUE);
@@ -77,7 +78,7 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 
 				return skin;
 			} catch(Exception e) {
-				e.printStackTrace();
+				InstantBlocks.LOGGER.error(e.getMessage());
 			}
 		}
 		return null;

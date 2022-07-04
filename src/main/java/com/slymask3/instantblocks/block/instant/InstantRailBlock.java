@@ -20,7 +20,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class InstantRailBlock extends InstantBlock {
 	public InstantRailBlock() {
 		super(Block.Properties.of(Material.DECORATION)
-				.strength(0.5F, 2000F)
+				.strength(0.5F)
 				.sound(SoundType.LADDER)
 				.noOcclusion()
 				.isSuffocating((state, world, pos) -> false)

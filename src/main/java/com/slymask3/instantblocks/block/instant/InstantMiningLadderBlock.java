@@ -18,7 +18,7 @@ import net.minecraft.world.level.material.Material;
 public class InstantMiningLadderBlock extends InstantBlock {
     public InstantMiningLadderBlock() {
 		super(Block.Properties.of(Material.STONE)
-				.strength(1.5F, 2000F)
+				.strength(1.5F)
 				.sound(SoundType.STONE)
 		, Config.Common.DISABLE_MINING_LADDER);
 		setCreateMessage(Strings.CREATE_MINING_LADDER);

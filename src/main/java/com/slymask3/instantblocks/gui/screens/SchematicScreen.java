@@ -103,7 +103,8 @@ public class SchematicScreen extends InstantScreen {
 
 	public boolean checkForSchematic() {
 		File file = new File(SchematicHelper.SCHEMATICS_DIR + "/" + input.getValue());
-		SchematicScreen.this.done.active = file.isFile();
+		this.done.active = file.isFile();
+		this.tileEntity.schematic = input.getValue();
 		return file.isFile();
 	}
 

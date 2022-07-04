@@ -23,7 +23,7 @@ import java.util.Random;
 public class InstantHarvestBlock extends InstantBlock implements EntityBlock {
 	public InstantHarvestBlock() {
 		super(Block.Properties.of(Material.WOOD)
-				.strength(1.5F, 2000F)
+				.strength(1.5F)
 				.sound(SoundType.WOOD)
 		, Config.Common.DISABLE_HARVEST);
 		setScreen(ClientHelper.Screen.HARVEST);

@@ -2,12 +2,12 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.TreeBlockEntity;
-import com.slymask3.instantblocks.gui.screens.TreeScreen;
 import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -19,12 +19,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.server.command.TextComponentHelper;
 import org.jetbrains.annotations.Nullable;
 
 public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 	public InstantTreeBlock() {
 		super(Block.Properties.of(Material.PLANT)
-				.strength(0.1F, 2000F)
+				.strength(0.1F)
 				.sound(SoundType.GRASS)
 				.noCollission()
 				.instabreak()
@@ -42,7 +43,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		return Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
 	}
 	
-	public boolean build(Level world, int x_center, int y, int z_center, int type, boolean fullLog, boolean fullLeaves, boolean air) {
+	public boolean build(Level world, int x_center, int y, int z_center, Player player, int type, boolean fullLog, boolean fullLeaves, boolean air) {
 		int size = Config.Common.TREE_SIZE.get();
 		int half = (int)Math.floor(size / 2);
 		int x = x_center - half;
@@ -56,7 +57,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 			case 5 -> buildDarkOak(world, x, y, z, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_LEAVES, size, fullLog, fullLeaves, air);
 			case 6 -> buildOak(world, x, y, z, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, size, fullLog, fullLeaves, air);
 		}
-		setCreateMessage(Strings.CREATE_TREE, TreeScreen.treeToString(type));
+		setCreateMessage(Strings.CREATE_TREE, treeToString(type,player));
 		return true;
 	}
 
@@ -781,5 +782,18 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 				Builder.Multiple.setup(world,x,y,z,1,size,size).setBlock(block).build();
 			}
 		}
+	}
+
+	public static String treeToString(int tree, Player player) {
+		return switch (tree) {
+			case 0 -> TextComponentHelper.createComponentTranslation(player, "ib.gui.tree.oak").getString();
+			case 1 -> TextComponentHelper.createComponentTranslation(player, "ib.gui.tree.spruce").getString();
+			case 2 -> TextComponentHelper.createComponentTranslation(player, "ib.gui.tree.birch").getString();
+			case 3 -> TextComponentHelper.createComponentTranslation(player, "ib.gui.tree.jungle").getString();
+			case 4 -> TextComponentHelper.createComponentTranslation(player, "ib.gui.tree.acacia").getString();
+			case 5 -> TextComponentHelper.createComponentTranslation(player, "ib.gui.tree.dark_oak").getString();
+			case 6 -> TextComponentHelper.createComponentTranslation(player, "ib.gui.tree.glass").getString();
+			default -> "Error";
+		};
 	}
 }

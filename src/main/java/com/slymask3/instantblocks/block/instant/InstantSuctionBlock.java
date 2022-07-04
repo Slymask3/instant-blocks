@@ -11,7 +11,7 @@ import net.minecraft.world.level.material.Material;
 public class InstantSuctionBlock extends InstantLiquidBlock {
     public InstantSuctionBlock() {
         super(Block.Properties.of(Material.STONE)
-                .strength(1.5F, 2000F)
+                .strength(1.5F)
                 .sound(SoundType.STONE)
         , Config.Common.DISABLE_SUCTION, null, Blocks.AIR);
         setErrorMessage(Strings.ERROR_SUCTION, String.valueOf(Config.Common.MAX_FILL.get()));

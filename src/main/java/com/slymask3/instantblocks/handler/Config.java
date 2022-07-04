@@ -29,6 +29,7 @@ public class Config {
 		public static IntValue SKYDIVE_MIN;
 		public static IntValue SKYDIVE_MAX;
 		public static IntValue SKYDIVE_WATER;
+		public static IntValue SKYDIVE_RADIUS;
 
 		public static IntValue WEIGHT_WHEAT;
 		public static IntValue WEIGHT_POTATOES;
@@ -261,6 +262,10 @@ public class Config {
 					.comment("Water height for the Instant Rainbow Skydive.\nDefault: 1")
 					.defineInRange("SKYDIVE_WATER", 1,1,300);
 
+			SKYDIVE_RADIUS = builder
+					.comment("Default radius for the Instant Rainbow Skydive GUI.\nDefault: 5")
+					.defineInRange("SKYDIVE_RADIUS", 5,1,9999);
+
 			builder.pop();
 
 			builder.comment("Instant farm settings").push("farm");
@@ -382,7 +387,6 @@ public class Config {
 		public static BooleanValue SHOW_EFFECTS;
 		public static ConfigValue<String> SOUND_GENERATE;
 		public static ConfigValue<String> SOUND_NO_LIQUID;
-		public static IntValue SKYDIVE_RADIUS;
 
 		Client(ForgeConfigSpec.Builder builder) {
 			builder.comment("Client only settings").push("client");
@@ -402,10 +406,6 @@ public class Config {
 			SOUND_NO_LIQUID = builder
 					.comment("Sound that is played when no liquid is found.\nList of sounds can be found here: https://www.digminecraft.com/lists/sound_list_pc.php or by using the /playsound command in-game.\nDefault: entity.panda.sneeze")
 					.define("SOUND_NO_LIQUID", "entity.panda.sneeze");
-
-			SKYDIVE_RADIUS = builder
-					.comment("Default radius for the Instant Rainbow Skydive GUI.\nDefault: 5")
-					.defineInRange("SKYDIVE_RADIUS", 5,1,1000);
 
 			builder.pop();
 		}

@@ -49,11 +49,12 @@ public class SchematicPacket {
 		public static void handle(SchematicPacket message, Supplier<NetworkEvent.Context> context) {
 			context.get().enqueueWork(() -> {
 				Player player = context.get().getSender();
-				Level world = player.getLevel();
-
-				InstantSchematicBlock block = (InstantSchematicBlock) Helper.getBlock(world,message._x, message._y, message._z);
-				if(block.build(world,message._x, message._y, message._z, player, message._schematic, message._center, message._air)) {
-					block.afterBuild(world,message._x, message._y, message._z, player);
+				if(player != null) {
+					Level world = player.getLevel();
+					InstantSchematicBlock block = (InstantSchematicBlock) Helper.getBlock(world,message._x, message._y, message._z);
+					if(block.build(world,message._x, message._y, message._z, player, message._schematic, message._center, message._air)) {
+						block.afterBuild(world,message._x, message._y, message._z, player);
+					}
 				}
 			});
 			context.get().setPacketHandled(true);

@@ -42,7 +42,7 @@ public class ColorEditBox extends EditBox {
         this.updateColor();
     }
 
-    public void renderLabel(PoseStack poseStack, int mouseX, int mouseY) {
+    public void renderLabel(PoseStack poseStack) {
         this.font.drawShadow(poseStack, new TranslatableComponent("ib.gui.skydive.color",(index+1)), this.x - 50, this.y + 3, tileEntity.colorCode[index]);
     }
 

@@ -28,7 +28,7 @@ public class InstantLightBlock extends InstantBlock {
 
     public InstantLightBlock() {
         super(Block.Properties.of(Material.DECORATION)
-                .strength(0.5F, 2000F)
+                .strength(0.5F)
                 .sound(SoundType.WOOD)
                 .noCollission()
                 .instabreak()

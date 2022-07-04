@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.slymask3.instantblocks.block.entity.TreeBlockEntity;
+import com.slymask3.instantblocks.block.instant.InstantTreeBlock;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.TreePacket;
 import net.minecraft.client.Minecraft;
@@ -17,7 +18,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.server.command.TextComponentHelper;
 
 public class TreeScreen extends InstantScreen {
 	protected final TreeBlockEntity tileEntity;
@@ -75,19 +75,6 @@ public class TreeScreen extends InstantScreen {
 	public void sendInfo() {
 		PacketHandler.sendToServer(new TreePacket(this.x, this.y, this.z, trees[selected], !fullLog.selected(), !fullLeaves.selected(), air.selected()));
 	}
-	
-	public static String treeToString(int tree) {
-		return switch (tree) {
-			case 0 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.oak").getString();
-			case 1 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.spruce").getString();
-			case 2 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.birch").getString();
-			case 3 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.jungle").getString();
-			case 4 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.acacia").getString();
-			case 5 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.dark_oak").getString();
-			case 6 -> TextComponentHelper.createComponentTranslation(Minecraft.getInstance().player, "ib.gui.tree.glass").getString();
-			default -> "Error";
-		};
-    }
 
     public void setSelected(int index) {
         this.selected = index;
@@ -166,7 +153,7 @@ public class TreeScreen extends InstantScreen {
 
 			public void render(PoseStack poseStack, int entryIdx, int top, int left, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean p_194999_5_, float partialTick) {
 				if(top > TreeScreen.TreeList.this.y0 - 5 && top + entryHeight < TreeScreen.TreeList.this.y1 + 5) {
-					String string = TreeScreen.treeToString(index);
+					String string = InstantTreeBlock.treeToString(index, Minecraft.getInstance().player);
 					TreeScreen.this.font.drawShadow(poseStack, string, (float)(left + entryWidth / 2 - TreeScreen.this.font.width(string) / 2), top, TreeScreen.this.getSelected() == this.index ? 0x00AA00 : 16777215, true);
 				}
 			}
@@ -181,7 +168,7 @@ public class TreeScreen extends InstantScreen {
 			}
 
 			public Component getNarration() {
-				return new TranslatableComponent("narrator.select", TreeScreen.treeToString(index));
+				return new TranslatableComponent("narrator.select", InstantTreeBlock.treeToString(index, Minecraft.getInstance().player));
 			}
 		}
 	}

@@ -69,11 +69,12 @@ public class StatuePacket {
 		public static void handle(StatuePacket message, Supplier<NetworkEvent.Context> context) {
 			context.get().enqueueWork(() -> {
 				Player player = context.get().getSender();
-				Level world = player.getLevel();
-
-				InstantStatueBlock block = (InstantStatueBlock) Helper.getBlock(world,message._x, message._y, message._z);
-				if(block.build(world, message._x, message._y, message._z, player, message._username, message._head, message._body, message._armLeft, message._armRight, message._legLeft, message._legRight, message._rgb)) {
-					block.afterBuild(world, message._x, message._y, message._z, player);
+				if(player != null) {
+					Level world = player.getLevel();
+					InstantStatueBlock block = (InstantStatueBlock) Helper.getBlock(world,message._x, message._y, message._z);
+					if(block.build(world, message._x, message._y, message._z, player, message._username, message._head, message._body, message._armLeft, message._armRight, message._legLeft, message._legRight, message._rgb)) {
+						block.afterBuild(world, message._x, message._y, message._z, player);
+					}
 				}
 			});
 			context.get().setPacketHandled(true);

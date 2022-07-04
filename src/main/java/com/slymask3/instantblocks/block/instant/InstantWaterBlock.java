@@ -16,7 +16,7 @@ import net.minecraftforge.common.util.ForgeSoundType;
 public class InstantWaterBlock extends InstantLiquidBlock {
     public InstantWaterBlock() {
         super(Block.Properties.of(Material.WATER)
-                .strength(1.5F, 2000F)
+                .strength(1.5F)
                 .sound(new ForgeSoundType(1.0F,1.0F, () -> SoundEvents.BUCKET_FILL,() -> SoundEvents.BUCKET_EMPTY,() -> SoundEvents.BUCKET_EMPTY,() -> SoundEvents.BUCKET_EMPTY,() -> SoundEvents.BUCKET_EMPTY))
                 .noOcclusion()
                 .isSuffocating((state, world, pos) -> false)

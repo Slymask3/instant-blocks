@@ -53,11 +53,12 @@ public class TreePacket {
 		public static void handle(TreePacket message, Supplier<NetworkEvent.Context> context) {
 			context.get().enqueueWork(() -> {
 				Player player = context.get().getSender();
-				Level world = player.getLevel();
-
-				InstantTreeBlock block = (InstantTreeBlock) Helper.getBlock(world,message._x, message._y, message._z);
-				if(block.build(world, message._x, message._y, message._z, message._type, message._log, message._leaves, message._air)) {
-					block.afterBuild(world, message._x, message._y, message._z, player);
+				if(player != null) {
+					Level world = player.getLevel();
+					InstantTreeBlock block = (InstantTreeBlock) Helper.getBlock(world,message._x, message._y, message._z);
+					if(block.build(world, message._x, message._y, message._z, player, message._type, message._log, message._leaves, message._air)) {
+						block.afterBuild(world, message._x, message._y, message._z, player);
+					}
 				}
 			});
 			context.get().setPacketHandled(true);

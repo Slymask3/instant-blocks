@@ -75,7 +75,16 @@ public class StatueScreen extends InstantScreen {
 			}
 		};
 
-		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 300+8, 20, new TextComponent("Input"));
+		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 300+8, 20, new TextComponent("Input")) {
+			public void insertText(String textToWrite) {
+				super.insertText(textToWrite);
+				tileEntity.username = this.getValue();
+			}
+			public void deleteChars(int pNum) {
+				super.deleteChars(pNum);
+				tileEntity.username = this.getValue();
+			}
+		};
 
 		this.addRenderableWidget(this.head);
 		this.addRenderableWidget(this.body);

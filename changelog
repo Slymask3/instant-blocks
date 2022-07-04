@@ -4,6 +4,7 @@ v1.6.0 (2022-06-29)
 - Added wand damage per block
 - Removed /instantblocks command
 - Set stone based on layer and dimension
+- Many more configurable options
 
 v1.5.5 (2022-05-29)
 - Added color blending for instant skydive

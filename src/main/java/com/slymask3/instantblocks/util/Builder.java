@@ -25,9 +25,9 @@ import java.util.ArrayList;
 public class Builder {
 	public static class BlockType {
 		enum Type { BLOCK,COLOR,STONE }
-		Type type;
-		BlockState state;
-		int color;
+		final Type type;
+		final BlockState state;
+		final int color;
 		private BlockType(Type type, BlockState state, int color) {
 			this.type = type;
 			this.state = state;

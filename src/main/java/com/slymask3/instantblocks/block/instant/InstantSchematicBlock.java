@@ -29,7 +29,7 @@ import java.util.Optional;
 public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 	public InstantSchematicBlock() {
 		super(Block.Properties.of(Material.WOOD)
-				.strength(1.5F, 2000F)
+				.strength(1.5F)
 				.sound(SoundType.WOOD)
 		, Config.Common.DISABLE_SCHEMATIC);
 		setScreen(ClientHelper.Screen.SCHEMATIC);

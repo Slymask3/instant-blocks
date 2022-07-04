@@ -17,7 +17,7 @@ import net.minecraft.world.level.material.Material;
 public class InstantHouseWoodBlock extends InstantBlock {
 	public InstantHouseWoodBlock() {
 		super(Block.Properties.of(Material.WOOD)
-				.strength(1.5F, 2000F)
+				.strength(1.5F)
 				.sound(SoundType.WOOD)
 		, Config.Common.DISABLE_WOODEN_HOUSE);
 		setCreateMessage(Strings.CREATE_WOODEN_HOUSE);

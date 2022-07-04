@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class InstantFarmBlock extends InstantBlock {
     public InstantFarmBlock() {
 		super(Block.Properties.of(Material.STONE)
-				.strength(1.5F, 2000F)
+				.strength(1.5F)
 				.sound(SoundType.STONE)
 		, Config.Common.DISABLE_FARM);
 		setCreateMessage(Strings.CREATE_FARM);

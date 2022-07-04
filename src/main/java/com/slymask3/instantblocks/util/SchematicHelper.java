@@ -23,7 +23,7 @@ public class SchematicHelper {
 			fis.close();
 			return new Schematic(tag);
 		} catch(Exception e) {
-			InstantBlocks.LOGGER.info("Couldn't read schematic.");
+			InstantBlocks.LOGGER.info("Failed to read schematic: " + e.getMessage());
 		}
 		return null;
 	}
@@ -33,9 +33,8 @@ public class SchematicHelper {
 		if(!dir.exists()) {
 			try {
 				dir.mkdir();
-				InstantBlocks.LOGGER.info("created schematics directory");
 			} catch(SecurityException se) {
-				InstantBlocks.LOGGER.error("failed to create schematics directory: " + se.getMessage());
+				InstantBlocks.LOGGER.error("Failed to create schematics directory: " + se.getMessage());
 			}
 		}
 	}

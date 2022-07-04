@@ -27,7 +27,7 @@ import javax.annotation.Nonnull;
 public class InstantGlassDomeBlock extends InstantBlock {
 	public InstantGlassDomeBlock() {
 		super(Block.Properties.of(Material.GLASS)
-				.strength(0.5F, 2000F)
+				.strength(0.5F)
 				.sound(SoundType.GLASS)
 				.noOcclusion()
 				.isSuffocating((state, world, pos) -> false)

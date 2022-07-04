@@ -21,10 +21,6 @@ public class ClientHelper {
     public enum Screen { STATUE, HARVEST, SKYDIVE, SCHEMATIC, TREE }
     public enum Particles { NONE, GENERATE, NO_LIQUID }
 
-    public static boolean isClient(Level world) {
-        return world.isClientSide();
-    }
-
     public static void playSound(Level world, int x, int y, int z, Particles particles) {
         SoundEvent sound = switch(particles) {
             case GENERATE -> new SoundEvent(new ResourceLocation("minecraft", Config.Client.SOUND_GENERATE.get()));
@@ -60,13 +56,13 @@ public class ClientHelper {
     }
 
     public static void sendMessage(Player player, String message, String variable) {
-        if(Config.Client.SHOW_MESSAGES.get() && isClient(player.getLevel())) {
+        if(Config.Client.SHOW_MESSAGES.get() && Helper.isClient(player.getLevel())) {
             player.displayClientMessage(new TranslatableComponent(message, variable.isEmpty() ? new Object[0] : variable),true);
         }
     }
 
     public static void showScreen(Screen screen, Player player, Level world, BlockPos pos) {
-        if(isClient(world)) {
+        if(Helper.isClient(world)) {
             switch(screen) {
                 case SKYDIVE -> Minecraft.getInstance().setScreen(new SkydiveScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
                 case STATUE -> Minecraft.getInstance().setScreen(new StatueScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));

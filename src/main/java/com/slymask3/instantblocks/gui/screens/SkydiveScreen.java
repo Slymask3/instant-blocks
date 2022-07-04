@@ -47,8 +47,19 @@ public class SkydiveScreen extends InstantScreen {
 			}
 		};
 
-		EditBox radiusField = new EditBox(this.font, this.width / 2 - 4 - 100 - 12, this.height / 4 + 100 + 12, 110, 16, new TextComponent("radius"));
-		radiusField.setValue(String.valueOf(Config.Client.SKYDIVE_RADIUS.get()));
+		EditBox radiusField = new EditBox(this.font, this.width / 2 - 4 - 100 - 12, this.height / 4 + 100 + 12, 110, 16, new TextComponent("radius")) {
+			public void insertText(String textToWrite) {
+				if(Character.isDigit(textToWrite.charAt(0)) && this.getValue().length() < 4) {
+					super.insertText(textToWrite);
+				}
+				tileEntity.radius = this.getValue().isEmpty() ? 0 : Integer.parseInt(this.getValue());
+			}
+			public void deleteChars(int pNum) {
+				super.deleteChars(pNum);
+				tileEntity.radius = this.getValue().isEmpty() ? 0 : Integer.parseInt(this.getValue());
+			}
+		};
+		radiusField.setValue(String.valueOf(tileEntity.radius));
 		this.radius = radiusField;
 
 		int cutoff = 6;
@@ -78,7 +89,7 @@ public class SkydiveScreen extends InstantScreen {
 		this.font.draw(poseStack, new TranslatableComponent("ib.gui.skydive.radius"), this.width / 2 - 4 - 150, this.height / 4 + 104 + 12,14737632);
 
 		for(ColorEditBox colorEditBox : color) {
-			colorEditBox.renderLabel(poseStack,mouseX,mouseY);
+			colorEditBox.renderLabel(poseStack);
 		}
 	}
 	
@@ -88,7 +99,7 @@ public class SkydiveScreen extends InstantScreen {
 			radius = Integer.parseInt(this.radius.getValue());
 			//Config.Client.SKYDIVE_RADIUS.set(radius);
 		} catch (NumberFormatException e) {
-			radius = Config.Client.SKYDIVE_RADIUS.get();
+			radius = Config.Common.SKYDIVE_RADIUS.get();
 		}
 		int[] colors = getColors();
 		PacketHandler.sendToServer(new SkydivePacket(this.x, this.y, this.z, colors.length, colors, radius, tp.selected()));

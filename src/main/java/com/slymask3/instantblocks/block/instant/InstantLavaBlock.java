@@ -18,7 +18,7 @@ import net.minecraftforge.common.util.ForgeSoundType;
 public class InstantLavaBlock extends InstantLiquidBlock {
 	public InstantLavaBlock() {
 		super(Block.Properties.of(Material.LAVA)
-				.strength(1.5F, 2000F)
+				.strength(1.5F)
 				.sound(new ForgeSoundType(1.0F,1.0F, () -> SoundEvents.BUCKET_FILL_LAVA,() -> SoundEvents.BUCKET_EMPTY_LAVA,() -> SoundEvents.BUCKET_EMPTY_LAVA,() -> SoundEvents.BUCKET_EMPTY_LAVA,() -> SoundEvents.BUCKET_EMPTY_LAVA))
 				.lightLevel((par1) -> 15)
 		, Config.Common.DISABLE_LAVA, Blocks.AIR, Blocks.LAVA);

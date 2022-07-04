@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWaterloggedBlock {
     public InstantEscapeLadderBlock() {
 		super(Block.Properties.of(Material.DECORATION)
-				.strength(0.4F, 2000F)
+				.strength(0.4F)
 				.sound(SoundType.LADDER)
 				.noOcclusion()
 				.isSuffocating((state, world, pos) -> false)
@@ -66,7 +66,7 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 			}
 		} else {
 			y_top = y - 1;
-			while(!world.canSeeSky(new BlockPos(x,y_top+1,z))) {
+			while(!world.canSeeSky(new BlockPos(x,y_top,z))) {
 				y_top++;
 			}
 		}

@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks.block.entity;
 
+import com.slymask3.instantblocks.handler.Config;
 import com.slymask3.instantblocks.init.ModTiles;
 import com.slymask3.instantblocks.util.ColorHelper;
 import net.minecraft.core.BlockPos;
@@ -10,6 +11,7 @@ public class SkydiveBlockEntity extends InstantBlockEntity {
 	public final String[] color = new String[11];
 	public final int[] colorCode = new int[11];
 	public boolean teleport;
+	public int radius;
 
 	public SkydiveBlockEntity(BlockPos pos, BlockState state) {
 		super(ModTiles.SKYDIVE.get(), pos, state);
@@ -19,6 +21,7 @@ public class SkydiveBlockEntity extends InstantBlockEntity {
 			this.colorCode[i] = ColorHelper.textToColor(color).getRGB();
 		}
 		this.teleport = true;
+		this.radius = Config.Common.SKYDIVE_RADIUS.get();
 	}
 
 	@Override
@@ -29,6 +32,7 @@ public class SkydiveBlockEntity extends InstantBlockEntity {
 			this.colorCode[i] = nbt.getInt("ColorCode" + i);
 		}
 		this.teleport = nbt.getBoolean("Teleport");
+		this.radius = nbt.getInt("Radius");
 	}
 
 	@Override
@@ -39,6 +43,7 @@ public class SkydiveBlockEntity extends InstantBlockEntity {
 			nbt.putInt("ColorCode" + i, colorCode[i]);
 		}
 		nbt.putBoolean("Teleport", teleport);
+		nbt.putInt("Radius", radius);
 	}
 	
 	public void setColorCode(int i, String input) {

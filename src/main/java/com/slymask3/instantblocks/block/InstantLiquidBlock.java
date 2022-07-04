@@ -116,7 +116,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 			return false;
 		}
 		if(coordsList.size() >= getMax()) {
-			Helper.sendMessage(player, errorMessage);
+			Helper.sendMessage(player, errorMessage, errorVariable);
 			coordsList = new ArrayList<>();
 			return false;
 		} else {
