@@ -9,7 +9,6 @@ import com.slymask3.instantblocks.tileentity.TileEntityStatue;
 import com.slymask3.instantblocks.util.BuildHelper;
 import com.slymask3.instantblocks.util.Colors;
 import com.slymask3.instantblocks.util.IBHelper;
-import com.slymask3.instantblocks.util.LogHelper;
 import cpw.mods.fml.client.config.GuiCheckBox;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

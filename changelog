@@ -1,5 +1,6 @@
-v1.6.0 (2022-05-29)
+v1.5.5 (2022-07-04)
 - Added color blending for instant skydive
+- Added support for slim model statues
 - Allow adjusting instant skydive radius
 - Allow disabling instant blocks
 - Reworked instant liquid blocks
@@ -33,7 +34,7 @@ v1.5 (2014-11-05)
 - Updated to Minecraft 1.7.10.
 - Added Instant Rail Block.
 - Added Instant Statue Block.
-- Added "Color Block" only avaliable in creative.
+- Added "Color Block" only available in creative.
 - Added Mod Gui Options.
 - Changed Instant Golden Wand uses from 2 to 16.
 
@@ -43,7 +44,7 @@ v1.4.7 (2013-07-24)
 - Fixed the Instant Water Block sound.
 
 v1.4.6 (2013-07-23)
-- Updated to Minecarft 1.6.2.
+- Updated to Minecraft 1.6.2.
 
 v1.4.5 (2013-06-05)
 - Removed Achievements.
@@ -51,7 +52,7 @@ v1.4.5 (2013-06-05)
 - Fixed a couple of bugs.
 
 v1.4.4 (2013-06-01)
-- Added Ahievement IDs to the config.
+- Added Achievement IDs to the config.
 - Fixed /instantblocks.
 
 v1.4.3 (2013-06-01)
@@ -140,7 +141,7 @@ v0.9 (2011-09-25)
 
 v0.8 (2011-09-19)
 - Changed Glass Blocks to Glass Panes.
-- Added Instant Stonebrick House.
+- Added Instant Stone bricks House.
 
 v0.7 (2011-08-18)
 - Updated to Minecraft Beta 1.8.1.
@@ -155,7 +156,7 @@ v0.5 (2011-07-30)
 
 v0.4 (2011-07-22)
 - Added Instant Sandstone House.
-- Added Instant Cobblesone House.
+- Added Instant Cobblestone House.
 
 v0.3 (2011-07-20)
 - Added Textures for each of the InstantHouses.

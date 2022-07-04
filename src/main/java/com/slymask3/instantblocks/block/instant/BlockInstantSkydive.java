@@ -64,6 +64,8 @@ public class BlockInstantSkydive extends BlockInstant {
 	public void build(World world, int x, int y, int z, EntityPlayer player, int[] selectedColors, int radius, boolean tp) {
 		int meta = world.getBlockMetadata(x, y, z);
 
+		BuildHelper.setBlock(world,x,y,z,Blocks.air);
+
 		ArrayList<Coords> coordsList = new ArrayList<>();
 		ArrayList<Coords> coordsAirList = new ArrayList<>();
 		double distance;
