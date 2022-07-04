@@ -10,7 +10,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.material.Material;
 
 public class InstantPoolBlock extends InstantBlock {
@@ -24,7 +27,7 @@ public class InstantPoolBlock extends InstantBlock {
     }
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Block stone = Blocks.SMOOTH_STONE;
+		BlockState stone = Blocks.SMOOTH_STONE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.DOUBLE);
 		Block water = Blocks.WATER;
 		Block slab = Blocks.SMOOTH_STONE_SLAB;
 		Block glow = Blocks.GLOWSTONE;

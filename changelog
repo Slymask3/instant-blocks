@@ -1,4 +1,4 @@
-v1.6.0 (2022-06-29)
+v1.6.0 (2022-07-04)
 - Updated to Minecraft 1.18.2
 - Added full localization support
 - Added wand damage per block
@@ -6,7 +6,7 @@ v1.6.0 (2022-06-29)
 - Set stone based on layer and dimension
 - Many more configurable options
 
-v1.5.5 (2022-05-29)
+v1.5.5 (2022-07-04)
 - Added color blending for instant skydive
 - Added support for slim model statues
 - Allow adjusting instant skydive radius
