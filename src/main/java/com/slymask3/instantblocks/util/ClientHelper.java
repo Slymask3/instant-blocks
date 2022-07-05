@@ -6,7 +6,7 @@ import com.slymask3.instantblocks.handler.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -57,7 +57,7 @@ public class ClientHelper {
 
     public static void sendMessage(Player player, String message, String variable) {
         if(Config.Client.SHOW_MESSAGES.get() && Helper.isClient(player.getLevel())) {
-            player.displayClientMessage(new TranslatableComponent(message, variable.isEmpty() ? new Object[0] : variable),true);
+            player.displayClientMessage(Component.translatable(message, variable.isEmpty() ? new Object[0] : variable),true);
         }
     }
 

@@ -13,7 +13,6 @@ import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -37,19 +36,19 @@ public class TreeScreen extends InstantScreen {
 	public void init() {
 		super.init();
 
-		this.fullLog = new Checkbox(this.width / 2 + 4, 50, 150, 20, new TranslatableComponent("ib.gui.tree.logs"), tileEntity.fullLog) {
+		this.fullLog = new Checkbox(this.width / 2 + 4, 50, 150, 20, Component.translatable("ib.gui.tree.logs"), tileEntity.fullLog) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.fullLog = this.selected();
 			}
 		};
-		this.fullLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, new TranslatableComponent("ib.gui.tree.leaves"), tileEntity.fullLeaves) {
+		this.fullLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, Component.translatable("ib.gui.tree.leaves"), tileEntity.fullLeaves) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.fullLeaves = this.selected();
 			}
 		};
-		this.air = new Checkbox(this.width / 2 + 4, 94, 150, 20, new TranslatableComponent("ib.gui.tree.air"), tileEntity.air) {
+		this.air = new Checkbox(this.width / 2 + 4, 94, 150, 20, Component.translatable("ib.gui.tree.air"), tileEntity.air) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.air = this.selected();
@@ -68,8 +67,8 @@ public class TreeScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, new TranslatableComponent("ib.gui.tree.options"), this.width / 2 + 4, 40, 10526880);
-		this.font.draw(poseStack, new TranslatableComponent("ib.gui.tree.type"), this.width / 2 - 2 - 150, 40, 10526880);
+		this.font.draw(poseStack, Component.translatable("ib.gui.tree.options"), this.width / 2 + 4, 40, 10526880);
+		this.font.draw(poseStack, Component.translatable("ib.gui.tree.type"), this.width / 2 - 2 - 150, 40, 10526880);
 	}
 
 	public void sendInfo() {
@@ -168,7 +167,7 @@ public class TreeScreen extends InstantScreen {
 			}
 
 			public Component getNarration() {
-				return new TranslatableComponent("narrator.select", InstantTreeBlock.treeToString(index, Minecraft.getInstance().player));
+				return Component.translatable("narrator.select", InstantTreeBlock.treeToString(index, Minecraft.getInstance().player));
 			}
 		}
 	}

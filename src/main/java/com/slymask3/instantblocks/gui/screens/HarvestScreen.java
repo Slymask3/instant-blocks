@@ -6,7 +6,7 @@ import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.HarvestPacket;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -33,105 +33,105 @@ public class HarvestScreen extends InstantScreen {
 		int slot = 22;
 		int check_width = 100;
 
-		this.logOak = new Checkbox(x_left, y, check_width, 20, new TranslatableComponent("block.minecraft.oak_log"), tileEntity.logOak) {
+		this.logOak = new Checkbox(x_left, y, check_width, 20, Component.translatable("block.minecraft.oak_log"), tileEntity.logOak) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.logOak = this.selected();
 			}
 		};
-		this.logSpruce = new Checkbox(x_left, y+slot, check_width, 20, new TranslatableComponent("block.minecraft.spruce_log"), tileEntity.logSpruce) {
+		this.logSpruce = new Checkbox(x_left, y+slot, check_width, 20, Component.translatable("block.minecraft.spruce_log"), tileEntity.logSpruce) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.logSpruce = this.selected();
 			}
 		};
-		this.logBirch = new Checkbox(x_left, y+(slot*2), check_width, 20, new TranslatableComponent("block.minecraft.birch_log"), tileEntity.logBirch) {
+		this.logBirch = new Checkbox(x_left, y+(slot*2), check_width, 20, Component.translatable("block.minecraft.birch_log"), tileEntity.logBirch) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.logBirch = this.selected();
 			}
 		};
-		this.logJungle = new Checkbox(x_left, y+(slot*3), check_width, 20, new TranslatableComponent("block.minecraft.jungle_log"), tileEntity.logJungle) {
+		this.logJungle = new Checkbox(x_left, y+(slot*3), check_width, 20, Component.translatable("block.minecraft.jungle_log"), tileEntity.logJungle) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.logJungle = this.selected();
 			}
 		};
-		this.logAcacia = new Checkbox(x_left, y+(slot*4), check_width, 20, new TranslatableComponent("block.minecraft.acacia_log"), tileEntity.logAcacia) {
+		this.logAcacia = new Checkbox(x_left, y+(slot*4), check_width, 20, Component.translatable("block.minecraft.acacia_log"), tileEntity.logAcacia) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.logAcacia = this.selected();
 			}
 		};
-		this.logDark = new Checkbox(x_left, y+(slot*5), check_width, 20, new TranslatableComponent("block.minecraft.dark_oak_log"), tileEntity.logDark) {
+		this.logDark = new Checkbox(x_left, y+(slot*5), check_width, 20, Component.translatable("block.minecraft.dark_oak_log"), tileEntity.logDark) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.logDark = this.selected();
 			}
 		};
 
-		this.wheat = new Checkbox(x_middle, y, check_width, 20, new TranslatableComponent("item.minecraft.wheat"), tileEntity.wheat) {
+		this.wheat = new Checkbox(x_middle, y, check_width, 20, Component.translatable("item.minecraft.wheat"), tileEntity.wheat) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.wheat = this.selected();
 			}
 		};
-		this.carrot = new Checkbox(x_middle, y+slot, check_width, 20, new TranslatableComponent("item.minecraft.carrot"), tileEntity.carrot) {
+		this.carrot = new Checkbox(x_middle, y+slot, check_width, 20, Component.translatable("item.minecraft.carrot"), tileEntity.carrot) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.carrot = this.selected();
 			}
 		};
-		this.potato = new Checkbox(x_middle, y+(slot*2), check_width, 20, new TranslatableComponent("item.minecraft.potato"), tileEntity.potato) {
+		this.potato = new Checkbox(x_middle, y+(slot*2), check_width, 20, Component.translatable("item.minecraft.potato"), tileEntity.potato) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.potato = this.selected();
 			}
 		};
-		this.cactus = new Checkbox(x_middle, y+(slot*3), check_width, 20, new TranslatableComponent("block.minecraft.cactus"), tileEntity.cactus) {
+		this.cactus = new Checkbox(x_middle, y+(slot*3), check_width, 20, Component.translatable("block.minecraft.cactus"), tileEntity.cactus) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.cactus = this.selected();
 			}
 		};
-		this.pumpkin = new Checkbox(x_middle, y+(slot*4), check_width, 20, new TranslatableComponent("block.minecraft.pumpkin"), tileEntity.pumpkin) {
+		this.pumpkin = new Checkbox(x_middle, y+(slot*4), check_width, 20, Component.translatable("block.minecraft.pumpkin"), tileEntity.pumpkin) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.pumpkin = this.selected();
 			}
 		};
-		this.melon = new Checkbox(x_middle, y+(slot*5), check_width, 20, new TranslatableComponent("block.minecraft.melon"), tileEntity.melon) {
+		this.melon = new Checkbox(x_middle, y+(slot*5), check_width, 20, Component.translatable("block.minecraft.melon"), tileEntity.melon) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.melon = this.selected();
 			}
 		};
 
-		this.sugarcane = new Checkbox(x_right, y, check_width, 20, new TranslatableComponent("block.minecraft.sugar_cane"), tileEntity.sugarcane) {
+		this.sugarcane = new Checkbox(x_right, y, check_width, 20, Component.translatable("block.minecraft.sugar_cane"), tileEntity.sugarcane) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.sugarcane = this.selected();
 			}
 		};
-		this.cocoa = new Checkbox(x_right, y+slot, check_width, 20, new TranslatableComponent("block.minecraft.cocoa"), tileEntity.cocoa) {
+		this.cocoa = new Checkbox(x_right, y+slot, check_width, 20, Component.translatable("block.minecraft.cocoa"), tileEntity.cocoa) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.cocoa = this.selected();
 			}
 		};
-		this.mushroom = new Checkbox(x_right, y+(slot*2), check_width, 20, new TranslatableComponent("ib.gui.harvest.mushroom"), tileEntity.mushroom) {
+		this.mushroom = new Checkbox(x_right, y+(slot*2), check_width, 20, Component.translatable("ib.gui.harvest.mushroom"), tileEntity.mushroom) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.mushroom = this.selected();
 			}
 		};
-		this.netherwart = new Checkbox(x_right, y+(slot*3), check_width, 20, new TranslatableComponent("block.minecraft.nether_wart"), tileEntity.netherwart) {
+		this.netherwart = new Checkbox(x_right, y+(slot*3), check_width, 20, Component.translatable("block.minecraft.nether_wart"), tileEntity.netherwart) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.netherwart = this.selected();
 			}
 		};
-		this.replant = new Checkbox(x_right, y+(slot*4), check_width, 20, new TranslatableComponent("ib.gui.harvest.replant"), tileEntity.replant) {
+		this.replant = new Checkbox(x_right, y+(slot*4), check_width, 20, Component.translatable("ib.gui.harvest.replant"), tileEntity.replant) {
 			public void onPress() {
 				super.onPress();
 				tileEntity.replant = this.selected();
@@ -158,7 +158,7 @@ public class HarvestScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, new TranslatableComponent("ib.gui.harvest.select"), this.width / 2 - 3 - 150, this.height / 4 - 30 + 12, 10526880);
+		this.font.draw(poseStack, Component.translatable("ib.gui.harvest.select"), this.width / 2 - 3 - 150, this.height / 4 - 30 + 12, 10526880);
 	}
 	
 	public void sendInfo() {
