@@ -7,6 +7,7 @@ import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -116,7 +117,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 			return false;
 		}
 		if(coordsList.size() >= getMax()) {
-			Helper.sendMessage(player, errorMessage, errorVariable);
+			Helper.sendMessage(player, errorMessage, ChatFormatting.RED + String.valueOf(isSuction ? Config.Common.MAX_FILL.get() : Config.Common.MAX_LIQUID.get()));
 			coordsList = new ArrayList<>();
 			return false;
 		} else {

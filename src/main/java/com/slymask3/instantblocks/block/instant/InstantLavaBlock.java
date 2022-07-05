@@ -22,7 +22,7 @@ public class InstantLavaBlock extends InstantLiquidBlock {
 				.sound(new ForgeSoundType(1.0F,1.0F, () -> SoundEvents.BUCKET_FILL_LAVA,() -> SoundEvents.BUCKET_EMPTY_LAVA,() -> SoundEvents.BUCKET_EMPTY_LAVA,() -> SoundEvents.BUCKET_EMPTY_LAVA,() -> SoundEvents.BUCKET_EMPTY_LAVA))
 				.lightLevel((par1) -> 15)
 		, Config.Common.DISABLE_LAVA, Blocks.AIR, Blocks.LAVA);
-		setErrorMessage(Strings.ERROR_LAVA_MAX, String.valueOf(Config.Common.MAX_LIQUID.get()));
+		setErrorMessage(Strings.ERROR_LAVA_MAX);
 		this.create = Strings.CREATE_LAVA;
 		this.create1 = Strings.CREATE_LAVA_1;
 		this.particle = ParticleTypes.LARGE_SMOKE;
