@@ -6,7 +6,6 @@ import com.mojang.blaze3d.vertex.*;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
 import com.slymask3.instantblocks.network.PacketHandler;
 import com.slymask3.instantblocks.network.packet.SchematicPacket;
-import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -18,7 +17,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class SchematicScreen extends InstantScreen {
@@ -34,7 +32,7 @@ public class SchematicScreen extends InstantScreen {
 	public SchematicScreen(Player player, Level world, int x, int y, int z) {
 		super(player, world, x, y, z, "ib.gui.schematic.title");
 		this.tileEntity = (SchematicBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
-		this.schematics = SchematicHelper.getSchematics();
+		this.schematics = this.tileEntity.schematics;
 	}
 
 	@Override
@@ -100,10 +98,9 @@ public class SchematicScreen extends InstantScreen {
 	}
 
 	public boolean checkForSchematic() {
-		File file = new File(SchematicHelper.SCHEMATICS_DIR + "/" + input.getValue());
-		this.done.active = file.isFile();
+		this.done.active = this.schematics.contains(input.getValue());
 		this.tileEntity.schematic = input.getValue();
-		return file.isFile();
+		return this.done.active;
 	}
 
     public void setSelected(int index) {

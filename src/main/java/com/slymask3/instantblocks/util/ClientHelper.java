@@ -51,7 +51,6 @@ public class ClientHelper {
                     world.addParticle(InstantLiquidBlock.WHITE_DUST, (double)x + 0.5D, (double)y + 0.5D, (double)z - 0.2D, 0.0D, 0.0D, 0.0D);
                 }
             }
-
         }
     }
 

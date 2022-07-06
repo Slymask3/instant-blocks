@@ -6,4 +6,6 @@ This mod adds 'Instant Blocks' to the game. These blocks could be obtained from 
 
 <b>Modrinth:</b> https://modrinth.com/mod/instant-blocks
 
-<b>Minecraft Forum:</b> http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1289100
+<b>Planet Minecraft:</b> https://www.planetminecraft.com/mod/instant-blocks/
+
+<b>Minecraft Forum:</b> https://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1289100
