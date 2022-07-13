@@ -91,10 +91,10 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 				Builder.Circle.setup(world,x,c,z,radius).setInner(Builder.BlockType.block(Blocks.AIR)).setOuter(Builder.BlockType.color(color)).build();
 			}
 			if(c == min+water+1) {
-				Builder.Single.setup(world,x+radius,c,z).setBlock(ModBlocks.SKYDIVE_TP.get()).build();
-				Builder.Single.setup(world,x-radius,c,z).setBlock(ModBlocks.SKYDIVE_TP.get()).build();
-				Builder.Single.setup(world,x,c,z+radius).setBlock(ModBlocks.SKYDIVE_TP.get()).build();
-				Builder.Single.setup(world,x,c,z-radius).setBlock(ModBlocks.SKYDIVE_TP.get()).build();
+				Builder.Single.setup(world,x+radius,c,z).setBlock(Builder.BlockType.color(color,ModBlocks.SKYDIVE_TP.get())).build();
+				Builder.Single.setup(world,x-radius,c,z).setBlock(Builder.BlockType.color(color,ModBlocks.SKYDIVE_TP.get())).build();
+				Builder.Single.setup(world,x,c,z+radius).setBlock(Builder.BlockType.color(color,ModBlocks.SKYDIVE_TP.get())).build();
+				Builder.Single.setup(world,x,c,z-radius).setBlock(Builder.BlockType.color(color,ModBlocks.SKYDIVE_TP.get())).build();
 			}
 			i++;
 		}

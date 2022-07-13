@@ -20,6 +20,7 @@ public class Client {
     public static void registerBlockColors(ColorHandlerEvent.Block event) {
         event.getBlockColors().register((state,world,pos,tintIndex) -> world != null && pos != null ? BiomeColors.getAverageWaterColor(world, pos) : -1, ModBlocks.INSTANT_WATER.get());
         event.getBlockColors().register(new Color(), ModBlocks.COLOR.get());
+        event.getBlockColors().register(new Color(), ModBlocks.SKYDIVE_TP.get());
     }
 
     @SubscribeEvent

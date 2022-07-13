@@ -6,18 +6,12 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class SkydiveTPBlock extends Block {
+public class SkydiveTPBlock extends ColorBlock {
 	public SkydiveTPBlock() {
-		super(Block.Properties.of(Material.METAL)
-				.strength(1.5F)
-				.sound(SoundType.METAL)
-		);
+		super();
 	}
 
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {

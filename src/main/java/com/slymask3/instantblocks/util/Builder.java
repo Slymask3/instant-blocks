@@ -40,7 +40,10 @@ public class Builder {
 			return new BlockType(Type.BLOCK,state,0);
 		}
 		public static BlockType color(int color) {
-			return new BlockType(Type.COLOR,ModBlocks.COLOR.get().defaultBlockState(),color);
+			return color(color,ModBlocks.COLOR.get());
+		}
+		public static BlockType color(int color, Block block) {
+			return new BlockType(Type.COLOR,block.defaultBlockState(),color);
 		}
 		public static BlockType stone() {
 			return new BlockType(Type.STONE,null,0);

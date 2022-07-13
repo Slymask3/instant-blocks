@@ -18,5 +18,5 @@ public class ModTiles {
 	public static final RegistryObject<BlockEntityType<HarvestBlockEntity>> HARVEST = TILES.register(Names.Blocks.IB_HARVEST, () -> BlockEntityType.Builder.of(HarvestBlockEntity::new, ModBlocks.INSTANT_HARVEST.get()).build(null));
 	public static final RegistryObject<BlockEntityType<SchematicBlockEntity>> SCHEMATIC = TILES.register(Names.Blocks.IB_SCHEMATIC, () -> BlockEntityType.Builder.of(SchematicBlockEntity::new, ModBlocks.INSTANT_SCHEMATIC.get()).build(null));
 	public static final RegistryObject<BlockEntityType<TreeBlockEntity>> TREE = TILES.register(Names.Blocks.IB_TREE, () -> BlockEntityType.Builder.of(TreeBlockEntity::new, ModBlocks.INSTANT_TREE.get()).build(null));
-	public static final RegistryObject<BlockEntityType<ColorBlockEntity>> COLOR = TILES.register(Names.Blocks.COLOR, () -> BlockEntityType.Builder.of(ColorBlockEntity::new, ModBlocks.COLOR.get()).build(null));
+	public static final RegistryObject<BlockEntityType<ColorBlockEntity>> COLOR = TILES.register(Names.Blocks.COLOR, () -> BlockEntityType.Builder.of(ColorBlockEntity::new, ModBlocks.COLOR.get(), ModBlocks.SKYDIVE_TP.get()).build(null));
 }
