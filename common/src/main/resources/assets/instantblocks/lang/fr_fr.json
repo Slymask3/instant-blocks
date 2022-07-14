@@ -1,0 +1,28 @@
+{
+  "block.instantblocks.instant_wood_house": "§3Bloc de maison de bois instantanée§f",
+  "block.instantblocks.instant_mining_ladder": "§3Bloc d'échelle de mine instantanée§f",
+  "block.instantblocks.instant_glass_dome": "§3Bloc de dome de verre instantané§f",
+  "block.instantblocks.instant_farm": "§3Bloc de ferme instantanée§f",
+  "block.instantblocks.instant_skydive": "§3Bloc de saut en chute linstantre instantané§f",
+  "block.instantblocks.instant_grinder": "§3Bloc du moulins instantané§f",
+  "block.instantblocks.instant_pool": "§3Bloc de piscine instantanée§f",
+  "block.instantblocks.instant_escape_ladder": "§3Bloc d'échelle d'évacuation instantanée§f",
+  "block.instantblocks.instant_water": "§3Bloc d'eau instantanée§f",
+  "block.instantblocks.instant_lava": "§3Bloc de lave instantanée§f",
+  "block.instantblocks.instant_suction": "§3Bloc de ventouse instantanée§f",
+  "block.instantblocks.instant_rail": "§3Bloc de rail instantané§f",
+  "block.instantblocks.instant_statue": "§3Bloc de statue instantanée§f",
+  "block.instantblocks.instant_harvest": "§3Bloc de moissoneuse instantanée§f",
+  "block.instantblocks.instant_light": "§3Bloc de lumière instantanée§f",
+  "block.instantblocks.instant_schematic": "§3Bloc schématique instantané§f",
+  "block.instantblocks.instant_tree": "§3Bloc de l'arbre immense instantané§f",
+  "block.instantblocks.color": "Bloc de couleur",
+  "block.instantblocks.skydive_tp": "Bloc du tremplin du saut en chute linstantre",
+
+  "item.instantblocks.wand_wood": "Baguette instantanée en bois",
+  "item.instantblocks.wand_stone": "Baguette instantanée en pierre",
+  "item.instantblocks.wand_iron": "Baguette instantanée en fer",
+  "item.instantblocks.wand_gold": "Baguette instantanée en or",
+  "item.instantblocks.wand_diamond": "Baguette instantanée en diamant",
+  "item.instantblocks.wand_netherite": "Baguette instantanée en Netherite"
+}

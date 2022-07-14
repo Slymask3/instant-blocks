@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "instantblocks:block/instant_statue",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "instantblocks:block/instant_statue"
+    },
+    "facing=south": {
+      "model": "instantblocks:block/instant_statue",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "instantblocks:block/instant_statue",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "WSW",
+    "BBB"
+  ],
+  "key": {
+    "L": {
+      "tag": "minecraft:leaves"
+    },
+    "W": {
+      "tag": "minecraft:logs"
+    },
+    "S": {
+      "tag": "minecraft:saplings"
+    },
+    "B": {
+      "item": "minecraft:bone_meal"
+    }
+  },
+  "result": {
+    "item": "instantblocks:instant_tree"
+  }
+}

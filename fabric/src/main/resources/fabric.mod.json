@@ -1,0 +1,35 @@
+{
+    "schemaVersion": 1,
+    "id": "instantblocks",
+    "version": "${version}",
+  
+    "name": "Instant Blocks",
+    "description": "This mod adds 'Instant Blocks' to the game. These blocks could be obtained from crafting, dungeon chests, village chests, etc. Each block generates a different structure upon right-clicking on the block with an Instant Wand.",
+    "authors": [
+      "Slymask3"
+    ],
+    "contact": {
+      "homepage": "https://www.curseforge.com/minecraft/mc-mods/instant-blocks",
+      "sources": "https://github.com/slymask3/instant-blocks"
+    },
+  
+    "license": "LGPLv3",
+    "icon": "assets/instantblocks/icon.png",
+  
+    "environment": "*",
+    "entrypoints": {
+      "main": [
+        "com.slymask3.instantblocks.InstantBlocks"
+      ],
+      "client": [
+        "com.slymask3.instantblocks.InstantBlocksClient"
+      ]
+    },
+  
+    "depends": {
+      "fabricloader": ">=0.14",
+      "fabric": "*",
+      "minecraft": "1.19.x",
+      "java": ">=17"
+    }
+}

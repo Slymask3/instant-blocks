@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "instantblocks:block/instant_pool",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "instantblocks:block/instant_pool",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "instantblocks:block/instant_pool"
+    },
+    "facing=west": {
+      "model": "instantblocks:block/instant_pool",
+      "y": 90
+    }
+  }
+}

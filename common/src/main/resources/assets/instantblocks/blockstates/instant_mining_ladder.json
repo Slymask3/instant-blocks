@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "instantblocks:block/instant_mining_ladder",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "instantblocks:block/instant_mining_ladder",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "instantblocks:block/instant_mining_ladder"
+    },
+    "facing=west": {
+      "model": "instantblocks:block/instant_mining_ladder",
+      "y": 90
+    }
+  }
+}

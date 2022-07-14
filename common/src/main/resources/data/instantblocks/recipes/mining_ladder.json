@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LST",
+    "LSI",
+    "LSW"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:ladder"
+    },
+    "S": {
+      "item": "minecraft:stone"
+    },
+    "T": {
+      "item": "minecraft:torch"
+    },
+    "I": {
+      "tag": "minecraft:signs"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "result": {
+    "item": "instantblocks:instant_mining_ladder"
+  }
+}

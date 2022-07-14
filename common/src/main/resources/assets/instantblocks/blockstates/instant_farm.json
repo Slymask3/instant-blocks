@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "instantblocks:block/instant_farm",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "instantblocks:block/instant_farm"
+    },
+    "facing=south": {
+      "model": "instantblocks:block/instant_farm"
+    },
+    "facing=west": {
+      "model": "instantblocks:block/instant_farm",
+      "y": 90
+    }
+  }
+}

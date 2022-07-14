@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " H ",
+    "AWA",
+    " H "
+  ],
+  "key": {
+    "H": {
+      "item": "minecraft:iron_hoe"
+    },
+    "A": {
+      "item": "minecraft:iron_axe"
+    },
+    "W": {
+      "item": "minecraft:crafting_table"
+    }
+  },
+  "result": {
+    "item": "instantblocks:instant_harvest"
+  }
+}
