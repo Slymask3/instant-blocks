@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "top": "instantblocks:blocks/farm_top",
-    "front": "minecraft:block/stone_bricks",
-    "side": "minecraft:block/stone_bricks"
-  }
-}

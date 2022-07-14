@@ -1,6 +1,9 @@
 # Minecraft 1.19 Changelog
 
 ## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.0...HEAD)
+### Added
+- Added Fabric support
+
 ### Changed
 - Only show server-side schematics
 - Replaced skydive TP block with an RGB colored texture

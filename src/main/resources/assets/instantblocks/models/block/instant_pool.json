@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "top": "instantblocks:blocks/pool_top",
-    "front": "minecraft:block/smooth_stone",
-    "side": "minecraft:block/smooth_stone",
-    "bottom": "minecraft:block/smooth_stone"
-  }
-}
