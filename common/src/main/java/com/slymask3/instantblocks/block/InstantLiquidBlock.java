@@ -12,6 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -170,5 +172,11 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 			return true;
 		}
 		return false;
+	}
+
+	public static class LiquidSoundType extends SoundType {
+		public LiquidSoundType(SoundEvent breakSound, SoundEvent placeSound) {
+			super(1.0F, 1.0F, breakSound, placeSound, placeSound, placeSound, placeSound);
+		}
 	}
 }

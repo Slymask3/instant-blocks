@@ -176,7 +176,7 @@ public class Builder {
 			}
 			if(canSet(getBlock)) {
 				if(block instanceof CrossCollisionBlock) {
-					BlockPlaceContext context = new BlockPlaceContext(null, InteractionHand.MAIN_HAND, ItemStack.EMPTY,new BlockHitResult(Vec3.ZERO,Direction.DOWN,new BlockPos(x,y,z),false));
+					Context context = new Context(world, new BlockPos(x,y,z));
 					state = block.getStateForPlacement(context);
 					if(state == null) return;
 				}
@@ -378,6 +378,12 @@ public class Builder {
 					}
 				}
 			}
+		}
+	}
+
+	public static class Context extends BlockPlaceContext {
+		public Context(Level world, BlockPos pos) {
+			super(world, null, InteractionHand.MAIN_HAND, ItemStack.EMPTY, new BlockHitResult(Vec3.ZERO,Direction.DOWN,pos,false));
 		}
 	}
 }

@@ -14,6 +14,9 @@ public abstract class AbstractPacket {
         return this.key;
     }
     public FriendlyByteBuf getBuffer() {
-        return new FriendlyByteBuf(Unpooled.EMPTY_BUFFER);
+        return write(this, new FriendlyByteBuf(Unpooled.buffer()));
+    }
+    public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT message, FriendlyByteBuf buffer) {
+        return buffer;
     }
 }

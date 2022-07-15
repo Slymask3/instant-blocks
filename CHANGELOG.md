@@ -2,7 +2,7 @@
 
 ## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.0...HEAD)
 ### Added
-- Added Fabric support
+- Fabric support
 
 ### Changed
 - Only show server-side schematics
@@ -21,8 +21,8 @@
 
 ## [1.6.0](https://github.com/slymask3/instant-blocks/compare/1.7.10-1.5.5...1.18.2-1.6.0) - 2022-07-04
 ### Added
-- Added full localization support
-- Added wand damage per block
+- Full localization support
+- Wand damage per block
 - Many more configurable options
 
 ### Changed
@@ -39,8 +39,8 @@
 
 ## [1.5.5](https://github.com/slymask3/instant-blocks/compare/v1.5.4...1.7.10-1.5.5) - 2022-07-04
 ### Added
-- Added color blending for instant skydive
-- Added support for slim model statues
+- Color blending for instant skydive
+- Support for slim model statues
 - Allow adjusting instant skydive radius
 - Allow disabling instant blocks
 - French translation from [@Mazdallier](https://github.com/Mazdallier)
@@ -57,15 +57,15 @@
 
 ## [1.5.4] - 2014-11-22
 ### Added
-- Added Instant Schematic Block
-- Added Instant Huge Tree Block
+- Added instant schematic block
+- Added instant huge tree block
 
 ## [1.5.3] - 2014-11-16
 ### Added
-- Added Instant Light Block
-- Added Instant Skydive Gui
+- Added instant light Block
+- Added instant skydive GUI
 - Added colored ladder block for rainbow skydive
-- Added Skydive TP block
+- Added skydive TP block
 - Added color block command (/ib colorblock)
 
 ### Removed

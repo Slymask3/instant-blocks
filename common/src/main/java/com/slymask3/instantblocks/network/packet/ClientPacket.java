@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
 import com.slymask3.instantblocks.network.PacketID;
-import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 
@@ -19,20 +18,13 @@ public class ClientPacket extends AbstractPacket {
 		this.particles = particles;
 	}
 
-	public FriendlyByteBuf getBuffer() {
-		FriendlyByteBuf buffer = new FriendlyByteBuf(Unpooled.buffer());
-		buffer.writeUtf(this.message);
-		buffer.writeUtf(this.variable);
-		buffer.writeBlockPos(this.pos);
-		buffer.writeInt(this.particles);
-		return buffer;
-	}
-
-	public static void encode(ClientPacket message, FriendlyByteBuf buffer) {
+	public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT packet, FriendlyByteBuf buffer) {
+		ClientPacket message = (ClientPacket)packet;
 		buffer.writeUtf(message.message);
 		buffer.writeUtf(message.variable);
 		buffer.writeBlockPos(message.pos);
 		buffer.writeInt(message.particles);
+		return buffer;
 	}
 
 	public static ClientPacket decode(FriendlyByteBuf buffer) {

@@ -3,6 +3,7 @@ package com.slymask3.instantblocks.network;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.network.packet.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
@@ -18,12 +19,12 @@ public class ForgePacketHandler {
 
     public static void register() {
         int index = 100;
-        INSTANCE.registerMessage(++index, ClientPacket.class, ClientPacket::encode, ClientPacket::decode, ClientPacketHandler::handle);
-        INSTANCE.registerMessage(++index, SkydivePacket.class, SkydivePacket::encode, SkydivePacket::decode, SkydivePacketHandler::handle);
-        INSTANCE.registerMessage(++index, StatuePacket.class, StatuePacket::encode, StatuePacket::decode, StatuePacketHandler::handle);
-        INSTANCE.registerMessage(++index, HarvestPacket.class, HarvestPacket::encode, HarvestPacket::decode, HarvestPacketHandler::handle);
-        INSTANCE.registerMessage(++index, TreePacket.class, TreePacket::encode, TreePacket::decode, TreePacketHandler::handle);
-        INSTANCE.registerMessage(++index, SchematicPacket.class, SchematicPacket::encode, SchematicPacket::decode, SchematicPacketHandler::handle);
+        INSTANCE.registerMessage(++index, ClientPacket.class, (ClientPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), ClientPacket::decode, ClientPacketHandler::handle);
+        INSTANCE.registerMessage(++index, SkydivePacket.class, (SkydivePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydivePacket::decode, SkydivePacketHandler::handle);
+        INSTANCE.registerMessage(++index, StatuePacket.class, (StatuePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), StatuePacket::decode, StatuePacketHandler::handle);
+        INSTANCE.registerMessage(++index, HarvestPacket.class, (HarvestPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), HarvestPacket::decode, HarvestPacketHandler::handle);
+        INSTANCE.registerMessage(++index, TreePacket.class, (TreePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), TreePacket::decode, TreePacketHandler::handle);
+        INSTANCE.registerMessage(++index, SchematicPacket.class, (SchematicPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SchematicPacket::decode, SchematicPacketHandler::handle);
     }
 
     public static class ClientPacketHandler {

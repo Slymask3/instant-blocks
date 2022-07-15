@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
 import com.slymask3.instantblocks.network.PacketID;
-import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class HarvestPacket extends AbstractPacket {
@@ -50,32 +49,8 @@ public class HarvestPacket extends AbstractPacket {
 		_replant = replant;
 	}
 
-	public FriendlyByteBuf getBuffer() {
-		FriendlyByteBuf buffer = new FriendlyByteBuf(Unpooled.buffer());
-		buffer.writeInt(this._x);
-		buffer.writeInt(this._y);
-		buffer.writeInt(this._z);
-		buffer.writeBoolean(this._logOak);
-		buffer.writeBoolean(this._logSpruce);
-		buffer.writeBoolean(this._logBirch);
-		buffer.writeBoolean(this._logJungle);
-		buffer.writeBoolean(this._logAcacia);
-		buffer.writeBoolean(this._logDark);
-		buffer.writeBoolean(this._wheat);
-		buffer.writeBoolean(this._carrot);
-		buffer.writeBoolean(this._potato);
-		buffer.writeBoolean(this._cactus);
-		buffer.writeBoolean(this._pumpkin);
-		buffer.writeBoolean(this._melon);
-		buffer.writeBoolean(this._sugarcane);
-		buffer.writeBoolean(this._cocoa);
-		buffer.writeBoolean(this._mushroom);
-		buffer.writeBoolean(this._netherwart);
-		buffer.writeBoolean(this._replant);
-		return buffer;
-	}
-
-	public static void encode(HarvestPacket message, FriendlyByteBuf buffer) {
+	public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT packet, FriendlyByteBuf buffer) {
+		HarvestPacket message = (HarvestPacket)packet;
 		buffer.writeInt(message._x);
 		buffer.writeInt(message._y);
 		buffer.writeInt(message._z);
@@ -96,6 +71,7 @@ public class HarvestPacket extends AbstractPacket {
 		buffer.writeBoolean(message._mushroom);
 		buffer.writeBoolean(message._netherwart);
 		buffer.writeBoolean(message._replant);
+		return buffer;
 	}
 
 	public static HarvestPacket decode(FriendlyByteBuf buffer) {

@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
 import com.slymask3.instantblocks.network.PacketID;
-import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class StatuePacket extends AbstractPacket {
@@ -32,23 +31,8 @@ public class StatuePacket extends AbstractPacket {
 		_rgb = rgb;
 	}
 
-	public FriendlyByteBuf getBuffer() {
-		FriendlyByteBuf buffer = new FriendlyByteBuf(Unpooled.buffer());
-		buffer.writeInt(this._x);
-		buffer.writeInt(this._y);
-		buffer.writeInt(this._z);
-		buffer.writeUtf(this._username);
-		buffer.writeBoolean(this._head);
-		buffer.writeBoolean(this._body);
-		buffer.writeBoolean(this._armLeft);
-		buffer.writeBoolean(this._armRight);
-		buffer.writeBoolean(this._legLeft);
-		buffer.writeBoolean(this._legRight);
-		buffer.writeBoolean(this._rgb);
-		return buffer;
-	}
-
-	public static void encode(StatuePacket message, FriendlyByteBuf buffer) {
+	public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT packet, FriendlyByteBuf buffer) {
+		StatuePacket message = (StatuePacket)packet;
 		buffer.writeInt(message._x);
 		buffer.writeInt(message._y);
 		buffer.writeInt(message._z);
@@ -60,6 +44,7 @@ public class StatuePacket extends AbstractPacket {
 		buffer.writeBoolean(message._legLeft);
 		buffer.writeBoolean(message._legRight);
 		buffer.writeBoolean(message._rgb);
+		return buffer;
 	}
 
 	public static StatuePacket decode(FriendlyByteBuf buffer) {

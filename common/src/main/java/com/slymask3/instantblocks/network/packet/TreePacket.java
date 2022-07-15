@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
 import com.slymask3.instantblocks.network.PacketID;
-import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class TreePacket extends AbstractPacket {
@@ -24,19 +23,8 @@ public class TreePacket extends AbstractPacket {
 		_air = air;
 	}
 
-	public FriendlyByteBuf getBuffer() {
-		FriendlyByteBuf buffer = new FriendlyByteBuf(Unpooled.buffer());
-		buffer.writeInt(this._x);
-		buffer.writeInt(this._y);
-		buffer.writeInt(this._z);
-		buffer.writeInt(this._type);
-		buffer.writeBoolean(this._log);
-		buffer.writeBoolean(this._leaves);
-		buffer.writeBoolean(this._air);
-		return buffer;
-	}
-
-	public static void encode(TreePacket message, FriendlyByteBuf buffer) {
+	public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT packet, FriendlyByteBuf buffer) {
+		TreePacket message = (TreePacket)packet;
 		buffer.writeInt(message._x);
 		buffer.writeInt(message._y);
 		buffer.writeInt(message._z);
@@ -44,6 +32,7 @@ public class TreePacket extends AbstractPacket {
 		buffer.writeBoolean(message._log);
 		buffer.writeBoolean(message._leaves);
 		buffer.writeBoolean(message._air);
+		return buffer;
 	}
 
 	public static TreePacket decode(FriendlyByteBuf buffer) {

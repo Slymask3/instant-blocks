@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
 import com.slymask3.instantblocks.network.PacketID;
-import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class SchematicPacket extends AbstractPacket {
@@ -22,24 +21,15 @@ public class SchematicPacket extends AbstractPacket {
 		_air = air;
 	}
 
-	public FriendlyByteBuf getBuffer() {
-		FriendlyByteBuf buffer = new FriendlyByteBuf(Unpooled.buffer());
-		buffer.writeInt(this._x);
-		buffer.writeInt(this._y);
-		buffer.writeInt(this._z);
-		buffer.writeUtf(this._schematic);
-		buffer.writeBoolean(this._center);
-		buffer.writeBoolean(this._air);
-		return buffer;
-	}
-
-	public static void encode(SchematicPacket message, FriendlyByteBuf buffer) {
+	public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT packet, FriendlyByteBuf buffer) {
+		SchematicPacket message = (SchematicPacket)packet;
 		buffer.writeInt(message._x);
 		buffer.writeInt(message._y);
 		buffer.writeInt(message._z);
 		buffer.writeUtf(message._schematic);
 		buffer.writeBoolean(message._center);
 		buffer.writeBoolean(message._air);
+		return buffer;
 	}
 
 	public static SchematicPacket decode(FriendlyByteBuf buffer) {

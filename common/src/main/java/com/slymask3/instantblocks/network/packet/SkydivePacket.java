@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
 import com.slymask3.instantblocks.network.PacketID;
-import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class SkydivePacket extends AbstractPacket {
@@ -24,21 +23,8 @@ public class SkydivePacket extends AbstractPacket {
 		_tp = tp;
 	}
 
-	public FriendlyByteBuf getBuffer() {
-		FriendlyByteBuf buffer = new FriendlyByteBuf(Unpooled.buffer());
-		buffer.writeInt(this._x);
-		buffer.writeInt(this._y);
-		buffer.writeInt(this._z);
-		buffer.writeInt(this._colors_amount);
-		for(int i=0; i < this._colors.length; i++) {
-			buffer.writeInt(this._colors[i]);
-		}
-		buffer.writeInt(this._radius);
-		buffer.writeBoolean(this._tp);
-		return buffer;
-	}
-
-	public static void encode(SkydivePacket message, FriendlyByteBuf buffer) {
+	public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT packet, FriendlyByteBuf buffer) {
+		SkydivePacket message = (SkydivePacket)packet;
 		buffer.writeInt(message._x);
 		buffer.writeInt(message._y);
 		buffer.writeInt(message._z);
@@ -48,6 +34,7 @@ public class SkydivePacket extends AbstractPacket {
 		}
 		buffer.writeInt(message._radius);
 		buffer.writeBoolean(message._tp);
+		return buffer;
 	}
 
 	public static SkydivePacket decode(FriendlyByteBuf buffer) {

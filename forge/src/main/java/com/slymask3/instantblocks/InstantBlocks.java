@@ -3,14 +3,12 @@ package com.slymask3.instantblocks;
 import com.slymask3.instantblocks.core.ModBlocks;
 import com.slymask3.instantblocks.handler.ForgeConfig;
 import com.slymask3.instantblocks.init.ForgeTiles;
+import com.slymask3.instantblocks.init.IRegistryHelper;
 import com.slymask3.instantblocks.init.Registration;
 import com.slymask3.instantblocks.network.ForgePacketHandler;
-import com.slymask3.instantblocks.network.packet.AbstractPacket;
 import com.slymask3.instantblocks.network.IPacketHandler;
-import com.slymask3.instantblocks.init.IRegistryHelper;
+import com.slymask3.instantblocks.network.packet.AbstractPacket;
 import com.slymask3.instantblocks.util.SchematicHelper;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,7 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkDirection;
@@ -35,39 +32,29 @@ public class InstantBlocks {
 		Common.TILES = new ForgeTiles();
 		Common.init();
 
-		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
 		ForgeConfig.init();
-		modEventBus.addListener(this::setupClient);
+
+		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(this::setupCommon);
-		modEventBus.addListener((RegisterEvent e) -> {
-			if(e.getForgeRegistry() != null) {
-				if(e.getForgeRegistry().getRegistryKey().equals(Registry.BLOCK_REGISTRY)) {
-					Registration.registerBlocks(new ForgeRegistryHelper<>(e.getForgeRegistry()));
-				} else if(e.getForgeRegistry().getRegistryKey().equals(Registry.ITEM_REGISTRY)) {
-					Registration.registerItems(new ForgeRegistryHelper<>(e.getForgeRegistry()));
-				} else if(e.getForgeRegistry().getRegistryKey().equals(Registry.BLOCK_ENTITY_TYPE_REGISTRY)) {
-					Registration.registerTiles(new ForgeRegistryHelper<>(e.getForgeRegistry()));
-				}
-			}
-		});
-
+		modEventBus.addListener(this::setupRegistry);
 		MinecraftForge.EVENT_BUS.register(this);
-	}
-
-	private void setupClient(final FMLClientSetupEvent event) {
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_GLASS_DOME, RenderType.translucent());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_ESCAPE_LADDER, RenderType.translucent());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_RAIL, RenderType.translucent());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_WATER, RenderType.translucent());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_TREE, RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_LIGHT, RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlocks.INSTANT_GRINDER, RenderType.translucent());
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
 		ForgePacketHandler.register();
 		SchematicHelper.createSchematicsDir();
+	}
+
+	private void setupRegistry(final RegisterEvent event) {
+		if(event.getForgeRegistry() != null) {
+			if(event.getForgeRegistry().getRegistryKey().equals(Registry.BLOCK_REGISTRY)) {
+				Registration.registerBlocks(new ForgeRegistryHelper<>(event.getForgeRegistry()));
+			} else if(event.getForgeRegistry().getRegistryKey().equals(Registry.ITEM_REGISTRY)) {
+				Registration.registerItems(new ForgeRegistryHelper<>(event.getForgeRegistry()));
+			} else if(event.getForgeRegistry().getRegistryKey().equals(Registry.BLOCK_ENTITY_TYPE_REGISTRY)) {
+				Registration.registerTiles(new ForgeRegistryHelper<>(event.getForgeRegistry()));
+			}
+		}
 	}
 
 	public static class ForgeRegistryHelper<T> implements IRegistryHelper<T> {
