@@ -1,8 +1,8 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
@@ -30,7 +30,7 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 		super(Properties.of(Material.WOOD)
 				.strength(1.5F)
 				.sound(SoundType.WOOD)
-		, Config.Common.DISABLE_SCHEMATIC);
+		, Common.CONFIG.DISABLE_SCHEMATIC());
 		setScreen(ClientHelper.Screen.SCHEMATIC);
 	}
 

@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import net.minecraft.core.BlockPos;
@@ -21,7 +21,7 @@ public class InstantPoolBlock extends InstantBlock {
 		super(Properties.of(Material.STONE)
 				.strength(1.5F)
 				.sound(SoundType.STONE)
-		, Config.Common.DISABLE_POOL);
+		, Common.CONFIG.DISABLE_POOL());
         setCreateMessage(Strings.CREATE_POOL);
 		setDirectional(true);
     }

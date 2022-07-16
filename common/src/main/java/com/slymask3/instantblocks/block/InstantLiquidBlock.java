@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block;
 
 import com.mojang.math.Vector3f;
-import com.slymask3.instantblocks.core.Config;
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.core.ModBlocks;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
@@ -84,7 +84,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	private int getMax() {
-		return isSuction ? Config.Common.MAX_FILL : Config.Common.MAX_LIQUID;
+		return isSuction ? Common.CONFIG.MAX_FILL() : Common.CONFIG.MAX_LIQUID();
 	}
 
 	private Block getMainReplaceBlock() {
@@ -98,7 +98,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		if(isSuction) {
 			Helper.sendMessage(player, "","",new BlockPos(x,y,z),ClientHelper.Particles.NO_LIQUID);
 		}
-		if(world.dimension().equals(Level.NETHER) && blockReplace.equals(Blocks.WATER) && !Config.Common.ALLOW_WATER_IN_NETHER) {
+		if(world.dimension().equals(Level.NETHER) && blockReplace.equals(Blocks.WATER) && !Common.CONFIG.ALLOW_WATER_IN_NETHER()) {
 			Helper.sendMessage(player, Strings.ERROR_WATER_DISABLED);
 			return false;
 		}
@@ -108,7 +108,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 			return false;
 		}
 		if(coordsList.size() >= getMax()) {
-			Helper.sendMessage(player, errorMessage, ChatFormatting.RED + String.valueOf(isSuction ? Config.Common.MAX_FILL : Config.Common.MAX_LIQUID));
+			Helper.sendMessage(player, errorMessage, ChatFormatting.RED + String.valueOf(isSuction ? Common.CONFIG.MAX_FILL() : Common.CONFIG.MAX_LIQUID()));
 			coordsList = new ArrayList<>();
 			return false;
 		} else {
@@ -138,7 +138,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		check(world,x-1,y,z);
 		check(world,x,y,z+1);
 		check(world,x,y,z-1);
-		if(!Config.Common.SIMPLE_LIQUID || isSuction) {
+		if(!Common.CONFIG.SIMPLE_LIQUID() || isSuction) {
 			check(world,x,y-1,z);
 		}
 		if(isSuction) {

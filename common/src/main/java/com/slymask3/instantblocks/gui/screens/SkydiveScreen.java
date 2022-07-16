@@ -3,7 +3,6 @@ package com.slymask3.instantblocks.gui.screens;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.entity.SkydiveBlockEntity;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.gui.components.ColorEditBox;
 import com.slymask3.instantblocks.network.packet.SkydivePacket;
 import net.minecraft.client.gui.components.Button;
@@ -96,9 +95,9 @@ public class SkydiveScreen extends InstantScreen {
 		int radius;
 		try {
 			radius = Integer.parseInt(this.radius.getValue());
-			//Config.Client.SKYDIVE_RADIUS.set(radius);
+			//Common.CONFIG.SKYDIVE_RADIUS().set(radius);
 		} catch (NumberFormatException e) {
-			radius = Config.Common.SKYDIVE_RADIUS;
+			radius = Common.CONFIG.SKYDIVE_RADIUS();
 		}
 		int[] colors = getColors();
 		Common.NETWORK.sendToServer(new SkydivePacket(this.x, this.y, this.z, colors.length, colors, radius, tp.selected()));

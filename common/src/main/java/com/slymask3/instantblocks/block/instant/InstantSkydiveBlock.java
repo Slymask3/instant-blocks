@@ -1,8 +1,8 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SkydiveBlockEntity;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.core.ModBlocks;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
@@ -28,7 +28,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 		super(Properties.of(Material.WOOL)
 				.strength(1.5F)
 				.sound(SoundType.WOOL)
-		, Config.Common.DISABLE_SKYDIVE);
+		, Common.CONFIG.DISABLE_SKYDIVE());
 		setScreen(ClientHelper.Screen.SKYDIVE);
 		setCreateMessage(Strings.CREATE_SKYDIVE);
 		setDirectional(true);
@@ -76,7 +76,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 		int i = 0;
 		int min = Helper.getMinSkydive(world);
 		int max = Helper.getMaxSkydive(world);
-		int water = Config.Common.SKYDIVE_WATER;
+		int water = Common.CONFIG.SKYDIVE_WATER();
 		for(int c=max; c>=min; c--) {
 			if(i>=colors.length) {
 				i = 0;

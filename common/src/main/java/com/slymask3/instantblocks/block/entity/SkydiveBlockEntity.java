@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.block.entity;
 
-import com.slymask3.instantblocks.core.Config;
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.core.ModTiles;
 import com.slymask3.instantblocks.util.ColorHelper;
 import net.minecraft.core.BlockPos;
@@ -21,7 +21,7 @@ public class SkydiveBlockEntity extends InstantBlockEntity {
 			this.colorCode[i] = ColorHelper.textToColor(color).getRGB();
 		}
 		this.teleport = true;
-		this.radius = Config.Common.SKYDIVE_RADIUS;
+		this.radius = Common.CONFIG.SKYDIVE_RADIUS();
 	}
 
 	@Override

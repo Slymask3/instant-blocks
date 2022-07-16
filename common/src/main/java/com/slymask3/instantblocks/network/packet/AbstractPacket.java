@@ -1,13 +1,13 @@
 package com.slymask3.instantblocks.network.packet;
 
-import com.slymask3.instantblocks.network.PacketID;
+import com.slymask3.instantblocks.network.PacketHelper;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
 public abstract class AbstractPacket {
     private final ResourceLocation key;
-    public AbstractPacket(PacketID packetID) {
+    public AbstractPacket(PacketHelper.PacketID packetID) {
         this.key = new ResourceLocation(packetID.toString().toLowerCase());
     }
     public ResourceLocation getKey() {

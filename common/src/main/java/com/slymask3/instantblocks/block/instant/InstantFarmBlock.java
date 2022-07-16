@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
@@ -23,17 +23,17 @@ public class InstantFarmBlock extends InstantBlock {
 		super(Properties.of(Material.STONE)
 				.strength(1.5F)
 				.sound(SoundType.STONE)
-		, Config.Common.DISABLE_FARM);
+		, Common.CONFIG.DISABLE_FARM());
 		setCreateMessage(Strings.CREATE_FARM);
 		setDirectional(true);
     }
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		ArrayList<Helper.WeightedBlock> blocks = new ArrayList<>();
-		blocks.add(new Helper.WeightedBlock(Blocks.WHEAT, Config.Common.WEIGHT_WHEAT));
-		blocks.add(new Helper.WeightedBlock(Blocks.POTATOES, Config.Common.WEIGHT_POTATOES));
-		blocks.add(new Helper.WeightedBlock(Blocks.CARROTS, Config.Common.WEIGHT_CARROTS));
-		blocks.add(new Helper.WeightedBlock(Blocks.BEETROOTS, Config.Common.WEIGHT_BEETROOTS));
+		blocks.add(new Helper.WeightedBlock(Blocks.WHEAT, Common.CONFIG.WEIGHT_WHEAT()));
+		blocks.add(new Helper.WeightedBlock(Blocks.POTATOES, Common.CONFIG.WEIGHT_POTATOES()));
+		blocks.add(new Helper.WeightedBlock(Blocks.CARROTS, Common.CONFIG.WEIGHT_CARROTS()));
+		blocks.add(new Helper.WeightedBlock(Blocks.BEETROOTS, Common.CONFIG.WEIGHT_BEETROOTS()));
 		Block crop = Helper.getRandomBlock(blocks);
 
 		Block stone = Blocks.STONE_BRICKS;

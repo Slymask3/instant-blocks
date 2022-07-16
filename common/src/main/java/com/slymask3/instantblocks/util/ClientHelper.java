@@ -1,8 +1,8 @@
 package com.slymask3.instantblocks.util;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantLiquidBlock;
 import com.slymask3.instantblocks.block.entity.ColorBlockEntity;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.gui.screens.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
@@ -26,15 +26,15 @@ public class ClientHelper {
 
     public static void playSound(Level world, BlockPos pos, Particles particles) {
         SoundEvent sound = switch(particles) {
-            case GENERATE -> new SoundEvent(new ResourceLocation("minecraft", Config.Client.SOUND_GENERATE));
-            case NO_LIQUID -> new SoundEvent(new ResourceLocation("minecraft", Config.Client.SOUND_NO_LIQUID));
+            case GENERATE -> new SoundEvent(new ResourceLocation("minecraft", Common.CONFIG.SOUND_GENERATE()));
+            case NO_LIQUID -> new SoundEvent(new ResourceLocation("minecraft", Common.CONFIG.SOUND_NO_LIQUID()));
             default -> SoundEvents.PLAYER_LEVELUP;
         };
         world.playSound(Minecraft.getInstance().player, pos, sound, SoundSource.BLOCKS,0.4F,1.0F);
     }
 
     public static void showParticles(Level world, BlockPos pos, Particles particles) {
-        if(Config.Client.SHOW_EFFECTS) {
+        if(Common.CONFIG.SHOW_EFFECTS()) {
             switch(particles) {
                 case GENERATE -> {
                     for(double i = 0; i <= 1; i = i + 0.2) {
@@ -58,7 +58,7 @@ public class ClientHelper {
     }
 
     public static void sendMessage(Player player, String message, String variable) {
-        if(Config.Client.SHOW_MESSAGES && Helper.isClient(player.getLevel())) {
+        if(Common.CONFIG.SHOW_MESSAGES() && Helper.isClient(player.getLevel())) {
             player.displayClientMessage(Component.translatable(message, variable.isEmpty() ? new Object[0] : variable),true);
         }
     }

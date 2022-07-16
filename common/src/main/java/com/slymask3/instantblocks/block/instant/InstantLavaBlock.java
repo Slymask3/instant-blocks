@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantLiquidBlock;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -20,7 +20,7 @@ public class InstantLavaBlock extends InstantLiquidBlock {
 				.strength(1.5F)
 				.sound(new LiquidSoundType(SoundEvents.BUCKET_FILL_LAVA, SoundEvents.BUCKET_EMPTY_LAVA))
 				.lightLevel((par1) -> 15)
-		, Config.Common.DISABLE_LAVA, Blocks.AIR, Blocks.LAVA);
+		, Common.CONFIG.DISABLE_LAVA(), Blocks.AIR, Blocks.LAVA);
 		setErrorMessage(Strings.ERROR_LAVA_MAX);
 		this.create = Strings.CREATE_LAVA;
 		this.create1 = Strings.CREATE_LAVA_1;

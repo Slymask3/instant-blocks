@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
@@ -23,7 +23,7 @@ public class InstantGrinderBlock extends InstantBlock {
 				.strength(1.5F)
 				.sound(SoundType.METAL)
 				.noOcclusion()
-		, Config.Common.DISABLE_GRINDER);
+		, Common.CONFIG.DISABLE_GRINDER());
         setCreateMessage(Strings.CREATE_GRINDER);
     }
 
@@ -226,7 +226,7 @@ public class InstantGrinderBlock extends InstantBlock {
 		Builder.Single.setup(world,x,y,z).setBlock(air).build();
 		
 		/************************ Teleport ************************/
-		if(Config.Common.TP_GRINDER) {
+		if(Common.CONFIG.TP_GRINDER()) {
 			Builder.Single.setup(world,x+7,y-4,z).setBlock(glass).build();
 			Builder.Single.setup(world,x+7,y-3,z).setBlock(glass).build();
 			Helper.teleport(world,player,x+13,y-4,z);

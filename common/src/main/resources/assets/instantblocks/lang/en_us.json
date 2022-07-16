@@ -141,5 +141,23 @@
   "ib.gui.tree.jungle": "Huge Jungle Tree",
   "ib.gui.tree.acacia": "Huge Acacia Tree",
   "ib.gui.tree.dark_oak": "Huge Dark Oak Tree",
-  "ib.gui.tree.glass": "Huge Glass Tree"
+  "ib.gui.tree.glass": "Huge Glass Tree",
+
+  "text.autoconfig.instantblocks.title": "Instant Blocks Settings",
+  "text.autoconfig.instantblocks.option.general": "General settings",
+  "text.autoconfig.instantblocks.option.general.USE_WANDS": "Use wands to activate instant blocks",
+  "text.autoconfig.instantblocks.option.general.TP_GRINDER": "Teleport the player to the collection room of the Instant Grinder",
+  "text.autoconfig.instantblocks.option.general.KEEP_BLOCKS": "Keep instant blocks after activation",
+  "text.autoconfig.instantblocks.option.general.ALLOW_WATER_IN_NETHER": "Allow generating water in the nether",
+  "text.autoconfig.instantblocks.option.general.RADIUS_HARVEST": "Radius to harvest blocks around Instant Harvest",
+  "text.autoconfig.instantblocks.option.general.RADIUS_LIGHT": "Radius to light up dark areas around Instant Light",
+  "text.autoconfig.instantblocks.option.general.RAILS_AMOUNT": "Amount of rail blocks to create for Instant Rail",
+  "text.autoconfig.instantblocks.option.general.MINING_LADDER_LAYER": "Mining layer for the Instant Mining Ladder",
+  "text.autoconfig.instantblocks.option.general.XP_AMOUNT": "How much experience activating instant blocks gives you",
+  "text.autoconfig.instantblocks.option.general.TREE_SIZE": "Block size for the huge tree",
+  "text.autoconfig.instantblocks.option.general.RADIUS_DOME": "Glass dome radius",
+  "text.autoconfig.instantblocks.option.liquid": "Instant liquid blocks settings",
+  "text.autoconfig.instantblocks.option.liquid.MAX_LIQUID": "Maximum amount of liquid blocks to generate",
+  "text.autoconfig.instantblocks.option.liquid.MAX_FILL": "Maximum amount of liquid blocks to fill in",
+  "text.autoconfig.instantblocks.option.liquid.SIMPLE_LIQUID": "Only generate liquid blocks on the block's layer, not below it"
 }

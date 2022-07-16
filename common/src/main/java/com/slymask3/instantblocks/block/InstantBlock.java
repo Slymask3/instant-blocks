@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.block;
 
-import com.slymask3.instantblocks.core.Config;
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
@@ -107,7 +107,7 @@ public abstract class InstantBlock extends Block {
 			int z = pos.getZ();
 
 			ItemStack is = player.getItemInHand(hand);
-			if(Config.Common.USE_WANDS && !Helper.isWand(is)) {
+			if(Common.CONFIG.USE_WANDS() && !Helper.isWand(is)) {
 				Helper.sendMessage(player, Strings.ERROR_WAND);
 				return InteractionResult.FAIL;
 			}
@@ -144,7 +144,7 @@ public abstract class InstantBlock extends Block {
 		}
 
 		ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
-		if(Config.Common.USE_WANDS) {
+		if(Common.CONFIG.USE_WANDS()) {
 			if(!Helper.isWand(is)) {
 				Helper.sendMessage(player, Strings.ERROR_WAND);
 				return InteractionResult.FAIL;
@@ -165,8 +165,8 @@ public abstract class InstantBlock extends Block {
 
 	public void afterBuild(Level world, int x, int y, int z, Player player) {
 		Helper.sendMessage(player,this.createMessage,this.createVariable,new BlockPos(x,y,z));
-		Helper.giveExp(world, player, Config.Common.XP_AMOUNT);
-		if(Config.Common.USE_WANDS) {
+		Helper.giveExp(world, player, Common.CONFIG.XP_AMOUNT());
+		if(Common.CONFIG.USE_WANDS()) {
 			ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
 			if(Helper.isWand(is)) {
 				is.hurtAndBreak(Helper.wandDamage(this), player, (entity) -> {

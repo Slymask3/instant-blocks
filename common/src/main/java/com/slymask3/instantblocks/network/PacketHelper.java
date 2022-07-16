@@ -8,6 +8,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class PacketHelper {
+    public enum PacketID { CLIENT, SKYDIVE, STATUE, HARVEST, TREE, SCHEMATIC }
+
     public static void handleClient(ClientPacket message, Player player) {
         if(player != null) {
             if(message.particles != ClientHelper.Particles.NONE.ordinal()) {

@@ -3,7 +3,6 @@ package com.slymask3.instantblocks.util;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.ColorBlockEntity;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.core.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -168,10 +167,10 @@ public class Builder {
 			BlockState state = blockType.getBlockState(world,y);
 			Block block = blockType.getBlock(world,y);
 			Block getBlock = getBlock();
-			if(Config.Common.KEEP_BLOCKS && getBlock instanceof InstantBlock) {
+			if(Common.CONFIG.KEEP_BLOCKS() && getBlock instanceof InstantBlock) {
 				return;
 			}
-			if(world.dimension().equals(Level.NETHER) && block.equals(Blocks.WATER) && !Config.Common.ALLOW_WATER_IN_NETHER) {
+			if(world.dimension().equals(Level.NETHER) && block.equals(Blocks.WATER) && !Common.CONFIG.ALLOW_WATER_IN_NETHER()) {
 				state = Blocks.AIR.defaultBlockState(); //replace water with air in the nether
 			}
 			if(canSet(getBlock)) {

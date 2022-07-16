@@ -1,8 +1,8 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.TreeBlockEntity;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
@@ -32,7 +32,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 				.sound(SoundType.GRASS)
 				.noCollission()
 				.instabreak()
-		, Config.Common.DISABLE_TREE);
+		, Common.CONFIG.DISABLE_TREE());
 		setScreen(ClientHelper.Screen.TREE);
 	}
 
@@ -47,7 +47,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 	}
 	
 	public boolean build(Level world, int x_center, int y, int z_center, Player player, int type, boolean fullLog, boolean fullLeaves, boolean air) {
-		int size = Config.Common.TREE_SIZE;
+		int size = Common.CONFIG.TREE_SIZE();
 		int half = (int)Math.floor(size / 2);
 		int x = x_center - half;
 		int z = z_center - half;

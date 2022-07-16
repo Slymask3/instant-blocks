@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.handler;
 
 import com.slymask3.instantblocks.Common;
-import com.slymask3.instantblocks.core.Config;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -15,10 +14,10 @@ public class LootHandler {
     public static void register() {
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             String name = id.toString();
-            if(Config.Common.GENERATE_IN_CHESTS_BONUS && name.equals("minecraft:chests/spawn_bonus_chest")) {
+            if(Common.CONFIG.GENERATE_IN_CHESTS_BONUS() && name.equals("minecraft:chests/spawn_bonus_chest")) {
                 tableBuilder.pool(injectPool(STARTER));
             }
-            if(Config.Common.GENERATE_IN_CHESTS && name.contains("minecraft:chests/") && !name.equals("minecraft:chests/spawn_bonus_chest")) {
+            if(Common.CONFIG.GENERATE_IN_CHESTS() && name.contains("minecraft:chests/") && !name.equals("minecraft:chests/spawn_bonus_chest")) {
                 tableBuilder.pool(injectPool(BLOCKS));
             }
         });

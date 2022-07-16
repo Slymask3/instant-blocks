@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
-import com.slymask3.instantblocks.network.PacketID;
+import com.slymask3.instantblocks.network.PacketHelper;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class TreePacket extends AbstractPacket {
@@ -13,7 +13,7 @@ public class TreePacket extends AbstractPacket {
 	public final boolean _air;
 
 	public TreePacket(int x, int y, int z, int type, boolean fullLogs, boolean fullLeaves, boolean air) {
-		super(PacketID.TREE);
+		super(PacketHelper.PacketID.TREE);
 		_x = x;
 		_y = y;
 		_z = z;

@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
@@ -34,7 +34,7 @@ public class InstantLightBlock extends InstantBlock {
                 .noCollission()
                 .instabreak()
                 .lightLevel((par1) -> 14)
-        , Config.Common.DISABLE_LIGHT);
+        , Common.CONFIG.DISABLE_LIGHT());
         this.coordsList = new ArrayList<>();
     }
 
@@ -53,7 +53,7 @@ public class InstantLightBlock extends InstantBlock {
     public boolean build(Level world, int x, int y, int z, Player player) {
         checkForDarkness(world,x,y,z);
         if(coordsList.isEmpty()) {
-            Helper.sendMessage(player,Strings.ERROR_LIGHT, ChatFormatting.RED + String.valueOf(Config.Common.RADIUS_LIGHT));
+            Helper.sendMessage(player,Strings.ERROR_LIGHT, ChatFormatting.RED + String.valueOf(Common.CONFIG.RADIUS_LIGHT()));
             return false;
         }
         Builder.Single.setup(world,x,y,z).setBlock(Blocks.TORCH).build();
@@ -63,7 +63,7 @@ public class InstantLightBlock extends InstantBlock {
 	}
 
     private void checkForDarkness(Level world, int x_center, int y_center, int z_center) {
-        int radius = Config.Common.RADIUS_LIGHT;
+        int radius = Common.CONFIG.RADIUS_LIGHT();
         Random random = new Random();
 
         for(int y=y_center+radius; y>y_center-radius*2; y-=(random.nextInt(3)+2)) {

@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
@@ -19,14 +19,14 @@ public class InstantHouseWoodBlock extends InstantBlock {
 		super(Properties.of(Material.WOOD)
 				.strength(1.5F)
 				.sound(SoundType.WOOD)
-		, Config.Common.DISABLE_WOODEN_HOUSE);
+		, Common.CONFIG.DISABLE_WOODEN_HOUSE());
 		setCreateMessage(Strings.CREATE_WOODEN_HOUSE);
 		setDirectional(true);
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		String planks_one = Config.Common.HOUSE_PLANKS_ONE;
-		String planks_two = Config.Common.HOUSE_PLANKS_TWO;
+		String planks_one = Common.CONFIG.HOUSE_PLANKS_ONE();
+		String planks_two = Common.CONFIG.HOUSE_PLANKS_TWO();
 
 		Block light = Helper.readBlock(planks_one + "_planks",Blocks.BIRCH_PLANKS);
 		Block dark = Helper.readBlock(planks_two + "_planks",Blocks.SPRUCE_PLANKS);
@@ -37,8 +37,8 @@ public class InstantHouseWoodBlock extends InstantBlock {
 		Block sign = Helper.readBlock(planks_two + "_wall_sign",Blocks.SPRUCE_WALL_SIGN);
 		Block plate_light = Helper.readBlock(planks_one + "_pressure_plate",Blocks.BIRCH_PRESSURE_PLATE);
 		Block plate_dark = Helper.readBlock(planks_two + "_pressure_plate",Blocks.SPRUCE_PRESSURE_PLATE);
-		Block log = Helper.readBlock(Config.Common.HOUSE_LOG + "_log",Blocks.BIRCH_LOG);
-		Block door = Helper.readBlock(Config.Common.HOUSE_DOOR + "_door",Blocks.DARK_OAK_DOOR);
+		Block log = Helper.readBlock(Common.CONFIG.HOUSE_LOG() + "_log",Blocks.BIRCH_LOG);
+		Block door = Helper.readBlock(Common.CONFIG.HOUSE_DOOR() + "_door",Blocks.DARK_OAK_DOOR);
 
 		Block craft = Blocks.CRAFTING_TABLE;
 		Block chest = Blocks.CHEST;

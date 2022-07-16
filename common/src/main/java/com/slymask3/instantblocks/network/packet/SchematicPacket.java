@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
-import com.slymask3.instantblocks.network.PacketID;
+import com.slymask3.instantblocks.network.PacketHelper;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class SchematicPacket extends AbstractPacket {
@@ -12,7 +12,7 @@ public class SchematicPacket extends AbstractPacket {
 	public final boolean _air;
 
 	public SchematicPacket(int x, int y, int z, String schematic, boolean center, boolean air) {
-		super(PacketID.SCHEMATIC);
+		super(PacketHelper.PacketID.SCHEMATIC);
 		_x = x;
 		_y = y;
 		_z = z;

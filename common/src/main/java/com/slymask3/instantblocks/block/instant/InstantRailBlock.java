@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import net.minecraft.core.BlockPos;
@@ -27,7 +27,7 @@ public class InstantRailBlock extends InstantBlock {
 				.isValidSpawn((state, world, pos, entityType) -> false)
 				.isRedstoneConductor((state, world, pos) -> false)
 				.isViewBlocking((state, world, pos) -> false)
-		, Config.Common.DISABLE_RAIL);
+		, Common.CONFIG.DISABLE_RAIL());
         setCreateMessage(Strings.CREATE_RAIL);
 		setDirectional(true);
 	}
@@ -38,7 +38,7 @@ public class InstantRailBlock extends InstantBlock {
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
-    	for(int i = 0; i<= Config.Common.RAILS_AMOUNT; i++) {
+    	for(int i = 0; i<= Common.CONFIG.RAILS_AMOUNT(); i++) {
 			Builder.Single.setup(world,x,y-1,z).offset(direction,i,0,0,0).setStone().build();
 			Builder.Single.setup(world,x,y,z).offset(direction,i,0,0,0).setBlock(Blocks.RAIL).build();
 			Builder.Single.setup(world,x,y+1,z).offset(direction,i,0,0,0).setBlock(Blocks.AIR).build();

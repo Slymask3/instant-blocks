@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks;
 
+import com.slymask3.instantblocks.config.ClothConfig;
 import com.slymask3.instantblocks.core.ModBlocks;
 import com.slymask3.instantblocks.handler.LootHandler;
 import com.slymask3.instantblocks.init.FabricTiles;
@@ -8,6 +9,7 @@ import com.slymask3.instantblocks.init.Registration;
 import com.slymask3.instantblocks.network.FabricPacketHandler;
 import com.slymask3.instantblocks.network.IPacketHandler;
 import com.slymask3.instantblocks.network.packet.AbstractPacket;
+import com.slymask3.instantblocks.platform.Services;
 import com.slymask3.instantblocks.util.SchematicHelper;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -25,6 +27,11 @@ public class InstantBlocks implements ModInitializer {
         Common.NETWORK = new PacketHandler();
         Common.TILES = new FabricTiles();
         Common.init();
+
+        if(Services.PLATFORM.isModLoaded("cloth-config")) {
+            ClothConfig.register();
+            Common.CONFIG = new ClothConfig();
+        }
 
         Registration.registerBlocks(new FabricRegistryHelper<>(Registry.BLOCK));
         Registration.registerItems(new FabricRegistryHelper<>(Registry.ITEM));

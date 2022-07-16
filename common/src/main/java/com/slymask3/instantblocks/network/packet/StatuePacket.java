@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
-import com.slymask3.instantblocks.network.PacketID;
+import com.slymask3.instantblocks.network.PacketHelper;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class StatuePacket extends AbstractPacket {
@@ -17,7 +17,7 @@ public class StatuePacket extends AbstractPacket {
 	public final boolean _rgb;
 
 	public StatuePacket(int x, int y, int z, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
-		super(PacketID.STATUE);
+		super(PacketHelper.PacketID.STATUE);
 		_x = x;
 		_y = y;
 		_z = z;

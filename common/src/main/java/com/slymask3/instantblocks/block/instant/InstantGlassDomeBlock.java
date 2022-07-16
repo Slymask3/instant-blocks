@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import net.minecraft.core.BlockPos;
@@ -30,7 +30,7 @@ public class InstantGlassDomeBlock extends InstantBlock {
 				.isValidSpawn((state, world, pos, entityType) -> false)
 				.isRedstoneConductor((state, world, pos) -> false)
 				.isViewBlocking((state, world, pos) -> false)
-		, Config.Common.DISABLE_GLASS_DOME);
+		, Common.CONFIG.DISABLE_GLASS_DOME());
 		setCreateMessage(Strings.CREATE_DOME);
     }
 
@@ -62,7 +62,7 @@ public class InstantGlassDomeBlock extends InstantBlock {
 		Block torch = Blocks.TORCH;
 		Block air = Blocks.AIR;
 
-		int radius = Config.Common.RADIUS_DOME;
+		int radius = Common.CONFIG.RADIUS_DOME();
 
 		Builder.Circle.setup(world,x,y,z,radius).setBlock(Builder.BlockType.stone()).build();
 		Builder.Sphere.setup(world,x,y+1,z,radius).setOuter(Builder.BlockType.block(glass)).setInner(Builder.BlockType.block(air)).setHalf().build();

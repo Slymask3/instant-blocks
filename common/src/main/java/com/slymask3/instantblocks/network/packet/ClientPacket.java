@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
-import com.slymask3.instantblocks.network.PacketID;
+import com.slymask3.instantblocks.network.PacketHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 
@@ -11,7 +11,7 @@ public class ClientPacket extends AbstractPacket {
 	public final int particles;
 
 	public ClientPacket(String message, String variable, BlockPos pos, int particles) {
-		super(PacketID.CLIENT);
+		super(PacketHelper.PacketID.CLIENT);
 		this.message = message;
 		this.variable = variable;
 		this.pos = pos;

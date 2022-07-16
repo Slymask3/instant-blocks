@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
@@ -20,14 +20,14 @@ public class InstantMiningLadderBlock extends InstantBlock {
 		super(Properties.of(Material.STONE)
 				.strength(1.5F)
 				.sound(SoundType.STONE)
-		, Config.Common.DISABLE_MINING_LADDER);
+		, Common.CONFIG.DISABLE_MINING_LADDER());
 		setCreateMessage(Strings.CREATE_MINING_LADDER);
 		setDirectional(true);
     }
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
-		if(y <= Config.Common.MINING_LADDER_LAYER + 4) {
-			Helper.sendMessage(player, Strings.ERROR_LADDER, ChatFormatting.RED + String.valueOf(Config.Common.MINING_LADDER_LAYER + 4));
+		if(y <= Common.CONFIG.MINING_LADDER_LAYER() + 4) {
+			Helper.sendMessage(player, Strings.ERROR_LADDER, ChatFormatting.RED + String.valueOf(Common.CONFIG.MINING_LADDER_LAYER() + 4));
 			return false;
 		}
 		return true;
@@ -40,7 +40,7 @@ public class InstantMiningLadderBlock extends InstantBlock {
 		Block sign = Blocks.OAK_WALL_SIGN;
 		Block air = Blocks.AIR;
 
-		int layer = Config.Common.MINING_LADDER_LAYER;
+		int layer = Common.CONFIG.MINING_LADDER_LAYER();
 
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 		Direction directionLadder = direction.getCounterClockWise();

@@ -1,8 +1,8 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.HarvestBlockEntity;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
@@ -25,7 +25,7 @@ public class InstantHarvestBlock extends InstantBlock implements EntityBlock {
 		super(Properties.of(Material.WOOD)
 				.strength(1.5F)
 				.sound(SoundType.WOOD)
-		, Config.Common.DISABLE_HARVEST);
+		, Common.CONFIG.DISABLE_HARVEST());
 		setScreen(ClientHelper.Screen.HARVEST);
 		setCreateMessage(Strings.CREATE_HARVEST);
 	}
@@ -37,7 +37,7 @@ public class InstantHarvestBlock extends InstantBlock implements EntityBlock {
 	}
 	
 	public boolean build(Level world, int X, int Y, int Z, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
-		int radius = Config.Common.RADIUS_HARVEST;
+		int radius = Common.CONFIG.RADIUS_HARVEST();
 
 		Builder.Single.setup(world,X,Y,Z).setBlock(Blocks.CHEST).build();
 		ChestBlockEntity chest = (ChestBlockEntity)world.getBlockEntity(new BlockPos(X,Y,Z));

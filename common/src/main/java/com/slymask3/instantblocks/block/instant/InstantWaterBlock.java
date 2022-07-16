@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantLiquidBlock;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -22,7 +22,7 @@ public class InstantWaterBlock extends InstantLiquidBlock {
                 .isValidSpawn((state, world, pos, entityType) -> false)
                 .isRedstoneConductor((state, world, pos) -> false)
                 .isViewBlocking((state, world, pos) -> false)
-        , Config.Common.DISABLE_WATER, Blocks.AIR, Blocks.WATER);
+        , Common.CONFIG.DISABLE_WATER(), Blocks.AIR, Blocks.WATER);
         setErrorMessage(Strings.ERROR_WATER_MAX);
 		this.create = Strings.CREATE_WATER;
 		this.create1 = Strings.CREATE_WATER_1;

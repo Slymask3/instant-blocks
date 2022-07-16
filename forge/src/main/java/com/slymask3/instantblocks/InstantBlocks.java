@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks;
 
+import com.slymask3.instantblocks.config.ForgeConfig;
 import com.slymask3.instantblocks.core.ModBlocks;
-import com.slymask3.instantblocks.handler.ForgeConfig;
 import com.slymask3.instantblocks.init.ForgeTiles;
 import com.slymask3.instantblocks.init.IRegistryHelper;
 import com.slymask3.instantblocks.init.Registration;
@@ -30,6 +30,7 @@ public class InstantBlocks {
 		Common.ITEM_GROUP = new CreativeModeTab(CreativeModeTab.TABS.length,Common.MOD_ID) { public @NotNull ItemStack makeIcon() { return new ItemStack(ModBlocks.INSTANT_WOOD_HOUSE); } };
 		Common.NETWORK = new PacketHandler();
 		Common.TILES = new ForgeTiles();
+		Common.CONFIG = new ForgeConfig();
 		Common.init();
 
 		ForgeConfig.init();

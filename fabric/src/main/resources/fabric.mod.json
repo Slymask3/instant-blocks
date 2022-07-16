@@ -10,7 +10,8 @@
     ],
     "contact": {
       "homepage": "https://www.curseforge.com/minecraft/mc-mods/instant-blocks",
-      "sources": "https://github.com/slymask3/instant-blocks"
+      "sources": "https://github.com/slymask3/instant-blocks",
+      "issues": "https://github.com/slymask3/instant-blocks/issues"
     },
   
     "license": "LGPLv3",
@@ -23,6 +24,9 @@
       ],
       "client": [
         "com.slymask3.instantblocks.InstantBlocksClient"
+      ],
+      "modmenu": [
+        "com.slymask3.instantblocks.handler.ModMenuIntegration"
       ]
     },
   

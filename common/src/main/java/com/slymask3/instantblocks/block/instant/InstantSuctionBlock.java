@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.instant;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantLiquidBlock;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.reference.Strings;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -13,7 +13,7 @@ public class InstantSuctionBlock extends InstantLiquidBlock {
         super(Block.Properties.of(Material.STONE)
                 .strength(1.5F)
                 .sound(SoundType.STONE)
-        , Config.Common.DISABLE_SUCTION, null, Blocks.AIR);
+        , Common.CONFIG.DISABLE_SUCTION(), null, Blocks.AIR);
         setErrorMessage(Strings.ERROR_SUCTION);
         this.create = Strings.CREATE_SUCTION;
 		this.create1 = Strings.CREATE_SUCTION_1;

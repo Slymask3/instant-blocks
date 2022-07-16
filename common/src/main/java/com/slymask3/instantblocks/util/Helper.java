@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.Common;
-import com.slymask3.instantblocks.core.Config;
 import com.slymask3.instantblocks.item.InstantWandItem;
 import com.slymask3.instantblocks.network.packet.ClientPacket;
 import com.slymask3.instantblocks.reference.Names;
@@ -68,23 +67,23 @@ public class Helper {
 
 	public static int wandDamage(Block block) {
 		return switch(block.getDescriptionId().substring(Common.MOD_ID.length()+7)) {
-			case Names.Blocks.IB_WOOD_HOUSE -> Config.Common.DAMAGE_WOODEN_HOUSE;
-			case Names.Blocks.IB_MINING_LADDER -> Config.Common.DAMAGE_MINING_LADDER;
-			case Names.Blocks.IB_GLASS_DOME -> Config.Common.DAMAGE_GLASS_DOME;
-			case Names.Blocks.IB_FARM -> Config.Common.DAMAGE_FARM;
-			case Names.Blocks.IB_SKYDIVE -> Config.Common.DAMAGE_SKYDIVE;
-			case Names.Blocks.IB_GRINDER -> Config.Common.DAMAGE_GRINDER;
-			case Names.Blocks.IB_POOL -> Config.Common.DAMAGE_POOL;
-			case Names.Blocks.IB_ESCAPE_LADDER -> Config.Common.DAMAGE_ESCAPE_LADDER;
-			case Names.Blocks.IB_WATER -> Config.Common.DAMAGE_WATER;
-			case Names.Blocks.IB_LAVA -> Config.Common.DAMAGE_LAVA;
-			case Names.Blocks.IB_SUCTION -> Config.Common.DAMAGE_SUCTION;
-			case Names.Blocks.IB_RAIL -> Config.Common.DAMAGE_RAIL;
-			case Names.Blocks.IB_STATUE -> Config.Common.DAMAGE_STATUE;
-			case Names.Blocks.IB_HARVEST -> Config.Common.DAMAGE_HARVEST;
-			case Names.Blocks.IB_LIGHT -> Config.Common.DAMAGE_LIGHT;
-			case Names.Blocks.IB_SCHEMATIC -> Config.Common.DAMAGE_SCHEMATIC;
-			case Names.Blocks.IB_TREE -> Config.Common.DAMAGE_TREE;
+			case Names.Blocks.IB_WOOD_HOUSE -> Common.CONFIG.DAMAGE_WOODEN_HOUSE();
+			case Names.Blocks.IB_MINING_LADDER -> Common.CONFIG.DAMAGE_MINING_LADDER();
+			case Names.Blocks.IB_GLASS_DOME -> Common.CONFIG.DAMAGE_GLASS_DOME();
+			case Names.Blocks.IB_FARM -> Common.CONFIG.DAMAGE_FARM();
+			case Names.Blocks.IB_SKYDIVE -> Common.CONFIG.DAMAGE_SKYDIVE();
+			case Names.Blocks.IB_GRINDER -> Common.CONFIG.DAMAGE_GRINDER();
+			case Names.Blocks.IB_POOL -> Common.CONFIG.DAMAGE_POOL();
+			case Names.Blocks.IB_ESCAPE_LADDER -> Common.CONFIG.DAMAGE_ESCAPE_LADDER();
+			case Names.Blocks.IB_WATER -> Common.CONFIG.DAMAGE_WATER();
+			case Names.Blocks.IB_LAVA -> Common.CONFIG.DAMAGE_LAVA();
+			case Names.Blocks.IB_SUCTION -> Common.CONFIG.DAMAGE_SUCTION();
+			case Names.Blocks.IB_RAIL -> Common.CONFIG.DAMAGE_RAIL();
+			case Names.Blocks.IB_STATUE -> Common.CONFIG.DAMAGE_STATUE();
+			case Names.Blocks.IB_HARVEST -> Common.CONFIG.DAMAGE_HARVEST();
+			case Names.Blocks.IB_LIGHT -> Common.CONFIG.DAMAGE_LIGHT();
+			case Names.Blocks.IB_SCHEMATIC -> Common.CONFIG.DAMAGE_SCHEMATIC();
+			case Names.Blocks.IB_TREE -> Common.CONFIG.DAMAGE_TREE();
 			default -> 1;
 		};
 	}
@@ -106,7 +105,7 @@ public class Helper {
 	}
 
 	public static int getMinSkydive(Level world) {
-		int min = Config.Common.SKYDIVE_MIN;
+		int min = Common.CONFIG.SKYDIVE_MIN();
 		if(min < world.getMinBuildHeight() - 4) {
 			min = world.getMinBuildHeight() - 5;
 		}
@@ -114,7 +113,7 @@ public class Helper {
 	}
 
 	public static int getMaxSkydive(Level world) {
-		int max = Config.Common.SKYDIVE_MAX;
+		int max = Common.CONFIG.SKYDIVE_MAX();
 		if(max > world.getMaxBuildHeight() - 3) {
 			max = world.getMaxBuildHeight() - 4;
 		}

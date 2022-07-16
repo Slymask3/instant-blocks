@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
-import com.slymask3.instantblocks.network.PacketID;
+import com.slymask3.instantblocks.network.PacketHelper;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class HarvestPacket extends AbstractPacket {
@@ -26,7 +26,7 @@ public class HarvestPacket extends AbstractPacket {
 	public final boolean _replant;
 
 	public HarvestPacket(int x, int y, int z, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
-		super(PacketID.HARVEST);
+		super(PacketHelper.PacketID.HARVEST);
 		_x = x;
 		_y = y;
 		_z = z;

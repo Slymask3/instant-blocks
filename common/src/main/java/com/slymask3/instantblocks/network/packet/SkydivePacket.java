@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
-import com.slymask3.instantblocks.network.PacketID;
+import com.slymask3.instantblocks.network.PacketHelper;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class SkydivePacket extends AbstractPacket {
@@ -13,7 +13,7 @@ public class SkydivePacket extends AbstractPacket {
 	public final boolean _tp;
 
 	public SkydivePacket(int x, int y, int z, int colors_amount, int[] colors, int radius, boolean tp) {
-		super(PacketID.SKYDIVE);
+		super(PacketHelper.PacketID.SKYDIVE);
 		_x = x;
 		_y = y;
 		_z = z;
