@@ -35,9 +35,13 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 		super(Properties.of(Material.WOOD)
 				.strength(1.5F)
 				.sound(SoundType.WOOD)
-		, Common.CONFIG.DISABLE_STATUE());
+		);
 		setScreen(ClientHelper.Screen.STATUE);
 		setDirectional(true);
+	}
+
+	public boolean isEnabled() {
+		return Common.CONFIG.ENABLE_STATUE();
 	}
 
 	@Nullable

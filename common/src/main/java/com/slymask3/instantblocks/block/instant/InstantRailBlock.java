@@ -27,9 +27,13 @@ public class InstantRailBlock extends InstantBlock {
 				.isValidSpawn((state, world, pos, entityType) -> false)
 				.isRedstoneConductor((state, world, pos) -> false)
 				.isViewBlocking((state, world, pos) -> false)
-		, Common.CONFIG.DISABLE_RAIL());
+		);
         setCreateMessage(Strings.CREATE_RAIL);
 		setDirectional(true);
+	}
+
+	public boolean isEnabled() {
+		return Common.CONFIG.ENABLE_RAIL();
 	}
 
 	public VoxelShape getShape(BlockState p_54372_, BlockGetter p_54373_, BlockPos p_54374_, CollisionContext p_54375_) {

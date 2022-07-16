@@ -28,12 +28,10 @@ public abstract class InstantBlock extends Block {
 	public String createMessage, errorMessage, createVariable, errorVariable;
 	boolean isDirectional = false;
 	ClientHelper.Screen screen = null;
-	final boolean isDisabled;
 	
-	protected InstantBlock(Properties properties, boolean isDisabled) {
+	protected InstantBlock(Properties properties) {
 		super(properties);
 		this.createMessage = this.errorMessage = this.createVariable = this.errorVariable = "";
-		this.isDisabled = isDisabled;
 	}
 
 	public void setCreateMessage(String message) {
@@ -77,6 +75,7 @@ public abstract class InstantBlock extends Block {
 	}
 
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+		Common.CONFIG.reload();
 		return screen == null ? onActivate(world,pos,player,hand) : onActivateGui(world,pos,player,hand);
 	}
 
@@ -84,8 +83,12 @@ public abstract class InstantBlock extends Block {
 		return true;
 	}
 
+	public boolean isEnabled() {
+		return true;
+	}
+
 	private boolean isDisabled(Player player) {
-		if(this.isDisabled) {
+		if(!this.isEnabled()) {
 			Helper.sendMessage(player,Strings.ERROR_DISABLED);
 			return true;
 		}

@@ -32,8 +32,12 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 				.sound(SoundType.GRASS)
 				.noCollission()
 				.instabreak()
-		, Common.CONFIG.DISABLE_TREE());
+		);
 		setScreen(ClientHelper.Screen.TREE);
+	}
+
+	public boolean isEnabled() {
+		return Common.CONFIG.ENABLE_TREE();
 	}
 
 	@Nullable

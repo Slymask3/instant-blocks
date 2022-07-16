@@ -13,50 +13,30 @@ public class ClothConfig implements ConfigData, IConfig {
         AutoConfig.register(ClothConfig.class, Toml4jConfigSerializer::new);
     }
 
+    public static ClothConfig get() {
+        return AutoConfig.getConfigHolder(ClothConfig.class).getConfig();
+    }
+
+    public void reload() {
+        Common.CONFIG = get();
+    }
+
     @ConfigEntry.Category("general")
+    @ConfigEntry.Gui.PrefixText()
+    @ConfigEntry.Gui.TransitiveObject
     SectionGeneral general = new SectionGeneral();
     static class SectionGeneral {
         boolean USE_WANDS = Defaults.USE_WANDS;
-        boolean TP_GRINDER = Defaults.TP_GRINDER;
         boolean KEEP_BLOCKS = Defaults.KEEP_BLOCKS;
         boolean ALLOW_WATER_IN_NETHER = Defaults.ALLOW_WATER_IN_NETHER;
-        int RADIUS_HARVEST = Defaults.RADIUS_HARVEST;
-        int RADIUS_LIGHT = Defaults.RADIUS_LIGHT;
-        int RAILS_AMOUNT = Defaults.RAILS_AMOUNT;
-        int MINING_LADDER_LAYER = Defaults.MINING_LADDER_LAYER;
         int XP_AMOUNT = Defaults.XP_AMOUNT;
-        int TREE_SIZE = Defaults.TREE_SIZE;
-        int RADIUS_DOME = Defaults.RADIUS_DOME;
+        boolean GENERATE_IN_CHESTS = Defaults.GENERATE_IN_CHESTS;
+        boolean GENERATE_IN_CHESTS_BONUS = Defaults.GENERATE_IN_CHESTS_BONUS;
     }
 
-
-    @ConfigEntry.Category("liquid")
-    SectionLiquid liquid = new SectionLiquid();
-    static class SectionLiquid {
-        int MAX_LIQUID = Defaults.MAX_LIQUID;
-        int MAX_FILL = Defaults.MAX_FILL;
-        boolean SIMPLE_LIQUID = Defaults.SIMPLE_LIQUID;
-    }
-
-    @ConfigEntry.Category("skydive")
-    SectionSkydive skydive = new SectionSkydive();
-    static class SectionSkydive {
-        int SKYDIVE_MIN = Defaults.SKYDIVE_MIN;
-        int SKYDIVE_MAX = Defaults.SKYDIVE_MAX;
-        int SKYDIVE_WATER = Defaults.SKYDIVE_WATER;
-        int SKYDIVE_RADIUS = Defaults.SKYDIVE_RADIUS;
-    }
-
-    @ConfigEntry.Category("farm")
-    SectionFarm farm = new SectionFarm();
-    static class SectionFarm {
-        int WEIGHT_WHEAT = Defaults.WEIGHT_WHEAT;
-        int WEIGHT_POTATOES = Defaults.WEIGHT_POTATOES;
-        int WEIGHT_CARROTS = Defaults.WEIGHT_CARROTS;
-        int WEIGHT_BEETROOTS = Defaults.WEIGHT_BEETROOTS;
-    }
-
-    @ConfigEntry.Category("house")
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.PrefixText()
+    @ConfigEntry.Gui.CollapsibleObject()
     SectionHouse house = new SectionHouse();
     static class SectionHouse {
         String HOUSE_PLANKS_ONE = Defaults.HOUSE_PLANKS_ONE;
@@ -65,36 +45,121 @@ public class ClothConfig implements ConfigData, IConfig {
         String HOUSE_DOOR = Defaults.HOUSE_DOOR;
     }
 
-    @ConfigEntry.Category("structures")
-    SectionStructures structures = new SectionStructures();
-    static class SectionStructures {
-        boolean GENERATE_IN_CHESTS = Defaults.GENERATE_IN_CHESTS;
-        boolean GENERATE_IN_CHESTS_BONUS = Defaults.GENERATE_IN_CHESTS_BONUS;
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.CollapsibleObject
+    SectionMining mining = new SectionMining();
+    static class SectionMining {
+        @ConfigEntry.BoundedDiscrete(min = -64, max = 320)
+        int MINING_LADDER_LAYER = Defaults.MINING_LADDER_LAYER;
+    }
+
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.CollapsibleObject
+    SectionDome dome = new SectionDome();
+    static class SectionDome {
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 100)
+        int RADIUS_DOME = Defaults.RADIUS_DOME;
+    }
+
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.CollapsibleObject
+    SectionFarm farm = new SectionFarm();
+    static class SectionFarm {
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
+        int WEIGHT_WHEAT = Defaults.WEIGHT_WHEAT;
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
+        int WEIGHT_POTATOES = Defaults.WEIGHT_POTATOES;
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
+        int WEIGHT_CARROTS = Defaults.WEIGHT_CARROTS;
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
+        int WEIGHT_BEETROOTS = Defaults.WEIGHT_BEETROOTS;
+    }
+
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.CollapsibleObject
+    SectionSkydive skydive = new SectionSkydive();
+    static class SectionSkydive {
+        @ConfigEntry.BoundedDiscrete(min = -64, max = 320)
+        int SKYDIVE_MIN = Defaults.SKYDIVE_MIN;
+        @ConfigEntry.BoundedDiscrete(min = -64, max = 320)
+        int SKYDIVE_MAX = Defaults.SKYDIVE_MAX;
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 300)
+        int SKYDIVE_WATER = Defaults.SKYDIVE_WATER;
+        int SKYDIVE_RADIUS = Defaults.SKYDIVE_RADIUS;
+    }
+
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.CollapsibleObject
+    SectionGrinder grinder = new SectionGrinder();
+    static class SectionGrinder {
+        boolean TP_GRINDER = Defaults.TP_GRINDER;
+    }
+
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.CollapsibleObject
+    SectionLiquid liquid = new SectionLiquid();
+    static class SectionLiquid {
+        int MAX_LIQUID = Defaults.MAX_LIQUID;
+        int MAX_FILL = Defaults.MAX_FILL;
+        boolean SIMPLE_LIQUID = Defaults.SIMPLE_LIQUID;
+    }
+
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.CollapsibleObject
+    SectionRail rail = new SectionRail();
+    static class SectionRail {
+        int RAILS_AMOUNT = Defaults.RAILS_AMOUNT;
+    }
+
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.CollapsibleObject
+    SectionHarvest harvest = new SectionHarvest();
+    static class SectionHarvest {
+        int RADIUS_HARVEST = Defaults.RADIUS_HARVEST;
+    }
+
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.CollapsibleObject
+    SectionLight light = new SectionLight();
+    static class SectionLight {
+        int RADIUS_LIGHT = Defaults.RADIUS_LIGHT;
+    }
+
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.CollapsibleObject
+    SectionTree tree = new SectionTree();
+    static class SectionTree {
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 24)
+        int TREE_SIZE = Defaults.TREE_SIZE;
     }
 
     @ConfigEntry.Category("toggle")
+    @ConfigEntry.Gui.PrefixText()
+    @ConfigEntry.Gui.TransitiveObject
     SectionToggle toggle = new SectionToggle();
     static class SectionToggle {
-        boolean DISABLE_WOODEN_HOUSE = Defaults.DISABLE_WOODEN_HOUSE;
-        boolean DISABLE_MINING_LADDER = Defaults.DISABLE_MINING_LADDER;
-        boolean DISABLE_GLASS_DOME = Defaults.DISABLE_GLASS_DOME;
-        boolean DISABLE_FARM = Defaults.DISABLE_FARM;
-        boolean DISABLE_SKYDIVE = Defaults.DISABLE_SKYDIVE;
-        boolean DISABLE_GRINDER = Defaults.DISABLE_GRINDER;
-        boolean DISABLE_POOL = Defaults.DISABLE_POOL;
-        boolean DISABLE_ESCAPE_LADDER = Defaults.DISABLE_ESCAPE_LADDER;
-        boolean DISABLE_WATER = Defaults.DISABLE_WATER;
-        boolean DISABLE_LAVA = Defaults.DISABLE_LAVA;
-        boolean DISABLE_SUCTION = Defaults.DISABLE_SUCTION;
-        boolean DISABLE_RAIL = Defaults.DISABLE_RAIL;
-        boolean DISABLE_STATUE = Defaults.DISABLE_STATUE;
-        boolean DISABLE_HARVEST = Defaults.DISABLE_HARVEST;
-        boolean DISABLE_LIGHT = Defaults.DISABLE_LIGHT;
-        boolean DISABLE_SCHEMATIC = Defaults.DISABLE_SCHEMATIC;
-        boolean DISABLE_TREE = Defaults.DISABLE_TREE;
+        boolean ENABLE_WOODEN_HOUSE = Defaults.ENABLE_WOODEN_HOUSE;
+        boolean ENABLE_MINING_LADDER = Defaults.ENABLE_MINING_LADDER;
+        boolean ENABLE_GLASS_DOME = Defaults.ENABLE_GLASS_DOME;
+        boolean ENABLE_FARM = Defaults.ENABLE_FARM;
+        boolean ENABLE_SKYDIVE = Defaults.ENABLE_SKYDIVE;
+        boolean ENABLE_GRINDER = Defaults.ENABLE_GRINDER;
+        boolean ENABLE_POOL = Defaults.ENABLE_POOL;
+        boolean ENABLE_ESCAPE_LADDER = Defaults.ENABLE_ESCAPE_LADDER;
+        boolean ENABLE_WATER = Defaults.ENABLE_WATER;
+        boolean ENABLE_LAVA = Defaults.ENABLE_LAVA;
+        boolean ENABLE_SUCTION = Defaults.ENABLE_SUCTION;
+        boolean ENABLE_RAIL = Defaults.ENABLE_RAIL;
+        boolean ENABLE_STATUE = Defaults.ENABLE_STATUE;
+        boolean ENABLE_HARVEST = Defaults.ENABLE_HARVEST;
+        boolean ENABLE_LIGHT = Defaults.ENABLE_LIGHT;
+        boolean ENABLE_SCHEMATIC = Defaults.ENABLE_SCHEMATIC;
+        boolean ENABLE_TREE = Defaults.ENABLE_TREE;
     }
 
     @ConfigEntry.Category("damage")
+    @ConfigEntry.Gui.PrefixText()
+    @ConfigEntry.Gui.TransitiveObject
     SectionDamage damage = new SectionDamage();
     static class SectionDamage {
         int DAMAGE_WOODEN_HOUSE = Defaults.DAMAGE_WOODEN_HOUSE;
@@ -117,6 +182,8 @@ public class ClothConfig implements ConfigData, IConfig {
     }
 
     @ConfigEntry.Category("client")
+    @ConfigEntry.Gui.PrefixText()
+    @ConfigEntry.Gui.TransitiveObject
     SectionClient client = new SectionClient();
     static class SectionClient {
         boolean SHOW_MESSAGES = Defaults.SHOW_MESSAGES;
@@ -126,16 +193,16 @@ public class ClothConfig implements ConfigData, IConfig {
     }
 
     public boolean USE_WANDS() { return general.USE_WANDS; }
-    public boolean TP_GRINDER() { return general.TP_GRINDER; }
+    public boolean TP_GRINDER() { return grinder.TP_GRINDER; }
     public boolean KEEP_BLOCKS() { return general.KEEP_BLOCKS; }
     public boolean ALLOW_WATER_IN_NETHER() { return general.ALLOW_WATER_IN_NETHER; }
-    public int RADIUS_HARVEST() { return general.RADIUS_HARVEST; }
-    public int RADIUS_LIGHT() { return general.RADIUS_LIGHT; }
-    public int RAILS_AMOUNT() { return general.RAILS_AMOUNT; }
-    public int MINING_LADDER_LAYER() { return general.MINING_LADDER_LAYER; }
+    public int RADIUS_HARVEST() { return harvest.RADIUS_HARVEST; }
+    public int RADIUS_LIGHT() { return light.RADIUS_LIGHT; }
+    public int RAILS_AMOUNT() { return rail.RAILS_AMOUNT; }
+    public int MINING_LADDER_LAYER() { return mining.MINING_LADDER_LAYER; }
     public int XP_AMOUNT() { return general.XP_AMOUNT; }
-    public int TREE_SIZE() { return general.TREE_SIZE; }
-    public int RADIUS_DOME() { return general.RADIUS_DOME; }
+    public int TREE_SIZE() { return tree.TREE_SIZE; }
+    public int RADIUS_DOME() { return dome.RADIUS_DOME; }
     public int MAX_LIQUID() { return liquid.MAX_LIQUID; }
     public int MAX_FILL() { return liquid.MAX_FILL; }
     public boolean SIMPLE_LIQUID() { return liquid.SIMPLE_LIQUID; }
@@ -151,25 +218,25 @@ public class ClothConfig implements ConfigData, IConfig {
     public String HOUSE_PLANKS_TWO() { return house.HOUSE_PLANKS_TWO; }
     public String HOUSE_LOG() { return house.HOUSE_LOG; }
     public String HOUSE_DOOR() { return house.HOUSE_DOOR; }
-    public boolean GENERATE_IN_CHESTS() { return structures.GENERATE_IN_CHESTS; }
-    public boolean GENERATE_IN_CHESTS_BONUS() { return structures.GENERATE_IN_CHESTS_BONUS; }
-    public boolean DISABLE_WOODEN_HOUSE() { return toggle.DISABLE_WOODEN_HOUSE; }
-    public boolean DISABLE_MINING_LADDER() { return toggle.DISABLE_MINING_LADDER; }
-    public boolean DISABLE_GLASS_DOME() { return toggle.DISABLE_GLASS_DOME; }
-    public boolean DISABLE_FARM() { return toggle.DISABLE_FARM; }
-    public boolean DISABLE_SKYDIVE() { return toggle.DISABLE_SKYDIVE; }
-    public boolean DISABLE_GRINDER() { return toggle.DISABLE_GRINDER; }
-    public boolean DISABLE_POOL() { return toggle.DISABLE_POOL; }
-    public boolean DISABLE_ESCAPE_LADDER() { return toggle.DISABLE_ESCAPE_LADDER; }
-    public boolean DISABLE_WATER() { return toggle.DISABLE_WATER; }
-    public boolean DISABLE_LAVA() { return toggle.DISABLE_LAVA; }
-    public boolean DISABLE_SUCTION() { return toggle.DISABLE_SUCTION; }
-    public boolean DISABLE_RAIL() { return toggle.DISABLE_RAIL; }
-    public boolean DISABLE_STATUE() { return toggle.DISABLE_STATUE; }
-    public boolean DISABLE_HARVEST() { return toggle.DISABLE_HARVEST; }
-    public boolean DISABLE_LIGHT() { return toggle.DISABLE_LIGHT; }
-    public boolean DISABLE_SCHEMATIC() { return toggle.DISABLE_SCHEMATIC; }
-    public boolean DISABLE_TREE() { return toggle.DISABLE_TREE; }
+    public boolean GENERATE_IN_CHESTS() { return general.GENERATE_IN_CHESTS; }
+    public boolean GENERATE_IN_CHESTS_BONUS() { return general.GENERATE_IN_CHESTS_BONUS; }
+    public boolean ENABLE_WOODEN_HOUSE() { return toggle.ENABLE_WOODEN_HOUSE; }
+    public boolean ENABLE_MINING_LADDER() { return toggle.ENABLE_MINING_LADDER; }
+    public boolean ENABLE_GLASS_DOME() { return toggle.ENABLE_GLASS_DOME; }
+    public boolean ENABLE_FARM() { return toggle.ENABLE_FARM; }
+    public boolean ENABLE_SKYDIVE() { return toggle.ENABLE_SKYDIVE; }
+    public boolean ENABLE_GRINDER() { return toggle.ENABLE_GRINDER; }
+    public boolean ENABLE_POOL() { return toggle.ENABLE_POOL; }
+    public boolean ENABLE_ESCAPE_LADDER() { return toggle.ENABLE_ESCAPE_LADDER; }
+    public boolean ENABLE_WATER() { return toggle.ENABLE_WATER; }
+    public boolean ENABLE_LAVA() { return toggle.ENABLE_LAVA; }
+    public boolean ENABLE_SUCTION() { return toggle.ENABLE_SUCTION; }
+    public boolean ENABLE_RAIL() { return toggle.ENABLE_RAIL; }
+    public boolean ENABLE_STATUE() { return toggle.ENABLE_STATUE; }
+    public boolean ENABLE_HARVEST() { return toggle.ENABLE_HARVEST; }
+    public boolean ENABLE_LIGHT() { return toggle.ENABLE_LIGHT; }
+    public boolean ENABLE_SCHEMATIC() { return toggle.ENABLE_SCHEMATIC; }
+    public boolean ENABLE_TREE() { return toggle.ENABLE_TREE; }
     public int DAMAGE_WOODEN_HOUSE() { return damage.DAMAGE_WOODEN_HOUSE; }
     public int DAMAGE_MINING_LADDER() { return damage.DAMAGE_MINING_LADDER; }
     public int DAMAGE_GLASS_DOME() { return damage.DAMAGE_GLASS_DOME; }

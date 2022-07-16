@@ -44,23 +44,23 @@ public class ForgeConfig implements IConfig {
 		public static BooleanValue GENERATE_IN_CHESTS;
 		public static BooleanValue GENERATE_IN_CHESTS_BONUS;
 
-		public static BooleanValue DISABLE_WOODEN_HOUSE;
-		public static BooleanValue DISABLE_MINING_LADDER;
-		public static BooleanValue DISABLE_GLASS_DOME;
-		public static BooleanValue DISABLE_FARM;
-		public static BooleanValue DISABLE_SKYDIVE;
-		public static BooleanValue DISABLE_GRINDER;
-		public static BooleanValue DISABLE_POOL;
-		public static BooleanValue DISABLE_ESCAPE_LADDER;
-		public static BooleanValue DISABLE_WATER;
-		public static BooleanValue DISABLE_LAVA;
-		public static BooleanValue DISABLE_SUCTION;
-		public static BooleanValue DISABLE_RAIL;
-		public static BooleanValue DISABLE_STATUE;
-		public static BooleanValue DISABLE_HARVEST;
-		public static BooleanValue DISABLE_LIGHT;
-		public static BooleanValue DISABLE_SCHEMATIC;
-		public static BooleanValue DISABLE_TREE;
+		public static BooleanValue ENABLE_WOODEN_HOUSE;
+		public static BooleanValue ENABLE_MINING_LADDER;
+		public static BooleanValue ENABLE_GLASS_DOME;
+		public static BooleanValue ENABLE_FARM;
+		public static BooleanValue ENABLE_SKYDIVE;
+		public static BooleanValue ENABLE_GRINDER;
+		public static BooleanValue ENABLE_POOL;
+		public static BooleanValue ENABLE_ESCAPE_LADDER;
+		public static BooleanValue ENABLE_WATER;
+		public static BooleanValue ENABLE_LAVA;
+		public static BooleanValue ENABLE_SUCTION;
+		public static BooleanValue ENABLE_RAIL;
+		public static BooleanValue ENABLE_STATUE;
+		public static BooleanValue ENABLE_HARVEST;
+		public static BooleanValue ENABLE_LIGHT;
+		public static BooleanValue ENABLE_SCHEMATIC;
+		public static BooleanValue ENABLE_TREE;
 
 		public static IntValue DAMAGE_WOODEN_HOUSE;
 		public static IntValue DAMAGE_MINING_LADDER;
@@ -131,90 +131,90 @@ public class ForgeConfig implements IConfig {
 
 			builder.comment("Toggling instant blocks").push("toggle");
 
-			DISABLE_WOODEN_HOUSE = builder
+			ENABLE_WOODEN_HOUSE = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_WOODEN_HOUSE", Defaults.DISABLE_WOODEN_HOUSE);
+					.define("ENABLE_WOODEN_HOUSE", Defaults.ENABLE_WOODEN_HOUSE);
 
-			DISABLE_MINING_LADDER = builder
+			ENABLE_MINING_LADDER = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_MINING_LADDER", Defaults.DISABLE_MINING_LADDER);
+					.define("ENABLE_MINING_LADDER", Defaults.ENABLE_MINING_LADDER);
 
-			DISABLE_GLASS_DOME = builder
+			ENABLE_GLASS_DOME = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_GLASS_DOME", Defaults.DISABLE_GLASS_DOME);
+					.define("ENABLE_GLASS_DOME", Defaults.ENABLE_GLASS_DOME);
 
-			DISABLE_FARM = builder
+			ENABLE_FARM = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_FARM", Defaults.DISABLE_FARM);
+					.define("ENABLE_FARM", Defaults.ENABLE_FARM);
 
-			DISABLE_SKYDIVE = builder
+			ENABLE_SKYDIVE = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_SKYDIVE", Defaults.DISABLE_SKYDIVE);
+					.define("ENABLE_SKYDIVE", Defaults.ENABLE_SKYDIVE);
 
-			DISABLE_GRINDER = builder
+			ENABLE_GRINDER = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_GRINDER", Defaults.DISABLE_GRINDER);
+					.define("ENABLE_GRINDER", Defaults.ENABLE_GRINDER);
 
-			DISABLE_POOL = builder
+			ENABLE_POOL = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_POOL", Defaults.DISABLE_POOL);
+					.define("ENABLE_POOL", Defaults.ENABLE_POOL);
 
-			DISABLE_ESCAPE_LADDER = builder
+			ENABLE_ESCAPE_LADDER = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_ESCAPE_LADDER", Defaults.DISABLE_ESCAPE_LADDER);
+					.define("ENABLE_ESCAPE_LADDER", Defaults.ENABLE_ESCAPE_LADDER);
 
-			DISABLE_WATER = builder
+			ENABLE_WATER = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_WATER", Defaults.DISABLE_WATER);
+					.define("ENABLE_WATER", Defaults.ENABLE_WATER);
 
-			DISABLE_LAVA = builder
+			ENABLE_LAVA = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_LAVA", Defaults.DISABLE_LAVA);
+					.define("ENABLE_LAVA", Defaults.ENABLE_LAVA);
 
-			DISABLE_SUCTION = builder
+			ENABLE_SUCTION = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_SUCTION", Defaults.DISABLE_SUCTION);
+					.define("ENABLE_SUCTION", Defaults.ENABLE_SUCTION);
 
-			DISABLE_RAIL = builder
+			ENABLE_RAIL = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_RAIL", Defaults.DISABLE_RAIL);
+					.define("ENABLE_RAIL", Defaults.ENABLE_RAIL);
 
-			DISABLE_STATUE = builder
+			ENABLE_STATUE = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_STATUE", Defaults.DISABLE_STATUE);
+					.define("ENABLE_STATUE", Defaults.ENABLE_STATUE);
 
-			DISABLE_HARVEST = builder
+			ENABLE_HARVEST = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_HARVEST", Defaults.DISABLE_HARVEST);
+					.define("ENABLE_HARVEST", Defaults.ENABLE_HARVEST);
 
-			DISABLE_LIGHT = builder
+			ENABLE_LIGHT = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_LIGHT", Defaults.DISABLE_LIGHT);
+					.define("ENABLE_LIGHT", Defaults.ENABLE_LIGHT);
 
-			DISABLE_SCHEMATIC = builder
+			ENABLE_SCHEMATIC = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_SCHEMATIC", Defaults.DISABLE_SCHEMATIC);
+					.define("ENABLE_SCHEMATIC", Defaults.ENABLE_SCHEMATIC);
 
-			DISABLE_TREE = builder
+			ENABLE_TREE = builder
 					.comment("Default: false")
 					.worldRestart()
-					.define("DISABLE_TREE", Defaults.DISABLE_TREE);
+					.define("ENABLE_TREE", Defaults.ENABLE_TREE);
 
 			builder.pop();
 
@@ -462,23 +462,23 @@ public class ForgeConfig implements IConfig {
 	public String HOUSE_DOOR() { return Common.HOUSE_DOOR.get(); }
 	public boolean GENERATE_IN_CHESTS() { return Common.GENERATE_IN_CHESTS.get(); }
 	public boolean GENERATE_IN_CHESTS_BONUS() { return Common.GENERATE_IN_CHESTS_BONUS.get(); }
-	public boolean DISABLE_WOODEN_HOUSE() { return Common.DISABLE_WOODEN_HOUSE.get(); }
-	public boolean DISABLE_MINING_LADDER() { return Common.DISABLE_MINING_LADDER.get(); }
-	public boolean DISABLE_GLASS_DOME() { return Common.DISABLE_GLASS_DOME.get(); }
-	public boolean DISABLE_FARM() { return Common.DISABLE_FARM.get(); }
-	public boolean DISABLE_SKYDIVE() { return Common.DISABLE_SKYDIVE.get(); }
-	public boolean DISABLE_GRINDER() { return Common.DISABLE_GRINDER.get(); }
-	public boolean DISABLE_POOL() { return Common.DISABLE_POOL.get(); }
-	public boolean DISABLE_ESCAPE_LADDER() { return Common.DISABLE_ESCAPE_LADDER.get(); }
-	public boolean DISABLE_WATER() { return Common.DISABLE_WATER.get(); }
-	public boolean DISABLE_LAVA() { return Common.DISABLE_LAVA.get(); }
-	public boolean DISABLE_SUCTION() { return Common.DISABLE_SUCTION.get(); }
-	public boolean DISABLE_RAIL() { return Common.DISABLE_RAIL.get(); }
-	public boolean DISABLE_STATUE() { return Common.DISABLE_STATUE.get(); }
-	public boolean DISABLE_HARVEST() { return Common.DISABLE_HARVEST.get(); }
-	public boolean DISABLE_LIGHT() { return Common.DISABLE_LIGHT.get(); }
-	public boolean DISABLE_SCHEMATIC() { return Common.DISABLE_SCHEMATIC.get(); }
-	public boolean DISABLE_TREE() { return Common.DISABLE_TREE.get(); }
+	public boolean ENABLE_WOODEN_HOUSE() { return Common.ENABLE_WOODEN_HOUSE.get(); }
+	public boolean ENABLE_MINING_LADDER() { return Common.ENABLE_MINING_LADDER.get(); }
+	public boolean ENABLE_GLASS_DOME() { return Common.ENABLE_GLASS_DOME.get(); }
+	public boolean ENABLE_FARM() { return Common.ENABLE_FARM.get(); }
+	public boolean ENABLE_SKYDIVE() { return Common.ENABLE_SKYDIVE.get(); }
+	public boolean ENABLE_GRINDER() { return Common.ENABLE_GRINDER.get(); }
+	public boolean ENABLE_POOL() { return Common.ENABLE_POOL.get(); }
+	public boolean ENABLE_ESCAPE_LADDER() { return Common.ENABLE_ESCAPE_LADDER.get(); }
+	public boolean ENABLE_WATER() { return Common.ENABLE_WATER.get(); }
+	public boolean ENABLE_LAVA() { return Common.ENABLE_LAVA.get(); }
+	public boolean ENABLE_SUCTION() { return Common.ENABLE_SUCTION.get(); }
+	public boolean ENABLE_RAIL() { return Common.ENABLE_RAIL.get(); }
+	public boolean ENABLE_STATUE() { return Common.ENABLE_STATUE.get(); }
+	public boolean ENABLE_HARVEST() { return Common.ENABLE_HARVEST.get(); }
+	public boolean ENABLE_LIGHT() { return Common.ENABLE_LIGHT.get(); }
+	public boolean ENABLE_SCHEMATIC() { return Common.ENABLE_SCHEMATIC.get(); }
+	public boolean ENABLE_TREE() { return Common.ENABLE_TREE.get(); }
 	public int DAMAGE_WOODEN_HOUSE() { return Common.DAMAGE_WOODEN_HOUSE.get(); }
 	public int DAMAGE_MINING_LADDER() { return Common.DAMAGE_MINING_LADDER.get(); }
 	public int DAMAGE_GLASS_DOME() { return Common.DAMAGE_GLASS_DOME.get(); }

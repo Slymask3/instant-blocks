@@ -18,8 +18,12 @@ public class InstantBlockItem extends BlockItem {
 	private final Block block;
 	
 	public InstantBlockItem(Block block) {
-         super(block,new Item.Properties().tab(Common.ITEM_GROUP));
-         this.block = block;
+		//Item.Properties properties = new Item.Properties();
+		//if(block instanceof InstantBlock && ((InstantBlock)block).isEnabled()) {
+		//	properties = properties.tab(Common.ITEM_GROUP);
+		//}
+		super(block,new Item.Properties().tab(Common.ITEM_GROUP));
+		this.block = block;
 	}
 
 	public void appendHoverText(ItemStack is, @Nullable Level world, List<Component> list, TooltipFlag flag) {

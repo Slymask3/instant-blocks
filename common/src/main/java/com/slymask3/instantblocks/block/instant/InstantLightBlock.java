@@ -34,8 +34,12 @@ public class InstantLightBlock extends InstantBlock {
                 .noCollission()
                 .instabreak()
                 .lightLevel((par1) -> 14)
-        , Common.CONFIG.DISABLE_LIGHT());
+        );
         this.coordsList = new ArrayList<>();
+    }
+
+    public boolean isEnabled() {
+        return Common.CONFIG.ENABLE_LIGHT();
     }
 
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {

@@ -19,9 +19,13 @@ public class InstantHouseWoodBlock extends InstantBlock {
 		super(Properties.of(Material.WOOD)
 				.strength(1.5F)
 				.sound(SoundType.WOOD)
-		, Common.CONFIG.DISABLE_WOODEN_HOUSE());
+		);
 		setCreateMessage(Strings.CREATE_WOODEN_HOUSE);
 		setDirectional(true);
+	}
+
+	public boolean isEnabled() {
+		return Common.CONFIG.ENABLE_WOODEN_HOUSE();
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {

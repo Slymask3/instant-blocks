@@ -30,7 +30,7 @@ public class InstantBlocks implements ModInitializer {
 
         if(Services.PLATFORM.isModLoaded("cloth-config")) {
             ClothConfig.register();
-            Common.CONFIG = new ClothConfig();
+            Common.CONFIG = ClothConfig.get();
         }
 
         Registration.registerBlocks(new FabricRegistryHelper<>(Registry.BLOCK));

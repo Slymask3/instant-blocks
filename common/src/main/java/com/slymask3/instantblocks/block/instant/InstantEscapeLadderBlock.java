@@ -36,9 +36,13 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 				.isValidSpawn((state, world, pos, entityType) -> false)
 				.isRedstoneConductor((state, world, pos) -> false)
 				.isViewBlocking((state, world, pos) -> false)
-		, Common.CONFIG.DISABLE_ESCAPE_LADDER());
+		);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.FALSE));
     }
+
+	public boolean isEnabled() {
+		return Common.CONFIG.ENABLE_ESCAPE_LADDER();
+	}
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(world.canSeeSky(new BlockPos(x, y+1, z))) {

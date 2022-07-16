@@ -30,9 +30,13 @@ public class InstantGlassDomeBlock extends InstantBlock {
 				.isValidSpawn((state, world, pos, entityType) -> false)
 				.isRedstoneConductor((state, world, pos) -> false)
 				.isViewBlocking((state, world, pos) -> false)
-		, Common.CONFIG.DISABLE_GLASS_DOME());
+		);
 		setCreateMessage(Strings.CREATE_DOME);
     }
+
+	public boolean isEnabled() {
+		return Common.CONFIG.ENABLE_GLASS_DOME();
+	}
 
 	@Override
 	//@OnlyIn(Dist.CLIENT)

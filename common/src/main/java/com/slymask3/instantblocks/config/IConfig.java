@@ -1,6 +1,8 @@
 package com.slymask3.instantblocks.config;
 
 public interface IConfig {
+    default void reload() {}
+
     default boolean USE_WANDS() { return Defaults.USE_WANDS; }
     default boolean TP_GRINDER() { return Defaults.TP_GRINDER; }
     default boolean KEEP_BLOCKS() { return Defaults.KEEP_BLOCKS; }
@@ -35,23 +37,23 @@ public interface IConfig {
     default boolean GENERATE_IN_CHESTS() { return Defaults.GENERATE_IN_CHESTS; }
     default boolean GENERATE_IN_CHESTS_BONUS() { return Defaults.GENERATE_IN_CHESTS_BONUS; }
 
-    default boolean DISABLE_WOODEN_HOUSE() { return Defaults.DISABLE_WOODEN_HOUSE; }
-    default boolean DISABLE_MINING_LADDER() { return Defaults.DISABLE_MINING_LADDER; }
-    default boolean DISABLE_GLASS_DOME() { return Defaults.DISABLE_GLASS_DOME; }
-    default boolean DISABLE_FARM() { return Defaults.DISABLE_FARM; }
-    default boolean DISABLE_SKYDIVE() { return Defaults.DISABLE_SKYDIVE; }
-    default boolean DISABLE_GRINDER() { return Defaults.DISABLE_GRINDER; }
-    default boolean DISABLE_POOL() { return Defaults.DISABLE_POOL; }
-    default boolean DISABLE_ESCAPE_LADDER() { return Defaults.DISABLE_ESCAPE_LADDER; }
-    default boolean DISABLE_WATER() { return Defaults.DISABLE_WATER; }
-    default boolean DISABLE_LAVA() { return Defaults.DISABLE_LAVA; }
-    default boolean DISABLE_SUCTION() { return Defaults.DISABLE_SUCTION; }
-    default boolean DISABLE_RAIL() { return Defaults.DISABLE_RAIL; }
-    default boolean DISABLE_STATUE() { return Defaults.DISABLE_STATUE; }
-    default boolean DISABLE_HARVEST() { return Defaults.DISABLE_HARVEST; }
-    default boolean DISABLE_LIGHT() { return Defaults.DISABLE_LIGHT; }
-    default boolean DISABLE_SCHEMATIC() { return Defaults.DISABLE_SCHEMATIC; }
-    default boolean DISABLE_TREE() { return Defaults.DISABLE_TREE; }
+    default boolean ENABLE_WOODEN_HOUSE() { return Defaults.ENABLE_WOODEN_HOUSE; }
+    default boolean ENABLE_MINING_LADDER() { return Defaults.ENABLE_MINING_LADDER; }
+    default boolean ENABLE_GLASS_DOME() { return Defaults.ENABLE_GLASS_DOME; }
+    default boolean ENABLE_FARM() { return Defaults.ENABLE_FARM; }
+    default boolean ENABLE_SKYDIVE() { return Defaults.ENABLE_SKYDIVE; }
+    default boolean ENABLE_GRINDER() { return Defaults.ENABLE_GRINDER; }
+    default boolean ENABLE_POOL() { return Defaults.ENABLE_POOL; }
+    default boolean ENABLE_ESCAPE_LADDER() { return Defaults.ENABLE_ESCAPE_LADDER; }
+    default boolean ENABLE_WATER() { return Defaults.ENABLE_WATER; }
+    default boolean ENABLE_LAVA() { return Defaults.ENABLE_LAVA; }
+    default boolean ENABLE_SUCTION() { return Defaults.ENABLE_SUCTION; }
+    default boolean ENABLE_RAIL() { return Defaults.ENABLE_RAIL; }
+    default boolean ENABLE_STATUE() { return Defaults.ENABLE_STATUE; }
+    default boolean ENABLE_HARVEST() { return Defaults.ENABLE_HARVEST; }
+    default boolean ENABLE_LIGHT() { return Defaults.ENABLE_LIGHT; }
+    default boolean ENABLE_SCHEMATIC() { return Defaults.ENABLE_SCHEMATIC; }
+    default boolean ENABLE_TREE() { return Defaults.ENABLE_TREE; }
 
     default int DAMAGE_WOODEN_HOUSE() { return Defaults.DAMAGE_WOODEN_HOUSE; }
     default int DAMAGE_MINING_LADDER() { return Defaults.DAMAGE_MINING_LADDER; }
@@ -111,23 +113,23 @@ public interface IConfig {
         public static boolean GENERATE_IN_CHESTS = true;
         public static boolean GENERATE_IN_CHESTS_BONUS = true;
 
-        public static boolean DISABLE_WOODEN_HOUSE = false;
-        public static boolean DISABLE_MINING_LADDER = false;
-        public static boolean DISABLE_GLASS_DOME = false;
-        public static boolean DISABLE_FARM = false;
-        public static boolean DISABLE_SKYDIVE = false;
-        public static boolean DISABLE_GRINDER = false;
-        public static boolean DISABLE_POOL = false;
-        public static boolean DISABLE_ESCAPE_LADDER = false;
-        public static boolean DISABLE_WATER = false;
-        public static boolean DISABLE_LAVA = false;
-        public static boolean DISABLE_SUCTION = false;
-        public static boolean DISABLE_RAIL = false;
-        public static boolean DISABLE_STATUE = false;
-        public static boolean DISABLE_HARVEST = false;
-        public static boolean DISABLE_LIGHT = false;
-        public static boolean DISABLE_SCHEMATIC = false;
-        public static boolean DISABLE_TREE = false;
+        public static boolean ENABLE_WOODEN_HOUSE = true;
+        public static boolean ENABLE_MINING_LADDER = true;
+        public static boolean ENABLE_GLASS_DOME = true;
+        public static boolean ENABLE_FARM = true;
+        public static boolean ENABLE_SKYDIVE = true;
+        public static boolean ENABLE_GRINDER = true;
+        public static boolean ENABLE_POOL = true;
+        public static boolean ENABLE_ESCAPE_LADDER = true;
+        public static boolean ENABLE_WATER = true;
+        public static boolean ENABLE_LAVA = true;
+        public static boolean ENABLE_SUCTION = true;
+        public static boolean ENABLE_RAIL = true;
+        public static boolean ENABLE_STATUE = true;
+        public static boolean ENABLE_HARVEST = true;
+        public static boolean ENABLE_LIGHT = true;
+        public static boolean ENABLE_SCHEMATIC = true;
+        public static boolean ENABLE_TREE = true;
 
         public static int DAMAGE_WOODEN_HOUSE = 40;
         public static int DAMAGE_MINING_LADDER = 30;

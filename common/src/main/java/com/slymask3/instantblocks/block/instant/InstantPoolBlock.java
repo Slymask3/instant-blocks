@@ -21,10 +21,14 @@ public class InstantPoolBlock extends InstantBlock {
 		super(Properties.of(Material.STONE)
 				.strength(1.5F)
 				.sound(SoundType.STONE)
-		, Common.CONFIG.DISABLE_POOL());
+		);
         setCreateMessage(Strings.CREATE_POOL);
 		setDirectional(true);
     }
+
+	public boolean isEnabled() {
+		return Common.CONFIG.ENABLE_POOL();
+	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		BlockState stone = Blocks.SMOOTH_STONE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.DOUBLE);

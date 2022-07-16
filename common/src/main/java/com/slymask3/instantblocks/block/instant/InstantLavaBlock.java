@@ -20,11 +20,15 @@ public class InstantLavaBlock extends InstantLiquidBlock {
 				.strength(1.5F)
 				.sound(new LiquidSoundType(SoundEvents.BUCKET_FILL_LAVA, SoundEvents.BUCKET_EMPTY_LAVA))
 				.lightLevel((par1) -> 15)
-		, Common.CONFIG.DISABLE_LAVA(), Blocks.AIR, Blocks.LAVA);
+		, Blocks.AIR, Blocks.LAVA);
 		setErrorMessage(Strings.ERROR_LAVA_MAX);
 		this.create = Strings.CREATE_LAVA;
 		this.create1 = Strings.CREATE_LAVA_1;
 		this.particle = ParticleTypes.LARGE_SMOKE;
+	}
+
+	public boolean isEnabled() {
+		return Common.CONFIG.ENABLE_LAVA();
 	}
 
 	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {

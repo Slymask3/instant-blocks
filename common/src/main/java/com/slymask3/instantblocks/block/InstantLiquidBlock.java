@@ -41,8 +41,8 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 
 	public static final DustParticleOptions WHITE_DUST = new DustParticleOptions(new Vector3f(Vec3.fromRGB24(0xFFFFFF)), 1.0F);
 
-    public InstantLiquidBlock(Properties properties, boolean isDisabled, Block blockCheck, Block blockReplace) {
-        super(properties,isDisabled);
+    public InstantLiquidBlock(Properties properties, Block blockCheck, Block blockReplace) {
+        super(properties);
 		this.coordsList = new ArrayList<>();
 		this.blockCheck = blockCheck;
 		this.blockReplace = blockReplace;

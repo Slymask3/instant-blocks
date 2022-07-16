@@ -23,9 +23,13 @@ public class InstantGrinderBlock extends InstantBlock {
 				.strength(1.5F)
 				.sound(SoundType.METAL)
 				.noOcclusion()
-		, Common.CONFIG.DISABLE_GRINDER());
+		);
         setCreateMessage(Strings.CREATE_GRINDER);
     }
+
+	public boolean isEnabled() {
+		return Common.CONFIG.ENABLE_GRINDER();
+	}
 
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		for(int i=0; i<4; i++) {

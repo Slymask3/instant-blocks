@@ -23,10 +23,14 @@ public class InstantFarmBlock extends InstantBlock {
 		super(Properties.of(Material.STONE)
 				.strength(1.5F)
 				.sound(SoundType.STONE)
-		, Common.CONFIG.DISABLE_FARM());
+		);
 		setCreateMessage(Strings.CREATE_FARM);
 		setDirectional(true);
     }
+
+	public boolean isEnabled() {
+		return Common.CONFIG.ENABLE_FARM();
+	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		ArrayList<Helper.WeightedBlock> blocks = new ArrayList<>();

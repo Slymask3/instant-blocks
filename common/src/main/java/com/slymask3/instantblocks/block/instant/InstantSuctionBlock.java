@@ -13,10 +13,14 @@ public class InstantSuctionBlock extends InstantLiquidBlock {
         super(Block.Properties.of(Material.STONE)
                 .strength(1.5F)
                 .sound(SoundType.STONE)
-        , Common.CONFIG.DISABLE_SUCTION(), null, Blocks.AIR);
+        , null, Blocks.AIR);
         setErrorMessage(Strings.ERROR_SUCTION);
         this.create = Strings.CREATE_SUCTION;
 		this.create1 = Strings.CREATE_SUCTION_1;
         this.isSuction = true;
+    }
+
+    public boolean isEnabled() {
+        return Common.CONFIG.ENABLE_SUCTION();
     }
 }

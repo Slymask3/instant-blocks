@@ -20,10 +20,14 @@ public class InstantMiningLadderBlock extends InstantBlock {
 		super(Properties.of(Material.STONE)
 				.strength(1.5F)
 				.sound(SoundType.STONE)
-		, Common.CONFIG.DISABLE_MINING_LADDER());
+		);
 		setCreateMessage(Strings.CREATE_MINING_LADDER);
 		setDirectional(true);
     }
+
+	public boolean isEnabled() {
+		return Common.CONFIG.ENABLE_MINING_LADDER();
+	}
 
 	public boolean canActivate(Level world, int x, int y, int z, Player player) {
 		if(y <= Common.CONFIG.MINING_LADDER_LAYER() + 4) {
