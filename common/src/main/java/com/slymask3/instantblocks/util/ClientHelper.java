@@ -19,6 +19,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.awt.*;
+import java.io.File;
+
 //@OnlyIn(Dist.CLIENT)
 public class ClientHelper {
     public enum Screen { STATUE, HARVEST, SKYDIVE, SCHEMATIC, TREE }
@@ -72,6 +75,23 @@ public class ClientHelper {
                 case TREE -> Minecraft.getInstance().setScreen(new TreeScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
                 case SCHEMATIC -> Minecraft.getInstance().setScreen(new SchematicScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
             }
+        }
+    }
+
+    public static void openDirectory(String path) {
+        try {
+            if(Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(new File(path));
+            } else {
+                Runtime runtime = Runtime.getRuntime();
+                if(System.getenv("OS") != null && System.getenv("OS").contains("Windows")) {
+                    runtime.exec("rundll32 url.dll,FileProtocolHandler " + path);
+                } else {
+                    runtime.exec("xdg-open " + path);
+                }
+            }
+        } catch(Exception e) {
+            Common.LOG.error("Failed to open directory: " + e.getMessage());
         }
     }
 

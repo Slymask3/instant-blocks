@@ -6,6 +6,9 @@ import com.mojang.blaze3d.vertex.*;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
 import com.slymask3.instantblocks.network.packet.SchematicPacket;
+import com.slymask3.instantblocks.util.ClientHelper;
+import com.slymask3.instantblocks.util.SchematicHelper;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -16,6 +19,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Consumer;
 
 public class SchematicScreen extends InstantScreen {
 	private final SchematicBlockEntity tileEntity;
@@ -26,16 +31,28 @@ public class SchematicScreen extends InstantScreen {
 
 	private EditBox input;
 	private Checkbox center, ignoreAir;
+	private Button open;
 
 	public SchematicScreen(Player player, Level world, int x, int y, int z) {
 		super(player, world, x, y, z, "ib.gui.schematic.title");
 		this.tileEntity = (SchematicBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
-		this.schematics = this.tileEntity.schematics;
+		this.schematics = SchematicHelper.SCHEMATICS_LIST;
 	}
 
 	@Override
 	public void init() {
 		super.init();
+
+		this.open = new Button(this.width / 2 + 134, 50, 20, 20, Component.literal(">"), (p_88642_) -> {
+			ClientHelper.openDirectory(SchematicHelper.SCHEMATICS_DIR);
+		}, new Button.OnTooltip() {
+			public void onTooltip(Button button, PoseStack poseStack, int x, int y) {
+				SchematicScreen.this.renderTooltip(poseStack, Arrays.asList(Component.translatable("ib.gui.schematic.open").getVisualOrderText()), x, y);
+			}
+			public void narrateTooltip(Consumer<Component> consumer) {
+				consumer.accept(Component.translatable("ib.gui.schematic.open"));
+			}
+		});
 
 		this.center = new Checkbox(this.width / 2 - 4 - 150, 75, 150, 20, Component.translatable("ib.gui.schematic.center"), tileEntity.center) {
 			public void onPress() {
@@ -43,6 +60,7 @@ public class SchematicScreen extends InstantScreen {
 				tileEntity.center = this.selected();
 			}
 		};
+
 		this.ignoreAir = new Checkbox(this.width / 2 + 4, 75, 150, 20, Component.translatable("ib.gui.schematic.ignore"), tileEntity.ignoreAir) {
 			public void onPress() {
 				super.onPress();
@@ -50,19 +68,17 @@ public class SchematicScreen extends InstantScreen {
 			}
 		};
 
-		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 300+8, 20, Component.literal("Input")) {
-			@Override
+		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 284, 20, Component.literal("Input")) {
 			public void insertText(String textToWrite) {
 				super.insertText(textToWrite);
 				SchematicScreen.this.checkForSchematic();
 			}
-
-			@Override
 			public void deleteChars(int pNum) {
 				super.deleteChars(pNum);
 				SchematicScreen.this.checkForSchematic();
 			}
 		};
+		this.input.setValue(tileEntity.schematic);
 
 		this.schematicList = new SchematicList(this.width / 2 - 4 - 150, 111, 302, this.height / 4);
 		this.addWidget(this.schematicList);
@@ -73,6 +89,7 @@ public class SchematicScreen extends InstantScreen {
 		this.addRenderableWidget(this.ignoreAir);
 		this.addRenderableWidget(this.input);
 		this.addRenderableWidget(this.schematicList);
+		this.addRenderableWidget(this.open);
 
 		this.setInitialFocus(this.input);
 	}

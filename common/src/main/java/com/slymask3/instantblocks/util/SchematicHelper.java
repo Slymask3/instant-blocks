@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public class SchematicHelper {
 	public static final String SCHEMATICS_DIR = "schematics";
+	public static ArrayList<String> SCHEMATICS_LIST = new ArrayList<>();
 
 	public static Schematic readSchematic(String schematicName) {
 		try {

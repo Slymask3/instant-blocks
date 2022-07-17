@@ -48,5 +48,12 @@ public class FabricPacketHandler {
                 PacketHelper.handleSchematic(message, player);
             });
         });
+
+        ClientPlayNetworking.registerGlobalReceiver(new ResourceLocation(PacketHelper.PacketID.SCHEMATIC_UPDATE.toString().toLowerCase()), (client, handler, buf, responseSender) -> {
+            SchematicUpdatePacket message = SchematicUpdatePacket.decode(buf);
+            client.execute(() -> {
+                PacketHelper.handleSchematicUpdate(message, client.player);
+            });
+        });
     }
 }

@@ -4,11 +4,12 @@ import com.slymask3.instantblocks.block.instant.*;
 import com.slymask3.instantblocks.network.packet.*;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
+import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class PacketHelper {
-    public enum PacketID { CLIENT, SKYDIVE, STATUE, HARVEST, TREE, SCHEMATIC }
+    public enum PacketID { CLIENT, SKYDIVE, STATUE, HARVEST, TREE, SCHEMATIC, SCHEMATIC_UPDATE }
 
     public static void handleClient(ClientPacket message, Player player) {
         if(player != null) {
@@ -70,6 +71,13 @@ public class PacketHelper {
             if(block.build(world,message._x, message._y, message._z, player, message._schematic, message._center, message._air)) {
                 block.afterBuild(world,message._x, message._y, message._z, player);
             }
+        }
+    }
+
+    public static void handleSchematicUpdate(SchematicUpdatePacket message, Player player) {
+        if(player != null) {
+            SchematicHelper.SCHEMATICS_LIST = message.schematics;
+            ClientHelper.showScreen(ClientHelper.Screen.SCHEMATIC,player,player.getLevel(),message.pos);
         }
     }
 }

@@ -5,8 +5,6 @@ import com.slymask3.instantblocks.network.packet.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
@@ -19,65 +17,39 @@ public class ForgePacketHandler {
 
     public static void register() {
         int index = 100;
-        INSTANCE.registerMessage(++index, ClientPacket.class, (ClientPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), ClientPacket::decode, ClientPacketHandler::handle);
-        INSTANCE.registerMessage(++index, SkydivePacket.class, (SkydivePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydivePacket::decode, SkydivePacketHandler::handle);
-        INSTANCE.registerMessage(++index, StatuePacket.class, (StatuePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), StatuePacket::decode, StatuePacketHandler::handle);
-        INSTANCE.registerMessage(++index, HarvestPacket.class, (HarvestPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), HarvestPacket::decode, HarvestPacketHandler::handle);
-        INSTANCE.registerMessage(++index, TreePacket.class, (TreePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), TreePacket::decode, TreePacketHandler::handle);
-        INSTANCE.registerMessage(++index, SchematicPacket.class, (SchematicPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SchematicPacket::decode, SchematicPacketHandler::handle);
+        INSTANCE.registerMessage(++index, ClientPacket.class, (ClientPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), ClientPacket::decode, Handler::client);
+        INSTANCE.registerMessage(++index, SkydivePacket.class, (SkydivePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydivePacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, StatuePacket.class, (StatuePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), StatuePacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, HarvestPacket.class, (HarvestPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), HarvestPacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, TreePacket.class, (TreePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), TreePacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, SchematicPacket.class, (SchematicPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SchematicPacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, SchematicUpdatePacket.class, (SchematicUpdatePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SchematicUpdatePacket::decode, Handler::client);
     }
 
-    public static class ClientPacketHandler {
-        public static void handle(ClientPacket message, Supplier<NetworkEvent.Context> context) {
+    public static class Handler {
+        public static void server(AbstractPacket message, Supplier<NetworkEvent.Context> context) {
             context.get().enqueueWork(() -> {
-                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-                    PacketHelper.handleClient(message, Minecraft.getInstance().player);
-                });
+                if(message.getClass().equals(SkydivePacket.class)) {
+                    PacketHelper.handleSkydive((SkydivePacket)message, context.get().getSender());
+                } else if(message.getClass().equals(StatuePacket.class)) {
+                    PacketHelper.handleStatue((StatuePacket)message, context.get().getSender());
+                } else if(message.getClass().equals(HarvestPacket.class)) {
+                    PacketHelper.handleHarvest((HarvestPacket)message, context.get().getSender());
+                } else if(message.getClass().equals(TreePacket.class)) {
+                    PacketHelper.handleTree((TreePacket)message, context.get().getSender());
+                } else if(message.getClass().equals(SchematicPacket.class)) {
+                    PacketHelper.handleSchematic((SchematicPacket)message, context.get().getSender());
+                }
             });
             context.get().setPacketHandled(true);
         }
-    }
-
-    public static class SkydivePacketHandler {
-        public static void handle(SkydivePacket message, Supplier<NetworkEvent.Context> context) {
+        public static void client(AbstractPacket message, Supplier<NetworkEvent.Context> context) {
             context.get().enqueueWork(() -> {
-                PacketHelper.handleSkydive(message, context.get().getSender());
-            });
-            context.get().setPacketHandled(true);
-        }
-    }
-
-    public static class StatuePacketHandler {
-        public static void handle(StatuePacket message, Supplier<NetworkEvent.Context> context) {
-            context.get().enqueueWork(() -> {
-                PacketHelper.handleStatue(message, context.get().getSender());
-            });
-            context.get().setPacketHandled(true);
-        }
-    }
-
-    public static class HarvestPacketHandler {
-        public static void handle(HarvestPacket message, Supplier<NetworkEvent.Context> context) {
-            context.get().enqueueWork(() -> {
-                PacketHelper.handleHarvest(message, context.get().getSender());
-            });
-            context.get().setPacketHandled(true);
-        }
-    }
-
-    public static class TreePacketHandler {
-        public static void handle(TreePacket message, Supplier<NetworkEvent.Context> context) {
-            context.get().enqueueWork(() -> {
-                PacketHelper.handleTree(message, context.get().getSender());
-            });
-            context.get().setPacketHandled(true);
-        }
-    }
-
-    public static class SchematicPacketHandler {
-        public static void handle(SchematicPacket message, Supplier<NetworkEvent.Context> context) {
-            context.get().enqueueWork(() -> {
-                PacketHelper.handleSchematic(message, context.get().getSender());
+                if(message.getClass().equals(ClientPacket.class)) {
+                    PacketHelper.handleClient((ClientPacket)message, Minecraft.getInstance().player);
+                } else if(message.getClass().equals(SchematicUpdatePacket.class)) {
+                    PacketHelper.handleSchematicUpdate((SchematicUpdatePacket)message, Minecraft.getInstance().player);
+                }
             });
             context.get().setPacketHandled(true);
         }

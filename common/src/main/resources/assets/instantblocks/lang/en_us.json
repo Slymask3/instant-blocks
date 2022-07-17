@@ -104,6 +104,7 @@
   "ib.gui.harvest.replant": "Re-Plant",
   "ib.gui.harvest.select": "Select blocks to harvest:",
   "ib.gui.schematic.title": "Instant Schematic",
+  "ib.gui.schematic.open": "Open schematics folder",
   "ib.gui.schematic.center": "Generate from center",
   "ib.gui.schematic.ignore": "Ignore generating air",
   "ib.gui.schematic.input": "Enter a Schematic File Name:",

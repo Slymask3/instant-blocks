@@ -44,16 +44,6 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 		return new SchematicBlockEntity(pos,state);
 	}
 
-	public boolean canActivate(Level world, int x, int y, int z, Player player) {
-		if(Helper.isServer(world)) {
-			SchematicBlockEntity blockEntity = (SchematicBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
-			if(blockEntity != null) {
-				blockEntity.updateSchematics();
-			}
-		}
-		return true;
-	}
-
 	public boolean build(Level world, int x, int y, int z, Player player, String schematicName, boolean center, boolean ignoreAir) {
 		SchematicHelper.Schematic schematic = SchematicHelper.readSchematic(schematicName);
 		if(schematic != null) {

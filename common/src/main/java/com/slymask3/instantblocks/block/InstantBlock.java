@@ -1,12 +1,16 @@
 package com.slymask3.instantblocks.block;
 
 import com.slymask3.instantblocks.Common;
+import com.slymask3.instantblocks.block.instant.InstantSchematicBlock;
+import com.slymask3.instantblocks.network.packet.SchematicUpdatePacket;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
+import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -154,7 +158,9 @@ public abstract class InstantBlock extends Block {
 			}
 		}
 
-		if(Helper.isClient(world)) {
+		if(Helper.isServer(world) && this instanceof InstantSchematicBlock) {
+			Common.NETWORK.sendToClient((ServerPlayer)player, new SchematicUpdatePacket(SchematicHelper.getSchematics(),pos));
+		} else if(Helper.isClient(world)) {
 			ClientHelper.showScreen(this.screen,player,world,pos);
 		}
 
