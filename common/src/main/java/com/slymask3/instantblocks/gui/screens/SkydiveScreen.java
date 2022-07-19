@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 
 public class SkydiveScreen extends InstantScreen {
-    private Button random;
 	private final ColorEditBox[] color = new ColorEditBox[11];
 	private final Button[] colorClear = new Button[11];
 	private Checkbox tp;
@@ -33,7 +32,7 @@ public class SkydiveScreen extends InstantScreen {
 
 		SkydiveBlockEntity blockEntity = (SkydiveBlockEntity)world.getBlockEntity(pos);
 
-		this.random = new Button(this.width / 2 + 4, this.height / 4 + 98 + 12, 150, 20, Component.translatable("ib.gui.skydive.random"), (p_88642_) -> {
+		Button random = new Button(this.width / 2 + 4, this.height / 4 + 98 + 12, 150, 20, Component.translatable("ib.gui.skydive.random"), (p_88642_) -> {
 			this.setRandom();
 		});
 
@@ -66,7 +65,7 @@ public class SkydiveScreen extends InstantScreen {
 			this.addRenderableWidget(this.colorClear[i]);
 		}
 
-		this.addRenderableWidget(this.random);
+		this.addRenderableWidget(random);
 		this.addRenderableWidget(this.tp);
 		this.addRenderableWidget(this.radius);
 	}

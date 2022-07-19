@@ -18,7 +18,7 @@ import net.minecraft.world.level.Level;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class SchematicScreen extends InstantScreen {
@@ -28,7 +28,6 @@ public class SchematicScreen extends InstantScreen {
 
 	private EditBox input;
 	private Checkbox center, ignoreAir;
-	private Button open;
 
 	public SchematicScreen(Player player, Level world, BlockPos pos) {
 		super(player, world, pos, "ib.gui.schematic.title");
@@ -41,11 +40,11 @@ public class SchematicScreen extends InstantScreen {
 
 		SchematicBlockEntity blockEntity = (SchematicBlockEntity)world.getBlockEntity(pos);
 
-		this.open = new Button(this.width / 2 + 134, 50, 20, 20, Component.literal(">"), (p_88642_) -> {
+		Button open = new Button(this.width / 2 + 134, 50, 20, 20, Component.literal(">"), (p_88642_) -> {
 			Util.getPlatform().openFile(new File(SchematicHelper.SCHEMATICS_DIR));
 		}, new Button.OnTooltip() {
 			public void onTooltip(Button button, PoseStack poseStack, int x, int y) {
-				SchematicScreen.this.renderTooltip(poseStack, Arrays.asList(Component.translatable("ib.gui.schematic.open").getVisualOrderText()), x, y);
+				SchematicScreen.this.renderTooltip(poseStack, List.of(Component.translatable("ib.gui.schematic.open").getVisualOrderText()), x, y);
 			}
 			public void narrateTooltip(Consumer<Component> consumer) {
 				consumer.accept(Component.translatable("ib.gui.schematic.open"));
@@ -76,7 +75,7 @@ public class SchematicScreen extends InstantScreen {
 		this.addRenderableWidget(this.ignoreAir);
 		this.addRenderableWidget(this.input);
 		this.addRenderableWidget(this.schematicList);
-		this.addRenderableWidget(this.open);
+		this.addRenderableWidget(open);
 
 		this.setInitialFocus(this.input);
 

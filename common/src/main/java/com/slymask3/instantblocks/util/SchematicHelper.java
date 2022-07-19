@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.Common;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtIo;
@@ -58,7 +59,7 @@ public class SchematicHelper {
 		public final short length;
 		public final byte[] blocks;
 		private final HashMap<Integer,BlockState> map;
-		private final HashMap<Helper.Coords,CompoundTag> blockEntities;
+		private final HashMap<BlockPos,CompoundTag> blockEntities;
 		private final ArrayList<CompoundTag> entities;
 		public Schematic(CompoundTag tag) {
 			this.width = tag.getShort("Width");
@@ -77,8 +78,7 @@ public class SchematicHelper {
 			for(Tag entity : blockEntities) {
 				CompoundTag entityTag = (CompoundTag)entity;
 				int[] pos = entityTag.getIntArray("Pos");
-				Helper.Coords entityPos = new Helper.Coords(pos[0],pos[1],pos[2]);
-				this.blockEntities.put(entityPos,entityTag);
+				this.blockEntities.put(new BlockPos(pos[0],pos[1],pos[2]),entityTag);
 			}
 			this.entities = new ArrayList<>();
 			ListTag entities = tag.getList("Entities",Tag.TAG_COMPOUND);
@@ -91,7 +91,7 @@ public class SchematicHelper {
 			return this.map.get((int)this.blocks[index]);
 		}
 		public CompoundTag getBlockEntityTag(int x, int y, int z) {
-			return this.blockEntities.get(new Helper.Coords(x,y,z));
+			return this.blockEntities.get(new BlockPos(x,y,z));
 		}
 		public ArrayList<CompoundTag> getEntityTags() {
 			return this.entities;

@@ -43,7 +43,7 @@ public class InstantBlocks implements ModInitializer {
     }
 
     public static class FabricRegistryHelper<T> implements IRegistryHelper<T> {
-        Registry<T> registry;
+        final Registry<T> registry;
         public FabricRegistryHelper(Registry<T> registry) {
             this.registry = registry;
         }

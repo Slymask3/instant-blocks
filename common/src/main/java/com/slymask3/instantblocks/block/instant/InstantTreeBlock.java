@@ -54,711 +54,711 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		int x = x_center - half;
 		int z = z_center - half;
 		switch(blockEntity.type) {
-			case 0 -> buildOak(world, x, y, z, Blocks.OAK_LOG, Blocks.OAK_LEAVES, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
-			case 1 -> buildSpruce(world, x, y, z, Blocks.SPRUCE_LOG, Blocks.SPRUCE_LEAVES, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
-			case 2 -> buildBirch(world, x, y, z, Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
-			case 3 -> buildJungle(world, x, y, z, Blocks.JUNGLE_LOG, Blocks.JUNGLE_LEAVES, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
-			case 4 -> buildAcacia(world, x, y, z, Blocks.ACACIA_LOG, Blocks.ACACIA_LEAVES, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
-			case 5 -> buildDarkOak(world, x, y, z, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_LEAVES, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
-			case 6 -> buildOak(world, x, y, z, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
+			case 0 -> buildOak(world, x, y, z, Blocks.OAK_LOG, Blocks.OAK_LEAVES, size, blockEntity);
+			case 1 -> buildSpruce(world, x, y, z, Blocks.SPRUCE_LOG, Blocks.SPRUCE_LEAVES, size, blockEntity);
+			case 2 -> buildBirch(world, x, y, z, Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES, size, blockEntity);
+			case 3 -> buildJungle(world, x, y, z, Blocks.JUNGLE_LOG, Blocks.JUNGLE_LEAVES, size, blockEntity);
+			case 4 -> buildAcacia(world, x, y, z, Blocks.ACACIA_LOG, Blocks.ACACIA_LEAVES, size, blockEntity);
+			case 5 -> buildDarkOak(world, x, y, z, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_LEAVES, size, blockEntity);
+			case 6 -> buildOak(world, x, y, z, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, size, blockEntity);
 		}
 		setCreateMessage(Strings.CREATE_TREE, treeToString(blockEntity.type,player));
 		return true;
 	}
 
-	private void buildOak(Level world, int x, int y, int z, Block log, Block leaves, int size, boolean fullLog, boolean fullLeaves, boolean air) {
-		buildLog(world, x, y, z, log, size, fullLog, air, false, true, true, true, true, true);
-		buildLog(world, x, y+size, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*2, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*3, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*4, z, log, size, fullLog, air, true, false, true, true, true, true);
+	private void buildOak(Level world, int x, int y, int z, Block log, Block leaves, int size, TreeBlockEntity blockEntity) {
+		buildLog(world, x, y, z, log, size, blockEntity, false, true, true, true, true, true);
+		buildLog(world, x, y+size, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*2, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*3, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*4, z, log, size, blockEntity, true, false, true, true, true, true);
 		
 		/** first layer **/
-		buildLeaves(world, x+size*2, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+size*2, y+size*2, z, leaves, size, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+size*2, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size, leaves, size, blockEntity, false, true, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z, leaves, size, blockEntity, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z-size, leaves, size, blockEntity, false, true, true, false, true, false);
 		
-		buildLeaves(world, x+size, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+size, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*2, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, true, true, false);
+		buildLeaves(world, x+size, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*2, z-size*2, leaves, size, blockEntity, false, true, true, false, true, false);
 		
-		buildLeaves(world, x, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, false);
-		buildLeaves(world, x, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, true, false, false);
+		buildLeaves(world, x, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*2, z-size*2, leaves, size, blockEntity, false, true, true, false, false, false);
 
-		buildLeaves(world, x-size, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-size, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*2, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, true, false, true);
+		buildLeaves(world, x-size, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z-size*2, leaves, size, blockEntity, false, true, true, false, false, false);
 
-		buildLeaves(world, x-size*2, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-size*2, y+size*2, z, leaves, size, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*2, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z+size, leaves, size, blockEntity, false, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z-size*2, leaves, size, blockEntity, true, true, true, false, false, true);
 		
 		/** second layer **/
-		buildLeaves(world, x+size*2, y+size*3, z+size, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+size*2, y+size*3, z, leaves, size, fullLeaves, air, true, false, false, false, true, false);
-		buildLeaves(world, x+size*2, y+size*3, z-size, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z+size, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z, leaves, size, blockEntity, true, false, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
 		
-		buildLeaves(world, x+size, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+size, y+size*3, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*3, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*3, z-size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x+size, y+size*3, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*3, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*3, z-size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*3, z-size*2, leaves, size, blockEntity, true, false, true, false, true, false);
 		
-		buildLeaves(world, x, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x, y+size*3, z+size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*3, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, false, false);
+		buildLeaves(world, x, y+size*3, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*3, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*3, z-size*2, leaves, size, blockEntity, true, false, true, false, false, false);
 
-		buildLeaves(world, x-size, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x-size, y+size*3, z+size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*3, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*3, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, false, false);
+		buildLeaves(world, x-size, y+size*3, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*3, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*3, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*3, z-size*2, leaves, size, blockEntity, true, false, true, false, false, true);
 
-		buildLeaves(world, x-size*2, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-size*2, y+size*3, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*3, z, leaves, size, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*3, z-size, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size*2, leaves, size, blockEntity, true, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size, leaves, size, blockEntity, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z, leaves, size, blockEntity, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
 		
 		/** third layer **/
-		buildLeaves(world, x+size, y+size*4, z, leaves, size, fullLeaves, air, false, false, true, true, true, false);
+		buildLeaves(world, x+size, y+size*4, z, leaves, size, blockEntity, false, false, true, true, true, false);
 
-		buildLeaves(world, x, y+size*4, z+size, leaves, size, fullLeaves, air, false, false, false, true, true, false);
-		buildLeaves(world, x, y+size*4, z-size, leaves, size, fullLeaves, air, false, false, true, false, true, false);
+		buildLeaves(world, x, y+size*4, z+size, leaves, size, blockEntity, false, false, false, true, true, false);
+		buildLeaves(world, x, y+size*4, z-size, leaves, size, blockEntity, false, false, true, false, true, false);
 
-		buildLeaves(world, x-size, y+size*4, z+size, leaves, size, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-size, y+size*4, z, leaves, size, fullLeaves, air, false, false, false, false, false, true);
-		buildLeaves(world, x-size, y+size*4, z-size, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size, y+size*4, z+size, leaves, size, blockEntity, true, false, false, true, false, true);
+		buildLeaves(world, x-size, y+size*4, z, leaves, size, blockEntity, false, false, false, false, false, true);
+		buildLeaves(world, x-size, y+size*4, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
 		
 		/** fourth layer **/
-		buildLeaves(world, x+size, y+size*5, z, leaves, size, fullLeaves, air, true, false, true, true, true, false);
+		buildLeaves(world, x+size, y+size*5, z, leaves, size, blockEntity, true, false, true, true, true, false);
 
-		buildLeaves(world, x, y+size*5, z+size, leaves, size, fullLeaves, air, true, false, false, true, true, true);
-		buildLeaves(world, x, y+size*5, z, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z-size, leaves, size, fullLeaves, air, true, false, true, false, true, true);
+		buildLeaves(world, x, y+size*5, z+size, leaves, size, blockEntity, true, false, false, true, true, true);
+		buildLeaves(world, x, y+size*5, z, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z-size, leaves, size, blockEntity, true, false, true, false, true, true);
 
-		buildLeaves(world, x-size, y+size*5, z, leaves, size, fullLeaves, air, true, false, true, true, false, true);
+		buildLeaves(world, x-size, y+size*5, z, leaves, size, blockEntity, true, false, true, true, false, true);
 	}
 
-	private void buildSpruce(Level world, int x, int y, int z, Block log, Block leaves, int size, boolean fullLog, boolean fullLeaves, boolean air) {
-		buildLog(world, x, y, z, log, size, fullLog, air, false, true, true, true, true, true);
-		buildLog(world, x, y+size, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*2, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*3, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*4, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*5, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*6, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*7, z, log, size, fullLog, air, true, false, true, true, true, true);
+	private void buildSpruce(Level world, int x, int y, int z, Block log, Block leaves, int size, TreeBlockEntity blockEntity) {
+		buildLog(world, x, y, z, log, size, blockEntity, false, true, true, true, true, true);
+		buildLog(world, x, y+size, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*2, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*3, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*4, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*5, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*6, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*7, z, log, size, blockEntity, true, false, true, true, true, true);
 		
 		/** first layer **/
-		buildLeaves(world, x+size*3, y+size*2, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+size*3, y+size*2, z+size, leaves, size, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+size*3, y+size*2, z, leaves, size, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+size*3, y+size*2, z-size, leaves, size, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+size*3, y+size*2, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*3, y+size*2, z+size*2, leaves, size, blockEntity, true, true, false, true, true, false);
+		buildLeaves(world, x+size*3, y+size*2, z+size, leaves, size, blockEntity, true, true, false, false, true, false);
+		buildLeaves(world, x+size*3, y+size*2, z, leaves, size, blockEntity, true, true, false, false, true, false);
+		buildLeaves(world, x+size*3, y+size*2, z-size, leaves, size, blockEntity, true, true, false, false, true, false);
+		buildLeaves(world, x+size*3, y+size*2, z-size*2, leaves, size, blockEntity, true, true, true, false, true, false);
 
-		buildLeaves(world, x+size*2, y+size*2, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+size*2, y+size*2, z+size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x+size*2, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size*2, y+size*2, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size*2, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size*2, y+size*2, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x+size*2, y+size*2, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size*3, leaves, size, blockEntity, true, true, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size*2, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*2, z-size*2, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*2, z-size*3, leaves, size, blockEntity, true, true, true, false, true, false);
 
-		buildLeaves(world, x+size, y+size*2, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x+size, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*2, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*2, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x+size, y+size*2, z+size*3, leaves, size, blockEntity, true, true, false, true, false, false);
+		buildLeaves(world, x+size, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*2, z-size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*2, z-size*3, leaves, size, blockEntity, true, true, true, false, false, false);
 
-		buildLeaves(world, x, y+size*2, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*2, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x, y+size*2, z+size*3, leaves, size, blockEntity, true, true, false, true, false, false);
+		buildLeaves(world, x, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*2, z-size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*2, z-size*3, leaves, size, blockEntity, true, true, true, false, false, false);
 
-		buildLeaves(world, x-size, y+size*2, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x-size, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*2, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*2, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z+size*3, leaves, size, blockEntity, true, true, false, true, false, false);
+		buildLeaves(world, x-size, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z-size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z-size*3, leaves, size, blockEntity, true, true, true, false, false, false);
 
-		buildLeaves(world, x-size*2, y+size*2, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-size*2, y+size*2, z+size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*2, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*2, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*2, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z+size*3, leaves, size, blockEntity, true, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z+size*2, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*2, z-size*2, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*2, z-size*3, leaves, size, blockEntity, true, true, true, false, false, true);
 
-		buildLeaves(world, x-size*3, y+size*2, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-size*3, y+size*2, z+size, leaves, size, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-size*3, y+size*2, z, leaves, size, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-size*3, y+size*2, z-size, leaves, size, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-size*3, y+size*2, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*3, y+size*2, z+size*2, leaves, size, blockEntity, true, true, false, true, false, true);
+		buildLeaves(world, x-size*3, y+size*2, z+size, leaves, size, blockEntity, true, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*2, z, leaves, size, blockEntity, true, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*2, z-size, leaves, size, blockEntity, true, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*2, z-size*2, leaves, size, blockEntity, true, true, true, false, false, true);
 		
 		/** second layer **/
-		buildLeaves(world, x+size*2, y+size*3, z+size, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+size*2, y+size*3, z, leaves, size, fullLeaves, air, true, false, false, false, true, false);
-		buildLeaves(world, x+size*2, y+size*3, z-size, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z+size, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z, leaves, size, blockEntity, true, false, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
 
-		buildLeaves(world, x+size, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+size, y+size*3, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*3, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*3, z-size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x+size, y+size*3, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*3, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*3, z-size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*3, z-size*2, leaves, size, blockEntity, true, false, true, false, true, false);
 
-		buildLeaves(world, x, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x, y+size*3, z+size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*3, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, false, false);
+		buildLeaves(world, x, y+size*3, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*3, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*3, z-size*2, leaves, size, blockEntity, true, false, true, false, false, false);
 
-		buildLeaves(world, x-size, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-size, y+size*3, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*3, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*3, z-size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, false, true);
+		buildLeaves(world, x-size, y+size*3, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*3, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*3, z-size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*3, z-size*2, leaves, size, blockEntity, true, false, true, false, false, true);
 
-		buildLeaves(world, x-size*2, y+size*3, z+size, leaves, size, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-size*2, y+size*3, z, leaves, size, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*3, z-size, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size, leaves, size, blockEntity, true, false, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z, leaves, size, blockEntity, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
 
 		/** third layer **/
-		buildLeaves(world, x+size, y+size*4, z, leaves, size, fullLeaves, air, false, false, true, true, true, false);
+		buildLeaves(world, x+size, y+size*4, z, leaves, size, blockEntity, false, false, true, true, true, false);
 
-		buildLeaves(world, x, y+size*4, z+size, leaves, size, fullLeaves, air, false, false, false, true, true, true);
-		buildLeaves(world, x, y+size*4, z-size, leaves, size, fullLeaves, air, false, false, true, false, true, true);
+		buildLeaves(world, x, y+size*4, z+size, leaves, size, blockEntity, false, false, false, true, true, true);
+		buildLeaves(world, x, y+size*4, z-size, leaves, size, blockEntity, false, false, true, false, true, true);
 
-		buildLeaves(world, x-size, y+size*4, z, leaves, size, fullLeaves, air, false, false, true, true, false, true);
+		buildLeaves(world, x-size, y+size*4, z, leaves, size, blockEntity, false, false, true, true, false, true);
 		
 		/** fourth layer **/
-		buildLeaves(world, x+size*2, y+size*5, z+size, leaves, size, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+size*2, y+size*5, z, leaves, size, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+size*2, y+size*5, z-size, leaves, size, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*5, z+size, leaves, size, blockEntity, true, true, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*5, z, leaves, size, blockEntity, true, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*5, z-size, leaves, size, blockEntity, true, true, true, false, true, false);
 
-		buildLeaves(world, x+size, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+size, y+size*5, z+size, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z-size, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size, y+size*5, z+size*2, leaves, size, blockEntity, true, true, false, true, true, false);
+		buildLeaves(world, x+size, y+size*5, z+size, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z-size, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z-size*2, leaves, size, blockEntity, true, true, true, false, true, false);
 
-		buildLeaves(world, x, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x, y+size*5, z+size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x, y+size*5, z+size*2, leaves, size, blockEntity, true, true, false, true, false, false);
+		buildLeaves(world, x, y+size*5, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z-size*2, leaves, size, blockEntity, true, true, true, false, false, false);
 
-		buildLeaves(world, x-size, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-size, y+size*5, z+size, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z-size, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size, y+size*5, z+size*2, leaves, size, blockEntity, true, true, false, true, false, true);
+		buildLeaves(world, x-size, y+size*5, z+size, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z-size, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z-size*2, leaves, size, blockEntity, true, true, true, false, false, true);
 
-		buildLeaves(world, x-size*2, y+size*5, z+size, leaves, size, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-size*2, y+size*5, z, leaves, size, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*5, z-size, leaves, size, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z+size, leaves, size, blockEntity, true, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z, leaves, size, blockEntity, true, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z-size, leaves, size, blockEntity, true, true, true, false, false, true);
 
 		/** fifth layer **/
-		buildLeaves(world, x+size, y+size*6, z, leaves, size, fullLeaves, air, true, false, true, true, true, false);
+		buildLeaves(world, x+size, y+size*6, z, leaves, size, blockEntity, true, false, true, true, true, false);
 
-		buildLeaves(world, x, y+size*6, z+size, leaves, size, fullLeaves, air, true, false, false, true, true, true);
-		buildLeaves(world, x, y+size*6, z-size, leaves, size, fullLeaves, air, true, false, true, false, true, true);
+		buildLeaves(world, x, y+size*6, z+size, leaves, size, blockEntity, true, false, false, true, true, true);
+		buildLeaves(world, x, y+size*6, z-size, leaves, size, blockEntity, true, false, true, false, true, true);
 
-		buildLeaves(world, x-size, y+size*6, z, leaves, size, fullLeaves, air, true, false, true, true, false, true);
+		buildLeaves(world, x-size, y+size*6, z, leaves, size, blockEntity, true, false, true, true, false, true);
 
 		/** seventh layer **/
-		buildLeaves(world, x+size, y+size*8, z, leaves, size, fullLeaves, air, true, true, true, true, true, false);
+		buildLeaves(world, x+size, y+size*8, z, leaves, size, blockEntity, true, true, true, true, true, false);
 
-		buildLeaves(world, x, y+size*8, z+size, leaves, size, fullLeaves, air, true, true, false, true, true, true);
-		buildLeaves(world, x, y+size*8, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*8, z-size, leaves, size, fullLeaves, air, true, true, true, false, true, true);
+		buildLeaves(world, x, y+size*8, z+size, leaves, size, blockEntity, true, true, false, true, true, true);
+		buildLeaves(world, x, y+size*8, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*8, z-size, leaves, size, blockEntity, true, true, true, false, true, true);
 
-		buildLeaves(world, x-size, y+size*8, z, leaves, size, fullLeaves, air, true, true, true, true, false, true);
+		buildLeaves(world, x-size, y+size*8, z, leaves, size, blockEntity, true, true, true, true, false, true);
 
 		/** eighth layer **/
-		buildLeaves(world, x, y+size*9, z, leaves, size, fullLeaves, air, true, false, true, true, true, true);
+		buildLeaves(world, x, y+size*9, z, leaves, size, blockEntity, true, false, true, true, true, true);
 	}
 
-	private void buildBirch(Level world, int x, int y, int z, Block log, Block leaves, int size, boolean fullLog, boolean fullLeaves, boolean air) {
-		buildLog(world, x, y, z, log, size, fullLog, air, false, true, true, true, true, true);
-		buildLog(world, x, y+size, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*2, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*3, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*4, z, log, size, fullLog, air, true, false, true, true, true, true);
+	private void buildBirch(Level world, int x, int y, int z, Block log, Block leaves, int size, TreeBlockEntity blockEntity) {
+		buildLog(world, x, y, z, log, size, blockEntity, false, true, true, true, true, true);
+		buildLog(world, x, y+size, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*2, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*3, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*4, z, log, size, blockEntity, true, false, true, true, true, true);
 		
 		/** first layer **/
-		buildLeaves(world, x+size*2, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+size*2, y+size*2, z, leaves, size, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+size*2, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z+size, leaves, size, blockEntity, false, true, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z, leaves, size, blockEntity, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*2, z-size, leaves, size, blockEntity, false, true, true, false, true, false);
 		
-		buildLeaves(world, x+size, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+size, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*2, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, true, true, false);
+		buildLeaves(world, x+size, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*2, z-size*2, leaves, size, blockEntity, false, true, true, false, true, false);
 		
-		buildLeaves(world, x, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, false);
-		buildLeaves(world, x, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, true, false, false);
+		buildLeaves(world, x, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*2, z-size*2, leaves, size, blockEntity, false, true, true, false, false, false);
 
-		buildLeaves(world, x-size, y+size*2, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-size, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*2, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*2, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, true, false, true);
+		buildLeaves(world, x-size, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*2, z-size*2, leaves, size, blockEntity, false, true, true, false, false, false);
 
-		buildLeaves(world, x-size*2, y+size*2, z+size, leaves, size, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-size*2, y+size*2, z, leaves, size, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*2, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*2, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z+size, leaves, size, blockEntity, false, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*2, z-size*2, leaves, size, blockEntity, true, true, true, false, false, true);
 		
 		/** second layer **/
-		buildLeaves(world, x+size*2, y+size*3, z+size, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+size*2, y+size*3, z, leaves, size, fullLeaves, air, true, false, false, false, true, false);
-		buildLeaves(world, x+size*2, y+size*3, z-size, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z+size, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z, leaves, size, blockEntity, true, false, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*3, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
 		
-		buildLeaves(world, x+size, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+size, y+size*3, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*3, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*3, z-size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x+size, y+size*3, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*3, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*3, z-size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*3, z-size*2, leaves, size, blockEntity, true, false, true, false, true, false);
 		
-		buildLeaves(world, x, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x, y+size*3, z+size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*3, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, false, false);
+		buildLeaves(world, x, y+size*3, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*3, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*3, z-size*2, leaves, size, blockEntity, true, false, true, false, false, false);
 
-		buildLeaves(world, x-size, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x-size, y+size*3, z+size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*3, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*3, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*3, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, false, false);
+		buildLeaves(world, x-size, y+size*3, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*3, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*3, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*3, z-size*2, leaves, size, blockEntity, true, false, true, false, false, true);
 
-		buildLeaves(world, x-size*2, y+size*3, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-size*2, y+size*3, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*3, z, leaves, size, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*3, z-size, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size*2, leaves, size, blockEntity, true, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z+size, leaves, size, blockEntity, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z, leaves, size, blockEntity, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*3, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
 		
 		/** third layer **/
-		buildLeaves(world, x+size, y+size*4, z, leaves, size, fullLeaves, air, false, false, true, true, true, false);
+		buildLeaves(world, x+size, y+size*4, z, leaves, size, blockEntity, false, false, true, true, true, false);
 
-		buildLeaves(world, x, y+size*4, z+size, leaves, size, fullLeaves, air, false, false, false, true, true, false);
-		buildLeaves(world, x, y+size*4, z-size, leaves, size, fullLeaves, air, false, false, true, false, true, false);
+		buildLeaves(world, x, y+size*4, z+size, leaves, size, blockEntity, false, false, false, true, true, false);
+		buildLeaves(world, x, y+size*4, z-size, leaves, size, blockEntity, false, false, true, false, true, false);
 
-		buildLeaves(world, x-size, y+size*4, z+size, leaves, size, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-size, y+size*4, z, leaves, size, fullLeaves, air, false, false, false, false, false, true);
-		buildLeaves(world, x-size, y+size*4, z-size, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size, y+size*4, z+size, leaves, size, blockEntity, true, false, false, true, false, true);
+		buildLeaves(world, x-size, y+size*4, z, leaves, size, blockEntity, false, false, false, false, false, true);
+		buildLeaves(world, x-size, y+size*4, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
 		
 		/** fourth layer **/
-		buildLeaves(world, x+size, y+size*5, z, leaves, size, fullLeaves, air, true, false, true, true, true, false);
+		buildLeaves(world, x+size, y+size*5, z, leaves, size, blockEntity, true, false, true, true, true, false);
 
-		buildLeaves(world, x, y+size*5, z+size, leaves, size, fullLeaves, air, true, false, false, true, true, true);
-		buildLeaves(world, x, y+size*5, z, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z-size, leaves, size, fullLeaves, air, true, false, true, false, true, true);
+		buildLeaves(world, x, y+size*5, z+size, leaves, size, blockEntity, true, false, false, true, true, true);
+		buildLeaves(world, x, y+size*5, z, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z-size, leaves, size, blockEntity, true, false, true, false, true, true);
 
-		buildLeaves(world, x-size, y+size*5, z, leaves, size, fullLeaves, air, true, false, true, true, false, true);
+		buildLeaves(world, x-size, y+size*5, z, leaves, size, blockEntity, true, false, true, true, false, true);
 	}
 
-	private void buildJungle(Level world, int x, int y, int z, Block log, Block leaves, int size, boolean fullLog, boolean fullLeaves, boolean air) {
-		buildLog(world, x, y, z, log, size, fullLog, air, false, true, true, true, true, true);
-		buildLog(world, x, y+size, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*2, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*3, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*4, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*5, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*6, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*7, z, log, size, fullLog, air, true, false, true, true, true, true);
+	private void buildJungle(Level world, int x, int y, int z, Block log, Block leaves, int size, TreeBlockEntity blockEntity) {
+		buildLog(world, x, y, z, log, size, blockEntity, false, true, true, true, true, true);
+		buildLog(world, x, y+size, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*2, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*3, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*4, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*5, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*6, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*7, z, log, size, blockEntity, true, false, true, true, true, true);
 		
 		/** first layer **/
-		buildLeaves(world, x+size*2, y+size*5, z+size, leaves, size, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+size*2, y+size*5, z, leaves, size, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+size*2, y+size*5, z-size, leaves, size, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*5, z+size, leaves, size, blockEntity, false, true, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*5, z, leaves, size, blockEntity, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*5, z-size, leaves, size, blockEntity, false, true, true, false, true, false);
 		
-		buildLeaves(world, x+size, y+size*5, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+size, y+size*5, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size, y+size*5, z+size*2, leaves, size, blockEntity, false, true, false, true, true, false);
+		buildLeaves(world, x+size, y+size*5, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z-size*2, leaves, size, blockEntity, false, true, true, false, true, false);
 		
-		buildLeaves(world, x, y+size*5, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, false);
-		buildLeaves(world, x, y+size*5, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x, y+size*5, z+size*2, leaves, size, blockEntity, false, true, false, true, false, false);
+		buildLeaves(world, x, y+size*5, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z-size*2, leaves, size, blockEntity, false, true, true, false, false, false);
 
-		buildLeaves(world, x-size, y+size*5, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-size, y+size*5, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z+size*2, leaves, size, blockEntity, false, true, false, true, false, true);
+		buildLeaves(world, x-size, y+size*5, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z-size*2, leaves, size, blockEntity, false, true, true, false, false, false);
 
-		buildLeaves(world, x-size*2, y+size*5, z+size, leaves, size, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-size*2, y+size*5, z, leaves, size, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*5, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z+size, leaves, size, blockEntity, false, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z, leaves, size, blockEntity, false, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z-size, leaves, size, blockEntity, false, true, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*5, z-size*2, leaves, size, blockEntity, true, true, true, false, false, true);
 		
 		/** second layer **/
-		buildLeaves(world, x+size*2, y+size*6, z+size, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+size*2, y+size*6, z, leaves, size, fullLeaves, air, true, false, false, false, true, false);
-		buildLeaves(world, x+size*2, y+size*6, z-size, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*6, z+size, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*6, z, leaves, size, blockEntity, true, false, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*6, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
 		
-		buildLeaves(world, x+size, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+size, y+size*6, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*6, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*6, z-size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size, y+size*6, z+size*2, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x+size, y+size*6, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*6, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*6, z-size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*6, z-size*2, leaves, size, blockEntity, true, false, true, false, true, false);
 		
-		buildLeaves(world, x, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x, y+size*6, z+size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*6, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x, y+size*6, z+size*2, leaves, size, blockEntity, true, false, false, true, false, false);
+		buildLeaves(world, x, y+size*6, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*6, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*6, z-size*2, leaves, size, blockEntity, true, false, true, false, false, false);
 
-		buildLeaves(world, x-size, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x-size, y+size*6, z+size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*6, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*6, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size, y+size*6, z+size*2, leaves, size, blockEntity, true, false, false, true, false, false);
+		buildLeaves(world, x-size, y+size*6, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*6, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*6, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*6, z-size*2, leaves, size, blockEntity, true, false, true, false, false, true);
 
-		buildLeaves(world, x-size*2, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-size*2, y+size*6, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*6, z, leaves, size, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-size*2, y+size*6, z-size, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*6, z+size*2, leaves, size, blockEntity, true, true, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*6, z+size, leaves, size, blockEntity, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*6, z, leaves, size, blockEntity, true, false, false, false, false, true);
+		buildLeaves(world, x-size*2, y+size*6, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
 		
 		/** third layer **/
-		buildLeaves(world, x+size, y+size*7, z, leaves, size, fullLeaves, air, false, false, true, true, true, false);
+		buildLeaves(world, x+size, y+size*7, z, leaves, size, blockEntity, false, false, true, true, true, false);
 
-		buildLeaves(world, x, y+size*7, z+size, leaves, size, fullLeaves, air, false, false, false, true, true, false);
-		buildLeaves(world, x, y+size*7, z-size, leaves, size, fullLeaves, air, false, false, true, false, true, false);
+		buildLeaves(world, x, y+size*7, z+size, leaves, size, blockEntity, false, false, false, true, true, false);
+		buildLeaves(world, x, y+size*7, z-size, leaves, size, blockEntity, false, false, true, false, true, false);
 
-		buildLeaves(world, x-size, y+size*7, z+size, leaves, size, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-size, y+size*7, z, leaves, size, fullLeaves, air, false, false, false, false, false, true);
-		buildLeaves(world, x-size, y+size*7, z-size, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size, y+size*7, z+size, leaves, size, blockEntity, true, false, false, true, false, true);
+		buildLeaves(world, x-size, y+size*7, z, leaves, size, blockEntity, false, false, false, false, false, true);
+		buildLeaves(world, x-size, y+size*7, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
 		
 		/** fourth layer **/
-		buildLeaves(world, x+size, y+size*8, z, leaves, size, fullLeaves, air, true, false, true, true, true, false);
+		buildLeaves(world, x+size, y+size*8, z, leaves, size, blockEntity, true, false, true, true, true, false);
 
-		buildLeaves(world, x, y+size*8, z+size, leaves, size, fullLeaves, air, true, false, false, true, true, true);
-		buildLeaves(world, x, y+size*8, z, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x, y+size*8, z-size, leaves, size, fullLeaves, air, true, false, true, false, true, true);
+		buildLeaves(world, x, y+size*8, z+size, leaves, size, blockEntity, true, false, false, true, true, true);
+		buildLeaves(world, x, y+size*8, z, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x, y+size*8, z-size, leaves, size, blockEntity, true, false, true, false, true, true);
 
-		buildLeaves(world, x-size, y+size*8, z, leaves, size, fullLeaves, air, true, false, true, true, false, true);
+		buildLeaves(world, x-size, y+size*8, z, leaves, size, blockEntity, true, false, true, true, false, true);
 	}
 
-	private void buildAcacia(Level world, int x, int y, int z, Block log, Block leaves, int size, boolean fullLog, boolean fullLeaves, boolean air) {
-		buildLog(world, x, y, z, log, size, fullLog, air, false, true, true, true, true, true);
-		buildLog(world, x, y+size, z, log, size, fullLog, air, false, false, true, true, true, true);
-		buildLog(world, x, y+size*2, z, log, size, fullLog, air, true, false, true, true, false, true);
+	private void buildAcacia(Level world, int x, int y, int z, Block log, Block leaves, int size, TreeBlockEntity blockEntity) {
+		buildLog(world, x, y, z, log, size, blockEntity, false, true, true, true, true, true);
+		buildLog(world, x, y+size, z, log, size, blockEntity, false, false, true, true, true, true);
+		buildLog(world, x, y+size*2, z, log, size, blockEntity, true, false, true, true, false, true);
 
-		buildLog(world, x+size, y+size*2, z, log, size, fullLog, air, true, true, true, true, true, false);
+		buildLog(world, x+size, y+size*2, z, log, size, blockEntity, true, true, true, true, true, false);
 
-		buildLog(world, x+size*2, y+size*3, z, log, size, fullLog, air, true, true, true, true, true, true);
-		buildLog(world, x-size, y+size*3, z, log, size, fullLog, air, true, true, true, true, true, true);
+		buildLog(world, x+size*2, y+size*3, z, log, size, blockEntity, true, true, true, true, true, true);
+		buildLog(world, x-size, y+size*3, z, log, size, blockEntity, true, true, true, true, true, true);
 
-		buildLog(world, x+size*3, y+size*4, z, log, size, fullLog, air, true, true, true, true, true, true);
-		buildLog(world, x-size*2, y+size*4, z, log, size, fullLog, air, false, true, true, true, true, true);
+		buildLog(world, x+size*3, y+size*4, z, log, size, blockEntity, true, true, true, true, true, true);
+		buildLog(world, x-size*2, y+size*4, z, log, size, blockEntity, false, true, true, true, true, true);
 
-		buildLog(world, x-size*2, y+size*5, z, log, size, fullLog, air, true, false, true, true, true, true);
+		buildLog(world, x-size*2, y+size*5, z, log, size, blockEntity, true, false, true, true, true, true);
 		
 		/** first layer **/
-		buildLeaves(world, x+size*5, y+size*4, z+size, leaves, size, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+size*5, y+size*4, z, leaves, size, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+size*5, y+size*4, z-size, leaves, size, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*5, y+size*4, z+size, leaves, size, blockEntity, true, true, false, true, true, false);
+		buildLeaves(world, x+size*5, y+size*4, z, leaves, size, blockEntity, true, true, false, false, true, false);
+		buildLeaves(world, x+size*5, y+size*4, z-size, leaves, size, blockEntity, true, true, true, false, true, false);
 
-		buildLeaves(world, x+size*4, y+size*4, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+size*4, y+size*4, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size*4, y+size*4, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size*4, y+size*4, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size*4, y+size*4, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*4, y+size*4, z+size*2, leaves, size, blockEntity, true, true, false, true, true, false);
+		buildLeaves(world, x+size*4, y+size*4, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size*4, y+size*4, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size*4, y+size*4, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size*4, y+size*4, z-size*2, leaves, size, blockEntity, true, true, true, false, true, false);
 
-		buildLeaves(world, x+size*3, y+size*4, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x+size*3, y+size*4, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size*3, y+size*4, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size*3, y+size*4, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x+size*3, y+size*4, z+size*2, leaves, size, blockEntity, true, true, false, true, false, false);
+		buildLeaves(world, x+size*3, y+size*4, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size*3, y+size*4, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size*3, y+size*4, z-size*2, leaves, size, blockEntity, true, true, true, false, false, false);
 
-		buildLeaves(world, x+size*2, y+size*4, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x+size*2, y+size*4, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size*2, y+size*4, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size*2, y+size*4, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size*2, y+size*4, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x+size*2, y+size*4, z+size*2, leaves, size, blockEntity, true, true, false, true, false, true);
+		buildLeaves(world, x+size*2, y+size*4, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*4, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*4, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*4, z-size*2, leaves, size, blockEntity, true, true, true, false, false, true);
 
-		buildLeaves(world, x+size, y+size*4, z+size, leaves, size, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x+size, y+size*4, z, leaves, size, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x+size, y+size*4, z-size, leaves, size, fullLeaves, air, false, true, true, false, false, true);
+		buildLeaves(world, x+size, y+size*4, z+size, leaves, size, blockEntity, false, true, false, true, false, true);
+		buildLeaves(world, x+size, y+size*4, z, leaves, size, blockEntity, false, true, false, false, false, true);
+		buildLeaves(world, x+size, y+size*4, z-size, leaves, size, blockEntity, false, true, true, false, false, true);
 		
 		/** second layer **/
-		buildLeaves(world, x+size*4, y+size*5, z+size, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+size*4, y+size*5, z, leaves, size, fullLeaves, air, true, false, false, false, true, false);
-		buildLeaves(world, x+size*4, y+size*5, z-size, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*4, y+size*5, z+size, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x+size*4, y+size*5, z, leaves, size, blockEntity, true, false, false, false, true, false);
+		buildLeaves(world, x+size*4, y+size*5, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
 		
-		buildLeaves(world, x+size*3, y+size*5, z+size, leaves, size, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x+size*3, y+size*5, z, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size*3, y+size*5, z-size, leaves, size, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x+size*3, y+size*5, z+size, leaves, size, blockEntity, true, false, false, true, false, false);
+		buildLeaves(world, x+size*3, y+size*5, z, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size*3, y+size*5, z-size, leaves, size, blockEntity, true, false, true, false, false, false);
 		
-		buildLeaves(world, x+size*2, y+size*5, z+size, leaves, size, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x+size*2, y+size*5, z, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size*2, y+size*5, z-size, leaves, size, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z+size, leaves, size, blockEntity, true, false, false, true, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z-size, leaves, size, blockEntity, true, false, true, false, false, false);
 
-		buildLeaves(world, x+size, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+size, y+size*5, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z-size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size, y+size*5, z+size*2, leaves, size, blockEntity, true, true, false, true, true, false);
+		buildLeaves(world, x+size, y+size*5, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z-size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z-size*2, leaves, size, blockEntity, true, true, true, false, true, false);
 
-		buildLeaves(world, x, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z+size, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z-size, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x, y+size*5, z+size*3, leaves, size, blockEntity, true, true, false, true, true, false);
+		buildLeaves(world, x, y+size*5, z+size*2, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z+size, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z-size, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z-size*2, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z-size*3, leaves, size, blockEntity, true, true, true, false, true, false);
 
-		buildLeaves(world, x-size, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x-size, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z+size*3, leaves, size, blockEntity, true, true, false, true, false, false);
+		buildLeaves(world, x-size, y+size*5, z+size*2, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z-size*2, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z-size*3, leaves, size, blockEntity, true, true, true, false, false, false);
 
-		buildLeaves(world, x-size*2, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size*3, leaves, size, blockEntity, true, true, false, true, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*3, leaves, size, blockEntity, true, true, true, false, false, false);
 
-		buildLeaves(world, x-size*3, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x-size*3, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-size*3, y+size*5, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*3, y+size*5, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*3, y+size*5, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*3, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-size*3, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z+size*3, leaves, size, blockEntity, true, true, false, true, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z+size*2, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z-size*2, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z-size*3, leaves, size, blockEntity, true, true, true, false, false, false);
 
-		buildLeaves(world, x-size*4, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-size*4, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-size*4, y+size*5, z+size, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-size*4, y+size*5, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*4, y+size*5, z-size, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-size*4, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, false);
-		buildLeaves(world, x-size*4, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z+size*3, leaves, size, blockEntity, true, true, false, true, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z+size*2, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x-size*4, y+size*5, z+size, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x-size*4, y+size*5, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*4, y+size*5, z-size, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x-size*4, y+size*5, z-size*2, leaves, size, blockEntity, true, true, false, false, false, false);
+		buildLeaves(world, x-size*4, y+size*5, z-size*3, leaves, size, blockEntity, true, true, true, false, false, true);
 
-		buildLeaves(world, x-size*5, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-size*5, y+size*5, z+size, leaves, size, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-size*5, y+size*5, z, leaves, size, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-size*5, y+size*5, z-size, leaves, size, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-size*5, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*5, y+size*5, z+size*2, leaves, size, blockEntity, true, true, false, true, false, true);
+		buildLeaves(world, x-size*5, y+size*5, z+size, leaves, size, blockEntity, true, true, false, false, false, true);
+		buildLeaves(world, x-size*5, y+size*5, z, leaves, size, blockEntity, true, true, false, false, false, true);
+		buildLeaves(world, x-size*5, y+size*5, z-size, leaves, size, blockEntity, true, true, false, false, false, true);
+		buildLeaves(world, x-size*5, y+size*5, z-size*2, leaves, size, blockEntity, true, true, true, false, false, true);
 		
 		/** third layer **/
-		buildLeaves(world, x, y+size*6, z, leaves, size, fullLeaves, air, true, false, true, true, true, false);
+		buildLeaves(world, x, y+size*6, z, leaves, size, blockEntity, true, false, true, true, true, false);
 
-		buildLeaves(world, x-size, y+size*6, z+size, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x-size, y+size*6, z, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*6, z-size, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x-size, y+size*6, z+size, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x-size, y+size*6, z, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*6, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
 
-		buildLeaves(world, x-size*2, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, true, true);
-		buildLeaves(world, x-size*2, y+size*6, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*6, z, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*6, z-size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, true, true);
+		buildLeaves(world, x-size*2, y+size*6, z+size*2, leaves, size, blockEntity, true, false, false, true, true, true);
+		buildLeaves(world, x-size*2, y+size*6, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*6, z, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*6, z-size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*6, z-size*2, leaves, size, blockEntity, true, false, true, false, true, true);
 
-		buildLeaves(world, x-size*3, y+size*6, z+size, leaves, size, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-size*3, y+size*6, z, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size*3, y+size*6, z-size, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*3, y+size*6, z+size, leaves, size, blockEntity, true, false, false, true, false, true);
+		buildLeaves(world, x-size*3, y+size*6, z, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*6, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
 
-		buildLeaves(world, x-size*4, y+size*6, z, leaves, size, fullLeaves, air, true, false, true, true, false, true);
+		buildLeaves(world, x-size*4, y+size*6, z, leaves, size, blockEntity, true, false, true, true, false, true);
 	}
 
-	private void buildDarkOak(Level world, int x, int y, int z, Block log, Block leaves, int size, boolean fullLog, boolean fullLeaves, boolean air) {
-		buildLog(world, x, y, z, log, size, fullLog, air, false, true, false, true, true, false);
-		buildLog(world, x, y+size, z, log, size, fullLog, air, false, false, false, true, true, false);
-		buildLog(world, x, y+size*2, z, log, size, fullLog, air, false, false, false, false, true, false);
-		buildLog(world, x, y+size*3, z, log, size, fullLog, air, false, false, false, false, true, false);
-		buildLog(world, x, y+size*4, z, log, size, fullLog, air, false, false, false, false, true, false);
-		buildLog(world, x, y+size*5, z, log, size, fullLog, air, true, false, false, true, true, false);
+	private void buildDarkOak(Level world, int x, int y, int z, Block log, Block leaves, int size, TreeBlockEntity blockEntity) {
+		buildLog(world, x, y, z, log, size, blockEntity, false, true, false, true, true, false);
+		buildLog(world, x, y+size, z, log, size, blockEntity, false, false, false, true, true, false);
+		buildLog(world, x, y+size*2, z, log, size, blockEntity, false, false, false, false, true, false);
+		buildLog(world, x, y+size*3, z, log, size, blockEntity, false, false, false, false, true, false);
+		buildLog(world, x, y+size*4, z, log, size, blockEntity, false, false, false, false, true, false);
+		buildLog(world, x, y+size*5, z, log, size, blockEntity, true, false, false, true, true, false);
 
-		buildLog(world, x, y, z-size, log, size, fullLog, air, false, true, true, false, true, false);
-		buildLog(world, x, y+size, z-size, log, size, fullLog, air, false, false, true, false, true, false);
-		buildLog(world, x, y+size*2, z-size, log, size, fullLog, air, false, false, true, false, true, false);
-		buildLog(world, x, y+size*3, z-size, log, size, fullLog, air, false, false, true, false, true, false);
-		buildLog(world, x, y+size*4, z-size, log, size, fullLog, air, false, false, true, false, true, false);
-		buildLog(world, x, y+size*5, z-size, log, size, fullLog, air, true, false, true, false, true, false);
+		buildLog(world, x, y, z-size, log, size, blockEntity, false, true, true, false, true, false);
+		buildLog(world, x, y+size, z-size, log, size, blockEntity, false, false, true, false, true, false);
+		buildLog(world, x, y+size*2, z-size, log, size, blockEntity, false, false, true, false, true, false);
+		buildLog(world, x, y+size*3, z-size, log, size, blockEntity, false, false, true, false, true, false);
+		buildLog(world, x, y+size*4, z-size, log, size, blockEntity, false, false, true, false, true, false);
+		buildLog(world, x, y+size*5, z-size, log, size, blockEntity, true, false, true, false, true, false);
 
-		buildLog(world, x-size, y, z, log, size, fullLog, air, false, true, false, true, false, true);
-		buildLog(world, x-size, y+size, z, log, size, fullLog, air, false, false, false, true, false, true);
-		buildLog(world, x-size, y+size*2, z, log, size, fullLog, air, false, false, false, true, false, true);
-		buildLog(world, x-size, y+size*3, z, log, size, fullLog, air, false, false, false, true, false, true);
-		buildLog(world, x-size, y+size*4, z, log, size, fullLog, air, false, false, false, true, false, true);
-		buildLog(world, x-size, y+size*5, z, log, size, fullLog, air, true, false, false, true, false, true);
+		buildLog(world, x-size, y, z, log, size, blockEntity, false, true, false, true, false, true);
+		buildLog(world, x-size, y+size, z, log, size, blockEntity, false, false, false, true, false, true);
+		buildLog(world, x-size, y+size*2, z, log, size, blockEntity, false, false, false, true, false, true);
+		buildLog(world, x-size, y+size*3, z, log, size, blockEntity, false, false, false, true, false, true);
+		buildLog(world, x-size, y+size*4, z, log, size, blockEntity, false, false, false, true, false, true);
+		buildLog(world, x-size, y+size*5, z, log, size, blockEntity, true, false, false, true, false, true);
 
-		buildLog(world, x-size, y, z-size, log, size, fullLog, air, false, true, true, false, false, true);
-		buildLog(world, x-size, y+size, z-size, log, size, fullLog, air, false, false, true, false, false, true);
-		buildLog(world, x-size, y+size*2, z-size, log, size, fullLog, air, false, false, true, false, false, true);
-		buildLog(world, x-size, y+size*3, z-size, log, size, fullLog, air, false, false, true, false, false, true);
-		buildLog(world, x-size, y+size*4, z-size, log, size, fullLog, air, false, false, true, false, false, true);
-		buildLog(world, x-size, y+size*5, z-size, log, size, fullLog, air, true, false, true, false, false, true);
+		buildLog(world, x-size, y, z-size, log, size, blockEntity, false, true, true, false, false, true);
+		buildLog(world, x-size, y+size, z-size, log, size, blockEntity, false, false, true, false, false, true);
+		buildLog(world, x-size, y+size*2, z-size, log, size, blockEntity, false, false, true, false, false, true);
+		buildLog(world, x-size, y+size*3, z-size, log, size, blockEntity, false, false, true, false, false, true);
+		buildLog(world, x-size, y+size*4, z-size, log, size, blockEntity, false, false, true, false, false, true);
+		buildLog(world, x-size, y+size*5, z-size, log, size, blockEntity, true, false, true, false, false, true);
 
-		buildLog(world, x, y+size*2, z+size, log, size, fullLog, air, false, true, false, true, true, true);
-		buildLog(world, x, y+size*3, z+size, log, size, fullLog, air, false, false, false, true, true, true);
-		buildLog(world, x, y+size*4, z+size, log, size, fullLog, air, true, false, false, true, true, true);
+		buildLog(world, x, y+size*2, z+size, log, size, blockEntity, false, true, false, true, true, true);
+		buildLog(world, x, y+size*3, z+size, log, size, blockEntity, false, false, false, true, true, true);
+		buildLog(world, x, y+size*4, z+size, log, size, blockEntity, true, false, false, true, true, true);
 		
 		/** first layer **/
-		buildLeaves(world, x+size*2, y+size*4, z+size*2, leaves, size, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+size*2, y+size*4, z+size, leaves, size, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+size*2, y+size*4, z, leaves, size, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+size*2, y+size*4, z-size, leaves, size, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+size*2, y+size*4, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, true, false);
-		buildLeaves(world, x+size*2, y+size*4, z-size*3, leaves, size, fullLeaves, air, false, true, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*4, z+size*2, leaves, size, blockEntity, true, true, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*4, z+size, leaves, size, blockEntity, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*4, z, leaves, size, blockEntity, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*4, z-size, leaves, size, blockEntity, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*4, z-size*2, leaves, size, blockEntity, false, true, false, false, true, false);
+		buildLeaves(world, x+size*2, y+size*4, z-size*3, leaves, size, blockEntity, false, true, true, false, true, false);
 
-		buildLeaves(world, x+size, y+size*4, z+size*3, leaves, size, fullLeaves, air, false, true, false, true, true, false);
-		buildLeaves(world, x+size, y+size*4, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*4, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*4, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*4, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*4, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x+size, y+size*4, z-size*3, leaves, size, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x+size, y+size*4, z+size*3, leaves, size, blockEntity, false, true, false, true, true, false);
+		buildLeaves(world, x+size, y+size*4, z+size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*4, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*4, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*4, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*4, z-size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x+size, y+size*4, z-size*3, leaves, size, blockEntity, false, true, true, false, false, false);
 
-		buildLeaves(world, x, y+size*4, z+size*3, leaves, size, fullLeaves, air, false, true, false, true, false, false);
-		buildLeaves(world, x, y+size*4, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*4, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x, y+size*4, z-size*3, leaves, size, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x, y+size*4, z+size*3, leaves, size, blockEntity, false, true, false, true, false, false);
+		buildLeaves(world, x, y+size*4, z+size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*4, z-size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x, y+size*4, z-size*3, leaves, size, blockEntity, false, true, true, false, false, false);
 
-		buildLeaves(world, x-size, y+size*4, z+size*3, leaves, size, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-size, y+size*4, z+size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*4, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*4, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size, y+size*4, z-size*3, leaves, size, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x-size, y+size*4, z+size*3, leaves, size, blockEntity, false, true, false, true, false, true);
+		buildLeaves(world, x-size, y+size*4, z+size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*4, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*4, z-size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size, y+size*4, z-size*3, leaves, size, blockEntity, false, true, true, false, false, false);
 
-		buildLeaves(world, x-size*2, y+size*4, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, false);
-		buildLeaves(world, x-size*2, y+size*4, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*4, z, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*4, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*4, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*4, z-size*3, leaves, size, fullLeaves, air, false, true, true, false, false, false);
+		buildLeaves(world, x-size*2, y+size*4, z+size*2, leaves, size, blockEntity, false, true, false, true, false, false);
+		buildLeaves(world, x-size*2, y+size*4, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*4, z, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*4, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*4, z-size*2, leaves, size, blockEntity, false, true, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*4, z-size*3, leaves, size, blockEntity, false, true, true, false, false, false);
 
-		buildLeaves(world, x-size*3, y+size*4, z+size*2, leaves, size, fullLeaves, air, false, true, false, true, false, true);
-		buildLeaves(world, x-size*3, y+size*4, z+size, leaves, size, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-size*3, y+size*4, z, leaves, size, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-size*3, y+size*4, z-size, leaves, size, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-size*3, y+size*4, z-size*2, leaves, size, fullLeaves, air, false, true, false, false, false, true);
-		buildLeaves(world, x-size*3, y+size*4, z-size*3, leaves, size, fullLeaves, air, false, true, true, false, false, true);
+		buildLeaves(world, x-size*3, y+size*4, z+size*2, leaves, size, blockEntity, false, true, false, true, false, true);
+		buildLeaves(world, x-size*3, y+size*4, z+size, leaves, size, blockEntity, false, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*4, z, leaves, size, blockEntity, false, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*4, z-size, leaves, size, blockEntity, false, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*4, z-size*2, leaves, size, blockEntity, false, true, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*4, z-size*3, leaves, size, blockEntity, false, true, true, false, false, true);
 		
 		/** second layer **/
-		buildLeaves(world, x+size*3, y+size*5, z+size, leaves, size, fullLeaves, air, true, true, false, true, true, false);
-		buildLeaves(world, x+size*3, y+size*5, z, leaves, size, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+size*3, y+size*5, z-size, leaves, size, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+size*3, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, true, false);
-		buildLeaves(world, x+size*3, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size*3, y+size*5, z+size, leaves, size, blockEntity, true, true, false, true, true, false);
+		buildLeaves(world, x+size*3, y+size*5, z, leaves, size, blockEntity, true, true, false, false, true, false);
+		buildLeaves(world, x+size*3, y+size*5, z-size, leaves, size, blockEntity, true, true, false, false, true, false);
+		buildLeaves(world, x+size*3, y+size*5, z-size*2, leaves, size, blockEntity, true, true, false, false, true, false);
+		buildLeaves(world, x+size*3, y+size*5, z-size*3, leaves, size, blockEntity, true, true, true, false, true, false);
 
-		buildLeaves(world, x+size*2, y+size*5, z+size, leaves, size, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x+size*2, y+size*5, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+size*2, y+size*5, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+size*2, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size*2, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, false, true, false, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z+size, leaves, size, blockEntity, true, false, false, true, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z-size*2, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size*2, y+size*5, z-size*3, leaves, size, blockEntity, true, false, true, false, false, false);
 
-		buildLeaves(world, x+size, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+size, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, false, false, false, true, false);
-		buildLeaves(world, x+size, y+size*5, z+size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*5, z-size*4, leaves, size, fullLeaves, air, true, true, true, false, true, false);
+		buildLeaves(world, x+size, y+size*5, z+size*3, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x+size, y+size*5, z+size*2, leaves, size, blockEntity, true, false, false, false, true, false);
+		buildLeaves(world, x+size, y+size*5, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z-size*2, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z-size*3, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*5, z-size*4, leaves, size, blockEntity, true, true, true, false, true, false);
 
-		buildLeaves(world, x, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x, y+size*5, z+size*2, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z+size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z-size*3, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*5, z-size*4, leaves, size, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x, y+size*5, z+size*3, leaves, size, blockEntity, true, false, false, true, false, false);
+		buildLeaves(world, x, y+size*5, z+size*2, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z-size*2, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z-size*3, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*5, z-size*4, leaves, size, blockEntity, true, true, true, false, false, false);
 
-		buildLeaves(world, x-size, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, false, false, true, false, false);
-		buildLeaves(world, x-size, y+size*5, z+size*2, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z+size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z-size*3, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*5, z-size*4, leaves, size, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z+size*3, leaves, size, blockEntity, true, false, false, true, false, false);
+		buildLeaves(world, x-size, y+size*5, z+size*2, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z-size*2, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z-size*3, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*5, z-size*4, leaves, size, blockEntity, true, true, true, false, false, false);
 
-		buildLeaves(world, x-size*2, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z+size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z-size*2, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z-size*4, leaves, size, fullLeaves, air, true, true, true, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size*3, leaves, size, blockEntity, true, true, false, true, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size*2, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*2, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*3, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size*4, leaves, size, blockEntity, true, true, true, false, false, false);
 
-		buildLeaves(world, x-size*3, y+size*5, z+size*3, leaves, size, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-size*3, y+size*5, z+size*2, leaves, size, fullLeaves, air, true, false, false, false, false, true);
-		buildLeaves(world, x-size*3, y+size*5, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*5, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size*3, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size*3, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size*3, y+size*5, z-size*4, leaves, size, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*3, y+size*5, z+size*3, leaves, size, blockEntity, true, true, false, true, false, true);
+		buildLeaves(world, x-size*3, y+size*5, z+size*2, leaves, size, blockEntity, true, false, false, false, false, true);
+		buildLeaves(world, x-size*3, y+size*5, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*5, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z-size*2, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z-size*3, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size*3, y+size*5, z-size*4, leaves, size, blockEntity, true, true, true, false, false, true);
 
-		buildLeaves(world, x-size*4, y+size*5, z+size, leaves, size, fullLeaves, air, true, true, false, true, false, true);
-		buildLeaves(world, x-size*4, y+size*5, z, leaves, size, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-size*4, y+size*5, z-size, leaves, size, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-size*4, y+size*5, z-size*2, leaves, size, fullLeaves, air, true, true, false, false, false, true);
-		buildLeaves(world, x-size*4, y+size*5, z-size*3, leaves, size, fullLeaves, air, true, true, true, false, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z+size, leaves, size, blockEntity, true, true, false, true, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z, leaves, size, blockEntity, true, true, false, false, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z-size, leaves, size, blockEntity, true, true, false, false, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z-size*2, leaves, size, blockEntity, true, true, false, false, false, true);
+		buildLeaves(world, x-size*4, y+size*5, z-size*3, leaves, size, blockEntity, true, true, true, false, false, true);
 		
 		/** third layer **/
-		buildLeaves(world, x+size*2, y+size*6, z, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+size*2, y+size*6, z-size, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size*2, y+size*6, z, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x+size*2, y+size*6, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
 
-		buildLeaves(world, x+size, y+size*6, z+size, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x+size, y+size*6, z, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*6, z-size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x+size, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x+size, y+size*6, z+size, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x+size, y+size*6, z, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*6, z-size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x+size, y+size*6, z-size*2, leaves, size, blockEntity, true, false, true, false, true, false);
 
-		buildLeaves(world, x, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x, y+size*6, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x, y+size*6, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*6, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x, y+size*6, z-size*3, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x, y+size*6, z+size*2, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x, y+size*6, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x, y+size*6, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*6, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x, y+size*6, z-size*2, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x, y+size*6, z-size*3, leaves, size, blockEntity, true, false, true, false, true, false);
 
-		buildLeaves(world, x-size, y+size*6, z+size*2, leaves, size, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-size, y+size*6, z+size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*6, z, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*6, z-size, leaves, size, fullLeaves, air, false, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size, y+size*6, z-size*3, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size, y+size*6, z+size*2, leaves, size, blockEntity, true, false, false, true, false, true);
+		buildLeaves(world, x-size, y+size*6, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*6, z, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*6, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*6, z-size*2, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size, y+size*6, z-size*3, leaves, size, blockEntity, true, false, true, false, false, true);
 
-		buildLeaves(world, x-size*2, y+size*6, z+size, leaves, size, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-size*2, y+size*6, z, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*6, z-size, leaves, size, fullLeaves, air, true, false, false, false, false, false);
-		buildLeaves(world, x-size*2, y+size*6, z-size*2, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*2, y+size*6, z+size, leaves, size, blockEntity, true, false, false, true, false, true);
+		buildLeaves(world, x-size*2, y+size*6, z, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*6, z-size, leaves, size, blockEntity, true, false, false, false, false, false);
+		buildLeaves(world, x-size*2, y+size*6, z-size*2, leaves, size, blockEntity, true, false, true, false, false, true);
 
-		buildLeaves(world, x-size*3, y+size*6, z, leaves, size, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-size*3, y+size*6, z-size, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size*3, y+size*6, z, leaves, size, blockEntity, true, false, false, true, false, true);
+		buildLeaves(world, x-size*3, y+size*6, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
 		
 		/** fourth layer **/
-		buildLeaves(world, x, y+size*7, z, leaves, size, fullLeaves, air, true, false, false, true, true, false);
-		buildLeaves(world, x, y+size*7, z-size, leaves, size, fullLeaves, air, true, false, true, false, true, false);
+		buildLeaves(world, x, y+size*7, z, leaves, size, blockEntity, true, false, false, true, true, false);
+		buildLeaves(world, x, y+size*7, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
 
-		buildLeaves(world, x-size, y+size*7, z, leaves, size, fullLeaves, air, true, false, false, true, false, true);
-		buildLeaves(world, x-size, y+size*7, z-size, leaves, size, fullLeaves, air, true, false, true, false, false, true);
+		buildLeaves(world, x-size, y+size*7, z, leaves, size, blockEntity, true, false, false, true, false, true);
+		buildLeaves(world, x-size, y+size*7, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
 	}
 
-	private void buildLog(Level world, int x, int y, int z, Block block, int size, boolean fullLog, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		buildBlock(world,x,y,z,block,size,fullLog,air,up,down,north,south,east,west);
+	private void buildLog(Level world, int x, int y, int z, Block block, int size, TreeBlockEntity blockEntity, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
+		buildBlock(world,x,y,z,block,size,blockEntity.fullLog,blockEntity.air,up,down,north,south,east,west);
 	}
 
-	private void buildLeaves(Level world, int x, int y, int z, Block block, int size, boolean fullLeaves, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		buildBlock(world,x,y,z,block,size,fullLeaves,air,up,down,north,south,east,west);
+	private void buildLeaves(Level world, int x, int y, int z, Block block, int size, TreeBlockEntity blockEntity, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
+		buildBlock(world,x,y,z,block,size,blockEntity.fullLeaves,blockEntity.air,up,down,north,south,east,west);
 	}
 
 	private void buildBlock(Level world, int x, int y, int z, Block block, int size, boolean full, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {

@@ -31,7 +31,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
 public abstract class InstantLiquidBlock extends InstantBlock {
-	public ArrayList<Helper.Coords> coordsList;
+	public ArrayList<BlockPos> posList;
 	public Block blockCheck;
 	public final Block blockReplace;
 	public String create;
@@ -43,7 +43,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 
     public InstantLiquidBlock(Properties properties, Block blockCheck, Block blockReplace) {
         super(properties);
-		this.coordsList = new ArrayList<>();
+		this.posList = new ArrayList<>();
 		this.blockCheck = blockCheck;
 		this.blockReplace = blockReplace;
     }
@@ -101,13 +101,13 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 			return false;
 		}
 		checkForBlock(world,pos);
-		if(isSuction && coordsList.isEmpty()) {
+		if(isSuction && posList.isEmpty()) {
 			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID);
 			return false;
 		}
-		if(coordsList.size() >= getMax()) {
+		if(posList.size() >= getMax()) {
 			Helper.sendMessage(player, errorMessage, ChatFormatting.RED + String.valueOf(isSuction ? Common.CONFIG.MAX_FILL() : Common.CONFIG.MAX_LIQUID()));
-			coordsList = new ArrayList<>();
+			posList = new ArrayList<>();
 			return false;
 		} else {
 			return true;
@@ -115,16 +115,16 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		for(Helper.Coords coords : coordsList) {
-			Builder.Single.setup(world,coords.getX(),coords.getY(),coords.getZ()).setBlock(blockReplace).build();
+		for(BlockPos pos : posList) {
+			Builder.Single.setup(world,pos).setBlock(blockReplace).build();
 		}
 		Builder.Single.setup(world,x,y,z).setBlock(getMainReplaceBlock()).build();
-		if(coordsList.size() > 0) {
-			setCreateMessage(create, String.valueOf(isSuction ? coordsList.size() : coordsList.size()+1));
+		if(posList.size() > 0) {
+			setCreateMessage(create, String.valueOf(isSuction ? posList.size() : posList.size()+1));
 		} else {
 			setCreateMessage(create1);
 		}
-		coordsList = new ArrayList<>();
+		posList = new ArrayList<>();
 		if(isSuction) {
 			this.blockCheck = null;
 		}
@@ -146,7 +146,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 
 	private void check(Level world, BlockPos pos) {
 		Block blockCurrent = Helper.getBlock(world,pos);
-		if(isCorrectBlock(blockCurrent) && coordsList.size() < getMax() && addCoords(pos)) {
+		if(isCorrectBlock(blockCurrent) && posList.size() < getMax() && addPos(pos)) {
 			if(blockCheck == null) {
 				blockCheck = blockCurrent;
 			}
@@ -163,10 +163,9 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		return block == blockCheck;
 	}
 
-	private boolean addCoords(BlockPos pos) {
-		Helper.Coords coords = new Helper.Coords(pos.getX(),pos.getY(),pos.getZ());
-		if(!coordsList.contains(coords)) {
-			coordsList.add(coords);
+	private boolean addPos(BlockPos pos) {
+		if(!posList.contains(pos)) {
+			posList.add(pos);
 			return true;
 		}
 		return false;

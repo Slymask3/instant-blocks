@@ -59,7 +59,7 @@ public class InstantBlocks {
 	}
 
 	public static class ForgeRegistryHelper<T> implements IRegistryHelper<T> {
-		IForgeRegistry<T> registry;
+		final IForgeRegistry<T> registry;
 		public ForgeRegistryHelper(IForgeRegistry<T> registry) {
 			this.registry = registry;
 		}

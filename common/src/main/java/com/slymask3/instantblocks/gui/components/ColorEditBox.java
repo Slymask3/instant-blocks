@@ -14,14 +14,12 @@ import java.awt.*;
 
 public class ColorEditBox extends EditBox {
     private final int index;
-    private final SkydiveBlockEntity tileEntity;
     private final Font font;
 
     public ColorEditBox(Font font, int x, int y, int width, int length, int index, SkydiveBlockEntity tileEntity) {
         super(font, x, y, width, length, Component.translatable("ib.gui.skydive.color",(index+1)));
         this.font = font;
         this.index = index;
-        this.tileEntity = tileEntity;
         this.setValue(tileEntity.color[index]);
     }
 

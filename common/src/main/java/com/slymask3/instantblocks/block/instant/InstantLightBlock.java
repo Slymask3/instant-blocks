@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class InstantLightBlock extends InstantBlock {
-    public final ArrayList<Helper.Coords> coordsList;
+    public final ArrayList<BlockPos> posList;
 
     public InstantLightBlock() {
         super(Properties.of(Material.DECORATION)
@@ -34,7 +34,7 @@ public class InstantLightBlock extends InstantBlock {
                 .instabreak()
                 .lightLevel((par1) -> 14)
         );
-        this.coordsList = new ArrayList<>();
+        this.posList = new ArrayList<>();
     }
 
     public boolean isEnabled() {
@@ -55,13 +55,13 @@ public class InstantLightBlock extends InstantBlock {
     
     public boolean build(Level world, int x, int y, int z, Player player) {
         checkForDarkness(world,x,y,z);
-        if(coordsList.isEmpty()) {
+        if(posList.isEmpty()) {
             Helper.sendMessage(player,Strings.ERROR_LIGHT, ChatFormatting.RED + String.valueOf(Common.CONFIG.RADIUS_LIGHT()));
             return false;
         }
         Builder.Single.setup(world,x,y,z).setBlock(Blocks.TORCH).build();
-        setCreateMessage(Strings.CREATE_LIGHT_AMOUNT, String.valueOf(coordsList.size()));
-        coordsList.clear();
+        setCreateMessage(Strings.CREATE_LIGHT_AMOUNT, String.valueOf(posList.size()));
+        posList.clear();
         return true;
 	}
 
@@ -74,7 +74,7 @@ public class InstantLightBlock extends InstantBlock {
                 for(int z=z_center-radius; z<z_center+radius*2; z+=(random.nextInt(3)+2)) {
                     BlockPos pos = new BlockPos(x,y,z);
                     if(world.getBlockState(pos).getBlock() == Blocks.AIR && world.getRawBrightness(pos,0) < 8 && canPlaceTorch(world,pos)) {
-                        addCoords(x,y,z);
+                        addPos(pos);
                         placeTorch(world, pos);
                         //todo update brightness
                     }
@@ -110,10 +110,9 @@ public class InstantLightBlock extends InstantBlock {
         //world.sendBlockUpdated(pos,world.getBlockState(pos),world.getBlockState(pos),0);
     }
 
-    private boolean addCoords(int x, int y, int z) {
-        Helper.Coords coords = new Helper.Coords(x,y,z);
-        if(!coordsList.contains(coords)) {
-            coordsList.add(coords);
+    private boolean addPos(BlockPos pos) {
+        if(!posList.contains(pos)) {
+            posList.add(pos);
             return true;
         }
         return false;

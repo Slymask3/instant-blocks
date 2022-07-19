@@ -15,7 +15,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class TreeScreen extends InstantScreen {
-	private TreeList treeList;
     private int selected = -1;
     private final int[] trees = {0, 1, 2, 3, 4, 5, 6};
 
@@ -35,15 +34,15 @@ public class TreeScreen extends InstantScreen {
 		this.fullLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, Component.translatable("ib.gui.tree.leaves"), blockEntity.fullLeaves);
 		this.air = new Checkbox(this.width / 2 + 4, 94, 150, 20, Component.translatable("ib.gui.tree.air"), blockEntity.air);
 
-		this.treeList = new TreeList(this.width / 2 - 4 - 150,50,144,120);
-		this.addWidget(this.treeList);
+		TreeList treeList = new TreeList(this.width / 2 - 4 - 150,50,144,120);
+		this.addWidget(treeList);
 
 		this.done.active = false;
 
 		this.addRenderableWidget(this.fullLog);
 		this.addRenderableWidget(this.fullLeaves);
 		this.addRenderableWidget(this.air);
-		this.addRenderableWidget(this.treeList);
+		this.addRenderableWidget(treeList);
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
