@@ -17,5 +17,6 @@
         "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "tintindex": 0 }
       }
     }
-  ]
+  ],
+  "render_type": "translucent"
 }

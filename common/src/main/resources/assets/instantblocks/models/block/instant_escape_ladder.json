@@ -13,5 +13,6 @@
         "south": { "uv": [ 16, 0, 0, 16 ], "texture": "#texture" }
       }
     }
-  ]
+  ],
+  "render_type": "translucent"
 }

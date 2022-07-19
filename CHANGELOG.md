@@ -6,6 +6,7 @@
 
 ### Changed
 - Replaced skydive TP block with an RGB colored texture
+- Updated for Forge 41.0.64+
 
 ### Fixed
 - Third person models for instant wands

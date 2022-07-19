@@ -2,5 +2,6 @@
   "parent": "minecraft:block/rail_flat",
   "textures": {
     "rail": "instantblocks:blocks/rail"
-  }
+  },
+  "render_type": "translucent"
 }

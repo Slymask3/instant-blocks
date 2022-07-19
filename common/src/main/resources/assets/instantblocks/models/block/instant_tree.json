@@ -2,5 +2,6 @@
   "parent": "minecraft:block/cross",
   "textures": {
     "cross": "instantblocks:blocks/tree"
-  }
+  },
+  "render_type": "cutout"
 }
