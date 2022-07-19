@@ -52,4 +52,16 @@ public class StatueBlockEntity extends InstantBlockEntity {
 		nbt.putBoolean("LegRight", legRight);
 		nbt.putBoolean("RGB", rgb);
 	}
+
+	public void update(String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
+		this.username = username;
+		this.head = head;
+		this.body = body;
+		this.armLeft = armLeft;
+		this.armRight = armRight;
+		this.legLeft = legLeft;
+		this.legRight = legRight;
+		this.rgb = rgb;
+		this.markUpdated();
+	}
 }

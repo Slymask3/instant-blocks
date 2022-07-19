@@ -39,7 +39,6 @@ public class InstantGlassDomeBlock extends InstantBlock {
 	}
 
 	@Override
-	//@OnlyIn(Dist.CLIENT)
 	public boolean skipRendering(@Nonnull BlockState state, BlockState adjacentBlockState, @Nonnull Direction side) {
 		return adjacentBlockState.is(this) || super.skipRendering(state, adjacentBlockState, side);
 	}
@@ -51,7 +50,6 @@ public class InstantGlassDomeBlock extends InstantBlock {
 	}
 
 	@Override
-	//@OnlyIn(Dist.CLIENT)
 	public float getShadeBrightness(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos) {
 		return 1.0F;
 	}

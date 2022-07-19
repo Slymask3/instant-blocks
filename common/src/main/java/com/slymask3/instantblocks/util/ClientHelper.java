@@ -19,10 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.awt.*;
-import java.io.File;
-
-//@OnlyIn(Dist.CLIENT)
 public class ClientHelper {
     public enum Screen { STATUE, HARVEST, SKYDIVE, SCHEMATIC, TREE }
     public enum Particles { NONE, GENERATE, NO_LIQUID }
@@ -69,29 +65,12 @@ public class ClientHelper {
     public static void showScreen(Screen screen, Player player, Level world, BlockPos pos) {
         if(Helper.isClient(world)) {
             switch(screen) {
-                case SKYDIVE -> Minecraft.getInstance().setScreen(new SkydiveScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
-                case STATUE -> Minecraft.getInstance().setScreen(new StatueScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
-                case HARVEST -> Minecraft.getInstance().setScreen(new HarvestScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
-                case TREE -> Minecraft.getInstance().setScreen(new TreeScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
-                case SCHEMATIC -> Minecraft.getInstance().setScreen(new SchematicScreen(player,world,pos.getX(),pos.getY(),pos.getZ()));
+                case SKYDIVE -> Minecraft.getInstance().setScreen(new SkydiveScreen(player,world,pos));
+                case STATUE -> Minecraft.getInstance().setScreen(new StatueScreen(player,world,pos));
+                case HARVEST -> Minecraft.getInstance().setScreen(new HarvestScreen(player,world,pos));
+                case TREE -> Minecraft.getInstance().setScreen(new TreeScreen(player,world,pos));
+                case SCHEMATIC -> Minecraft.getInstance().setScreen(new SchematicScreen(player,world,pos));
             }
-        }
-    }
-
-    public static void openDirectory(String path) {
-        try {
-            if(Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().open(new File(path));
-            } else {
-                Runtime runtime = Runtime.getRuntime();
-                if(System.getenv("OS") != null && System.getenv("OS").contains("Windows")) {
-                    runtime.exec("rundll32 url.dll,FileProtocolHandler " + path);
-                } else {
-                    runtime.exec("xdg-open " + path);
-                }
-            }
-        } catch(Exception e) {
-            Common.LOG.error("Failed to open directory: " + e.getMessage());
         }
     }
 

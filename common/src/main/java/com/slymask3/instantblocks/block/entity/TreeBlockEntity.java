@@ -34,4 +34,12 @@ public class TreeBlockEntity extends InstantBlockEntity {
 		nbt.putBoolean("FullLeaves", fullLeaves);
 		nbt.putBoolean("Air", air);
 	}
+
+	public void update(int type, boolean fullLog, boolean fullLeaves, boolean air) {
+		this.type = type;
+		this.fullLog = fullLog;
+		this.fullLeaves = fullLeaves;
+		this.air = air;
+		this.markUpdated();
+	}
 }

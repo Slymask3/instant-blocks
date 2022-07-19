@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks;
 
 import com.slymask3.instantblocks.core.ModBlocks;
+import com.slymask3.instantblocks.network.FabricPacketHandler;
 import com.slymask3.instantblocks.util.ClientHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
@@ -18,5 +19,7 @@ public class InstantBlocksClient implements ClientModInitializer {
 
         BlockRenderLayerMapImpl.INSTANCE.putBlocks(RenderType.translucent(), ModBlocks.INSTANT_GLASS_DOME, ModBlocks.INSTANT_ESCAPE_LADDER, ModBlocks.INSTANT_RAIL, ModBlocks.INSTANT_WATER, ModBlocks.INSTANT_GRINDER);
         BlockRenderLayerMapImpl.INSTANCE.putBlocks(RenderType.cutout(), ModBlocks.INSTANT_TREE, ModBlocks.INSTANT_LIGHT);
+
+        FabricPacketHandler.Client.init();
     }
 }

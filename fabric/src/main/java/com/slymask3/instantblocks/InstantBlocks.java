@@ -38,7 +38,7 @@ public class InstantBlocks implements ModInitializer {
         Registration.registerTiles(new FabricRegistryHelper<>(Registry.BLOCK_ENTITY_TYPE));
 
         LootHandler.register();
-        FabricPacketHandler.init();
+        FabricPacketHandler.Common.init();
         SchematicHelper.createSchematicsDir();
     }
 

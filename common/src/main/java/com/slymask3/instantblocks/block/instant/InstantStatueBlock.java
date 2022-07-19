@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import org.jetbrains.annotations.Nullable;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -44,7 +43,6 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 		return Common.CONFIG.ENABLE_STATUE();
 	}
 
-	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new StatueBlockEntity(pos,state);
@@ -86,29 +84,30 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 		return null;
 	}
 
-	public boolean build(Level world, int x, int y, int z, Player player, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
+	public boolean build(Level world, int x, int y, int z, Player player) {
+		StatueBlockEntity blockEntity = (StatueBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 
-		Skin skin = getSkin(username);
+		Skin skin = getSkin(blockEntity.username);
 		if(skin != null) {
 			BufferedImage img = skin.getImage();
 
 			Builder.Single.setup(world,x,y,z).setBlock(Blocks.AIR).build();
 
-			buildHead(world, x, y, z, img, direction, head, rgb);
-			buildBody(world, x, y, z, img, direction, body, rgb);
-			buildLegs(world, x, y, z, img, direction, legLeft, legRight, rgb);
+			buildHead(world, x, y, z, img, direction, blockEntity.head, blockEntity.rgb);
+			buildBody(world, x, y, z, img, direction, blockEntity.body, blockEntity.rgb);
+			buildLegs(world, x, y, z, img, direction, blockEntity.legLeft, blockEntity.legRight, blockEntity.rgb);
 
 			if(skin.isSlim()) {
-				buildArmsSlim(world, x, y, z, img, direction, armLeft, armRight, rgb);
+				buildArmsSlim(world, x, y, z, img, direction, blockEntity.armLeft, blockEntity.armRight, blockEntity.rgb);
 			} else {
-				buildArms(world, x, y, z, img, direction, armLeft, armRight, rgb);
+				buildArms(world, x, y, z, img, direction, blockEntity.armLeft, blockEntity.armRight, blockEntity.rgb);
 			}
 
-			setCreateMessage(Strings.CREATE_STATUE, username);
+			setCreateMessage(Strings.CREATE_STATUE, blockEntity.username);
 			return true;
 		} else {
-			Helper.sendMessage(player, Strings.ERROR_STATUE, ChatFormatting.RED + username);
+			Helper.sendMessage(player, Strings.ERROR_STATUE, ChatFormatting.RED + blockEntity.username);
 		}
 		return false;
 	}

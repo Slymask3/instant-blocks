@@ -15,75 +15,32 @@ public class StatueScreen extends InstantScreen {
 	private EditBox input;
 	private Checkbox head, body, armLeft, armRight, legLeft, legRight;
 	private Checkbox rgbMode;
-	private final StatueBlockEntity tileEntity;
 
-	public StatueScreen(Player player, Level world, int x, int y, int z) {
-		super(player, world, x, y, z, "ib.gui.statue.title");
-		this.tileEntity = (StatueBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
+	public StatueScreen(Player player, Level world, BlockPos pos) {
+		super(player, world, pos, "ib.gui.statue.title");
 	}
 
 	@Override
 	public void init() {
 		super.init();
 
+		StatueBlockEntity blockEntity = (StatueBlockEntity)world.getBlockEntity(pos);
+
 		int x_left = this.width / 2 - 4 - 150;
 		int x_right = this.width / 2 + 4;
 		int y = this.height / 4 + 32;
 		int slot = 22;
 
-		this.head = new Checkbox(x_left, y, 150, 20, Component.translatable("ib.gui.statue.head"), tileEntity.head) {
-			public void onPress() {
-				super.onPress();
-				tileEntity.head = this.selected();
-			}
-		};
-		this.body = new Checkbox(x_right, y, 150, 20, Component.translatable("ib.gui.statue.body"), tileEntity.body) {
-			public void onPress() {
-				super.onPress();
-				tileEntity.body = this.selected();
-			}
-		};
-		this.armLeft = new Checkbox(x_left, y+(slot), 150, 20, Component.translatable("ib.gui.statue.arm.left"), tileEntity.armLeft) {
-			public void onPress() {
-				super.onPress();
-				tileEntity.armLeft = this.selected();
-			}
-		};
-		this.armRight = new Checkbox(x_right, y+(slot), 150, 20, Component.translatable("ib.gui.statue.arm.right"), tileEntity.armRight) {
-			public void onPress() {
-				super.onPress();
-				tileEntity.armRight = this.selected();
-			}
-		};
-		this.legLeft = new Checkbox(x_left, y+(slot*2), 150, 20, Component.translatable("ib.gui.statue.leg.left"), tileEntity.legLeft) {
-			public void onPress() {
-				super.onPress();
-				tileEntity.legLeft = this.selected();
-			}
-		};
-		this.legRight = new Checkbox(x_right, y+(slot*2), 150, 20, Component.translatable("ib.gui.statue.leg.right"), tileEntity.legRight) {
-			public void onPress() {
-				super.onPress();
-				tileEntity.legRight = this.selected();
-			}
-		};
-		this.rgbMode = new Checkbox(x_left, y+(slot*3), 150, 20, Component.translatable("ib.gui.statue.rgb"), tileEntity.rgb) {
-			public void onPress() {
-				super.onPress();
-				tileEntity.rgb = this.selected();
-			}
-		};
+		this.head = new Checkbox(x_left, y, 150, 20, Component.translatable("ib.gui.statue.head"), blockEntity.head);
+		this.body = new Checkbox(x_right, y, 150, 20, Component.translatable("ib.gui.statue.body"), blockEntity.body);
+		this.armLeft = new Checkbox(x_left, y+(slot), 150, 20, Component.translatable("ib.gui.statue.arm.left"), blockEntity.armLeft);
+		this.armRight = new Checkbox(x_right, y+(slot), 150, 20, Component.translatable("ib.gui.statue.arm.right"), blockEntity.armRight);
+		this.legLeft = new Checkbox(x_left, y+(slot*2), 150, 20, Component.translatable("ib.gui.statue.leg.left"), blockEntity.legLeft);
+		this.legRight = new Checkbox(x_right, y+(slot*2), 150, 20, Component.translatable("ib.gui.statue.leg.right"), blockEntity.legRight);
+		this.rgbMode = new Checkbox(x_left, y+(slot*3), 150, 20, Component.translatable("ib.gui.statue.rgb"), blockEntity.rgb);
 
-		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 300+8, 20, Component.literal("Input")) {
-			public void insertText(String textToWrite) {
-				super.insertText(textToWrite);
-				tileEntity.username = this.getValue();
-			}
-			public void deleteChars(int pNum) {
-				super.deleteChars(pNum);
-				tileEntity.username = this.getValue();
-			}
-		};
+		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 300+8, 20, Component.literal("Input"));
+		this.input.setValue(blockEntity.username);
 
 		this.addRenderableWidget(this.head);
 		this.addRenderableWidget(this.body);
@@ -102,8 +59,8 @@ public class StatueScreen extends InstantScreen {
 		this.font.draw(poseStack, Component.translatable("ib.gui.statue.select"), this.width / 2 - 3 - 150, this.height / 4 + 8 + 12, 10526880);
 		this.font.draw(poseStack, Component.translatable("ib.gui.statue.rgb.text"), this.width / 2 - 3 - 150, this.height / 4 + 32 + 88, 10526880);
 	}
-	
-	public void sendInfo() {
-		Common.NETWORK.sendToServer(new StatuePacket(this.x, this.y, this.z, input.getValue(), head.selected(), body.selected(), armLeft.selected(), armRight.selected(), legLeft.selected(), legRight.selected(), rgbMode.selected()));
+
+	public void sendInfo(boolean activate) {
+		Common.NETWORK.sendToServer(new StatuePacket(activate, this.pos, input.getValue(), head.selected(), body.selected(), armLeft.selected(), armRight.selected(), legLeft.selected(), legRight.selected(), rgbMode.selected()));
 	}
 }

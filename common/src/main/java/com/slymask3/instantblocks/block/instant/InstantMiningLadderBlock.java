@@ -29,8 +29,8 @@ public class InstantMiningLadderBlock extends InstantBlock {
 		return Common.CONFIG.ENABLE_MINING_LADDER();
 	}
 
-	public boolean canActivate(Level world, int x, int y, int z, Player player) {
-		if(y <= Common.CONFIG.MINING_LADDER_LAYER() + 4) {
+	public boolean canActivate(Level world, BlockPos pos, Player player) {
+		if(pos.getY() <= Common.CONFIG.MINING_LADDER_LAYER() + 4) {
 			Helper.sendMessage(player, Strings.ERROR_LADDER, ChatFormatting.RED + String.valueOf(Common.CONFIG.MINING_LADDER_LAYER() + 4));
 			return false;
 		}

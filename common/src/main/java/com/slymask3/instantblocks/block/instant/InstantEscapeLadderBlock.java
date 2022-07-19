@@ -24,8 +24,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import javax.annotation.Nullable;
-
 public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWaterloggedBlock {
     public InstantEscapeLadderBlock() {
 		super(Properties.of(Material.DECORATION)
@@ -44,8 +42,8 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 		return Common.CONFIG.ENABLE_ESCAPE_LADDER();
 	}
 
-	public boolean canActivate(Level world, int x, int y, int z, Player player) {
-		if(world.canSeeSky(new BlockPos(x, y+1, z))) {
+	public boolean canActivate(Level world, BlockPos pos, Player player) {
+		if(world.canSeeSky(pos.above(1))) {
 			Helper.sendMessage(player, Strings.ERROR_ESCAPE_LADDER);
 			return false;
 		}
@@ -137,7 +135,6 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 		}
 	}
 
-	@Nullable
 	public BlockState getStateForPlacement(BlockPlaceContext p_54347_) {
 		if (!p_54347_.replacingClickedOnBlock()) {
 			BlockState blockstate = p_54347_.getLevel().getBlockState(p_54347_.getClickedPos().relative(p_54347_.getClickedFace().getOpposite()));

@@ -1,12 +1,10 @@
 package com.slymask3.instantblocks.network.packet;
 
 import com.slymask3.instantblocks.network.PacketHelper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 
-public class HarvestPacket extends AbstractPacket {
-	public final int _x;
-	public final int _y;
-	public final int _z;
+public class HarvestPacket extends InstantPacket {
 	public final boolean _logOak;
 	public final boolean _logSpruce;
 	public final boolean _logBirch;
@@ -25,11 +23,8 @@ public class HarvestPacket extends AbstractPacket {
 	public final boolean _netherwart;
 	public final boolean _replant;
 
-	public HarvestPacket(int x, int y, int z, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
-		super(PacketHelper.PacketID.HARVEST);
-		_x = x;
-		_y = y;
-		_z = z;
+	public HarvestPacket(boolean activate, BlockPos pos, boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
+		super(PacketHelper.PacketID.HARVEST,activate,pos);
 		_logOak = logOak;
 		_logSpruce = logSpruce;
 		_logBirch = logBirch;
@@ -50,10 +45,8 @@ public class HarvestPacket extends AbstractPacket {
 	}
 
 	public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT packet, FriendlyByteBuf buffer) {
+		buffer = super.write(packet,buffer);
 		HarvestPacket message = (HarvestPacket)packet;
-		buffer.writeInt(message._x);
-		buffer.writeInt(message._y);
-		buffer.writeInt(message._z);
 		buffer.writeBoolean(message._logOak);
 		buffer.writeBoolean(message._logSpruce);
 		buffer.writeBoolean(message._logBirch);
@@ -75,9 +68,8 @@ public class HarvestPacket extends AbstractPacket {
 	}
 
 	public static HarvestPacket decode(FriendlyByteBuf buffer) {
-		int x = buffer.readInt();
-		int y = buffer.readInt();
-		int z = buffer.readInt();
+		boolean activate = buffer.readBoolean();
+		BlockPos pos = buffer.readBlockPos();
 		boolean logOak = buffer.readBoolean();
 		boolean logSpruce = buffer.readBoolean();
 		boolean logBirch = buffer.readBoolean();
@@ -95,6 +87,6 @@ public class HarvestPacket extends AbstractPacket {
 		boolean mushroom = buffer.readBoolean();
 		boolean netherwart = buffer.readBoolean();
 		boolean replant = buffer.readBoolean();
-		return new HarvestPacket(x,y,z,logOak,logSpruce,logBirch,logJungle,logAcacia,logDark,wheat,carrot,potato,cactus,pumpkin,melon,sugarcane,cocoa,mushroom,netherwart,replant);
+		return new HarvestPacket(activate,pos,logOak,logSpruce,logBirch,logJungle,logAcacia,logDark,wheat,carrot,potato,cactus,pumpkin,melon,sugarcane,cocoa,mushroom,netherwart,replant);
 	}
 }

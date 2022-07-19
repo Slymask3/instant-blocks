@@ -1,30 +1,27 @@
 package com.slymask3.instantblocks.gui.screens;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
+import com.slymask3.instantblocks.gui.components.SelectionList;
 import com.slymask3.instantblocks.network.packet.SchematicPacket;
-import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.SchematicHelper;
+import net.minecraft.Util;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ObjectSelectionList;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class SchematicScreen extends InstantScreen {
-	private final SchematicBlockEntity tileEntity;
-
 	private SchematicList schematicList;
     private int selected = -1;
     private final ArrayList<String> schematics;
@@ -33,9 +30,8 @@ public class SchematicScreen extends InstantScreen {
 	private Checkbox center, ignoreAir;
 	private Button open;
 
-	public SchematicScreen(Player player, Level world, int x, int y, int z) {
-		super(player, world, x, y, z, "ib.gui.schematic.title");
-		this.tileEntity = (SchematicBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
+	public SchematicScreen(Player player, Level world, BlockPos pos) {
+		super(player, world, pos, "ib.gui.schematic.title");
 		this.schematics = SchematicHelper.SCHEMATICS_LIST;
 	}
 
@@ -43,8 +39,10 @@ public class SchematicScreen extends InstantScreen {
 	public void init() {
 		super.init();
 
+		SchematicBlockEntity blockEntity = (SchematicBlockEntity)world.getBlockEntity(pos);
+
 		this.open = new Button(this.width / 2 + 134, 50, 20, 20, Component.literal(">"), (p_88642_) -> {
-			ClientHelper.openDirectory(SchematicHelper.SCHEMATICS_DIR);
+			Util.getPlatform().openFile(new File(SchematicHelper.SCHEMATICS_DIR));
 		}, new Button.OnTooltip() {
 			public void onTooltip(Button button, PoseStack poseStack, int x, int y) {
 				SchematicScreen.this.renderTooltip(poseStack, Arrays.asList(Component.translatable("ib.gui.schematic.open").getVisualOrderText()), x, y);
@@ -54,19 +52,8 @@ public class SchematicScreen extends InstantScreen {
 			}
 		});
 
-		this.center = new Checkbox(this.width / 2 - 4 - 150, 75, 150, 20, Component.translatable("ib.gui.schematic.center"), tileEntity.center) {
-			public void onPress() {
-				super.onPress();
-				tileEntity.center = this.selected();
-			}
-		};
-
-		this.ignoreAir = new Checkbox(this.width / 2 + 4, 75, 150, 20, Component.translatable("ib.gui.schematic.ignore"), tileEntity.ignoreAir) {
-			public void onPress() {
-				super.onPress();
-				tileEntity.ignoreAir = this.selected();
-			}
-		};
+		this.center = new Checkbox(this.width / 2 - 4 - 150, 75, 150, 20, Component.translatable("ib.gui.schematic.center"), blockEntity.center);
+		this.ignoreAir = new Checkbox(this.width / 2 + 4, 75, 150, 20, Component.translatable("ib.gui.schematic.ignore"), blockEntity.ignoreAir);
 
 		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 284, 20, Component.literal("Input")) {
 			public void insertText(String textToWrite) {
@@ -78,7 +65,7 @@ public class SchematicScreen extends InstantScreen {
 				SchematicScreen.this.checkForSchematic();
 			}
 		};
-		this.input.setValue(tileEntity.schematic);
+		this.input.setValue(blockEntity.schematic);
 
 		this.schematicList = new SchematicList(this.width / 2 - 4 - 150, 111, 302, this.height / 4);
 		this.addWidget(this.schematicList);
@@ -92,12 +79,15 @@ public class SchematicScreen extends InstantScreen {
 		this.addRenderableWidget(this.open);
 
 		this.setInitialFocus(this.input);
+
+		this.checkForSchematic();
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
 		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 10526880);
+		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 10526880);
 
-		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.file", input.getValue()), this.width / 2 - 2 - 150, this.height / 4 + 115, this.checkForSchematic() ? 0x00FF00 : 0xAA0000);
+		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.file", input.getValue()), this.width / 2 - 2 - 150, this.height / 4 + 115, this.done.active ? 0x00FF00 : 0xAA0000);
 
 		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.found", this.schematics.size()), this.width / 2 - 2 - 150, 100, 0xFFFFFF);
 
@@ -108,17 +98,26 @@ public class SchematicScreen extends InstantScreen {
 		}
 	}
 	
-	public void sendInfo() {
-		Common.NETWORK.sendToServer(new SchematicPacket(this.x, this.y, this.z, this.input.getValue(), !center.selected(), !ignoreAir.selected()));
+	public void sendInfo(boolean activate) {
+		Common.NETWORK.sendToServer(new SchematicPacket(activate, this.pos, this.input.getValue(), center.selected(), ignoreAir.selected()));
 	}
 
-	public boolean checkForSchematic() {
+	public void checkForSchematic() {
 		this.done.active = this.schematics.contains(input.getValue());
-		this.tileEntity.schematic = input.getValue();
-		return this.done.active;
+		if(this.done.active) {
+			for(int i = 0; i< this.schematics.size(); i++) {
+				if(this.schematics.get(i).equals(input.getValue()) && this.selected != i) {
+					this.selected = i;
+					break;
+				}
+			}
+		} else {
+			this.selected = -1;
+		}
+		this.schematicList.setSelectedSchematic(this.selected);
 	}
 
-    public void setSelected(int index) {
+    public void clickOnSchematic(int index) {
         this.selected = index;
         if(index>=0 && index<=schematics.size()) {
             this.input.setValue(schematics.get(selected));
@@ -130,67 +129,32 @@ public class SchematicScreen extends InstantScreen {
 		return this.selected;
 	}
 
-	//@OnlyIn(Dist.CLIENT)
-	class SchematicList extends ObjectSelectionList<SchematicList.Entry> {
+	class SchematicList extends SelectionList<SchematicList.Entry> {
 		public SchematicList(int x, int y, int width, int height) {
-			super(SchematicScreen.this.minecraft, width, height, y, y + height, 18);
-			this.setLeftPos(x);
-			this.setRenderHeader(false, 0);
-			this.setRenderTopAndBottom(false);
-			this.setRenderSelection(true);
-			//this.setRenderBackground(false);
+			super(SchematicScreen.this.minecraft, x, y, width, height, 18);
 			for(int i = 0; i< SchematicScreen.this.schematics.size(); i++) {
 				Entry entry = new Entry(i);
 				this.addEntry(entry);
 			}
-			if (this.getSelected() != null) {
+			if(this.getSelected() != null) {
 				this.centerScrollOn(this.getSelected());
 			}
-		}
-
-		protected int getScrollbarPosition() {
-			return this.x0 + this.width;
-		}
-
-		protected void renderList(PoseStack p_93452_, int p_93453_, int p_93454_, int p_93455_, int p_93456_, float p_93457_) {
-			super.renderList(p_93452_, p_93453_, p_93454_, p_93455_, p_93456_, p_93457_);
-
-			Tesselator tesselator = Tesselator.getInstance();
-			BufferBuilder bufferbuilder = tesselator.getBuilder();
-
-			RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
-			RenderSystem.enableDepthTest();
-			RenderSystem.depthFunc(515);
-			RenderSystem.disableDepthTest();
-			RenderSystem.enableBlend();
-			RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ZERO, GlStateManager.DestFactor.ONE);
-			RenderSystem.disableTexture();
-			RenderSystem.setShader(GameRenderer::getPositionColorShader);
-			bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-			bufferbuilder.vertex(this.x0, this.y0 + 4, 0.0D).color(0, 0, 0, 0).endVertex();
-			bufferbuilder.vertex(this.x1, this.y0 + 4, 0.0D).color(0, 0, 0, 0).endVertex();
-			bufferbuilder.vertex(this.x1, this.y0, 0.0D).color(0, 0, 0, 255).endVertex();
-			bufferbuilder.vertex(this.x0, this.y0, 0.0D).color(0, 0, 0, 255).endVertex();
-			bufferbuilder.vertex(this.x0, this.y1, 0.0D).color(0, 0, 0, 255).endVertex();
-			bufferbuilder.vertex(this.x1, this.y1, 0.0D).color(0, 0, 0, 255).endVertex();
-			bufferbuilder.vertex(this.x1, this.y1 - 4, 0.0D).color(0, 0, 0, 0).endVertex();
-			bufferbuilder.vertex(this.x0, this.y1 - 4, 0.0D).color(0, 0, 0, 0).endVertex();
-			tesselator.end();
-
-			bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-			bufferbuilder.vertex(this.x0, this.y0 - 10, 0.0D).color(255, 255, 255, 0).endVertex();
-			bufferbuilder.vertex(this.x1, this.y0 - 10, 0.0D).color(255, 255, 255, 0).endVertex();
-			bufferbuilder.vertex(this.x1, this.y0, 0.0D).color(255, 255, 255, 0).endVertex();
-			bufferbuilder.vertex(this.x0, this.y0, 0.0D).color(255, 255, 255, 0).endVertex();
-			tesselator.end();
 		}
 
 		protected boolean isFocused() {
 			return SchematicScreen.this.getFocused() == this;
 		}
 
-		//@OnlyIn(Dist.CLIENT)
-		public class Entry extends ObjectSelectionList.Entry<Entry> {
+		public void setSelectedSchematic(int index) {
+			if(index > 0 && index < SchematicScreen.this.schematics.size()) {
+				this.setSelected(this.getEntry(index));
+				this.centerScrollOn(this.getSelected());
+			} else {
+				this.setSelected(null);
+			}
+		}
+
+		class Entry extends ObjectSelectionList.Entry<Entry> {
 			final int index;
 
 			public Entry(int index) {
@@ -206,7 +170,7 @@ public class SchematicScreen extends InstantScreen {
 
 			public boolean mouseClicked(double p_96122_, double p_96123_, int p_96124_) {
 				if (p_96124_ == 0) {
-					SchematicScreen.this.setSelected(this.index);
+					SchematicScreen.this.clickOnSchematic(this.index);
 					return true;
 				} else {
 					return false;

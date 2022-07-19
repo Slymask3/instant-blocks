@@ -1,12 +1,10 @@
 package com.slymask3.instantblocks.network.packet;
 
 import com.slymask3.instantblocks.network.PacketHelper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 
-public class StatuePacket extends AbstractPacket {
-	public final int _x;
-	public final int _y;
-	public final int _z;
+public class StatuePacket extends InstantPacket {
 	public final String _username;
 	public final boolean _head;
 	public final boolean _body;
@@ -16,11 +14,8 @@ public class StatuePacket extends AbstractPacket {
 	public final boolean _legRight;
 	public final boolean _rgb;
 
-	public StatuePacket(int x, int y, int z, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
-		super(PacketHelper.PacketID.STATUE);
-		_x = x;
-		_y = y;
-		_z = z;
+	public StatuePacket(boolean activate, BlockPos pos, String username, boolean head, boolean body, boolean armLeft, boolean armRight, boolean legLeft, boolean legRight, boolean rgb) {
+		super(PacketHelper.PacketID.STATUE,activate,pos);
 		_username = username;
 		_head = head;
 		_body = body;
@@ -32,10 +27,8 @@ public class StatuePacket extends AbstractPacket {
 	}
 
 	public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT packet, FriendlyByteBuf buffer) {
+		buffer = super.write(packet,buffer);
 		StatuePacket message = (StatuePacket)packet;
-		buffer.writeInt(message._x);
-		buffer.writeInt(message._y);
-		buffer.writeInt(message._z);
 		buffer.writeUtf(message._username);
 		buffer.writeBoolean(message._head);
 		buffer.writeBoolean(message._body);
@@ -48,9 +41,8 @@ public class StatuePacket extends AbstractPacket {
 	}
 
 	public static StatuePacket decode(FriendlyByteBuf buffer) {
-		int x = buffer.readInt();
-		int y = buffer.readInt();
-		int z = buffer.readInt();
+		boolean activate = buffer.readBoolean();
+		BlockPos pos = buffer.readBlockPos();
 		String username = buffer.readUtf();
 		boolean head = buffer.readBoolean();
 		boolean body = buffer.readBoolean();
@@ -59,6 +51,6 @@ public class StatuePacket extends AbstractPacket {
 		boolean legLeft = buffer.readBoolean();
 		boolean legRight = buffer.readBoolean();
 		boolean rgb = buffer.readBoolean();
-		return new StatuePacket(x,y,z,username,head,body,armLeft,armRight,legLeft,legRight,rgb);
+		return new StatuePacket(activate,pos,username,head,body,armLeft,armRight,legLeft,legRight,rgb);
 	}
 }

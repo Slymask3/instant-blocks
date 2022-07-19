@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -38,21 +37,21 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 		return Common.CONFIG.ENABLE_SCHEMATIC();
 	}
 
-	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new SchematicBlockEntity(pos,state);
 	}
 
-	public boolean build(Level world, int x, int y, int z, Player player, String schematicName, boolean center, boolean ignoreAir) {
-		SchematicHelper.Schematic schematic = SchematicHelper.readSchematic(schematicName);
+	public boolean build(Level world, int x, int y, int z, Player player) {
+		SchematicBlockEntity blockEntity = (SchematicBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
+		SchematicHelper.Schematic schematic = SchematicHelper.readSchematic(blockEntity.schematic);
 		if(schematic != null) {
 			Builder.Single.setup(world,x,y,z).setBlock(Blocks.AIR).build();
-			buildSchematic(world, x, y, z, schematic, center, ignoreAir);
-			setCreateMessage(Strings.CREATE_SCHEMATIC, schematicName);
+			buildSchematic(world, x, y, z, schematic, blockEntity.center, blockEntity.ignoreAir);
+			setCreateMessage(Strings.CREATE_SCHEMATIC, blockEntity.schematic);
 			return true;
 		}
-		Helper.sendMessage(player, Strings.ERROR_SCHEMATIC, ChatFormatting.RED + schematicName);
+		Helper.sendMessage(player, Strings.ERROR_SCHEMATIC, ChatFormatting.RED + blockEntity.schematic);
 		return false;
 	}
 

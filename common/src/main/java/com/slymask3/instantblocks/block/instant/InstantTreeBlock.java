@@ -21,14 +21,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 
 public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 	public InstantTreeBlock() {
 		super(Properties.of(Material.PLANT)
-				.strength(0.1F)
 				.sound(SoundType.GRASS)
 				.noCollission()
 				.instabreak()
@@ -40,7 +38,6 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		return Common.CONFIG.ENABLE_TREE();
 	}
 
-	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new TreeBlockEntity(pos,state);
@@ -50,21 +47,22 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		return Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
 	}
 	
-	public boolean build(Level world, int x_center, int y, int z_center, Player player, int type, boolean fullLog, boolean fullLeaves, boolean air) {
+	public boolean build(Level world, int x_center, int y, int z_center, Player player) {
+		TreeBlockEntity blockEntity = (TreeBlockEntity)world.getBlockEntity(new BlockPos(x_center,y,z_center));
 		int size = Common.CONFIG.TREE_SIZE();
 		int half = (int)Math.floor(size / 2);
 		int x = x_center - half;
 		int z = z_center - half;
-		switch(type) {
-			case 0 -> buildOak(world, x, y, z, Blocks.OAK_LOG, Blocks.OAK_LEAVES, size, fullLog, fullLeaves, air);
-			case 1 -> buildSpruce(world, x, y, z, Blocks.SPRUCE_LOG, Blocks.SPRUCE_LEAVES, size, fullLog, fullLeaves, air);
-			case 2 -> buildBirch(world, x, y, z, Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES, size, fullLog, fullLeaves, air);
-			case 3 -> buildJungle(world, x, y, z, Blocks.JUNGLE_LOG, Blocks.JUNGLE_LEAVES, size, fullLog, fullLeaves, air);
-			case 4 -> buildAcacia(world, x, y, z, Blocks.ACACIA_LOG, Blocks.ACACIA_LEAVES, size, fullLog, fullLeaves, air);
-			case 5 -> buildDarkOak(world, x, y, z, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_LEAVES, size, fullLog, fullLeaves, air);
-			case 6 -> buildOak(world, x, y, z, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, size, fullLog, fullLeaves, air);
+		switch(blockEntity.type) {
+			case 0 -> buildOak(world, x, y, z, Blocks.OAK_LOG, Blocks.OAK_LEAVES, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
+			case 1 -> buildSpruce(world, x, y, z, Blocks.SPRUCE_LOG, Blocks.SPRUCE_LEAVES, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
+			case 2 -> buildBirch(world, x, y, z, Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
+			case 3 -> buildJungle(world, x, y, z, Blocks.JUNGLE_LOG, Blocks.JUNGLE_LEAVES, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
+			case 4 -> buildAcacia(world, x, y, z, Blocks.ACACIA_LOG, Blocks.ACACIA_LEAVES, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
+			case 5 -> buildDarkOak(world, x, y, z, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_LEAVES, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
+			case 6 -> buildOak(world, x, y, z, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, size, blockEntity.fullLog, blockEntity.fullLeaves, blockEntity.air);
 		}
-		setCreateMessage(Strings.CREATE_TREE, treeToString(type,player));
+		setCreateMessage(Strings.CREATE_TREE, treeToString(blockEntity.type,player));
 		return true;
 	}
 

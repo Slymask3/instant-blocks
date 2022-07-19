@@ -24,8 +24,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
-import javax.annotation.Nullable;
-
 public abstract class InstantBlock extends Block {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -72,7 +70,6 @@ public abstract class InstantBlock extends Block {
 		builder.add(FACING);
 	}
 
-	@Nullable
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.isDirectional ? this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()) : super.getStateForPlacement(context);
@@ -83,7 +80,7 @@ public abstract class InstantBlock extends Block {
 		return screen == null ? onActivate(world,pos,player,hand) : onActivateGui(world,pos,player,hand);
 	}
 
-	public boolean canActivate(Level world, int x, int y, int z, Player player) {
+	public boolean canActivate(Level world, BlockPos pos, Player player) {
 		return true;
 	}
 
@@ -99,7 +96,7 @@ public abstract class InstantBlock extends Block {
 		return false;
 	}
 
-	public InteractionResult onActivate(Level world, BlockPos pos, Player player, InteractionHand hand) {
+	private InteractionResult onActivate(Level world, BlockPos pos, Player player, InteractionHand hand) {
 		if(Helper.isServer(world)) {
 			if(hand == InteractionHand.OFF_HAND) {
 				return InteractionResult.FAIL;
@@ -109,31 +106,22 @@ public abstract class InstantBlock extends Block {
 				return InteractionResult.FAIL;
 			}
 
-			int x = pos.getX();
-			int y = pos.getY();
-			int z = pos.getZ();
-
 			ItemStack is = player.getItemInHand(hand);
 			if(Common.CONFIG.USE_WANDS() && !Helper.isWand(is)) {
 				Helper.sendMessage(player, Strings.ERROR_WAND);
 				return InteractionResult.FAIL;
 			}
 
-			if(!canActivate(world,x,y,z,player)) {
+			if(!canActivate(world,pos,player)) {
 				return InteractionResult.FAIL;
 			}
 
-			if(build(world, x, y, z, player)) {
-				afterBuild(world, x, y, z, player);
-				return InteractionResult.SUCCESS;
-			} else {
-				return InteractionResult.FAIL;
-			}
+			return activate(world,pos,player);
 		}
 		return InteractionResult.FAIL;
 	}
 
-	public InteractionResult onActivateGui(Level world, BlockPos pos, Player player, InteractionHand hand) {
+	private InteractionResult onActivateGui(Level world, BlockPos pos, Player player, InteractionHand hand) {
 		if(hand == InteractionHand.OFF_HAND) {
 			return InteractionResult.FAIL;
 		}
@@ -142,11 +130,7 @@ public abstract class InstantBlock extends Block {
 			return InteractionResult.FAIL;
 		}
 
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
-
-		if(!canActivate(world,x,y,z,player)) {
+		if(!canActivate(world,pos,player)) {
 			return InteractionResult.FAIL;
 		}
 
@@ -167,13 +151,22 @@ public abstract class InstantBlock extends Block {
 		return InteractionResult.SUCCESS;
 	}
 
+	public InteractionResult activate(Level world, BlockPos pos, Player player) {
+		if(build(world, pos.getX(), pos.getY(), pos.getZ(), player)) {
+			afterBuild(world, pos, player);
+			return InteractionResult.SUCCESS;
+		} else {
+			return InteractionResult.FAIL;
+		}
+	}
+
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		//build structure
 		return true;
 	}
 
-	public void afterBuild(Level world, int x, int y, int z, Player player) {
-		Helper.sendMessage(player,this.createMessage,this.createVariable,new BlockPos(x,y,z));
+	private void afterBuild(Level world, BlockPos pos, Player player) {
+		Helper.sendMessage(player,this.createMessage,this.createVariable,pos);
 		Helper.giveExp(world, player, Common.CONFIG.XP_AMOUNT());
 		if(Common.CONFIG.USE_WANDS()) {
 			ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);

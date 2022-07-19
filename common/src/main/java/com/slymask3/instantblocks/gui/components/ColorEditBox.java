@@ -29,26 +29,12 @@ public class ColorEditBox extends EditBox {
         return ColorHelper.textToColor(getValue());
     }
 
-    @Override
-    public void insertText(String textToWrite) {
-        super.insertText(textToWrite);
-        this.updateColor();
-    }
-
-    @Override
-    public void deleteChars(int pNum) {
-        super.deleteChars(pNum);
-        this.updateColor();
-    }
-
     public void renderLabel(PoseStack poseStack) {
-        this.font.drawShadow(poseStack, Component.translatable("ib.gui.skydive.color",(index+1)), this.x - 50, this.y + 3, tileEntity.colorCode[index]);
+        this.font.drawShadow(poseStack, Component.translatable("ib.gui.skydive.color",(index+1)), this.x - 50, this.y + 3, ColorHelper.textToColor(this.getValue()).getRGB());
     }
 
     public void setRandomHex() {
         setValue(createRandomHex());
-        tileEntity.setColorCode(index, getValue());
-        tileEntity.setColor(index, getValue());
     }
 
     private String createRandomHex() {
@@ -56,15 +42,9 @@ public class ColorEditBox extends EditBox {
         return String.format("%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
     }
 
-    private void updateColor() {
-        tileEntity.setColorCode(index, getValue());
-        tileEntity.setColor(index, getValue());
-    }
-
     public Button getClearButton() {
         return new ClearButton(this.x + this.width + 5, this.y + 1, (onPress) -> {
             this.setValue("");
-            this.updateColor();
         });
     }
 

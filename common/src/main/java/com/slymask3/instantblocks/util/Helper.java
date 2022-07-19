@@ -139,7 +139,11 @@ public class Helper {
 	}
 
 	public static Block getBlock(Level world, int x, int y, int z) {
-		return Builder.Single.setup(world,x,y,z).getBlock();
+		return getBlock(world,new BlockPos(x,y,z));
+	}
+
+	public static Block getBlock(Level world, BlockPos pos) {
+		return Builder.Single.setup(world,pos).getBlock();
 	}
 
 	public static Block getRandomBlock(List<WeightedBlock> blocks) {

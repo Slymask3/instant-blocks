@@ -32,4 +32,11 @@ public class SchematicBlockEntity extends InstantBlockEntity {
 		nbt.putBoolean("Center", this.center);
 		nbt.putBoolean("IgnoreAir", this.ignoreAir);
 	}
+
+	public void update(String schematic, boolean center, boolean ignoreAir) {
+		this.schematic = schematic;
+		this.center = center;
+		this.ignoreAir = ignoreAir;
+		this.markUpdated();
+	}
 }

@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
@@ -38,13 +37,16 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 		return Common.CONFIG.ENABLE_SKYDIVE();
 	}
 
-	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new SkydiveBlockEntity(pos,state);
 	}
 
-	public boolean build(Level world, int x, int y, int z, Player player, int[] selectedColors, int radius, boolean teleportToTop) {
+	public boolean build(Level world, int x, int y, int z, Player player) {
+		SkydiveBlockEntity blockEntity = (SkydiveBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
+		int[] selectedColors = blockEntity.colorCode;
+		int radius = blockEntity.radius;
+
 		if(selectedColors.length == 0) {
 			Helper.sendMessage(player,Strings.ERROR_NO_COLORS);
 			return false;
@@ -102,7 +104,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 			i++;
 		}
 
-		if(teleportToTop) {
+		if(blockEntity.teleport) {
 			if(direction == Direction.SOUTH) {
 				Helper.teleport(world,player,x,max+1,z+radius);
 			} else if(direction == Direction.WEST) {

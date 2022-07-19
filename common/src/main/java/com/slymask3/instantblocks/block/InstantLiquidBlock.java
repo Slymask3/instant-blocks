@@ -61,7 +61,6 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	@Override
-	//@OnlyIn(Dist.CLIENT)
 	public boolean skipRendering(@Nonnull BlockState state, BlockState adjacentBlockState, @Nonnull Direction side) {
 		return adjacentBlockState.is(this) || super.skipRendering(state, adjacentBlockState, side);
 	}
@@ -73,7 +72,6 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	@Override
-	//@OnlyIn(Dist.CLIENT)
 	public float getShadeBrightness(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos) {
 		return 1.0F;
 	}
@@ -94,15 +92,15 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		return blockReplace;
 	}
 
-	public boolean canActivate(Level world, int x, int y, int z, Player player) {
+	public boolean canActivate(Level world, BlockPos pos, Player player) {
 		if(isSuction) {
-			Helper.sendMessage(player, "","",new BlockPos(x,y,z),ClientHelper.Particles.NO_LIQUID);
+			Helper.sendMessage(player, "","",pos,ClientHelper.Particles.NO_LIQUID);
 		}
 		if(world.dimension().equals(Level.NETHER) && blockReplace.equals(Blocks.WATER) && !Common.CONFIG.ALLOW_WATER_IN_NETHER()) {
 			Helper.sendMessage(player, Strings.ERROR_WATER_DISABLED);
 			return false;
 		}
-		checkForBlock(world,x,y,z);
+		checkForBlock(world,pos);
 		if(isSuction && coordsList.isEmpty()) {
 			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID);
 			return false;
@@ -133,26 +131,26 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		return true;
 	}
 
-	private void checkForBlock(Level world, int x, int y, int z) {
-		check(world,x+1,y,z);
-		check(world,x-1,y,z);
-		check(world,x,y,z+1);
-		check(world,x,y,z-1);
+	private void checkForBlock(Level world, BlockPos pos) {
+		check(world,pos.north(1));
+		check(world,pos.east(1));
+		check(world,pos.south(1));
+		check(world,pos.west(1));
 		if(!Common.CONFIG.SIMPLE_LIQUID() || isSuction) {
-			check(world,x,y-1,z);
+			check(world,pos.below(1));
 		}
 		if(isSuction) {
-			check(world,x,y+1,z);
+			check(world,pos.above(1));
 		}
 	}
 
-	private void check(Level world, int x, int y, int z) {
-		Block blockCurrent = Helper.getBlock(world,x,y,z);
-		if(isCorrectBlock(blockCurrent) && coordsList.size() < getMax() && addCoords(x,y,z)) {
+	private void check(Level world, BlockPos pos) {
+		Block blockCurrent = Helper.getBlock(world,pos);
+		if(isCorrectBlock(blockCurrent) && coordsList.size() < getMax() && addCoords(pos)) {
 			if(blockCheck == null) {
 				blockCheck = blockCurrent;
 			}
-			checkForBlock(world,x,y,z);
+			checkForBlock(world,pos);
 		}
 	}
 
@@ -165,8 +163,8 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		return block == blockCheck;
 	}
 
-	private boolean addCoords(int x, int y, int z) {
-		Helper.Coords coords = new Helper.Coords(x,y,z);
+	private boolean addCoords(BlockPos pos) {
+		Helper.Coords coords = new Helper.Coords(pos.getX(),pos.getY(),pos.getZ());
 		if(!coordsList.contains(coords)) {
 			coordsList.add(coords);
 			return true;

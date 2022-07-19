@@ -14,23 +14,23 @@ public class HarvestBlockEntity extends InstantBlockEntity {
 
 	public HarvestBlockEntity(BlockPos pos, BlockState state) {
 		super(ModTiles.HARVEST, pos, state);
-		this.logOak=true;
-		this.logSpruce=true;
-		this.logBirch=true;
-		this.logJungle=true;
-		this.logAcacia=true;
-		this.logDark=true;
-		this.wheat=true;
-		this.carrot=true;
-		this.potato=true;
-		this.cactus=true;
-		this.pumpkin=true;
-		this.melon=true;
-		this.sugarcane=true;
-		this.cocoa=true;
-		this.mushroom=true;
-		this.netherwart=true;
-		this.replant=true;
+		this.logOak = true;
+		this.logSpruce = true;
+		this.logBirch = true;
+		this.logJungle = true;
+		this.logAcacia = true;
+		this.logDark = true;
+		this.wheat = true;
+		this.carrot = true;
+		this.potato = true;
+		this.cactus = true;
+		this.pumpkin = true;
+		this.melon = true;
+		this.sugarcane = true;
+		this.cocoa = true;
+		this.mushroom = true;
+		this.netherwart = true;
+		this.replant = true;
 	}
 
 	@Override
@@ -75,5 +75,26 @@ public class HarvestBlockEntity extends InstantBlockEntity {
 		nbt.putBoolean("Mushroom", mushroom);
 		nbt.putBoolean("Netherwart", netherwart);
 		nbt.putBoolean("Replant", replant);
+	}
+
+	public void update(boolean logOak, boolean logSpruce, boolean logBirch, boolean logJungle, boolean logAcacia, boolean logDark, boolean wheat, boolean carrot, boolean potato, boolean cactus, boolean pumpkin, boolean melon, boolean sugarcane, boolean cocoa, boolean mushroom, boolean netherwart, boolean replant) {
+		this.logOak = logOak;
+		this.logSpruce = logSpruce;
+		this.logBirch = logBirch;
+		this.logJungle = logJungle;
+		this.logAcacia = logAcacia;
+		this.logDark = logDark;
+		this.wheat = wheat;
+		this.carrot = carrot;
+		this.potato = potato;
+		this.cactus = cactus;
+		this.pumpkin = pumpkin;
+		this.melon = melon;
+		this.sugarcane = sugarcane;
+		this.cocoa = cocoa;
+		this.mushroom = mushroom;
+		this.netherwart = netherwart;
+		this.replant = replant;
+		this.markUpdated();
 	}
 }

@@ -8,8 +8,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class SkydiveBlockEntity extends InstantBlockEntity {
-	public final String[] color = new String[11];
-	public final int[] colorCode = new int[11];
+	public String[] color = new String[11];
+	public int[] colorCode = new int[11];
 	public boolean teleport;
 	public int radius;
 
@@ -45,12 +45,15 @@ public class SkydiveBlockEntity extends InstantBlockEntity {
 		nbt.putBoolean("Teleport", teleport);
 		nbt.putInt("Radius", radius);
 	}
-	
-	public void setColorCode(int i, String input) {
-		this.colorCode[i] = ColorHelper.textToColor(input).getRGB();
-	}
-	
-	public void setColor(int i, String input) {
-		this.color[i] = input;
+
+	public void update(String[] color, int radius, boolean teleport) {
+		this.color = color;
+		this.colorCode = new int[color.length];
+		for(int i=0; i<color.length; i++) {
+			this.colorCode[i] = ColorHelper.textToColor(color[i]).getRGB();
+		}
+		this.teleport = teleport;
+		this.radius = radius;
+		this.markUpdated();
 	}
 }

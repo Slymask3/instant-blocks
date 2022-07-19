@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.Nullable;
 
 public class ColorBlock extends Block implements EntityBlock {
     public static final Block blockType = Blocks.WHITE_WOOL;
@@ -26,7 +25,6 @@ public class ColorBlock extends Block implements EntityBlock {
         );
     }
 
-    @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new ColorBlockEntity(pos,state);
