@@ -11,6 +11,7 @@ import org.apache.commons.lang3.tuple.Pair;
 public class ForgeConfig implements IConfig {
 	public static class Common {
 		public static BooleanValue USE_WANDS;
+		public static BooleanValue WAND_OVER_DURABILITY;
 		public static BooleanValue TP_GRINDER;
 		public static BooleanValue KEEP_BLOCKS;
 		public static BooleanValue ALLOW_WATER_IN_NETHER;
@@ -86,6 +87,10 @@ public class ForgeConfig implements IConfig {
 			USE_WANDS = builder
 					.comment("Use wands to activate instant blocks.\nDefault: true")
 					.define("USE_WANDS", Defaults.USE_WANDS);
+
+			WAND_OVER_DURABILITY = builder
+					.comment("Allow activating instant blocks even if the wand doesn't have enough durability.\nDefault: false")
+					.define("USE_WANDS", Defaults.WAND_OVER_DURABILITY);
 
 			TP_GRINDER = builder
 					.comment("Teleport the player to the collection room of the Instant Grinder.\nDefault: true")
@@ -435,6 +440,7 @@ public class ForgeConfig implements IConfig {
 	}
 
 	public boolean USE_WANDS() { return Common.USE_WANDS.get(); }
+	public boolean WAND_OVER_DURABILITY() { return Common.WAND_OVER_DURABILITY.get(); }
 	public boolean TP_GRINDER() { return Common.TP_GRINDER.get(); }
 	public boolean KEEP_BLOCKS() { return Common.KEEP_BLOCKS.get(); }
 	public boolean ALLOW_WATER_IN_NETHER() { return Common.ALLOW_WATER_IN_NETHER.get(); }

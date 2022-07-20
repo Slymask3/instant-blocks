@@ -107,9 +107,14 @@ public abstract class InstantBlock extends Block {
 			}
 
 			ItemStack is = player.getItemInHand(hand);
-			if(Common.CONFIG.USE_WANDS() && !Helper.isWand(is)) {
-				Helper.sendMessage(player, Strings.ERROR_WAND);
-				return InteractionResult.FAIL;
+			if(Common.CONFIG.USE_WANDS()) {
+				if(!Helper.isWand(is)) {
+					Helper.sendMessage(player, Strings.ERROR_WAND);
+					return InteractionResult.FAIL;
+				} else if(Helper.wandDamage(Helper.getBlock(world,pos)) > is.getMaxDamage() - is.getDamageValue() && !player.isCreative()) {
+					Helper.sendMessage(player, Strings.ERROR_WAND_DURABILITY);
+					return InteractionResult.FAIL;
+				}
 			}
 
 			if(!canActivate(world,pos,player)) {
@@ -134,10 +139,13 @@ public abstract class InstantBlock extends Block {
 			return InteractionResult.FAIL;
 		}
 
-		ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);
+		ItemStack is = player.getItemInHand(hand);
 		if(Common.CONFIG.USE_WANDS()) {
 			if(!Helper.isWand(is)) {
 				Helper.sendMessage(player, Strings.ERROR_WAND);
+				return InteractionResult.FAIL;
+			} else if(Helper.wandDamage(Helper.getBlock(world,pos)) > is.getMaxDamage() - is.getDamageValue() && !player.isCreative()) {
+				Helper.sendMessage(player, Strings.ERROR_WAND_DURABILITY);
 				return InteractionResult.FAIL;
 			}
 		}

@@ -163,9 +163,10 @@ public class SchematicScreen extends InstantScreen {
 			}
 
 			public void render(PoseStack poseStack, int entryIdx, int top, int left, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean p_194999_5_, float partialTick) {
-				if(top > SchematicList.this.y0 - 5 && top + entryHeight < SchematicList.this.y1 + 5) {
+				int entry_y = top + 4;
+				if(entry_y > SchematicList.this.y0 - 5 && entry_y + entryHeight < SchematicList.this.y1 + 5) {
 					String string = SchematicScreen.this.schematics.get(index);
-					SchematicScreen.this.font.drawShadow(poseStack, string, (float)(left + entryWidth / 2 - SchematicScreen.this.font.width(string) / 2), top, SchematicScreen.this.getSelected() == this.index ? 0x00AA00 : 16777215, true);
+					SchematicScreen.this.font.drawShadow(poseStack, string, (float)(left + entryWidth / 2 - SchematicScreen.this.font.width(string) / 2), entry_y, SchematicScreen.this.getSelected() == this.index ? 0x00AA00 : 16777215, true);
 				}
 			}
 

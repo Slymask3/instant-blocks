@@ -36,6 +36,7 @@ public class TreeScreen extends InstantScreen {
 		this.airInside = new Checkbox(this.width / 2 + 4, 94, 150, 20, new TranslatableComponent("ib.gui.tree.air"), blockEntity.airInside);
 
 		TreeList treeList = new TreeList(this.width / 2 - 4 - 150,50,144,120);
+		treeList.setSelectedTree(blockEntity.type);
 		this.addWidget(treeList);
 
 		this.done.active = false;
@@ -80,6 +81,15 @@ public class TreeScreen extends InstantScreen {
 			return TreeScreen.this.getFocused() == this;
 		}
 
+		public void setSelectedTree(int index) {
+			if(index > 0 && index < TreeScreen.this.trees.length) {
+				this.setSelected(this.getEntry(index));
+				this.centerScrollOn(this.getSelected());
+			} else {
+				this.setSelected(null);
+			}
+		}
+
 		class Entry extends ObjectSelectionList.Entry<Entry> {
 			final int index;
 
@@ -88,9 +98,10 @@ public class TreeScreen extends InstantScreen {
 			}
 
 			public void render(PoseStack poseStack, int entryIdx, int top, int left, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean p_194999_5_, float partialTick) {
-				if(top > TreeList.this.y0 - 5 && top + entryHeight < TreeList.this.y1 + 5) {
+				int entry_y = top + 4;
+				if(entry_y > TreeList.this.y0 - 5 && entry_y + entryHeight < TreeList.this.y1 + 5) {
 					String string = InstantTreeBlock.treeToString(index, Minecraft.getInstance().player);
-					TreeScreen.this.font.drawShadow(poseStack, string, (float)(left + entryWidth / 2 - TreeScreen.this.font.width(string) / 2), top, TreeScreen.this.getSelected() == this.index ? 0x00AA00 : 16777215, true);
+					TreeScreen.this.font.drawShadow(poseStack, string, (float)(left + entryWidth / 2 - TreeScreen.this.font.width(string) / 2), entry_y, TreeScreen.this.getSelected() == this.index ? 0x00AA00 : 16777215, true);
 				}
 			}
 
