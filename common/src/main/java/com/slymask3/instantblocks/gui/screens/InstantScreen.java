@@ -6,7 +6,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -19,7 +19,7 @@ public abstract class InstantScreen extends Screen {
 	private String doneText;
 
 	public InstantScreen(Player player, Level world, BlockPos pos, String title) {
-		super(Component.translatable(title));
+		super(new TranslatableComponent(title));
 		this.player = player;
 		this.world = world;
 		this.pos = pos;
@@ -32,7 +32,7 @@ public abstract class InstantScreen extends Screen {
 
 	@Override
 	public void init() {
-		this.done = this.addRenderableWidget(new Button(this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, Component.translatable(doneText), (p_88642_) -> {
+		this.done = this.addRenderableWidget(new Button(this.width / 2 - 4 - 150, this.height / 4 + 120 + 12, 150, 20, new TranslatableComponent(doneText), (p_88642_) -> {
 			this.sendInfo(true);
 			this.close();
 		}));

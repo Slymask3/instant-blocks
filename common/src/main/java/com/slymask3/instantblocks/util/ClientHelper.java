@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -58,7 +58,7 @@ public class ClientHelper {
 
     public static void sendMessage(Player player, String message, String variable) {
         if(Common.CONFIG.SHOW_MESSAGES() && Helper.isClient(player.getLevel())) {
-            player.displayClientMessage(Component.translatable(message, variable.isEmpty() ? new Object[0] : variable),true);
+            player.displayClientMessage(new TranslatableComponent(message, variable.isEmpty() ? new Object[0] : variable),true);
         }
     }
 

@@ -7,7 +7,8 @@ import com.slymask3.instantblocks.util.ColorHelper;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import java.awt.*;
@@ -17,7 +18,7 @@ public class ColorEditBox extends EditBox {
     private final Font font;
 
     public ColorEditBox(Font font, int x, int y, int width, int length, int index, SkydiveBlockEntity tileEntity) {
-        super(font, x, y, width, length, Component.translatable("ib.gui.skydive.color",(index+1)));
+        super(font, x, y, width, length, new TranslatableComponent("ib.gui.skydive.color",(index+1)));
         this.font = font;
         this.index = index;
         this.setValue(tileEntity.color[index]);
@@ -28,7 +29,7 @@ public class ColorEditBox extends EditBox {
     }
 
     public void renderLabel(PoseStack poseStack) {
-        this.font.drawShadow(poseStack, Component.translatable("ib.gui.skydive.color",(index+1)), this.x - 50, this.y + 3, ColorHelper.textToColor(this.getValue()).getRGB());
+        this.font.drawShadow(poseStack, new TranslatableComponent("ib.gui.skydive.color",(index+1)), this.x - 50, this.y + 3, ColorHelper.textToColor(this.getValue()).getRGB());
     }
 
     public void setRandomHex() {
@@ -48,7 +49,7 @@ public class ColorEditBox extends EditBox {
 
     public static class ClearButton extends Button {
         public ClearButton(int x, int y, OnPress onPress) {
-            super(x,y,12,12,Component.literal("X"),onPress);
+            super(x,y,12,12,new TextComponent("X"),onPress);
         }
 
         public void renderButton(PoseStack p_86777_, int p_86778_, int p_86779_, float p_86780_) {

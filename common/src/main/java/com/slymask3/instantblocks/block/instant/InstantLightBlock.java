@@ -9,7 +9,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -45,7 +44,7 @@ public class InstantLightBlock extends InstantBlock {
         return Block.box(6.0D, 0.0D, 6.0D, 10.0D, 15.0D, 10.0D);
     }
 
-    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
         double d0 = (double)pos.getX() + 0.5D;
         double d1 = (double)pos.getY() + 1.0D;
         double d2 = (double)pos.getZ() + 0.5D;

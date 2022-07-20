@@ -13,6 +13,8 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -40,21 +42,21 @@ public class SchematicScreen extends InstantScreen {
 
 		SchematicBlockEntity blockEntity = (SchematicBlockEntity)world.getBlockEntity(pos);
 
-		Button open = new Button(this.width / 2 + 134, 50, 20, 20, Component.literal(">"), (p_88642_) -> {
+		Button open = new Button(this.width / 2 + 134, 50, 20, 20, new TextComponent(">"), (p_88642_) -> {
 			Util.getPlatform().openFile(new File(SchematicHelper.SCHEMATICS_DIR));
 		}, new Button.OnTooltip() {
 			public void onTooltip(Button button, PoseStack poseStack, int x, int y) {
-				SchematicScreen.this.renderTooltip(poseStack, List.of(Component.translatable("ib.gui.schematic.open").getVisualOrderText()), x, y);
+				SchematicScreen.this.renderTooltip(poseStack, List.of(new TranslatableComponent("ib.gui.schematic.open").getVisualOrderText()), x, y);
 			}
 			public void narrateTooltip(Consumer<Component> consumer) {
-				consumer.accept(Component.translatable("ib.gui.schematic.open"));
+				consumer.accept(new TranslatableComponent("ib.gui.schematic.open"));
 			}
 		});
 
-		this.center = new Checkbox(this.width / 2 - 4 - 150, 75, 150, 20, Component.translatable("ib.gui.schematic.center"), blockEntity.center);
-		this.ignoreAir = new Checkbox(this.width / 2 + 4, 75, 150, 20, Component.translatable("ib.gui.schematic.ignore"), blockEntity.ignoreAir);
+		this.center = new Checkbox(this.width / 2 - 4 - 150, 75, 150, 20, new TranslatableComponent("ib.gui.schematic.center"), blockEntity.center);
+		this.ignoreAir = new Checkbox(this.width / 2 + 4, 75, 150, 20, new TranslatableComponent("ib.gui.schematic.ignore"), blockEntity.ignoreAir);
 
-		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 284, 20, Component.literal("Input")) {
+		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 284, 20, new TextComponent("Input")) {
 			public void insertText(String textToWrite) {
 				super.insertText(textToWrite);
 				SchematicScreen.this.checkForSchematic();
@@ -83,17 +85,17 @@ public class SchematicScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 10526880);
-		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 10526880);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 10526880);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 10526880);
 
-		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.file", input.getValue()), this.width / 2 - 2 - 150, this.height / 4 + 115, this.done.active ? 0x00FF00 : 0xAA0000);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.file", input.getValue()), this.width / 2 - 2 - 150, this.height / 4 + 115, this.done.active ? 0x00FF00 : 0xAA0000);
 
-		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.found", this.schematics.size()), this.width / 2 - 2 - 150, 100, 0xFFFFFF);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.found", this.schematics.size()), this.width / 2 - 2 - 150, 100, 0xFFFFFF);
 
 		if(this.schematics.size() == 0) {
-			this.font.draw(poseStack, Component.translatable("ib.gui.schematic.instructions.1"), this.width / 2 - 3 - 150, 120, 0xAA0000);
-			this.font.draw(poseStack, Component.translatable("ib.gui.schematic.instructions.2"), this.width / 2 - 3 - 150, 130, 0xAA0000);
-			this.font.draw(poseStack, Component.translatable("ib.gui.schematic.instructions.3"), this.width / 2 - 3 - 150, 140, 0xAA0000);
+			this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.instructions.1"), this.width / 2 - 3 - 150, 120, 0xAA0000);
+			this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.instructions.2"), this.width / 2 - 3 - 150, 130, 0xAA0000);
+			this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.instructions.3"), this.width / 2 - 3 - 150, 140, 0xAA0000);
 		}
 	}
 	
@@ -177,7 +179,7 @@ public class SchematicScreen extends InstantScreen {
 			}
 
 			public Component getNarration() {
-				return Component.translatable("narrator.select", SchematicScreen.this.schematics.get(index));
+				return new TranslatableComponent("narrator.select", SchematicScreen.this.schematics.get(index));
 			}
 		}
 	}

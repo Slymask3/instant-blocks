@@ -11,6 +11,7 @@ import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -30,9 +31,9 @@ public class TreeScreen extends InstantScreen {
 
 		TreeBlockEntity blockEntity = (TreeBlockEntity)world.getBlockEntity(pos);
 
-		this.fullLog = new Checkbox(this.width / 2 + 4, 50, 150, 20, Component.translatable("ib.gui.tree.logs"), blockEntity.fullLog);
-		this.fullLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, Component.translatable("ib.gui.tree.leaves"), blockEntity.fullLeaves);
-		this.air = new Checkbox(this.width / 2 + 4, 94, 150, 20, Component.translatable("ib.gui.tree.air"), blockEntity.air);
+		this.fullLog = new Checkbox(this.width / 2 + 4, 50, 150, 20, new TranslatableComponent("ib.gui.tree.logs"), blockEntity.fullLog);
+		this.fullLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, new TranslatableComponent("ib.gui.tree.leaves"), blockEntity.fullLeaves);
+		this.air = new Checkbox(this.width / 2 + 4, 94, 150, 20, new TranslatableComponent("ib.gui.tree.air"), blockEntity.air);
 
 		TreeList treeList = new TreeList(this.width / 2 - 4 - 150,50,144,120);
 		this.addWidget(treeList);
@@ -46,8 +47,8 @@ public class TreeScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, Component.translatable("ib.gui.tree.options"), this.width / 2 + 4, 40, 10526880);
-		this.font.draw(poseStack, Component.translatable("ib.gui.tree.type"), this.width / 2 - 2 - 150, 40, 10526880);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.tree.options"), this.width / 2 + 4, 40, 10526880);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.tree.type"), this.width / 2 - 2 - 150, 40, 10526880);
 	}
 
 	public void sendInfo(boolean activate) {
@@ -103,7 +104,7 @@ public class TreeScreen extends InstantScreen {
 			}
 
 			public Component getNarration() {
-				return Component.translatable("narrator.select", InstantTreeBlock.treeToString(index, Minecraft.getInstance().player));
+				return new TranslatableComponent("narrator.select", InstantTreeBlock.treeToString(index, Minecraft.getInstance().player));
 			}
 		}
 	}

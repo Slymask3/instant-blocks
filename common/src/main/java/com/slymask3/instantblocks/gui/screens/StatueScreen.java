@@ -7,7 +7,8 @@ import com.slymask3.instantblocks.network.packet.StatuePacket;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -31,15 +32,15 @@ public class StatueScreen extends InstantScreen {
 		int y = this.height / 4 + 32;
 		int slot = 22;
 
-		this.head = new Checkbox(x_left, y, 150, 20, Component.translatable("ib.gui.statue.head"), blockEntity.head);
-		this.body = new Checkbox(x_right, y, 150, 20, Component.translatable("ib.gui.statue.body"), blockEntity.body);
-		this.armLeft = new Checkbox(x_left, y+(slot), 150, 20, Component.translatable("ib.gui.statue.arm.left"), blockEntity.armLeft);
-		this.armRight = new Checkbox(x_right, y+(slot), 150, 20, Component.translatable("ib.gui.statue.arm.right"), blockEntity.armRight);
-		this.legLeft = new Checkbox(x_left, y+(slot*2), 150, 20, Component.translatable("ib.gui.statue.leg.left"), blockEntity.legLeft);
-		this.legRight = new Checkbox(x_right, y+(slot*2), 150, 20, Component.translatable("ib.gui.statue.leg.right"), blockEntity.legRight);
-		this.rgbMode = new Checkbox(x_left, y+(slot*3), 150, 20, Component.translatable("ib.gui.statue.rgb"), blockEntity.rgb);
+		this.head = new Checkbox(x_left, y, 150, 20, new TranslatableComponent("ib.gui.statue.head"), blockEntity.head);
+		this.body = new Checkbox(x_right, y, 150, 20, new TranslatableComponent("ib.gui.statue.body"), blockEntity.body);
+		this.armLeft = new Checkbox(x_left, y+(slot), 150, 20, new TranslatableComponent("ib.gui.statue.arm.left"), blockEntity.armLeft);
+		this.armRight = new Checkbox(x_right, y+(slot), 150, 20, new TranslatableComponent("ib.gui.statue.arm.right"), blockEntity.armRight);
+		this.legLeft = new Checkbox(x_left, y+(slot*2), 150, 20, new TranslatableComponent("ib.gui.statue.leg.left"), blockEntity.legLeft);
+		this.legRight = new Checkbox(x_right, y+(slot*2), 150, 20, new TranslatableComponent("ib.gui.statue.leg.right"), blockEntity.legRight);
+		this.rgbMode = new Checkbox(x_left, y+(slot*3), 150, 20, new TranslatableComponent("ib.gui.statue.rgb"), blockEntity.rgb);
 
-		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 300+8, 20, Component.literal("Input"));
+		this.input = new EditBox(this.font, this.width / 2 - 4 - 150, 50, 300+8, 20, new TextComponent("Input"));
 		this.input.setValue(blockEntity.username);
 
 		this.addRenderableWidget(this.head);
@@ -55,9 +56,9 @@ public class StatueScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, Component.translatable("ib.gui.statue.input"), this.width / 2 - 4 - 150, 37, 10526880);
-		this.font.draw(poseStack, Component.translatable("ib.gui.statue.select"), this.width / 2 - 3 - 150, this.height / 4 + 8 + 12, 10526880);
-		this.font.draw(poseStack, Component.translatable("ib.gui.statue.rgb.text"), this.width / 2 - 3 - 150, this.height / 4 + 32 + 88, 10526880);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.statue.input"), this.width / 2 - 4 - 150, 37, 10526880);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.statue.select"), this.width / 2 - 3 - 150, this.height / 4 + 8 + 12, 10526880);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.statue.rgb.text"), this.width / 2 - 3 - 150, this.height / 4 + 32 + 88, 10526880);
 	}
 
 	public void sendInfo(boolean activate) {

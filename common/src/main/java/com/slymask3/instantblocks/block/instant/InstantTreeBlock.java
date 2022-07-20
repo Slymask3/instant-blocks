@@ -8,7 +8,7 @@ import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.locale.Language;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -791,13 +791,13 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 
 	public static String treeToString(int tree, Player player) {
 		return switch (tree) {
-			case 0 -> Component.literal(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.oak"))).getString();
-			case 1 -> Component.literal(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.spruce"))).getString();
-			case 2 -> Component.literal(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.birch"))).getString();
-			case 3 -> Component.literal(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.jungle"))).getString();
-			case 4 -> Component.literal(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.acacia"))).getString();
-			case 5 -> Component.literal(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.dark_oak"))).getString();
-			case 6 -> Component.literal(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.glass"))).getString();
+			case 0 -> new TextComponent(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.oak"))).getString();
+			case 1 -> new TextComponent(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.spruce"))).getString();
+			case 2 -> new TextComponent(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.birch"))).getString();
+			case 3 -> new TextComponent(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.jungle"))).getString();
+			case 4 -> new TextComponent(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.acacia"))).getString();
+			case 5 -> new TextComponent(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.dark_oak"))).getString();
+			case 6 -> new TextComponent(String.format(Locale.ENGLISH, Language.getInstance().getOrDefault("ib.gui.tree.glass"))).getString();
 			default -> "Error";
 		};
 	}
