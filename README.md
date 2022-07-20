@@ -1,4 +1,4 @@
-Instant Blocks for 1.19.x
+Instant Blocks for 1.18.2
 =============
 This mod adds 'Instant Blocks' to the game. These blocks could be obtained from crafting, dungeon chests, village chests, etc. Each block generates a different structure upon right-clicking on the block with an Instant Wand.
 
