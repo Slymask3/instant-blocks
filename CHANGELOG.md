@@ -1,7 +1,12 @@
 # Minecraft 1.19 Changelog
 
-## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.0...HEAD)
+## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.1...HEAD)
+### Changed
+- Adjusted block strengths
+- Don't allow activating when the wand doesn't have enough durability (configurable)
 
+### Fixed
+- Instant tree packet
 
 ## [1.6.1](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.0...1.19-1.6.1) - 2022-07-19
 ### Added

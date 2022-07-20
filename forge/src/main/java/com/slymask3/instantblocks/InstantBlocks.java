@@ -31,7 +31,6 @@ public class InstantBlocks {
 		Common.NETWORK = new PacketHandler();
 		Common.TILES = new ForgeTiles();
 		Common.CONFIG = new ForgeConfig();
-		Common.init();
 
 		ForgeConfig.init();
 

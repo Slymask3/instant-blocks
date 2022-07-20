@@ -30,6 +30,7 @@
   "item.instantblocks.wand_netherite": "Netherite Instant Wand",
 
   "ib.message.error.wand": "§cYou must use an Instant Wand",
+  "ib.message.error.wand_durability": "§cYou don't have enough durability for this block",
   "ib.message.error.disabled": "§cThis instant block is disabled in the config",
   "ib.message.error.grinder": "§cYou must place this above a Zombie/Skeleton spawner",
   "ib.message.error.mining_ladder": "§cInstant Mining Ladder cannot be created below layer %s",
@@ -150,6 +151,7 @@
   "text.autoconfig.instantblocks.category.general": "General",
   "text.autoconfig.instantblocks.option.general.@PrefixText": "General settings",
   "text.autoconfig.instantblocks.option.general.USE_WANDS": "Use wands to activate instant blocks",
+  "text.autoconfig.instantblocks.option.general.WAND_OVER_DURABILITY": "Activate even if there's not enough durability",
   "text.autoconfig.instantblocks.option.general.KEEP_BLOCKS": "Keep instant blocks after activation",
   "text.autoconfig.instantblocks.option.general.ALLOW_WATER_IN_NETHER": "Allow generating water in the nether",
   "text.autoconfig.instantblocks.option.general.XP_AMOUNT": "Experience to give after activation",

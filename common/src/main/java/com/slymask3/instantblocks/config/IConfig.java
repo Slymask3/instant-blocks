@@ -4,6 +4,7 @@ public interface IConfig {
     default void reload() {}
 
     default boolean USE_WANDS() { return Defaults.USE_WANDS; }
+    default boolean WAND_OVER_DURABILITY() { return Defaults.WAND_OVER_DURABILITY; }
     default boolean TP_GRINDER() { return Defaults.TP_GRINDER; }
     default boolean KEEP_BLOCKS() { return Defaults.KEEP_BLOCKS; }
     default boolean ALLOW_WATER_IN_NETHER() { return Defaults.ALLOW_WATER_IN_NETHER; }
@@ -77,9 +78,10 @@ public interface IConfig {
     default boolean SHOW_EFFECTS() { return Defaults.SHOW_EFFECTS; }
     default String SOUND_GENERATE() { return Defaults.SOUND_GENERATE; }
     default String SOUND_NO_LIQUID() { return Defaults.SOUND_NO_LIQUID; }
-    
+
     class Defaults {
         public static boolean USE_WANDS = true;
+        public static boolean WAND_OVER_DURABILITY = false;
         public static boolean TP_GRINDER = true;
         public static boolean KEEP_BLOCKS = false;
         public static boolean ALLOW_WATER_IN_NETHER = false;
