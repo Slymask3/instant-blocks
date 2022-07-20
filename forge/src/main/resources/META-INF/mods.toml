@@ -1,13 +1,13 @@
 modLoader="javafml"
 loaderVersion="[39,)"
 license="LGPLv3"
-issueTrackerURL="https://github.com/ksatchkov/instant-blocks/issues"
+issueTrackerURL="https://github.com/slymask3/instant-blocks/issues"
 
 [[mods]]
 modId="instantblocks"
 version="1.6.1"
 displayName="Instant Blocks"
-updateJSONURL="https://raw.githubusercontent.com/ksatchkov/instant-blocks/1.19.x/update.json"
+updateJSONURL="https://raw.githubusercontent.com/slymask3/instant-blocks/1.19.x/update.json"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/instant-blocks"
 logoFile="logo.png"
 credits="Slymask3"

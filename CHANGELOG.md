@@ -12,10 +12,11 @@
 - Third person models for instant wands
 - Only show server-side schematics
 - Block entity syncing
+- Block drops
 
 ## [1.6.0](https://github.com/slymask3/instant-blocks/compare/1.18.2-1.6.0...1.19-1.6.0) - 2022-07-04
 ### Changed
-- Ported for Minecraft 1.19
+- Ported to Minecraft 1.19
 
 ---
 
