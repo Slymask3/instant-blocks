@@ -1,6 +1,9 @@
 # Minecraft 1.19 Changelog
 
 ## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.0...HEAD)
+
+
+## [1.6.1](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.0...1.19-1.6.1) - 2022-07-19
 ### Added
 - Fabric support
 
@@ -21,6 +24,13 @@
 ---
 
 # Minecraft 1.18.2 Changelog
+
+## [1.6.1](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.1...1.18.2-1.6.1) - 2022-07-19
+### Added
+- Fabric support ([#2](https://github.com/slymask3/instant-blocks/issues/2))
+
+### Changed
+- Ported to Minecraft 1.19
 
 ## [1.6.0](https://github.com/slymask3/instant-blocks/compare/1.7.10-1.5.5...1.18.2-1.6.0) - 2022-07-04
 ### Added
