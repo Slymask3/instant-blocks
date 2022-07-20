@@ -90,7 +90,7 @@ public class ForgeConfig implements IConfig {
 
 			WAND_OVER_DURABILITY = builder
 					.comment("Allow activating instant blocks even if the wand doesn't have enough durability.\nDefault: false")
-					.define("USE_WANDS", Defaults.WAND_OVER_DURABILITY);
+					.define("WAND_OVER_DURABILITY", Defaults.WAND_OVER_DURABILITY);
 
 			TP_GRINDER = builder
 					.comment("Teleport the player to the collection room of the Instant Grinder.\nDefault: true")

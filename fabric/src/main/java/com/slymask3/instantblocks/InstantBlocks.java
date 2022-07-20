@@ -26,7 +26,6 @@ public class InstantBlocks implements ModInitializer {
         Common.ITEM_GROUP = FabricItemGroupBuilder.build(new ResourceLocation(Common.MOD_ID, "general"), () -> new ItemStack(ModBlocks.INSTANT_WOOD_HOUSE));
         Common.NETWORK = new PacketHandler();
         Common.TILES = new FabricTiles();
-        Common.init();
 
         if(Services.PLATFORM.isModLoaded("cloth-config")) {
             ClothConfig.register();
