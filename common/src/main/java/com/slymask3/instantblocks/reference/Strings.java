@@ -16,6 +16,7 @@ public class Strings {
 	public static final String ERROR_SCHEMATIC = ERROR + "schematic";
 	public static final String ERROR_WATER_DISABLED = ERROR + "water_disabled";
 	public static final String ERROR_NO_COLORS = ERROR + "no_colors";
+	public static final String ERROR_TREE = ERROR + "tree";
 
 	private static final String CREATE = "ib.message.create.";
 	public static final String CREATE_WOODEN_HOUSE = CREATE + "wooden_house";

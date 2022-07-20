@@ -6,6 +6,7 @@ import com.slymask3.instantblocks.block.entity.TreeBlockEntity;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.TextComponent;
@@ -46,7 +47,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		return Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
 	}
-	
+
 	public boolean build(Level world, int x_center, int y, int z_center, Player player) {
 		TreeBlockEntity blockEntity = (TreeBlockEntity)world.getBlockEntity(new BlockPos(x_center,y,z_center));
 		int size = Common.CONFIG.TREE_SIZE();
@@ -61,6 +62,10 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 			case 4 -> buildAcacia(world, x, y, z, Blocks.ACACIA_LOG, Blocks.ACACIA_LEAVES, size, blockEntity);
 			case 5 -> buildDarkOak(world, x, y, z, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_LEAVES, size, blockEntity);
 			case 6 -> buildOak(world, x, y, z, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, size, blockEntity);
+			default -> {
+				Helper.sendMessage(player, Strings.ERROR_TREE);
+				return false;
+			}
 		}
 		setCreateMessage(Strings.CREATE_TREE, treeToString(blockEntity.type,player));
 		return true;
@@ -72,18 +77,18 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLog(world, x, y+size*2, z, log, size, blockEntity, false, false, true, true, true, true);
 		buildLog(world, x, y+size*3, z, log, size, blockEntity, false, false, true, true, true, true);
 		buildLog(world, x, y+size*4, z, log, size, blockEntity, true, false, true, true, true, true);
-		
+
 		/** first layer **/
 		buildLeaves(world, x+size*2, y+size*2, z+size, leaves, size, blockEntity, false, true, false, true, true, false);
 		buildLeaves(world, x+size*2, y+size*2, z, leaves, size, blockEntity, false, true, false, false, true, false);
 		buildLeaves(world, x+size*2, y+size*2, z-size, leaves, size, blockEntity, false, true, true, false, true, false);
-		
+
 		buildLeaves(world, x+size, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, true, true, false);
 		buildLeaves(world, x+size, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
 		buildLeaves(world, x+size, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, false);
 		buildLeaves(world, x+size, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
 		buildLeaves(world, x+size, y+size*2, z-size*2, leaves, size, blockEntity, false, true, true, false, true, false);
-		
+
 		buildLeaves(world, x, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, true, false, false);
 		buildLeaves(world, x, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
 		buildLeaves(world, x, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
@@ -99,18 +104,18 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size*2, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, true);
 		buildLeaves(world, x-size*2, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, true);
 		buildLeaves(world, x-size*2, y+size*2, z-size*2, leaves, size, blockEntity, true, true, true, false, false, true);
-		
+
 		/** second layer **/
 		buildLeaves(world, x+size*2, y+size*3, z+size, leaves, size, blockEntity, true, false, false, true, true, false);
 		buildLeaves(world, x+size*2, y+size*3, z, leaves, size, blockEntity, true, false, false, false, true, false);
 		buildLeaves(world, x+size*2, y+size*3, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
-		
+
 		buildLeaves(world, x+size, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, true, false);
 		buildLeaves(world, x+size, y+size*3, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
 		buildLeaves(world, x+size, y+size*3, z, leaves, size, blockEntity, false, false, false, false, false, false);
 		buildLeaves(world, x+size, y+size*3, z-size, leaves, size, blockEntity, true, false, false, false, false, false);
 		buildLeaves(world, x+size, y+size*3, z-size*2, leaves, size, blockEntity, true, false, true, false, true, false);
-		
+
 		buildLeaves(world, x, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, false, false);
 		buildLeaves(world, x, y+size*3, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
 		buildLeaves(world, x, y+size*3, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
@@ -126,7 +131,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size*2, y+size*3, z+size, leaves, size, blockEntity, true, false, false, false, false, true);
 		buildLeaves(world, x-size*2, y+size*3, z, leaves, size, blockEntity, true, false, false, false, false, true);
 		buildLeaves(world, x-size*2, y+size*3, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
-		
+
 		/** third layer **/
 		buildLeaves(world, x+size, y+size*4, z, leaves, size, blockEntity, false, false, true, true, true, false);
 
@@ -136,7 +141,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size, y+size*4, z+size, leaves, size, blockEntity, true, false, false, true, false, true);
 		buildLeaves(world, x-size, y+size*4, z, leaves, size, blockEntity, false, false, false, false, false, true);
 		buildLeaves(world, x-size, y+size*4, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
-		
+
 		/** fourth layer **/
 		buildLeaves(world, x+size, y+size*5, z, leaves, size, blockEntity, true, false, true, true, true, false);
 
@@ -156,7 +161,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLog(world, x, y+size*5, z, log, size, blockEntity, false, false, true, true, true, true);
 		buildLog(world, x, y+size*6, z, log, size, blockEntity, false, false, true, true, true, true);
 		buildLog(world, x, y+size*7, z, log, size, blockEntity, true, false, true, true, true, true);
-		
+
 		/** first layer **/
 		buildLeaves(world, x+size*3, y+size*2, z+size*2, leaves, size, blockEntity, true, true, false, true, true, false);
 		buildLeaves(world, x+size*3, y+size*2, z+size, leaves, size, blockEntity, true, true, false, false, true, false);
@@ -208,7 +213,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size*3, y+size*2, z, leaves, size, blockEntity, true, true, false, false, false, true);
 		buildLeaves(world, x-size*3, y+size*2, z-size, leaves, size, blockEntity, true, true, false, false, false, true);
 		buildLeaves(world, x-size*3, y+size*2, z-size*2, leaves, size, blockEntity, true, true, true, false, false, true);
-		
+
 		/** second layer **/
 		buildLeaves(world, x+size*2, y+size*3, z+size, leaves, size, blockEntity, true, false, false, true, true, false);
 		buildLeaves(world, x+size*2, y+size*3, z, leaves, size, blockEntity, true, false, false, false, true, false);
@@ -242,7 +247,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x, y+size*4, z-size, leaves, size, blockEntity, false, false, true, false, true, true);
 
 		buildLeaves(world, x-size, y+size*4, z, leaves, size, blockEntity, false, false, true, true, false, true);
-		
+
 		/** fourth layer **/
 		buildLeaves(world, x+size*2, y+size*5, z+size, leaves, size, blockEntity, true, true, false, true, true, false);
 		buildLeaves(world, x+size*2, y+size*5, z, leaves, size, blockEntity, true, true, false, false, true, false);
@@ -296,18 +301,18 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLog(world, x, y+size*2, z, log, size, blockEntity, false, false, true, true, true, true);
 		buildLog(world, x, y+size*3, z, log, size, blockEntity, false, false, true, true, true, true);
 		buildLog(world, x, y+size*4, z, log, size, blockEntity, true, false, true, true, true, true);
-		
+
 		/** first layer **/
 		buildLeaves(world, x+size*2, y+size*2, z+size, leaves, size, blockEntity, false, true, false, true, true, false);
 		buildLeaves(world, x+size*2, y+size*2, z, leaves, size, blockEntity, false, true, false, false, true, false);
 		buildLeaves(world, x+size*2, y+size*2, z-size, leaves, size, blockEntity, false, true, true, false, true, false);
-		
+
 		buildLeaves(world, x+size, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, true, true, false);
 		buildLeaves(world, x+size, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
 		buildLeaves(world, x+size, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, false);
 		buildLeaves(world, x+size, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
 		buildLeaves(world, x+size, y+size*2, z-size*2, leaves, size, blockEntity, false, true, true, false, true, false);
-		
+
 		buildLeaves(world, x, y+size*2, z+size*2, leaves, size, blockEntity, false, true, false, true, false, false);
 		buildLeaves(world, x, y+size*2, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
 		buildLeaves(world, x, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
@@ -323,18 +328,18 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size*2, y+size*2, z, leaves, size, blockEntity, false, true, false, false, false, true);
 		buildLeaves(world, x-size*2, y+size*2, z-size, leaves, size, blockEntity, false, true, false, false, false, true);
 		buildLeaves(world, x-size*2, y+size*2, z-size*2, leaves, size, blockEntity, true, true, true, false, false, true);
-		
+
 		/** second layer **/
 		buildLeaves(world, x+size*2, y+size*3, z+size, leaves, size, blockEntity, true, false, false, true, true, false);
 		buildLeaves(world, x+size*2, y+size*3, z, leaves, size, blockEntity, true, false, false, false, true, false);
 		buildLeaves(world, x+size*2, y+size*3, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
-		
+
 		buildLeaves(world, x+size, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, true, false);
 		buildLeaves(world, x+size, y+size*3, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
 		buildLeaves(world, x+size, y+size*3, z, leaves, size, blockEntity, false, false, false, false, false, false);
 		buildLeaves(world, x+size, y+size*3, z-size, leaves, size, blockEntity, true, false, false, false, false, false);
 		buildLeaves(world, x+size, y+size*3, z-size*2, leaves, size, blockEntity, true, false, true, false, true, false);
-		
+
 		buildLeaves(world, x, y+size*3, z+size*2, leaves, size, blockEntity, true, false, false, true, false, false);
 		buildLeaves(world, x, y+size*3, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
 		buildLeaves(world, x, y+size*3, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
@@ -350,7 +355,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size*2, y+size*3, z+size, leaves, size, blockEntity, true, false, false, false, false, true);
 		buildLeaves(world, x-size*2, y+size*3, z, leaves, size, blockEntity, true, false, false, false, false, true);
 		buildLeaves(world, x-size*2, y+size*3, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
-		
+
 		/** third layer **/
 		buildLeaves(world, x+size, y+size*4, z, leaves, size, blockEntity, false, false, true, true, true, false);
 
@@ -360,7 +365,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size, y+size*4, z+size, leaves, size, blockEntity, true, false, false, true, false, true);
 		buildLeaves(world, x-size, y+size*4, z, leaves, size, blockEntity, false, false, false, false, false, true);
 		buildLeaves(world, x-size, y+size*4, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
-		
+
 		/** fourth layer **/
 		buildLeaves(world, x+size, y+size*5, z, leaves, size, blockEntity, true, false, true, true, true, false);
 
@@ -380,18 +385,18 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLog(world, x, y+size*5, z, log, size, blockEntity, false, false, true, true, true, true);
 		buildLog(world, x, y+size*6, z, log, size, blockEntity, false, false, true, true, true, true);
 		buildLog(world, x, y+size*7, z, log, size, blockEntity, true, false, true, true, true, true);
-		
+
 		/** first layer **/
 		buildLeaves(world, x+size*2, y+size*5, z+size, leaves, size, blockEntity, false, true, false, true, true, false);
 		buildLeaves(world, x+size*2, y+size*5, z, leaves, size, blockEntity, false, true, false, false, true, false);
 		buildLeaves(world, x+size*2, y+size*5, z-size, leaves, size, blockEntity, false, true, true, false, true, false);
-		
+
 		buildLeaves(world, x+size, y+size*5, z+size*2, leaves, size, blockEntity, false, true, false, true, true, false);
 		buildLeaves(world, x+size, y+size*5, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
 		buildLeaves(world, x+size, y+size*5, z, leaves, size, blockEntity, false, true, false, false, false, false);
 		buildLeaves(world, x+size, y+size*5, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
 		buildLeaves(world, x+size, y+size*5, z-size*2, leaves, size, blockEntity, false, true, true, false, true, false);
-		
+
 		buildLeaves(world, x, y+size*5, z+size*2, leaves, size, blockEntity, false, true, false, true, false, false);
 		buildLeaves(world, x, y+size*5, z+size, leaves, size, blockEntity, false, true, false, false, false, false);
 		buildLeaves(world, x, y+size*5, z-size, leaves, size, blockEntity, false, true, false, false, false, false);
@@ -407,18 +412,18 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size*2, y+size*5, z, leaves, size, blockEntity, false, true, false, false, false, true);
 		buildLeaves(world, x-size*2, y+size*5, z-size, leaves, size, blockEntity, false, true, false, false, false, true);
 		buildLeaves(world, x-size*2, y+size*5, z-size*2, leaves, size, blockEntity, true, true, true, false, false, true);
-		
+
 		/** second layer **/
 		buildLeaves(world, x+size*2, y+size*6, z+size, leaves, size, blockEntity, true, false, false, true, true, false);
 		buildLeaves(world, x+size*2, y+size*6, z, leaves, size, blockEntity, true, false, false, false, true, false);
 		buildLeaves(world, x+size*2, y+size*6, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
-		
+
 		buildLeaves(world, x+size, y+size*6, z+size*2, leaves, size, blockEntity, true, false, false, true, true, false);
 		buildLeaves(world, x+size, y+size*6, z+size, leaves, size, blockEntity, true, false, false, false, false, false);
 		buildLeaves(world, x+size, y+size*6, z, leaves, size, blockEntity, false, false, false, false, false, false);
 		buildLeaves(world, x+size, y+size*6, z-size, leaves, size, blockEntity, true, false, false, false, false, false);
 		buildLeaves(world, x+size, y+size*6, z-size*2, leaves, size, blockEntity, true, false, true, false, true, false);
-		
+
 		buildLeaves(world, x, y+size*6, z+size*2, leaves, size, blockEntity, true, false, false, true, false, false);
 		buildLeaves(world, x, y+size*6, z+size, leaves, size, blockEntity, false, false, false, false, false, false);
 		buildLeaves(world, x, y+size*6, z-size, leaves, size, blockEntity, false, false, false, false, false, false);
@@ -434,7 +439,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size*2, y+size*6, z+size, leaves, size, blockEntity, true, false, false, false, false, true);
 		buildLeaves(world, x-size*2, y+size*6, z, leaves, size, blockEntity, true, false, false, false, false, true);
 		buildLeaves(world, x-size*2, y+size*6, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
-		
+
 		/** third layer **/
 		buildLeaves(world, x+size, y+size*7, z, leaves, size, blockEntity, false, false, true, true, true, false);
 
@@ -444,7 +449,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size, y+size*7, z+size, leaves, size, blockEntity, true, false, false, true, false, true);
 		buildLeaves(world, x-size, y+size*7, z, leaves, size, blockEntity, false, false, false, false, false, true);
 		buildLeaves(world, x-size, y+size*7, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
-		
+
 		/** fourth layer **/
 		buildLeaves(world, x+size, y+size*8, z, leaves, size, blockEntity, true, false, true, true, true, false);
 
@@ -469,7 +474,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLog(world, x-size*2, y+size*4, z, log, size, blockEntity, false, true, true, true, true, true);
 
 		buildLog(world, x-size*2, y+size*5, z, log, size, blockEntity, true, false, true, true, true, true);
-		
+
 		/** first layer **/
 		buildLeaves(world, x+size*5, y+size*4, z+size, leaves, size, blockEntity, true, true, false, true, true, false);
 		buildLeaves(world, x+size*5, y+size*4, z, leaves, size, blockEntity, true, true, false, false, true, false);
@@ -495,16 +500,16 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x+size, y+size*4, z+size, leaves, size, blockEntity, false, true, false, true, false, true);
 		buildLeaves(world, x+size, y+size*4, z, leaves, size, blockEntity, false, true, false, false, false, true);
 		buildLeaves(world, x+size, y+size*4, z-size, leaves, size, blockEntity, false, true, true, false, false, true);
-		
+
 		/** second layer **/
 		buildLeaves(world, x+size*4, y+size*5, z+size, leaves, size, blockEntity, true, false, false, true, true, false);
 		buildLeaves(world, x+size*4, y+size*5, z, leaves, size, blockEntity, true, false, false, false, true, false);
 		buildLeaves(world, x+size*4, y+size*5, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
-		
+
 		buildLeaves(world, x+size*3, y+size*5, z+size, leaves, size, blockEntity, true, false, false, true, false, false);
 		buildLeaves(world, x+size*3, y+size*5, z, leaves, size, blockEntity, true, false, false, false, false, false);
 		buildLeaves(world, x+size*3, y+size*5, z-size, leaves, size, blockEntity, true, false, true, false, false, false);
-		
+
 		buildLeaves(world, x+size*2, y+size*5, z+size, leaves, size, blockEntity, true, false, false, true, false, false);
 		buildLeaves(world, x+size*2, y+size*5, z, leaves, size, blockEntity, true, false, false, false, false, false);
 		buildLeaves(world, x+size*2, y+size*5, z-size, leaves, size, blockEntity, true, false, true, false, false, false);
@@ -559,7 +564,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size*5, y+size*5, z, leaves, size, blockEntity, true, true, false, false, false, true);
 		buildLeaves(world, x-size*5, y+size*5, z-size, leaves, size, blockEntity, true, true, false, false, false, true);
 		buildLeaves(world, x-size*5, y+size*5, z-size*2, leaves, size, blockEntity, true, true, true, false, false, true);
-		
+
 		/** third layer **/
 		buildLeaves(world, x, y+size*6, z, leaves, size, blockEntity, true, false, true, true, true, false);
 
@@ -612,7 +617,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLog(world, x, y+size*2, z+size, log, size, blockEntity, false, true, false, true, true, true);
 		buildLog(world, x, y+size*3, z+size, log, size, blockEntity, false, false, false, true, true, true);
 		buildLog(world, x, y+size*4, z+size, log, size, blockEntity, true, false, false, true, true, true);
-		
+
 		/** first layer **/
 		buildLeaves(world, x+size*2, y+size*4, z+size*2, leaves, size, blockEntity, true, true, false, true, true, false);
 		buildLeaves(world, x+size*2, y+size*4, z+size, leaves, size, blockEntity, false, true, false, false, true, false);
@@ -653,7 +658,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size*3, y+size*4, z-size, leaves, size, blockEntity, false, true, false, false, false, true);
 		buildLeaves(world, x-size*3, y+size*4, z-size*2, leaves, size, blockEntity, false, true, false, false, false, true);
 		buildLeaves(world, x-size*3, y+size*4, z-size*3, leaves, size, blockEntity, false, true, true, false, false, true);
-		
+
 		/** second layer **/
 		buildLeaves(world, x+size*3, y+size*5, z+size, leaves, size, blockEntity, true, true, false, true, true, false);
 		buildLeaves(world, x+size*3, y+size*5, z, leaves, size, blockEntity, true, true, false, false, true, false);
@@ -713,7 +718,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 		buildLeaves(world, x-size*4, y+size*5, z-size, leaves, size, blockEntity, true, true, false, false, false, true);
 		buildLeaves(world, x-size*4, y+size*5, z-size*2, leaves, size, blockEntity, true, true, false, false, false, true);
 		buildLeaves(world, x-size*4, y+size*5, z-size*3, leaves, size, blockEntity, true, true, true, false, false, true);
-		
+
 		/** third layer **/
 		buildLeaves(world, x+size*2, y+size*6, z, leaves, size, blockEntity, true, false, false, true, true, false);
 		buildLeaves(world, x+size*2, y+size*6, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
@@ -744,7 +749,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 
 		buildLeaves(world, x-size*3, y+size*6, z, leaves, size, blockEntity, true, false, false, true, false, true);
 		buildLeaves(world, x-size*3, y+size*6, z-size, leaves, size, blockEntity, true, false, true, false, false, true);
-		
+
 		/** fourth layer **/
 		buildLeaves(world, x, y+size*7, z, leaves, size, blockEntity, true, false, false, true, true, false);
 		buildLeaves(world, x, y+size*7, z-size, leaves, size, blockEntity, true, false, true, false, true, false);
@@ -754,18 +759,18 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 	}
 
 	private void buildLog(Level world, int x, int y, int z, Block block, int size, TreeBlockEntity blockEntity, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		buildBlock(world,x,y,z,block,size,blockEntity.fullLog,blockEntity.air,up,down,north,south,east,west);
+		buildBlock(world,x,y,z,block,size,blockEntity.hollowLogs,blockEntity.airInside,up,down,north,south,east,west);
 	}
 
 	private void buildLeaves(Level world, int x, int y, int z, Block block, int size, TreeBlockEntity blockEntity, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		buildBlock(world,x,y,z,block,size,blockEntity.fullLeaves,blockEntity.air,up,down,north,south,east,west);
+		buildBlock(world,x,y,z,block,size,blockEntity.hollowLeaves,blockEntity.airInside,up,down,north,south,east,west);
 	}
 
-	private void buildBlock(Level world, int x, int y, int z, Block block, int size, boolean full, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		if(full) {
+	private void buildBlock(Level world, int x, int y, int z, Block block, int size, boolean hollow, boolean airInside, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
+		if(!hollow) {
 			Builder.Multiple.setup(world,x,y,z,size,size,size).setBlock(block).build();
 		} else {
-			if(air) {
+			if(airInside) {
 				Builder.Multiple.setup(world,x,y,z,size,size,size).setBlock(Blocks.AIR).build();
 			}
 			if(up) {

@@ -4,6 +4,5 @@
     "top": "minecraft:block/glass",
     "side": "instantblocks:blocks/glassdome_side",
     "bottom": "minecraft:block/stone"
-  },
-  "render_type": "translucent"
+  }
 }

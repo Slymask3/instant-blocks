@@ -19,7 +19,7 @@ public class TreeScreen extends InstantScreen {
     private int selected = -1;
     private final int[] trees = {0, 1, 2, 3, 4, 5, 6};
 
-	private Checkbox fullLog, fullLeaves, air;
+	private Checkbox hollowLogs, hollowLeaves, airInside;
 
 	public TreeScreen(Player player, Level world, BlockPos pos) {
 		super(player, world, pos, "ib.gui.tree.title");
@@ -31,18 +31,18 @@ public class TreeScreen extends InstantScreen {
 
 		TreeBlockEntity blockEntity = (TreeBlockEntity)world.getBlockEntity(pos);
 
-		this.fullLog = new Checkbox(this.width / 2 + 4, 50, 150, 20, new TranslatableComponent("ib.gui.tree.logs"), blockEntity.fullLog);
-		this.fullLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, new TranslatableComponent("ib.gui.tree.leaves"), blockEntity.fullLeaves);
-		this.air = new Checkbox(this.width / 2 + 4, 94, 150, 20, new TranslatableComponent("ib.gui.tree.air"), blockEntity.air);
+		this.hollowLogs = new Checkbox(this.width / 2 + 4, 50, 150, 20, new TranslatableComponent("ib.gui.tree.logs"), blockEntity.hollowLogs);
+		this.hollowLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, new TranslatableComponent("ib.gui.tree.leaves"), blockEntity.hollowLeaves);
+		this.airInside = new Checkbox(this.width / 2 + 4, 94, 150, 20, new TranslatableComponent("ib.gui.tree.air"), blockEntity.airInside);
 
 		TreeList treeList = new TreeList(this.width / 2 - 4 - 150,50,144,120);
 		this.addWidget(treeList);
 
 		this.done.active = false;
 
-		this.addRenderableWidget(this.fullLog);
-		this.addRenderableWidget(this.fullLeaves);
-		this.addRenderableWidget(this.air);
+		this.addRenderableWidget(this.hollowLogs);
+		this.addRenderableWidget(this.hollowLeaves);
+		this.addRenderableWidget(this.airInside);
 		this.addRenderableWidget(treeList);
 	}
 
@@ -52,7 +52,7 @@ public class TreeScreen extends InstantScreen {
 	}
 
 	public void sendInfo(boolean activate) {
-		Common.NETWORK.sendToServer(new TreePacket(activate, this.pos, trees[selected], !fullLog.selected(), !fullLeaves.selected(), air.selected()));
+		Common.NETWORK.sendToServer(new TreePacket(activate, this.pos, this.selected, this.hollowLogs.selected(), this.hollowLeaves.selected(), this.airInside.selected()));
 	}
 
     public void setSelected(int index) {

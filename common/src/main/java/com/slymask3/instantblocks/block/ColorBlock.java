@@ -20,7 +20,7 @@ public class ColorBlock extends Block implements EntityBlock {
 
     public ColorBlock() {
         super(Properties.of(blockType.defaultBlockState().getMaterial())
-                .strength(0.5F)
+                .strength(0.8F)
                 .sound(blockType.defaultBlockState().getSoundType())
         );
     }

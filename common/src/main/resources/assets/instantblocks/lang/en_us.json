@@ -43,6 +43,7 @@
   "ib.message.error.schematic": "§cError creating schematic from the file %s",
   "ib.message.error.water_disabled": "§cGenerating water is not allowed in the nether",
   "ib.message.error.no_colors": "§cNo colors selected",
+  "ib.message.error.tree": "§cError creating huge tree",
 
   "ib.message.create.wooden_house": "§aInstant Wooden House created",
   "ib.message.create.skydive": "§aInstant §cR§6a§ei§an§2b§3o§bw§a Skydive created",
