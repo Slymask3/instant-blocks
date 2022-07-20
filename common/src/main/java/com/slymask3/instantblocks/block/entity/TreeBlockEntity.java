@@ -7,39 +7,39 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TreeBlockEntity extends InstantBlockEntity {
 	public int type;
-	public boolean fullLog, fullLeaves, air;
+	public boolean hollowLogs, hollowLeaves, airInside;
 
 	public TreeBlockEntity(BlockPos pos, BlockState state) {
 		super(ModTiles.TREE, pos, state);
 		this.type = 0;
-		this.fullLog = true;
-		this.fullLeaves = true;
-		this.air = true;
+		this.hollowLogs = true;
+		this.hollowLeaves = true;
+		this.airInside = true;
 	}
 
 	@Override
 	public void load(CompoundTag nbt) {
 		super.load(nbt);
-		type = nbt.getInt("Type");
-		fullLog = nbt.getBoolean("FullLog");
-		fullLeaves = nbt.getBoolean("FullLeaves");
-		air = nbt.getBoolean("Air");
+		this.type = nbt.getInt("Type");
+		this.hollowLogs = nbt.getBoolean("HollowLogs");
+		this.hollowLeaves = nbt.getBoolean("HollowLeaves");
+		this.airInside = nbt.getBoolean("AirInside");
 	}
 
 	@Override
 	protected void saveAdditional(CompoundTag nbt) {
 		super.saveAdditional(nbt);
-		nbt.putInt("Type", type);
-		nbt.putBoolean("FullLog", fullLog);
-		nbt.putBoolean("FullLeaves", fullLeaves);
-		nbt.putBoolean("Air", air);
+		nbt.putInt("Type", this.type);
+		nbt.putBoolean("HollowLogs", this.hollowLogs);
+		nbt.putBoolean("HollowLeaves", this.hollowLeaves);
+		nbt.putBoolean("AirInside", this.airInside);
 	}
 
-	public void update(int type, boolean fullLog, boolean fullLeaves, boolean air) {
+	public void update(int type, boolean hollowLogs, boolean hollowLeaves, boolean airInside) {
 		this.type = type;
-		this.fullLog = fullLog;
-		this.fullLeaves = fullLeaves;
-		this.air = air;
+		this.hollowLogs = hollowLogs;
+		this.hollowLeaves = hollowLeaves;
+		this.airInside = airInside;
 		this.markUpdated();
 	}
 }

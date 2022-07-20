@@ -25,7 +25,7 @@ import java.awt.*;
 public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
     public InstantSkydiveBlock() {
 		super(Properties.of(Material.WOOL)
-				.strength(1.5F)
+				.strength(0.8F)
 				.sound(SoundType.WOOL)
 		);
 		setScreen(ClientHelper.Screen.SKYDIVE);

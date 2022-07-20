@@ -15,7 +15,7 @@ import net.minecraft.world.level.material.Material;
 public class InstantWaterBlock extends InstantLiquidBlock {
     public InstantWaterBlock() {
         super(Block.Properties.of(Material.WATER)
-                .strength(1.5F)
+                .strength(0.5F)
                 .sound(new LiquidSoundType(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
                 .noOcclusion()
                 .isSuffocating((state, world, pos) -> false)

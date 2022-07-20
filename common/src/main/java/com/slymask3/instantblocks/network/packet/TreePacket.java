@@ -5,27 +5,26 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class TreePacket extends InstantPacket {
-	public final int _type;
-	public final boolean _log;
-	public final boolean _leaves;
-	public final boolean _air;
+	public final int type;
+	public final boolean hollowLogs;
+	public final boolean hollowLeaves;
+	public final boolean airInside;
 
-	public TreePacket(boolean activate, BlockPos pos, int type, boolean fullLogs, boolean fullLeaves, boolean air) {
+	public TreePacket(boolean activate, BlockPos pos, int type, boolean hollowLogs, boolean hollowLeaves, boolean airInside) {
 		super(PacketHelper.PacketID.TREE,activate,pos);
-		_type = type;
-		_log = fullLogs;
-		_leaves = fullLeaves;
-		_air = air;
+		this.type = type;
+		this.hollowLogs = hollowLogs;
+		this.hollowLeaves = hollowLeaves;
+		this.airInside = airInside;
 	}
 
 	public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT packet, FriendlyByteBuf buffer) {
 		buffer = super.write(packet,buffer);
 		TreePacket message = (TreePacket)packet;
-		buffer.writeBlockPos(message.pos);
-		buffer.writeInt(message._type);
-		buffer.writeBoolean(message._log);
-		buffer.writeBoolean(message._leaves);
-		buffer.writeBoolean(message._air);
+		buffer.writeInt(message.type);
+		buffer.writeBoolean(message.hollowLogs);
+		buffer.writeBoolean(message.hollowLeaves);
+		buffer.writeBoolean(message.airInside);
 		return buffer;
 	}
 
@@ -33,9 +32,9 @@ public class TreePacket extends InstantPacket {
 		boolean activate = buffer.readBoolean();
 		BlockPos pos = buffer.readBlockPos();
 		int type = buffer.readInt();
-		boolean log = buffer.readBoolean();
-		boolean leaves = buffer.readBoolean();
-		boolean air = buffer.readBoolean();
-		return new TreePacket(activate,pos,type,log,leaves,air);
+		boolean hollowLogs = buffer.readBoolean();
+		boolean hollowLeaves = buffer.readBoolean();
+		boolean airInside = buffer.readBoolean();
+		return new TreePacket(activate,pos,type,hollowLogs,hollowLeaves,airInside);
 	}
 }

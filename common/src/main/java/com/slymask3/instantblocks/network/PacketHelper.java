@@ -70,7 +70,7 @@ public class PacketHelper {
             Level world = player.getLevel();
             TreeBlockEntity blockEntity = (TreeBlockEntity)world.getBlockEntity(message.pos);
             if(blockEntity != null) {
-                blockEntity.update(message._type, message._log, message._leaves, message._air);
+                blockEntity.update(message.type, message.hollowLogs, message.hollowLeaves, message.airInside);
                 activate(message, world, player);
             }
         }

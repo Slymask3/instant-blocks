@@ -6,6 +6,7 @@ import com.slymask3.instantblocks.block.entity.TreeBlockEntity;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
@@ -61,6 +62,10 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 			case 4 -> buildAcacia(world, x, y, z, Blocks.ACACIA_LOG, Blocks.ACACIA_LEAVES, size, blockEntity);
 			case 5 -> buildDarkOak(world, x, y, z, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_LEAVES, size, blockEntity);
 			case 6 -> buildOak(world, x, y, z, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, size, blockEntity);
+			default -> {
+				Helper.sendMessage(player, Strings.ERROR_TREE);
+				return false;
+			}
 		}
 		setCreateMessage(Strings.CREATE_TREE, treeToString(blockEntity.type,player));
 		return true;
@@ -754,18 +759,18 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 	}
 
 	private void buildLog(Level world, int x, int y, int z, Block block, int size, TreeBlockEntity blockEntity, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		buildBlock(world,x,y,z,block,size,blockEntity.fullLog,blockEntity.air,up,down,north,south,east,west);
+		buildBlock(world,x,y,z,block,size,blockEntity.hollowLogs,blockEntity.airInside,up,down,north,south,east,west);
 	}
 
 	private void buildLeaves(Level world, int x, int y, int z, Block block, int size, TreeBlockEntity blockEntity, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		buildBlock(world,x,y,z,block,size,blockEntity.fullLeaves,blockEntity.air,up,down,north,south,east,west);
+		buildBlock(world,x,y,z,block,size,blockEntity.hollowLeaves,blockEntity.airInside,up,down,north,south,east,west);
 	}
 
-	private void buildBlock(Level world, int x, int y, int z, Block block, int size, boolean full, boolean air, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
-		if(full) {
+	private void buildBlock(Level world, int x, int y, int z, Block block, int size, boolean hollow, boolean airInside, boolean up, boolean down, boolean north, boolean south, boolean east, boolean west) {
+		if(!hollow) {
 			Builder.Multiple.setup(world,x,y,z,size,size,size).setBlock(block).build();
 		} else {
-			if(air) {
+			if(airInside) {
 				Builder.Multiple.setup(world,x,y,z,size,size,size).setBlock(Blocks.AIR).build();
 			}
 			if(up) {
