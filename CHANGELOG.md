@@ -1,6 +1,8 @@
 # Minecraft 1.19 Changelog
 
-## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.1...HEAD)
+## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.2...HEAD)
+
+## [1.6.2](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.1...1.19-1.6.2) - 2022-07-20
 ### Changed
 - Adjusted block strengths
 - Don't allow activating when the wand doesn't have enough durability (configurable)
@@ -29,6 +31,15 @@
 ---
 
 # Minecraft 1.18.2 Changelog
+
+## [1.6.2](https://github.com/slymask3/instant-blocks/compare/1.18.2-1.6.1...1.18.2-1.6.2) - 2022-07-20
+### Changed
+- Adjusted block strengths
+- Don't allow activating when the wand doesn't have enough durability (configurable)
+
+### Fixed
+- Instant tree packet
+- Block rendering
 
 ## [1.6.1](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.1...1.18.2-1.6.1) - 2022-07-19
 ### Added
