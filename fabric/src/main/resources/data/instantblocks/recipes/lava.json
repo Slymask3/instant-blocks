@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "LDL",
+    "LLL"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:lava_bucket"
+    },
+    "D": {
+      "tag": "c:diamonds"
+    }
+  },
+  "result": {
+    "item": "instantblocks:instant_lava",
+    "count": 2
+  }
+}

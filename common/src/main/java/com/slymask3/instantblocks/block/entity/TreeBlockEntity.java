@@ -11,7 +11,7 @@ public class TreeBlockEntity extends InstantBlockEntity {
 
 	public TreeBlockEntity(BlockPos pos, BlockState state) {
 		super(ModTiles.TREE, pos, state);
-		this.type = 0;
+		this.type = -1;
 		this.hollowLogs = true;
 		this.hollowLeaves = true;
 		this.airInside = true;

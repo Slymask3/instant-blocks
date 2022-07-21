@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IHI",
+    "III"
+  ],
+  "key": {
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "I": {
+      "tag": "c:iron_ingots"
+    }
+  },
+  "result": {
+    "item": "instantblocks:instant_suction",
+    "count": 2
+  }
+}

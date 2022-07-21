@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "LDL",
+    "LLL"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:water_bucket"
+    },
+    "D": {
+      "tag": "c:diamonds"
+    }
+  },
+  "result": {
+    "item": "instantblocks:instant_water",
+    "count": 2
+  }
+}

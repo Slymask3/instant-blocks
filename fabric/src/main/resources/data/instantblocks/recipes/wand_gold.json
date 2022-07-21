@@ -7,7 +7,7 @@
   ],
   "key": {
     "M": {
-      "tag": "minecraft:stone_tool_materials"
+      "tag": "c:gold_ingots"
     },
     "R": {
       "item": "minecraft:redstone_block"
@@ -17,6 +17,6 @@
     }
   },
   "result": {
-    "item": "instantblocks:wand_stone"
+    "item": "instantblocks:wand_gold"
   }
 }
