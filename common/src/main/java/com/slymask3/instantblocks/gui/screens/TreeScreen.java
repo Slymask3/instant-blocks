@@ -20,6 +20,7 @@ public class TreeScreen extends InstantScreen {
     private final int[] trees = {0, 1, 2, 3, 4, 5, 6};
 
 	private Checkbox hollowLogs, hollowLeaves, airInside;
+	private TreeList treeList;
 
 	public TreeScreen(Player player, Level world, BlockPos pos) {
 		super(player, world, pos, "ib.gui.tree.title");
@@ -35,16 +36,15 @@ public class TreeScreen extends InstantScreen {
 		this.hollowLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, new TranslatableComponent("ib.gui.tree.leaves"), blockEntity.hollowLeaves);
 		this.airInside = new Checkbox(this.width / 2 + 4, 94, 150, 20, new TranslatableComponent("ib.gui.tree.air"), blockEntity.airInside);
 
-		TreeList treeList = new TreeList(this.width / 2 - 4 - 150,50,144,120);
-		treeList.setSelectedTree(blockEntity.type);
-		this.addWidget(treeList);
-
-		this.done.active = false;
+		this.treeList = new TreeList(this.width / 2 - 4 - 150,50,144,this.height / 4 + 70);
+		this.addWidget(this.treeList);
 
 		this.addRenderableWidget(this.hollowLogs);
 		this.addRenderableWidget(this.hollowLeaves);
 		this.addRenderableWidget(this.airInside);
 		this.addRenderableWidget(treeList);
+
+		this.setSelected(blockEntity.type);
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
@@ -57,7 +57,8 @@ public class TreeScreen extends InstantScreen {
 	}
 
     public void setSelected(int index) {
-        this.selected = index;
+		this.selected = index;
+		this.treeList.setSelectedTree(index);
 		this.done.active = index >= 0 && index < this.trees.length;
     }
 

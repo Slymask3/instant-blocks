@@ -5,6 +5,7 @@ import com.slymask3.instantblocks.network.packet.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
@@ -32,16 +33,19 @@ public class ForgePacketHandler {
     public static class Handler {
         public static void common(AbstractPacket message, Supplier<NetworkEvent.Context> context) {
             context.get().enqueueWork(() -> {
-                if(message.getClass().equals(SkydivePacket.class)) {
-                    PacketHelper.handleSkydive((SkydivePacket)message, context.get().getSender());
-                } else if(message.getClass().equals(StatuePacket.class)) {
-                    PacketHelper.handleStatue((StatuePacket)message, context.get().getSender());
-                } else if(message.getClass().equals(HarvestPacket.class)) {
-                    PacketHelper.handleHarvest((HarvestPacket)message, context.get().getSender());
-                } else if(message.getClass().equals(TreePacket.class)) {
-                    PacketHelper.handleTree((TreePacket)message, context.get().getSender());
-                } else if(message.getClass().equals(SchematicPacket.class)) {
-                    PacketHelper.handleSchematic((SchematicPacket)message, context.get().getSender());
+                Player player = context.get().getSender();
+                if(player != null) {
+                    if(message.getClass().equals(SkydivePacket.class)) {
+                        PacketHelper.handleSkydive((SkydivePacket)message, player);
+                    } else if(message.getClass().equals(StatuePacket.class)) {
+                        PacketHelper.handleStatue((StatuePacket)message, player);
+                    } else if(message.getClass().equals(HarvestPacket.class)) {
+                        PacketHelper.handleHarvest((HarvestPacket)message, player);
+                    } else if(message.getClass().equals(TreePacket.class)) {
+                        PacketHelper.handleTree((TreePacket)message, player);
+                    } else if(message.getClass().equals(SchematicPacket.class)) {
+                        PacketHelper.handleSchematic((SchematicPacket)message, player);
+                    }
                 }
             });
             context.get().setPacketHandled(true);
@@ -57,10 +61,13 @@ public class ForgePacketHandler {
     @OnlyIn(Dist.CLIENT)
     public static class ClientHandler {
         public static void handle(AbstractPacket message, Supplier<NetworkEvent.Context> context) {
-            if(message.getClass().equals(ClientPacket.class)) {
-                PacketHelper.handleClient((ClientPacket)message, Minecraft.getInstance().player);
-            } else if(message.getClass().equals(SchematicUpdatePacket.class)) {
-                PacketHelper.handleSchematicUpdate((SchematicUpdatePacket)message, Minecraft.getInstance().player);
+            Player player = Minecraft.getInstance().player;
+            if(player != null) {
+                if(message.getClass().equals(ClientPacket.class)) {
+                    PacketHelper.handleClient((ClientPacket)message, player);
+                } else if(message.getClass().equals(SchematicUpdatePacket.class)) {
+                    PacketHelper.handleSchematicUpdate((SchematicUpdatePacket)message, player);
+                }
             }
         }
     }
