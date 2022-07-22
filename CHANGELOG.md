@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.2...HEAD)
 
+## [1.6.3](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.2...1.19-1.6.3)
+### Fixed
+- Recipes using forge tags on fabric
+
 ## [1.6.2](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.1...1.19-1.6.2) - 2022-07-20
 ### Changed
 - Adjusted block strengths
@@ -31,6 +35,10 @@
 ---
 
 # Minecraft 1.18.2 Changelog
+
+## [1.6.3](https://github.com/slymask3/instant-blocks/compare/1.18.2-1.6.2...1.18.2-1.6.3)
+### Fixed
+- Recipes using forge tags on fabric
 
 ## [1.6.2](https://github.com/slymask3/instant-blocks/compare/1.18.2-1.6.1...1.18.2-1.6.2) - 2022-07-20
 ### Changed
