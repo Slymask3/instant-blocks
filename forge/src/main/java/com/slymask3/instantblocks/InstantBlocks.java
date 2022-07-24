@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks;
 
+import com.slymask3.instantblocks.config.ClothConfig;
 import com.slymask3.instantblocks.config.ForgeConfig;
 import com.slymask3.instantblocks.core.ModBlocks;
 import com.slymask3.instantblocks.init.ForgeTiles;
@@ -8,6 +9,7 @@ import com.slymask3.instantblocks.init.Registration;
 import com.slymask3.instantblocks.network.ForgePacketHandler;
 import com.slymask3.instantblocks.network.IPacketHandler;
 import com.slymask3.instantblocks.network.packet.AbstractPacket;
+import com.slymask3.instantblocks.platform.Services;
 import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -30,9 +32,14 @@ public class InstantBlocks {
 		Common.ITEM_GROUP = new CreativeModeTab(CreativeModeTab.TABS.length,Common.MOD_ID) { public @NotNull ItemStack makeIcon() { return new ItemStack(ModBlocks.INSTANT_WOOD_HOUSE); } };
 		Common.NETWORK = new PacketHandler();
 		Common.TILES = new ForgeTiles();
-		Common.CONFIG = new ForgeConfig();
 
-		ForgeConfig.init();
+		if(Services.PLATFORM.isModLoaded("cloth_config")) {
+			ClothConfig.register();
+			Common.CONFIG = ClothConfig.get();
+		} else {
+			ForgeConfig.init();
+			Common.CONFIG = new ForgeConfig();
+		}
 
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(this::setupCommon);

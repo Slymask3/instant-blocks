@@ -5,16 +5,14 @@ issueTrackerURL="https://github.com/slymask3/instant-blocks/issues"
 
 [[mods]]
 modId="instantblocks"
-version="1.6.2"
+version="1.6.4"
 displayName="Instant Blocks"
 updateJSONURL="https://raw.githubusercontent.com/slymask3/instant-blocks/1.19.x/update.json"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/instant-blocks"
 logoFile="logo.png"
 credits="Slymask3"
 authors="Slymask3"
-description='''
-This mod adds 'Instant Blocks' to the game. These blocks could be obtained from crafting, dungeon chests, village chests, etc. Each block generates a different structure upon right-clicking on the block with an Instant Wand.
-'''
+description="Generate structures or perform actions instantaneously."
 
 [[dependencies.instantblocks]]
     modId="forge"

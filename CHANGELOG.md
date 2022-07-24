@@ -1,6 +1,7 @@
 # Minecraft 1.19 Changelog
 
-## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.2...HEAD)
+## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.3...HEAD)
+- Added optional cloth config support for forge
 
 ## [1.6.3](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.2...1.19-1.6.3)
 ### Fixed
