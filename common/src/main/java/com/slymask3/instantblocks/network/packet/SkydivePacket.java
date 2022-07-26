@@ -5,28 +5,29 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class SkydivePacket extends InstantPacket {
-	public final int _colors_amount;
-	public final String[] _colors;
-	public final int _radius;
-	public final boolean _tp;
+	public final String[] colors;
+	public final int radius;
+	public final boolean teleport;
+	public final int colorSetsIndex;
 
-	public SkydivePacket(boolean activate, BlockPos pos, int colors_amount, String[] colors, int radius, boolean tp) {
+	public SkydivePacket(boolean activate, BlockPos pos, String[] colors, int radius, boolean teleport, int colorSetsIndex) {
 		super(PacketHelper.PacketID.SKYDIVE,activate,pos);
-		_colors_amount = colors_amount;
-		_colors = colors;
-		_radius = radius;
-		_tp = tp;
+		this.colors = colors;
+		this.radius = radius;
+		this.teleport = teleport;
+		this.colorSetsIndex = colorSetsIndex;
 	}
 
 	public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT packet, FriendlyByteBuf buffer) {
 		buffer = super.write(packet,buffer);
 		SkydivePacket message = (SkydivePacket)packet;
-		buffer.writeInt(message._colors_amount);
-		for(int i=0; i < message._colors.length; i++) {
-			buffer.writeUtf(message._colors[i]);
+		buffer.writeInt(message.colors.length);
+		for(int i=0; i < message.colors.length; i++) {
+			buffer.writeUtf(message.colors[i]);
 		}
-		buffer.writeInt(message._radius);
-		buffer.writeBoolean(message._tp);
+		buffer.writeInt(message.radius);
+		buffer.writeBoolean(message.teleport);
+		buffer.writeInt(message.colorSetsIndex);
 		return buffer;
 	}
 
@@ -39,7 +40,8 @@ public class SkydivePacket extends InstantPacket {
 			colors[i] = buffer.readUtf();
 		}
 		int radius = buffer.readInt();
-		boolean tp = buffer.readBoolean();
-		return new SkydivePacket(activate,pos,colors_amount,colors,radius,tp);
+		boolean teleport = buffer.readBoolean();
+		int colorSetsIndex = buffer.readInt();
+		return new SkydivePacket(activate,pos,colors,radius,teleport,colorSetsIndex);
 	}
 }

@@ -7,7 +7,6 @@ import com.slymask3.instantblocks.reference.Names;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -127,7 +126,7 @@ public class Helper {
 
 	public static void sendMessage(Player player, String message, String variable, BlockPos pos, ClientHelper.Particles particles) {
 		if(isServer(player.getLevel())) {
-			Common.NETWORK.sendToClient((ServerPlayer)player,new ClientPacket(message,variable,pos,particles.ordinal()));
+			Common.NETWORK.sendToClient(player,new ClientPacket(message,variable,pos,particles.ordinal()));
 		}
 	}
 

@@ -63,6 +63,13 @@ public class FabricPacketHandler {
                     client.execute(() -> PacketHelper.handleSchematicUpdate(message, client.player));
                 }
             });
+
+            ClientPlayNetworking.registerGlobalReceiver(new ResourceLocation(PacketHelper.PacketID.SKYDIVE_UPDATE.toString().toLowerCase()), (client, handler, buf, responseSender) -> {
+                if(client.player != null) {
+                    SkydiveUpdatePacket message = SkydiveUpdatePacket.decode(buf);
+                    client.execute(() -> PacketHelper.handleSkydiveUpdate(message, client.player));
+                }
+            });
         }
     }
 }

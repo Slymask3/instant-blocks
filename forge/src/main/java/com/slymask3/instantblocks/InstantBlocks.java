@@ -10,10 +10,12 @@ import com.slymask3.instantblocks.network.ForgePacketHandler;
 import com.slymask3.instantblocks.network.IPacketHandler;
 import com.slymask3.instantblocks.network.packet.AbstractPacket;
 import com.slymask3.instantblocks.platform.Services;
+import com.slymask3.instantblocks.util.Helper;
 import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -78,8 +80,10 @@ public class InstantBlocks {
 		public void sendToServer(AbstractPacket message) {
 			ForgePacketHandler.INSTANCE.sendToServer(message);
 		}
-		public void sendToClient(ServerPlayer player, AbstractPacket message) {
-			ForgePacketHandler.INSTANCE.sendTo(message, player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+		public void sendToClient(Player player, AbstractPacket message) {
+			if(Helper.isServer(player.getLevel())) {
+				ForgePacketHandler.INSTANCE.sendTo(message, ((ServerPlayer)player).connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+			}
 		}
 	}
 }

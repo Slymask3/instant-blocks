@@ -10,6 +10,7 @@ import com.slymask3.instantblocks.network.FabricPacketHandler;
 import com.slymask3.instantblocks.network.IPacketHandler;
 import com.slymask3.instantblocks.network.packet.AbstractPacket;
 import com.slymask3.instantblocks.platform.Services;
+import com.slymask3.instantblocks.util.Helper;
 import com.slymask3.instantblocks.util.SchematicHelper;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -18,6 +19,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 public class InstantBlocks implements ModInitializer {
@@ -55,8 +57,10 @@ public class InstantBlocks implements ModInitializer {
         public void sendToServer(AbstractPacket message) {
             ClientPlayNetworking.send(message.getKey(), message.getBuffer());
         }
-        public void sendToClient(ServerPlayer player, AbstractPacket message) {
-            ServerPlayNetworking.send(player, message.getKey(), message.getBuffer());
+        public void sendToClient(Player player, AbstractPacket message) {
+            if(Helper.isServer(player.getLevel())) {
+                ServerPlayNetworking.send((ServerPlayer)player, message.getKey(), message.getBuffer());
+            }
         }
     }
 }

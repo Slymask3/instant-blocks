@@ -1,5 +1,8 @@
 package com.slymask3.instantblocks.config;
 
+import java.util.Arrays;
+import java.util.List;
+
 public interface IConfig {
     default void reload() {}
 
@@ -24,6 +27,7 @@ public interface IConfig {
     default int SKYDIVE_MAX() { return Defaults.SKYDIVE_MAX; }
     default int SKYDIVE_WATER() { return Defaults.SKYDIVE_WATER; }
     default int SKYDIVE_RADIUS() { return Defaults.SKYDIVE_RADIUS; }
+    default List<ColorSet> SKYDIVE_PRESETS() { return Defaults.SKYDIVE_PRESETS; }
 
     default int WEIGHT_WHEAT() { return Defaults.WEIGHT_WHEAT; }
     default int WEIGHT_POTATOES() { return Defaults.WEIGHT_POTATOES; }
@@ -155,5 +159,23 @@ public interface IConfig {
         public static boolean SHOW_EFFECTS = true;
         public static String SOUND_GENERATE = "entity.player.levelup";
         public static String SOUND_NO_LIQUID = "entity.panda.sneeze";
+
+        public static List<ColorSet> SKYDIVE_PRESETS = Arrays.asList(
+            new ColorSet("Rainbow","red","orange","yellow","lime","green","cyan","light blue","blue","purple","magenta","pink"),
+            new ColorSet("Test","lime","light blue","pink")
+        );
+    }
+
+    class ColorSet {
+        public String name;
+        public List<String> colors;
+        public ColorSet() {
+            this.name = "Unnamed";
+            this.colors = Arrays.asList("white");
+        }
+        public ColorSet(String name, String... colors) {
+            this.name = name;
+            this.colors = Arrays.asList(colors);
+        }
     }
 }
