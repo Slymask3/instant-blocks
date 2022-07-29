@@ -70,6 +70,13 @@ public class FabricPacketHandler {
                     client.execute(() -> PacketHelper.handleSkydiveUpdate(message, client.player));
                 }
             });
+
+            ClientPlayNetworking.registerGlobalReceiver(new ResourceLocation(PacketHelper.PacketID.TREE_UPDATE.toString().toLowerCase()), (client, handler, buf, responseSender) -> {
+                if(client.player != null) {
+                    TreeUpdatePacket message = TreeUpdatePacket.decode(buf);
+                    client.execute(() -> PacketHelper.handleTreeUpdate(message, client.player));
+                }
+            });
         }
     }
 }

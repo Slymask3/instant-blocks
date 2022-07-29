@@ -1,6 +1,6 @@
 package com.slymask3.instantblocks.network.packet;
 
-import com.slymask3.instantblocks.config.IConfig;
+import com.slymask3.instantblocks.config.entry.ColorSet;
 import com.slymask3.instantblocks.network.PacketHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SkydiveUpdatePacket extends AbstractPacket {
-	public final List<IConfig.ColorSet> presets;
+	public final List<ColorSet> presets;
 	public final BlockPos pos;
 
-	public SkydiveUpdatePacket(List<IConfig.ColorSet> presets, BlockPos pos) {
+	public SkydiveUpdatePacket(List<ColorSet> presets, BlockPos pos) {
 		super(PacketHelper.PacketID.SKYDIVE_UPDATE);
 		this.presets = presets;
 		this.pos = pos;
@@ -21,7 +21,7 @@ public class SkydiveUpdatePacket extends AbstractPacket {
 	public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT packet, FriendlyByteBuf buffer) {
 		SkydiveUpdatePacket message = (SkydiveUpdatePacket)packet;
 		buffer.writeInt(message.presets.size());
-		for(IConfig.ColorSet colorSet : message.presets) {
+		for(ColorSet colorSet : message.presets) {
 			buffer.writeUtf(colorSet.name);
 			buffer.writeInt(colorSet.colors.size());
 			for(String color : colorSet.colors) {
@@ -34,7 +34,7 @@ public class SkydiveUpdatePacket extends AbstractPacket {
 
 	public static SkydiveUpdatePacket decode(FriendlyByteBuf buffer) {
 		int amount = buffer.readInt();
-		List<IConfig.ColorSet> presets = new ArrayList<>();
+		List<ColorSet> presets = new ArrayList<>();
 		for(int i=0; i < amount; i++) {
 			String name = buffer.readUtf();
 			int amountColors = buffer.readInt();
@@ -42,7 +42,7 @@ public class SkydiveUpdatePacket extends AbstractPacket {
 			for(int j=0; j < amountColors; j++) {
 				colors.add(buffer.readUtf());
 			}
-			presets.add(new IConfig.ColorSet(name,colors.toArray(new String[0])));
+			presets.add(new ColorSet(name,colors.toArray(new String[0])));
 		}
 		BlockPos pos = buffer.readBlockPos();
 		return new SkydiveUpdatePacket(presets,pos);

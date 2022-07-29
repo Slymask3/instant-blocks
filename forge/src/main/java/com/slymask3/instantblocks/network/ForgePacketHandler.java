@@ -70,6 +70,8 @@ public class ForgePacketHandler {
                     PacketHelper.handleSchematicUpdate((SchematicUpdatePacket)message, player);
                 } else if(message.getClass().equals(SkydiveUpdatePacket.class)) {
                     PacketHelper.handleSkydiveUpdate((SkydiveUpdatePacket)message, player);
+                } else if(message.getClass().equals(TreeUpdatePacket.class)) {
+                    PacketHelper.handleTreeUpdate((TreeUpdatePacket)message, player);
                 }
             }
         }

@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.gui.screens;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.entity.SkydiveBlockEntity;
-import com.slymask3.instantblocks.config.IConfig;
+import com.slymask3.instantblocks.config.entry.ColorSet;
 import com.slymask3.instantblocks.gui.components.ColorEditBox;
 import com.slymask3.instantblocks.network.packet.SkydivePacket;
 import com.slymask3.instantblocks.util.ClientHelper;
@@ -25,7 +25,7 @@ public class SkydiveScreen extends InstantScreen {
 	private Checkbox teleport;
 	private EditBox radius;
 	private Button preset;
-	private final List<IConfig.ColorSet> colorSets;
+	private final List<ColorSet> colorSets;
 	private int colorSetsIndex;
 
 	public SkydiveScreen(Player player, Level world, BlockPos pos) {
@@ -131,7 +131,7 @@ public class SkydiveScreen extends InstantScreen {
 
 	private void setPreset() {
 		if(this.colorSets.size() > 0) {
-			IConfig.ColorSet colorSet = this.colorSets.get(this.colorSetsIndex);
+			ColorSet colorSet = this.colorSets.get(this.colorSetsIndex);
 			this.preset.setMessage(Component.translatable("ib.gui.skydive.preset",colorSet.name));
 			for(int i=0; i<this.color.length; i++) {
 				this.color[i].setValue(i < colorSet.colors.size() ? colorSet.colors.get(i) : "");

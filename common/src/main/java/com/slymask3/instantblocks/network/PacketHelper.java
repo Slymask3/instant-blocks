@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class PacketHelper {
-    public enum PacketID { CLIENT, SKYDIVE, STATUE, HARVEST, TREE, SCHEMATIC, SCHEMATIC_UPDATE, SKYDIVE_UPDATE }
+    public enum PacketID { CLIENT, SKYDIVE, STATUE, HARVEST, TREE, SCHEMATIC, SCHEMATIC_UPDATE, SKYDIVE_UPDATE, TREE_UPDATE }
 
     private static void activate(InstantPacket message, Level world, Player player) {
         if(message.activate) {
@@ -61,7 +61,7 @@ public class PacketHelper {
         Level world = player.getLevel();
         TreeBlockEntity blockEntity = (TreeBlockEntity)world.getBlockEntity(message.pos);
         if(blockEntity != null) {
-            blockEntity.update(message.type, message.hollowLogs, message.hollowLeaves, message.airInside);
+            blockEntity.update(message.tree, message.hollowLogs, message.hollowLeaves, message.airInside, message.hugeTreesIndex);
             activate(message, world, player);
         }
     }
@@ -83,5 +83,10 @@ public class PacketHelper {
     public static void handleSkydiveUpdate(SkydiveUpdatePacket message, Player player) {
         ClientHelper.SKYDIVE_PRESETS = message.presets;
         ClientHelper.showScreen(ClientHelper.Screen.SKYDIVE,player,player.getLevel(),message.pos);
+    }
+
+    public static void handleTreeUpdate(TreeUpdatePacket message, Player player) {
+        ClientHelper.HUGE_TREES = message.hugeTrees;
+        ClientHelper.showScreen(ClientHelper.Screen.TREE,player,player.getLevel(),message.pos);
     }
 }

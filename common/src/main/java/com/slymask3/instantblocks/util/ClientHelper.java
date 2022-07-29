@@ -3,7 +3,8 @@ package com.slymask3.instantblocks.util;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantLiquidBlock;
 import com.slymask3.instantblocks.block.entity.ColorBlockEntity;
-import com.slymask3.instantblocks.config.IConfig;
+import com.slymask3.instantblocks.config.entry.ColorSet;
+import com.slymask3.instantblocks.config.entry.HugeTree;
 import com.slymask3.instantblocks.gui.screens.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
@@ -26,7 +27,8 @@ public class ClientHelper {
     public enum Screen { STATUE, HARVEST, SKYDIVE, SCHEMATIC, TREE }
     public enum Particles { NONE, GENERATE, NO_LIQUID }
 
-    public static List<IConfig.ColorSet> SKYDIVE_PRESETS;
+    public static List<ColorSet> SKYDIVE_PRESETS;
+    public static List<HugeTree> HUGE_TREES;
 
     public static void playSound(Level world, BlockPos pos, Particles particles) {
         SoundEvent sound = switch(particles) {

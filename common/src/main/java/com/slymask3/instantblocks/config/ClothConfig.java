@@ -1,6 +1,8 @@
 package com.slymask3.instantblocks.config;
 
 import com.slymask3.instantblocks.Common;
+import com.slymask3.instantblocks.config.entry.ColorSet;
+import com.slymask3.instantblocks.config.entry.HugeTree;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
@@ -136,6 +138,7 @@ public class ClothConfig implements ConfigData, IConfig {
     static class SectionTree {
         @ConfigEntry.BoundedDiscrete(min = 1, max = 24)
         int TREE_SIZE = Defaults.TREE_SIZE;
+        List<HugeTree> HUGE_TREES = Defaults.HUGE_TREES;
     }
 
     @ConfigEntry.Category("toggle")
@@ -207,7 +210,6 @@ public class ClothConfig implements ConfigData, IConfig {
     public int RAILS_AMOUNT() { return rail.RAILS_AMOUNT; }
     public int MINING_LADDER_LAYER() { return mining.MINING_LADDER_LAYER; }
     public int XP_AMOUNT() { return general.XP_AMOUNT; }
-    public int TREE_SIZE() { return tree.TREE_SIZE; }
     public int RADIUS_DOME() { return dome.RADIUS_DOME; }
     public int MAX_LIQUID() { return liquid.MAX_LIQUID; }
     public int MAX_FILL() { return liquid.MAX_FILL; }
@@ -216,7 +218,9 @@ public class ClothConfig implements ConfigData, IConfig {
     public int SKYDIVE_MAX() { return skydive.SKYDIVE_MAX; }
     public int SKYDIVE_WATER() { return skydive.SKYDIVE_WATER; }
     public int SKYDIVE_RADIUS() { return skydive.SKYDIVE_RADIUS; }
-    public List<ColorSet> SKYDIVE_PRESETS() { return skydive.SKYDIVE_PRESETS; }
+    public List<ColorSet> SKYDIVE_PRESETS() { return skydive.SKYDIVE_PRESETS.size() == 1 && skydive.SKYDIVE_PRESETS.get(0).colors.size() == 0 ? List.of() : skydive.SKYDIVE_PRESETS; }
+    public int TREE_SIZE() { return tree.TREE_SIZE; }
+    public List<HugeTree> HUGE_TREES() { return tree.HUGE_TREES.size() == 1 && tree.HUGE_TREES.get(0).name.isEmpty() ? List.of() : tree.HUGE_TREES; }
     public int WEIGHT_WHEAT() { return farm.WEIGHT_WHEAT; }
     public int WEIGHT_POTATOES() { return farm.WEIGHT_POTATOES; }
     public int WEIGHT_CARROTS() { return farm.WEIGHT_CARROTS; }

@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.block.entity;
 
 import com.slymask3.instantblocks.Common;
-import com.slymask3.instantblocks.config.IConfig;
+import com.slymask3.instantblocks.config.entry.ColorSet;
 import com.slymask3.instantblocks.core.ModTiles;
 import com.slymask3.instantblocks.util.ColorHelper;
 import net.minecraft.core.BlockPos;
@@ -19,7 +19,7 @@ public class SkydiveBlockEntity extends InstantBlockEntity {
 
 	public SkydiveBlockEntity(BlockPos pos, BlockState state) {
 		super(ModTiles.SKYDIVE, pos, state);
-		List<IConfig.ColorSet> colorSets = Common.CONFIG.SKYDIVE_PRESETS();
+		List<ColorSet> colorSets = Common.CONFIG.SKYDIVE_PRESETS();
 		for(int i=0; i<color.length; i++) {
 			String color = colorSets.size() > 0 && i < colorSets.get(0).colors.size() ? colorSets.get(0).colors.get(i) : "";
 			this.color[i] = color;

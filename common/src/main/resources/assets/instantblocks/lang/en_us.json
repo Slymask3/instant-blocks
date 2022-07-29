@@ -210,6 +210,12 @@
 
   "text.autoconfig.instantblocks.option.tree": "Instant Huge Tree",
   "text.autoconfig.instantblocks.option.tree.TREE_SIZE": "Block size for the huge tree",
+  "text.autoconfig.instantblocks.option.tree.HUGE_TREES": "Huge Trees List",
+  "text.autoconfig.instantblocks.option.HugeTree": "Huge Tree",
+  "text.autoconfig.instantblocks.option.HugeTree.name": "Name",
+  "text.autoconfig.instantblocks.option.HugeTree.type": "Type",
+  "text.autoconfig.instantblocks.option.HugeTree.logs": "Logs Block",
+  "text.autoconfig.instantblocks.option.HugeTree.leaves": "Leaves Block",
 
   "text.autoconfig.instantblocks.category.toggle": "Toggle",
   "text.autoconfig.instantblocks.option.toggle.@PrefixText": "Toggling instant blocks",

@@ -5,6 +5,7 @@ import com.slymask3.instantblocks.item.InstantWandItem;
 import com.slymask3.instantblocks.network.packet.ClientPacket;
 import com.slymask3.instantblocks.reference.Names;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.entity.player.Player;
@@ -183,6 +184,10 @@ public class Helper {
 			return fallback;
 		}
 		return state;
+	}
+
+	public static String serializeBlock(Block block) {
+		return Registry.BLOCK.getKey(block).toString();
 	}
 
 	public static class WeightedBlock {
