@@ -162,7 +162,7 @@ public interface IConfig {
 
         public static List<ColorSet> SKYDIVE_PRESETS = Arrays.asList(
             new ColorSet("Rainbow","red","orange","yellow","lime","green","cyan","light blue","blue","purple","magenta","pink"),
-            new ColorSet("Test","lime","light blue","pink")
+            new ColorSet("Grayscale","FFFFFF","CCCCCC","999999","666666","333333","000000","333333","666666","999999","CCCCCC")
         );
     }
 
@@ -171,7 +171,7 @@ public interface IConfig {
         public List<String> colors;
         public ColorSet() {
             this.name = "Unnamed";
-            this.colors = Arrays.asList("white");
+            this.colors = List.of("white");
         }
         public ColorSet(String name, String... colors) {
             this.name = name;

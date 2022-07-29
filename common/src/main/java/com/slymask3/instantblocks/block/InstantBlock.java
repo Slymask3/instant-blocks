@@ -1,14 +1,9 @@
 package com.slymask3.instantblocks.block;
 
 import com.slymask3.instantblocks.Common;
-import com.slymask3.instantblocks.block.instant.InstantSchematicBlock;
-import com.slymask3.instantblocks.block.instant.InstantSkydiveBlock;
-import com.slymask3.instantblocks.network.packet.SchematicUpdatePacket;
-import com.slymask3.instantblocks.network.packet.SkydiveUpdatePacket;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
-import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -151,15 +146,13 @@ public abstract class InstantBlock extends Block {
 			}
 		}
 
-		if(this instanceof InstantSchematicBlock) {
-			Common.NETWORK.sendToClient(player, new SchematicUpdatePacket(SchematicHelper.getSchematics(),pos));
-		} else if(this instanceof InstantSkydiveBlock) {
-			Common.NETWORK.sendToClient(player, new SkydiveUpdatePacket(Common.CONFIG.SKYDIVE_PRESETS(),pos));
-		} else {
-			ClientHelper.showScreen(this.screen,player,world,pos);
-		}
+		this.openScreen(player,pos);
 
 		return InteractionResult.SUCCESS;
+	}
+
+	public void openScreen(Player player, BlockPos pos) {
+		ClientHelper.showScreen(this.screen,player,player.getLevel(),pos);
 	}
 
 	public InteractionResult activate(Level world, BlockPos pos, Player player) {

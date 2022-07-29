@@ -44,11 +44,7 @@ public class ColorHelper {
 	}
 	
 	public static Color getColorAt(BufferedImage img, int x, int y) {
-		int rgb = img.getRGB(x, y);
-        int red = (rgb & 0x00ff0000) >> 16;
-        int green = (rgb & 0x0000ff00) >> 8;
-        int blue = rgb & 0x000000ff;
-		return new Color(red,green,blue);
+		return new Color(img.getRGB(x,y));
 	}
 
 	public static int hsvToRgb(int hue, float saturation, float value) {
@@ -114,62 +110,45 @@ public class ColorHelper {
 	public static Color textToColor(String input) {
 		int color;
 		if(input.equalsIgnoreCase("red")) {
-			color = 0x00FF0000;
+			color = 0xFF0000;
 		} else if(input.equalsIgnoreCase("orange")) {
-			color = 0x00FF8000;
+			color = 0xFF8000;
 		} else if(input.equalsIgnoreCase("yellow")) {
-			color = 0x00FFFF00;
+			color = 0xFFFF00;
 		} else if(input.equalsIgnoreCase("lime")) {
-			color = 0x0080FF00;
+			color = 0x80FF00;
 		} else if(input.equalsIgnoreCase("green")) {
-			color = 0x0000FF00;
+			color = 0x00FF00;
 		} else if(input.equalsIgnoreCase("cyan")) {
-			color = 0x0000FFFF;
+			color = 0x00FFFF;
 		} else if(input.equalsIgnoreCase("light blue") || input.equalsIgnoreCase("lightblue")) {
-			color = 0x000080FF;
+			color = 0x0080FF;
 		} else if(input.equalsIgnoreCase("blue")) {
-			color = 0x000000FF;
+			color = 0x0000FF;
 		} else if(input.equalsIgnoreCase("purple")) {
-			color = 0x008000FF;
+			color = 0x8000FF;
 		} else if(input.equalsIgnoreCase("magenta")) {
-			color = 0x00FF00FF;
+			color = 0xFF00FF;
 		} else if(input.equalsIgnoreCase("pink")) {
-			color = 0x00FF0080;
+			color = 0xFF0080;
 		} else if(input.equalsIgnoreCase("white")) {
-			color = 0x00FFFFFF;
+			color = 0xFFFFFF;
 		} else if(input.equalsIgnoreCase("gray") || input.equalsIgnoreCase("grey")) {
-			color = 0x00808080;
+			color = 0x808080;
 		} else if(input.equalsIgnoreCase("light gray") || input.equalsIgnoreCase("lightgray") || input.equalsIgnoreCase("light grey") || input.equalsIgnoreCase("lightgrey")) {
-			color = 0x00C0C0C0;
+			color = 0xC0C0C0;
 		} else if(input.equalsIgnoreCase("brown")) {
-			color = 0x00663300;
+			color = 0x663300;
 		} else if(input.equalsIgnoreCase("black")) {
-			color = 0x00000000;
+			color = 0x000000;
 		} else {
 			try {
 				color = (int)Long.parseLong(input, 16);
 			} catch(Exception e) {
-				color = 0x00FFFFFF;
+				color = 0xA0A0A0;
 			}
 		}
 		return new Color(color);
-	}
-
-	public static String indexRainbowToString(int index) {
-		return switch (index) {
-			case 0 -> "red";
-			case 1 -> "orange";
-			case 2 -> "yellow";
-			case 3 -> "lime";
-			case 4 -> "green";
-			case 5 -> "cyan";
-			case 6 -> "light blue";
-			case 7 -> "blue";
-			case 8 -> "purple";
-			case 9 -> "magenta";
-			case 10 -> "pink";
-			default -> "white";
-		};
 	}
 
 	public static class VanillaColor {

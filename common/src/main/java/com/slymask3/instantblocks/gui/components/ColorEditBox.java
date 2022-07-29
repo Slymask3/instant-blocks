@@ -26,7 +26,9 @@ public class ColorEditBox extends EditBox {
     }
 
     public void renderLabel(PoseStack poseStack) {
-        this.font.drawShadow(poseStack, Component.translatable("ib.gui.skydive.color",(index+1)), this.x - 50, this.y + 3, ColorHelper.textToColor(this.getValue()).getRGB());
+        if(!this.getValue().isEmpty()) {
+            this.font.drawShadow(poseStack, Component.translatable("ib.gui.skydive.color",(index+1)), this.x - 50, this.y + 3, ColorHelper.textToColor(this.getValue()).getRGB());
+        }
     }
 
     public void setRandomHex() {

@@ -4,6 +4,7 @@ import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SkydiveBlockEntity;
 import com.slymask3.instantblocks.core.ModBlocks;
+import com.slymask3.instantblocks.network.packet.SkydiveUpdatePacket;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
@@ -35,6 +36,10 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 
 	public boolean isEnabled() {
 		return Common.CONFIG.ENABLE_SKYDIVE();
+	}
+
+	public void openScreen(Player player, BlockPos pos) {
+		Common.NETWORK.sendToClient(player, new SkydiveUpdatePacket(Common.CONFIG.SKYDIVE_PRESETS(),pos));
 	}
 
 	@Override

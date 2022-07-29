@@ -73,7 +73,7 @@ public class HarvestScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, Component.translatable("ib.gui.harvest.select"), this.width / 2 - 3 - 150, this.height / 4 - 30 + 12, 10526880);
+		this.font.draw(poseStack, Component.translatable("ib.gui.harvest.select"), this.width / 2 - 3 - 150, this.height / 4 - 30 + 12, 0xA0A0A0);
 	}
 
 	public void sendInfo(boolean activate) {

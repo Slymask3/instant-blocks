@@ -1,6 +1,5 @@
 package com.slymask3.instantblocks.gui.components;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 
@@ -16,9 +15,5 @@ public class SelectionList<T extends ObjectSelectionList.Entry<T>> extends Objec
 
     protected int getScrollbarPosition() {
         return this.x0 + this.width;
-    }
-
-    protected void renderList(PoseStack poseStack, int p_93453_, int p_93454_, int p_93455_, int p_93456_, float p_93457_) {
-        super.renderList(poseStack, p_93453_, p_93454_, p_93455_, p_93456_, p_93457_);
     }
 }

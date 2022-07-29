@@ -93,16 +93,13 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	public boolean canActivate(Level world, BlockPos pos, Player player) {
-		if(isSuction) {
-			Helper.sendMessage(player, "","",pos,ClientHelper.Particles.NO_LIQUID);
-		}
 		if(world.dimension().equals(Level.NETHER) && blockReplace.equals(Blocks.WATER) && !Common.CONFIG.ALLOW_WATER_IN_NETHER()) {
 			Helper.sendMessage(player, Strings.ERROR_WATER_DISABLED);
 			return false;
 		}
 		checkForBlock(world,pos);
 		if(isSuction && posList.isEmpty()) {
-			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID);
+			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID,"",pos,ClientHelper.Particles.NO_LIQUID);
 			return false;
 		}
 		if(posList.size() >= getMax()) {

@@ -39,7 +39,7 @@ public class SkydiveScreen extends InstantScreen {
 
 		SkydiveBlockEntity blockEntity = (SkydiveBlockEntity)world.getBlockEntity(pos);
 
-		this.colorSetsIndex = blockEntity.colorSetsIndex;
+		this.colorSetsIndex = blockEntity.colorSetsIndex < colorSets.size() ? blockEntity.colorSetsIndex : 0;
 
 		Button random = new Button(this.width / 2 + 4, this.height / 4 + 111, 150, 20, Component.translatable("ib.gui.skydive.random"), (p_88642_) -> {
 			this.setRandom();
@@ -76,7 +76,7 @@ public class SkydiveScreen extends InstantScreen {
 			this.addRenderableWidget(this.colorClear[i]);
 		}
 
-		String colorSetName = this.colorSetsIndex >= 0 && this.colorSetsIndex < this.colorSets.size() ? this.colorSets.get(this.colorSetsIndex).name : "";
+		String colorSetName = this.colorSetsIndex >= 0 && this.colorSetsIndex < this.colorSets.size() ? this.colorSets.get(this.colorSetsIndex).name : Component.translatable("ib.gui.skydive.preset.none").getString();
 		this.preset = new Button(this.width / 2 - 4 - 150, this.height / 4 + 111, 150, 20, Component.translatable("ib.gui.skydive.preset",colorSetName), (p_88642_) -> {
 			this.nextPreset();
 			this.setPreset();
@@ -90,8 +90,8 @@ public class SkydiveScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, Component.translatable("ib.gui.skydive.input"), this.width / 2 - 4 - 150, 33, 10526880);
-		this.font.draw(poseStack, Component.translatable("ib.gui.skydive.radius"), this.width / 2 + 4, 138, 14737632);
+		this.font.draw(poseStack, Component.translatable("ib.gui.skydive.input"), this.width / 2 - 4 - 150, 33, 0xA0A0A0);
+		this.font.draw(poseStack, Component.translatable("ib.gui.skydive.radius"), this.width / 2 + 4, 138, 0xE0E0E0);
 
 		for(ColorEditBox colorEditBox : color) {
 			colorEditBox.renderLabel(poseStack);

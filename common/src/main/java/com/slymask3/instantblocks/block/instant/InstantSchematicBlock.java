@@ -3,6 +3,7 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
+import com.slymask3.instantblocks.network.packet.SchematicUpdatePacket;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
@@ -35,6 +36,10 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 
 	public boolean isEnabled() {
 		return Common.CONFIG.ENABLE_SCHEMATIC();
+	}
+
+	public void openScreen(Player player, BlockPos pos) {
+		Common.NETWORK.sendToClient(player, new SchematicUpdatePacket(SchematicHelper.getSchematics(),pos));
 	}
 
 	@Override

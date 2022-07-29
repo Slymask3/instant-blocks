@@ -1,9 +1,11 @@
 # Minecraft 1.19 Changelog
 
 ## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.3...HEAD)
-- Added optional cloth config support for forge
+### Added
+- Optional cloth config support for forge
+- Presets for instant skydive
 
-## [1.6.3](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.2...1.19-1.6.3)
+## [1.6.3](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.2...1.19-1.6.3) - 2022-07-21
 ### Fixed
 - Recipes using forge tags on fabric
 
@@ -37,7 +39,7 @@
 
 # Minecraft 1.18.2 Changelog
 
-## [1.6.3](https://github.com/slymask3/instant-blocks/compare/1.18.2-1.6.2...1.18.2-1.6.3)
+## [1.6.3](https://github.com/slymask3/instant-blocks/compare/1.18.2-1.6.2...1.18.2-1.6.3) - 2022-07-21
 ### Fixed
 - Recipes using forge tags on fabric
 

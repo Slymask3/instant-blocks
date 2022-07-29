@@ -7,6 +7,8 @@ import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 
+import java.util.List;
+
 @Config(name = Common.MOD_ID)
 public class ClothConfig implements ConfigData, IConfig {
     public static void register() {
@@ -18,6 +20,7 @@ public class ClothConfig implements ConfigData, IConfig {
     }
 
     public void reload() {
+        AutoConfig.getConfigHolder(ClothConfig.class).load();
         Common.CONFIG = get();
     }
 
@@ -87,6 +90,7 @@ public class ClothConfig implements ConfigData, IConfig {
         @ConfigEntry.BoundedDiscrete(min = 1, max = 300)
         int SKYDIVE_WATER = Defaults.SKYDIVE_WATER;
         int SKYDIVE_RADIUS = Defaults.SKYDIVE_RADIUS;
+        List<ColorSet> SKYDIVE_PRESETS = Defaults.SKYDIVE_PRESETS;
     }
 
     @ConfigEntry.Category("blocks")
@@ -212,6 +216,7 @@ public class ClothConfig implements ConfigData, IConfig {
     public int SKYDIVE_MAX() { return skydive.SKYDIVE_MAX; }
     public int SKYDIVE_WATER() { return skydive.SKYDIVE_WATER; }
     public int SKYDIVE_RADIUS() { return skydive.SKYDIVE_RADIUS; }
+    public List<ColorSet> SKYDIVE_PRESETS() { return skydive.SKYDIVE_PRESETS; }
     public int WEIGHT_WHEAT() { return farm.WEIGHT_WHEAT; }
     public int WEIGHT_POTATOES() { return farm.WEIGHT_POTATOES; }
     public int WEIGHT_CARROTS() { return farm.WEIGHT_CARROTS; }
