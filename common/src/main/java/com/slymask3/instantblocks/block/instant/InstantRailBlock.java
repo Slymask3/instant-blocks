@@ -2,8 +2,9 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
+import com.slymask3.instantblocks.builder.Builder;
+import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.Builder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -41,12 +42,14 @@ public class InstantRailBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
+		Builder builder = new Builder();
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
     	for(int i = 0; i<= Common.CONFIG.RAILS_AMOUNT(); i++) {
-			Builder.Single.setup(world,x,y-1,z).offset(direction,i,0,0,0).setStone().build();
-			Builder.Single.setup(world,x,y,z).offset(direction,i,0,0,0).setBlock(Blocks.RAIL).build();
-			Builder.Single.setup(world,x,y+1,z).offset(direction,i,0,0,0).setBlock(Blocks.AIR).build();
+			Single.setup(builder,world,x,y-1,z).offset(direction,i,0,0,0).setStone().queue(i);
+			Single.setup(builder,world,x,y,z).offset(direction,i,0,0,0).setBlock(Blocks.RAIL).queue(i);
+			Single.setup(builder,world,x,y+1,z).offset(direction,i,0,0,0).setBlock(Blocks.AIR).queue(i);
     	}
+		builder.build();
 		return true;
     }
 }

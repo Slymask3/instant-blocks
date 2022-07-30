@@ -2,9 +2,10 @@ package com.slymask3.instantblocks.block;
 
 import com.mojang.math.Vector3f;
 import com.slymask3.instantblocks.Common;
+import com.slymask3.instantblocks.builder.Builder;
+import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.core.ModBlocks;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.ChatFormatting;
@@ -112,15 +113,17 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
+		Builder builder = new Builder();
 		for(BlockPos pos : posList) {
-			Builder.Single.setup(world,pos).setBlock(blockReplace).build();
+			Single.setup(builder,world,pos).setBlock(blockReplace).build();
 		}
-		Builder.Single.setup(world,x,y,z).setBlock(getMainReplaceBlock()).build();
+		Single.setup(builder,world,x,y,z).setBlock(getMainReplaceBlock()).build();
 		if(posList.size() > 0) {
 			setCreateMessage(create, String.valueOf(isSuction ? posList.size() : posList.size()+1));
 		} else {
 			setCreateMessage(create1);
 		}
+		builder.build();
 		posList = new ArrayList<>();
 		if(isSuction) {
 			this.blockCheck = null;

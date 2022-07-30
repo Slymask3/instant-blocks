@@ -35,6 +35,7 @@ public class ClothConfig implements ConfigData, IConfig {
         boolean WAND_OVER_DURABILITY = Defaults.WAND_OVER_DURABILITY;
         boolean KEEP_BLOCKS = Defaults.KEEP_BLOCKS;
         boolean ALLOW_WATER_IN_NETHER = Defaults.ALLOW_WATER_IN_NETHER;
+        boolean ORIGINAL_INSTANT = Defaults.ORIGINAL_INSTANT;
         int XP_AMOUNT = Defaults.XP_AMOUNT;
         boolean GENERATE_IN_CHESTS = Defaults.GENERATE_IN_CHESTS;
         boolean GENERATE_IN_CHESTS_BONUS = Defaults.GENERATE_IN_CHESTS_BONUS;
@@ -205,6 +206,7 @@ public class ClothConfig implements ConfigData, IConfig {
     public boolean TP_GRINDER() { return grinder.TP_GRINDER; }
     public boolean KEEP_BLOCKS() { return general.KEEP_BLOCKS; }
     public boolean ALLOW_WATER_IN_NETHER() { return general.ALLOW_WATER_IN_NETHER; }
+    public boolean ORIGINAL_INSTANT() { return general.ORIGINAL_INSTANT; }
     public int RADIUS_HARVEST() { return harvest.RADIUS_HARVEST; }
     public int RADIUS_LIGHT() { return light.RADIUS_LIGHT; }
     public int RAILS_AMOUNT() { return rail.RAILS_AMOUNT; }

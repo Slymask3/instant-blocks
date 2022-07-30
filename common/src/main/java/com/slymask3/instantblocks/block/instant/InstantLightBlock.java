@@ -2,8 +2,9 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
+import com.slymask3.instantblocks.builder.Builder;
+import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -54,18 +55,20 @@ public class InstantLightBlock extends InstantBlock {
     }
     
     public boolean build(Level world, int x, int y, int z, Player player) {
-        checkForDarkness(world,x,y,z);
+        Builder builder = new Builder();
+        checkForDarkness(builder,world,x,y,z);
         if(posList.isEmpty()) {
             Helper.sendMessage(player,Strings.ERROR_LIGHT, ChatFormatting.RED + String.valueOf(Common.CONFIG.RADIUS_LIGHT()));
             return false;
         }
-        Builder.Single.setup(world,x,y,z).setBlock(Blocks.TORCH).build();
+        Single.setup(builder,world,x,y,z).setBlock(Blocks.TORCH).queue();
+        builder.build();
         setCreateMessage(Strings.CREATE_LIGHT_AMOUNT, String.valueOf(posList.size()));
         posList.clear();
         return true;
 	}
 
-    private void checkForDarkness(Level world, int x_center, int y_center, int z_center) {
+    private void checkForDarkness(Builder builder, Level world, int x_center, int y_center, int z_center) {
         int radius = Common.CONFIG.RADIUS_LIGHT();
         Random random = new Random();
 
@@ -75,7 +78,7 @@ public class InstantLightBlock extends InstantBlock {
                     BlockPos pos = new BlockPos(x,y,z);
                     if(world.getBlockState(pos).getBlock() == Blocks.AIR && world.getRawBrightness(pos,0) < 8 && canPlaceTorch(world,pos)) {
                         addPos(pos);
-                        placeTorch(world, pos);
+                        placeTorch(builder, world, pos);
                         //todo update brightness
                     }
                 }
@@ -91,17 +94,17 @@ public class InstantLightBlock extends InstantBlock {
             || world.getBlockState(pos.west()).isFaceSturdy(world,pos,Direction.EAST);
     }
 
-    private void placeTorch(Level world, BlockPos pos) {
+    private void placeTorch(Builder builder, Level world, BlockPos pos) {
         if(world.getBlockState(pos.below()).isFaceSturdy(world,pos,Direction.UP)) {
-            Builder.Single.setup(world,pos).setBlock(Blocks.TORCH).setDirection(Direction.UP).build();
+            Single.setup(builder,world,pos).setBlock(Blocks.TORCH).setDirection(Direction.UP).queue();
         } else if(world.getBlockState(pos.north()).isFaceSturdy(world,pos,Direction.SOUTH)) {
-            Builder.Single.setup(world,pos).setBlock(Blocks.WALL_TORCH).setDirection(Direction.SOUTH).build();
+            Single.setup(builder,world,pos).setBlock(Blocks.WALL_TORCH).setDirection(Direction.SOUTH).queue();
         } else if(world.getBlockState(pos.east()).isFaceSturdy(world,pos,Direction.WEST)) {
-            Builder.Single.setup(world,pos).setBlock(Blocks.WALL_TORCH).setDirection(Direction.WEST).build();
+            Single.setup(builder,world,pos).setBlock(Blocks.WALL_TORCH).setDirection(Direction.WEST).queue();
         } else if(world.getBlockState(pos.south()).isFaceSturdy(world,pos,Direction.NORTH)) {
-            Builder.Single.setup(world,pos).setBlock(Blocks.WALL_TORCH).setDirection(Direction.NORTH).build();
+            Single.setup(builder,world,pos).setBlock(Blocks.WALL_TORCH).setDirection(Direction.NORTH).queue();
         } else if(world.getBlockState(pos.west()).isFaceSturdy(world,pos,Direction.EAST)) {
-            Builder.Single.setup(world,pos).setBlock(Blocks.WALL_TORCH).setDirection(Direction.EAST).build();
+            Single.setup(builder,world,pos).setBlock(Blocks.WALL_TORCH).setDirection(Direction.EAST).queue();
         }
         //world.getLightEngine().updateSectionStatus(pos,true);
         //world.getLightEngine().enableLightSources(new ChunkPos(pos),true);

@@ -15,6 +15,7 @@ public class ForgeConfig implements IConfig {
 		public static BooleanValue TP_GRINDER;
 		public static BooleanValue KEEP_BLOCKS;
 		public static BooleanValue ALLOW_WATER_IN_NETHER;
+		public static BooleanValue ORIGINAL_INSTANT;
 		public static IntValue RADIUS_HARVEST;
 		public static IntValue RADIUS_LIGHT;
 		public static IntValue RAILS_AMOUNT;
@@ -103,6 +104,10 @@ public class ForgeConfig implements IConfig {
 			ALLOW_WATER_IN_NETHER = builder
 					.comment("Allow generating water in the nether.\nDefault: false")
 					.define("ALLOW_WATER_IN_NETHER", Defaults.ALLOW_WATER_IN_NETHER);
+
+			ORIGINAL_INSTANT = builder
+					.comment("Generate structures instantaneously without a queue.\nDefault: false")
+					.define("ORIGINAL_INSTANT", Defaults.ORIGINAL_INSTANT);
 
 			RADIUS_HARVEST = builder
 					.comment("Radius to harvest blocks around Instant Harvest.\nDefault: 25")
@@ -444,6 +449,7 @@ public class ForgeConfig implements IConfig {
 	public boolean TP_GRINDER() { return Common.TP_GRINDER.get(); }
 	public boolean KEEP_BLOCKS() { return Common.KEEP_BLOCKS.get(); }
 	public boolean ALLOW_WATER_IN_NETHER() { return Common.ALLOW_WATER_IN_NETHER.get(); }
+	public boolean ORIGINAL_INSTANT() { return Common.ORIGINAL_INSTANT.get(); }
 	public int RADIUS_HARVEST() { return Common.RADIUS_HARVEST.get(); }
 	public int RADIUS_LIGHT() { return Common.RADIUS_LIGHT.get(); }
 	public int RAILS_AMOUNT() { return Common.RAILS_AMOUNT.get(); }

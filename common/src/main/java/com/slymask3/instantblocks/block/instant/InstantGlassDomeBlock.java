@@ -2,8 +2,11 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
+import com.slymask3.instantblocks.builder.*;
+import com.slymask3.instantblocks.builder.type.Circle;
+import com.slymask3.instantblocks.builder.type.Single;
+import com.slymask3.instantblocks.builder.type.Sphere;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.Builder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -60,21 +63,25 @@ public class InstantGlassDomeBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
+		Builder builder = new Builder();
+
 		Block glass = Blocks.GLASS;
 		Block torch = Blocks.TORCH;
 		Block air = Blocks.AIR;
 
 		int radius = Common.CONFIG.RADIUS_DOME();
 
-		Builder.Circle.setup(world,x,y,z,radius).setBlock(Builder.BlockType.stone()).build();
-		Builder.Sphere.setup(world,x,y+1,z,radius).setOuter(Builder.BlockType.block(glass)).setInner(Builder.BlockType.block(air)).setHalf().build();
+		Circle.setup(builder,world,x,y,z,radius).setBlock(BlockType.stone()).queue();
+		Sphere.setup(builder,world,x,y+1,z,radius).setOuter(BlockType.block(glass)).setInner(BlockType.block(air)).setHalf().queue();
 
 		for(int i=3; i<radius; i=i+6) {
-			Builder.Single.setup(world,x+i,y+1,z).setBlock(torch).build();
-			Builder.Single.setup(world,x-i,y+1,z).setBlock(torch).build();
-			Builder.Single.setup(world,x,y+1,z+i).setBlock(torch).build();
-			Builder.Single.setup(world,x,y+1,z-i).setBlock(torch).build();
+			Single.setup(builder,world,x+i,y+1,z).setBlock(torch).queue();
+			Single.setup(builder,world,x-i,y+1,z).setBlock(torch).queue();
+			Single.setup(builder,world,x,y+1,z+i).setBlock(torch).queue();
+			Single.setup(builder,world,x,y+1,z-i).setBlock(torch).queue();
 		}
+
+		builder.build();
 
 		return true;
 	}

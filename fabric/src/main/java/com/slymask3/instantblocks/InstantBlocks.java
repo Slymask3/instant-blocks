@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks;
 
+import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.config.ClothConfig;
 import com.slymask3.instantblocks.core.ModBlocks;
 import com.slymask3.instantblocks.handler.LootHandler;
@@ -15,6 +16,7 @@ import com.slymask3.instantblocks.util.SchematicHelper;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -37,6 +39,8 @@ public class InstantBlocks implements ModInitializer {
         Registration.registerBlocks(new FabricRegistryHelper<>(Registry.BLOCK));
         Registration.registerItems(new FabricRegistryHelper<>(Registry.ITEM));
         Registration.registerTiles(new FabricRegistryHelper<>(Registry.BLOCK_ENTITY_TYPE));
+
+        ServerTickEvents.END_SERVER_TICK.register((tick) -> Builder.globalTick());
 
         LootHandler.register();
         FabricPacketHandler.Common.init();

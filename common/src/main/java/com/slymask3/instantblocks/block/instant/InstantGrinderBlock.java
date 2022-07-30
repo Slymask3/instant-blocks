@@ -2,8 +2,10 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
+import com.slymask3.instantblocks.builder.Builder;
+import com.slymask3.instantblocks.builder.type.Multiple;
+import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -49,6 +51,8 @@ public class InstantGrinderBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
+		Builder builder = new Builder();
+
 		Block water = Blocks.WATER;
 		Block torch = Blocks.WALL_TORCH;
 		Block chest = Blocks.CHEST;
@@ -61,178 +65,180 @@ public class InstantGrinderBlock extends InstantBlock {
 		Block air = Blocks.AIR;
 
 		/************************ Layer -5 : Stone ************************/
-		Builder.Multiple.setup(world,x-5,y-5,z-5,11,1,11).setStone().build();
-		Builder.Multiple.setup(world,x+6,y-5,z-1,3,1,3).setStone().build();
-		Builder.Multiple.setup(world,x+9,y-5,z-3,8,1,7).setStone().build();
+		Multiple.setup(builder,world,x-5,y-5,z-5,11,1,11).setStone().queue();
+		Multiple.setup(builder,world,x+6,y-5,z-1,3,1,3).setStone().queue();
+		Multiple.setup(builder,world,x+9,y-5,z-3,8,1,7).setStone().queue();
 
 		/************************ Layer -4 to -2 : Air (Spawn Room) ************************/
-		Builder.Multiple.setup(world,x-4,y-4,z-4,9,3,9).setBlock(air).build();
+		Multiple.setup(builder,world,x-4,y-4,z-4,9,3,9).setBlock(air).queue();
 
 		/************************ Layer -1 to 0 : Air (Spawn Room) ************************/
-		Builder.Multiple.setup(world,x-4,y-1,z-4,9,2,4).setBlock(air).build();
-		Builder.Multiple.setup(world,x-4,y-1,z+1,9,2,4).setBlock(air).build();
-		Builder.Multiple.setup(world,x-4,y-1,z,4,2,1).setBlock(air).build();
-		Builder.Multiple.setup(world,x+1,y-1,z,4,2,1).setBlock(air).build();
+		Multiple.setup(builder,world,x-4,y-1,z-4,9,2,4).setBlock(air).queue();
+		Multiple.setup(builder,world,x-4,y-1,z+1,9,2,4).setBlock(air).queue();
+		Multiple.setup(builder,world,x-4,y-1,z,4,2,1).setBlock(air).queue();
+		Multiple.setup(builder,world,x+1,y-1,z,4,2,1).setBlock(air).queue();
 
 		/************************ Layer 1 to 2 : Air (Spawn Room) ************************/
-		Builder.Multiple.setup(world,x-4,y+1,z-4,9,2,9).setBlock(air).build();
+		Multiple.setup(builder,world,x-4,y+1,z-4,9,2,9).setBlock(air).queue();
 
 		/************************ Layer -4 to -1 : Air (Output Room) ************************/
-		Builder.Multiple.setup(world,x+10,y-4,z-2,6,3,5).setBlock(air).build();
+		Multiple.setup(builder,world,x+10,y-4,z-2,6,3,5).setBlock(air).queue();
 		
 		/************************ Layer -4 ************************/
-		Builder.Multiple.setup(world,x-5,y-4,z-5,5,1,11).setStone().build();
-		Builder.Multiple.setup(world,x,y-4,z-5,1,1,5).setStone().build();
-		Builder.Multiple.setup(world,x,y-4,z+1,1,1,5).setStone().build();
-		Builder.Multiple.setup(world,x+1,y-4,z-5,1,1,4).setStone().build();
-		Builder.Multiple.setup(world,x+1,y-4,z+2,1,1,4).setStone().build();
-		Builder.Multiple.setup(world,x+2,y-4,z-5,1,1,3).setStone().build();
-		Builder.Multiple.setup(world,x+2,y-4,z+3,1,1,3).setStone().build();
-		Builder.Multiple.setup(world,x+3,y-4,z-5,1,1,2).setStone().build();
-		Builder.Multiple.setup(world,x+3,y-4,z+4,1,1,2).setStone().build();
-		Builder.Multiple.setup(world,x+4,y-4,z-5,1,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+4,y-4,z+5,1,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+5,y-4,z-5,1,1,5).setStone().build();
-		Builder.Multiple.setup(world,x+5,y-4,z+1,1,1,5).setStone().build();
-		Builder.Multiple.setup(world,x+6,y-4,z-1,4,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+6,y-4,z+1,4,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+9,y-4,z-3,1,1,2).setStone().build();
-		Builder.Multiple.setup(world,x+9,y-4,z+2,1,1,2).setStone().build();
-		Builder.Multiple.setup(world,x+10,y-4,z-3,6,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+10,y-4,z+3,6,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+16,y-4,z-3,1,1,7).setStone().build();
+		Multiple.setup(builder,world,x-5,y-4,z-5,5,1,11).setStone().queue();
+		Multiple.setup(builder,world,x,y-4,z-5,1,1,5).setStone().queue();
+		Multiple.setup(builder,world,x,y-4,z+1,1,1,5).setStone().queue();
+		Multiple.setup(builder,world,x+1,y-4,z-5,1,1,4).setStone().queue();
+		Multiple.setup(builder,world,x+1,y-4,z+2,1,1,4).setStone().queue();
+		Multiple.setup(builder,world,x+2,y-4,z-5,1,1,3).setStone().queue();
+		Multiple.setup(builder,world,x+2,y-4,z+3,1,1,3).setStone().queue();
+		Multiple.setup(builder,world,x+3,y-4,z-5,1,1,2).setStone().queue();
+		Multiple.setup(builder,world,x+3,y-4,z+4,1,1,2).setStone().queue();
+		Multiple.setup(builder,world,x+4,y-4,z-5,1,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+4,y-4,z+5,1,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+5,y-4,z-5,1,1,5).setStone().queue();
+		Multiple.setup(builder,world,x+5,y-4,z+1,1,1,5).setStone().queue();
+		Multiple.setup(builder,world,x+6,y-4,z-1,4,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+6,y-4,z+1,4,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+9,y-4,z-3,1,1,2).setStone().queue();
+		Multiple.setup(builder,world,x+9,y-4,z+2,1,1,2).setStone().queue();
+		Multiple.setup(builder,world,x+10,y-4,z-3,6,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+10,y-4,z+3,6,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+16,y-4,z-3,1,1,7).setStone().queue();
 
-		Builder.Single.setup(world,x+5,y-4,z).setBlock(air).build();
-		Builder.Single.setup(world,x+6,y-4,z).setBlock(sign).setDirection(Direction.NORTH).build(); //SIGN
-		Builder.Single.setup(world,x+8,y-4,z).setBlock(air).build();
-		Builder.Single.setup(world,x+9,y-4,z).setBlock(door).setDirection(Direction.WEST).build(); //DOOR
-		Builder.Single.setup(world,x+10,y-4,z-2).setStone().build();
-		Builder.Single.setup(world,x+10,y-4,z+2).setStone().build();
-		Builder.Single.setup(world,x+15,y-4,z+2).setBlock(chest).setDirection(Direction.WEST).build();
-		Builder.Single.setup(world,x+15,y-4,z+1).setBlock(chest).setDirection(Direction.WEST).build();
-		Builder.Single.setup(world,x+15,y-4,z).setBlock(craft).build();
-		Builder.Single.setup(world,x+15,y-4,z-1).setBlock(chest).setDirection(Direction.WEST).build();
-		Builder.Single.setup(world,x+15,y-4,z-2).setBlock(chest).setDirection(Direction.WEST).build();
+		Single.setup(builder,world,x+5,y-4,z).setBlock(air).queue();
+		Single.setup(builder,world,x+6,y-4,z).setBlock(sign).setDirection(Direction.NORTH).queue(); //SIGN
+		Single.setup(builder,world,x+8,y-4,z).setBlock(air).queue();
+		Single.setup(builder,world,x+9,y-4,z).setBlock(door).setDirection(Direction.WEST).queue(); //DOOR
+		Single.setup(builder,world,x+10,y-4,z-2).setStone().queue();
+		Single.setup(builder,world,x+10,y-4,z+2).setStone().queue();
+		Single.setup(builder,world,x+15,y-4,z+2).setBlock(chest).setDirection(Direction.WEST).queue();
+		Single.setup(builder,world,x+15,y-4,z+1).setBlock(chest).setDirection(Direction.WEST).queue();
+		Single.setup(builder,world,x+15,y-4,z).setBlock(craft).queue();
+		Single.setup(builder,world,x+15,y-4,z-1).setBlock(chest).setDirection(Direction.WEST).queue();
+		Single.setup(builder,world,x+15,y-4,z-2).setBlock(chest).setDirection(Direction.WEST).queue();
 
 		/************************ Layer -3 ************************/
-		Builder.Multiple.setup(world,x-5,y-3,z-5,1,1,11).setStone().build();
-		Builder.Multiple.setup(world,x-4,y-3,z-5,1,1,3).setStone().build();
-		Builder.Multiple.setup(world,x-4,y-3,z+3,1,1,3).setStone().build();
-		Builder.Multiple.setup(world,x-3,y-3,z-5,1,1,2).setStone().build();
-		Builder.Multiple.setup(world,x-3,y-3,z+4,1,1,2).setStone().build();
-		Builder.Multiple.setup(world,x-2,y-3,z-5,7,1,1).setStone().build();
-		Builder.Multiple.setup(world,x-2,y-3,z+5,7,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+5,y-3,z-5,1,1,11).setStone().build();
-		Builder.Multiple.setup(world,x+6,y-3,z-1,4,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+6,y-3,z+1,4,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+9,y-3,z-3,1,1,2).setStone().build();
-		Builder.Multiple.setup(world,x+9,y-3,z+2,1,1,2).setStone().build();
-		Builder.Multiple.setup(world,x+10,y-3,z-3,6,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+10,y-3,z+3,6,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+16,y-3,z-3,1,1,7).setStone().build();
+		Multiple.setup(builder,world,x-5,y-3,z-5,1,1,11).setStone().queue();
+		Multiple.setup(builder,world,x-4,y-3,z-5,1,1,3).setStone().queue();
+		Multiple.setup(builder,world,x-4,y-3,z+3,1,1,3).setStone().queue();
+		Multiple.setup(builder,world,x-3,y-3,z-5,1,1,2).setStone().queue();
+		Multiple.setup(builder,world,x-3,y-3,z+4,1,1,2).setStone().queue();
+		Multiple.setup(builder,world,x-2,y-3,z-5,7,1,1).setStone().queue();
+		Multiple.setup(builder,world,x-2,y-3,z+5,7,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+5,y-3,z-5,1,1,11).setStone().queue();
+		Multiple.setup(builder,world,x+6,y-3,z-1,4,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+6,y-3,z+1,4,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+9,y-3,z-3,1,1,2).setStone().queue();
+		Multiple.setup(builder,world,x+9,y-3,z+2,1,1,2).setStone().queue();
+		Multiple.setup(builder,world,x+10,y-3,z-3,6,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+10,y-3,z+3,6,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+16,y-3,z-3,1,1,7).setStone().queue();
 
-		Builder.Single.setup(world,x+5,y-3,z).setBlock(sign).setDirection(Direction.NORTH).build(); //SIGN
-		Builder.Single.setup(world,x+8,y-3,z).setBlock(air).build();
-		Builder.Single.setup(world,x+6,y-3,z).setBlock(water).build();
+		Single.setup(builder,world,x+5,y-3,z).setBlock(sign).setDirection(Direction.NORTH).queue(); //SIGN
+		Single.setup(builder,world,x+8,y-3,z).setBlock(air).queue();
+		Single.setup(builder,world,x+6,y-3,z).setBlock(water).queue();
 
 		/************************ Layer -2 to 2 : Stone (Spawn Room Walls) ************************/
-		Builder.Multiple.setup(world,x-5,y-2,z-5,1,5,11).setStone().build();
-		Builder.Multiple.setup(world,x-4,y-2,z-5,9,5,1).setStone().build();
-		Builder.Multiple.setup(world,x-4,y-2,z+5,9,5,1).setStone().build();
-		Builder.Multiple.setup(world,x+5,y-2,z-5,1,5,11).setStone().build();
+		Multiple.setup(builder,world,x-5,y-2,z-5,1,5,11).setStone().queue();
+		Multiple.setup(builder,world,x-4,y-2,z-5,9,5,1).setStone().queue();
+		Multiple.setup(builder,world,x-4,y-2,z+5,9,5,1).setStone().queue();
+		Multiple.setup(builder,world,x+5,y-2,z-5,1,5,11).setStone().queue();
 
 		/************************ Layer -2 ************************/
-		Builder.Multiple.setup(world,x+6,y-2,z-1,4,1,3).setStone().build();
-		Builder.Multiple.setup(world,x+9,y-2,z-3,1,1,2).setStone().build();
-		Builder.Multiple.setup(world,x+9,y-2,z+2,1,1,2).setStone().build();
-		Builder.Multiple.setup(world,x+10,y-2,z-3,6,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+10,y-2,z+3,6,1,1).setStone().build();
-		Builder.Multiple.setup(world,x+16,y-2,z-3,1,1,7).setStone().build();
+		Multiple.setup(builder,world,x+6,y-2,z-1,4,1,3).setStone().queue();
+		Multiple.setup(builder,world,x+9,y-2,z-3,1,1,2).setStone().queue();
+		Multiple.setup(builder,world,x+9,y-2,z+2,1,1,2).setStone().queue();
+		Multiple.setup(builder,world,x+10,y-2,z-3,6,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+10,y-2,z+3,6,1,1).setStone().queue();
+		Multiple.setup(builder,world,x+16,y-2,z-3,1,1,7).setStone().queue();
 
-		Builder.Single.setup(world,x-4,y-2,z-4).setBlock(water).build();
-		Builder.Single.setup(world,x-4,y-2,z+4).setBlock(water).build();
-		Builder.Single.setup(world,x+10,y-2,z-1).setBlock(pane).build();
-		Builder.Single.setup(world,x+10,y-2,z+1).setBlock(pane).build();
-		Builder.Single.setup(world,x+11,y-2,z-2).setBlock(pane).build();
-		Builder.Single.setup(world,x+11,y-2,z-1).setBlock(pane).build();
-		Builder.Single.setup(world,x+11,y-2,z+2).setBlock(pane).build();
-		Builder.Single.setup(world,x+11,y-2,z+1).setBlock(pane).build();
-		Builder.Single.setup(world,x+10,y-2,z).setBlock(torch).setDirection(Direction.EAST).build();
-		Builder.Single.setup(world,x+12,y-2,z-2).setBlock(torch).setDirection(Direction.SOUTH).build();
-		Builder.Single.setup(world,x+12,y-2,z+2).setBlock(torch).setDirection(Direction.NORTH).build();
-		Builder.Single.setup(world,x+15,y-2,z-1).setBlock(torch).setDirection(Direction.WEST).build();
-		Builder.Single.setup(world,x+15,y-2,z+1).setBlock(torch).setDirection(Direction.WEST).build();
-		Builder.Single.setup(world,x+6,y-2,z).setBlock(sign).setDirection(Direction.NORTH).build(); //SIGN
+		Single.setup(builder,world,x-4,y-2,z-4).setBlock(water).queue();
+		Single.setup(builder,world,x-4,y-2,z+4).setBlock(water).queue();
+		Single.setup(builder,world,x+10,y-2,z-1).setBlock(pane).queue();
+		Single.setup(builder,world,x+10,y-2,z+1).setBlock(pane).queue();
+		Single.setup(builder,world,x+11,y-2,z-2).setBlock(pane).queue();
+		Single.setup(builder,world,x+11,y-2,z-1).setBlock(pane).queue();
+		Single.setup(builder,world,x+11,y-2,z+2).setBlock(pane).queue();
+		Single.setup(builder,world,x+11,y-2,z+1).setBlock(pane).queue();
+		Single.setup(builder,world,x+10,y-2,z).setBlock(torch).setDirection(Direction.EAST).queue();
+		Single.setup(builder,world,x+12,y-2,z-2).setBlock(torch).setDirection(Direction.SOUTH).queue();
+		Single.setup(builder,world,x+12,y-2,z+2).setBlock(torch).setDirection(Direction.NORTH).queue();
+		Single.setup(builder,world,x+15,y-2,z-1).setBlock(torch).setDirection(Direction.WEST).queue();
+		Single.setup(builder,world,x+15,y-2,z+1).setBlock(torch).setDirection(Direction.WEST).queue();
+		Single.setup(builder,world,x+6,y-2,z).setBlock(sign).setDirection(Direction.NORTH).queue(); //SIGN
 
 		/************************ Layer 3 : Stone (Spawn Room Roof) ************************/
-		Builder.Multiple.setup(world,x-5,y+3,z-5,11,1,11).setStone().build();
+		Multiple.setup(builder,world,x-5,y+3,z-5,11,1,11).setStone().queue();
 
 		/************************ Layer -1 : Stone (Output Room Roof) ************************/
-		Builder.Multiple.setup(world,x+9,y-1,z-3,8,1,7).setStone().build();
+		Multiple.setup(builder,world,x+9,y-1,z-3,8,1,7).setStone().queue();
 
 		/************************ Layer -1 to 21 : Stone (Input Tube) ************************/
-		Builder.Multiple.setup(world,x+5,y-1,z-1,3,23,3).setStone().build();
+		Multiple.setup(builder,world,x+5,y-1,z-1,3,23,3).setStone().queue();
 
 		/************************ Layer -1 to 21 : Stone (Output Tube 1) ************************/
-		Builder.Multiple.setup(world,x+9,y-1,z+1,3,23,3).setStone().build();
+		Multiple.setup(builder,world,x+9,y-1,z+1,3,23,3).setStone().queue();
 
 		/************************ Layer -1 to 21 : Stone (Output Tube 1) ************************/
-		Builder.Multiple.setup(world,x+9,y-1,z-3,3,23,3).setStone().build();
+		Multiple.setup(builder,world,x+9,y-1,z-3,3,23,3).setStone().queue();
 
 		/************************ Layer 18 to 21 : Stone (Top Room) ************************/
-		Builder.Multiple.setup(world,x+7,y+18,z-3,4,4,7).setStone().build();
+		Multiple.setup(builder,world,x+7,y+18,z-3,4,4,7).setStone().queue();
 
 		/************************ Layer -1 to 20 : Air (Input Tube) ************************/
-		Builder.Multiple.setup(world,x+6,y-1,z,1,22,1).setBlock(air).build();
+		Multiple.setup(builder,world,x+6,y-1,z,1,22,1).setBlock(air).queue();
 
 		/************************ Layer -1 to 20 : Air (Output Tube 1) ************************/
-		Builder.Multiple.setup(world,x+10,y-1,z+2,1,22,1).setBlock(air).build();
+		Multiple.setup(builder,world,x+10,y-1,z+2,1,22,1).setBlock(air).queue();
 
 		/************************ Layer -1 to 20 : Air (Output Tube 1) ************************/
-		Builder.Multiple.setup(world,x+10,y-1,z-2,1,22,1).setBlock(air).build();
+		Multiple.setup(builder,world,x+10,y-1,z-2,1,22,1).setBlock(air).queue();
 
 		/************************ Layer 19 to 20 : Stone (Top Room) ************************/
-		Builder.Multiple.setup(world,x+7,y+19,z,1,2,1).setBlock(air).build();
-		Builder.Multiple.setup(world,x+8,y+19,z-2,1,2,5).setBlock(air).build();
-		Builder.Multiple.setup(world,x+9,y+19,z-2,2,2,1).setBlock(air).build();
-		Builder.Multiple.setup(world,x+9,y+19,z+2,2,2,1).setBlock(air).build();
+		Multiple.setup(builder,world,x+7,y+19,z,1,2,1).setBlock(air).queue();
+		Multiple.setup(builder,world,x+8,y+19,z-2,1,2,5).setBlock(air).queue();
+		Multiple.setup(builder,world,x+9,y+19,z-2,2,2,1).setBlock(air).queue();
+		Multiple.setup(builder,world,x+9,y+19,z+2,2,2,1).setBlock(air).queue();
 
 		/************************ Layer 19 (Top Room) ************************/
-		Builder.Single.setup(world,x+8,y+19,z).setBlock(plate).build();
-		Builder.Single.setup(world,x+8,y+19,z-1).setBlock(water).build();
-		Builder.Single.setup(world,x+8,y+19,z+1).setBlock(water).build();
-		Builder.Single.setup(world,x+10,y+19,z-2).setBlock(sign).setDirection(Direction.NORTH).build();
-		Builder.Single.setup(world,x+10,y+19,z+2).setBlock(sign).setDirection(Direction.NORTH).build();
+		Single.setup(builder,world,x+8,y+19,z).setBlock(plate).queue();
+		Single.setup(builder,world,x+8,y+19,z-1).setBlock(water).queue();
+		Single.setup(builder,world,x+8,y+19,z+1).setBlock(water).queue();
+		Single.setup(builder,world,x+10,y+19,z-2).setBlock(sign).setDirection(Direction.NORTH).queue();
+		Single.setup(builder,world,x+10,y+19,z+2).setBlock(sign).setDirection(Direction.NORTH).queue();
 
 		/************************ Layer -1 to 19 (Input Tube) ************************/
-		Builder.Single.setup(world,x+6,y-1,z).setBlock(water).build();
-		Builder.Single.setup(world,x+6,y,z).setBlock(sign).setDirection(Direction.NORTH).build();
-		Builder.Single.setup(world,x+6,y+1,z).setBlock(water).build();
-		Builder.Single.setup(world,x+6,y+2,z).setBlock(sign).setDirection(Direction.NORTH).build();
-		Builder.Single.setup(world,x+6,y+3,z).setBlock(water).build();
-		Builder.Single.setup(world,x+6,y+4,z).setBlock(sign).setDirection(Direction.NORTH).build();
-		Builder.Single.setup(world,x+6,y+5,z).setBlock(water).build();
-		Builder.Single.setup(world,x+6,y+6,z).setBlock(sign).setDirection(Direction.NORTH).build();
-		Builder.Single.setup(world,x+6,y+7,z).setBlock(water).build();
-		Builder.Single.setup(world,x+6,y+8,z).setBlock(sign).setDirection(Direction.NORTH).build();
-		Builder.Single.setup(world,x+6,y+9,z).setBlock(water).build();
-		Builder.Single.setup(world,x+6,y+10,z).setBlock(sign).setDirection(Direction.NORTH).build();
-		Builder.Single.setup(world,x+6,y+11,z).setBlock(water).build();
-		Builder.Single.setup(world,x+6,y+12,z).setBlock(sign).setDirection(Direction.NORTH).build();
-		Builder.Single.setup(world,x+6,y+13,z).setBlock(water).build();
-		Builder.Single.setup(world,x+6,y+14,z).setBlock(sign).setDirection(Direction.NORTH).build();
-		Builder.Single.setup(world,x+6,y+15,z).setBlock(water).build();
-		Builder.Single.setup(world,x+6,y+16,z).setBlock(sign).setDirection(Direction.NORTH).build();
-		Builder.Single.setup(world,x+6,y+17,z).setBlock(water).build();
-		Builder.Single.setup(world,x+6,y+18,z).setBlock(sign).setDirection(Direction.NORTH).build();
-		Builder.Single.setup(world,x+6,y+19,z).setBlock(water).build();
+		Single.setup(builder,world,x+6,y-1,z).setBlock(water).queue();
+		Single.setup(builder,world,x+6,y,z).setBlock(sign).setDirection(Direction.NORTH).queue();
+		Single.setup(builder,world,x+6,y+1,z).setBlock(water).queue();
+		Single.setup(builder,world,x+6,y+2,z).setBlock(sign).setDirection(Direction.NORTH).queue();
+		Single.setup(builder,world,x+6,y+3,z).setBlock(water).queue();
+		Single.setup(builder,world,x+6,y+4,z).setBlock(sign).setDirection(Direction.NORTH).queue();
+		Single.setup(builder,world,x+6,y+5,z).setBlock(water).queue();
+		Single.setup(builder,world,x+6,y+6,z).setBlock(sign).setDirection(Direction.NORTH).queue();
+		Single.setup(builder,world,x+6,y+7,z).setBlock(water).queue();
+		Single.setup(builder,world,x+6,y+8,z).setBlock(sign).setDirection(Direction.NORTH).queue();
+		Single.setup(builder,world,x+6,y+9,z).setBlock(water).queue();
+		Single.setup(builder,world,x+6,y+10,z).setBlock(sign).setDirection(Direction.NORTH).queue();
+		Single.setup(builder,world,x+6,y+11,z).setBlock(water).queue();
+		Single.setup(builder,world,x+6,y+12,z).setBlock(sign).setDirection(Direction.NORTH).queue();
+		Single.setup(builder,world,x+6,y+13,z).setBlock(water).queue();
+		Single.setup(builder,world,x+6,y+14,z).setBlock(sign).setDirection(Direction.NORTH).queue();
+		Single.setup(builder,world,x+6,y+15,z).setBlock(water).queue();
+		Single.setup(builder,world,x+6,y+16,z).setBlock(sign).setDirection(Direction.NORTH).queue();
+		Single.setup(builder,world,x+6,y+17,z).setBlock(water).queue();
+		Single.setup(builder,world,x+6,y+18,z).setBlock(sign).setDirection(Direction.NORTH).queue();
+		Single.setup(builder,world,x+6,y+19,z).setBlock(water).queue();
 		
-		Builder.Single.setup(world,x,y,z).setBlock(air).build();
+		Single.setup(builder,world,x,y,z).setBlock(air).queue();
+
+		builder.build();
 		
 		/************************ Teleport ************************/
 		if(Common.CONFIG.TP_GRINDER()) {
-			Builder.Single.setup(world,x+7,y-4,z).setBlock(glass).build();
-			Builder.Single.setup(world,x+7,y-3,z).setBlock(glass).build();
+			Single.setup(builder,world,x+7,y-4,z).setBlock(glass).queue();
+			Single.setup(builder,world,x+7,y-3,z).setBlock(glass).queue();
 			Helper.teleport(world,player,x+13,y-4,z);
 		}
 

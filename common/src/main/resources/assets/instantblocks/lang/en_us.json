@@ -156,6 +156,7 @@
   "text.autoconfig.instantblocks.option.general.WAND_OVER_DURABILITY": "Activate even if not enough durability",
   "text.autoconfig.instantblocks.option.general.KEEP_BLOCKS": "Keep instant blocks after activation",
   "text.autoconfig.instantblocks.option.general.ALLOW_WATER_IN_NETHER": "Allow generating water in the nether",
+  "text.autoconfig.instantblocks.option.general.ORIGINAL_INSTANT": "Generate structures without a queue",
   "text.autoconfig.instantblocks.option.general.XP_AMOUNT": "Experience to give after activation",
   "text.autoconfig.instantblocks.option.general.GENERATE_IN_CHESTS": "Add to structure chests loot tables",
   "text.autoconfig.instantblocks.option.general.GENERATE_IN_CHESTS_BONUS": "Add wooden house to bonus chest",

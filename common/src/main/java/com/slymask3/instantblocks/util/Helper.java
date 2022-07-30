@@ -40,21 +40,24 @@ public class Helper {
 			player.teleportTo(x + 0.5, y + 0.5, z + 0.5);
 		}
 	}
-	
+
 	public static void addToChest(ChestBlockEntity chest, Block block, int amount) {
 		addToChest(chest, block.asItem(), amount);
 	}
-	
+
 	public static void addToChest(ChestBlockEntity chest, Item item, int amount) {
+		addToChest(chest, new ItemStack(item, amount));
+	}
+	
+	public static void addToChest(ChestBlockEntity chest, ItemStack itemStack) {
 		if(chest != null) {
-			ItemStack itemStack = new ItemStack(item, amount);
 			for(int i=0; i<chest.getContainerSize(); i++) {
 				ItemStack itemStackSlot = chest.getItem(i);
 				if(itemStackSlot.sameItem(itemStack) && itemStackSlot.getCount() < itemStackSlot.getMaxStackSize()) {
-					chest.setItem(i, new ItemStack(item, itemStackSlot.getCount() + amount));
+					chest.setItem(i, new ItemStack(itemStack.getItem(), itemStackSlot.getCount() + itemStack.getCount()));
 					break;
 				} else if(chest.getItem(i) == ItemStack.EMPTY) {
-					chest.setItem(i, new ItemStack(item, amount));
+					chest.setItem(i, itemStack);
 					break;
 				}
 			}
@@ -136,7 +139,7 @@ public class Helper {
 	}
 
 	public static Block getBlock(Level world, BlockPos pos) {
-		return Builder.Single.setup(world,pos).getBlock();
+		return world.getBlockState(pos).getBlock();
 	}
 
 	public static Block getRandomBlock(List<WeightedBlock> blocks) {

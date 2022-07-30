@@ -2,8 +2,10 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
+import com.slymask3.instantblocks.builder.Builder;
+import com.slymask3.instantblocks.builder.type.Multiple;
+import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -51,6 +53,8 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
+		Builder builder = new Builder();
+
 		Block ladder = Blocks.LADDER;
 		Block torch = Blocks.TORCH;
 		Block air = Blocks.AIR;
@@ -74,17 +78,19 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 		}
 
 		for(int i=y-1; i<y_top; i++) {
-			Builder.Multiple.setup(world,x-1,y-1,z-1,3,1,3).setStone().build();
-			Builder.Multiple.setup(world,x-1,i,z-1,3,1,3).setStone().build();
-			Builder.Single.setup(world,x,i,z).setBlock(air).build();
+			Multiple.setup(builder,world,x-1,y-1,z-1,3,1,3).setStone().queue();
+			Multiple.setup(builder,world,x-1,i,z-1,3,1,3).setStone().queue();
+			Single.setup(builder,world,x,i,z).setBlock(air).queue();
 
-			Builder.Single.setup(world,x,i,z).setBlock(ladder).setDirection(direction).build();
-			Builder.Single.setup(world,x,y,z).offset(direction,0,1,0,0).setBlock(air).build();
-			Builder.Single.setup(world,x,y+1,z).offset(direction,0,1,0,0).setBlock(air).build();
+			Single.setup(builder,world,x,i,z).setBlock(ladder).setDirection(direction).queue();
+			Single.setup(builder,world,x,y,z).offset(direction,0,1,0,0).setBlock(air).queue();
+			Single.setup(builder,world,x,y+1,z).offset(direction,0,1,0,0).setBlock(air).queue();
 			for(int m = y + 6; m < i; m = m + 6) {
-				Builder.Single.setup(world,x,m,z).offset(direction,0,1,0,0).setBlock(torch).build();
+				Single.setup(builder,world,x,m,z).offset(direction,0,1,0,0).setBlock(torch).queue();
 			}
 		}
+
+		builder.build();
 
 		setCreateMessage(Strings.CREATE_ESCAPE_LADDER, String.valueOf(y_top-y));
 

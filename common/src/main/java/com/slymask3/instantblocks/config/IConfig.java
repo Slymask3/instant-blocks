@@ -15,6 +15,7 @@ public interface IConfig {
     default boolean TP_GRINDER() { return Defaults.TP_GRINDER; }
     default boolean KEEP_BLOCKS() { return Defaults.KEEP_BLOCKS; }
     default boolean ALLOW_WATER_IN_NETHER() { return Defaults.ALLOW_WATER_IN_NETHER; }
+    default boolean ORIGINAL_INSTANT() { return Defaults.ORIGINAL_INSTANT; }
     default int RADIUS_HARVEST() { return Defaults.RADIUS_HARVEST; }
     default int RADIUS_LIGHT() { return Defaults.RADIUS_LIGHT; }
     default int RAILS_AMOUNT() { return Defaults.RAILS_AMOUNT; }
@@ -102,6 +103,7 @@ public interface IConfig {
         public static int XP_AMOUNT = 0;
         public static int TREE_SIZE = 4;
         public static int RADIUS_DOME = 4;
+        public static boolean ORIGINAL_INSTANT = false;
 
         public static int MAX_LIQUID = 1000;
         public static int MAX_FILL = 1000;

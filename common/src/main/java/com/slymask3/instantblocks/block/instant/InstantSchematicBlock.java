@@ -3,9 +3,10 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
+import com.slymask3.instantblocks.builder.Builder;
+import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.network.packet.SchematicUpdatePacket;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import com.slymask3.instantblocks.util.SchematicHelper;
@@ -48,11 +49,13 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
+		Builder builder = new Builder();
 		SchematicBlockEntity blockEntity = (SchematicBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
 		SchematicHelper.Schematic schematic = SchematicHelper.readSchematic(blockEntity.schematic);
 		if(schematic != null) {
-			Builder.Single.setup(world,x,y,z).setBlock(Blocks.AIR).build();
-			buildSchematic(world, x, y, z, schematic, blockEntity.center, blockEntity.ignoreAir);
+			Single.setup(builder,world,x,y,z).setBlock(Blocks.AIR).queue();
+			buildSchematic(builder, world, x, y, z, schematic, blockEntity.center, blockEntity.ignoreAir);
+			builder.build();
 			setCreateMessage(Strings.CREATE_SCHEMATIC, blockEntity.schematic);
 			return true;
 		}
@@ -60,7 +63,7 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 		return false;
 	}
 
-	public static void buildSchematic(Level world, int X, int Y, int Z, SchematicHelper.Schematic schematic, boolean center, boolean ignoreAir) {
+	public static void buildSchematic(Builder builder, Level world, int X, int Y, int Z, SchematicHelper.Schematic schematic, boolean center, boolean ignoreAir) {
 		int width = schematic.width;
 		int height = schematic.height;
 		int length = schematic.length;
@@ -79,7 +82,7 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 					BlockState state = schematic.getBlockState(index);
 					BlockPos pos = new BlockPos(x+X-x_offset,y+Y,z+Z-z_offset);
 					if(!(ignoreAir && state.getBlock() == Blocks.AIR)) {
-						Builder.Single.setup(world,pos).setBlock(state).build();
+						Single.setup(builder,world,pos).setBlock(state).queue();
 						CompoundTag tag = schematic.getBlockEntityTag(x,y,z);
 						BlockEntity entity = world.getBlockEntity(pos);
 						if(tag != null && entity != null) {
