@@ -38,16 +38,16 @@ public class Single extends Base<Single> {
 
     public Single offset(Direction direction, int forward, int back, int left, int right, int up, int down) {
         this.y = this.y + up - down;
-        if (direction == Direction.SOUTH) {
+        if(direction == Direction.SOUTH) {
             this.x = this.x - left + right;
             this.z = this.z - forward + back;
-        } else if (direction == Direction.WEST) {
+        } else if(direction == Direction.WEST) {
             this.x = this.x + forward - back;
             this.z = this.z - left + right;
-        } else if (direction == Direction.NORTH) {
+        } else if(direction == Direction.NORTH) {
             this.x = this.x + left - right;
             this.z = this.z + forward - back;
-        } else if (direction == Direction.EAST) {
+        } else if(direction == Direction.EAST) {
             this.x = this.x - forward + back;
             this.z = this.z + left - right;
         }
@@ -62,73 +62,66 @@ public class Single extends Base<Single> {
         return new Single(builder, world, pos.getX(), pos.getY(), pos.getZ());
     }
 
-    public void queue(int priority) {
+    public void queue(int priority, boolean replace) {
         this.setPriority(priority);
-        this.builder.queue(this);
+        this.replace = replace;
+        this.builder.queue(this,this.replace);
     }
 
     public void build() {
         BlockState state = blockType.getBlockState(world, y);
         Block block = blockType.getBlock(world, y);
         Block getBlock = getBlock();
-        if (Common.CONFIG.KEEP_BLOCKS() && getBlock instanceof InstantBlock) {
+        if(Common.CONFIG.KEEP_BLOCKS() && getBlock instanceof InstantBlock) {
             return;
         }
-        if (world.dimension().equals(Level.NETHER) && block.equals(Blocks.WATER) && !Common.CONFIG.ALLOW_WATER_IN_NETHER()) {
+        if(world.dimension().equals(Level.NETHER) && block.equals(Blocks.WATER) && !Common.CONFIG.ALLOW_WATER_IN_NETHER()) {
             state = Blocks.AIR.defaultBlockState(); //replace water with air in the nether
         }
-        if (canSet(getBlock)) {
-            if (block instanceof CrossCollisionBlock) {
+        if(canSet(getBlock)) {
+            if(block instanceof CrossCollisionBlock) {
                 Context context = new Context(world, new BlockPos(x, y, z));
                 state = block.getStateForPlacement(context);
-                if (state == null) return;
+                if(state == null) return;
             }
-            if (block instanceof SlabBlock && direction == Direction.UP) {
+            if(block instanceof SlabBlock && direction == Direction.UP) {
                 direction = null;
                 state = state.setValue(SlabBlock.TYPE, SlabType.TOP);
             }
-            if (direction != null && state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+            if(direction != null && state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
                 state = state.setValue(BlockStateProperties.HORIZONTAL_FACING, direction);
             }
-            if (block == Blocks.FARMLAND) {
+            if(block == Blocks.FARMLAND) {
                 state = state.setValue(FarmBlock.MOISTURE, FarmBlock.MAX_MOISTURE);
             }
-            if (block instanceof BedBlock && direction != null) {
+            if(block instanceof BedBlock && direction != null) {
                 state = state.setValue(BedBlock.PART, BedPart.HEAD);
             }
-            if (block instanceof LeavesBlock) {
+            if(block instanceof LeavesBlock) {
                 state = state.setValue(LeavesBlock.PERSISTENT, Boolean.TRUE);
             }
-            if (block instanceof ChestBlock && direction != null) {
-                BlockPos left_pos = new BlockPos(x, y, z).relative(direction.getCounterClockWise(), 1);
-                BlockPos right_pos = new BlockPos(x, y, z).relative(direction.getClockWise(), 1);
-                BlockState left = world.getBlockState(left_pos);
-                BlockState right = world.getBlockState(right_pos);
-                if (left.getBlock() == Blocks.CHEST && left.getValue(ChestBlock.TYPE) == ChestType.SINGLE && left.getValue(ChestBlock.FACING) == direction) {
-                    world.setBlock(left_pos, state.setValue(ChestBlock.TYPE, ChestType.LEFT), flag);
-                    state = state.setValue(ChestBlock.TYPE, ChestType.RIGHT);
-                } else if (right.getBlock() == Blocks.CHEST && right.getValue(ChestBlock.TYPE) == ChestType.SINGLE && right.getValue(ChestBlock.FACING) == direction) {
-                    world.setBlock(left_pos, state.setValue(ChestBlock.TYPE, ChestType.RIGHT), flag);
-                    state = state.setValue(ChestBlock.TYPE, ChestType.LEFT);
-                }
+            if(blockType.isDoubleChest()) {
+                BlockPos right_pos = new BlockPos(x, y, z).relative(direction.getCounterClockWise(), 1);
+                world.setBlock(right_pos, state.setValue(ChestBlock.TYPE, ChestType.LEFT), flag);
+                state = state.setValue(ChestBlock.TYPE, ChestType.RIGHT);
             }
             world.setBlock(new BlockPos(x, y, z), state, flag);
-            if (block instanceof DoorBlock) {
+            if(block instanceof DoorBlock) {
                 world.setBlock(new BlockPos(x, y, z).above(), state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER), 3);
             }
-            if (block instanceof BedBlock && direction != null) {
+            if(block instanceof BedBlock && direction != null) {
                 world.setBlock(new BlockPos(x, y, z).relative(direction.getOpposite(), 1), state.setValue(BedBlock.PART, BedPart.FOOT), 3);
             }
             if(blockType.isColor()) {
                 try {
                     ColorBlockEntity entity = (ColorBlockEntity) world.getBlockEntity(new BlockPos(x, y, z));
-                    if (entity != null) {
+                    if(entity != null) {
                         entity.color = blockType.getColor();
                     }
                 } catch (Exception e) {
                     Common.LOG.info(e.getMessage());
                 }
-            } else if(blockType.isContainer()) {
+            } else if(blockType.isChest()) {
                 ChestBlockEntity blockEntity = (ChestBlockEntity)world.getBlockEntity(this.getBlockPos());
                 for(ItemStack itemStack : blockType.getContainerItems()) {
                     Helper.addToChest(blockEntity, itemStack);

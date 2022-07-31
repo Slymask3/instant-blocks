@@ -75,14 +75,15 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 			z_offset = length / 2;
 		}
 
-		for(int x = 0; x < width; ++x) {
-			for(int y = 0; y < height; ++y) {
+		int priority = 0;
+		for(int y = 0; y < height; ++y) {
+			for(int x = 0; x < width; ++x) {
 				for(int z = 0; z < length; ++z) {
 					int index = y * width * length + z * width + x;
 					BlockState state = schematic.getBlockState(index);
 					BlockPos pos = new BlockPos(x+X-x_offset,y+Y,z+Z-z_offset);
 					if(!(ignoreAir && state.getBlock() == Blocks.AIR)) {
-						Single.setup(builder,world,pos).setBlock(state).queue();
+						Single.setup(builder,world,pos).setBlock(state).queue(priority);
 						CompoundTag tag = schematic.getBlockEntityTag(x,y,z);
 						BlockEntity entity = world.getBlockEntity(pos);
 						if(tag != null && entity != null) {
@@ -91,6 +92,7 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 					}
 				}
 			}
+			priority++;
 		}
 		for(CompoundTag entityTag : schematic.getEntityTags()) {
 			Optional<Entity> optional = EntityType.create(entityTag,world);

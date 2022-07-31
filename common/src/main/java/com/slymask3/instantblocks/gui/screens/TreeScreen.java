@@ -118,7 +118,7 @@ public class TreeScreen extends InstantScreen {
 			}
 
 			public boolean mouseClicked(double p_96122_, double p_96123_, int p_96124_) {
-				if (p_96124_ == 0) {
+				if(p_96124_ == 0) {
 					TreeScreen.this.setSelected(this.tree);
 					return true;
 				} else {

@@ -2,6 +2,7 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
+import com.slymask3.instantblocks.builder.BlockType;
 import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.builder.type.Multiple;
 import com.slymask3.instantblocks.builder.type.Single;
@@ -31,7 +32,7 @@ public class InstantHouseWoodBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder();
+		Builder builder = new Builder(10);
 
 		String planks_one = Common.CONFIG.HOUSE_PLANKS_ONE();
 		String planks_two = Common.CONFIG.HOUSE_PLANKS_TWO();
@@ -49,7 +50,6 @@ public class InstantHouseWoodBlock extends InstantBlock {
 		Block door = Helper.readBlock(Common.CONFIG.HOUSE_DOOR() + "_door",Blocks.DARK_OAK_DOOR);
 
 		Block craft = Blocks.CRAFTING_TABLE;
-		Block chest = Blocks.CHEST;
 		Block furnace = Blocks.FURNACE;
 		Block bed = Blocks.RED_BED;
 		Block pane = Blocks.GLASS_PANE;
@@ -90,13 +90,15 @@ public class InstantHouseWoodBlock extends InstantBlock {
 		Multiple.setup(builder,world,x,y+1,z,direction,0,2,0,4,0,0,8,0,3,0).setBlock(light).queue(); //WOOD WALL 2
 		Multiple.setup(builder,world,x,y+1,z,direction,4,0,0,5,0,5,0,0,3,0).setBlock(light).queue(); //WOOD WALL 3
 		Multiple.setup(builder,world,x,y+1,z,direction,4,0,5,0,0,5,0,0,3,0).setBlock(light).queue(); //WOOD WALL 4
-		Multiple.setup(builder,world,x,y+2,z,direction,5,0,0,3,0,0,6,0,1,0).setBlock(pane).queue(); //PANE WALL 1
-		Multiple.setup(builder,world,x,y+2,z,direction,0,2,0,3,0,0,0,0,1,0).setBlock(pane).queue(); //PANE WALL 2 (1)
-		Multiple.setup(builder,world,x,y+2,z,direction,0,2,3,0,0,0,0,0,1,0).setBlock(pane).queue(); //PANE WALL 2 (2)
-		Multiple.setup(builder,world,x,y+2,z,direction,3,0,0,5,0,3,0,0,1,0).setBlock(pane).queue(); //PANE WALL 3
-		Multiple.setup(builder,world,x,y+2,z,direction,3,0,5,0,0,3,0,0,1,0).setBlock(pane).queue(); //PANE WALL 4
-		Multiple.setup(builder,world,x,y+1,z,direction,0,2,0,1,0,0,2,0,2,0).setBlock(log).queue(); //LOG ENTRANCE
-		Single.setup(builder,world,x,y+1,z).offset(direction,0,2,0,0).setBlock(door).setDirection(directionDoor).queue();
+		Multiple.setup(builder,world,x,y+2,z,direction,5,0,0,3,0,0,6,0,1,0).setBlock(pane).queue(1); //PANE WALL 1
+		Multiple.setup(builder,world,x,y+2,z,direction,0,2,0,3,0,0,0,0,1,0).setBlock(pane).queue(1); //PANE WALL 2 (1)
+		Multiple.setup(builder,world,x,y+2,z,direction,0,2,3,0,0,0,0,0,1,0).setBlock(pane).queue(1); //PANE WALL 2 (2)
+		Multiple.setup(builder,world,x,y+2,z,direction,3,0,0,5,0,3,0,0,1,0).setBlock(pane).queue(1); //PANE WALL 3
+		Multiple.setup(builder,world,x,y+2,z,direction,3,0,5,0,0,3,0,0,1,0).setBlock(pane).queue(1); //PANE WALL 4
+		Multiple.setup(builder,world,x,y+1,z,direction,0,2,1,0,0,0,0,0,2,0).setBlock(log).queue(); //LOG ENTRANCE
+		Multiple.setup(builder,world,x,y+1,z,direction,0,2,0,1,0,0,0,0,2,0).setBlock(log).queue(); //LOG ENTRANCE
+		Single.setup(builder,world,x,y+3,z).offset(direction,0,2,0,0).setBlock(log).queue(); //LOG ENTRANCE
+		Single.setup(builder,world,x,y+1,z).offset(direction,0,2,0,0).setBlock(door).setDirection(directionDoor).queue(1);
 
 		//porch
 		Multiple.setup(builder,world,x,y+4,z,direction,0,3,0,4,0,3,8,0,0,0).setBlock(slabD).setDirection(Direction.UP).queue(); //PORCH ROOF 1
@@ -105,14 +107,14 @@ public class InstantHouseWoodBlock extends InstantBlock {
 		Multiple.setup(builder,world,x,y+1,z,direction,0,3,4,0,0,0,0,0,3,0).setBlock(dark).queue(); //PORCH CORNER 2
 		Multiple.setup(builder,world,x,y+1,z,direction,0,6,0,4,0,0,0,0,3,0).setBlock(dark).queue(); //PORCH CORNER 3
 		Multiple.setup(builder,world,x,y+1,z,direction,0,6,4,0,0,0,0,0,3,0).setBlock(dark).queue(); //PORCH CORNER 4
-		Multiple.setup(builder,world,x,y+2,z,direction,0,3,0,4,0,0,0,0,1,0).setBlock(fence).queue(); //PORCH CORNER 1 (FENCE)
-		Multiple.setup(builder,world,x,y+2,z,direction,0,3,4,0,0,0,0,0,1,0).setBlock(fence).queue(); //PORCH CORNER 2 (FENCE)
-		Multiple.setup(builder,world,x,y+2,z,direction,0,6,0,4,0,0,0,0,1,0).setBlock(fence).queue(); //PORCH CORNER 3 (FENCE)
-		Multiple.setup(builder,world,x,y+2,z,direction,0,6,4,0,0,0,0,0,1,0).setBlock(fence).queue(); //PORCH CORNER 4 (FENCE)
-		Multiple.setup(builder,world,x,y+1,z,direction,0,4,0,4,0,1,0,0,0,0).setBlock(fence).queue(); //PORCH SIDE 1
-		Multiple.setup(builder,world,x,y+1,z,direction,0,4,4,0,0,1,0,0,0,0).setBlock(fence).queue(); //PORCH SIDE 2
-		Multiple.setup(builder,world,x,y+1,z,direction,0,6,0,3,0,0,6,0,0,0).setBlock(fence).queue(); //PORCH SIDE 3 (FRONT)
-		Single.setup(builder,world,x,y+1,z).offset(direction,0,6,0,0).setBlock(gate).setDirection(direction).queue(); //PORCH GATE
+		Multiple.setup(builder,world,x,y+2,z,direction,0,3,0,4,0,0,0,0,1,0).setBlock(fence).queue(2); //PORCH CORNER 1 (FENCE)
+		Multiple.setup(builder,world,x,y+2,z,direction,0,3,4,0,0,0,0,0,1,0).setBlock(fence).queue(2); //PORCH CORNER 2 (FENCE)
+		Multiple.setup(builder,world,x,y+2,z,direction,0,6,0,4,0,0,0,0,1,0).setBlock(fence).queue(2); //PORCH CORNER 3 (FENCE)
+		Multiple.setup(builder,world,x,y+2,z,direction,0,6,4,0,0,0,0,0,1,0).setBlock(fence).queue(2); //PORCH CORNER 4 (FENCE)
+		Multiple.setup(builder,world,x,y+1,z,direction,0,4,0,4,0,1,0,0,0,0).setBlock(fence).queue(2); //PORCH SIDE 1
+		Multiple.setup(builder,world,x,y+1,z,direction,0,4,4,0,0,1,0,0,0,0).setBlock(fence).queue(2); //PORCH SIDE 2
+		Multiple.setup(builder,world,x,y+1,z,direction,0,6,0,3,0,0,6,0,0,0).setBlock(fence).queue(2); //PORCH SIDE 3 (FRONT)
+		Single.setup(builder,world,x,y+1,z).offset(direction,0,6,0,0).setBlock(gate).setDirection(direction).queue(2); //PORCH GATE
 
 		//roof
 		Multiple.setup(builder,world,x,y+5,z,direction,5,0,0,5,0,0,10,0,0,0).setBlock(slabD).queue(); //HOUSE ROOF 1
@@ -130,49 +132,47 @@ public class InstantHouseWoodBlock extends InstantBlock {
 		Multiple.setup(builder,world,x,y+6,z,direction,2,0,0,2,0,1,4,0,0,0).setBlock(light).queue(); //HOUSE ROOF TOP
 
 		//inside
-		Single.setup(builder,world,x,y+1,z).offset(direction,4,0,0,4).setBlock(bed).setDirection(directionLeft).queue(); //BED
-		Single.setup(builder,world,x,y+1,z).offset(direction,4,0,2,0).setBlock(chest).setDirection(direction).queue(); //CHEST
-		Single.setup(builder,world,x,y+1,z).offset(direction,4,0,3,0).setBlock(chest).setDirection(direction).queue(); //CHEST
-		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,4,0).setBlock(chest).setDirection(directionChestLeft).queue(); //CHEST
-		Single.setup(builder,world,x,y+1,z).offset(direction,2,0,4,0).setBlock(chest).setDirection(directionChestLeft).queue(); //CHEST
-		Single.setup(builder,world,x,y+1,z).offset(direction,4,0,4,0).setBlock(craft).queue(); //WORKBENCH
-		Single.setup(builder,world,x,y+1,z).offset(direction,2,0,0,4).setBlock(furnace).setDirection(directionRight).queue(); //FURNACE
-		Single.setup(builder,world,x,y+1,z).offset(direction,1,0,0,4).setBlock(furnace).setDirection(directionRight).queue(); //FURNACE
-		Single.setup(builder,world,x,y+1,z).offset(direction,0,1,0,4).setBlock(stair).setDirection(directionStairLeft).queue(); //CHAIR
-		Single.setup(builder,world,x,y+1,z).offset(direction,0,1,4,0).setBlock(stair).setDirection(directionStairRight).queue(); //CHAIR
-		Single.setup(builder,world,x,y+1,z).offset(direction,0,0,0,4).setBlock(sign).setDirection(directionBack).queue(); //CHAIR
-		Single.setup(builder,world,x,y+1,z).offset(direction,0,0,4,0).setBlock(sign).setDirection(directionBack).queue(); //CHAIR
-		Single.setup(builder,world,x,y+2,z).offset(direction,0,1,0,2).setBlock(plate_dark).queue(); //TABLE
-		Single.setup(builder,world,x,y+2,z).offset(direction,0,1,2,0).setBlock(plate_dark).queue(); //TABLE
-		Single.setup(builder,world,x,y+1,z).offset(direction,0,1,0,2).setBlock(fence).queue(); //TABLE
-		Single.setup(builder,world,x,y+1,z).offset(direction,0,1,2,0).setBlock(fence).queue(); //TABLE
+		Single.setup(builder,world,x,y+1,z).offset(direction,4,0,0,4).setBlock(bed).setDirection(directionLeft).queue(2,false); //BED
+		Single.setup(builder,world,x,y+1,z).offset(direction,4,0,3,0).setBlock(BlockType.chest(true)).setDirection(direction).queue(2,false); //CHEST
+		Single.setup(builder,world,x,y+1,z).offset(direction,2,0,4,0).setBlock(BlockType.chest(true)).setDirection(directionChestLeft).queue(2,false); //CHEST
+		Single.setup(builder,world,x,y+1,z).offset(direction,4,0,4,0).setBlock(craft).queue(2,false); //WORKBENCH
+		Single.setup(builder,world,x,y+1,z).offset(direction,2,0,0,4).setBlock(furnace).setDirection(directionRight).queue(2,false); //FURNACE
+		Single.setup(builder,world,x,y+1,z).offset(direction,1,0,0,4).setBlock(furnace).setDirection(directionRight).queue(2,false); //FURNACE
+		Single.setup(builder,world,x,y+1,z).offset(direction,0,1,0,4).setBlock(stair).setDirection(directionStairLeft).queue(2,false); //CHAIR
+		Single.setup(builder,world,x,y+1,z).offset(direction,0,1,4,0).setBlock(stair).setDirection(directionStairRight).queue(2,false); //CHAIR
+		Single.setup(builder,world,x,y+1,z).offset(direction,0,0,0,4).setBlock(sign).setDirection(directionBack).queue(2,false); //CHAIR
+		Single.setup(builder,world,x,y+1,z).offset(direction,0,0,4,0).setBlock(sign).setDirection(directionBack).queue(2,false); //CHAIR
+		Single.setup(builder,world,x,y+2,z).offset(direction,0,1,0,2).setBlock(plate_dark).queue(2,false); //TABLE
+		Single.setup(builder,world,x,y+2,z).offset(direction,0,1,2,0).setBlock(plate_dark).queue(2,false); //TABLE
+		Single.setup(builder,world,x,y+1,z).offset(direction,0,1,0,2).setBlock(fence).queue(2,false); //TABLE
+		Single.setup(builder,world,x,y+1,z).offset(direction,0,1,2,0).setBlock(fence).queue(2,false); //TABLE
 
 		//above door torches
-		Single.setup(builder,world,x,y+3,z).offset(direction,0,3,1,0).setBlock(torch_wall).setDirection(direction).queue();
-		Single.setup(builder,world,x,y+3,z).offset(direction,0,3,0,1).setBlock(torch_wall).setDirection(direction).queue();
+		Single.setup(builder,world,x,y+3,z).offset(direction,0,3,1,0).setBlock(torch_wall).setDirection(direction).queue(3);
+		Single.setup(builder,world,x,y+3,z).offset(direction,0,3,0,1).setBlock(torch_wall).setDirection(direction).queue(3);
 
 		//outdoor torches
-		Single.setup(builder,world,x,y+4,z).offset(direction,0,7,4,0).setBlock(torch_wall).setDirection(direction).queue();
-		Single.setup(builder,world,x,y+4,z).offset(direction,0,7,0,4).setBlock(torch_wall).setDirection(direction).queue();
-		Single.setup(builder,world,x,y+4,z).offset(direction,0,6,5,0).setBlock(torch_wall).setDirection(directionRight).queue();
-		Single.setup(builder,world,x,y+4,z).offset(direction,0,6,0,5).setBlock(torch_wall).setDirection(directionLeft).queue();
-		Single.setup(builder,world,x,y+2,z).offset(direction,0,6,0,1).setBlock(torch).queue();
-		Single.setup(builder,world,x,y+2,z).offset(direction,0,6,1,0).setBlock(torch).queue();
+		Single.setup(builder,world,x,y+4,z).offset(direction,0,7,4,0).setBlock(torch_wall).setDirection(direction).queue(3);
+		Single.setup(builder,world,x,y+4,z).offset(direction,0,7,0,4).setBlock(torch_wall).setDirection(direction).queue(3);
+		Single.setup(builder,world,x,y+4,z).offset(direction,0,6,5,0).setBlock(torch_wall).setDirection(directionRight).queue(3);
+		Single.setup(builder,world,x,y+4,z).offset(direction,0,6,0,5).setBlock(torch_wall).setDirection(directionLeft).queue(3);
+		Single.setup(builder,world,x,y+2,z).offset(direction,0,6,0,1).setBlock(torch).queue(3);
+		Single.setup(builder,world,x,y+2,z).offset(direction,0,6,1,0).setBlock(torch).queue(3);
 
 		//indoor torches
-		Single.setup(builder,world,x,y+4,z).offset(direction,0,1,2,0).setBlock(torch_wall).setDirection(directionBack).queue();
-		Single.setup(builder,world,x,y+4,z).offset(direction,0,1,0,2).setBlock(torch_wall).setDirection(directionBack).queue();
-		Single.setup(builder,world,x,y+4,z).offset(direction,4,0,2,0).setBlock(torch_wall).setDirection(direction).queue();
-		Single.setup(builder,world,x,y+4,z).offset(direction,4,0,0,2).setBlock(torch_wall).setDirection(direction).queue();
-		Single.setup(builder,world,x,y+4,z).offset(direction,1,0,4,0).setBlock(torch_wall).setDirection(directionLeft).queue();
-		Single.setup(builder,world,x,y+4,z).offset(direction,2,0,4,0).setBlock(torch_wall).setDirection(directionLeft).queue();
-		Single.setup(builder,world,x,y+4,z).offset(direction,1,0,0,4).setBlock(torch_wall).setDirection(directionRight).queue();
-		Single.setup(builder,world,x,y+4,z).offset(direction,2,0,0,4).setBlock(torch_wall).setDirection(directionRight).queue();
+		Single.setup(builder,world,x,y+4,z).offset(direction,0,1,2,0).setBlock(torch_wall).setDirection(directionBack).queue(3);
+		Single.setup(builder,world,x,y+4,z).offset(direction,0,1,0,2).setBlock(torch_wall).setDirection(directionBack).queue(3);
+		Single.setup(builder,world,x,y+4,z).offset(direction,4,0,2,0).setBlock(torch_wall).setDirection(direction).queue(3);
+		Single.setup(builder,world,x,y+4,z).offset(direction,4,0,0,2).setBlock(torch_wall).setDirection(direction).queue(3);
+		Single.setup(builder,world,x,y+4,z).offset(direction,1,0,4,0).setBlock(torch_wall).setDirection(directionLeft).queue(3);
+		Single.setup(builder,world,x,y+4,z).offset(direction,2,0,4,0).setBlock(torch_wall).setDirection(directionLeft).queue(3);
+		Single.setup(builder,world,x,y+4,z).offset(direction,1,0,0,4).setBlock(torch_wall).setDirection(directionRight).queue(3);
+		Single.setup(builder,world,x,y+4,z).offset(direction,2,0,0,4).setBlock(torch_wall).setDirection(directionRight).queue(3);
 
 		//pressure plates
-		Single.setup(builder,world,x,y+1,z).offset(direction,0,1,0,0).setBlock(plate_light).queue();
-		Single.setup(builder,world,x,y+1,z).offset(direction,0,3,0,0).setBlock(plate_dark).queue();
-		Single.setup(builder,world,x,y+1,z).offset(direction,0,5,0,0).setBlock(plate_light).queue();
+		Single.setup(builder,world,x,y+1,z).offset(direction,0,1,0,0).setBlock(plate_light).queue(1);
+		Single.setup(builder,world,x,y+1,z).offset(direction,0,3,0,0).setBlock(plate_dark).queue(1);
+		Single.setup(builder,world,x,y+1,z).offset(direction,0,5,0,0).setBlock(plate_light).queue(1);
 
 		builder.build();
 

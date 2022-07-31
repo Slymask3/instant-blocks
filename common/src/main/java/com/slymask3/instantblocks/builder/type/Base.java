@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 public abstract class Base<T extends Base<T>> {
     final Builder builder;
     public int priority;
+    public boolean replace;
     final Level world;
     public int x, y, z;
     BlockType blockType;
@@ -23,6 +24,8 @@ public abstract class Base<T extends Base<T>> {
 
     public Base(Builder builder, Level world, int x, int y, int z) {
         this.builder = builder;
+        this.priority = 0;
+        this.replace = true;
         this.world = world;
         this.x = x;
         this.y = y;
@@ -73,7 +76,12 @@ public abstract class Base<T extends Base<T>> {
     }
 
     public void queue(int priority) {
+        this.queue(priority,true);
+    }
+
+    public void queue(int priority, boolean replace) {
         this.setPriority(priority);
+        this.replace = replace;
         this.build();
     }
 

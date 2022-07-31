@@ -78,15 +78,15 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 		}
 
 		for(int i=y-1; i<y_top; i++) {
-			Multiple.setup(builder,world,x-1,y-1,z-1,3,1,3).setStone().queue();
-			Multiple.setup(builder,world,x-1,i,z-1,3,1,3).setStone().queue();
-			Single.setup(builder,world,x,i,z).setBlock(air).queue();
+			Multiple.setup(builder,world,x-1,y-1,z-1,3,1,3).setStone().queue(i);
+			Multiple.setup(builder,world,x-1,i,z-1,3,1,3).setStone().queue(i);
+			Single.setup(builder,world,x,i,z).setBlock(air).queue(i);
 
-			Single.setup(builder,world,x,i,z).setBlock(ladder).setDirection(direction).queue();
-			Single.setup(builder,world,x,y,z).offset(direction,0,1,0,0).setBlock(air).queue();
-			Single.setup(builder,world,x,y+1,z).offset(direction,0,1,0,0).setBlock(air).queue();
+			Single.setup(builder,world,x,i,z).setBlock(ladder).setDirection(direction).queue(i);
+			Single.setup(builder,world,x,y,z).offset(direction,0,1,0,0).setBlock(air).queue(i);
+			Single.setup(builder,world,x,y+1,z).offset(direction,0,1,0,0).setBlock(air).queue(i);
 			for(int m = y + 6; m < i; m = m + 6) {
-				Single.setup(builder,world,x,m,z).offset(direction,0,1,0,0).setBlock(torch).queue();
+				Single.setup(builder,world,x,m,z).offset(direction,0,1,0,0).setBlock(torch).queue(i);
 			}
 		}
 
@@ -130,10 +130,10 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 	}
 
 	public BlockState updateShape(BlockState p_54363_, Direction p_54364_, BlockState p_54365_, LevelAccessor p_54366_, BlockPos p_54367_, BlockPos p_54368_) {
-		if (p_54364_.getOpposite() == p_54363_.getValue(FACING) && !p_54363_.canSurvive(p_54366_, p_54367_)) {
+		if(p_54364_.getOpposite() == p_54363_.getValue(FACING) && !p_54363_.canSurvive(p_54366_, p_54367_)) {
 			return Blocks.AIR.defaultBlockState();
 		} else {
-			if (p_54363_.getValue(WATERLOGGED)) {
+			if(p_54363_.getValue(WATERLOGGED)) {
 				p_54366_.scheduleTick(p_54367_, Fluids.WATER, Fluids.WATER.getTickDelay(p_54366_));
 			}
 
@@ -142,9 +142,9 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 	}
 
 	public BlockState getStateForPlacement(BlockPlaceContext p_54347_) {
-		if (!p_54347_.replacingClickedOnBlock()) {
+		if(!p_54347_.replacingClickedOnBlock()) {
 			BlockState blockstate = p_54347_.getLevel().getBlockState(p_54347_.getClickedPos().relative(p_54347_.getClickedFace().getOpposite()));
-			if (blockstate.is(this) && blockstate.getValue(FACING) == p_54347_.getClickedFace()) {
+			if(blockstate.is(this) && blockstate.getValue(FACING) == p_54347_.getClickedFace()) {
 				return null;
 			}
 		}
@@ -155,9 +155,9 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 		FluidState fluidstate = p_54347_.getLevel().getFluidState(p_54347_.getClickedPos());
 
 		for(Direction direction : p_54347_.getNearestLookingDirections()) {
-			if (direction.getAxis().isHorizontal()) {
+			if(direction.getAxis().isHorizontal()) {
 				blockstate1 = blockstate1.setValue(FACING, direction.getOpposite());
-				if (blockstate1.canSurvive(levelreader, blockpos)) {
+				if(blockstate1.canSurvive(levelreader, blockpos)) {
 					return blockstate1.setValue(WATERLOGGED, Boolean.valueOf(fluidstate.getType() == Fluids.WATER));
 				}
 			}

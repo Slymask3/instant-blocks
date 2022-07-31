@@ -22,22 +22,22 @@ public class Multiple extends Base<Multiple> {
     public static Multiple setup(Builder builder, Level world, int x, int y, int z, Direction direction, int forward, int back, int left, int right, int forwardX, int backX, int leftX, int rightX, int upX, int downX) {
         int x1 = x, z1 = z, x2 = x, z2 = z;
         int y2 = y + upX - downX;
-        if (direction == Direction.SOUTH) {
+        if(direction == Direction.SOUTH) {
             x1 = x - left + right;
             z1 = z - forward + back;
             x2 = x1 - leftX + rightX;
             z2 = z1 - forwardX + backX;
-        } else if (direction == Direction.WEST) {
+        } else if(direction == Direction.WEST) {
             x1 = x + forward - back;
             z1 = z - left + right;
             x2 = x1 + forwardX - backX;
             z2 = z1 - leftX + rightX;
-        } else if (direction == Direction.NORTH) {
+        } else if(direction == Direction.NORTH) {
             x1 = x + left - right;
             z1 = z + forward - back;
             x2 = x1 + leftX - rightX;
             z2 = z1 + forwardX - backX;
-        } else if (direction == Direction.EAST) {
+        } else if(direction == Direction.EAST) {
             x1 = x - forward + back;
             z1 = z + left - right;
             x2 = x1 - forwardX + backX;
@@ -54,9 +54,9 @@ public class Multiple extends Base<Multiple> {
         boolean x_dir = Helper.isPositive(x1 - x2);
         boolean y_dir = Helper.isPositive(y1 - y2);
         boolean z_dir = Helper.isPositive(z1 - z2);
-        for (int y_cur = y1; (y_dir ? y_cur >= y2 : y_cur <= y2); y_cur = y_cur + (y_dir ? -1 : 1)) {
-            for (int z_cur = z1; (z_dir ? z_cur >= z2 : z_cur <= z2); z_cur = z_cur + (z_dir ? -1 : 1)) {
-                for (int x_cur = x1; (x_dir ? x_cur >= x2 : x_cur <= x2); x_cur = x_cur + (x_dir ? -1 : 1)) {
+        for(int y_cur = y1; (y_dir ? y_cur >= y2 : y_cur <= y2); y_cur = y_cur + (y_dir ? -1 : 1)) {
+            for(int z_cur = z1; (z_dir ? z_cur >= z2 : z_cur <= z2); z_cur = z_cur + (z_dir ? -1 : 1)) {
+                for(int x_cur = x1; (x_dir ? x_cur >= x2 : x_cur <= x2); x_cur = x_cur + (x_dir ? -1 : 1)) {
                     Single.setup(builder, world, x_cur, y_cur, z_cur).setBlock(blockType).setDirection(direction).queue(this.priority);
                 }
             }

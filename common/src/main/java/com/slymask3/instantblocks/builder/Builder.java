@@ -1,14 +1,15 @@
 package com.slymask3.instantblocks.builder;
 
+import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.builder.type.Single;
+import net.minecraft.core.BlockPos;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Builder {
 	public enum Status { SETUP, BUILD, DONE }
 
+	public HashMap<BlockPos,Single> queueMap;
 	public List<Single> queue;
 	public Status status;
 	public int speed;
@@ -19,6 +20,8 @@ public class Builder {
 	}
 
 	public Builder(int speed) {
+		Common.Timer.start();
+		this.queueMap = new HashMap<>();
 		this.queue = new ArrayList<>();
 		this.status = Status.SETUP;
 		this.speed = speed;
@@ -45,14 +48,30 @@ public class Builder {
 		}
 	}
 
-	public void queue(Single single) {
-		this.queue.removeIf(temp -> temp.getBlockPos().equals(single.getBlockPos()) && temp.priority == single.priority);
-		//this.queue.removeIf(temp -> temp.x == single.x && temp.y == single.y && temp.z == single.z && temp.priority == single.priority);
-		this.queue.add(single);
+	public void queue(Single single, boolean replace) {
+		BlockPos pos = single.getBlockPos();
+		if(replace) {
+			if(this.queueMap.containsKey(pos)) {
+				this.queueMap.replace(single.getBlockPos(),single);
+			} else {
+				this.queueMap.put(single.getBlockPos(),single);
+			}
+		} else {
+			this.queue.add(single);
+		}
 	}
 
 	public void build() {
+		Common.LOG.info("build(): " + Common.Timer.end());
+
+		Common.Timer.start();
+		for(Map.Entry<BlockPos,Single> set : this.queueMap.entrySet()) {
+			this.queue.add(set.getValue());
+		}
 		this.queue.sort(Comparator.comparingInt(one -> one.priority));
+		this.queueMap.clear();
+		Common.LOG.info("sort(): " + Common.Timer.end());
+
 		this.status = Status.BUILD;
 		builders.add(this);
 	}

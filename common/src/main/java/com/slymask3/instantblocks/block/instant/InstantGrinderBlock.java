@@ -2,6 +2,7 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
+import com.slymask3.instantblocks.builder.BlockType;
 import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.builder.type.Multiple;
 import com.slymask3.instantblocks.builder.type.Single;
@@ -55,7 +56,6 @@ public class InstantGrinderBlock extends InstantBlock {
 
 		Block water = Blocks.WATER;
 		Block torch = Blocks.WALL_TORCH;
-		Block chest = Blocks.CHEST;
 		Block craft = Blocks.CRAFTING_TABLE;
 		Block door = Blocks.OAK_DOOR;
 		Block glass = Blocks.GLASS;
@@ -112,11 +112,9 @@ public class InstantGrinderBlock extends InstantBlock {
 		Single.setup(builder,world,x+9,y-4,z).setBlock(door).setDirection(Direction.WEST).queue(); //DOOR
 		Single.setup(builder,world,x+10,y-4,z-2).setStone().queue();
 		Single.setup(builder,world,x+10,y-4,z+2).setStone().queue();
-		Single.setup(builder,world,x+15,y-4,z+2).setBlock(chest).setDirection(Direction.WEST).queue();
-		Single.setup(builder,world,x+15,y-4,z+1).setBlock(chest).setDirection(Direction.WEST).queue();
+		Single.setup(builder,world,x+15,y-4,z+1).setBlock(BlockType.chest(true)).setDirection(Direction.WEST).queue();
 		Single.setup(builder,world,x+15,y-4,z).setBlock(craft).queue();
-		Single.setup(builder,world,x+15,y-4,z-1).setBlock(chest).setDirection(Direction.WEST).queue();
-		Single.setup(builder,world,x+15,y-4,z-2).setBlock(chest).setDirection(Direction.WEST).queue();
+		Single.setup(builder,world,x+15,y-4,z-2).setBlock(BlockType.chest(true)).setDirection(Direction.WEST).queue();
 
 		/************************ Layer -3 ************************/
 		Multiple.setup(builder,world,x-5,y-3,z-5,1,1,11).setStone().queue();

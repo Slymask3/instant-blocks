@@ -2,7 +2,8 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
-import com.slymask3.instantblocks.builder.*;
+import com.slymask3.instantblocks.builder.BlockType;
+import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.builder.type.Circle;
 import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.builder.type.Sphere;
@@ -63,7 +64,7 @@ public class InstantGlassDomeBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder();
+		Builder builder = new Builder(2);
 
 		Block glass = Blocks.GLASS;
 		Block torch = Blocks.TORCH;
@@ -71,14 +72,15 @@ public class InstantGlassDomeBlock extends InstantBlock {
 
 		int radius = Common.CONFIG.RADIUS_DOME();
 
-		Circle.setup(builder,world,x,y,z,radius).setBlock(BlockType.stone()).queue();
-		Sphere.setup(builder,world,x,y+1,z,radius).setOuter(BlockType.block(glass)).setInner(BlockType.block(air)).setHalf().queue();
+		Circle.setup(builder,world,x,y,z,radius).setBlock(BlockType.stone()).queue(0);
+		Sphere.setup(builder,world,x,y+1,z,radius).setOuter(BlockType.block(glass)).setInner(BlockType.block(air)).setHalf().setQueueDirection(Direction.UP).queue(1);
+		//Sphere.setup(builder,world,x,y+1,z,radius).setInner(BlockType.block(air)).setHalf().queue(0,false);
 
 		for(int i=3; i<radius; i=i+6) {
-			Single.setup(builder,world,x+i,y+1,z).setBlock(torch).queue();
-			Single.setup(builder,world,x-i,y+1,z).setBlock(torch).queue();
-			Single.setup(builder,world,x,y+1,z+i).setBlock(torch).queue();
-			Single.setup(builder,world,x,y+1,z-i).setBlock(torch).queue();
+			Single.setup(builder,world,x+i,y+1,z).setBlock(torch).queue(1000,false);
+			Single.setup(builder,world,x-i,y+1,z).setBlock(torch).queue(1000,false);
+			Single.setup(builder,world,x,y+1,z+i).setBlock(torch).queue(1000,false);
+			Single.setup(builder,world,x,y+1,z-i).setBlock(torch).queue(1000,false);
 		}
 
 		builder.build();

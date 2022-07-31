@@ -14,4 +14,14 @@ public class Common {
     public static IPacketHandler NETWORK;
     public static ITileHelper TILES;
     public static IConfig CONFIG = new IConfig(){};
+
+    public static class Timer {
+        private static long milliseconds;
+        public static void start() {
+            milliseconds = System.currentTimeMillis();
+        }
+        public static long end() {
+            return System.currentTimeMillis() - milliseconds;
+        }
+    }
 }

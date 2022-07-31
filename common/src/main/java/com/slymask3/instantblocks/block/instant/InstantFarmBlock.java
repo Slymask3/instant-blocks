@@ -51,7 +51,6 @@ public class InstantFarmBlock extends InstantBlock {
 		Block fence = Blocks.OAK_FENCE;
 		Block gate = Blocks.OAK_FENCE_GATE;
 		Block torch = Blocks.TORCH;
-		Block chest = Blocks.CHEST;
 		Block craft = Blocks.CRAFTING_TABLE;
 		Block air = Blocks.AIR;
 
@@ -80,8 +79,8 @@ public class InstantFarmBlock extends InstantBlock {
 
 		Single.setup(builder,world,x,y+1,z).offset(direction,0,4,0,0).setBlock(gate).setDirection(direction).queue();
 		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,0,0).setBlock(craft).queue();
-		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,1,0).setBlock(BlockType.container(chest, new ItemStack(Items.STONE_HOE))).setDirection(direction).queue();
-		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,0,1).setBlock(BlockType.container(chest, new ItemStack(Items.STONE_HOE))).setDirection(direction).queue();
+		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,1,0).setBlock(BlockType.chest(false, new ItemStack(Items.STONE_HOE))).setDirection(direction).queue();
+		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,0,1).setBlock(BlockType.chest(false, new ItemStack(Items.STONE_HOE))).setDirection(direction).queue();
 
 		Single.setup(builder,world,x,y+2,z).offset(direction,0,4,7,0).setBlock(torch).queue();
 		Single.setup(builder,world,x,y+2,z).offset(direction,0,0,7,0).setBlock(torch).queue();

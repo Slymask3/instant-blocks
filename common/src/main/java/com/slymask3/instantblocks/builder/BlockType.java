@@ -13,25 +13,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockType {
-    enum Type { BLOCK, COLOR, STONE, CONTAINER }
+    enum Type { BLOCK, COLOR, STONE, CHEST }
 
     final Type type;
     final BlockState state;
     final int color;
     final List<ItemStack> containerItems;
+    final boolean isDoubleChest;
 
     private BlockType(Type type, BlockState state, int color) {
         this.type = type;
         this.state = state;
         this.color = color;
         this.containerItems = null;
+        this.isDoubleChest = false;
     }
 
-    private BlockType(Type type, BlockState state, ItemStack... items) {
+    private BlockType(Type type, BlockState state, boolean isDoubleChest, ItemStack... items) {
         this.type = type;
         this.state = state;
         this.color = 0;
         this.containerItems = List.of(items);
+        this.isDoubleChest = isDoubleChest;
     }
 
     public static BlockType block(Block block) {
@@ -54,8 +57,8 @@ public class BlockType {
         return new BlockType(Type.STONE, null, 0);
     }
 
-    public static BlockType container(Block block, ItemStack... itemStacks) {
-        return new BlockType(Type.CONTAINER, block.defaultBlockState(), itemStacks);
+    public static BlockType chest(boolean isDoubleChest, ItemStack... itemStacks) {
+        return new BlockType(Type.CHEST, Blocks.CHEST.defaultBlockState(), isDoubleChest, itemStacks);
     }
 
     public Type getType() {
@@ -66,8 +69,12 @@ public class BlockType {
         return this.type == Type.COLOR;
     }
 
-    public boolean isContainer() {
-        return this.type == Type.CONTAINER;
+    public boolean isChest() {
+        return this.type == Type.CHEST;
+    }
+
+    public boolean isDoubleChest() {
+        return this.isDoubleChest;
     }
 
     public List<ItemStack> getContainerItems() {
@@ -79,13 +86,13 @@ public class BlockType {
     }
 
     public BlockState getBlockState(Level world, int y) {
-        if (this.type == Type.STONE) {
+        if(this.type == Type.STONE) {
             BlockState state;
             ResourceKey<Level> dimension = world.dimension();
-            if (dimension.equals(Level.OVERWORLD)) {
-                if (y > 8) {
+            if(dimension.equals(Level.OVERWORLD)) {
+                if(y > 8) {
                     state = Blocks.STONE.defaultBlockState();
-                } else if (y < 0) {
+                } else if(y < 0) {
                     state = Blocks.DEEPSLATE.defaultBlockState();
                 } else { //0,1,2,3,4,5,6,7,8
                     ArrayList<Helper.WeightedBlock> blocks = new ArrayList<>();
@@ -93,9 +100,9 @@ public class BlockType {
                     blocks.add(new Helper.WeightedBlock(Blocks.DEEPSLATE, 10 - y + 1)); //9,8,7,6,5,4,3,2,1
                     state = Helper.getRandomBlock(blocks).defaultBlockState();
                 }
-            } else if (dimension.equals(Level.NETHER)) {
+            } else if(dimension.equals(Level.NETHER)) {
                 state = Blocks.NETHERRACK.defaultBlockState();
-            } else if (dimension.equals(Level.END)) {
+            } else if(dimension.equals(Level.END)) {
                 state = Blocks.END_STONE.defaultBlockState();
             } else {
                 state = Blocks.STONE.defaultBlockState();

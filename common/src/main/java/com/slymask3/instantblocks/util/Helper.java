@@ -145,12 +145,12 @@ public class Helper {
 	public static Block getRandomBlock(List<WeightedBlock> blocks) {
 		Random random = new Random();
 		int total = 0;
-		for (WeightedBlock block : blocks) {
+		for(WeightedBlock block : blocks) {
 			total += block.getWeight();
 		}
 		int r = random.nextInt(total) + 1;
 		int count = 0;
-		for (WeightedBlock block : blocks) {
+		for(WeightedBlock block : blocks) {
 			count += block.getWeight();
 			if(count >= r) {
 				return block.getBlock();

@@ -169,7 +169,7 @@ public class SchematicScreen extends InstantScreen {
 			}
 
 			public boolean mouseClicked(double p_96122_, double p_96123_, int p_96124_) {
-				if (p_96124_ == 0) {
+				if(p_96124_ == 0) {
 					SchematicScreen.this.clickOnSchematic(this.index);
 					return true;
 				} else {
