@@ -53,7 +53,7 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder();
+		Builder builder = new Builder(1,true);
 
 		Block ladder = Blocks.LADDER;
 		Block torch = Blocks.TORCH;
@@ -78,15 +78,15 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 		}
 
 		for(int i=y-1; i<y_top; i++) {
-			Multiple.setup(builder,world,x-1,y-1,z-1,3,1,3).setStone().queue(i);
-			Multiple.setup(builder,world,x-1,i,z-1,3,1,3).setStone().queue(i);
+			Multiple.setup(builder,world,x-1,y-1,z-1,3,1,3).setStone().queue();
+			Multiple.setup(builder,world,x-1,i,z-1,3,1,3).setStone().queue();
 			Single.setup(builder,world,x,i,z).setBlock(air).queue(i);
 
-			Single.setup(builder,world,x,i,z).setBlock(ladder).setDirection(direction).queue(i);
-			Single.setup(builder,world,x,y,z).offset(direction,0,1,0,0).setBlock(air).queue(i);
-			Single.setup(builder,world,x,y+1,z).offset(direction,0,1,0,0).setBlock(air).queue(i);
+			Single.setup(builder,world,x,i,z).setBlock(ladder).setDirection(direction).queue();
+			Single.setup(builder,world,x,y,z).offset(direction,0,1,0,0).setBlock(air).queue();
+			Single.setup(builder,world,x,y+1,z).offset(direction,0,1,0,0).setBlock(air).queue();
 			for(int m = y + 6; m < i; m = m + 6) {
-				Single.setup(builder,world,x,m,z).offset(direction,0,1,0,0).setBlock(torch).queue(i);
+				Single.setup(builder,world,x,m,z).offset(direction,0,1,0,0).setBlock(torch).queue();
 			}
 		}
 

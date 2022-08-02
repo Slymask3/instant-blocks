@@ -49,7 +49,7 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder();
+		Builder builder = new Builder(1,true);
 		SchematicBlockEntity blockEntity = (SchematicBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
 		SchematicHelper.Schematic schematic = SchematicHelper.readSchematic(blockEntity.schematic);
 		if(schematic != null) {
@@ -75,7 +75,6 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 			z_offset = length / 2;
 		}
 
-		int priority = 0;
 		for(int y = 0; y < height; ++y) {
 			for(int x = 0; x < width; ++x) {
 				for(int z = 0; z < length; ++z) {
@@ -83,7 +82,7 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 					BlockState state = schematic.getBlockState(index);
 					BlockPos pos = new BlockPos(x+X-x_offset,y+Y,z+Z-z_offset);
 					if(!(ignoreAir && state.getBlock() == Blocks.AIR)) {
-						Single.setup(builder,world,pos).setBlock(state).queue(priority);
+						Single.setup(builder,world,pos).setBlock(state).queue();
 						CompoundTag tag = schematic.getBlockEntityTag(x,y,z);
 						BlockEntity entity = world.getBlockEntity(pos);
 						if(tag != null && entity != null) {
@@ -92,7 +91,6 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 					}
 				}
 			}
-			priority++;
 		}
 		for(CompoundTag entityTag : schematic.getEntityTags()) {
 			Optional<Entity> optional = EntityType.create(entityTag,world);

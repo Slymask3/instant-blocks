@@ -14,24 +14,30 @@ public class Builder {
 	public Status status;
 	public int speed;
 	public int ticks;
+	boolean isUpwardPriority;
 
 	public Builder() {
 		this(1);
 	}
 
 	public Builder(int speed) {
+		this(speed, false);
+	}
+
+	public Builder(int speed, boolean isUpwardPriority) {
 		Common.Timer.start();
 		this.queueMap = new HashMap<>();
 		this.queue = new ArrayList<>();
 		this.status = Status.SETUP;
 		this.speed = speed;
 		this.ticks = speed - 1;
+		this.isUpwardPriority = isUpwardPriority;
 	}
 
 	public void tick() {
 		if(this.status.equals(Status.BUILD) && !queue.isEmpty()) {
 			this.ticks++;
-			if(this.ticks == this.speed) {
+			if(this.ticks >= this.speed) {
 				Single first = queue.get(0);
 				int priority = first.priority;
 				first.build();
@@ -68,6 +74,13 @@ public class Builder {
 		for(Map.Entry<BlockPos,Single> set : this.queueMap.entrySet()) {
 			this.queue.add(set.getValue());
 		}
+
+		if(this.isUpwardPriority) {
+			for(Single single : this.queue) {
+				single.priority = single.y;
+			}
+		}
+
 		this.queue.sort(Comparator.comparingInt(one -> one.priority));
 		this.queueMap.clear();
 		Common.LOG.info("sort(): " + Common.Timer.end());

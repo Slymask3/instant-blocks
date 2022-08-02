@@ -48,7 +48,7 @@ public class TreeScreen extends InstantScreen {
 		this.addRenderableWidget(this.airInside);
 		this.addRenderableWidget(treeList);
 
-		this.setSelected(this.hugeTrees.get(this.hugeTreesIndex));
+		this.setSelected(this.getSelectedHugeTree());
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
@@ -57,7 +57,7 @@ public class TreeScreen extends InstantScreen {
 	}
 
 	public void sendInfo(boolean activate) {
-		Common.NETWORK.sendToServer(new TreePacket(activate, this.pos, this.hugeTrees.get(this.hugeTreesIndex), this.hollowLogs.selected(), this.hollowLeaves.selected(), this.airInside.selected(), this.hugeTreesIndex));
+		Common.NETWORK.sendToServer(new TreePacket(activate, this.pos, this.getSelectedHugeTree(), this.hollowLogs.selected(), this.hollowLeaves.selected(), this.airInside.selected(), this.hugeTreesIndex));
 	}
 
     public void setSelected(HugeTree tree) {
@@ -73,8 +73,8 @@ public class TreeScreen extends InstantScreen {
 		this.done.active = index >= 0 && index < this.hugeTrees.size();
     }
 
-	public HugeTree getSelected() {
-		return this.hugeTreesIndex >= 0 && this.hugeTreesIndex < this.hugeTrees.size()  ? this.hugeTrees.get(this.hugeTreesIndex) : null;
+	private HugeTree getSelectedHugeTree() {
+		return this.hugeTreesIndex >= 0 && this.hugeTreesIndex < this.hugeTrees.size() ? this.hugeTrees.get(this.hugeTreesIndex) : null;
 	}
 
 	class TreeList extends SelectionList<TreeList.Entry> {
@@ -113,7 +113,7 @@ public class TreeScreen extends InstantScreen {
 				int entry_y = top + 4;
 				if(entry_y > TreeList.this.y0 - 5 && entry_y + entryHeight < TreeList.this.y1 + 5) {
 					String string = tree.name;
-					TreeScreen.this.font.drawShadow(poseStack, string, (float)(left + entryWidth / 2 - TreeScreen.this.font.width(string) / 2), entry_y, TreeScreen.this.getSelected() == this.tree ? 0x00AA00 : 16777215, true);
+					TreeScreen.this.font.drawShadow(poseStack, string, (float)(left + entryWidth / 2 - TreeScreen.this.font.width(string) / 2), entry_y, TreeScreen.this.getSelectedHugeTree() == this.tree ? 0x00AA00 : 16777215, true);
 				}
 			}
 

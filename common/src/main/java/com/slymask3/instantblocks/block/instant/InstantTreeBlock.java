@@ -51,7 +51,7 @@ public class InstantTreeBlock extends InstantBlock implements EntityBlock {
 	}
 	
 	public boolean build(Level world, int x_center, int y, int z_center, Player player) {
-		Builder builder = new Builder();
+		Builder builder = new Builder(1,true);
 		TreeBlockEntity blockEntity = (TreeBlockEntity)world.getBlockEntity(new BlockPos(x_center,y,z_center));
 		int size = Common.CONFIG.TREE_SIZE();
 		int half = (int)Math.floor(size / 2);

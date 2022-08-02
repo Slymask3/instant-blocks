@@ -29,6 +29,7 @@ public class ForgePacketHandler {
         INSTANCE.registerMessage(++index, SchematicPacket.class, (SchematicPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SchematicPacket::decode, Handler::common);
         INSTANCE.registerMessage(++index, SchematicUpdatePacket.class, (SchematicUpdatePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SchematicUpdatePacket::decode, Handler::client);
         INSTANCE.registerMessage(++index, SkydiveUpdatePacket.class, (SkydiveUpdatePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydiveUpdatePacket::decode, Handler::client);
+        INSTANCE.registerMessage(++index, TreeUpdatePacket.class, (TreeUpdatePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), TreeUpdatePacket::decode, Handler::client);
     }
 
     public static class Handler {

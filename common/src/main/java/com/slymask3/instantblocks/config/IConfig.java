@@ -177,9 +177,9 @@ public interface IConfig {
             new HugeTree("Huge Oak Tree", HugeTree.Type.OAK, Blocks.OAK_LOG, Blocks.OAK_LEAVES),
             new HugeTree("Huge Spruce Tree", HugeTree.Type.SPRUCE, Blocks.SPRUCE_LOG, Blocks.SPRUCE_LEAVES),
             new HugeTree("Huge Birch Tree", HugeTree.Type.BIRCH, Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES),
-            new HugeTree("Huge Spruce Tree", HugeTree.Type.JUNGLE, Blocks.JUNGLE_LOG, Blocks.JUNGLE_LEAVES),
-            new HugeTree("Huge Spruce Tree", HugeTree.Type.ACACIA, Blocks.ACACIA_LOG, Blocks.ACACIA_LEAVES),
-            new HugeTree("Huge Spruce Tree", HugeTree.Type.DARK_OAK, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_LEAVES),
+            new HugeTree("Huge Jungle Tree", HugeTree.Type.JUNGLE, Blocks.JUNGLE_LOG, Blocks.JUNGLE_LEAVES),
+            new HugeTree("Huge Acacia Tree", HugeTree.Type.ACACIA, Blocks.ACACIA_LOG, Blocks.ACACIA_LEAVES),
+            new HugeTree("Huge Dark Oak Tree", HugeTree.Type.DARK_OAK, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_LEAVES),
             new HugeTree("Huge Glass Tree", HugeTree.Type.OAK, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS)
         );
     }

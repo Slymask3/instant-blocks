@@ -33,7 +33,7 @@ public class InstantPoolBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder(10);
+		Builder builder = new Builder(1,true);
 
 		BlockState stone = Blocks.SMOOTH_STONE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.DOUBLE);
 		Block water = Blocks.WATER;
@@ -47,13 +47,13 @@ public class InstantPoolBlock extends InstantBlock {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 		
 		/************************ Layer -5 to 5 : Air ************************/
-		Multiple.setup(builder,world,x-6,y-5,z-6,13,11,13).setBlock(air).queue();
+		Multiple.setup(builder,world,x-6,y-5,z-6,13,11,13).setBlock(air).build();
 		
 		/************************ Layer -5 to 0 : Stone ************************/
 		Multiple.setup(builder,world,x-6,y-5,z-6,13,6,13).setBlock(stone).queue();
 		
 		/************************ Layer -4 to 0 : Water ************************/
-		Multiple.setup(builder,world,x-5,y-4,z-5,11,5,11).setBlock(air).queue();
+		//Multiple.setup(builder,world,x-5,y-4,z-5,11,5,11).setBlock(air).queue();
 		Multiple.setup(builder,world,x-5,y-4,z-5,11,5,11).setBlock(water).queue(1);
 		
 		/************************ Layer 1 : Stone Slab ************************/
