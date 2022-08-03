@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks.util;
 
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -47,53 +48,6 @@ public class ColorHelper {
 		return new Color(img.getRGB(x,y));
 	}
 
-	public static int hsvToRgb(int hue, float saturation, float value) {
-		// Source: en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB#From_HSV
-		hue %= 360;
-		float s = saturation / 100;
-		float v = value / 100;
-		float c = v * s;
-		float h = (float) hue / 60;
-		float x = c * (1 - Math.abs(h % 2 - 1));
-		float r, g, b;
-		switch (hue / 60) {
-			case 0:
-				r = c;
-				g = x;
-				b = 0;
-				break;
-			case 1:
-				r = x;
-				g = c;
-				b = 0;
-				break;
-			case 2:
-				r = 0;
-				g = c;
-				b = x;
-				break;
-			case 3:
-				r = 0;
-				g = x;
-				b = c;
-				break;
-			case 4:
-				r = x;
-				g = 0;
-				b = c;
-				break;
-			case 5:
-				r = c;
-				g = 0;
-				b = x;
-				break;
-			default:
-				return 0;
-		}
-		float m = v - c;
-		return ((int) ((r + m) * 255) << 16) | ((int) ((g + m) * 255) << 8) | ((int) ((b + m) * 255));
-	}
-
 	public static Color getColorBetween(Color one, Color two, int per1, int per2) {
 		double p1 = per1 / 100.0;
 		double p2 = per2 / 100.0;
@@ -102,8 +56,7 @@ public class ColorHelper {
 
 	public static Color generateRandomColor() {
 		Random rand = new Random();
-		int hue = rand.nextInt(360);
-		int color = hsvToRgb(hue,100F,100F);
+		int color = Mth.hsvToRgb(rand.nextFloat(),rand.nextFloat(0.5F)+0.5F,rand.nextFloat(0.5F)+0.5F);
 		return new Color(color);
 	}
 
@@ -157,13 +110,6 @@ public class ColorHelper {
 		private float value;
 		private final Color color;
 		private final Block block;
-		public VanillaColor(float hue, float saturation, float value, Block block) {
-			this.hue = hue;
-			this.saturation = saturation;
-			this.value = value;
-			this.color = Color.getHSBColor(hue,saturation,value);
-			this.block = block;
-		}
 		public VanillaColor(Color color, Block block) {
 			this.color = color;
 			this.block = block;

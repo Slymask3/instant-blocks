@@ -9,6 +9,7 @@ import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -41,7 +42,7 @@ public class InstantHarvestBlock extends InstantBlock implements EntityBlock {
 	}
 	
 	public boolean build(Level world, int X, int Y, int Z, Player player) {
-		Builder builder = new Builder();
+		Builder builder = new Builder(1, Direction.DOWN);
 
 		HarvestBlockEntity blockEntity = (HarvestBlockEntity)world.getBlockEntity(new BlockPos(X,Y,Z));
 		int radius = Common.CONFIG.RADIUS_HARVEST();

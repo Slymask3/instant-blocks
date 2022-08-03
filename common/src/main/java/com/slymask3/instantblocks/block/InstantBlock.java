@@ -170,7 +170,8 @@ public abstract class InstantBlock extends Block {
 	}
 
 	private void afterBuild(Level world, BlockPos pos, Player player) {
-		Helper.sendMessage(player,this.createMessage,this.createVariable,pos);
+		Helper.sendMessage(player,this.createMessage,this.createVariable);
+		Helper.showParticles(world, pos, ClientHelper.Particles.GENERATE);
 		Helper.giveExp(world, player, Common.CONFIG.XP_AMOUNT());
 		if(Common.CONFIG.USE_WANDS()) {
 			ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);

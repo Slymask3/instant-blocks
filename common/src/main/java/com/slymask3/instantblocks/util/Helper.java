@@ -2,13 +2,16 @@ package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.item.InstantWandItem;
-import com.slymask3.instantblocks.network.packet.ClientPacket;
+import com.slymask3.instantblocks.network.packet.MessagePacket;
+import com.slymask3.instantblocks.network.packet.ParticlePacket;
+import com.slymask3.instantblocks.network.packet.SoundPacket;
 import com.slymask3.instantblocks.reference.Names;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +42,12 @@ public class Helper {
 	public static void teleport(Level world, Player player, int x, int y, int z) {
 		if(isServer(world)) {
 			player.teleportTo(x + 0.5, y + 0.5, z + 0.5);
+			playSound(player,SoundEvents.CHORUS_FRUIT_TELEPORT,0.5F);
 		}
+	}
+
+	public static void playSound(Player player, SoundEvent sound, float volume) {
+		Common.NETWORK.sendToClient(player,new SoundPacket(List.of(new Helper.BuildSound(player.getOnPos(), sound,null,volume))));
 	}
 
 	public static void addToChest(ChestBlockEntity chest, Block block, int amount) {
@@ -118,20 +126,18 @@ public class Helper {
 	}
 
 	public static void sendMessage(Player player, String message) {
-		sendMessage(player, message, "", BlockPos.ZERO, ClientHelper.Particles.NONE);
+		sendMessage(player, message, "");
 	}
 
 	public static void sendMessage(Player player, String message, String variable) {
-		sendMessage(player, message, variable, BlockPos.ZERO, ClientHelper.Particles.NONE);
-	}
-
-	public static void sendMessage(Player player, String message, String variable, BlockPos pos) {
-		sendMessage(player, message, variable, pos, ClientHelper.Particles.GENERATE);
-	}
-
-	public static void sendMessage(Player player, String message, String variable, BlockPos pos, ClientHelper.Particles particles) {
 		if(isServer(player.getLevel())) {
-			Common.NETWORK.sendToClient(player,new ClientPacket(message,variable,pos,particles.ordinal()));
+			Common.NETWORK.sendToClient(player, new MessagePacket(message,variable));
+		}
+	}
+
+	public static void showParticles(Level world, BlockPos pos, ClientHelper.Particles particles) {
+		if(isServer(world)) {
+			Common.NETWORK.sendToAllAround(world, pos, new ParticlePacket(pos,particles.ordinal()));
 		}
 	}
 
@@ -212,10 +218,12 @@ public class Helper {
 	public static class BuildSound {
 		private final BlockPos pos;
 		private final SoundEvent placeSound, breakSound;
-		public BuildSound(BlockPos pos, SoundEvent placeSound, SoundEvent breakSound) {
+		private final float volume;
+		public BuildSound(BlockPos pos, SoundEvent placeSound, SoundEvent breakSound, float volume) {
 			this.pos = pos;
 			this.placeSound = placeSound;
 			this.breakSound = breakSound;
+			this.volume = volume;
 		}
 		public BlockPos getBlockPos() {
 			return this.pos;
@@ -231,6 +239,9 @@ public class Helper {
 		}
 		public String getBreakSoundString() {
 			return this.breakSound != null ? this.breakSound.getLocation().toString() : "";
+		}
+		public float getVolume() {
+			return this.volume;
 		}
 	}
 }

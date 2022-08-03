@@ -36,7 +36,7 @@ public class InstantFarmBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder();
+		Builder builder = new Builder(5);
 
 		ArrayList<Helper.WeightedBlock> blocks = new ArrayList<>();
 		blocks.add(new Helper.WeightedBlock(Blocks.WHEAT, Common.CONFIG.WEIGHT_WHEAT()));
@@ -59,39 +59,39 @@ public class InstantFarmBlock extends InstantBlock {
 		Multiple.setup(builder,world,x,y-1,z,direction,0,4,7,0,8,0,0,14,3,0).setBlock(air).queue();
 		Multiple.setup(builder,world,x,y-1,z,direction,0,4,7,0,8,0,0,14,1,0).setBlock(stone).queue();
 
-		Multiple.setup(builder,world,x,y+1,z,direction,0,4,7,0,8,0,0,0,0,0).setBlock(fence).queue();
-		Multiple.setup(builder,world,x,y+1,z,direction,0,4,0,7,8,0,0,0,0,0).setBlock(fence).queue();
-		Multiple.setup(builder,world,x,y+1,z,direction,0,4,6,0,0,0,0,12,0,0).setBlock(fence).queue();
-		Multiple.setup(builder,world,x,y+1,z,direction,4,0,6,0,0,0,0,12,0,0).setBlock(fence).queue();
+		Multiple.setup(builder,world,x,y+1,z,direction,0,4,7,0,8,0,0,0,0,0).setBlock(fence).queue(1);
+		Multiple.setup(builder,world,x,y+1,z,direction,0,4,0,7,8,0,0,0,0,0).setBlock(fence).queue(1);
+		Multiple.setup(builder,world,x,y+1,z,direction,0,4,6,0,0,0,0,12,0,0).setBlock(fence).queue(1);
+		Multiple.setup(builder,world,x,y+1,z,direction,4,0,6,0,0,0,0,12,0,0).setBlock(fence).queue(1);
 
-		Multiple.setup(builder,world,x,y,z,direction,0,3,6,0,6,0,0,1,0,0).setBlock(farm).queue();
-		Multiple.setup(builder,world,x,y,z,direction,0,3,3,0,6,0,0,1,0,0).setBlock(farm).queue();
-		Multiple.setup(builder,world,x,y,z,direction,0,3,0,2,6,0,0,1,0,0).setBlock(farm).queue();
-		Multiple.setup(builder,world,x,y,z,direction,0,3,0,5,6,0,0,1,0,0).setBlock(farm).queue();
+		Multiple.setup(builder,world,x,y,z,direction,0,3,6,0,6,0,0,1,0,0).setBlock(farm).queue(2);
+		Multiple.setup(builder,world,x,y,z,direction,0,3,3,0,6,0,0,1,0,0).setBlock(farm).queue(2);
+		Multiple.setup(builder,world,x,y,z,direction,0,3,0,2,6,0,0,1,0,0).setBlock(farm).queue(2);
+		Multiple.setup(builder,world,x,y,z,direction,0,3,0,5,6,0,0,1,0,0).setBlock(farm).queue(2);
 
-		Multiple.setup(builder,world,x,y,z,direction,0,3,4,0,6,0,0,0,0,0).setBlock(water).queue();
-		Multiple.setup(builder,world,x,y,z,direction,0,3,0,4,6,0,0,0,0,0).setBlock(water).queue();
+		Multiple.setup(builder,world,x,y,z,direction,0,3,4,0,6,0,0,0,0,0).setBlock(water).queue(3);
+		Multiple.setup(builder,world,x,y,z,direction,0,3,0,4,6,0,0,0,0,0).setBlock(water).queue(3);
 
-		Multiple.setup(builder,world,x,y+1,z,direction,0,3,6,0,6,0,0,1,0,0).setBlock(crop).queue();
-		Multiple.setup(builder,world,x,y+1,z,direction,0,3,3,0,6,0,0,1,0,0).setBlock(crop).queue();
-		Multiple.setup(builder,world,x,y+1,z,direction,0,3,0,2,6,0,0,1,0,0).setBlock(crop).queue();
-		Multiple.setup(builder,world,x,y+1,z,direction,0,3,0,5,6,0,0,1,0,0).setBlock(crop).queue();
+		Multiple.setup(builder,world,x,y+1,z,direction,0,3,6,0,6,0,0,1,0,0).setBlock(crop).queue(3);
+		Multiple.setup(builder,world,x,y+1,z,direction,0,3,3,0,6,0,0,1,0,0).setBlock(crop).queue(3);
+		Multiple.setup(builder,world,x,y+1,z,direction,0,3,0,2,6,0,0,1,0,0).setBlock(crop).queue(3);
+		Multiple.setup(builder,world,x,y+1,z,direction,0,3,0,5,6,0,0,1,0,0).setBlock(crop).queue(3);
 
-		Single.setup(builder,world,x,y+1,z).offset(direction,0,4,0,0).setBlock(gate).setDirection(direction).queue();
-		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,0,0).setBlock(craft).queue();
-		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,1,0).setBlock(BlockType.chest(false, new ItemStack(Items.STONE_HOE))).setDirection(direction).queue();
-		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,0,1).setBlock(BlockType.chest(false, new ItemStack(Items.STONE_HOE))).setDirection(direction).queue();
+		Single.setup(builder,world,x,y+1,z).offset(direction,0,4,0,0).setBlock(gate).setDirection(direction).queue(1);
+		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,0,0).setBlock(craft).queue(4);
+		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,1,0).setBlock(BlockType.chest(false, new ItemStack(Items.STONE_HOE))).setDirection(direction).queue(4);
+		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,0,1).setBlock(BlockType.chest(false, new ItemStack(Items.STONE_HOE))).setDirection(direction).queue(4);
 
-		Single.setup(builder,world,x,y+2,z).offset(direction,0,4,7,0).setBlock(torch).queue();
-		Single.setup(builder,world,x,y+2,z).offset(direction,0,0,7,0).setBlock(torch).queue();
-		Single.setup(builder,world,x,y+2,z).offset(direction,4,0,7,0).setBlock(torch).queue();
-		Single.setup(builder,world,x,y+2,z).offset(direction,0,4,0,7).setBlock(torch).queue();
-		Single.setup(builder,world,x,y+2,z).offset(direction,0,0,0,7).setBlock(torch).queue();
-		Single.setup(builder,world,x,y+2,z).offset(direction,4,0,0,7).setBlock(torch).queue();
-		Single.setup(builder,world,x,y+2,z).offset(direction,0,4,2,0).setBlock(torch).queue();
-		Single.setup(builder,world,x,y+2,z).offset(direction,4,0,2,0).setBlock(torch).queue();
-		Single.setup(builder,world,x,y+2,z).offset(direction,0,4,0,2).setBlock(torch).queue();
-		Single.setup(builder,world,x,y+2,z).offset(direction,4,0,0,2).setBlock(torch).queue();
+		Single.setup(builder,world,x,y+2,z).offset(direction,0,4,7,0).setBlock(torch).queue(4);
+		Single.setup(builder,world,x,y+2,z).offset(direction,0,0,7,0).setBlock(torch).queue(4);
+		Single.setup(builder,world,x,y+2,z).offset(direction,4,0,7,0).setBlock(torch).queue(4);
+		Single.setup(builder,world,x,y+2,z).offset(direction,0,4,0,7).setBlock(torch).queue(4);
+		Single.setup(builder,world,x,y+2,z).offset(direction,0,0,0,7).setBlock(torch).queue(4);
+		Single.setup(builder,world,x,y+2,z).offset(direction,4,0,0,7).setBlock(torch).queue(4);
+		Single.setup(builder,world,x,y+2,z).offset(direction,0,4,2,0).setBlock(torch).queue(4);
+		Single.setup(builder,world,x,y+2,z).offset(direction,4,0,2,0).setBlock(torch).queue(4);
+		Single.setup(builder,world,x,y+2,z).offset(direction,0,4,0,2).setBlock(torch).queue(4);
+		Single.setup(builder,world,x,y+2,z).offset(direction,4,0,0,2).setBlock(torch).queue(4);
 
 		builder.build();
 

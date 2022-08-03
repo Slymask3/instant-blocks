@@ -4,6 +4,7 @@ import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantLiquidBlock;
 import com.slymask3.instantblocks.reference.Strings;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -26,6 +27,7 @@ public class InstantWaterBlock extends InstantLiquidBlock {
         setErrorMessage(Strings.ERROR_WATER_MAX);
 		this.create = Strings.CREATE_WATER;
 		this.create1 = Strings.CREATE_WATER_1;
+        this.particle = ParticleTypes.FALLING_WATER;
     }
 
     public boolean isEnabled() {

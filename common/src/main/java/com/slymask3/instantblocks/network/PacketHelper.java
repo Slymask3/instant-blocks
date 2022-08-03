@@ -6,13 +6,12 @@ import com.slymask3.instantblocks.network.packet.*;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import com.slymask3.instantblocks.util.SchematicHelper;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class PacketHelper {
     public enum PacketID {
-        CLIENT, SOUND,
+        MESSAGE, PARTICLE, SOUND,
         SKYDIVE, STATUE, HARVEST, TREE, SCHEMATIC,
         SKYDIVE_UPDATE, TREE_UPDATE, SCHEMATIC_UPDATE
     }
@@ -24,21 +23,23 @@ public class PacketHelper {
         }
     }
 
-    public static void handleClient(ClientPacket message, Player player) {
-        if(message.particles != ClientHelper.Particles.NONE.ordinal()) {
-            Level world = player.getLevel();
-            ClientHelper.playSound(world, message.pos, ClientHelper.Particles.values()[message.particles]);
-            ClientHelper.showParticles(world, message.pos, ClientHelper.Particles.values()[message.particles]);
-        }
+    public static void handleMessage(MessagePacket message, Player player) {
         if(!message.message.isEmpty()) {
             ClientHelper.sendMessage(player, message.message, message.variable);
         }
     }
 
+    public static void handleParticle(ParticlePacket message, Player player) {
+        ClientHelper.showParticles(player, message.pos, ClientHelper.Particles.values()[message.particles]);
+    }
+
     public static void handleSound(SoundPacket message, Player player) {
         for(Helper.BuildSound buildSound : message.buildSounds) {
-            ClientHelper.playSound(player,buildSound.getBlockPos(),buildSound.getBreakSound());
-            ClientHelper.playSound(player,buildSound.getBlockPos(),buildSound.getPlaceSound());
+            if(buildSound.getBreakSound() != null || buildSound.getPlaceSound() != null) {
+                ClientHelper.showParticles(player, buildSound.getBlockPos(), ClientHelper.Particles.PLACE_BLOCK);
+            }
+            ClientHelper.playSound(player, buildSound.getBlockPos(), buildSound.getBreakSound(), buildSound.getVolume());
+            ClientHelper.playSound(player, buildSound.getBlockPos(), buildSound.getPlaceSound(), buildSound.getVolume());
         }
     }
 

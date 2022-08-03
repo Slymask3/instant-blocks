@@ -5,6 +5,7 @@ import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.network.packet.SoundPacket;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 
 import java.util.*;
@@ -17,24 +18,24 @@ public class Builder {
 	public Status status;
 	public int speed;
 	public int ticks;
-	boolean isUpwardPriority;
+	Direction priorityDirection;
 
 	public Builder() {
 		this(1);
 	}
 
 	public Builder(int speed) {
-		this(speed, false);
+		this(speed, null);
 	}
 
-	public Builder(int speed, boolean isUpwardPriority) {
+	public Builder(int speed, Direction priorityDirection) {
 		Common.Timer.start();
 		this.queueMap = new HashMap<>();
 		this.queue = new ArrayList<>();
 		this.status = Status.SETUP;
 		this.speed = speed;
 		this.ticks = speed - 1;
-		this.isUpwardPriority = isUpwardPriority;
+		this.priorityDirection = priorityDirection;
 	}
 
 	public void tick() {
@@ -86,9 +87,31 @@ public class Builder {
 			this.queue.add(set.getValue());
 		}
 
-		if(this.isUpwardPriority) {
-			for(Single single : this.queue) {
-				single.priority = single.y;
+		if(this.priorityDirection != null) {
+			if(this.priorityDirection.equals(Direction.UP)) {
+				for(Single single : this.queue) {
+					single.priority = single.y;
+				}
+			} else if(this.priorityDirection.equals(Direction.DOWN)) {
+				for(Single single : this.queue) {
+					single.priority = -single.y;
+				}
+			} else if(this.priorityDirection.equals(Direction.NORTH)) {
+				for(Single single : this.queue) {
+					single.priority = -single.z;
+				}
+			} else if(this.priorityDirection.equals(Direction.SOUTH)) {
+				for(Single single : this.queue) {
+					single.priority = single.z;
+				}
+			} else if(this.priorityDirection.equals(Direction.WEST)) {
+				for(Single single : this.queue) {
+					single.priority = -single.x;
+				}
+			} else if(this.priorityDirection.equals(Direction.EAST)) {
+				for(Single single : this.queue) {
+					single.priority = single.x;
+				}
 			}
 		}
 

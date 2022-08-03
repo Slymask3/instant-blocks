@@ -10,6 +10,9 @@
 ### Changed
 - Allow configuring huge trees list
 
+### Fixed
+- Shows particles and play sounds for all players around
+
 ## [1.6.3](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.2...1.19-1.6.3) - 2022-07-21
 ### Fixed
 - Recipes using forge tags on fabric

@@ -37,7 +37,7 @@ public class InstantRailBlock extends InstantBlock {
 		return Common.CONFIG.ENABLE_RAIL();
 	}
 
-	public VoxelShape getShape(BlockState p_54372_, BlockGetter p_54373_, BlockPos p_54374_, CollisionContext p_54375_) {
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		return Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 	}
 

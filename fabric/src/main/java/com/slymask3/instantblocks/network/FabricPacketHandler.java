@@ -50,10 +50,17 @@ public class FabricPacketHandler {
     @Environment(EnvType.CLIENT)
     public static class Client {
         public static void init() {
-            ClientPlayNetworking.registerGlobalReceiver(new ResourceLocation(PacketHelper.PacketID.CLIENT.toString().toLowerCase()), (client, handler, buf, responseSender) -> {
+            ClientPlayNetworking.registerGlobalReceiver(new ResourceLocation(PacketHelper.PacketID.MESSAGE.toString().toLowerCase()), (client, handler, buf, responseSender) -> {
                 if(client.player != null) {
-                    ClientPacket message = ClientPacket.decode(buf);
-                    client.execute(() -> PacketHelper.handleClient(message, client.player));
+                    MessagePacket message = MessagePacket.decode(buf);
+                    client.execute(() -> PacketHelper.handleMessage(message, client.player));
+                }
+            });
+
+            ClientPlayNetworking.registerGlobalReceiver(new ResourceLocation(PacketHelper.PacketID.PARTICLE.toString().toLowerCase()), (client, handler, buf, responseSender) -> {
+                if(client.player != null) {
+                    ParticlePacket message = ParticlePacket.decode(buf);
+                    client.execute(() -> PacketHelper.handleParticle(message, client.player));
                 }
             });
 

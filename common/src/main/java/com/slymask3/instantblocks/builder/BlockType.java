@@ -17,24 +17,31 @@ public class BlockType {
 
     final Type type;
     final BlockState state;
-    final int color;
-    final List<ItemStack> containerItems;
-    final boolean isDoubleChest;
+    int color;
+    boolean isDoubleChest;
+    List<ItemStack> containerItems;
 
-    private BlockType(Type type, BlockState state, int color) {
-        this.type = type;
-        this.state = state;
-        this.color = color;
-        this.containerItems = null;
-        this.isDoubleChest = false;
-    }
-
-    private BlockType(Type type, BlockState state, boolean isDoubleChest, ItemStack... items) {
+    private BlockType(Type type, BlockState state) {
         this.type = type;
         this.state = state;
         this.color = 0;
-        this.containerItems = List.of(items);
+        this.isDoubleChest = false;
+        this.containerItems = null;
+    }
+
+    private static BlockType setup(Type type, BlockState state) {
+        return new BlockType(type,state);
+    }
+
+    private BlockType setColor(int color) {
+        this.color = color;
+        return this;
+    }
+
+    private BlockType setContainer(boolean isDoubleChest, ItemStack... items) {
         this.isDoubleChest = isDoubleChest;
+        this.containerItems = List.of(items);
+        return this;
     }
 
     public static BlockType block(Block block) {
@@ -42,7 +49,7 @@ public class BlockType {
     }
 
     public static BlockType block(BlockState state) {
-        return new BlockType(Type.BLOCK, state, 0);
+        return setup(Type.BLOCK, state);
     }
 
     public static BlockType color(int color) {
@@ -50,15 +57,15 @@ public class BlockType {
     }
 
     public static BlockType color(int color, Block block) {
-        return new BlockType(Type.COLOR, block.defaultBlockState(), color);
+        return setup(Type.COLOR, block.defaultBlockState()).setColor(color);
     }
 
     public static BlockType stone() {
-        return new BlockType(Type.STONE, null, 0);
+        return setup(Type.STONE, Blocks.STONE.defaultBlockState());
     }
 
     public static BlockType chest(boolean isDoubleChest, ItemStack... itemStacks) {
-        return new BlockType(Type.CHEST, Blocks.CHEST.defaultBlockState(), isDoubleChest, itemStacks);
+        return setup(Type.CHEST, Blocks.CHEST.defaultBlockState()).setContainer(isDoubleChest, itemStacks);
     }
 
     public Type getType() {

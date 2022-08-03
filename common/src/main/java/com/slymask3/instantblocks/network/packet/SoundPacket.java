@@ -25,6 +25,7 @@ public class SoundPacket extends AbstractPacket {
 			buffer.writeBlockPos(buildSound.getBlockPos());
 			buffer.writeUtf(buildSound.getPlaceSoundString());
 			buffer.writeUtf(buildSound.getBreakSoundString());
+			buffer.writeFloat(buildSound.getVolume());
 		}
 		return buffer;
 	}
@@ -38,7 +39,8 @@ public class SoundPacket extends AbstractPacket {
 			String breakSoundString = buffer.readUtf();
 			SoundEvent placeSound = !placeSoundString.isEmpty() ? new SoundEvent(new ResourceLocation(placeSoundString)) : null;
 			SoundEvent breakSound = !breakSoundString.isEmpty() ? new SoundEvent(new ResourceLocation(breakSoundString)) : null;
-			buildSounds.add(new Helper.BuildSound(pos,placeSound,breakSound));
+			float volume = buffer.readFloat();
+			buildSounds.add(new Helper.BuildSound(pos,placeSound,breakSound,volume));
 		}
 		return new SoundPacket(buildSounds);
 	}

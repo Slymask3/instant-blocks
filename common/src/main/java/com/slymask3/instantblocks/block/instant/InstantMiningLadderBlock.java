@@ -40,7 +40,9 @@ public class InstantMiningLadderBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder();
+		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
+
+		Builder builder = new Builder(2, direction.getCounterClockWise());
 
 		Block ladder = Blocks.LADDER;
 		Block torch = Blocks.TORCH;
@@ -50,7 +52,6 @@ public class InstantMiningLadderBlock extends InstantBlock {
 
 		int layer = Common.CONFIG.MINING_LADDER_LAYER();
 
-		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 		Direction directionLadder = direction.getCounterClockWise();
 		Direction directionSign = direction.getClockWise();
 

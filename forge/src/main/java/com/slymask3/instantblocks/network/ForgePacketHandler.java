@@ -21,7 +21,7 @@ public class ForgePacketHandler {
 
     public static void register() {
         int index = 100;
-        INSTANCE.registerMessage(++index, ClientPacket.class, (ClientPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), ClientPacket::decode, Handler::client);
+        INSTANCE.registerMessage(++index, MessagePacket.class, (MessagePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), MessagePacket::decode, Handler::client);
         INSTANCE.registerMessage(++index, SoundPacket.class, (SoundPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SoundPacket::decode, Handler::client);
         INSTANCE.registerMessage(++index, SkydivePacket.class, (SkydivePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydivePacket::decode, Handler::common);
         INSTANCE.registerMessage(++index, StatuePacket.class, (StatuePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), StatuePacket::decode, Handler::common);
@@ -66,8 +66,10 @@ public class ForgePacketHandler {
         public static void handle(AbstractPacket message, Supplier<NetworkEvent.Context> context) {
             Player player = Minecraft.getInstance().player;
             if(player != null) {
-                if(message.getClass().equals(ClientPacket.class)) {
-                    PacketHelper.handleClient((ClientPacket)message, player);
+                if(message.getClass().equals(MessagePacket.class)) {
+                    PacketHelper.handleMessage((MessagePacket)message, player);
+                } else if(message.getClass().equals(ParticlePacket.class)) {
+                    PacketHelper.handleParticle((ParticlePacket)message, player);
                 } else if(message.getClass().equals(SoundPacket.class)) {
                     PacketHelper.handleSound((SoundPacket)message, player);
                 } else if(message.getClass().equals(SchematicUpdatePacket.class)) {

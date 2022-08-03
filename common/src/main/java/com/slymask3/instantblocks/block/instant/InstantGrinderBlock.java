@@ -52,7 +52,7 @@ public class InstantGrinderBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder(1,true);
+		Builder builder = new Builder(5);
 
 		Block water = Blocks.WATER;
 		Block torch = Blocks.WALL_TORCH;
@@ -109,12 +109,12 @@ public class InstantGrinderBlock extends InstantBlock {
 		Single.setup(builder,world,x+5,y-4,z).setBlock(air).queue();
 		Single.setup(builder,world,x+6,y-4,z).setBlock(sign).setDirection(Direction.NORTH).queue(); //SIGN
 		Single.setup(builder,world,x+8,y-4,z).setBlock(air).queue();
-		Single.setup(builder,world,x+9,y-4,z).setBlock(door).setDirection(Direction.WEST).queue(); //DOOR
+		Single.setup(builder,world,x+9,y-4,z).setBlock(door).setDirection(Direction.WEST).queue(1); //DOOR
 		Single.setup(builder,world,x+10,y-4,z-2).setStone().queue();
 		Single.setup(builder,world,x+10,y-4,z+2).setStone().queue();
-		Single.setup(builder,world,x+15,y-4,z+1).setBlock(BlockType.chest(true)).setDirection(Direction.WEST).queue();
-		Single.setup(builder,world,x+15,y-4,z).setBlock(craft).queue();
-		Single.setup(builder,world,x+15,y-4,z-2).setBlock(BlockType.chest(true)).setDirection(Direction.WEST).queue();
+		Single.setup(builder,world,x+15,y-4,z).setBlock(craft).queue(1);
+		Single.setup(builder,world,x+15,y-4,z-2).setBlock(BlockType.chest(true)).setDirection(Direction.WEST).queue(1);
+		Single.setup(builder,world,x+15,y-4,z+1).setBlock(BlockType.chest(true)).setDirection(Direction.WEST).queue(1);
 
 		/************************ Layer -3 ************************/
 		Multiple.setup(builder,world,x-5,y-3,z-5,1,1,11).setStone().queue();
@@ -153,17 +153,17 @@ public class InstantGrinderBlock extends InstantBlock {
 
 		Single.setup(builder,world,x-4,y-2,z-4).setBlock(water).queue();
 		Single.setup(builder,world,x-4,y-2,z+4).setBlock(water).queue();
-		Single.setup(builder,world,x+10,y-2,z-1).setBlock(pane).queue();
-		Single.setup(builder,world,x+10,y-2,z+1).setBlock(pane).queue();
-		Single.setup(builder,world,x+11,y-2,z-2).setBlock(pane).queue();
-		Single.setup(builder,world,x+11,y-2,z-1).setBlock(pane).queue();
-		Single.setup(builder,world,x+11,y-2,z+2).setBlock(pane).queue();
-		Single.setup(builder,world,x+11,y-2,z+1).setBlock(pane).queue();
-		Single.setup(builder,world,x+10,y-2,z).setBlock(torch).setDirection(Direction.EAST).queue();
-		Single.setup(builder,world,x+12,y-2,z-2).setBlock(torch).setDirection(Direction.SOUTH).queue();
-		Single.setup(builder,world,x+12,y-2,z+2).setBlock(torch).setDirection(Direction.NORTH).queue();
-		Single.setup(builder,world,x+15,y-2,z-1).setBlock(torch).setDirection(Direction.WEST).queue();
-		Single.setup(builder,world,x+15,y-2,z+1).setBlock(torch).setDirection(Direction.WEST).queue();
+		Single.setup(builder,world,x+10,y-2,z-1).setBlock(pane).queue(2);
+		Single.setup(builder,world,x+10,y-2,z+1).setBlock(pane).queue(2);
+		Single.setup(builder,world,x+11,y-2,z-2).setBlock(pane).queue(2);
+		Single.setup(builder,world,x+11,y-2,z-1).setBlock(pane).queue(2);
+		Single.setup(builder,world,x+11,y-2,z+2).setBlock(pane).queue(2);
+		Single.setup(builder,world,x+11,y-2,z+1).setBlock(pane).queue(2);
+		Single.setup(builder,world,x+10,y-2,z).setBlock(torch).setDirection(Direction.EAST).queue(2);
+		Single.setup(builder,world,x+12,y-2,z-2).setBlock(torch).setDirection(Direction.SOUTH).queue(2);
+		Single.setup(builder,world,x+12,y-2,z+2).setBlock(torch).setDirection(Direction.NORTH).queue(2);
+		Single.setup(builder,world,x+15,y-2,z-1).setBlock(torch).setDirection(Direction.WEST).queue(2);
+		Single.setup(builder,world,x+15,y-2,z+1).setBlock(torch).setDirection(Direction.WEST).queue(2);
 		Single.setup(builder,world,x+6,y-2,z).setBlock(sign).setDirection(Direction.NORTH).queue(); //SIGN
 
 		/************************ Layer 3 : Stone (Spawn Room Roof) ************************/

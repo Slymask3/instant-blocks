@@ -51,7 +51,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if(this.particle != null) {
-			for(int i=0; i<8; i++) {
+			for(int i=0; i<4; i++) {
 				world.addParticle(this.particle, (double)pos.getX() + Math.random(), (double)pos.getY() + 1.2D, (double)pos.getZ() + Math.random(), 0.0D, 0.0D, 0.0D);
 			}
 		}
@@ -100,7 +100,8 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		}
 		checkForBlock(world,pos);
 		if(isSuction && posList.isEmpty()) {
-			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID,"",pos,ClientHelper.Particles.NO_LIQUID);
+			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID);
+			Helper.showParticles(world, pos, ClientHelper.Particles.NO_LIQUID);
 			return false;
 		}
 		if(posList.size() >= getMax()) {

@@ -173,7 +173,7 @@ public class Single extends Base<Single> {
         Common.LOG.info("place: " + (placeBlockState != null ? placeBlockState.getBlock() : "none") + " - " + (placeSound != null ? placeSound.getLocation() : "none"));
         Common.LOG.info("break: " + (breakBlockState != null ? breakBlockState.getBlock() : "none") + " - " + (breakSound != null ? breakSound.getLocation() : "none"));
         Common.LOG.info("------");
-        return new Helper.BuildSound(this.getBlockPos(),placeSound,breakSound);
+        return new Helper.BuildSound(this.getBlockPos(),placeSound,breakSound,0.1F);
     }
 
     public static class Context extends BlockPlaceContext {
