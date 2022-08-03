@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -205,6 +206,31 @@ public class Helper {
 		}
 		public int getWeight() {
 			return this.weight;
+		}
+	}
+
+	public static class BuildSound {
+		private final BlockPos pos;
+		private final SoundEvent placeSound, breakSound;
+		public BuildSound(BlockPos pos, SoundEvent placeSound, SoundEvent breakSound) {
+			this.pos = pos;
+			this.placeSound = placeSound;
+			this.breakSound = breakSound;
+		}
+		public BlockPos getBlockPos() {
+			return this.pos;
+		}
+		public SoundEvent getPlaceSound() {
+			return this.placeSound;
+		}
+		public String getPlaceSoundString() {
+			return this.placeSound != null ? this.placeSound.getLocation().toString() : "";
+		}
+		public SoundEvent getBreakSound() {
+			return this.breakSound;
+		}
+		public String getBreakSoundString() {
+			return this.breakSound != null ? this.breakSound.getLocation().toString() : "";
 		}
 	}
 }

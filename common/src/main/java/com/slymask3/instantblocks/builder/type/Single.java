@@ -7,6 +7,8 @@ import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -71,7 +73,7 @@ public class Single extends Base<Single> {
     public void build() {
         BlockState state = blockType.getBlockState(world, y);
         Block block = blockType.getBlock(world, y);
-        Block getBlock = getBlock();
+        Block getBlock = getWorldBlock();
         if(Common.CONFIG.KEEP_BLOCKS() && getBlock instanceof InstantBlock) {
             return;
         }
@@ -134,12 +136,44 @@ public class Single extends Base<Single> {
         return block.defaultDestroyTime() >= 0F || block.equals(Blocks.AIR);
     }
 
-    public Block getBlock() {
-        return world.getBlockState(new BlockPos(x, y, z)).getBlock();
+    public Block getWorldBlock() {
+        return this.getWorldBlockState().getBlock();
+    }
+
+    public BlockState getWorldBlockState() {
+        return world.getBlockState(this.getBlockPos());
     }
 
     public BlockEntity getBlockEntity() {
-        return world.getBlockEntity(new BlockPos(x, y, z));
+        return world.getBlockEntity(this.getBlockPos());
+    }
+
+    public Helper.BuildSound getBuildSound() {
+        BlockState breakBlockState = this.getWorldBlockState();
+        BlockState placeBlockState = this.blockType.getBlockState(); //this.blockType.getBlockState(world,y);
+        SoundEvent placeSound = null, breakSound = null;
+        if(placeBlockState != null && !placeBlockState.getBlock().equals(Blocks.AIR)) {
+            if(placeBlockState.getBlock().equals(Blocks.WATER)) {
+                placeSound = SoundEvents.BUCKET_EMPTY;
+            } else if(placeBlockState.getBlock().equals(Blocks.LAVA)) {
+                placeSound = SoundEvents.BUCKET_EMPTY_LAVA;
+            } else {
+                placeSound = placeBlockState.getBlock().getSoundType(placeBlockState).getPlaceSound();
+            }
+        }
+        if(breakBlockState != null && !breakBlockState.getBlock().equals(Blocks.AIR)) {
+            if(breakBlockState.getBlock().equals(Blocks.WATER)) {
+                breakSound = SoundEvents.BUCKET_FILL;
+            } else if(breakBlockState.getBlock().equals(Blocks.LAVA)) {
+                breakSound = SoundEvents.BUCKET_FILL_LAVA;
+            } else {
+                breakSound = breakBlockState.getBlock().getSoundType(breakBlockState).getBreakSound();
+            }
+        }
+        Common.LOG.info("place: " + (placeBlockState != null ? placeBlockState.getBlock() : "none") + " - " + (placeSound != null ? placeSound.getLocation() : "none"));
+        Common.LOG.info("break: " + (breakBlockState != null ? breakBlockState.getBlock() : "none") + " - " + (breakSound != null ? breakSound.getLocation() : "none"));
+        Common.LOG.info("------");
+        return new Helper.BuildSound(this.getBlockPos(),placeSound,breakSound);
     }
 
     public static class Context extends BlockPlaceContext {

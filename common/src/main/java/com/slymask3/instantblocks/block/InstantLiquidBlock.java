@@ -115,9 +115,9 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		Builder builder = new Builder();
 		for(BlockPos pos : posList) {
-			Single.setup(builder,world,pos).setBlock(blockReplace).build();
+			Single.setup(builder,world,pos).setBlock(blockReplace).queue();
 		}
-		Single.setup(builder,world,x,y,z).setBlock(getMainReplaceBlock()).build();
+		Single.setup(builder,world,x,y,z).setBlock(getMainReplaceBlock()).queue();
 		if(posList.size() > 0) {
 			setCreateMessage(create, String.valueOf(isSuction ? posList.size() : posList.size()+1));
 		} else {

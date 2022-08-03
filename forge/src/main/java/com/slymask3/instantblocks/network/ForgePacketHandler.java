@@ -22,6 +22,7 @@ public class ForgePacketHandler {
     public static void register() {
         int index = 100;
         INSTANCE.registerMessage(++index, ClientPacket.class, (ClientPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), ClientPacket::decode, Handler::client);
+        INSTANCE.registerMessage(++index, SoundPacket.class, (SoundPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SoundPacket::decode, Handler::client);
         INSTANCE.registerMessage(++index, SkydivePacket.class, (SkydivePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydivePacket::decode, Handler::common);
         INSTANCE.registerMessage(++index, StatuePacket.class, (StatuePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), StatuePacket::decode, Handler::common);
         INSTANCE.registerMessage(++index, HarvestPacket.class, (HarvestPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), HarvestPacket::decode, Handler::common);
@@ -67,6 +68,8 @@ public class ForgePacketHandler {
             if(player != null) {
                 if(message.getClass().equals(ClientPacket.class)) {
                     PacketHelper.handleClient((ClientPacket)message, player);
+                } else if(message.getClass().equals(SoundPacket.class)) {
+                    PacketHelper.handleSound((SoundPacket)message, player);
                 } else if(message.getClass().equals(SchematicUpdatePacket.class)) {
                     PacketHelper.handleSchematicUpdate((SchematicUpdatePacket)message, player);
                 } else if(message.getClass().equals(SkydiveUpdatePacket.class)) {

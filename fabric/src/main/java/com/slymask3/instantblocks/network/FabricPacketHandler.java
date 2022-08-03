@@ -57,6 +57,13 @@ public class FabricPacketHandler {
                 }
             });
 
+            ClientPlayNetworking.registerGlobalReceiver(new ResourceLocation(PacketHelper.PacketID.SOUND.toString().toLowerCase()), (client, handler, buf, responseSender) -> {
+                if(client.player != null) {
+                    SoundPacket message = SoundPacket.decode(buf);
+                    client.execute(() -> PacketHelper.handleSound(message, client.player));
+                }
+            });
+
             ClientPlayNetworking.registerGlobalReceiver(new ResourceLocation(PacketHelper.PacketID.SCHEMATIC_UPDATE.toString().toLowerCase()), (client, handler, buf, responseSender) -> {
                 if(client.player != null) {
                     SchematicUpdatePacket message = SchematicUpdatePacket.decode(buf);

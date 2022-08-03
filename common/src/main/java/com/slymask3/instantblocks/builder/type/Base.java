@@ -67,6 +67,10 @@ public abstract class Base<T extends Base<T>> {
         return new BlockPos(x,y,z);
     }
 
+    public Level getLevel() {
+        return this.world;
+    }
+
     protected void setPriority(int priority) {
         this.priority = Common.CONFIG.ORIGINAL_INSTANT() ? 0 : priority;
     }

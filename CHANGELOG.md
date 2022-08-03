@@ -5,6 +5,7 @@
 - Optional cloth config support for forge
 - Presets for instant skydive
 - Queue support for builder
+- Play block sounds when generating
 
 ### Changed
 - Allow configuring huge trees list

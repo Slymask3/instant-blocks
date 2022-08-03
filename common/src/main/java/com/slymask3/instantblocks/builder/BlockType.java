@@ -85,6 +85,10 @@ public class BlockType {
         return getBlockState(world, y).getBlock();
     }
 
+    public BlockState getBlockState() {
+        return this.state;
+    }
+
     public BlockState getBlockState(Level world, int y) {
         if(this.type == Type.STONE) {
             BlockState state;

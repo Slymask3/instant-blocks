@@ -52,7 +52,7 @@ public class InstantGrinderBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder();
+		Builder builder = new Builder(1,true);
 
 		Block water = Blocks.WATER;
 		Block torch = Blocks.WALL_TORCH;
@@ -230,13 +230,16 @@ public class InstantGrinderBlock extends InstantBlock {
 		Single.setup(builder,world,x+6,y+19,z).setBlock(water).queue();
 		
 		Single.setup(builder,world,x,y,z).setBlock(air).queue();
-
-		builder.build();
 		
 		/************************ Teleport ************************/
 		if(Common.CONFIG.TP_GRINDER()) {
 			Single.setup(builder,world,x+7,y-4,z).setBlock(glass).queue();
 			Single.setup(builder,world,x+7,y-3,z).setBlock(glass).queue();
+		}
+
+		builder.build();
+
+		if(Common.CONFIG.TP_GRINDER()) {
 			Helper.teleport(world,player,x+13,y-4,z);
 		}
 

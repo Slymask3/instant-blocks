@@ -30,13 +30,20 @@ public class ClientHelper {
     public static List<ColorSet> SKYDIVE_PRESETS;
     public static List<HugeTree> HUGE_TREES;
 
+    public static void playSound(Player player, BlockPos pos, SoundEvent sound) {
+        //Common.LOG.info("sound: " + sound);
+        if(sound != null) {
+            player.level.playSound(player, pos, sound, SoundSource.BLOCKS, 0.2F, 1.0F);
+        }
+    }
+
     public static void playSound(Level world, BlockPos pos, Particles particles) {
         SoundEvent sound = switch(particles) {
             case GENERATE -> new SoundEvent(new ResourceLocation("minecraft", Common.CONFIG.SOUND_GENERATE()));
             case NO_LIQUID -> new SoundEvent(new ResourceLocation("minecraft", Common.CONFIG.SOUND_NO_LIQUID()));
             default -> SoundEvents.PLAYER_LEVELUP;
         };
-        world.playSound(Minecraft.getInstance().player, pos, sound, SoundSource.BLOCKS,0.4F,1.0F);
+        //world.playSound(Minecraft.getInstance().player, pos, sound, SoundSource.BLOCKS,0.4F,1.0F);
     }
 
     public static void showParticles(Level world, BlockPos pos, Particles particles) {

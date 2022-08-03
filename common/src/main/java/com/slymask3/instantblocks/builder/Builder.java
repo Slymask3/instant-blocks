@@ -2,7 +2,10 @@ package com.slymask3.instantblocks.builder;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.builder.type.Single;
+import com.slymask3.instantblocks.network.packet.SoundPacket;
+import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import java.util.*;
 
@@ -38,13 +41,21 @@ public class Builder {
 		if(this.status.equals(Status.BUILD) && !queue.isEmpty()) {
 			this.ticks++;
 			if(this.ticks >= this.speed) {
+				List<Helper.BuildSound> buildSounds = new ArrayList<>();
 				Single first = queue.get(0);
+				Level world = first.getLevel();
+				BlockPos firstBlockPos = first.getBlockPos();
 				int priority = first.priority;
+				buildSounds.add(first.getBuildSound());
 				first.build();
 				queue.remove(0);
 				while(!queue.isEmpty() && queue.get(0).priority == priority) {
+					buildSounds.add(queue.get(0).getBuildSound());
 					queue.get(0).build();
 					queue.remove(0);
+				}
+				if(!buildSounds.isEmpty()) {
+					Common.NETWORK.sendToAllAround(world,firstBlockPos,new SoundPacket(buildSounds));
 				}
 				if(queue.isEmpty()) {
 					this.status = Status.DONE;

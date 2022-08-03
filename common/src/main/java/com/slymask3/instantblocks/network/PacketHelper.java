@@ -6,11 +6,16 @@ import com.slymask3.instantblocks.network.packet.*;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import com.slymask3.instantblocks.util.SchematicHelper;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class PacketHelper {
-    public enum PacketID { CLIENT, SKYDIVE, STATUE, HARVEST, TREE, SCHEMATIC, SCHEMATIC_UPDATE, SKYDIVE_UPDATE, TREE_UPDATE }
+    public enum PacketID {
+        CLIENT, SOUND,
+        SKYDIVE, STATUE, HARVEST, TREE, SCHEMATIC,
+        SKYDIVE_UPDATE, TREE_UPDATE, SCHEMATIC_UPDATE
+    }
 
     private static void activate(InstantPacket message, Level world, Player player) {
         if(message.activate) {
@@ -27,6 +32,13 @@ public class PacketHelper {
         }
         if(!message.message.isEmpty()) {
             ClientHelper.sendMessage(player, message.message, message.variable);
+        }
+    }
+
+    public static void handleSound(SoundPacket message, Player player) {
+        for(Helper.BuildSound buildSound : message.buildSounds) {
+            ClientHelper.playSound(player,buildSound.getBlockPos(),buildSound.getBreakSound());
+            ClientHelper.playSound(player,buildSound.getBlockPos(),buildSound.getPlaceSound());
         }
     }
 
