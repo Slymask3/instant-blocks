@@ -11,7 +11,6 @@ import com.slymask3.instantblocks.network.IPacketHandler;
 import com.slymask3.instantblocks.network.packet.AbstractPacket;
 import com.slymask3.instantblocks.platform.Services;
 import com.slymask3.instantblocks.util.Helper;
-import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -54,7 +53,7 @@ public class InstantBlocks {
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
 		ForgePacketHandler.register();
-		SchematicHelper.createSchematicsDir();
+		Common.init();
 	}
 
 	private void setupRegistry(final RegisterEvent event) {

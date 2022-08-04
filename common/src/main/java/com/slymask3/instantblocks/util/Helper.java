@@ -21,6 +21,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.List;
 import java.util.Random;
 
@@ -198,6 +202,33 @@ public class Helper {
 
 	public static String serializeBlock(Block block) {
 		return Registry.BLOCK.getKey(block).toString();
+	}
+
+	public static void createDirectory(String directory) {
+		File dir = new File(directory);
+		if(!dir.exists()) {
+			try {
+				dir.mkdir();
+			} catch(SecurityException se) {
+				Common.LOG.error("Failed to create '" + directory + "' directory: " + se.getMessage());
+			}
+		}
+	}
+
+	public static String get_url_contents(String url_string) {
+		StringBuilder content = new StringBuilder();
+		try {
+			URL url = new URL(url_string);
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
+			String line;
+			while((line = bufferedReader.readLine()) != null) {
+				content.append(line).append("\n");
+			}
+			bufferedReader.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return content.toString();
 	}
 
 	public static class WeightedBlock {

@@ -22,6 +22,7 @@ public interface IConfig {
     default int MINING_LADDER_LAYER() { return Defaults.MINING_LADDER_LAYER; }
     default int XP_AMOUNT() { return Defaults.XP_AMOUNT; }
     default int RADIUS_DOME() { return Defaults.RADIUS_DOME; }
+    default int STATUE_CACHE_TIME() { return Defaults.STATUE_CACHE_TIME; }
 
     default int MAX_LIQUID() { return Defaults.MAX_LIQUID; }
     default int MAX_FILL() { return Defaults.MAX_FILL; }
@@ -96,6 +97,7 @@ public interface IConfig {
         public static boolean TP_GRINDER = true;
         public static boolean KEEP_BLOCKS = false;
         public static boolean ALLOW_WATER_IN_NETHER = false;
+        public static boolean ORIGINAL_INSTANT = false;
         public static int RADIUS_HARVEST = 25;
         public static int RADIUS_LIGHT = 25;
         public static int RAILS_AMOUNT = 37;
@@ -103,7 +105,7 @@ public interface IConfig {
         public static int XP_AMOUNT = 0;
         public static int TREE_SIZE = 4;
         public static int RADIUS_DOME = 4;
-        public static boolean ORIGINAL_INSTANT = false;
+        public static int STATUE_CACHE_TIME = 60;
 
         public static int MAX_LIQUID = 1000;
         public static int MAX_FILL = 1000;

@@ -41,7 +41,7 @@ public class SchematicScreen extends InstantScreen {
 		SchematicBlockEntity blockEntity = (SchematicBlockEntity)world.getBlockEntity(pos);
 
 		Button open = new Button(this.width / 2 + 134, 50, 20, 20, Component.literal(">"), (p_88642_) -> {
-			Util.getPlatform().openFile(new File(SchematicHelper.SCHEMATICS_DIR));
+			Util.getPlatform().openFile(new File(Common.SCHEMATICS_DIR));
 		}, new Button.OnTooltip() {
 			public void onTooltip(Button button, PoseStack poseStack, int x, int y) {
 				SchematicScreen.this.renderTooltip(poseStack, List.of(Component.translatable("ib.gui.schematic.open").getVisualOrderText()), x, y);

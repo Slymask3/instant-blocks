@@ -11,7 +11,7 @@ import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 
 import java.util.List;
 
-@Config(name = Common.MOD_ID)
+@Config(name = Common.MOD_ID + "/config")
 public class ClothConfig implements ConfigData, IConfig {
     public static void register() {
         AutoConfig.register(ClothConfig.class, Toml4jConfigSerializer::new);
@@ -121,6 +121,14 @@ public class ClothConfig implements ConfigData, IConfig {
 
     @ConfigEntry.Category("blocks")
     @ConfigEntry.Gui.CollapsibleObject
+    SectionStatue statue = new SectionStatue();
+    static class SectionStatue {
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 240)
+        int STATUE_CACHE_TIME = Defaults.STATUE_CACHE_TIME;
+    }
+
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.CollapsibleObject
     SectionHarvest harvest = new SectionHarvest();
     static class SectionHarvest {
         int RADIUS_HARVEST = Defaults.RADIUS_HARVEST;
@@ -213,6 +221,7 @@ public class ClothConfig implements ConfigData, IConfig {
     public int MINING_LADDER_LAYER() { return mining.MINING_LADDER_LAYER; }
     public int XP_AMOUNT() { return general.XP_AMOUNT; }
     public int RADIUS_DOME() { return dome.RADIUS_DOME; }
+    public int STATUE_CACHE_TIME() { return statue.STATUE_CACHE_TIME; }
     public int MAX_LIQUID() { return liquid.MAX_LIQUID; }
     public int MAX_FILL() { return liquid.MAX_FILL; }
     public boolean SIMPLE_LIQUID() { return liquid.SIMPLE_LIQUID; }

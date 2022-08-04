@@ -170,9 +170,9 @@ public class Single extends Base<Single> {
                 breakSound = breakBlockState.getBlock().getSoundType(breakBlockState).getBreakSound();
             }
         }
-        Common.LOG.info("place: " + (placeBlockState != null ? placeBlockState.getBlock() : "none") + " - " + (placeSound != null ? placeSound.getLocation() : "none"));
-        Common.LOG.info("break: " + (breakBlockState != null ? breakBlockState.getBlock() : "none") + " - " + (breakSound != null ? breakSound.getLocation() : "none"));
-        Common.LOG.info("------");
+        //Common.LOG.info("place: " + (placeBlockState != null ? placeBlockState.getBlock() : "none") + " - " + (placeSound != null ? placeSound.getLocation() : "none"));
+        //Common.LOG.info("break: " + (breakBlockState != null ? breakBlockState.getBlock() : "none") + " - " + (breakSound != null ? breakSound.getLocation() : "none"));
+        //Common.LOG.info("------");
         return new Helper.BuildSound(this.getBlockPos(),placeSound,breakSound,0.1F);
     }
 

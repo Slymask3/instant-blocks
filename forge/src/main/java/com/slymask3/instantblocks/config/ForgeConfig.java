@@ -23,6 +23,7 @@ public class ForgeConfig implements IConfig {
 		public static IntValue XP_AMOUNT;
 		public static IntValue TREE_SIZE;
 		public static IntValue RADIUS_DOME;
+		public static IntValue STATUE_CACHE_TIME;
 
 		public static IntValue MAX_LIQUID;
 		public static IntValue MAX_FILL;
@@ -136,6 +137,10 @@ public class ForgeConfig implements IConfig {
 			RADIUS_DOME = builder
 					.comment("Glass dome radius.\nDefault: 4")
 					.defineInRange("RADIUS_DOME", Defaults.RADIUS_DOME,1,200);
+
+			STATUE_CACHE_TIME = builder
+					.comment("Statue skin cache time (minutes).\nDefault: 15")
+					.defineInRange("STATUE_CACHE_TIME", Defaults.STATUE_CACHE_TIME,1,240);
 
 			builder.pop();
 
@@ -457,6 +462,7 @@ public class ForgeConfig implements IConfig {
 	public int XP_AMOUNT() { return Common.XP_AMOUNT.get(); }
 	public int TREE_SIZE() { return Common.TREE_SIZE.get(); }
 	public int RADIUS_DOME() { return Common.RADIUS_DOME.get(); }
+	public int STATUE_CACHE_TIME() { return Common.STATUE_CACHE_TIME.get(); }
 	public int MAX_LIQUID() { return Common.MAX_LIQUID.get(); }
 	public int MAX_FILL() { return Common.MAX_FILL.get(); }
 	public boolean SIMPLE_LIQUID() { return Common.SIMPLE_LIQUID.get(); }

@@ -1,4 +1,4 @@
-# Minecraft 1.19 Changelog
+# Minecraft 1.19.1 Changelog
 
 ## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.3...HEAD)
 ### Added
@@ -6,12 +6,15 @@
 - Presets for instant skydive
 - Queue support for builder
 - Play block sounds when generating
+- Cache for instant statue skins
 
 ### Changed
 - Allow configuring huge trees list
 
 ### Fixed
-- Shows particles and play sounds for all players around
+- Show particles and play sounds for all players around
+
+# Minecraft 1.19 Changelog
 
 ## [1.6.3](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.2...1.19-1.6.3) - 2022-07-21
 ### Fixed

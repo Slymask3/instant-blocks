@@ -12,7 +12,6 @@ import com.slymask3.instantblocks.network.IPacketHandler;
 import com.slymask3.instantblocks.network.packet.AbstractPacket;
 import com.slymask3.instantblocks.platform.Services;
 import com.slymask3.instantblocks.util.Helper;
-import com.slymask3.instantblocks.util.SchematicHelper;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -48,7 +47,7 @@ public class InstantBlocks implements ModInitializer {
 
         LootHandler.register();
         FabricPacketHandler.Common.init();
-        SchematicHelper.createSchematicsDir();
+        Common.init();
     }
 
     public static class FabricRegistryHelper<T> implements IRegistryHelper<T> {

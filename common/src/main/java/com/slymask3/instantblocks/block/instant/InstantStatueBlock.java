@@ -2,6 +2,7 @@ package com.slymask3.instantblocks.block.instant;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
@@ -25,9 +26,11 @@ import net.minecraft.world.level.material.Material;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Base64;
 
 public class InstantStatueBlock extends InstantBlock implements EntityBlock {
@@ -51,36 +54,127 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 
 	public Skin getSkin(String username) {
 		if(!username.equalsIgnoreCase("")) {
-			try {
-				GsonBuilder builder = new GsonBuilder();
-				builder.setPrettyPrinting();
-				Gson gson = builder.create();
+			return getSkinFromCache(username);
+		}
+		return null;
+	}
 
-				String user_api_contents = get_contents("https://api.mojang.com/users/profiles/minecraft/"+username);
-				JsonObject user_json = gson.fromJson(user_api_contents,JsonObject.class);
-				String uuid = user_json.get("id").getAsString();
+	private Skin getSkinFromCache(String username) {
+		try {
+			GsonBuilder builder = new GsonBuilder();
+			builder.setPrettyPrinting();
+			Gson gson = builder.create();
 
-				String uuid_api_contents = get_contents("https://sessionserver.mojang.com/session/minecraft/profile/"+uuid);
-				JsonObject uuid_json = gson.fromJson(uuid_api_contents,JsonObject.class);
-				String base64 = uuid_json.get("properties").getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString();
+			String cache_file_name = Common.STATUE_CACHE_DIR + "/statue-skins.json";
+			File cache_file = new File(cache_file_name);
+			JsonArray cache_json;
+			if(cache_file.exists()) {
+				cache_json = gson.fromJson(Files.readString(cache_file.toPath()),JsonArray.class);
+			} else {
+				cache_json = new JsonArray();
+			}
 
-				String base64_decoded = new String(Base64.getDecoder().decode(base64));
-				JsonObject image_json = gson.fromJson(base64_decoded,JsonObject.class);
-				JsonObject skin_json = image_json.get("textures").getAsJsonObject().get("SKIN").getAsJsonObject();
-				String image_url = skin_json.get("url").getAsString();
+			int cache_index = -1;
+			for(int i=0; i<cache_json.size(); i++) {
+				JsonObject obj = cache_json.get(i).getAsJsonObject();
+				if(obj.get("name").getAsString().equalsIgnoreCase(username)) {
+					cache_index = i;
+					break;
+				}
+			}
+			if(cache_index == -1) {
+				JsonObject obj = new JsonObject();
+				obj.addProperty("name", username);
+				obj.addProperty("uuid", "");
+				obj.addProperty("skin", "");
+				obj.addProperty("slim", false);
+				obj.addProperty("timestamp", 0);
+				cache_json.add(obj);
+				cache_index = cache_json.size() - 1;
+			}
 
-				Skin skin = new Skin(ImageIO.read(new URL(image_url)));
-				if(skin_json.has("metadata")) {
-					JsonObject metadata = skin_json.get("metadata").getAsJsonObject();
-					if(metadata.has("model") && metadata.get("model").getAsString().equalsIgnoreCase("slim")) {
-						skin.setSlim(true);
+			JsonObject cache_user = cache_json.get(cache_index).getAsJsonObject();
+			long timestamp = cache_user.get("timestamp").getAsLong();
+			String cache_skin_url = cache_user.get("skin").getAsString();
+			String cache_name = cache_user.get("name").getAsString();
+			String cache_uuid = cache_user.get("uuid").getAsString();
+			boolean cache_slim = cache_user.get("slim").getAsBoolean();
+
+			if(cache_skin_url.isEmpty() || System.currentTimeMillis() - timestamp >= (long) Common.CONFIG.STATUE_CACHE_TIME() * 60 * 1000) {
+				Skin skin;
+				if(cache_uuid.isEmpty()) {
+					skin = getSkinFromAPI(username);
+				} else {
+					skin = getSkinFromAPIUUID(cache_uuid);
+				}
+				if(skin != null) {
+					JsonObject new_user = new JsonObject();
+					new_user.addProperty("name", skin.getName());
+					new_user.addProperty("uuid", skin.getUUID());
+					new_user.addProperty("skin", skin.getImageURL());
+					new_user.addProperty("slim", skin.isSlim());
+					new_user.addProperty("timestamp", System.currentTimeMillis());
+
+					cache_json.set(cache_index,new_user);
+
+					try(FileWriter file = new FileWriter(cache_file_name)) {
+						gson.toJson(cache_json,file);
 					}
 				}
-
 				return skin;
-			} catch(Exception e) {
-				Common.LOG.error(e.getMessage());
+			} else {
+				return new Skin(cache_uuid,cache_name,cache_skin_url,cache_slim);
 			}
+		} catch(Exception e) {
+			Common.LOG.error(e.getMessage());
+		}
+		return null;
+	}
+
+	private Skin getSkinFromAPI(String username) {
+		try {
+			GsonBuilder builder = new GsonBuilder();
+			builder.setPrettyPrinting();
+			Gson gson = builder.create();
+
+			String user_api_contents = Helper.get_url_contents("https://api.mojang.com/users/profiles/minecraft/"+username);
+			JsonObject user_json = gson.fromJson(user_api_contents,JsonObject.class);
+			String uuid = user_json.get("id").getAsString();
+
+			return getSkinFromAPIUUID(uuid);
+		} catch(Exception e) {
+			Common.LOG.error(e.getMessage());
+		}
+		return null;
+	}
+
+	private Skin getSkinFromAPIUUID(String uuid) {
+		try {
+			GsonBuilder builder = new GsonBuilder();
+			builder.setPrettyPrinting();
+			Gson gson = builder.create();
+
+			String uuid_api_contents = Helper.get_url_contents("https://sessionserver.mojang.com/session/minecraft/profile/"+uuid);
+			JsonObject uuid_json = gson.fromJson(uuid_api_contents,JsonObject.class);
+			String name = uuid_json.get("name").getAsString();
+			String base64 = uuid_json.get("properties").getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString();
+
+			String base64_decoded = new String(Base64.getDecoder().decode(base64));
+			JsonObject image_json = gson.fromJson(base64_decoded,JsonObject.class);
+			JsonObject skin_json = image_json.get("textures").getAsJsonObject().get("SKIN").getAsJsonObject();
+			String image_url = skin_json.get("url").getAsString();
+
+			Skin skin = new Skin(uuid,name,image_url);
+			if(skin_json.has("metadata")) {
+				JsonObject metadata = skin_json.get("metadata").getAsJsonObject();
+				if(metadata.has("model") && metadata.get("model").getAsString().equalsIgnoreCase("slim")) {
+					skin.setSlim(true);
+				}
+			}
+
+			return skin;
+		} catch(Exception e) {
+			Common.LOG.error(e.getMessage());
 		}
 		return null;
 	}
@@ -109,28 +203,12 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 
 			builder.build();
 
-			setCreateMessage(Strings.CREATE_STATUE, blockEntity.username);
+			setCreateMessage(Strings.CREATE_STATUE, skin.getName());
 			return true;
 		} else {
 			Helper.sendMessage(player, Strings.ERROR_STATUE, ChatFormatting.RED + blockEntity.username);
 		}
 		return false;
-	}
-
-	private static String get_contents(String url_string) {
-		StringBuilder content = new StringBuilder();
-		try {
-			URL url = new URL(url_string);
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
-			String line;
-			while((line = bufferedReader.readLine()) != null) {
-				content.append(line).append("\n");
-			}
-			bufferedReader.close();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return content.toString();
 	}
 
 	private static void buildHead(Builder builder, Level world, int x, int y, int z, BufferedImage img, Direction direction, boolean build, boolean rgb) {
@@ -506,11 +584,29 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 	}
 
 	private static class Skin {
+		private final String uuid;
+		private final String name;
+		private final String image_url;
 		private final BufferedImage image;
 		private boolean slim;
-		public Skin(BufferedImage image) {
-			this.image = image;
-			this.slim = false;
+		public Skin(String uuid, String name, String image_url) throws IOException {
+			this(uuid,name,image_url,false);
+		}
+		public Skin(String uuid, String name, String image_url, boolean slim) throws IOException {
+			this.uuid = uuid;
+			this.name = name;
+			this.image_url = image_url;
+			this.image = ImageIO.read(new URL(image_url));
+			this.slim = slim;
+		}
+		public String getUUID() {
+			return this.uuid;
+		}
+		public String getName() {
+			return this.name;
+		}
+		public String getImageURL() {
+			return this.image_url;
 		}
 		public BufferedImage getImage() {
 			return this.image;

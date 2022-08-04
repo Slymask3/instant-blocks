@@ -14,12 +14,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SchematicHelper {
-	public static final String SCHEMATICS_DIR = "schematics";
 	public static ArrayList<String> SCHEMATICS_LIST = new ArrayList<>();
 
 	public static Schematic readSchematic(String schematicName) {
 		try {
-			File file = new File(SCHEMATICS_DIR + "/" + schematicName);
+			File file = new File(Common.SCHEMATICS_DIR + "/" + schematicName);
 			FileInputStream fis = new FileInputStream(file);
 			CompoundTag tag = NbtIo.readCompressed(fis);
 			fis.close();
@@ -30,20 +29,9 @@ public class SchematicHelper {
 		return null;
 	}
 
-	public static void createSchematicsDir() {
-		File dir = new File(SCHEMATICS_DIR);
-		if(!dir.exists()) {
-			try {
-				dir.mkdir();
-			} catch(SecurityException se) {
-				Common.LOG.error("Failed to create schematics directory: " + se.getMessage());
-			}
-		}
-	}
-
 	public static ArrayList<String> getSchematics() {
 		ArrayList<String> schematics = new ArrayList<>();
-		File dir = new File(SCHEMATICS_DIR + "/");
+		File dir = new File(Common.SCHEMATICS_DIR + "/");
 		File[] files = dir.listFiles(file -> file.isFile() && (file.getName().toLowerCase().endsWith(".schematic") || file.getName().toLowerCase().endsWith(".schem")));
 		if(files != null) {
 			for(File file : files) {
