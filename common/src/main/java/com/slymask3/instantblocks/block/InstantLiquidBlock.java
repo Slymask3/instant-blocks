@@ -23,6 +23,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -58,7 +60,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		return Block.box(1.0D, 0.0D, 1.0D, 15.0D, 15.0D, 15.0D);
+		return this.isSuction ? Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D) : Block.box(1.0D, 0.0D, 1.0D, 15.0D, 15.0D, 15.0D);
 	}
 
 	@Override
@@ -88,13 +90,13 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 
 	private Block getMainReplaceBlock() {
 		if(isSuction) {
-			return blockCheck == Blocks.WATER ? ModBlocks.INSTANT_WATER : ModBlocks.INSTANT_LAVA;
+			return blockCheck == Blocks.LAVA ? ModBlocks.INSTANT_LAVA : ModBlocks.INSTANT_WATER;
 		}
 		return blockReplace;
 	}
 
 	public boolean canActivate(Level world, BlockPos pos, Player player) {
-		if(world.dimension().equals(Level.NETHER) && blockReplace.equals(Blocks.WATER) && !Common.CONFIG.ALLOW_WATER_IN_NETHER()) {
+		if(Helper.isNether(world) && blockReplace.equals(Blocks.WATER) && !Common.CONFIG.ALLOW_WATER_IN_NETHER()) {
 			Helper.sendMessage(player, Strings.ERROR_WATER_DISABLED);
 			return false;
 		}
@@ -114,9 +116,16 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder();
+		Builder builder = (new Builder()).setOrigin(new BlockPos(x,y,z), !this.isSuction);
 		for(BlockPos pos : posList) {
-			Single.setup(builder,world,pos).setBlock(blockReplace).queue();
+			BlockState state = world.getBlockState(pos);
+			if(isSuction && state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED)) {
+				Single.setup(builder,world,pos).setBlock(state.setValue(BlockStateProperties.WATERLOGGED,false)).queue();
+			} else if(!isSuction && state.hasProperty(BlockStateProperties.WATERLOGGED) && !state.getValue(BlockStateProperties.WATERLOGGED)) {
+				Single.setup(builder,world,pos).setBlock(state.setValue(BlockStateProperties.WATERLOGGED,true)).queue();
+			} else {
+				Single.setup(builder,world,pos).setBlock(blockReplace).queue();
+			}
 		}
 		Single.setup(builder,world,x,y,z).setBlock(getMainReplaceBlock()).queue();
 		if(posList.size() > 0) {
@@ -146,8 +155,9 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	private void check(Level world, BlockPos pos) {
-		Block blockCurrent = Helper.getBlock(world,pos);
-		if(isCorrectBlock(blockCurrent) && posList.size() < getMax() && addPos(pos)) {
+		BlockState state = world.getBlockState(pos);
+		Block blockCurrent = state.getBlock();
+		if((isCorrectBlock(blockCurrent) || isWaterlogged(state) || isWaterloggable(state)) && posList.size() < getMax() && addPos(pos)) {
 			if(blockCheck == null) {
 				blockCheck = blockCurrent;
 			}
@@ -162,6 +172,17 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 			return block == blockCheck || block instanceof BushBlock;
 		}
 		return block == blockCheck;
+	}
+
+	private boolean isWaterlogged(BlockState state) {
+		return isSuction && (blockCheck == null || blockCheck.equals(Blocks.WATER))
+			&& state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED);
+	}
+
+	private boolean isWaterloggable(BlockState state) {
+		return !isSuction && blockReplace.equals(Blocks.WATER)
+			&& state.hasProperty(BlockStateProperties.WATERLOGGED) && !state.getValue(BlockStateProperties.WATERLOGGED)
+			&& ((state.hasProperty(BlockStateProperties.SLAB_TYPE) && !state.getValue(BlockStateProperties.SLAB_TYPE).equals(SlabType.DOUBLE)) || !state.hasProperty(BlockStateProperties.SLAB_TYPE));
 	}
 
 	private boolean addPos(BlockPos pos) {

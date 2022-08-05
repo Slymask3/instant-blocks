@@ -19,6 +19,8 @@ public class Builder {
 	public int speed;
 	public int ticks;
 	Direction priorityDirection;
+	BlockPos originPos;
+	boolean fromOrigin;
 
 	public Builder() {
 		this(1);
@@ -36,6 +38,14 @@ public class Builder {
 		this.speed = speed;
 		this.ticks = speed - 1;
 		this.priorityDirection = priorityDirection;
+		this.originPos = null;
+		this.fromOrigin = true;
+	}
+
+	public Builder setOrigin(BlockPos pos, boolean fromOrigin) {
+		this.originPos = pos;
+		this.fromOrigin = fromOrigin;
+		return this;
 	}
 
 	public void tick() {
@@ -112,6 +122,13 @@ public class Builder {
 				for(Single single : this.queue) {
 					single.priority = single.x;
 				}
+			}
+		}
+
+		if(this.originPos != null) {
+			for(Single single : this.queue) {
+				int distance = (int)Math.floor(Helper.getDistanceBetween(this.originPos,single.getBlockPos()) * 1);
+				single.priority = this.fromOrigin ? distance : -distance;
 			}
 		}
 

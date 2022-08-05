@@ -73,7 +73,7 @@ public class Single extends Base<Single> {
         if(Common.CONFIG.KEEP_BLOCKS() && getBlock instanceof InstantBlock) {
             return;
         }
-        if(world.dimension().equals(Level.NETHER) && block.equals(Blocks.WATER) && !Common.CONFIG.ALLOW_WATER_IN_NETHER()) {
+        if(Helper.isNether(world) && block.equals(Blocks.WATER) && !Common.CONFIG.ALLOW_WATER_IN_NETHER()) {
             state = Blocks.AIR.defaultBlockState(); //replace water with air in the nether
         }
         if(canSet(getBlock)) {

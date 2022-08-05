@@ -115,18 +115,22 @@ public class Helper {
 
 	public static int getMinSkydive(Level world) {
 		int min = Common.CONFIG.SKYDIVE_MIN();
-		if(min < world.getMinBuildHeight() - 4) {
-			min = world.getMinBuildHeight() - 5;
-		}
-		return min;
+		int min_world = world.getMinBuildHeight();
+		return min < min_world + 4 ? min_world + 5 : min;
 	}
 
 	public static int getMaxSkydive(Level world) {
 		int max = Common.CONFIG.SKYDIVE_MAX();
-		if(max > world.getMaxBuildHeight() - 3) {
-			max = world.getMaxBuildHeight() - 4;
-		}
-		return max;
+		int max_world = isNether(world) ? 120 : world.getMaxBuildHeight();
+		return max > max_world - 3 ? max_world - 4 : max;
+	}
+
+	public static boolean isNether(Level world) {
+		return world.dimension().equals(Level.NETHER);
+	}
+
+	public static double getDistanceBetween(BlockPos pos1, BlockPos pos2) {
+		return Math.sqrt(Math.pow(pos2.getX()-pos1.getX(),2)+Math.pow(pos2.getY()-pos1.getY(),2)+Math.pow(pos2.getZ()-pos1.getZ(),2));
 	}
 
 	public static void sendMessage(Player player, String message) {

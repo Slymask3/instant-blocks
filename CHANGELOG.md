@@ -7,6 +7,7 @@
 - Queue support for builder
 - Play block sounds when generating
 - Cache for instant statue skins
+- Waterlogging support for instant liquid blocks
 
 ### Changed
 - Allow configuring huge trees list
@@ -14,6 +15,9 @@
 ### Fixed
 - Show particles and play sounds for all players around
 - Cross collision block placement
+- Height limit in the nether for instant skydive
+
+---
 
 # Minecraft 1.19 Changelog
 

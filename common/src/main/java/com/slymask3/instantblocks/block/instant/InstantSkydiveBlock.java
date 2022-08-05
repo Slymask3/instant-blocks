@@ -121,6 +121,12 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 			}
 		}
 
+		if(Helper.isNether(world)) {
+			for(int i=max; i < max+4; ++i) {
+				Circle.setup(builder,world,x,i,z,radius).setBlock(BlockType.block(Blocks.AIR)).queue();
+			}
+		}
+
 		builder.build();
 
 		if(blockEntity.teleport) {
