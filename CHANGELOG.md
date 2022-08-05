@@ -13,6 +13,7 @@
 
 ### Fixed
 - Show particles and play sounds for all players around
+- Cross collision block placement
 
 # Minecraft 1.19 Changelog
 

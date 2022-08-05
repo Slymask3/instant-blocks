@@ -9,17 +9,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.*;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 
 public class Single extends Base<Single> {
     private Single(Builder builder, Level world, int x, int y, int z) {
@@ -82,9 +78,7 @@ public class Single extends Base<Single> {
         }
         if(canSet(getBlock)) {
             if(block instanceof CrossCollisionBlock) {
-                Context context = new Context(world, new BlockPos(x, y, z));
-                state = block.getStateForPlacement(context);
-                if(state == null) return;
+                state = Block.updateFromNeighbourShapes(state == null ? block.defaultBlockState() : state, world, getBlockPos());
             }
             if(block instanceof SlabBlock && direction == Direction.UP) {
                 direction = null;
@@ -174,11 +168,5 @@ public class Single extends Base<Single> {
         //Common.LOG.info("break: " + (breakBlockState != null ? breakBlockState.getBlock() : "none") + " - " + (breakSound != null ? breakSound.getLocation() : "none"));
         //Common.LOG.info("------");
         return new Helper.BuildSound(this.getBlockPos(),placeSound,breakSound,0.1F);
-    }
-
-    public static class Context extends BlockPlaceContext {
-        public Context(Level world, BlockPos pos) {
-            super(world, null, InteractionHand.MAIN_HAND, ItemStack.EMPTY, new BlockHitResult(Vec3.ZERO,Direction.DOWN,pos,false));
-        }
     }
 }

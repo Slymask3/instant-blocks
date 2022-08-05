@@ -88,6 +88,10 @@ public class BlockType {
         return this.containerItems;
     }
 
+    public Block getBlock() {
+        return this.state.getBlock();
+    }
+
     public Block getBlock(Level world, int y) {
         return getBlockState(world, y).getBlock();
     }
