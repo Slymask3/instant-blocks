@@ -11,6 +11,7 @@
 
 ### Changed
 - Allow configuring huge trees list
+- Place torches based on light level (configurable)
 
 ### Fixed
 - Show particles and play sounds for all players around

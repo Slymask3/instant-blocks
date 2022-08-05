@@ -18,6 +18,7 @@ public class ForgeConfig implements IConfig {
 		public static BooleanValue ORIGINAL_INSTANT;
 		public static IntValue RADIUS_HARVEST;
 		public static IntValue RADIUS_LIGHT;
+		public static IntValue LIGHT_MAX;
 		public static IntValue RAILS_AMOUNT;
 		public static IntValue MINING_LADDER_LAYER;
 		public static IntValue XP_AMOUNT;
@@ -117,6 +118,10 @@ public class ForgeConfig implements IConfig {
 			RADIUS_LIGHT = builder
 					.comment("Radius to light up dark areas around Instant Light.\nDefault: 25")
 					.defineInRange("RADIUS_LIGHT", Defaults.RADIUS_LIGHT,1,1000);
+
+			LIGHT_MAX = builder
+					.comment("Maximum light level for placing a torch.\nDefault: 7")
+					.defineInRange("LIGHT_MAX", Defaults.RADIUS_LIGHT,0,15);
 
 			RAILS_AMOUNT = builder
 					.comment("Amount of rail blocks to create for Instant Rail.\nDefault: 37")
@@ -457,6 +462,7 @@ public class ForgeConfig implements IConfig {
 	public boolean ORIGINAL_INSTANT() { return Common.ORIGINAL_INSTANT.get(); }
 	public int RADIUS_HARVEST() { return Common.RADIUS_HARVEST.get(); }
 	public int RADIUS_LIGHT() { return Common.RADIUS_LIGHT.get(); }
+	public int LIGHT_MAX() { return Common.LIGHT_MAX.get(); }
 	public int RAILS_AMOUNT() { return Common.RAILS_AMOUNT.get(); }
 	public int MINING_LADDER_LAYER() { return Common.MINING_LADDER_LAYER.get(); }
 	public int XP_AMOUNT() { return Common.XP_AMOUNT.get(); }

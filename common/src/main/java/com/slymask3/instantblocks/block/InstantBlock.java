@@ -23,9 +23,9 @@ import net.minecraft.world.phys.BlockHitResult;
 public abstract class InstantBlock extends Block {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-	public String createMessage, errorMessage, createVariable, errorVariable;
-	boolean isDirectional = false;
-	ClientHelper.Screen screen = null;
+	protected String createMessage, errorMessage, createVariable, errorVariable;
+	private boolean isDirectional = false;
+	private ClientHelper.Screen screen = null;
 	
 	protected InstantBlock(Properties properties) {
 		super(properties);

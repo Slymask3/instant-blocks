@@ -14,10 +14,8 @@ public class InstantSuctionBlock extends InstantLiquidBlock {
                 .strength(1.5F)
                 .sound(SoundType.STONE)
         , null, Blocks.AIR);
-        setErrorMessage(Strings.ERROR_SUCTION);
-        this.create = Strings.CREATE_SUCTION;
-		this.create1 = Strings.CREATE_SUCTION_1;
-        this.isSuction = true;
+        this.setErrorMessage(Strings.ERROR_SUCTION);
+        this.setCreateMessages(Strings.CREATE_SUCTION,Strings.CREATE_SUCTION_1);
     }
 
     public boolean isEnabled() {

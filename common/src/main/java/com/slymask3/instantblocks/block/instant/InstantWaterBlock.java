@@ -24,10 +24,9 @@ public class InstantWaterBlock extends InstantLiquidBlock {
                 .isRedstoneConductor((state, world, pos) -> false)
                 .isViewBlocking((state, world, pos) -> false)
         , Blocks.AIR, Blocks.WATER);
-        setErrorMessage(Strings.ERROR_WATER_MAX);
-		this.create = Strings.CREATE_WATER;
-		this.create1 = Strings.CREATE_WATER_1;
-        this.particle = ParticleTypes.FALLING_WATER;
+        this.setErrorMessage(Strings.ERROR_WATER_MAX);
+        this.setCreateMessages(Strings.CREATE_WATER,Strings.CREATE_WATER_1);
+        this.setParticle(ParticleTypes.FALLING_WATER);
     }
 
     public boolean isEnabled() {

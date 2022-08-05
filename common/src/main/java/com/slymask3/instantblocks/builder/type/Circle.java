@@ -5,8 +5,8 @@ import com.slymask3.instantblocks.builder.Builder;
 import net.minecraft.world.level.Level;
 
 public class Circle extends Base<Circle> {
-    BlockType outerBlockType, innerBlockType;
-    final int radius;
+    private BlockType outerBlockType, innerBlockType;
+    private final int radius;
 
     private Circle(Builder builder, Level world, int x, int y, int z, int radius) {
         super(builder, world, x, y, z);

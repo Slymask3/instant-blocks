@@ -18,6 +18,7 @@ public interface IConfig {
     default boolean ORIGINAL_INSTANT() { return Defaults.ORIGINAL_INSTANT; }
     default int RADIUS_HARVEST() { return Defaults.RADIUS_HARVEST; }
     default int RADIUS_LIGHT() { return Defaults.RADIUS_LIGHT; }
+    default int LIGHT_MAX() { return Defaults.LIGHT_MAX; }
     default int RAILS_AMOUNT() { return Defaults.RAILS_AMOUNT; }
     default int MINING_LADDER_LAYER() { return Defaults.MINING_LADDER_LAYER; }
     default int XP_AMOUNT() { return Defaults.XP_AMOUNT; }
@@ -100,6 +101,7 @@ public interface IConfig {
         public static boolean ORIGINAL_INSTANT = false;
         public static int RADIUS_HARVEST = 25;
         public static int RADIUS_LIGHT = 25;
+        public static int LIGHT_MAX = 5;
         public static int RAILS_AMOUNT = 37;
         public static int MINING_LADDER_LAYER = -59;
         public static int XP_AMOUNT = 0;

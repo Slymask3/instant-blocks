@@ -3,6 +3,8 @@ package com.slymask3.instantblocks.builder.type;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.ColorBlockEntity;
+import com.slymask3.instantblocks.block.instant.InstantLightBlock;
+import com.slymask3.instantblocks.builder.BlockType;
 import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
@@ -70,6 +72,23 @@ public class Single extends Base<Single> {
         BlockState state = blockType.getBlockState(world, y);
         Block block = blockType.getBlock(world, y);
         Block getBlock = getWorldBlock();
+        if(blockType.isConditionalTorch()) {
+            if(InstantLightBlock.canPlaceTorch(world,getBlockPos())) {
+                BlockPos pos = getBlockPos();
+                if(world.getBlockState(pos.below()).isFaceSturdy(world,pos,Direction.UP)) {
+                    world.setBlock(pos, Blocks.TORCH.defaultBlockState(), flag);
+                } else if(world.getBlockState(pos.north()).isFaceSturdy(world,pos,Direction.SOUTH)) {
+                    world.setBlock(pos, Blocks.WALL_TORCH.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING,Direction.SOUTH), flag);
+                } else if(world.getBlockState(pos.east()).isFaceSturdy(world,pos,Direction.WEST)) {
+                    world.setBlock(pos, Blocks.WALL_TORCH.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING,Direction.WEST), flag);
+                } else if(world.getBlockState(pos.south()).isFaceSturdy(world,pos,Direction.NORTH)) {
+                    world.setBlock(pos, Blocks.WALL_TORCH.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING,Direction.NORTH), flag);
+                } else if(world.getBlockState(pos.west()).isFaceSturdy(world,pos,Direction.EAST)) {
+                    world.setBlock(pos, Blocks.WALL_TORCH.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING,Direction.EAST), flag);
+                }
+            }
+            return;
+        }
         if(Common.CONFIG.KEEP_BLOCKS() && getBlock instanceof InstantBlock) {
             return;
         }
@@ -142,7 +161,14 @@ public class Single extends Base<Single> {
         return world.getBlockEntity(this.getBlockPos());
     }
 
+    public BlockType getBlockType() {
+        return this.blockType;
+    }
+
     public Helper.BuildSound getBuildSound() {
+        if(blockType.isConditionalTorch() && (this.getWorldBlock().equals(Blocks.TORCH) || this.getWorldBlock().equals(Blocks.WALL_TORCH))) {
+            return new Helper.BuildSound(getBlockPos(),Blocks.TORCH.getSoundType(Blocks.TORCH.defaultBlockState()).getPlaceSound(),null,0.1F);
+        }
         BlockState breakBlockState = this.getWorldBlockState();
         BlockState placeBlockState = this.blockType.getBlockState(); //this.blockType.getBlockState(world,y);
         SoundEvent placeSound = null, breakSound = null;

@@ -211,6 +211,7 @@
 
   "text.autoconfig.instantblocks/config.option.light": "Instant Light",
   "text.autoconfig.instantblocks/config.option.light.RADIUS_LIGHT": "Radius to light up around",
+  "text.autoconfig.instantblocks/config.option.light.LIGHT_MAX": "Max light level for placing a torch",
 
   "text.autoconfig.instantblocks/config.option.tree": "Instant Huge Tree",
   "text.autoconfig.instantblocks/config.option.tree.TREE_SIZE": "Block size for the huge tree",

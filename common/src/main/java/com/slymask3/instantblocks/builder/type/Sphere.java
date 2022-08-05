@@ -1,15 +1,17 @@
 package com.slymask3.instantblocks.builder.type;
 
+import com.slymask3.instantblocks.block.instant.InstantLightBlock;
 import com.slymask3.instantblocks.builder.BlockType;
 import com.slymask3.instantblocks.builder.Builder;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 
 public class Sphere extends Base<Sphere> {
-    final int radius;
-    BlockType outerBlockType, innerBlockType;
-    boolean half;
-    Direction queueDirection;
+    private final int radius;
+    private BlockType outerBlockType, innerBlockType;
+    private boolean half;
+    private Direction queueDirection;
 
     private Sphere(Builder builder, Level world, int x, int y, int z, int radius) {
         super(builder, world, x, y, z);
@@ -57,9 +59,9 @@ public class Sphere extends Base<Sphere> {
                     int y_pos = y + yc - radius;
                     if(y_pos >= y || !this.half) {
                         if(outerBlockType != null && distance > radius - 0.4 && distance < radius + 0.6) {
-                            Single.setup(builder, world, x + xc - radius, y + yc - radius, z + zc - radius).setBlock(outerBlockType).queue(this.priority,this.replace);
+                            queueSingle(outerBlockType, x + xc - radius, y + yc - radius, z + zc - radius);
                         } else if(innerBlockType != null && distance < radius - 0.3) {
-                            Single.setup(builder, world, x + xc - radius, y + yc - radius, z + zc - radius).setBlock(innerBlockType).queue(this.priority,this.replace);
+                            queueSingle(innerBlockType, x + xc - radius, y + yc - radius, z + zc - radius);
                         }
                     }
                 }
@@ -67,6 +69,12 @@ public class Sphere extends Base<Sphere> {
             if(this.queueDirection != null && this.queueDirection.equals(Direction.UP)) {
                 this.priority++;
             }
+        }
+    }
+
+    private void queueSingle(BlockType blockType, int x, int y, int z) {
+        if(blockType != null && ((blockType.isConditionalTorch() && InstantLightBlock.canPlaceTorch(world,new BlockPos(x,y,z))) || !blockType.isConditionalTorch())) {
+            Single.setup(builder,world,x,y,z).setBlock(blockType).queue(this.priority,this.replace);
         }
     }
 }

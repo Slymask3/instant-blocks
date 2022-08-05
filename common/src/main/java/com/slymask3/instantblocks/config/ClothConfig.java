@@ -139,6 +139,8 @@ public class ClothConfig implements ConfigData, IConfig {
     SectionLight light = new SectionLight();
     static class SectionLight {
         int RADIUS_LIGHT = Defaults.RADIUS_LIGHT;
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 15)
+        int LIGHT_MAX = Defaults.LIGHT_MAX;
     }
 
     @ConfigEntry.Category("blocks")
@@ -217,6 +219,7 @@ public class ClothConfig implements ConfigData, IConfig {
     public boolean ORIGINAL_INSTANT() { return general.ORIGINAL_INSTANT; }
     public int RADIUS_HARVEST() { return harvest.RADIUS_HARVEST; }
     public int RADIUS_LIGHT() { return light.RADIUS_LIGHT; }
+    public int LIGHT_MAX() { return light.LIGHT_MAX; }
     public int RAILS_AMOUNT() { return rail.RAILS_AMOUNT; }
     public int MINING_LADDER_LAYER() { return mining.MINING_LADDER_LAYER; }
     public int XP_AMOUNT() { return general.XP_AMOUNT; }

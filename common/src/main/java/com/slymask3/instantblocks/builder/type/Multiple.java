@@ -6,8 +6,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 
 public class Multiple extends Base<Multiple> {
-    final int x1, y1, z1;
-    final int x2, y2, z2;
+    private final int x1, y1, z1;
+    private final int x2, y2, z2;
 
     private Multiple(Builder builder, Level world, int x, int y, int z, int x1, int y1, int z1, int x2, int y2, int z2) {
         super(builder, world, x, y, z);

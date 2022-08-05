@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockType {
-    enum Type { BLOCK, COLOR, STONE, CHEST }
+    private enum Type { BLOCK, COLOR, STONE, CHEST, CONDITIONAL_TORCH }
 
-    final Type type;
-    final BlockState state;
-    int color;
-    boolean isDoubleChest;
-    List<ItemStack> containerItems;
+    private final Type type;
+    private final BlockState state;
+    private int color;
+    private boolean isDoubleChest;
+    private List<ItemStack> containerItems;
 
     private BlockType(Type type, BlockState state) {
         this.type = type;
@@ -68,6 +68,10 @@ public class BlockType {
         return setup(Type.CHEST, Blocks.CHEST.defaultBlockState()).setContainer(isDoubleChest, itemStacks);
     }
 
+    public static BlockType conditionalTorch() {
+        return setup(Type.CONDITIONAL_TORCH, Blocks.AIR.defaultBlockState());
+    }
+
     public Type getType() {
         return this.type;
     }
@@ -78,6 +82,10 @@ public class BlockType {
 
     public boolean isChest() {
         return this.type == Type.CHEST;
+    }
+
+    public boolean isConditionalTorch() {
+        return this.type == Type.CONDITIONAL_TORCH;
     }
 
     public boolean isDoubleChest() {

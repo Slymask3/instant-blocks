@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class ColorBlock extends Block implements EntityBlock {
-    public static final Block blockType = Blocks.WHITE_WOOL;
+    private static final Block blockType = Blocks.WHITE_WOOL;
 
     public ColorBlock() {
         super(Properties.of(blockType.defaultBlockState().getMaterial())

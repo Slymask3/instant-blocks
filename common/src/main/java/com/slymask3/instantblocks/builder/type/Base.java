@@ -13,14 +13,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.awt.image.BufferedImage;
 
 public abstract class Base<T extends Base<T>> {
-    final Builder builder;
+    protected final Builder builder;
     public int priority;
-    public boolean replace;
-    final Level world;
+    protected boolean replace;
+    protected final Level world;
     public int x, y, z;
-    BlockType blockType;
-    Direction direction;
-    final int flag;
+    protected BlockType blockType;
+    protected Direction direction;
+    protected final int flag;
 
     public Base(Builder builder, Level world, int x, int y, int z) {
         this.builder = builder;

@@ -11,16 +11,17 @@ import net.minecraft.world.level.Level;
 import java.util.*;
 
 public class Builder {
-	public enum Status { SETUP, BUILD, DONE }
+	private enum Status { SETUP, BUILD, DONE }
 
-	public HashMap<BlockPos,Single> queueMap;
-	public List<Single> queue;
-	public Status status;
-	public int speed;
-	public int ticks;
-	Direction priorityDirection;
-	BlockPos originPos;
-	boolean fromOrigin;
+	private final HashMap<BlockPos,Single> queueMap;
+	private final List<Single> queue;
+	private Status status;
+	private final int speed;
+	private int ticks;
+	private final Direction priorityDirection;
+	private BlockPos originPos;
+	private boolean fromOrigin;
+	private int distanceMultiplier;
 
 	public Builder() {
 		this(1);
@@ -40,11 +41,17 @@ public class Builder {
 		this.priorityDirection = priorityDirection;
 		this.originPos = null;
 		this.fromOrigin = true;
+		this.distanceMultiplier = 1;
 	}
 
 	public Builder setOrigin(BlockPos pos, boolean fromOrigin) {
+		return this.setOrigin(pos,fromOrigin,1);
+	}
+
+	public Builder setOrigin(BlockPos pos, boolean fromOrigin, int distanceMultiplier) {
 		this.originPos = pos;
 		this.fromOrigin = fromOrigin;
+		this.distanceMultiplier = distanceMultiplier;
 		return this;
 	}
 
@@ -57,14 +64,11 @@ public class Builder {
 				Level world = first.getLevel();
 				BlockPos firstBlockPos = first.getBlockPos();
 				int priority = first.priority;
-				buildSounds.add(first.getBuildSound());
-				first.build();
-				queue.remove(0);
+				this.handle(buildSounds);
 				while(!queue.isEmpty() && queue.get(0).priority == priority) {
-					buildSounds.add(queue.get(0).getBuildSound());
-					queue.get(0).build();
-					queue.remove(0);
+					this.handle(buildSounds);
 				}
+				Common.LOG.info("buildSounds.size(): {}", buildSounds.size());
 				if(!buildSounds.isEmpty()) {
 					Common.NETWORK.sendToAllAround(world,firstBlockPos,new SoundPacket(buildSounds));
 				}
@@ -74,6 +78,18 @@ public class Builder {
 				this.ticks = 0;
 			}
 		}
+	}
+
+	private void handle(List<Helper.BuildSound> buildSounds) {
+		if(queue.get(0).getBlockType().isConditionalTorch()) {
+			queue.get(0).build();
+			buildSounds.add(queue.get(0).getBuildSound());
+			queue.remove(0);
+			return;
+		}
+		buildSounds.add(queue.get(0).getBuildSound());
+		queue.get(0).build();
+		queue.remove(0);
 	}
 
 	public void queue(Single single, boolean replace) {
@@ -96,44 +112,29 @@ public class Builder {
 		for(Map.Entry<BlockPos,Single> set : this.queueMap.entrySet()) {
 			this.queue.add(set.getValue());
 		}
+		this.queueMap.clear();
 
 		if(this.priorityDirection != null) {
-			if(this.priorityDirection.equals(Direction.UP)) {
-				for(Single single : this.queue) {
-					single.priority = single.y;
-				}
-			} else if(this.priorityDirection.equals(Direction.DOWN)) {
-				for(Single single : this.queue) {
-					single.priority = -single.y;
-				}
-			} else if(this.priorityDirection.equals(Direction.NORTH)) {
-				for(Single single : this.queue) {
-					single.priority = -single.z;
-				}
-			} else if(this.priorityDirection.equals(Direction.SOUTH)) {
-				for(Single single : this.queue) {
-					single.priority = single.z;
-				}
-			} else if(this.priorityDirection.equals(Direction.WEST)) {
-				for(Single single : this.queue) {
-					single.priority = -single.x;
-				}
-			} else if(this.priorityDirection.equals(Direction.EAST)) {
-				for(Single single : this.queue) {
-					single.priority = single.x;
-				}
+			for(Single single : this.queue) {
+				single.priority = switch(this.priorityDirection) {
+					case UP -> single.y;
+					case DOWN -> -single.y;
+					case NORTH -> -single.z;
+					case SOUTH -> single.z;
+					case WEST -> -single.x;
+					case EAST -> single.x;
+				};
 			}
 		}
 
 		if(this.originPos != null) {
 			for(Single single : this.queue) {
-				int distance = (int)Math.floor(Helper.getDistanceBetween(this.originPos,single.getBlockPos()) * 1);
+				int distance = (int)Math.floor(Helper.getDistanceBetween(this.originPos,single.getBlockPos()) * this.distanceMultiplier);
 				single.priority = this.fromOrigin ? distance : -distance;
 			}
 		}
 
 		this.queue.sort(Comparator.comparingInt(one -> one.priority));
-		this.queueMap.clear();
 		Common.LOG.info("sort(): " + Common.Timer.end());
 
 		this.status = Status.BUILD;
