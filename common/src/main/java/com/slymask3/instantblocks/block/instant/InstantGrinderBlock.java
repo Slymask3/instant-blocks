@@ -52,7 +52,7 @@ public class InstantGrinderBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder(5);
+		Builder builder = Builder.setup(world,x,y,z).setSpeed(5);
 
 		Block water = Blocks.WATER;
 		Block torch = Blocks.WALL_TORCH;

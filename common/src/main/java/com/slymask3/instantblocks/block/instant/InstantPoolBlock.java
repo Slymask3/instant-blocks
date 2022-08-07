@@ -33,7 +33,7 @@ public class InstantPoolBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder(5);
+		Builder builder = Builder.setup(world,x,y,z).setSpeed(5);
 
 		BlockState stone = Blocks.SMOOTH_STONE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.DOUBLE);
 		Block water = Blocks.WATER;

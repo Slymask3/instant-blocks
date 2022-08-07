@@ -36,7 +36,7 @@ public class InstantFarmBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder(5);
+		Builder builder = Builder.setup(world,x,y,z).setSpeed(5);
 
 		ArrayList<Helper.WeightedBlock> blocks = new ArrayList<>();
 		blocks.add(new Helper.WeightedBlock(Blocks.WHEAT, Common.CONFIG.WEIGHT_WHEAT()));

@@ -135,7 +135,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = (new Builder()).setOrigin(new BlockPos(x,y,z), !this.isSuction());
+		Builder builder = Builder.setup(world,x,y,z).setOrigin(isSuction() ? Builder.Origin.TO : Builder.Origin.FROM);
 		for(BlockPos pos : posList) {
 			BlockState state = world.getBlockState(pos);
 			if(isSuction() && state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED)) {

@@ -32,7 +32,7 @@ public class InstantHouseWoodBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder(5);
+		Builder builder = Builder.setup(world,x,y,z).setSpeed(5);
 
 		String planks_one = Common.CONFIG.HOUSE_PLANKS_ONE();
 		String planks_two = Common.CONFIG.HOUSE_PLANKS_TWO();

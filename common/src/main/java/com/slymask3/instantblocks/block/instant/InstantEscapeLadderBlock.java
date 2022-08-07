@@ -53,7 +53,7 @@ public class InstantEscapeLadderBlock extends InstantBlock implements SimpleWate
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder(1, Direction.UP);
+		Builder builder = Builder.setup(world,x,y,z).setDirection(Direction.UP);
 
 		Block ladder = Blocks.LADDER;
 		Block torch = Blocks.TORCH;

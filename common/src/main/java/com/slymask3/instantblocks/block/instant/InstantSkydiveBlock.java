@@ -51,7 +51,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder();
+		Builder builder = Builder.setup(world,x,y,z);
 
 		SkydiveBlockEntity blockEntity = (SkydiveBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
 		int[] selectedColors = blockEntity.colorCode;

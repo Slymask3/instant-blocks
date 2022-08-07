@@ -180,7 +180,7 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder(2, Direction.UP);
+		Builder builder = Builder.setup(world,x,y,z).setSpeed(2).setDirection(Direction.UP);
 		
 		StatueBlockEntity blockEntity = (StatueBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);

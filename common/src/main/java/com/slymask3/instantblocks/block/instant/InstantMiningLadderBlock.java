@@ -42,7 +42,7 @@ public class InstantMiningLadderBlock extends InstantBlock {
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 
-		Builder builder = new Builder(2, direction.getCounterClockWise());
+		Builder builder = Builder.setup(world,x,y,z).setSpeed(2).setDirection(direction.getCounterClockWise());
 
 		Block ladder = Blocks.LADDER;
 		Block torch = Blocks.TORCH;

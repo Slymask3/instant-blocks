@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks;
 
+import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.config.ClothConfig;
 import com.slymask3.instantblocks.config.ForgeConfig;
 import com.slymask3.instantblocks.core.ModBlocks;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -49,6 +51,8 @@ public class InstantBlocks {
 		modEventBus.addListener(this::setupCommon);
 		modEventBus.addListener(this::setupRegistry);
 		MinecraftForge.EVENT_BUS.register(this);
+
+		MinecraftForge.EVENT_BUS.addListener(this::onBlockBreak);
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
@@ -65,6 +69,12 @@ public class InstantBlocks {
 			} else if(event.getForgeRegistry().getRegistryKey().equals(Registry.BLOCK_ENTITY_TYPE_REGISTRY)) {
 				Registration.registerTiles(new ForgeRegistryHelper<>(event.getForgeRegistry()));
 			}
+		}
+	}
+
+	private void onBlockBreak(final BlockEvent.BreakEvent event) {
+		if(Builder.inProgress(event.getLevel(),event.getPos())) {
+			event.setCanceled(true);
 		}
 	}
 

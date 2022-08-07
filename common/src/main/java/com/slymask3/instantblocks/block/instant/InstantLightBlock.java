@@ -49,7 +49,7 @@ public class InstantLightBlock extends InstantBlock {
     }
     
     public boolean build(Level world, int x, int y, int z, Player player) {
-        Builder builder = (new Builder()).setOrigin(new BlockPos(x,y,z),true,10);
+        Builder builder = Builder.setup(world,x,y,z).setOrigin(Builder.Origin.FROM,10);
         Single.setup(builder,world,x,y,z).setBlock(Blocks.AIR).queue();
         Sphere.setup(builder,world,x,y,z,Common.CONFIG.RADIUS_LIGHT()).setBlock(BlockType.conditionalTorch()).queue();
         builder.build();

@@ -42,7 +42,7 @@ public class InstantRailBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder();
+		Builder builder = Builder.setup(world,x,y,z);
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
     	for(int i = 0; i<= Common.CONFIG.RAILS_AMOUNT(); i++) {
 			Single.setup(builder,world,x,y-1,z).offset(direction,i,0,0,0).setStone().queue(i);

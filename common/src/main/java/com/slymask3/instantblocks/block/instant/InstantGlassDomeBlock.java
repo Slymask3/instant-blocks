@@ -64,7 +64,7 @@ public class InstantGlassDomeBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
-		Builder builder = new Builder(2);
+		Builder builder = Builder.setup(world,x,y,z).setSpeed(2);
 
 		Block glass = Blocks.GLASS;
 		Block torch = Blocks.TORCH;

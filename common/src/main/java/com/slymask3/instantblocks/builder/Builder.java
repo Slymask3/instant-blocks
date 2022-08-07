@@ -1,55 +1,70 @@
 package com.slymask3.instantblocks.builder;
 
 import com.slymask3.instantblocks.Common;
+import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.network.packet.SoundPacket;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 
 import java.util.*;
 
 public class Builder {
 	private enum Status { SETUP, BUILD, DONE }
+	public enum Origin { FROM, TO }
 
 	private final HashMap<BlockPos,Single> queueMap;
 	private final List<Single> queue;
+	private final Level world;
+	private final BlockPos originPos;
 	private Status status;
-	private final int speed;
+	private int speed;
 	private int ticks;
-	private final Direction priorityDirection;
-	private BlockPos originPos;
-	private boolean fromOrigin;
+	private Direction priorityDirection;
+	private Origin originType;
 	private int distanceMultiplier;
 
-	public Builder() {
-		this(1);
-	}
-
-	public Builder(int speed) {
-		this(speed, null);
-	}
-
-	public Builder(int speed, Direction priorityDirection) {
+	private Builder(Level world, BlockPos pos) {
 		this.queueMap = new HashMap<>();
 		this.queue = new ArrayList<>();
+		this.world = world;
+		this.originPos = pos;
 		this.status = Status.SETUP;
-		this.speed = speed;
-		this.ticks = speed - 1;
-		this.priorityDirection = priorityDirection;
-		this.originPos = null;
-		this.fromOrigin = true;
+		this.speed = 1;
+		this.ticks = 0;
+		this.priorityDirection = null;
+		this.originType = null;
 		this.distanceMultiplier = 1;
 	}
 
-	public Builder setOrigin(BlockPos pos, boolean fromOrigin) {
-		return this.setOrigin(pos,fromOrigin,1);
+	public static Builder setup(Level world, BlockPos pos) {
+		return new Builder(world,pos);
 	}
 
-	public Builder setOrigin(BlockPos pos, boolean fromOrigin, int distanceMultiplier) {
-		this.originPos = pos;
-		this.fromOrigin = fromOrigin;
+	public static Builder setup(Level world, int x, int y, int z) {
+		return new Builder(world, new BlockPos(x,y,z));
+	}
+
+	public Builder setSpeed(int speed) {
+		this.speed = speed;
+		this.ticks = speed - 1;
+		return this;
+	}
+
+	public Builder setDirection(Direction direction) {
+		this.priorityDirection = direction;
+		return this;
+	}
+
+	public Builder setOrigin(Origin originType) {
+		return this.setOrigin(originType,1);
+	}
+
+	public Builder setOrigin(Origin originType, int distanceMultiplier) {
+		this.originType = originType;
 		this.distanceMultiplier = distanceMultiplier;
 		return this;
 	}
@@ -122,10 +137,13 @@ public class Builder {
 			}
 		}
 
-		if(this.originPos != null) {
+		if(this.originType != null) {
 			for(Single single : this.queue) {
 				int distance = (int)Math.floor(Helper.getDistanceBetween(this.originPos,single.getBlockPos()) * this.distanceMultiplier);
-				single.priority = this.fromOrigin ? distance : -distance;
+				single.priority = switch(originType) {
+					case FROM -> distance;
+					case TO -> -distance;
+				};
 			}
 		}
 
@@ -147,5 +165,16 @@ public class Builder {
 				}
 			}
 		}
+	}
+
+	public static boolean inProgress(LevelAccessor world, BlockPos pos) {
+		if(!builders.isEmpty()) {
+			for(Builder builder : builders) {
+				if(builder.status.equals(Status.BUILD) && builder.world.equals(world) && builder.originPos.equals(pos) && world.getBlockState(pos).getBlock() instanceof InstantBlock) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
