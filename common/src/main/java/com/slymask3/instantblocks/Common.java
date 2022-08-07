@@ -22,14 +22,4 @@ public class Common {
         Helper.createDirectory(SCHEMATICS_DIR);
         Helper.createDirectory(STATUE_CACHE_DIR);
     }
-
-    public static class Timer {
-        private static long milliseconds;
-        public static void start() {
-            milliseconds = System.currentTimeMillis();
-        }
-        public static long end() {
-            return System.currentTimeMillis() - milliseconds;
-        }
-    }
 }

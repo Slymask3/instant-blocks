@@ -57,7 +57,7 @@ public class Multiple extends Base<Multiple> {
         for(int y_cur = y1; (y_dir ? y_cur >= y2 : y_cur <= y2); y_cur = y_cur + (y_dir ? -1 : 1)) {
             for(int z_cur = z1; (z_dir ? z_cur >= z2 : z_cur <= z2); z_cur = z_cur + (z_dir ? -1 : 1)) {
                 for(int x_cur = x1; (x_dir ? x_cur >= x2 : x_cur <= x2); x_cur = x_cur + (x_dir ? -1 : 1)) {
-                    Single.setup(builder, world, x_cur, y_cur, z_cur).setBlock(blockType).setDirection(direction).queue(this.priority);
+                    Single.setup(builder, world, x_cur, y_cur, z_cur).setBlock(blockType).setDirection(direction).queue(this.priority,this.replace);
                 }
             }
         }

@@ -22,6 +22,7 @@ public class ForgePacketHandler {
     public static void register() {
         int index = 100;
         INSTANCE.registerMessage(++index, MessagePacket.class, (MessagePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), MessagePacket::decode, Handler::client);
+        INSTANCE.registerMessage(++index, ParticlePacket.class, (ParticlePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), ParticlePacket::decode, Handler::client);
         INSTANCE.registerMessage(++index, SoundPacket.class, (SoundPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SoundPacket::decode, Handler::client);
         INSTANCE.registerMessage(++index, SkydivePacket.class, (SkydivePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydivePacket::decode, Handler::common);
         INSTANCE.registerMessage(++index, StatuePacket.class, (StatuePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), StatuePacket::decode, Handler::common);

@@ -134,7 +134,7 @@ public class Single extends Base<Single> {
                         entity.color = blockType.getColor();
                     }
                 } catch (Exception e) {
-                    Common.LOG.info(e.getMessage());
+                    Common.LOG.error(e.getMessage());
                 }
             } else if(blockType.isChest()) {
                 ChestBlockEntity blockEntity = (ChestBlockEntity)world.getBlockEntity(this.getBlockPos());

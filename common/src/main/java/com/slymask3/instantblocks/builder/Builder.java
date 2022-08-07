@@ -32,7 +32,6 @@ public class Builder {
 	}
 
 	public Builder(int speed, Direction priorityDirection) {
-		Common.Timer.start();
 		this.queueMap = new HashMap<>();
 		this.queue = new ArrayList<>();
 		this.status = Status.SETUP;
@@ -68,7 +67,6 @@ public class Builder {
 				while(!queue.isEmpty() && queue.get(0).priority == priority) {
 					this.handle(buildSounds);
 				}
-				Common.LOG.info("buildSounds.size(): {}", buildSounds.size());
 				if(!buildSounds.isEmpty()) {
 					Common.NETWORK.sendToAllAround(world,firstBlockPos,new SoundPacket(buildSounds));
 				}
@@ -106,9 +104,6 @@ public class Builder {
 	}
 
 	public void build() {
-		Common.LOG.info("build(): " + Common.Timer.end());
-
-		Common.Timer.start();
 		for(Map.Entry<BlockPos,Single> set : this.queueMap.entrySet()) {
 			this.queue.add(set.getValue());
 		}
@@ -135,7 +130,6 @@ public class Builder {
 		}
 
 		this.queue.sort(Comparator.comparingInt(one -> one.priority));
-		Common.LOG.info("sort(): " + Common.Timer.end());
 
 		this.status = Status.BUILD;
 		builders.add(this);

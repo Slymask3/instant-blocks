@@ -24,7 +24,7 @@ public class SchematicHelper {
 			fis.close();
 			return new Schematic(tag);
 		} catch(Exception e) {
-			Common.LOG.info("Failed to read schematic: " + e.getMessage());
+			Common.LOG.error("Failed to read schematic: " + e.getMessage());
 		}
 		return null;
 	}

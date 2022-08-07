@@ -152,7 +152,9 @@ public abstract class InstantBlock extends Block {
 	}
 
 	public void openScreen(Player player, BlockPos pos) {
-		ClientHelper.showScreen(this.screen,player,player.getLevel(),pos);
+		if(Helper.isClient(player.getLevel())) {
+			ClientHelper.showScreen(this.screen,player,player.getLevel(),pos);
+		}
 	}
 
 	public InteractionResult activate(Level world, BlockPos pos, Player player) {

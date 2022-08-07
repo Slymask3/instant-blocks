@@ -1,22 +1,23 @@
-# Minecraft 1.19.1 Changelog
+# Minecraft 1.19.2 Changelog
 
 ## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.3...HEAD)
 ### Added
-- Optional cloth config support for forge
+- Generate through a priority queue system
+- Play block break/place sounds when generating
 - Presets for instant skydive
-- Queue support for builder
-- Play block sounds when generating
 - Cache for instant statue skins
-- Waterlogging support for instant liquid blocks
+- Optional cloth config support for forge
 
 ### Changed
 - Allow configuring huge trees list
 - Place torches based on light level (configurable)
+- Instant water and suction now work with waterlogged blocks
 
 ### Fixed
 - Show particles and play sounds for all players around
 - Cross collision block placement
 - Height limit in the nether for instant skydive
+- Block break speeds for correct tools
 
 ---
 
