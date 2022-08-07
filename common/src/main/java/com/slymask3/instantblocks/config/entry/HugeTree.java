@@ -35,6 +35,10 @@ public class HugeTree {
         this.leaves = leaves;
     }
 
+    public static HugeTree empty() {
+        return new HugeTree("",Type.OAK,"","");
+    }
+
     public Block getLogs() {
         return Helper.readBlock(this.logs,Blocks.OAK_LOG);
     }

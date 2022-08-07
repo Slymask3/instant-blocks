@@ -10,9 +10,9 @@ import net.minecraft.world.level.material.Material;
 
 public class InstantSuctionBlock extends InstantLiquidBlock {
     public InstantSuctionBlock() {
-        super(Block.Properties.of(Material.STONE)
+        super(Block.Properties.of(Material.METAL)
                 .strength(1.5F)
-                .sound(SoundType.STONE)
+                .sound(SoundType.METAL)
         , null, Blocks.AIR);
         this.setErrorMessage(Strings.ERROR_SUCTION);
         this.setCreateMessages(Strings.CREATE_SUCTION,Strings.CREATE_SUCTION_1);

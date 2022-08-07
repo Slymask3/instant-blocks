@@ -74,7 +74,7 @@ public class TreeScreen extends InstantScreen {
     }
 
 	private HugeTree getSelectedHugeTree() {
-		return this.hugeTreesIndex >= 0 && this.hugeTreesIndex < this.hugeTrees.size() ? this.hugeTrees.get(this.hugeTreesIndex) : null;
+		return this.hugeTreesIndex >= 0 && this.hugeTreesIndex < this.hugeTrees.size() ? this.hugeTrees.get(this.hugeTreesIndex) : HugeTree.empty();
 	}
 
 	class TreeList extends SelectionList<TreeList.Entry> {

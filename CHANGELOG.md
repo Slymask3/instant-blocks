@@ -18,6 +18,7 @@
 - Cross collision block placement
 - Height limit in the nether for instant skydive
 - Block break speeds for correct tools
+- Instant water and lava blocks breaking in liquid
 
 ---
 
