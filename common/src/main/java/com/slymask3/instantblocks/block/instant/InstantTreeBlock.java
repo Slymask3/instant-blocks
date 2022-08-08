@@ -5,7 +5,7 @@ import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.TreeBlockEntity;
 import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.builder.type.Multiple;
-import com.slymask3.instantblocks.network.packet.TreeUpdatePacket;
+import com.slymask3.instantblocks.network.packet.client.TreeUpdatePacket;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;

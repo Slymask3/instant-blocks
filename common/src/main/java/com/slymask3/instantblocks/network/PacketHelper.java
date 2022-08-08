@@ -3,6 +3,8 @@ package com.slymask3.instantblocks.network;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.*;
 import com.slymask3.instantblocks.network.packet.*;
+import com.slymask3.instantblocks.network.packet.client.*;
+import com.slymask3.instantblocks.network.packet.server.*;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import com.slymask3.instantblocks.util.SchematicHelper;

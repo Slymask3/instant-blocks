@@ -5,7 +5,7 @@ import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.entity.SkydiveBlockEntity;
 import com.slymask3.instantblocks.config.entry.ColorSet;
 import com.slymask3.instantblocks.gui.components.ColorEditBox;
-import com.slymask3.instantblocks.network.packet.SkydivePacket;
+import com.slymask3.instantblocks.network.packet.server.SkydivePacket;
 import com.slymask3.instantblocks.util.ClientHelper;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Checkbox;

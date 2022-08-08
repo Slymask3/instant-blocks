@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
 import com.slymask3.instantblocks.gui.components.SelectionList;
-import com.slymask3.instantblocks.network.packet.SchematicPacket;
+import com.slymask3.instantblocks.network.packet.server.SchematicPacket;
 import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.Util;
 import net.minecraft.client.gui.components.Button;

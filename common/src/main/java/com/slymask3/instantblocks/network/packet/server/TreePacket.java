@@ -1,7 +1,9 @@
-package com.slymask3.instantblocks.network.packet;
+package com.slymask3.instantblocks.network.packet.server;
 
 import com.slymask3.instantblocks.config.entry.HugeTree;
 import com.slymask3.instantblocks.network.PacketHelper;
+import com.slymask3.instantblocks.network.packet.AbstractPacket;
+import com.slymask3.instantblocks.network.packet.InstantPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 

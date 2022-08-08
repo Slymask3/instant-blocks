@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.network;
 
-import com.slymask3.instantblocks.network.packet.*;
+import com.slymask3.instantblocks.network.packet.client.*;
+import com.slymask3.instantblocks.network.packet.server.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;

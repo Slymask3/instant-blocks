@@ -1,6 +1,7 @@
-package com.slymask3.instantblocks.network.packet;
+package com.slymask3.instantblocks.network.packet.client;
 
 import com.slymask3.instantblocks.network.PacketHelper;
+import com.slymask3.instantblocks.network.packet.AbstractPacket;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;

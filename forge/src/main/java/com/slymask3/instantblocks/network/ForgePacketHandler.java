@@ -2,6 +2,8 @@ package com.slymask3.instantblocks.network;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.network.packet.*;
+import com.slymask3.instantblocks.network.packet.client.*;
+import com.slymask3.instantblocks.network.packet.server.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;

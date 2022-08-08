@@ -5,7 +5,7 @@ import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
 import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.builder.type.Single;
-import com.slymask3.instantblocks.network.packet.SchematicUpdatePacket;
+import com.slymask3.instantblocks.network.packet.client.SchematicUpdatePacket;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;

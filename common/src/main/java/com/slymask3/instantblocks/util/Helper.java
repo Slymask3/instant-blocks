@@ -2,9 +2,9 @@ package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.item.InstantWandItem;
-import com.slymask3.instantblocks.network.packet.MessagePacket;
-import com.slymask3.instantblocks.network.packet.ParticlePacket;
-import com.slymask3.instantblocks.network.packet.SoundPacket;
+import com.slymask3.instantblocks.network.packet.client.MessagePacket;
+import com.slymask3.instantblocks.network.packet.client.ParticlePacket;
+import com.slymask3.instantblocks.network.packet.client.SoundPacket;
 import com.slymask3.instantblocks.reference.Names;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;

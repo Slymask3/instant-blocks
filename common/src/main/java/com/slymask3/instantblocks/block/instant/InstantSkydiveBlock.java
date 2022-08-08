@@ -8,7 +8,7 @@ import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.builder.type.Circle;
 import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.core.ModBlocks;
-import com.slymask3.instantblocks.network.packet.SkydiveUpdatePacket;
+import com.slymask3.instantblocks.network.packet.client.SkydiveUpdatePacket;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.ColorHelper;

@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.builder;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.builder.type.Single;
-import com.slymask3.instantblocks.network.packet.SoundPacket;
+import com.slymask3.instantblocks.network.packet.client.SoundPacket;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

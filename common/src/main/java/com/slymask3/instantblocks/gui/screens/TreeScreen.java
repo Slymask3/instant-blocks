@@ -5,7 +5,7 @@ import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.entity.TreeBlockEntity;
 import com.slymask3.instantblocks.config.entry.HugeTree;
 import com.slymask3.instantblocks.gui.components.SelectionList;
-import com.slymask3.instantblocks.network.packet.TreePacket;
+import com.slymask3.instantblocks.network.packet.server.TreePacket;
 import com.slymask3.instantblocks.util.ClientHelper;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.ObjectSelectionList;

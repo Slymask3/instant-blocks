@@ -1,6 +1,7 @@
-package com.slymask3.instantblocks.network.packet;
+package com.slymask3.instantblocks.network.packet.client;
 
 import com.slymask3.instantblocks.network.PacketHelper;
+import com.slymask3.instantblocks.network.packet.AbstractPacket;
 import net.minecraft.network.FriendlyByteBuf;
 
 public class MessagePacket extends AbstractPacket {
