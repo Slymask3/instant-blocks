@@ -3,9 +3,13 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SkydiveBlockEntity;
+import com.slymask3.instantblocks.builder.BlockType;
+import com.slymask3.instantblocks.builder.Builder;
+import com.slymask3.instantblocks.builder.type.Circle;
+import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.core.ModBlocks;
+import com.slymask3.instantblocks.network.packet.client.SkydiveUpdatePacket;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.ColorHelper;
 import com.slymask3.instantblocks.util.Helper;
@@ -37,12 +41,18 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 		return Common.CONFIG.ENABLE_SKYDIVE();
 	}
 
+	public void openScreen(Player player, BlockPos pos) {
+		Common.NETWORK.sendToClient(player, new SkydiveUpdatePacket(Common.CONFIG.SKYDIVE_PRESETS(),pos));
+	}
+
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new SkydiveBlockEntity(pos,state);
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
+		Builder builder = Builder.setup(world,x,y,z);
+
 		SkydiveBlockEntity blockEntity = (SkydiveBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
 		int[] selectedColors = blockEntity.colorCode;
 		int radius = blockEntity.radius;
@@ -54,7 +64,7 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 
 		Direction direction = world.getBlockState(new BlockPos(x,y,z)).getValue(FACING);
 
-		Builder.Single.setup(world,x,y,z).setBlock(Blocks.AIR).build();
+		Single.setup(builder,world,x,y,z).setBlock(Blocks.AIR).build();
 
 		Color[] colors;
 		int index = 0;
@@ -79,30 +89,45 @@ public class InstantSkydiveBlock extends InstantBlock implements EntityBlock {
 			colors[index] = ColorHelper.getColorBetween(base,after,10,90); index++;
 		}
 
-		int i = 0;
+		int colorIndex = 0;
+		int queueCount = 0;
+		int queue = 0;
 		int min = Helper.getMinSkydive(world);
 		int max = Helper.getMaxSkydive(world);
 		int water = Common.CONFIG.SKYDIVE_WATER();
 		for(int c=max; c>=min; c--) {
-			if(i>=colors.length) {
-				i = 0;
+			if(colorIndex >= colors.length) {
+				colorIndex = 0;
 			}
-			int color = colors[i].getRGB();
+			int color = colors[colorIndex].getRGB();
 			if(c == min) {
-				Builder.Circle.setup(world,x,c,z,radius).setBlock(Builder.BlockType.color(color)).build();
+				Circle.setup(builder,world,x,c,z,radius).setBlock(BlockType.color(color)).queue(queue);
 			} else if(c < min+water+1) {
-				Builder.Circle.setup(world,x,c,z,radius).setInner(Builder.BlockType.block(Blocks.WATER)).setOuter(Builder.BlockType.color(color)).build();
+				Circle.setup(builder,world,x,c,z,radius).setInner(BlockType.block(Blocks.WATER)).setOuter(BlockType.color(color)).queue(queue);
 			} else {
-				Builder.Circle.setup(world,x,c,z,radius).setInner(Builder.BlockType.block(Blocks.AIR)).setOuter(Builder.BlockType.color(color)).build();
+				Circle.setup(builder,world,x,c,z,radius).setInner(BlockType.block(Blocks.AIR)).setOuter(BlockType.color(color)).queue(queue);
 			}
 			if(c == min+water+1) {
-				Builder.Single.setup(world,x+radius,c,z).setBlock(Builder.BlockType.color(color,ModBlocks.SKYDIVE_TP)).build();
-				Builder.Single.setup(world,x-radius,c,z).setBlock(Builder.BlockType.color(color,ModBlocks.SKYDIVE_TP)).build();
-				Builder.Single.setup(world,x,c,z+radius).setBlock(Builder.BlockType.color(color,ModBlocks.SKYDIVE_TP)).build();
-				Builder.Single.setup(world,x,c,z-radius).setBlock(Builder.BlockType.color(color,ModBlocks.SKYDIVE_TP)).build();
+				Single.setup(builder,world,x+radius,c,z).setBlock(BlockType.color(color,ModBlocks.SKYDIVE_TP)).queue(queue);
+				Single.setup(builder,world,x-radius,c,z).setBlock(BlockType.color(color,ModBlocks.SKYDIVE_TP)).queue(queue);
+				Single.setup(builder,world,x,c,z+radius).setBlock(BlockType.color(color,ModBlocks.SKYDIVE_TP)).queue(queue);
+				Single.setup(builder,world,x,c,z-radius).setBlock(BlockType.color(color,ModBlocks.SKYDIVE_TP)).queue(queue);
 			}
-			i++;
+			colorIndex++;
+			queueCount++;
+			if(queueCount == 3) {
+				queue++;
+				queueCount = 0;
+			}
 		}
+
+		if(Helper.isNether(world)) {
+			for(int i=max; i < max+4; ++i) {
+				Circle.setup(builder,world,x,i,z,radius).setBlock(BlockType.block(Blocks.AIR)).queue();
+			}
+		}
+
+		builder.build();
 
 		if(blockEntity.teleport) {
 			if(direction == Direction.SOUTH) {

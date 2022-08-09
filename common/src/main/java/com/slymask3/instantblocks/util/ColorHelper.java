@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks.util;
 
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -44,58 +45,7 @@ public class ColorHelper {
 	}
 	
 	public static Color getColorAt(BufferedImage img, int x, int y) {
-		int rgb = img.getRGB(x, y);
-        int red = (rgb & 0x00ff0000) >> 16;
-        int green = (rgb & 0x0000ff00) >> 8;
-        int blue = rgb & 0x000000ff;
-		return new Color(red,green,blue);
-	}
-
-	public static int hsvToRgb(int hue, float saturation, float value) {
-		// Source: en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB#From_HSV
-		hue %= 360;
-		float s = saturation / 100;
-		float v = value / 100;
-		float c = v * s;
-		float h = (float) hue / 60;
-		float x = c * (1 - Math.abs(h % 2 - 1));
-		float r, g, b;
-		switch (hue / 60) {
-			case 0:
-				r = c;
-				g = x;
-				b = 0;
-				break;
-			case 1:
-				r = x;
-				g = c;
-				b = 0;
-				break;
-			case 2:
-				r = 0;
-				g = c;
-				b = x;
-				break;
-			case 3:
-				r = 0;
-				g = x;
-				b = c;
-				break;
-			case 4:
-				r = x;
-				g = 0;
-				b = c;
-				break;
-			case 5:
-				r = c;
-				g = 0;
-				b = x;
-				break;
-			default:
-				return 0;
-		}
-		float m = v - c;
-		return ((int) ((r + m) * 255) << 16) | ((int) ((g + m) * 255) << 8) | ((int) ((b + m) * 255));
+		return new Color(img.getRGB(x,y));
 	}
 
 	public static Color getColorBetween(Color one, Color two, int per1, int per2) {
@@ -106,70 +56,52 @@ public class ColorHelper {
 
 	public static Color generateRandomColor() {
 		Random rand = new Random();
-		int hue = rand.nextInt(360);
-		int color = hsvToRgb(hue,100F,100F);
+		int color = Mth.hsvToRgb(rand.nextFloat(),rand.nextFloat(0.5F)+0.5F,rand.nextFloat(0.5F)+0.5F);
 		return new Color(color);
 	}
 
 	public static Color textToColor(String input) {
 		int color;
 		if(input.equalsIgnoreCase("red")) {
-			color = 0x00FF0000;
+			color = 0xFF0000;
 		} else if(input.equalsIgnoreCase("orange")) {
-			color = 0x00FF8000;
+			color = 0xFF8000;
 		} else if(input.equalsIgnoreCase("yellow")) {
-			color = 0x00FFFF00;
+			color = 0xFFFF00;
 		} else if(input.equalsIgnoreCase("lime")) {
-			color = 0x0080FF00;
+			color = 0x80FF00;
 		} else if(input.equalsIgnoreCase("green")) {
-			color = 0x0000FF00;
+			color = 0x00FF00;
 		} else if(input.equalsIgnoreCase("cyan")) {
-			color = 0x0000FFFF;
+			color = 0x00FFFF;
 		} else if(input.equalsIgnoreCase("light blue") || input.equalsIgnoreCase("lightblue")) {
-			color = 0x000080FF;
+			color = 0x0080FF;
 		} else if(input.equalsIgnoreCase("blue")) {
-			color = 0x000000FF;
+			color = 0x0000FF;
 		} else if(input.equalsIgnoreCase("purple")) {
-			color = 0x008000FF;
+			color = 0x8000FF;
 		} else if(input.equalsIgnoreCase("magenta")) {
-			color = 0x00FF00FF;
+			color = 0xFF00FF;
 		} else if(input.equalsIgnoreCase("pink")) {
-			color = 0x00FF0080;
+			color = 0xFF0080;
 		} else if(input.equalsIgnoreCase("white")) {
-			color = 0x00FFFFFF;
+			color = 0xFFFFFF;
 		} else if(input.equalsIgnoreCase("gray") || input.equalsIgnoreCase("grey")) {
-			color = 0x00808080;
+			color = 0x808080;
 		} else if(input.equalsIgnoreCase("light gray") || input.equalsIgnoreCase("lightgray") || input.equalsIgnoreCase("light grey") || input.equalsIgnoreCase("lightgrey")) {
-			color = 0x00C0C0C0;
+			color = 0xC0C0C0;
 		} else if(input.equalsIgnoreCase("brown")) {
-			color = 0x00663300;
+			color = 0x663300;
 		} else if(input.equalsIgnoreCase("black")) {
-			color = 0x00000000;
+			color = 0x000000;
 		} else {
 			try {
 				color = (int)Long.parseLong(input, 16);
 			} catch(Exception e) {
-				color = 0x00FFFFFF;
+				color = 0xA0A0A0;
 			}
 		}
 		return new Color(color);
-	}
-
-	public static String indexRainbowToString(int index) {
-		return switch (index) {
-			case 0 -> "red";
-			case 1 -> "orange";
-			case 2 -> "yellow";
-			case 3 -> "lime";
-			case 4 -> "green";
-			case 5 -> "cyan";
-			case 6 -> "light blue";
-			case 7 -> "blue";
-			case 8 -> "purple";
-			case 9 -> "magenta";
-			case 10 -> "pink";
-			default -> "white";
-		};
 	}
 
 	public static class VanillaColor {
@@ -178,13 +110,6 @@ public class ColorHelper {
 		private float value;
 		private final Color color;
 		private final Block block;
-		public VanillaColor(float hue, float saturation, float value, Block block) {
-			this.hue = hue;
-			this.saturation = saturation;
-			this.value = value;
-			this.color = Color.getHSBColor(hue,saturation,value);
-			this.block = block;
-		}
 		public VanillaColor(Color color, Block block) {
 			this.color = color;
 			this.block = block;
@@ -232,23 +157,23 @@ public class ColorHelper {
 			double h = -1, s = -1;
 
 			// if cmax and cmax are equal then h = 0
-			if (cmax == cmin)
+			if(cmax == cmin)
 				h = 0;
 
 				// if cmax equal r then compute h
-			else if (cmax == r)
+			else if(cmax == r)
 				h = (60 * ((g - b) / diff) + 360) % 360;
 
 				// if cmax equal g then compute h
-			else if (cmax == g)
+			else if(cmax == g)
 				h = (60 * ((b - r) / diff) + 120) % 360;
 
 				// if cmax equal b then compute h
-			else if (cmax == b)
+			else if(cmax == b)
 				h = (60 * ((r - g) / diff) + 240) % 360;
 
 			// if cmax equal zero
-			if (cmax == 0)
+			if(cmax == 0)
 				s = 0;
 			else
 				s = (diff / cmax) * 100;

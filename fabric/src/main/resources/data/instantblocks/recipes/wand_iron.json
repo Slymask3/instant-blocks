@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "MRM",
+    " S "
+  ],
+  "key": {
+    "M": {
+      "tag": "c:iron_ingots"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "instantblocks:wand_iron"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "instantblocks:instant_escape_ladder",
+    "instantblocks:instant_harvest",
+    "instantblocks:instant_schematic",
+    "instantblocks:instant_statue",
+    "instantblocks:instant_wood_house"
+  ]
+}

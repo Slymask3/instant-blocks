@@ -15,13 +15,16 @@ public class ForgeConfig implements IConfig {
 		public static BooleanValue TP_GRINDER;
 		public static BooleanValue KEEP_BLOCKS;
 		public static BooleanValue ALLOW_WATER_IN_NETHER;
+		public static BooleanValue ORIGINAL_INSTANT;
 		public static IntValue RADIUS_HARVEST;
 		public static IntValue RADIUS_LIGHT;
+		public static IntValue LIGHT_MAX;
 		public static IntValue RAILS_AMOUNT;
 		public static IntValue MINING_LADDER_LAYER;
 		public static IntValue XP_AMOUNT;
 		public static IntValue TREE_SIZE;
 		public static IntValue RADIUS_DOME;
+		public static IntValue STATUE_CACHE_TIME;
 
 		public static IntValue MAX_LIQUID;
 		public static IntValue MAX_FILL;
@@ -104,6 +107,10 @@ public class ForgeConfig implements IConfig {
 					.comment("Allow generating water in the nether.\nDefault: false")
 					.define("ALLOW_WATER_IN_NETHER", Defaults.ALLOW_WATER_IN_NETHER);
 
+			ORIGINAL_INSTANT = builder
+					.comment("Generate structures instantaneously without a queue.\nDefault: false")
+					.define("ORIGINAL_INSTANT", Defaults.ORIGINAL_INSTANT);
+
 			RADIUS_HARVEST = builder
 					.comment("Radius to harvest blocks around Instant Harvest.\nDefault: 25")
 					.defineInRange("RADIUS_HARVEST", Defaults.RADIUS_HARVEST,1,1000);
@@ -111,6 +118,10 @@ public class ForgeConfig implements IConfig {
 			RADIUS_LIGHT = builder
 					.comment("Radius to light up dark areas around Instant Light.\nDefault: 25")
 					.defineInRange("RADIUS_LIGHT", Defaults.RADIUS_LIGHT,1,1000);
+
+			LIGHT_MAX = builder
+					.comment("Maximum light level for placing a torch.\nDefault: 7")
+					.defineInRange("LIGHT_MAX", Defaults.RADIUS_LIGHT,0,15);
 
 			RAILS_AMOUNT = builder
 					.comment("Amount of rail blocks to create for Instant Rail.\nDefault: 37")
@@ -131,6 +142,10 @@ public class ForgeConfig implements IConfig {
 			RADIUS_DOME = builder
 					.comment("Glass dome radius.\nDefault: 4")
 					.defineInRange("RADIUS_DOME", Defaults.RADIUS_DOME,1,200);
+
+			STATUE_CACHE_TIME = builder
+					.comment("Statue skin cache time (minutes).\nDefault: 15")
+					.defineInRange("STATUE_CACHE_TIME", Defaults.STATUE_CACHE_TIME,1,240);
 
 			builder.pop();
 
@@ -444,13 +459,16 @@ public class ForgeConfig implements IConfig {
 	public boolean TP_GRINDER() { return Common.TP_GRINDER.get(); }
 	public boolean KEEP_BLOCKS() { return Common.KEEP_BLOCKS.get(); }
 	public boolean ALLOW_WATER_IN_NETHER() { return Common.ALLOW_WATER_IN_NETHER.get(); }
+	public boolean ORIGINAL_INSTANT() { return Common.ORIGINAL_INSTANT.get(); }
 	public int RADIUS_HARVEST() { return Common.RADIUS_HARVEST.get(); }
 	public int RADIUS_LIGHT() { return Common.RADIUS_LIGHT.get(); }
+	public int LIGHT_MAX() { return Common.LIGHT_MAX.get(); }
 	public int RAILS_AMOUNT() { return Common.RAILS_AMOUNT.get(); }
 	public int MINING_LADDER_LAYER() { return Common.MINING_LADDER_LAYER.get(); }
 	public int XP_AMOUNT() { return Common.XP_AMOUNT.get(); }
 	public int TREE_SIZE() { return Common.TREE_SIZE.get(); }
 	public int RADIUS_DOME() { return Common.RADIUS_DOME.get(); }
+	public int STATUE_CACHE_TIME() { return Common.STATUE_CACHE_TIME.get(); }
 	public int MAX_LIQUID() { return Common.MAX_LIQUID.get(); }
 	public int MAX_FILL() { return Common.MAX_FILL.get(); }
 	public boolean SIMPLE_LIQUID() { return Common.SIMPLE_LIQUID.get(); }

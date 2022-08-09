@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "WDW",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:wool"
+    },
+    "D": {
+      "tag": "c:diamonds"
+    }
+  },
+  "result": {
+    "item": "instantblocks:instant_skydive"
+  }
+}

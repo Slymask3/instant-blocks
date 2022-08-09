@@ -9,19 +9,18 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class ColorBlock extends Block implements EntityBlock {
-    public static final Block blockType = Blocks.WHITE_WOOL;
-
     public ColorBlock() {
-        super(Properties.of(blockType.defaultBlockState().getMaterial())
+        super(Properties.of(Material.WOOL)
                 .strength(0.8F)
-                .sound(blockType.defaultBlockState().getSoundType())
+                .sound(SoundType.WOOL)
         );
     }
 

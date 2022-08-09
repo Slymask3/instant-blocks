@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
 import com.slymask3.instantblocks.gui.components.SelectionList;
-import com.slymask3.instantblocks.network.packet.SchematicPacket;
+import com.slymask3.instantblocks.network.packet.server.SchematicPacket;
 import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.Util;
 import net.minecraft.client.gui.components.Button;
@@ -42,8 +42,8 @@ public class SchematicScreen extends InstantScreen {
 
 		SchematicBlockEntity blockEntity = (SchematicBlockEntity)world.getBlockEntity(pos);
 
-		Button open = new Button(this.width / 2 + 134, 50, 20, 20, new TextComponent(">"), (p_88642_) -> {
-			Util.getPlatform().openFile(new File(SchematicHelper.SCHEMATICS_DIR));
+		Button open = new Button(this.width / 2 + 134, 50, 20, 20, Component.literal(">"), (p_88642_) -> {
+			Util.getPlatform().openFile(new File(Common.SCHEMATICS_DIR));
 		}, new Button.OnTooltip() {
 			public void onTooltip(Button button, PoseStack poseStack, int x, int y) {
 				SchematicScreen.this.renderTooltip(poseStack, List.of(new TranslatableComponent("ib.gui.schematic.open").getVisualOrderText()), x, y);
@@ -85,8 +85,8 @@ public class SchematicScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 10526880);
-		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 10526880);
+		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 0xA0A0A0);
+		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 0xA0A0A0);
 
 		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.file", input.getValue()), this.width / 2 - 2 - 150, this.height / 4 + 115, this.done.active ? 0x00FF00 : 0xAA0000);
 
@@ -171,7 +171,7 @@ public class SchematicScreen extends InstantScreen {
 			}
 
 			public boolean mouseClicked(double p_96122_, double p_96123_, int p_96124_) {
-				if (p_96124_ == 0) {
+				if(p_96124_ == 0) {
 					SchematicScreen.this.clickOnSchematic(this.index);
 					return true;
 				} else {

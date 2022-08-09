@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "instantblocks:instant_farm",
+    "instantblocks:instant_glass_dome",
+    "instantblocks:instant_grinder",
+    "instantblocks:instant_mining_ladder",
+    "instantblocks:instant_pool",
+    "instantblocks:instant_rail",
+    "instantblocks:instant_suction"
+  ]
+}

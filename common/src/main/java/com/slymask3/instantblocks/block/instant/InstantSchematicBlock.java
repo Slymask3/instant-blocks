@@ -3,13 +3,16 @@ package com.slymask3.instantblocks.block.instant;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.SchematicBlockEntity;
+import com.slymask3.instantblocks.builder.Builder;
+import com.slymask3.instantblocks.builder.type.Single;
+import com.slymask3.instantblocks.network.packet.client.SchematicUpdatePacket;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -37,17 +40,23 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 		return Common.CONFIG.ENABLE_SCHEMATIC();
 	}
 
+	public void openScreen(Player player, BlockPos pos) {
+		Common.NETWORK.sendToClient(player, new SchematicUpdatePacket(SchematicHelper.getSchematics(),pos));
+	}
+
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new SchematicBlockEntity(pos,state);
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
+		Builder builder = Builder.setup(world,x,y,z).setSpeed(2).setDirection(Direction.UP);
 		SchematicBlockEntity blockEntity = (SchematicBlockEntity)world.getBlockEntity(new BlockPos(x,y,z));
 		SchematicHelper.Schematic schematic = SchematicHelper.readSchematic(blockEntity.schematic);
 		if(schematic != null) {
-			Builder.Single.setup(world,x,y,z).setBlock(Blocks.AIR).build();
-			buildSchematic(world, x, y, z, schematic, blockEntity.center, blockEntity.ignoreAir);
+			Single.setup(builder,world,x,y,z).setBlock(Blocks.AIR).queue();
+			buildSchematic(builder, world, x, y, z, schematic, blockEntity.center, blockEntity.ignoreAir);
+			builder.build();
 			setCreateMessage(Strings.CREATE_SCHEMATIC, blockEntity.schematic);
 			return true;
 		}
@@ -55,7 +64,7 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 		return false;
 	}
 
-	public static void buildSchematic(Level world, int X, int Y, int Z, SchematicHelper.Schematic schematic, boolean center, boolean ignoreAir) {
+	public static void buildSchematic(Builder builder, Level world, int X, int Y, int Z, SchematicHelper.Schematic schematic, boolean center, boolean ignoreAir) {
 		int width = schematic.width;
 		int height = schematic.height;
 		int length = schematic.length;
@@ -67,14 +76,14 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 			z_offset = length / 2;
 		}
 
-		for(int x = 0; x < width; ++x) {
-			for(int y = 0; y < height; ++y) {
+		for(int y = 0; y < height; ++y) {
+			for(int x = 0; x < width; ++x) {
 				for(int z = 0; z < length; ++z) {
 					int index = y * width * length + z * width + x;
 					BlockState state = schematic.getBlockState(index);
 					BlockPos pos = new BlockPos(x+X-x_offset,y+Y,z+Z-z_offset);
 					if(!(ignoreAir && state.getBlock() == Blocks.AIR)) {
-						Builder.Single.setup(world,pos).setBlock(state).build();
+						Single.setup(builder,world,pos).setBlock(state).queue();
 						CompoundTag tag = schematic.getBlockEntityTag(x,y,z);
 						BlockEntity entity = world.getBlockEntity(pos);
 						if(tag != null && entity != null) {

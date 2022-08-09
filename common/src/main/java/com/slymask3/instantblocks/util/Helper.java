@@ -2,12 +2,16 @@ package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.item.InstantWandItem;
-import com.slymask3.instantblocks.network.packet.ClientPacket;
+import com.slymask3.instantblocks.network.packet.client.MessagePacket;
+import com.slymask3.instantblocks.network.packet.client.ParticlePacket;
+import com.slymask3.instantblocks.network.packet.client.SoundPacket;
 import com.slymask3.instantblocks.reference.Names;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -17,6 +21,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.List;
 import java.util.Random;
 
@@ -38,23 +46,31 @@ public class Helper {
 	public static void teleport(Level world, Player player, int x, int y, int z) {
 		if(isServer(world)) {
 			player.teleportTo(x + 0.5, y + 0.5, z + 0.5);
+			playSound(player,SoundEvents.CHORUS_FRUIT_TELEPORT,0.5F);
 		}
 	}
-	
+
+	public static void playSound(Player player, SoundEvent sound, float volume) {
+		Common.NETWORK.sendToClient(player,new SoundPacket(List.of(new Helper.BuildSound(player.getOnPos(), sound,null,volume))));
+	}
+
 	public static void addToChest(ChestBlockEntity chest, Block block, int amount) {
 		addToChest(chest, block.asItem(), amount);
 	}
-	
+
 	public static void addToChest(ChestBlockEntity chest, Item item, int amount) {
+		addToChest(chest, new ItemStack(item, amount));
+	}
+	
+	public static void addToChest(ChestBlockEntity chest, ItemStack itemStack) {
 		if(chest != null) {
-			ItemStack itemStack = new ItemStack(item, amount);
 			for(int i=0; i<chest.getContainerSize(); i++) {
 				ItemStack itemStackSlot = chest.getItem(i);
 				if(itemStackSlot.sameItem(itemStack) && itemStackSlot.getCount() < itemStackSlot.getMaxStackSize()) {
-					chest.setItem(i, new ItemStack(item, itemStackSlot.getCount() + amount));
+					chest.setItem(i, new ItemStack(itemStack.getItem(), itemStackSlot.getCount() + itemStack.getCount()));
 					break;
 				} else if(chest.getItem(i) == ItemStack.EMPTY) {
-					chest.setItem(i, new ItemStack(item, amount));
+					chest.setItem(i, itemStack);
 					break;
 				}
 			}
@@ -99,35 +115,37 @@ public class Helper {
 
 	public static int getMinSkydive(Level world) {
 		int min = Common.CONFIG.SKYDIVE_MIN();
-		if(min < world.getMinBuildHeight() - 4) {
-			min = world.getMinBuildHeight() - 5;
-		}
-		return min;
+		int min_world = world.getMinBuildHeight();
+		return min < min_world + 4 ? min_world + 5 : min;
 	}
 
 	public static int getMaxSkydive(Level world) {
 		int max = Common.CONFIG.SKYDIVE_MAX();
-		if(max > world.getMaxBuildHeight() - 3) {
-			max = world.getMaxBuildHeight() - 4;
-		}
-		return max;
+		int max_world = isNether(world) ? 120 : world.getMaxBuildHeight();
+		return max > max_world - 3 ? max_world - 4 : max;
+	}
+
+	public static boolean isNether(Level world) {
+		return world.dimension().equals(Level.NETHER);
+	}
+
+	public static double getDistanceBetween(BlockPos pos1, BlockPos pos2) {
+		return Math.sqrt(Math.pow(pos2.getX()-pos1.getX(),2)+Math.pow(pos2.getY()-pos1.getY(),2)+Math.pow(pos2.getZ()-pos1.getZ(),2));
 	}
 
 	public static void sendMessage(Player player, String message) {
-		sendMessage(player, message, "", BlockPos.ZERO, ClientHelper.Particles.NONE);
+		sendMessage(player, message, "");
 	}
 
 	public static void sendMessage(Player player, String message, String variable) {
-		sendMessage(player, message, variable, BlockPos.ZERO, ClientHelper.Particles.NONE);
-	}
-
-	public static void sendMessage(Player player, String message, String variable, BlockPos pos) {
-		sendMessage(player, message, variable, pos, ClientHelper.Particles.GENERATE);
-	}
-
-	public static void sendMessage(Player player, String message, String variable, BlockPos pos, ClientHelper.Particles particles) {
 		if(isServer(player.getLevel())) {
-			Common.NETWORK.sendToClient((ServerPlayer)player,new ClientPacket(message,variable,pos,particles.ordinal()));
+			Common.NETWORK.sendToClient(player, new MessagePacket(message,variable));
+		}
+	}
+
+	public static void showParticles(Level world, BlockPos pos, ClientHelper.Particles particles) {
+		if(isServer(world)) {
+			Common.NETWORK.sendToAllAround(world, pos, new ParticlePacket(pos,particles.ordinal()));
 		}
 	}
 
@@ -136,18 +154,18 @@ public class Helper {
 	}
 
 	public static Block getBlock(Level world, BlockPos pos) {
-		return Builder.Single.setup(world,pos).getBlock();
+		return world.getBlockState(pos).getBlock();
 	}
 
 	public static Block getRandomBlock(List<WeightedBlock> blocks) {
 		Random random = new Random();
 		int total = 0;
-		for (WeightedBlock block : blocks) {
+		for(WeightedBlock block : blocks) {
 			total += block.getWeight();
 		}
 		int r = random.nextInt(total) + 1;
 		int count = 0;
-		for (WeightedBlock block : blocks) {
+		for(WeightedBlock block : blocks) {
 			count += block.getWeight();
 			if(count >= r) {
 				return block.getBlock();
@@ -186,6 +204,37 @@ public class Helper {
 		return state;
 	}
 
+	public static String serializeBlock(Block block) {
+		return Registry.BLOCK.getKey(block).toString();
+	}
+
+	public static void createDirectory(String directory) {
+		File dir = new File(directory);
+		if(!dir.exists()) {
+			try {
+				dir.mkdir();
+			} catch(SecurityException se) {
+				Common.LOG.error("Failed to create '" + directory + "' directory: " + se.getMessage());
+			}
+		}
+	}
+
+	public static String get_url_contents(String url_string) {
+		StringBuilder content = new StringBuilder();
+		try {
+			URL url = new URL(url_string);
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
+			String line;
+			while((line = bufferedReader.readLine()) != null) {
+				content.append(line).append("\n");
+			}
+			bufferedReader.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return content.toString();
+	}
+
 	public static class WeightedBlock {
 		private final Block block;
 		private final int weight;
@@ -198,6 +247,36 @@ public class Helper {
 		}
 		public int getWeight() {
 			return this.weight;
+		}
+	}
+
+	public static class BuildSound {
+		private final BlockPos pos;
+		private final SoundEvent placeSound, breakSound;
+		private final float volume;
+		public BuildSound(BlockPos pos, SoundEvent placeSound, SoundEvent breakSound, float volume) {
+			this.pos = pos;
+			this.placeSound = placeSound;
+			this.breakSound = breakSound;
+			this.volume = volume;
+		}
+		public BlockPos getBlockPos() {
+			return this.pos;
+		}
+		public SoundEvent getPlaceSound() {
+			return this.placeSound;
+		}
+		public String getPlaceSoundString() {
+			return this.placeSound != null ? this.placeSound.getLocation().toString() : "";
+		}
+		public SoundEvent getBreakSound() {
+			return this.breakSound;
+		}
+		public String getBreakSoundString() {
+			return this.breakSound != null ? this.breakSound.getLocation().toString() : "";
+		}
+		public float getVolume() {
+			return this.volume;
 		}
 	}
 }

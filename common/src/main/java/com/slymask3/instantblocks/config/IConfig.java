@@ -1,5 +1,12 @@
 package com.slymask3.instantblocks.config;
 
+import com.slymask3.instantblocks.config.entry.ColorSet;
+import com.slymask3.instantblocks.config.entry.HugeTree;
+import net.minecraft.world.level.block.Blocks;
+
+import java.util.Arrays;
+import java.util.List;
+
 public interface IConfig {
     default void reload() {}
 
@@ -8,13 +15,15 @@ public interface IConfig {
     default boolean TP_GRINDER() { return Defaults.TP_GRINDER; }
     default boolean KEEP_BLOCKS() { return Defaults.KEEP_BLOCKS; }
     default boolean ALLOW_WATER_IN_NETHER() { return Defaults.ALLOW_WATER_IN_NETHER; }
+    default boolean ORIGINAL_INSTANT() { return Defaults.ORIGINAL_INSTANT; }
     default int RADIUS_HARVEST() { return Defaults.RADIUS_HARVEST; }
     default int RADIUS_LIGHT() { return Defaults.RADIUS_LIGHT; }
+    default int LIGHT_MAX() { return Defaults.LIGHT_MAX; }
     default int RAILS_AMOUNT() { return Defaults.RAILS_AMOUNT; }
     default int MINING_LADDER_LAYER() { return Defaults.MINING_LADDER_LAYER; }
     default int XP_AMOUNT() { return Defaults.XP_AMOUNT; }
-    default int TREE_SIZE() { return Defaults.TREE_SIZE; }
     default int RADIUS_DOME() { return Defaults.RADIUS_DOME; }
+    default int STATUE_CACHE_TIME() { return Defaults.STATUE_CACHE_TIME; }
 
     default int MAX_LIQUID() { return Defaults.MAX_LIQUID; }
     default int MAX_FILL() { return Defaults.MAX_FILL; }
@@ -24,6 +33,10 @@ public interface IConfig {
     default int SKYDIVE_MAX() { return Defaults.SKYDIVE_MAX; }
     default int SKYDIVE_WATER() { return Defaults.SKYDIVE_WATER; }
     default int SKYDIVE_RADIUS() { return Defaults.SKYDIVE_RADIUS; }
+    default List<ColorSet> SKYDIVE_PRESETS() { return Defaults.SKYDIVE_PRESETS; }
+
+    default int TREE_SIZE() { return Defaults.TREE_SIZE; }
+    default List<HugeTree> HUGE_TREES() { return Defaults.HUGE_TREES; }
 
     default int WEIGHT_WHEAT() { return Defaults.WEIGHT_WHEAT; }
     default int WEIGHT_POTATOES() { return Defaults.WEIGHT_POTATOES; }
@@ -78,20 +91,23 @@ public interface IConfig {
     default boolean SHOW_EFFECTS() { return Defaults.SHOW_EFFECTS; }
     default String SOUND_GENERATE() { return Defaults.SOUND_GENERATE; }
     default String SOUND_NO_LIQUID() { return Defaults.SOUND_NO_LIQUID; }
-    
+
     class Defaults {
         public static boolean USE_WANDS = true;
         public static boolean WAND_OVER_DURABILITY = false;
         public static boolean TP_GRINDER = true;
         public static boolean KEEP_BLOCKS = false;
         public static boolean ALLOW_WATER_IN_NETHER = false;
+        public static boolean ORIGINAL_INSTANT = false;
         public static int RADIUS_HARVEST = 25;
         public static int RADIUS_LIGHT = 25;
+        public static int LIGHT_MAX = 5;
         public static int RAILS_AMOUNT = 37;
         public static int MINING_LADDER_LAYER = -59;
         public static int XP_AMOUNT = 0;
         public static int TREE_SIZE = 4;
         public static int RADIUS_DOME = 4;
+        public static int STATUE_CACHE_TIME = 60;
 
         public static int MAX_LIQUID = 1000;
         public static int MAX_FILL = 1000;
@@ -155,5 +171,20 @@ public interface IConfig {
         public static boolean SHOW_EFFECTS = true;
         public static String SOUND_GENERATE = "entity.player.levelup";
         public static String SOUND_NO_LIQUID = "entity.panda.sneeze";
+
+        public static List<ColorSet> SKYDIVE_PRESETS = Arrays.asList(
+            new ColorSet("Rainbow","red","orange","yellow","lime","green","cyan","light blue","blue","purple","magenta","pink"),
+            new ColorSet("Grayscale","FFFFFF","CCCCCC","999999","666666","333333","000000","333333","666666","999999","CCCCCC")
+        );
+
+        public static List<HugeTree> HUGE_TREES = Arrays.asList(
+            new HugeTree("Huge Oak Tree", HugeTree.Type.OAK, Blocks.OAK_LOG, Blocks.OAK_LEAVES),
+            new HugeTree("Huge Spruce Tree", HugeTree.Type.SPRUCE, Blocks.SPRUCE_LOG, Blocks.SPRUCE_LEAVES),
+            new HugeTree("Huge Birch Tree", HugeTree.Type.BIRCH, Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES),
+            new HugeTree("Huge Jungle Tree", HugeTree.Type.JUNGLE, Blocks.JUNGLE_LOG, Blocks.JUNGLE_LEAVES),
+            new HugeTree("Huge Acacia Tree", HugeTree.Type.ACACIA, Blocks.ACACIA_LOG, Blocks.ACACIA_LEAVES),
+            new HugeTree("Huge Dark Oak Tree", HugeTree.Type.DARK_OAK, Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_LEAVES),
+            new HugeTree("Huge Glass Tree", HugeTree.Type.OAK, Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS)
+        );
     }
 }

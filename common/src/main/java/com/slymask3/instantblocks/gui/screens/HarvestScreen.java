@@ -3,7 +3,7 @@ package com.slymask3.instantblocks.gui.screens;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.entity.HarvestBlockEntity;
-import com.slymask3.instantblocks.network.packet.HarvestPacket;
+import com.slymask3.instantblocks.network.packet.server.HarvestPacket;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -73,7 +73,7 @@ public class HarvestScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, new TranslatableComponent("ib.gui.harvest.select"), this.width / 2 - 3 - 150, this.height / 4 - 30 + 12, 10526880);
+		this.font.draw(poseStack, Component.translatable("ib.gui.harvest.select"), this.width / 2 - 3 - 150, this.height / 4 - 30 + 12, 0xA0A0A0);
 	}
 
 	public void sendInfo(boolean activate) {

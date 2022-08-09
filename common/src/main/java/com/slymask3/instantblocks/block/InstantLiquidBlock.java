@@ -2,9 +2,12 @@ package com.slymask3.instantblocks.block;
 
 import com.mojang.math.Vector3f;
 import com.slymask3.instantblocks.Common;
+import com.slymask3.instantblocks.block.instant.InstantSuctionBlock;
+import com.slymask3.instantblocks.block.instant.InstantWaterBlock;
+import com.slymask3.instantblocks.builder.Builder;
+import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.core.ModBlocks;
 import com.slymask3.instantblocks.reference.Strings;
-import com.slymask3.instantblocks.util.Builder;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.ChatFormatting;
@@ -21,6 +24,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -31,13 +36,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class InstantLiquidBlock extends InstantBlock {
-	public ArrayList<BlockPos> posList;
-	public Block blockCheck;
-	public final Block blockReplace;
-	public String create;
-	public String create1;
-	public boolean isSuction = false;
-	public ParticleOptions particle = null;
+	private ArrayList<BlockPos> posList;
+	private Block blockCheck;
+	private final Block blockReplace;
+	private String create;
+	private String create1;
+	private ParticleOptions particle;
 
 	public static final DustParticleOptions WHITE_DUST = new DustParticleOptions(new Vector3f(Vec3.fromRGB24(0xFFFFFF)), 1.0F);
 
@@ -46,18 +50,19 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		this.posList = new ArrayList<>();
 		this.blockCheck = blockCheck;
 		this.blockReplace = blockReplace;
+		this.particle = null;
     }
 
 	public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
 		if(this.particle != null) {
-			for(int i=0; i<8; i++) {
+			for(int i=0; i<4; i++) {
 				world.addParticle(this.particle, (double)pos.getX() + Math.random(), (double)pos.getY() + 1.2D, (double)pos.getZ() + Math.random(), 0.0D, 0.0D, 0.0D);
 			}
 		}
 	}
 
 	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		return Block.box(1.0D, 0.0D, 1.0D, 15.0D, 15.0D, 15.0D);
+		return this.isSuction() ? Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D) : Block.box(1.0D, 0.0D, 1.0D, 15.0D, 15.0D, 15.0D);
 	}
 
 	@Override
@@ -78,35 +83,50 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 
 	@Override
 	public boolean propagatesSkylightDown(@Nonnull BlockState state, @Nonnull BlockGetter reader, @Nonnull BlockPos pos) {
-		return !this.isSuction;
+		return !this.isSuction();
+	}
+
+	public void setCreateMessages(String plural, String singular) {
+		this.create = plural;
+		this.create1 = singular;
+	}
+
+	public void setParticle(ParticleOptions particle) {
+		this.particle = particle;
 	}
 
 	private int getMax() {
-		return isSuction ? Common.CONFIG.MAX_FILL() : Common.CONFIG.MAX_LIQUID();
+		return isSuction() ? Common.CONFIG.MAX_FILL() : Common.CONFIG.MAX_LIQUID();
 	}
 
 	private Block getMainReplaceBlock() {
-		if(isSuction) {
-			return blockCheck == Blocks.WATER ? ModBlocks.INSTANT_WATER : ModBlocks.INSTANT_LAVA;
+		if(isSuction()) {
+			return blockCheck == Blocks.LAVA ? ModBlocks.INSTANT_LAVA : ModBlocks.INSTANT_WATER;
 		}
 		return blockReplace;
 	}
 
+	private boolean isSuction() {
+		return this instanceof InstantSuctionBlock;
+	}
+
+	private boolean isWater() {
+		return this instanceof InstantWaterBlock;
+	}
+
 	public boolean canActivate(Level world, BlockPos pos, Player player) {
-		if(isSuction) {
-			Helper.sendMessage(player, "","",pos,ClientHelper.Particles.NO_LIQUID);
-		}
-		if(world.dimension().equals(Level.NETHER) && blockReplace.equals(Blocks.WATER) && !Common.CONFIG.ALLOW_WATER_IN_NETHER()) {
+		if(Helper.isNether(world) && blockReplace.equals(Blocks.WATER) && !Common.CONFIG.ALLOW_WATER_IN_NETHER()) {
 			Helper.sendMessage(player, Strings.ERROR_WATER_DISABLED);
 			return false;
 		}
 		checkForBlock(world,pos);
-		if(isSuction && posList.isEmpty()) {
+		if(isSuction() && posList.isEmpty()) {
 			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID);
+			Helper.showParticles(world, pos, ClientHelper.Particles.NO_LIQUID);
 			return false;
 		}
 		if(posList.size() >= getMax()) {
-			Helper.sendMessage(player, errorMessage, ChatFormatting.RED + String.valueOf(isSuction ? Common.CONFIG.MAX_FILL() : Common.CONFIG.MAX_LIQUID()));
+			Helper.sendMessage(player, errorMessage, ChatFormatting.RED + String.valueOf(isSuction() ? Common.CONFIG.MAX_FILL() : Common.CONFIG.MAX_LIQUID()));
 			posList = new ArrayList<>();
 			return false;
 		} else {
@@ -115,17 +135,26 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
+		Builder builder = Builder.setup(world,x,y,z).setOrigin(isSuction() ? Builder.Origin.TO : Builder.Origin.FROM);
 		for(BlockPos pos : posList) {
-			Builder.Single.setup(world,pos).setBlock(blockReplace).build();
+			BlockState state = world.getBlockState(pos);
+			if(isSuction() && state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED)) {
+				Single.setup(builder,world,pos).setBlock(state.setValue(BlockStateProperties.WATERLOGGED,false)).queue();
+			} else if(!isSuction() && state.hasProperty(BlockStateProperties.WATERLOGGED) && !state.getValue(BlockStateProperties.WATERLOGGED)) {
+				Single.setup(builder,world,pos).setBlock(state.setValue(BlockStateProperties.WATERLOGGED,true)).queue();
+			} else {
+				Single.setup(builder,world,pos).setBlock(blockReplace).queue();
+			}
 		}
-		Builder.Single.setup(world,x,y,z).setBlock(getMainReplaceBlock()).build();
+		Single.setup(builder,world,x,y,z).setBlock(getMainReplaceBlock()).queue();
 		if(posList.size() > 0) {
-			setCreateMessage(create, String.valueOf(isSuction ? posList.size() : posList.size()+1));
+			setCreateMessage(create, String.valueOf(isSuction() ? posList.size() : posList.size()+1));
 		} else {
 			setCreateMessage(create1);
 		}
+		builder.build();
 		posList = new ArrayList<>();
-		if(isSuction) {
+		if(isSuction()) {
 			this.blockCheck = null;
 		}
 		return true;
@@ -136,17 +165,18 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		check(world,pos.east(1));
 		check(world,pos.south(1));
 		check(world,pos.west(1));
-		if(!Common.CONFIG.SIMPLE_LIQUID() || isSuction) {
+		if(!Common.CONFIG.SIMPLE_LIQUID() || isSuction()) {
 			check(world,pos.below(1));
 		}
-		if(isSuction) {
+		if(isSuction()) {
 			check(world,pos.above(1));
 		}
 	}
 
 	private void check(Level world, BlockPos pos) {
-		Block blockCurrent = Helper.getBlock(world,pos);
-		if(isCorrectBlock(blockCurrent) && posList.size() < getMax() && addPos(pos)) {
+		BlockState state = world.getBlockState(pos);
+		Block blockCurrent = state.getBlock();
+		if((isCorrectBlock(blockCurrent) || isWaterlogged(state) || isWaterloggable(state)) && posList.size() < getMax() && addPos(pos)) {
 			if(blockCheck == null) {
 				blockCheck = blockCurrent;
 			}
@@ -161,6 +191,17 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 			return block == blockCheck || block instanceof BushBlock;
 		}
 		return block == blockCheck;
+	}
+
+	private boolean isWaterlogged(BlockState state) {
+		return isSuction() && (blockCheck == null || blockCheck.equals(Blocks.WATER))
+			&& state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED);
+	}
+
+	private boolean isWaterloggable(BlockState state) {
+		return isWater()
+			&& state.hasProperty(BlockStateProperties.WATERLOGGED) && !state.getValue(BlockStateProperties.WATERLOGGED)
+			&& ((state.hasProperty(BlockStateProperties.SLAB_TYPE) && !state.getValue(BlockStateProperties.SLAB_TYPE).equals(SlabType.DOUBLE)) || !state.hasProperty(BlockStateProperties.SLAB_TYPE));
 	}
 
 	private boolean addPos(BlockPos pos) {

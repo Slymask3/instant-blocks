@@ -1,13 +1,17 @@
 package com.slymask3.instantblocks.config;
 
 import com.slymask3.instantblocks.Common;
+import com.slymask3.instantblocks.config.entry.ColorSet;
+import com.slymask3.instantblocks.config.entry.HugeTree;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 
-@Config(name = Common.MOD_ID)
+import java.util.List;
+
+@Config(name = Common.MOD_ID + "/config")
 public class ClothConfig implements ConfigData, IConfig {
     public static void register() {
         AutoConfig.register(ClothConfig.class, Toml4jConfigSerializer::new);
@@ -18,6 +22,7 @@ public class ClothConfig implements ConfigData, IConfig {
     }
 
     public void reload() {
+        AutoConfig.getConfigHolder(ClothConfig.class).load();
         Common.CONFIG = get();
     }
 
@@ -30,6 +35,7 @@ public class ClothConfig implements ConfigData, IConfig {
         boolean WAND_OVER_DURABILITY = Defaults.WAND_OVER_DURABILITY;
         boolean KEEP_BLOCKS = Defaults.KEEP_BLOCKS;
         boolean ALLOW_WATER_IN_NETHER = Defaults.ALLOW_WATER_IN_NETHER;
+        boolean ORIGINAL_INSTANT = Defaults.ORIGINAL_INSTANT;
         int XP_AMOUNT = Defaults.XP_AMOUNT;
         boolean GENERATE_IN_CHESTS = Defaults.GENERATE_IN_CHESTS;
         boolean GENERATE_IN_CHESTS_BONUS = Defaults.GENERATE_IN_CHESTS_BONUS;
@@ -87,6 +93,7 @@ public class ClothConfig implements ConfigData, IConfig {
         @ConfigEntry.BoundedDiscrete(min = 1, max = 300)
         int SKYDIVE_WATER = Defaults.SKYDIVE_WATER;
         int SKYDIVE_RADIUS = Defaults.SKYDIVE_RADIUS;
+        List<ColorSet> SKYDIVE_PRESETS = Defaults.SKYDIVE_PRESETS;
     }
 
     @ConfigEntry.Category("blocks")
@@ -114,6 +121,14 @@ public class ClothConfig implements ConfigData, IConfig {
 
     @ConfigEntry.Category("blocks")
     @ConfigEntry.Gui.CollapsibleObject
+    SectionStatue statue = new SectionStatue();
+    static class SectionStatue {
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 240)
+        int STATUE_CACHE_TIME = Defaults.STATUE_CACHE_TIME;
+    }
+
+    @ConfigEntry.Category("blocks")
+    @ConfigEntry.Gui.CollapsibleObject
     SectionHarvest harvest = new SectionHarvest();
     static class SectionHarvest {
         int RADIUS_HARVEST = Defaults.RADIUS_HARVEST;
@@ -124,6 +139,8 @@ public class ClothConfig implements ConfigData, IConfig {
     SectionLight light = new SectionLight();
     static class SectionLight {
         int RADIUS_LIGHT = Defaults.RADIUS_LIGHT;
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 15)
+        int LIGHT_MAX = Defaults.LIGHT_MAX;
     }
 
     @ConfigEntry.Category("blocks")
@@ -132,6 +149,7 @@ public class ClothConfig implements ConfigData, IConfig {
     static class SectionTree {
         @ConfigEntry.BoundedDiscrete(min = 1, max = 24)
         int TREE_SIZE = Defaults.TREE_SIZE;
+        List<HugeTree> HUGE_TREES = Defaults.HUGE_TREES;
     }
 
     @ConfigEntry.Category("toggle")
@@ -198,13 +216,15 @@ public class ClothConfig implements ConfigData, IConfig {
     public boolean TP_GRINDER() { return grinder.TP_GRINDER; }
     public boolean KEEP_BLOCKS() { return general.KEEP_BLOCKS; }
     public boolean ALLOW_WATER_IN_NETHER() { return general.ALLOW_WATER_IN_NETHER; }
+    public boolean ORIGINAL_INSTANT() { return general.ORIGINAL_INSTANT; }
     public int RADIUS_HARVEST() { return harvest.RADIUS_HARVEST; }
     public int RADIUS_LIGHT() { return light.RADIUS_LIGHT; }
+    public int LIGHT_MAX() { return light.LIGHT_MAX; }
     public int RAILS_AMOUNT() { return rail.RAILS_AMOUNT; }
     public int MINING_LADDER_LAYER() { return mining.MINING_LADDER_LAYER; }
     public int XP_AMOUNT() { return general.XP_AMOUNT; }
-    public int TREE_SIZE() { return tree.TREE_SIZE; }
     public int RADIUS_DOME() { return dome.RADIUS_DOME; }
+    public int STATUE_CACHE_TIME() { return statue.STATUE_CACHE_TIME; }
     public int MAX_LIQUID() { return liquid.MAX_LIQUID; }
     public int MAX_FILL() { return liquid.MAX_FILL; }
     public boolean SIMPLE_LIQUID() { return liquid.SIMPLE_LIQUID; }
@@ -212,6 +232,9 @@ public class ClothConfig implements ConfigData, IConfig {
     public int SKYDIVE_MAX() { return skydive.SKYDIVE_MAX; }
     public int SKYDIVE_WATER() { return skydive.SKYDIVE_WATER; }
     public int SKYDIVE_RADIUS() { return skydive.SKYDIVE_RADIUS; }
+    public List<ColorSet> SKYDIVE_PRESETS() { return skydive.SKYDIVE_PRESETS.size() == 1 && skydive.SKYDIVE_PRESETS.get(0).colors.size() == 0 ? List.of() : skydive.SKYDIVE_PRESETS; }
+    public int TREE_SIZE() { return tree.TREE_SIZE; }
+    public List<HugeTree> HUGE_TREES() { return tree.HUGE_TREES.size() == 1 && tree.HUGE_TREES.get(0).name.isEmpty() ? List.of() : tree.HUGE_TREES; }
     public int WEIGHT_WHEAT() { return farm.WEIGHT_WHEAT; }
     public int WEIGHT_POTATOES() { return farm.WEIGHT_POTATOES; }
     public int WEIGHT_CARROTS() { return farm.WEIGHT_CARROTS; }

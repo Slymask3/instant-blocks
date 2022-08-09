@@ -16,15 +16,14 @@ import net.minecraft.world.level.material.Material;
 
 public class InstantLavaBlock extends InstantLiquidBlock {
 	public InstantLavaBlock() {
-		super(Block.Properties.of(Material.LAVA)
+		super(Block.Properties.of(Material.CLAY)
 				.strength(0.5F)
 				.sound(new LiquidSoundType(SoundEvents.BUCKET_FILL_LAVA, SoundEvents.BUCKET_EMPTY_LAVA))
 				.lightLevel((par1) -> 15)
 		, Blocks.AIR, Blocks.LAVA);
-		setErrorMessage(Strings.ERROR_LAVA_MAX);
-		this.create = Strings.CREATE_LAVA;
-		this.create1 = Strings.CREATE_LAVA_1;
-		this.particle = ParticleTypes.LARGE_SMOKE;
+		this.setErrorMessage(Strings.ERROR_LAVA_MAX);
+		this.setCreateMessages(Strings.CREATE_LAVA,Strings.CREATE_LAVA_1);
+		this.setParticle(ParticleTypes.LARGE_SMOKE);
 	}
 
 	public boolean isEnabled() {

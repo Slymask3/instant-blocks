@@ -2,7 +2,6 @@ package com.slymask3.instantblocks.gui.components;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.slymask3.instantblocks.block.entity.SkydiveBlockEntity;
 import com.slymask3.instantblocks.util.ColorHelper;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
@@ -17,11 +16,10 @@ public class ColorEditBox extends EditBox {
     private final int index;
     private final Font font;
 
-    public ColorEditBox(Font font, int x, int y, int width, int length, int index, SkydiveBlockEntity tileEntity) {
-        super(font, x, y, width, length, new TranslatableComponent("ib.gui.skydive.color",(index+1)));
+    public ColorEditBox(Font font, int x, int y, int width, int height, int index) {
+        super(font, x, y, width, height, Component.translatable("ib.gui.skydive.color",(index+1)));
         this.font = font;
         this.index = index;
-        this.setValue(tileEntity.color[index]);
     }
 
     public Color getColor() {
@@ -29,7 +27,9 @@ public class ColorEditBox extends EditBox {
     }
 
     public void renderLabel(PoseStack poseStack) {
-        this.font.drawShadow(poseStack, new TranslatableComponent("ib.gui.skydive.color",(index+1)), this.x - 50, this.y + 3, ColorHelper.textToColor(this.getValue()).getRGB());
+        if(!this.getValue().isEmpty()) {
+            this.font.drawShadow(poseStack, Component.translatable("ib.gui.skydive.color",(index+1)), this.x - 50, this.y + 3, ColorHelper.textToColor(this.getValue()).getRGB());
+        }
     }
 
     public void setRandomHex() {

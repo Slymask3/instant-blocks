@@ -45,6 +45,8 @@ subprojects {
             name = 'BlameJared Maven (CrT / Bookshelf)'
             url = 'https://maven.blamejared.com'
         }
+
+        maven { url = 'https://maven.shedaniel.me/' }
     }
 
     tasks.withType(JavaCompile).configureEach {

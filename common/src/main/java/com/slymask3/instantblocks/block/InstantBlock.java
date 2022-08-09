@@ -1,16 +1,12 @@
 package com.slymask3.instantblocks.block;
 
 import com.slymask3.instantblocks.Common;
-import com.slymask3.instantblocks.block.instant.InstantSchematicBlock;
-import com.slymask3.instantblocks.network.packet.SchematicUpdatePacket;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
-import com.slymask3.instantblocks.util.SchematicHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -27,9 +23,9 @@ import net.minecraft.world.phys.BlockHitResult;
 public abstract class InstantBlock extends Block {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-	public String createMessage, errorMessage, createVariable, errorVariable;
-	boolean isDirectional = false;
-	ClientHelper.Screen screen = null;
+	protected String createMessage, errorMessage, createVariable, errorVariable;
+	private boolean isDirectional = false;
+	private ClientHelper.Screen screen = null;
 	
 	protected InstantBlock(Properties properties) {
 		super(properties);
@@ -111,7 +107,7 @@ public abstract class InstantBlock extends Block {
 				if(!Helper.isWand(is)) {
 					Helper.sendMessage(player, Strings.ERROR_WAND);
 					return InteractionResult.FAIL;
-				} else if(Helper.wandDamage(Helper.getBlock(world,pos)) > is.getMaxDamage() - is.getDamageValue() && !player.isCreative()) {
+				} else if(!player.isCreative() && !Common.CONFIG.WAND_OVER_DURABILITY() && Helper.wandDamage(Helper.getBlock(world,pos)) > is.getMaxDamage() - is.getDamageValue()) {
 					Helper.sendMessage(player, Strings.ERROR_WAND_DURABILITY);
 					return InteractionResult.FAIL;
 				}
@@ -144,19 +140,21 @@ public abstract class InstantBlock extends Block {
 			if(!Helper.isWand(is)) {
 				Helper.sendMessage(player, Strings.ERROR_WAND);
 				return InteractionResult.FAIL;
-			} else if(Helper.wandDamage(Helper.getBlock(world,pos)) > is.getMaxDamage() - is.getDamageValue() && !player.isCreative()) {
+			} else if(!player.isCreative() && !Common.CONFIG.WAND_OVER_DURABILITY() && Helper.wandDamage(Helper.getBlock(world,pos)) > is.getMaxDamage() - is.getDamageValue()) {
 				Helper.sendMessage(player, Strings.ERROR_WAND_DURABILITY);
 				return InteractionResult.FAIL;
 			}
 		}
 
-		if(Helper.isServer(world) && this instanceof InstantSchematicBlock) {
-			Common.NETWORK.sendToClient((ServerPlayer)player, new SchematicUpdatePacket(SchematicHelper.getSchematics(),pos));
-		} else if(Helper.isClient(world)) {
-			ClientHelper.showScreen(this.screen,player,world,pos);
-		}
+		this.openScreen(player,pos);
 
 		return InteractionResult.SUCCESS;
+	}
+
+	public void openScreen(Player player, BlockPos pos) {
+		if(Helper.isClient(player.getLevel())) {
+			ClientHelper.showScreen(this.screen,player,player.getLevel(),pos);
+		}
 	}
 
 	public InteractionResult activate(Level world, BlockPos pos, Player player) {
@@ -174,7 +172,8 @@ public abstract class InstantBlock extends Block {
 	}
 
 	private void afterBuild(Level world, BlockPos pos, Player player) {
-		Helper.sendMessage(player,this.createMessage,this.createVariable,pos);
+		Helper.sendMessage(player,this.createMessage,this.createVariable);
+		Helper.showParticles(world, pos, ClientHelper.Particles.GENERATE);
 		Helper.giveExp(world, player, Common.CONFIG.XP_AMOUNT());
 		if(Common.CONFIG.USE_WANDS()) {
 			ItemStack is = player.getItemInHand(InteractionHand.MAIN_HAND);

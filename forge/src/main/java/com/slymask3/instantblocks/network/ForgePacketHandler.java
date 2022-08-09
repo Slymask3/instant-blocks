@@ -1,10 +1,13 @@
 package com.slymask3.instantblocks.network;
 
 import com.slymask3.instantblocks.Common;
-import com.slymask3.instantblocks.network.packet.*;
+import com.slymask3.instantblocks.network.packet.AbstractPacket;
+import com.slymask3.instantblocks.network.packet.client.*;
+import com.slymask3.instantblocks.network.packet.server.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
@@ -20,28 +23,35 @@ public class ForgePacketHandler {
 
     public static void register() {
         int index = 100;
-        INSTANCE.registerMessage(++index, ClientPacket.class, (ClientPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), ClientPacket::decode, Handler::client);
-        INSTANCE.registerMessage(++index, SkydivePacket.class, (SkydivePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydivePacket::decode, Handler::common);
-        INSTANCE.registerMessage(++index, StatuePacket.class, (StatuePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), StatuePacket::decode, Handler::common);
-        INSTANCE.registerMessage(++index, HarvestPacket.class, (HarvestPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), HarvestPacket::decode, Handler::common);
-        INSTANCE.registerMessage(++index, TreePacket.class, (TreePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), TreePacket::decode, Handler::common);
-        INSTANCE.registerMessage(++index, SchematicPacket.class, (SchematicPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SchematicPacket::decode, Handler::common);
+        INSTANCE.registerMessage(++index, MessagePacket.class, (MessagePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), MessagePacket::decode, Handler::client);
+        INSTANCE.registerMessage(++index, ParticlePacket.class, (ParticlePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), ParticlePacket::decode, Handler::client);
+        INSTANCE.registerMessage(++index, SoundPacket.class, (SoundPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SoundPacket::decode, Handler::client);
+        INSTANCE.registerMessage(++index, SkydivePacket.class, (SkydivePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydivePacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, StatuePacket.class, (StatuePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), StatuePacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, HarvestPacket.class, (HarvestPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), HarvestPacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, TreePacket.class, (TreePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), TreePacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, SchematicPacket.class, (SchematicPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SchematicPacket::decode, Handler::server);
         INSTANCE.registerMessage(++index, SchematicUpdatePacket.class, (SchematicUpdatePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SchematicUpdatePacket::decode, Handler::client);
+        INSTANCE.registerMessage(++index, SkydiveUpdatePacket.class, (SkydiveUpdatePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydiveUpdatePacket::decode, Handler::client);
+        INSTANCE.registerMessage(++index, TreeUpdatePacket.class, (TreeUpdatePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), TreeUpdatePacket::decode, Handler::client);
     }
 
     public static class Handler {
-        public static void common(AbstractPacket message, Supplier<NetworkEvent.Context> context) {
+        public static void server(AbstractPacket message, Supplier<NetworkEvent.Context> context) {
             context.get().enqueueWork(() -> {
-                if(message.getClass().equals(SkydivePacket.class)) {
-                    PacketHelper.handleSkydive((SkydivePacket)message, context.get().getSender());
-                } else if(message.getClass().equals(StatuePacket.class)) {
-                    PacketHelper.handleStatue((StatuePacket)message, context.get().getSender());
-                } else if(message.getClass().equals(HarvestPacket.class)) {
-                    PacketHelper.handleHarvest((HarvestPacket)message, context.get().getSender());
-                } else if(message.getClass().equals(TreePacket.class)) {
-                    PacketHelper.handleTree((TreePacket)message, context.get().getSender());
-                } else if(message.getClass().equals(SchematicPacket.class)) {
-                    PacketHelper.handleSchematic((SchematicPacket)message, context.get().getSender());
+                Player player = context.get().getSender();
+                if(player != null) {
+                    if(message.getClass().equals(SkydivePacket.class)) {
+                        PacketHelper.handleSkydive((SkydivePacket)message, player);
+                    } else if(message.getClass().equals(StatuePacket.class)) {
+                        PacketHelper.handleStatue((StatuePacket)message, player);
+                    } else if(message.getClass().equals(HarvestPacket.class)) {
+                        PacketHelper.handleHarvest((HarvestPacket)message, player);
+                    } else if(message.getClass().equals(TreePacket.class)) {
+                        PacketHelper.handleTree((TreePacket)message, player);
+                    } else if(message.getClass().equals(SchematicPacket.class)) {
+                        PacketHelper.handleSchematic((SchematicPacket)message, player);
+                    }
                 }
             });
             context.get().setPacketHandled(true);
@@ -57,10 +67,21 @@ public class ForgePacketHandler {
     @OnlyIn(Dist.CLIENT)
     public static class ClientHandler {
         public static void handle(AbstractPacket message, Supplier<NetworkEvent.Context> context) {
-            if(message.getClass().equals(ClientPacket.class)) {
-                PacketHelper.handleClient((ClientPacket)message, Minecraft.getInstance().player);
-            } else if(message.getClass().equals(SchematicUpdatePacket.class)) {
-                PacketHelper.handleSchematicUpdate((SchematicUpdatePacket)message, Minecraft.getInstance().player);
+            Player player = Minecraft.getInstance().player;
+            if(player != null) {
+                if(message.getClass().equals(MessagePacket.class)) {
+                    PacketHelper.handleMessage((MessagePacket)message, player);
+                } else if(message.getClass().equals(ParticlePacket.class)) {
+                    PacketHelper.handleParticle((ParticlePacket)message, player);
+                } else if(message.getClass().equals(SoundPacket.class)) {
+                    PacketHelper.handleSound((SoundPacket)message, player);
+                } else if(message.getClass().equals(SchematicUpdatePacket.class)) {
+                    PacketHelper.handleSchematicUpdate((SchematicUpdatePacket)message, player);
+                } else if(message.getClass().equals(SkydiveUpdatePacket.class)) {
+                    PacketHelper.handleSkydiveUpdate((SkydiveUpdatePacket)message, player);
+                } else if(message.getClass().equals(TreeUpdatePacket.class)) {
+                    PacketHelper.handleTreeUpdate((TreeUpdatePacket)message, player);
+                }
             }
         }
     }
