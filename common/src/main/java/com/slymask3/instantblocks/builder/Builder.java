@@ -24,7 +24,7 @@ public class Builder {
 	private int speed;
 	private int ticks;
 	private Direction priorityDirection;
-	private Origin originType;
+	private Origin priorityOrigin;
 	private int distanceMultiplier;
 
 	private Builder(Level world, BlockPos pos) {
@@ -36,7 +36,7 @@ public class Builder {
 		this.speed = 1;
 		this.ticks = 0;
 		this.priorityDirection = null;
-		this.originType = null;
+		this.priorityOrigin = null;
 		this.distanceMultiplier = 1;
 	}
 
@@ -63,8 +63,8 @@ public class Builder {
 		return this.setOrigin(originType,1);
 	}
 
-	public Builder setOrigin(Origin originType, int distanceMultiplier) {
-		this.originType = originType;
+	public Builder setOrigin(Origin priorityOrigin, int distanceMultiplier) {
+		this.priorityOrigin = priorityOrigin;
 		this.distanceMultiplier = distanceMultiplier;
 		return this;
 	}
@@ -137,10 +137,10 @@ public class Builder {
 			}
 		}
 
-		if(this.originType != null) {
+		if(this.priorityOrigin != null) {
 			for(Single single : this.queue) {
 				int distance = (int)Math.floor(Helper.getDistanceBetween(this.originPos,single.getBlockPos()) * this.distanceMultiplier);
-				single.priority = switch(originType) {
+				single.priority = switch(priorityOrigin) {
 					case FROM -> distance;
 					case TO -> -distance;
 				};

@@ -72,10 +72,10 @@ public class InstantFarmBlock extends InstantBlock {
 		Multiple.setup(builder,world,x,y,z,direction,0,3,4,0,6,0,0,0,0,0).setBlock(water).queue(3);
 		Multiple.setup(builder,world,x,y,z,direction,0,3,0,4,6,0,0,0,0,0).setBlock(water).queue(3);
 
-		Multiple.setup(builder,world,x,y+1,z,direction,0,3,6,0,6,0,0,1,0,0).setBlock(crop).queue(3);
-		Multiple.setup(builder,world,x,y+1,z,direction,0,3,3,0,6,0,0,1,0,0).setBlock(crop).queue(3);
-		Multiple.setup(builder,world,x,y+1,z,direction,0,3,0,2,6,0,0,1,0,0).setBlock(crop).queue(3);
-		Multiple.setup(builder,world,x,y+1,z,direction,0,3,0,5,6,0,0,1,0,0).setBlock(crop).queue(3);
+		Multiple.setup(builder,world,x,y+1,z,direction,0,3,6,0,6,0,0,1,0,0).setBlock(crop).queue(3,false);
+		Multiple.setup(builder,world,x,y+1,z,direction,0,3,3,0,6,0,0,1,0,0).setBlock(crop).queue(3,false);
+		Multiple.setup(builder,world,x,y+1,z,direction,0,3,0,2,6,0,0,1,0,0).setBlock(crop).queue(3,false);
+		Multiple.setup(builder,world,x,y+1,z,direction,0,3,0,5,6,0,0,1,0,0).setBlock(crop).queue(3,false);
 
 		Single.setup(builder,world,x,y+1,z).offset(direction,0,4,0,0).setBlock(gate).setDirection(direction).queue(1);
 		Single.setup(builder,world,x,y+1,z).offset(direction,3,0,0,0).setBlock(craft).queue(4);

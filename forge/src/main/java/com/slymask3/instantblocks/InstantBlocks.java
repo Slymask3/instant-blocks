@@ -21,6 +21,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -52,6 +53,7 @@ public class InstantBlocks {
 		modEventBus.addListener(this::setupRegistry);
 		MinecraftForge.EVENT_BUS.register(this);
 
+		MinecraftForge.EVENT_BUS.addListener(this::onServerTick);
 		MinecraftForge.EVENT_BUS.addListener(this::onBlockBreak);
 	}
 
@@ -69,6 +71,12 @@ public class InstantBlocks {
 			} else if(event.getForgeRegistry().getRegistryKey().equals(Registry.BLOCK_ENTITY_TYPE_REGISTRY)) {
 				Registration.registerTiles(new ForgeRegistryHelper<>(event.getForgeRegistry()));
 			}
+		}
+	}
+
+	private void onServerTick(final TickEvent.ServerTickEvent event) {
+		if(event.phase == TickEvent.Phase.END) {
+			Builder.globalTick();
 		}
 	}
 

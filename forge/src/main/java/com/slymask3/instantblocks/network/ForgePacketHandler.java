@@ -1,7 +1,7 @@
 package com.slymask3.instantblocks.network;
 
 import com.slymask3.instantblocks.Common;
-import com.slymask3.instantblocks.network.packet.*;
+import com.slymask3.instantblocks.network.packet.AbstractPacket;
 import com.slymask3.instantblocks.network.packet.client.*;
 import com.slymask3.instantblocks.network.packet.server.*;
 import net.minecraft.client.Minecraft;
@@ -26,18 +26,18 @@ public class ForgePacketHandler {
         INSTANCE.registerMessage(++index, MessagePacket.class, (MessagePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), MessagePacket::decode, Handler::client);
         INSTANCE.registerMessage(++index, ParticlePacket.class, (ParticlePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), ParticlePacket::decode, Handler::client);
         INSTANCE.registerMessage(++index, SoundPacket.class, (SoundPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SoundPacket::decode, Handler::client);
-        INSTANCE.registerMessage(++index, SkydivePacket.class, (SkydivePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydivePacket::decode, Handler::common);
-        INSTANCE.registerMessage(++index, StatuePacket.class, (StatuePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), StatuePacket::decode, Handler::common);
-        INSTANCE.registerMessage(++index, HarvestPacket.class, (HarvestPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), HarvestPacket::decode, Handler::common);
-        INSTANCE.registerMessage(++index, TreePacket.class, (TreePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), TreePacket::decode, Handler::common);
-        INSTANCE.registerMessage(++index, SchematicPacket.class, (SchematicPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SchematicPacket::decode, Handler::common);
+        INSTANCE.registerMessage(++index, SkydivePacket.class, (SkydivePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydivePacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, StatuePacket.class, (StatuePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), StatuePacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, HarvestPacket.class, (HarvestPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), HarvestPacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, TreePacket.class, (TreePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), TreePacket::decode, Handler::server);
+        INSTANCE.registerMessage(++index, SchematicPacket.class, (SchematicPacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SchematicPacket::decode, Handler::server);
         INSTANCE.registerMessage(++index, SchematicUpdatePacket.class, (SchematicUpdatePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SchematicUpdatePacket::decode, Handler::client);
         INSTANCE.registerMessage(++index, SkydiveUpdatePacket.class, (SkydiveUpdatePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), SkydiveUpdatePacket::decode, Handler::client);
         INSTANCE.registerMessage(++index, TreeUpdatePacket.class, (TreeUpdatePacket message, FriendlyByteBuf buffer) -> message.write(message,buffer), TreeUpdatePacket::decode, Handler::client);
     }
 
     public static class Handler {
-        public static void common(AbstractPacket message, Supplier<NetworkEvent.Context> context) {
+        public static void server(AbstractPacket message, Supplier<NetworkEvent.Context> context) {
             context.get().enqueueWork(() -> {
                 Player player = context.get().getSender();
                 if(player != null) {

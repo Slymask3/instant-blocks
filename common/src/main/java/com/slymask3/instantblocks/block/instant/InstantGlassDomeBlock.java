@@ -74,7 +74,6 @@ public class InstantGlassDomeBlock extends InstantBlock {
 
 		Circle.setup(builder,world,x,y,z,radius).setBlock(BlockType.stone()).queue(0);
 		Sphere.setup(builder,world,x,y+1,z,radius).setOuter(BlockType.block(glass)).setInner(BlockType.block(air)).setHalf().setQueueDirection(Direction.UP).queue(1);
-		//Sphere.setup(builder,world,x,y+1,z,radius).setInner(BlockType.block(air)).setHalf().queue(0,false);
 
 		for(int i=3; i<radius; i=i+6) {
 			Single.setup(builder,world,x+i,y+1,z).setBlock(torch).queue(1000,false);
