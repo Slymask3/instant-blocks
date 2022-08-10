@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/slymask3/instant-blocks/issues"
 
 [[mods]]
 modId="instantblocks"
-version="1.6.4"
+version="1.6.5"
 displayName="Instant Blocks"
 updateJSONURL="https://raw.githubusercontent.com/slymask3/instant-blocks/1.19.x/update.json"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/instant-blocks"

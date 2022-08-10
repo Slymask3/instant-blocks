@@ -10,7 +10,6 @@ public class Strings {
 	public static final String ERROR_ESCAPE_LADDER = ERROR + "escape_ladder";
 	public static final String ERROR_WATER_MAX = ERROR + "water_max";
 	public static final String ERROR_LAVA_MAX = ERROR + "lava_max";
-	public static final String ERROR_LIGHT = ERROR + "light";
 	public static final String ERROR_NO_LIQUID = ERROR + "no_liquid";
 	public static final String ERROR_STATUE = ERROR + "statue";
 	public static final String ERROR_SUCTION = ERROR + "suction";
@@ -18,6 +17,7 @@ public class Strings {
 	public static final String ERROR_WATER_DISABLED = ERROR + "water_disabled";
 	public static final String ERROR_NO_COLORS = ERROR + "no_colors";
 	public static final String ERROR_TREE = ERROR + "tree";
+	public static final String ERROR_CLEAR = ERROR + "clear";
 
 	private static final String CREATE = "ib.message.create.";
 	public static final String CREATE_WOODEN_HOUSE = CREATE + "wooden_house";
@@ -35,9 +35,11 @@ public class Strings {
 	public static final String CREATE_SUCTION_1 = CREATE + "suction_single";
 	public static final String CREATE_RAIL = CREATE + "rail";
 	public static final String CREATE_HARVEST = CREATE + "harvest";
-	public static final String CREATE_LIGHT_AMOUNT = CREATE + "light";
+	public static final String CREATE_LIGHT = CREATE + "light";
 	public static final String CREATE_SCHEMATIC = CREATE + "schematic";
 	public static final String CREATE_STATUE = CREATE + "statue";
 	public static final String CREATE_TREE = CREATE + "tree";
 	public static final String CREATE_ESCAPE_LADDER = CREATE + "escape_ladder";
+
+	public static final String CLEAR = "ib.message.clear";
 }

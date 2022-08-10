@@ -28,6 +28,7 @@
   "item.instantblocks.wand_gold": "Golden Instant Wand",
   "item.instantblocks.wand_diamond": "Diamond Instant Wand",
   "item.instantblocks.wand_netherite": "Netherite Instant Wand",
+  "item.instantblocks.wand_clear": "Clear Wand",
 
   "ib.message.error.wand": "§cYou must use an Instant Wand",
   "ib.message.error.wand_durability": "§cYou don't have enough durability for this block",
@@ -45,6 +46,7 @@
   "ib.message.error.water_disabled": "§cGenerating water is not allowed in the nether",
   "ib.message.error.no_colors": "§cNo colors selected",
   "ib.message.error.tree": "§cError creating huge tree",
+  "ib.message.error.clear": "§cUse on skydive or statue color blocks",
 
   "ib.message.create.wooden_house": "§aInstant Wooden House created",
   "ib.message.create.skydive": "§aInstant §cR§6a§ei§an§2b§3o§bw§a Skydive created",
@@ -61,11 +63,13 @@
   "ib.message.create.suction_single": "§aFilled in 1 block",
   "ib.message.create.rail": "§aInstant Rail created",
   "ib.message.create.harvest": "§aHarvested all blocks around",
-  "ib.message.create.light": "§aLit up the area with %s§a torches",
+  "ib.message.create.light": "§aLit up the area with torches",
   "ib.message.create.schematic": "§aInstant Schematic created from the file '%s§a'",
   "ib.message.create.statue": "§aInstant Statue created of the player '%s§a'",
   "ib.message.create.tree": "§aInstant %s§a created",
   "ib.message.create.escape_ladder": "§aInstant Escape Ladder created going %s§a blocks up",
+
+  "ib.message.clear": "§aCleared %s§a blocks",
 
   "ib.tooltip.wooden_house": "Creates a small wooden house.",
   "ib.tooltip.mining_ladder": "Creates a ladder down to layer %s.",

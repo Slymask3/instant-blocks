@@ -61,6 +61,7 @@ public class Registration {
         helper.register(Names.Items.IB_WAND_GOLD, ModItems.WAND_GOLD);
         helper.register(Names.Items.IB_WAND_DIAMOND, ModItems.WAND_DIAMOND);
         helper.register(Names.Items.IB_WAND_NETHERITE, ModItems.WAND_NETHERITE);
+        helper.register(Names.Items.IB_WAND_CLEAR, ModItems.WAND_CLEAR);
     }
 
     public static void registerTiles(IRegistryHelper<BlockEntityType<?>> helper) {

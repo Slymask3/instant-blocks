@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -277,6 +278,29 @@ public class Helper {
 		}
 		public float getVolume() {
 			return this.volume;
+		}
+	}
+
+	public static class BlockPosHolder {
+		private final List<BlockPos> posList;
+		public BlockPosHolder() {
+			this.posList = new ArrayList<>();
+		}
+		public List<BlockPos> getList() {
+			return this.posList;
+		}
+		public boolean isEmpty() {
+			return this.posList.isEmpty();
+		}
+		public int size() {
+			return this.posList.size();
+		}
+		public boolean add(BlockPos pos) {
+			if(!this.posList.contains(pos)) {
+				this.posList.add(pos);
+				return true;
+			}
+			return false;
 		}
 	}
 }

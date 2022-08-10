@@ -53,7 +53,7 @@ public class InstantLightBlock extends InstantBlock {
         Single.setup(builder,world,x,y,z).setBlock(Blocks.AIR).queue();
         Sphere.setup(builder,world,x,y,z,Common.CONFIG.RADIUS_LIGHT()).setBlock(BlockType.conditionalTorch()).queue();
         builder.build();
-        setCreateMessage(Strings.CREATE_LIGHT_AMOUNT, "0");
+        setCreateMessage(Strings.CREATE_LIGHT);
         return true;
 	}
 
