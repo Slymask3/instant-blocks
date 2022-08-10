@@ -1,6 +1,8 @@
 # Minecraft 1.19.2 Changelog
 
-## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.3...HEAD)
+## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-2-1.6.4...HEAD)
+
+## [1.6.4](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.3...1.19-2-1.6.4) - 2022-08-09
 ### Added
 - Generate through a priority queue system
 - Play block break/place sounds when generating
@@ -57,6 +59,26 @@
 ---
 
 # Minecraft 1.18.2 Changelog
+
+## [1.6.4](https://github.com/slymask3/instant-blocks/compare/1.18.2-1.6.3...1.18-2-1.6.4) - 2022-08-09
+### Added
+- Generate through a priority queue system
+- Play block break/place sounds when generating
+- Presets for instant skydive
+- Cache for instant statue skins
+- Optional cloth config support for forge
+
+### Changed
+- Allow configuring huge trees list
+- Place torches based on light level (configurable)
+- Instant water and suction now work with waterlogged blocks
+
+### Fixed
+- Show particles and play sounds for all players around
+- Cross collision block placement
+- Height limit in the nether for instant skydive
+- Block break speeds for correct tools
+- Instant water and lava blocks breaking in liquid
 
 ## [1.6.3](https://github.com/slymask3/instant-blocks/compare/1.18.2-1.6.2...1.18.2-1.6.3) - 2022-07-21
 ### Fixed
