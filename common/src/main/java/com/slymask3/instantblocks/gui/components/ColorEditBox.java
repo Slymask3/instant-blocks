@@ -17,7 +17,7 @@ public class ColorEditBox extends EditBox {
     private final Font font;
 
     public ColorEditBox(Font font, int x, int y, int width, int height, int index) {
-        super(font, x, y, width, height, Component.translatable("ib.gui.skydive.color",(index+1)));
+        super(font, x, y, width, height, new TranslatableComponent("ib.gui.skydive.color",(index+1)));
         this.font = font;
         this.index = index;
     }
@@ -28,7 +28,7 @@ public class ColorEditBox extends EditBox {
 
     public void renderLabel(PoseStack poseStack) {
         if(!this.getValue().isEmpty()) {
-            this.font.drawShadow(poseStack, Component.translatable("ib.gui.skydive.color",(index+1)), this.x - 50, this.y + 3, ColorHelper.textToColor(this.getValue()).getRGB());
+            this.font.drawShadow(poseStack, new TranslatableComponent("ib.gui.skydive.color",(index+1)), this.x - 50, this.y + 3, ColorHelper.textToColor(this.getValue()).getRGB());
         }
     }
 

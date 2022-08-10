@@ -37,9 +37,9 @@ public class TreeScreen extends InstantScreen {
 
 		this.hugeTreesIndex = blockEntity.hugeTreesIndex < hugeTrees.size() ? blockEntity.hugeTreesIndex : 0;
 
-		this.hollowLogs = new Checkbox(this.width / 2 + 4, 50, 150, 20, Component.translatable("ib.gui.tree.logs"), blockEntity.hollowLogs);
-		this.hollowLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, Component.translatable("ib.gui.tree.leaves"), blockEntity.hollowLeaves);
-		this.airInside = new Checkbox(this.width / 2 + 4, 94, 150, 20, Component.translatable("ib.gui.tree.air"), blockEntity.airInside);
+		this.hollowLogs = new Checkbox(this.width / 2 + 4, 50, 150, 20, new TranslatableComponent("ib.gui.tree.logs"), blockEntity.hollowLogs);
+		this.hollowLeaves = new Checkbox(this.width / 2 + 4, 72, 150, 20, new TranslatableComponent("ib.gui.tree.leaves"), blockEntity.hollowLeaves);
+		this.airInside = new Checkbox(this.width / 2 + 4, 94, 150, 20, new TranslatableComponent("ib.gui.tree.air"), blockEntity.airInside);
 
 		this.treeList = new TreeList(this.width / 2 - 4 - 150,50,144,this.height / 4 + 70);
 		this.addWidget(this.treeList);
@@ -53,8 +53,8 @@ public class TreeScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, Component.translatable("ib.gui.tree.options"), this.width / 2 + 4, 40, 0xA0A0A0);
-		this.font.draw(poseStack, Component.translatable("ib.gui.tree.type"), this.width / 2 - 2 - 150, 40, 0xA0A0A0);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.tree.options"), this.width / 2 + 4, 40, 0xA0A0A0);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.tree.type"), this.width / 2 - 2 - 150, 40, 0xA0A0A0);
 	}
 
 	public void sendInfo(boolean activate) {
@@ -128,7 +128,7 @@ public class TreeScreen extends InstantScreen {
 			}
 
 			public Component getNarration() {
-				return Component.translatable("narrator.select", this.tree.name);
+				return new TranslatableComponent("narrator.select", this.tree.name);
 			}
 		}
 	}

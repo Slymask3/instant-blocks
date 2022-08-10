@@ -21,6 +21,8 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import java.util.Random;
+
 public class InstantLightBlock extends InstantBlock {
     public InstantLightBlock() {
         super(Properties.of(Material.DECORATION)

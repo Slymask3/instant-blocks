@@ -42,7 +42,7 @@ public class SchematicScreen extends InstantScreen {
 
 		SchematicBlockEntity blockEntity = (SchematicBlockEntity)world.getBlockEntity(pos);
 
-		Button open = new Button(this.width / 2 + 134, 50, 20, 20, Component.literal(">"), (p_88642_) -> {
+		Button open = new Button(this.width / 2 + 134, 50, 20, 20, new TextComponent(">"), (p_88642_) -> {
 			Util.getPlatform().openFile(new File(Common.SCHEMATICS_DIR));
 		}, new Button.OnTooltip() {
 			public void onTooltip(Button button, PoseStack poseStack, int x, int y) {
@@ -85,8 +85,8 @@ public class SchematicScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 0xA0A0A0);
-		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 0xA0A0A0);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 0xA0A0A0);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 0xA0A0A0);
 
 		this.font.draw(poseStack, new TranslatableComponent("ib.gui.schematic.file", input.getValue()), this.width / 2 - 2 - 150, this.height / 4 + 115, this.done.active ? 0x00FF00 : 0xAA0000);
 

@@ -56,9 +56,9 @@ public class StatueScreen extends InstantScreen {
 	}
 
 	protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {
-		this.font.draw(poseStack, Component.translatable("ib.gui.statue.input"), this.width / 2 - 4 - 150, 37, 0xA0A0A0);
-		this.font.draw(poseStack, Component.translatable("ib.gui.statue.select"), this.width / 2 - 3 - 150, this.height / 4 + 8 + 12, 0xA0A0A0);
-		this.font.draw(poseStack, Component.translatable("ib.gui.statue.rgb.text"), this.width / 2 - 3 - 150, this.height / 4 + 32 + 88, 0xA0A0A0);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.statue.input"), this.width / 2 - 4 - 150, 37, 0xA0A0A0);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.statue.select"), this.width / 2 - 3 - 150, this.height / 4 + 8 + 12, 0xA0A0A0);
+		this.font.draw(poseStack, new TranslatableComponent("ib.gui.statue.rgb.text"), this.width / 2 - 3 - 150, this.height / 4 + 32 + 88, 0xA0A0A0);
 	}
 
 	public void sendInfo(boolean activate) {

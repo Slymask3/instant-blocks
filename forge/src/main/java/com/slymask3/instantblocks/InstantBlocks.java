@@ -13,7 +13,6 @@ import com.slymask3.instantblocks.network.packet.AbstractPacket;
 import com.slymask3.instantblocks.platform.Services;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -21,9 +20,12 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -65,18 +67,6 @@ public class InstantBlocks {
 		Common.init();
 	}
 
-	private void setupRegistry(final RegisterEvent event) {
-		if(event.getForgeRegistry() != null) {
-			if(event.getForgeRegistry().getRegistryKey().equals(Registry.BLOCK_REGISTRY)) {
-				Registration.registerBlocks(new ForgeRegistryHelper<>(event.getForgeRegistry()));
-			} else if(event.getForgeRegistry().getRegistryKey().equals(Registry.ITEM_REGISTRY)) {
-				Registration.registerItems(new ForgeRegistryHelper<>(event.getForgeRegistry()));
-			} else if(event.getForgeRegistry().getRegistryKey().equals(Registry.BLOCK_ENTITY_TYPE_REGISTRY)) {
-				Registration.registerTiles(new ForgeRegistryHelper<>(event.getForgeRegistry()));
-			}
-		}
-	}
-
 	private void onServerTick(final TickEvent.ServerTickEvent event) {
 		if(event.phase == TickEvent.Phase.END) {
 			Builder.globalTick();
@@ -84,12 +74,12 @@ public class InstantBlocks {
 	}
 
 	private void onBlockBreak(final BlockEvent.BreakEvent event) {
-		if(Builder.inProgress(event.getLevel(),event.getPos())) {
+		if(Builder.inProgress(event.getWorld(),event.getPos())) {
 			event.setCanceled(true);
 		}
 	}
 
-	public static class ForgeRegistryHelper<T> implements IRegistryHelper<T> {
+	public static class ForgeRegistryHelper<T extends IForgeRegistryEntry<T>> implements IRegistryHelper<T> {
 		final IForgeRegistry<T> registry;
 		public ForgeRegistryHelper(IForgeRegistry<T> registry) {
 			this.registry = registry;
