@@ -4,6 +4,7 @@ import com.mojang.math.Vector3f;
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.instant.InstantSuctionBlock;
 import com.slymask3.instantblocks.block.instant.InstantWaterBlock;
+import com.slymask3.instantblocks.builder.BlockPosHolder;
 import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.core.ModBlocks;
@@ -33,10 +34,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 
 public abstract class InstantLiquidBlock extends InstantBlock {
-	private ArrayList<BlockPos> posList;
 	private Block blockCheck;
 	private final Block blockReplace;
 	private String create;
@@ -47,7 +46,6 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 
     public InstantLiquidBlock(Properties properties, Block blockCheck, Block blockReplace) {
         super(properties);
-		this.posList = new ArrayList<>();
 		this.blockCheck = blockCheck;
 		this.blockReplace = blockReplace;
 		this.particle = null;
@@ -119,24 +117,46 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 			Helper.sendMessage(player, Strings.ERROR_WATER_DISABLED);
 			return false;
 		}
-		checkForBlock(world,pos);
-		if(isSuction() && posList.isEmpty()) {
-			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID);
-			Helper.showParticles(world, pos, ClientHelper.Particles.NO_LIQUID);
-			return false;
-		}
-		if(posList.size() >= getMax()) {
-			Helper.sendMessage(player, errorMessage, ChatFormatting.RED + String.valueOf(isSuction() ? Common.CONFIG.MAX_FILL() : Common.CONFIG.MAX_LIQUID()));
-			posList = new ArrayList<>();
-			return false;
-		} else {
-			return true;
-		}
+		return true;
 	}
 
 	public boolean build(Level world, int x, int y, int z, Player player) {
+		BlockPos origin = new BlockPos(x,y,z);
+
+		BlockPosHolder holder = new BlockPosHolder(origin, (pos,hold) -> {
+			hold.checkBlock(pos.north(1));
+			hold.checkBlock(pos.east(1));
+			hold.checkBlock(pos.south(1));
+			hold.checkBlock(pos.west(1));
+			if(!Common.CONFIG.SIMPLE_LIQUID() || isSuction()) {
+				hold.checkBlock(pos.below(1));
+			}
+			if(isSuction()) {
+				hold.checkBlock(pos.above(1));
+			}
+		}, (pos,hold) -> {
+			BlockState state = world.getBlockState(pos);
+			Block blockCurrent = state.getBlock();
+			if((isCorrectBlock(blockCurrent) || isWaterlogged(state) || isWaterloggable(state)) && hold.size() < getMax() && hold.add(pos)) {
+				if(blockCheck == null) {
+					blockCheck = blockCurrent;
+				}
+				hold.checkDirections(pos);
+			}
+		});
+
+		if(isSuction() && holder.isEmpty()) {
+			Helper.sendMessage(player, Strings.ERROR_NO_LIQUID);
+			Helper.showParticles(world, origin, ClientHelper.Particles.NO_LIQUID);
+			return false;
+		}
+		if(holder.size() >= getMax()) {
+			Helper.sendMessage(player, errorMessage, ChatFormatting.RED + String.valueOf(isSuction() ? Common.CONFIG.MAX_FILL() : Common.CONFIG.MAX_LIQUID()));
+			return false;
+		}
+
 		Builder builder = Builder.setup(world,x,y,z).setOrigin(isSuction() ? Builder.Origin.TO : Builder.Origin.FROM);
-		for(BlockPos pos : posList) {
+		for(BlockPos pos : holder.getList()) {
 			BlockState state = world.getBlockState(pos);
 			if(isSuction() && state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED)) {
 				Single.setup(builder,world,pos).setBlock(state.setValue(BlockStateProperties.WATERLOGGED,false)).queue();
@@ -147,41 +167,16 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 			}
 		}
 		Single.setup(builder,world,x,y,z).setBlock(getMainReplaceBlock()).queue();
-		if(posList.size() > 0) {
-			setCreateMessage(create, String.valueOf(isSuction() ? posList.size() : posList.size()+1));
+		if(holder.size() > 0) {
+			setCreateMessage(create, String.valueOf(isSuction() ? holder.size() : holder.size()+1));
 		} else {
 			setCreateMessage(create1);
 		}
 		builder.build();
-		posList = new ArrayList<>();
 		if(isSuction()) {
 			this.blockCheck = null;
 		}
 		return true;
-	}
-
-	private void checkForBlock(Level world, BlockPos pos) {
-		check(world,pos.north(1));
-		check(world,pos.east(1));
-		check(world,pos.south(1));
-		check(world,pos.west(1));
-		if(!Common.CONFIG.SIMPLE_LIQUID() || isSuction()) {
-			check(world,pos.below(1));
-		}
-		if(isSuction()) {
-			check(world,pos.above(1));
-		}
-	}
-
-	private void check(Level world, BlockPos pos) {
-		BlockState state = world.getBlockState(pos);
-		Block blockCurrent = state.getBlock();
-		if((isCorrectBlock(blockCurrent) || isWaterlogged(state) || isWaterloggable(state)) && posList.size() < getMax() && addPos(pos)) {
-			if(blockCheck == null) {
-				blockCheck = blockCurrent;
-			}
-			checkForBlock(world,pos);
-		}
 	}
 
 	private boolean isCorrectBlock(Block block) {
@@ -202,14 +197,6 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 		return isWater()
 			&& state.hasProperty(BlockStateProperties.WATERLOGGED) && !state.getValue(BlockStateProperties.WATERLOGGED)
 			&& ((state.hasProperty(BlockStateProperties.SLAB_TYPE) && !state.getValue(BlockStateProperties.SLAB_TYPE).equals(SlabType.DOUBLE)) || !state.hasProperty(BlockStateProperties.SLAB_TYPE));
-	}
-
-	private boolean addPos(BlockPos pos) {
-		if(!posList.contains(pos)) {
-			posList.add(pos);
-			return true;
-		}
-		return false;
 	}
 
 	public static class LiquidSoundType extends SoundType {

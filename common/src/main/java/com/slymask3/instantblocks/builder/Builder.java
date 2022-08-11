@@ -73,7 +73,7 @@ public class Builder {
 		if(this.status.equals(Status.BUILD) && !queue.isEmpty()) {
 			this.ticks++;
 			if(this.ticks >= this.speed) {
-				List<Helper.BuildSound> buildSounds = new ArrayList<>();
+				List<BuildSound> buildSounds = new ArrayList<>();
 				Single first = queue.get(0);
 				Level world = first.getLevel();
 				BlockPos firstBlockPos = first.getBlockPos();
@@ -93,7 +93,7 @@ public class Builder {
 		}
 	}
 
-	private void handle(List<Helper.BuildSound> buildSounds) {
+	private void handle(List<BuildSound> buildSounds) {
 		if(queue.get(0).getBlockType().isConditionalTorch()) {
 			queue.get(0).build();
 			buildSounds.add(queue.get(0).getBuildSound());

@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.Common;
+import com.slymask3.instantblocks.builder.BuildSound;
 import com.slymask3.instantblocks.item.InstantWandItem;
 import com.slymask3.instantblocks.network.packet.client.MessagePacket;
 import com.slymask3.instantblocks.network.packet.client.ParticlePacket;
@@ -25,7 +26,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -52,7 +52,7 @@ public class Helper {
 	}
 
 	public static void playSound(Player player, SoundEvent sound, float volume) {
-		Common.NETWORK.sendToClient(player,new SoundPacket(List.of(new Helper.BuildSound(player.getOnPos(), sound,null,volume))));
+		Common.NETWORK.sendToClient(player,new SoundPacket(List.of(new BuildSound(player.getOnPos(), sound,null,volume))));
 	}
 
 	public static void addToChest(ChestBlockEntity chest, Block block, int amount) {
@@ -158,21 +158,22 @@ public class Helper {
 		return world.getBlockState(pos).getBlock();
 	}
 
+	public record WeightedBlock(Block block, int weight) {}
 	public static Block getRandomBlock(List<WeightedBlock> blocks) {
 		Random random = new Random();
 		int total = 0;
 		for(WeightedBlock block : blocks) {
-			total += block.getWeight();
+			total += block.weight();
 		}
 		int r = random.nextInt(total) + 1;
 		int count = 0;
 		for(WeightedBlock block : blocks) {
-			count += block.getWeight();
+			count += block.weight();
 			if(count >= r) {
-				return block.getBlock();
+				return block.block();
 			}
 		}
-		return blocks.get(0).getBlock();
+		return blocks.get(0).block();
 	}
 
 	public static Block readBlock(String string, Block fallback) {
@@ -234,73 +235,5 @@ public class Helper {
 			e.printStackTrace();
 		}
 		return content.toString();
-	}
-
-	public static class WeightedBlock {
-		private final Block block;
-		private final int weight;
-		public WeightedBlock(Block block, int weight) {
-			this.block = block;
-			this.weight = weight;
-		}
-		public Block getBlock() {
-			return this.block;
-		}
-		public int getWeight() {
-			return this.weight;
-		}
-	}
-
-	public static class BuildSound {
-		private final BlockPos pos;
-		private final SoundEvent placeSound, breakSound;
-		private final float volume;
-		public BuildSound(BlockPos pos, SoundEvent placeSound, SoundEvent breakSound, float volume) {
-			this.pos = pos;
-			this.placeSound = placeSound;
-			this.breakSound = breakSound;
-			this.volume = volume;
-		}
-		public BlockPos getBlockPos() {
-			return this.pos;
-		}
-		public SoundEvent getPlaceSound() {
-			return this.placeSound;
-		}
-		public String getPlaceSoundString() {
-			return this.placeSound != null ? this.placeSound.getLocation().toString() : "";
-		}
-		public SoundEvent getBreakSound() {
-			return this.breakSound;
-		}
-		public String getBreakSoundString() {
-			return this.breakSound != null ? this.breakSound.getLocation().toString() : "";
-		}
-		public float getVolume() {
-			return this.volume;
-		}
-	}
-
-	public static class BlockPosHolder {
-		private final List<BlockPos> posList;
-		public BlockPosHolder() {
-			this.posList = new ArrayList<>();
-		}
-		public List<BlockPos> getList() {
-			return this.posList;
-		}
-		public boolean isEmpty() {
-			return this.posList.isEmpty();
-		}
-		public int size() {
-			return this.posList.size();
-		}
-		public boolean add(BlockPos pos) {
-			if(!this.posList.contains(pos)) {
-				this.posList.add(pos);
-				return true;
-			}
-			return false;
-		}
 	}
 }

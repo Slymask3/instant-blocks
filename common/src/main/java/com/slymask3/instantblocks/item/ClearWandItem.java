@@ -2,6 +2,7 @@ package com.slymask3.instantblocks.item;
 
 import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.ColorBlock;
+import com.slymask3.instantblocks.builder.BlockPosHolder;
 import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.reference.Strings;
@@ -26,22 +27,33 @@ public class ClearWandItem extends TieredItem {
 
 	public InteractionResult useOn(UseOnContext context) {
 		Level world = context.getLevel();
-		BlockPos pos = context.getClickedPos();
+		BlockPos origin = context.getClickedPos();
 		Player player = context.getPlayer();
 
 		if(Helper.isClient(world) || player == null) {
 			return InteractionResult.PASS;
 		}
 
-		Helper.BlockPosHolder holder = new Helper.BlockPosHolder();
-
-		checkForBlock(world,pos,holder);
-		if(holder.isEmpty()) {
+		if(!(world.getBlockState(origin).getBlock() instanceof ColorBlock)) {
 			Helper.sendMessage(player, Strings.ERROR_CLEAR);
 			return InteractionResult.PASS;
 		}
 
-		Builder builder = Builder.setup(world,pos).setOrigin(Builder.Origin.FROM);
+		BlockPosHolder holder = new BlockPosHolder(origin, (pos,hold) -> {
+			hold.checkBlock(pos.north(1));
+			hold.checkBlock(pos.east(1));
+			hold.checkBlock(pos.south(1));
+			hold.checkBlock(pos.west(1));
+			hold.checkBlock(pos.above(1));
+			hold.checkBlock(pos.below(1));
+		}, (pos,hold) -> {
+			Block block = world.getBlockState(pos).getBlock();
+			if(block instanceof ColorBlock && hold.add(pos)) {
+				hold.checkDirections(pos);
+			}
+		});
+
+		Builder builder = Builder.setup(world,origin).setOrigin(Builder.Origin.FROM);
 		for(BlockPos posItem : holder.getList()) {
 			Single.setup(builder,world,posItem).setBlock(Blocks.AIR).queue();
 		}
@@ -55,21 +67,5 @@ public class ClearWandItem extends TieredItem {
 		Helper.sendMessage(player, Strings.CLEAR, ChatFormatting.GREEN + String.valueOf(holder.size()));
 
 		return InteractionResult.PASS;
-	}
-
-	private void checkForBlock(Level world, BlockPos pos, Helper.BlockPosHolder holder) {
-		check(world,pos.north(1),holder);
-		check(world,pos.east(1),holder);
-		check(world,pos.south(1),holder);
-		check(world,pos.west(1),holder);
-		check(world,pos.above(1),holder);
-		check(world,pos.below(1),holder);
-	}
-
-	private void check(Level world, BlockPos pos, Helper.BlockPosHolder holder) {
-		Block block = world.getBlockState(pos).getBlock();
-		if(block instanceof ColorBlock && holder.add(pos)) {
-			checkForBlock(world,pos,holder);
-		}
 	}
 }
