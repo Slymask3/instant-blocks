@@ -26,7 +26,7 @@ import java.util.List;
 
 public class ClientHelper {
     public enum Screen { STATUE, HARVEST, SKYDIVE, SCHEMATIC, TREE }
-    public enum Particles { GENERATE, NO_LIQUID, PLACE_BLOCK }
+    public enum Particles { NONE, GENERATE, NO_LIQUID, PLACE_BLOCK, CLEAR_BLOCK }
 
     public static List<ColorSet> SKYDIVE_PRESETS;
     public static List<HugeTree> HUGE_TREES;
@@ -60,6 +60,7 @@ public class ClientHelper {
                 playSound(player, pos, new SoundEvent(new ResourceLocation("minecraft", Common.CONFIG.SOUND_NO_LIQUID())), 0.4F);
             }
             case PLACE_BLOCK -> addParticle(world,pos, ParticleTypes.ENCHANT,0.5D,0.5D,0.5D);
+            case CLEAR_BLOCK -> addParticle(world,pos, ParticleTypes.LAVA,0.5D,0.5D,0.5D);
         }
     }
 

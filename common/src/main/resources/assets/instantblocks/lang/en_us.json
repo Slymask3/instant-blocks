@@ -114,7 +114,6 @@
   "ib.gui.schematic.center": "Generate from center",
   "ib.gui.schematic.ignore": "Ignore generating air",
   "ib.gui.schematic.input": "Enter a Schematic File Name:",
-  "ib.gui.schematic.file": "File: '.minecraft/schematics/%s'",
   "ib.gui.schematic.found": "Found %s schematic files:",
   "ib.gui.schematic.instructions.1": "Put .schem files into the 'schematics' folder in .minecraft.",
   "ib.gui.schematic.instructions.2": "If the 'schematics' folder doesn't exit, create it.",

@@ -3,6 +3,7 @@ package com.slymask3.instantblocks.network.packet.client;
 import com.slymask3.instantblocks.builder.BuildSound;
 import com.slymask3.instantblocks.network.PacketHelper;
 import com.slymask3.instantblocks.network.packet.AbstractPacket;
+import com.slymask3.instantblocks.util.ClientHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -27,6 +28,7 @@ public class SoundPacket extends AbstractPacket {
 			buffer.writeUtf(buildSound.getPlaceSoundString());
 			buffer.writeUtf(buildSound.getBreakSoundString());
 			buffer.writeFloat(buildSound.getVolume());
+			buffer.writeInt(buildSound.getParticles().ordinal());
 		}
 		return buffer;
 	}
@@ -41,7 +43,8 @@ public class SoundPacket extends AbstractPacket {
 			SoundEvent placeSound = !placeSoundString.isEmpty() ? new SoundEvent(new ResourceLocation(placeSoundString)) : null;
 			SoundEvent breakSound = !breakSoundString.isEmpty() ? new SoundEvent(new ResourceLocation(breakSoundString)) : null;
 			float volume = buffer.readFloat();
-			buildSounds.add(new BuildSound(pos,placeSound,breakSound,volume));
+			int particles = buffer.readInt();
+			buildSounds.add(new BuildSound(pos,placeSound,breakSound,volume,ClientHelper.Particles.values()[particles]));
 		}
 		return new SoundPacket(buildSounds);
 	}

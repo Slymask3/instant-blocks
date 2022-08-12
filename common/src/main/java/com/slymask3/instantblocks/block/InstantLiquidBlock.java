@@ -123,18 +123,7 @@ public abstract class InstantLiquidBlock extends InstantBlock {
 	public boolean build(Level world, int x, int y, int z, Player player) {
 		BlockPos origin = new BlockPos(x,y,z);
 
-		BlockPosHolder holder = new BlockPosHolder(origin, (pos,hold) -> {
-			hold.checkBlock(pos.north(1));
-			hold.checkBlock(pos.east(1));
-			hold.checkBlock(pos.south(1));
-			hold.checkBlock(pos.west(1));
-			if(!Common.CONFIG.SIMPLE_LIQUID() || isSuction()) {
-				hold.checkBlock(pos.below(1));
-			}
-			if(isSuction()) {
-				hold.checkBlock(pos.above(1));
-			}
-		}, (pos,hold) -> {
+		BlockPosHolder holder = new BlockPosHolder(origin,true,true,true,true,isSuction(),!Common.CONFIG.SIMPLE_LIQUID() || isSuction(), (pos,hold) -> {
 			BlockState state = world.getBlockState(pos);
 			Block blockCurrent = state.getBlock();
 			if((isCorrectBlock(blockCurrent) || isWaterlogged(state) || isWaterloggable(state)) && hold.size() < getMax() && hold.add(pos)) {

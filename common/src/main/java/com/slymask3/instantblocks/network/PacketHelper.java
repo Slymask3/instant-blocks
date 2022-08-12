@@ -39,7 +39,7 @@ public class PacketHelper {
     public static void handleSound(SoundPacket message, Player player) {
         for(BuildSound buildSound : message.buildSounds) {
             if(buildSound.getBreakSound() != null || buildSound.getPlaceSound() != null) {
-                ClientHelper.showParticles(player, buildSound.getBlockPos(), ClientHelper.Particles.PLACE_BLOCK);
+                ClientHelper.showParticles(player, buildSound.getBlockPos(), buildSound.getParticles());
             }
             ClientHelper.playSound(player, buildSound.getBlockPos(), buildSound.getBreakSound(), buildSound.getVolume());
             ClientHelper.playSound(player, buildSound.getBlockPos(), buildSound.getPlaceSound(), buildSound.getVolume());

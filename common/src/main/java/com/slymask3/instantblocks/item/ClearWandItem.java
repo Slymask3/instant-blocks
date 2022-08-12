@@ -6,6 +6,7 @@ import com.slymask3.instantblocks.builder.BlockPosHolder;
 import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.reference.Strings;
+import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -39,21 +40,14 @@ public class ClearWandItem extends TieredItem {
 			return InteractionResult.PASS;
 		}
 
-		BlockPosHolder holder = new BlockPosHolder(origin, (pos,hold) -> {
-			hold.checkBlock(pos.north(1));
-			hold.checkBlock(pos.east(1));
-			hold.checkBlock(pos.south(1));
-			hold.checkBlock(pos.west(1));
-			hold.checkBlock(pos.above(1));
-			hold.checkBlock(pos.below(1));
-		}, (pos,hold) -> {
+		BlockPosHolder holder = new BlockPosHolder(origin,true,true,true,true,true,true, (pos,hold) -> {
 			Block block = world.getBlockState(pos).getBlock();
 			if(block instanceof ColorBlock && hold.add(pos)) {
 				hold.checkDirections(pos);
 			}
 		});
 
-		Builder builder = Builder.setup(world,origin).setOrigin(Builder.Origin.FROM);
+		Builder builder = Builder.setup(world,origin).setOrigin(Builder.Origin.FROM).setParticles(ClientHelper.Particles.CLEAR_BLOCK);
 		for(BlockPos posItem : holder.getList()) {
 			Single.setup(builder,world,posItem).setBlock(Blocks.AIR).queue();
 		}

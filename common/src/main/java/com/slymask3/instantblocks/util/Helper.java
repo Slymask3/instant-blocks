@@ -52,7 +52,7 @@ public class Helper {
 	}
 
 	public static void playSound(Player player, SoundEvent sound, float volume) {
-		Common.NETWORK.sendToClient(player,new SoundPacket(List.of(new BuildSound(player.getOnPos(), sound,null,volume))));
+		Common.NETWORK.sendToClient(player,new SoundPacket(List.of(new BuildSound(player.getOnPos(), sound,null,volume,ClientHelper.Particles.NONE))));
 	}
 
 	public static void addToChest(ChestBlockEntity chest, Block block, int amount) {

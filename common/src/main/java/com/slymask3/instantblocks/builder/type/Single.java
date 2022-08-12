@@ -7,6 +7,7 @@ import com.slymask3.instantblocks.block.instant.InstantLightBlock;
 import com.slymask3.instantblocks.builder.BlockType;
 import com.slymask3.instantblocks.builder.BuildSound;
 import com.slymask3.instantblocks.builder.Builder;
+import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -166,9 +167,9 @@ public class Single extends Base<Single> {
         return this.blockType;
     }
 
-    public BuildSound getBuildSound() {
+    public BuildSound getBuildSound(ClientHelper.Particles particles) {
         if(blockType.isConditionalTorch() && (this.getWorldBlock().equals(Blocks.TORCH) || this.getWorldBlock().equals(Blocks.WALL_TORCH))) {
-            return new BuildSound(getBlockPos(),Blocks.TORCH.getSoundType(Blocks.TORCH.defaultBlockState()).getPlaceSound(),null,0.1F);
+            return new BuildSound(getBlockPos(),Blocks.TORCH.getSoundType(Blocks.TORCH.defaultBlockState()).getPlaceSound(),null,0.1F,particles);
         }
         BlockState breakBlockState = this.getWorldBlockState();
         BlockState placeBlockState = this.blockType.getBlockState(); //this.blockType.getBlockState(world,y);
@@ -194,6 +195,6 @@ public class Single extends Base<Single> {
         //Common.LOG.info("place: " + (placeBlockState != null ? placeBlockState.getBlock() : "none") + " - " + (placeSound != null ? placeSound.getLocation() : "none"));
         //Common.LOG.info("break: " + (breakBlockState != null ? breakBlockState.getBlock() : "none") + " - " + (breakSound != null ? breakSound.getLocation() : "none"));
         //Common.LOG.info("------");
-        return new BuildSound(this.getBlockPos(),placeSound,breakSound,0.1F);
+        return new BuildSound(this.getBlockPos(),placeSound,breakSound,0.1F,particles);
     }
 }

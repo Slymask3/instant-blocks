@@ -4,6 +4,9 @@
 ### Added
 - Clear wand for removing skydive and statue color blocks
 
+### Changed
+- Instant grinder input to a bubble column
+
 ### Fixed
 - Prevent activating an instant block more than once
 - Instant light message
