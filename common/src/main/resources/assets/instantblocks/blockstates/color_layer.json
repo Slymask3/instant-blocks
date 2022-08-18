@@ -1,0 +1,43 @@
+{
+  "variants": {
+    "face=ceiling,facing=east": {
+      "model": "instantblocks:block/color_layer_ceiling"
+    },
+    "face=ceiling,facing=north": {
+      "model": "instantblocks:block/color_layer_ceiling"
+    },
+    "face=ceiling,facing=south": {
+      "model": "instantblocks:block/color_layer_ceiling"
+    },
+    "face=ceiling,facing=west": {
+      "model": "instantblocks:block/color_layer_ceiling"
+    },
+    "face=wall,facing=east": {
+      "model": "instantblocks:block/color_layer_wall"
+    },
+    "face=wall,facing=north": {
+      "model": "instantblocks:block/color_layer_wall",
+      "y": 270
+    },
+    "face=wall,facing=south": {
+      "model": "instantblocks:block/color_layer_wall",
+      "y": 90
+    },
+    "face=wall,facing=west": {
+      "model": "instantblocks:block/color_layer_wall",
+      "y": 180
+    },
+    "face=floor,facing=east": {
+      "model": "instantblocks:block/color_layer_floor"
+    },
+    "face=floor,facing=north": {
+      "model": "instantblocks:block/color_layer_floor"
+    },
+    "face=floor,facing=south": {
+      "model": "instantblocks:block/color_layer_floor"
+    },
+    "face=floor,facing=west": {
+      "model": "instantblocks:block/color_layer_floor"
+    }
+  }
+}

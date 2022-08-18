@@ -1,6 +1,8 @@
 package com.slymask3.instantblocks.util;
 
 import com.slymask3.instantblocks.Common;
+import com.slymask3.instantblocks.block.ColorBlock;
+import com.slymask3.instantblocks.block.ColorLayerBlock;
 import com.slymask3.instantblocks.builder.BuildSound;
 import com.slymask3.instantblocks.item.InstantWandItem;
 import com.slymask3.instantblocks.network.packet.client.MessagePacket;
@@ -235,5 +237,9 @@ public class Helper {
 			e.printStackTrace();
 		}
 		return content.toString();
+	}
+
+	public static boolean isColorBlock(Block block) {
+		return block instanceof ColorBlock || block instanceof ColorLayerBlock;
 	}
 }

@@ -12,6 +12,6 @@ public class FabricTiles implements ITileHelper {
         ModTiles.HARVEST = FabricBlockEntityTypeBuilder.create(HarvestBlockEntity::new, ModBlocks.INSTANT_HARVEST).build(null);
         ModTiles.SCHEMATIC = FabricBlockEntityTypeBuilder.create(SchematicBlockEntity::new, ModBlocks.INSTANT_SCHEMATIC).build(null);
         ModTiles.TREE = FabricBlockEntityTypeBuilder.create(TreeBlockEntity::new, ModBlocks.INSTANT_TREE).build(null);
-        ModTiles.COLOR = FabricBlockEntityTypeBuilder.create(ColorBlockEntity::new, ModBlocks.COLOR, ModBlocks.SKYDIVE_TP).build(null);
+        ModTiles.COLOR = FabricBlockEntityTypeBuilder.create(ColorBlockEntity::new, ModBlocks.COLOR, ModBlocks.COLOR_LAYER, ModBlocks.SKYDIVE_TP).build(null);
     }
 }

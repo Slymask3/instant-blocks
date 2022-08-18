@@ -3,6 +3,7 @@
 ## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19.2-1.6.4...HEAD)
 ### Added
 - Clear wand for removing skydive and statue color blocks
+- Skin overlay support for instant statue
 
 ### Changed
 - Instant grinder input to a bubble column

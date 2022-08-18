@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.core;
 
 import com.slymask3.instantblocks.block.ColorBlock;
+import com.slymask3.instantblocks.block.ColorLayerBlock;
 import com.slymask3.instantblocks.block.SkydiveTPBlock;
 import com.slymask3.instantblocks.block.instant.*;
 import net.minecraft.world.level.block.Block;
@@ -24,6 +25,7 @@ public class ModBlocks {
     public static Block INSTANT_SCHEMATIC;
     public static Block INSTANT_TREE;
     public static Block COLOR;
+    public static Block COLOR_LAYER;
     public static Block SKYDIVE_TP;
 
     public static void init() {
@@ -45,6 +47,7 @@ public class ModBlocks {
         INSTANT_SCHEMATIC = new InstantSchematicBlock();
         INSTANT_TREE = new InstantTreeBlock();
         COLOR = new ColorBlock();
+        COLOR_LAYER = new ColorLayerBlock();
         SKYDIVE_TP = new SkydiveTPBlock();
     }
 }

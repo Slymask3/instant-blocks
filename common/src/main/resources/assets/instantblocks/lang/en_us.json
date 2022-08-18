@@ -20,6 +20,7 @@
   "block.instantblocks.instant_schematic": "§3Instant Schematic§f",
   "block.instantblocks.instant_tree": "§3Instant Huge Tree§f",
   "block.instantblocks.color": "Color Block",
+  "block.instantblocks.color_layer": "Color Layer Block",
   "block.instantblocks.skydive_tp": "Skydive TP Block",
 
   "item.instantblocks.wand_wood": "Wooden Instant Wand",

@@ -5,12 +5,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.slymask3.instantblocks.Common;
+import com.slymask3.instantblocks.block.ColorLayerBlock;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.StatueBlockEntity;
 import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
+import com.slymask3.instantblocks.util.ColorHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -191,10 +193,20 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 
 			Single.setup(builder,world,x,y,z).setBlock(Blocks.AIR).queue();
 
+			if(img.getHeight() == 64) {
+				if(skin.isSlim()) {
+					buildArmsSlimOverlay(builder, img, direction, blockEntity.armLeft, blockEntity.armRight, blockEntity.rgb);
+				} else {
+					buildArmsOverlay(builder, img, direction, blockEntity.armLeft, blockEntity.armRight, blockEntity.rgb);
+				}
+				buildLegsOverlay(builder, img, direction, blockEntity.armLeft, blockEntity.armRight, blockEntity.rgb);
+				buildHeadOverlay(builder, img, direction, blockEntity.head, blockEntity.rgb);
+				buildBodyOverlay(builder, img, direction, blockEntity.head, blockEntity.rgb);
+			}
+
 			buildHead(builder, img, direction, blockEntity.head, blockEntity.rgb);
 			buildBody(builder, img, direction, blockEntity.body, blockEntity.rgb);
 			buildLegs(builder, img, direction, blockEntity.legLeft, blockEntity.legRight, blockEntity.rgb);
-
 			if(skin.isSlim()) {
 				buildArmsSlim(builder, img, direction, blockEntity.armLeft, blockEntity.armRight, blockEntity.rgb);
 			} else {
@@ -209,6 +221,86 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 			Helper.sendMessage(player, Strings.ERROR_STATUE, ChatFormatting.RED + blockEntity.username);
 		}
 		return false;
+	}
+
+
+	private static void buildHeadOverlay(Builder builder, BufferedImage img, Direction direction, boolean build, boolean rgb) {
+		if(build) {
+			buildFromImage(builder,direction,rgb,5,0,3,0,32,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,40,0,8,8,RelativeDirection.DOWN); //top
+			buildFromImage(builder,direction,rgb,5,0,3,0,23,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,48,0,8,8,RelativeDirection.UP); //bottom
+			buildFromImage(builder,direction,rgb,5,0,4,0,31,0, RelativeDirection.BACK, RelativeDirection.DOWN,img,32,8,8,8,RelativeDirection.RIGHT); //left
+			buildFromImage(builder,direction,rgb,0,2,0,5,31,0, RelativeDirection.FORWARD, RelativeDirection.DOWN,img,48,8,8,8,RelativeDirection.LEFT); //right
+			buildFromImage(builder,direction,rgb,0,3,3,0,31,0, RelativeDirection.RIGHT, RelativeDirection.DOWN,img,40,8,8,8,RelativeDirection.FORWARD); //front
+			buildFromImage(builder,direction,rgb,6,0,0,4,31,0, RelativeDirection.LEFT, RelativeDirection.DOWN,img,56,8,8,8,RelativeDirection.BACK); //back
+		}
+	}
+
+	private static void buildBodyOverlay(Builder builder, BufferedImage img, Direction direction, boolean build, boolean rgb) {
+		if(build) {
+			buildFromImage(builder,direction,rgb,3,0,3,0,24,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,20, 32,8,4,RelativeDirection.DOWN); //top
+			buildFromImage(builder,direction,rgb,3,0,3,0,11,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,28, 32,8,4,RelativeDirection.UP); //bottom
+			buildFromImage(builder,direction,rgb,3,0,4,0,23,0, RelativeDirection.BACK, RelativeDirection.DOWN,img,16, 36,4,12,RelativeDirection.RIGHT); //left
+			buildFromImage(builder,direction,rgb,0,0,0,5,23,0, RelativeDirection.FORWARD, RelativeDirection.DOWN,img,28, 36,4,12,RelativeDirection.LEFT); //right
+			buildFromImage(builder,direction,rgb,0,1,3,0,23,0, RelativeDirection.RIGHT, RelativeDirection.DOWN,img,20, 36,8,12,RelativeDirection.FORWARD); //front
+			buildFromImage(builder,direction,rgb,4,0,0,4,23,0, RelativeDirection.LEFT, RelativeDirection.DOWN,img,32, 36,8,12,RelativeDirection.BACK); //back
+		}
+	}
+
+	private static void buildArmsOverlay(Builder builder, BufferedImage img, Direction direction, boolean buildLeft, boolean buildRight, boolean rgb) {
+		if(buildLeft) {
+			buildFromImage(builder,direction,rgb,3,0,0,5,24,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,52, 48,4,4,RelativeDirection.DOWN); //top
+			buildFromImage(builder,direction,rgb,3,0,0,5,11,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,56, 48,4,4,RelativeDirection.UP); //bottom
+			buildFromImage(builder,direction,rgb,3,0,0,4,23,0, RelativeDirection.BACK, RelativeDirection.DOWN,img,48, 52,4,12,RelativeDirection.RIGHT); //left
+			buildFromImage(builder,direction,rgb,0,0,0,9,23,0, RelativeDirection.FORWARD, RelativeDirection.DOWN,img,56, 52,4,12,RelativeDirection.LEFT); //right
+			buildFromImage(builder,direction,rgb,0,1,0,5,23,0, RelativeDirection.RIGHT, RelativeDirection.DOWN,img,52, 52,4,12,RelativeDirection.FORWARD); //front
+			buildFromImage(builder,direction,rgb,4,0,0,8,23,0, RelativeDirection.LEFT, RelativeDirection.DOWN,img,60, 52,4,12,RelativeDirection.BACK); //back
+		}
+		if(buildRight) {
+			buildFromImage(builder,direction,rgb,3,0,7,0,24,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,44, 32,4,4,RelativeDirection.DOWN); //top
+			buildFromImage(builder,direction,rgb,3,0,7,0,11,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,48, 32,4,4,RelativeDirection.UP); //bottom
+			buildFromImage(builder,direction,rgb,3,0,8,0,23,0, RelativeDirection.BACK, RelativeDirection.DOWN,img,40, 36,4,12,RelativeDirection.RIGHT); //left
+			buildFromImage(builder,direction,rgb,0,0,3,0,23,0, RelativeDirection.FORWARD, RelativeDirection.DOWN,img,48, 36,4,12,RelativeDirection.LEFT); //right
+			buildFromImage(builder,direction,rgb,0,1,7,0,23,0, RelativeDirection.RIGHT, RelativeDirection.DOWN,img,44, 36,4,12,RelativeDirection.FORWARD); //front
+			buildFromImage(builder,direction,rgb,4,0,4,0,23,0, RelativeDirection.LEFT, RelativeDirection.DOWN,img,52, 36,4,12,RelativeDirection.BACK); //back
+		}
+	}
+
+	private static void buildArmsSlimOverlay(Builder builder, BufferedImage img, Direction direction, boolean buildLeft, boolean buildRight, boolean rgb) {
+		if(buildLeft) {
+			buildFromImage(builder,direction,rgb,3,0,0,5,24,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,52, 48,3,4,RelativeDirection.DOWN); //top
+			buildFromImage(builder,direction,rgb,3,0,0,5,11,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,55, 48,3,4,RelativeDirection.UP); //bottom
+			buildFromImage(builder,direction,rgb,3,0,0,4,23,0, RelativeDirection.BACK, RelativeDirection.DOWN,img,48, 52,4,12,RelativeDirection.RIGHT); //left
+			buildFromImage(builder,direction,rgb,0,0,0,8,23,0, RelativeDirection.FORWARD, RelativeDirection.DOWN,img,55, 52,4,12,RelativeDirection.LEFT); //right
+			buildFromImage(builder,direction,rgb,0,1,0,5,23,0, RelativeDirection.RIGHT, RelativeDirection.DOWN,img,52, 52,3,12,RelativeDirection.FORWARD); //front
+			buildFromImage(builder,direction,rgb,4,0,0,7,23,0, RelativeDirection.LEFT, RelativeDirection.DOWN,img,59, 52,3,12,RelativeDirection.BACK); //back
+		}
+		if(buildRight) {
+			buildFromImage(builder,direction,rgb,3,0,6,0,24,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,44, 32,3,4,RelativeDirection.DOWN); //top
+			buildFromImage(builder,direction,rgb,3,0,6,0,11,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,47, 32,3,4,RelativeDirection.UP); //bottom
+			buildFromImage(builder,direction,rgb,3,0,7,0,23,0, RelativeDirection.BACK, RelativeDirection.DOWN,img,40, 36,4,12,RelativeDirection.RIGHT); //left
+			buildFromImage(builder,direction,rgb,0,0,3,0,23,0, RelativeDirection.FORWARD, RelativeDirection.DOWN,img,47, 36,4,12,RelativeDirection.LEFT); //right
+			buildFromImage(builder,direction,rgb,0,1,6,0,23,0, RelativeDirection.RIGHT, RelativeDirection.DOWN,img,44, 36,3,12,RelativeDirection.FORWARD); //front
+			buildFromImage(builder,direction,rgb,4,0,4,0,23,0, RelativeDirection.LEFT, RelativeDirection.DOWN,img,51, 36,3,12,RelativeDirection.BACK); //back
+		}
+	}
+
+	private static void buildLegsOverlay(Builder builder, BufferedImage img, Direction direction, boolean buildLeft, boolean buildRight, boolean rgb) {
+		if(buildLeft) {
+			buildFromImage(builder,direction,rgb,3,0,0,1,12,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,4, 48,4,4,RelativeDirection.DOWN); //top
+			//buildFromImage(builder,direction,rgb,3,0,0,1,0,1, RelativeDirection.RIGHT, RelativeDirection.BACK,img,8, 48,4,4,RelativeDirection.UP); //bottom
+			buildFromImage(builder,direction,rgb,3,0,0,0,11,0, RelativeDirection.BACK, RelativeDirection.DOWN,img,0, 52,4,12,RelativeDirection.RIGHT); //left
+			buildFromImage(builder,direction,rgb,0,0,0,5,11,0, RelativeDirection.FORWARD, RelativeDirection.DOWN,img,8, 52,4,12,RelativeDirection.LEFT); //right
+			buildFromImage(builder,direction,rgb,0,1,0,1,11,0, RelativeDirection.RIGHT, RelativeDirection.DOWN,img,4, 52,4,12,RelativeDirection.FORWARD); //front
+			buildFromImage(builder,direction,rgb,4,0,0,4,11,0, RelativeDirection.LEFT, RelativeDirection.DOWN,img,12, 52,4,12,RelativeDirection.BACK); //back
+		}
+		if(buildRight) {
+			buildFromImage(builder,direction,rgb,3,0,3,0,12,0, RelativeDirection.RIGHT, RelativeDirection.BACK,img,4, 32,4,4,RelativeDirection.DOWN); //top
+			//buildFromImage(builder,direction,rgb,3,0,3,0,0,1, RelativeDirection.RIGHT, RelativeDirection.BACK,img,8, 32,4,4,RelativeDirection.UP); //bottom
+			buildFromImage(builder,direction,rgb,3,0,4,0,11,0, RelativeDirection.BACK, RelativeDirection.DOWN,img,0, 36,4,12,RelativeDirection.RIGHT); //left
+			buildFromImage(builder,direction,rgb,0,0,0,1,11,0, RelativeDirection.FORWARD, RelativeDirection.DOWN,img,8, 36,4,12,RelativeDirection.LEFT); //right
+			buildFromImage(builder,direction,rgb,0,1,3,0,11,0, RelativeDirection.RIGHT, RelativeDirection.DOWN,img,4, 36,4,12,RelativeDirection.FORWARD); //front
+			buildFromImage(builder,direction,rgb,4,0,0,0,11,0, RelativeDirection.LEFT, RelativeDirection.DOWN,img,12, 36,4,12,RelativeDirection.BACK); //back
+		}
 	}
 
 	private static void buildHead(Builder builder, BufferedImage img, Direction direction, boolean build, boolean rgb) {
@@ -320,6 +412,10 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 	private enum RelativeDirection { LEFT,RIGHT,FORWARD,BACK,UP,DOWN }
 
 	private static void buildFromImage(Builder builder, Direction direction, boolean rgb, int forward, int back, int left, int right, int up, int down, RelativeDirection dirX, RelativeDirection dirY, BufferedImage img, int imgX, int imgY, int sizeX, int sizeY) {
+		buildFromImage(builder,direction,rgb,forward,back,left,right,up,down,dirX,dirY,img,imgX,imgY,sizeX,sizeY,null);
+	}
+
+	private static void buildFromImage(Builder builder, Direction direction, boolean rgb, int forward, int back, int left, int right, int up, int down, RelativeDirection dirX, RelativeDirection dirY, BufferedImage img, int imgX, int imgY, int sizeX, int sizeY, RelativeDirection overlayDirection) {
 		BlockPos pos = builder.getOriginPos();
 		for(int xtimes=0; xtimes<sizeX; xtimes++) {
 			for(int ytimes=0; ytimes<sizeY; ytimes++) {
@@ -345,7 +441,22 @@ public class InstantStatueBlock extends InstantBlock implements EntityBlock {
 					case UP -> u += ytimes;
 					case DOWN -> d += ytimes;
 				}
-				Single.setup(builder,builder.getWorld(),pos).offset(direction,f,b,l,r,u,d).setImageColor(img,imgX+xtimes,imgY+ytimes,rgb).queue();
+				if(overlayDirection != null) {
+					if(rgb && ColorHelper.isTransparent(img.getRGB(imgX+xtimes,imgY+ytimes))) {
+						Direction stateDirection = switch(overlayDirection) {
+							case LEFT -> direction.getCounterClockWise();
+							case RIGHT -> direction.getClockWise();
+							case FORWARD -> direction;
+							case BACK -> direction.getOpposite();
+							case UP -> Direction.UP;
+							case DOWN -> Direction.DOWN;
+						};
+						BlockState state = ColorLayerBlock.getStateForDirection(stateDirection);
+						Single.setup(builder,builder.getWorld(),pos).offset(direction,f,b,l,r,u,d).setImageColor(img,imgX+xtimes,imgY+ytimes,state).queue();
+					}
+				} else {
+					Single.setup(builder,builder.getWorld(),pos).offset(direction,f,b,l,r,u,d).setImageColor(img,imgX+xtimes,imgY+ytimes,rgb).queue();
+				}
 			}
 		}
 	}

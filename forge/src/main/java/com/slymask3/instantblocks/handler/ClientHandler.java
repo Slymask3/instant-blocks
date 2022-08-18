@@ -21,6 +21,7 @@ public class ClientHandler {
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.getBlockColors().register((state,world,pos,tintIndex) -> world != null && pos != null ? BiomeColors.getAverageWaterColor(world, pos) : -1, ModBlocks.INSTANT_WATER);
         event.getBlockColors().register(new ClientHelper.Color(), ModBlocks.COLOR);
+        event.getBlockColors().register(new ClientHelper.Color(), ModBlocks.COLOR_LAYER);
         event.getBlockColors().register(new ClientHelper.Color(), ModBlocks.SKYDIVE_TP);
     }
 

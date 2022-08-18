@@ -1,7 +1,6 @@
 package com.slymask3.instantblocks.item;
 
 import com.slymask3.instantblocks.Common;
-import com.slymask3.instantblocks.block.ColorBlock;
 import com.slymask3.instantblocks.builder.BlockPosHolder;
 import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.builder.type.Single;
@@ -35,14 +34,14 @@ public class ClearWandItem extends TieredItem {
 			return InteractionResult.PASS;
 		}
 
-		if(!(world.getBlockState(origin).getBlock() instanceof ColorBlock)) {
+		if(!Helper.isColorBlock(world.getBlockState(origin).getBlock())) {
 			Helper.sendMessage(player, Strings.ERROR_CLEAR);
 			return InteractionResult.PASS;
 		}
 
 		BlockPosHolder holder = new BlockPosHolder(origin,true,true,true,true,true,true, (pos,hold) -> {
 			Block block = world.getBlockState(pos).getBlock();
-			if(block instanceof ColorBlock && hold.add(pos)) {
+			if(Helper.isColorBlock(block) && hold.add(pos)) {
 				hold.checkDirections(pos);
 			}
 		});

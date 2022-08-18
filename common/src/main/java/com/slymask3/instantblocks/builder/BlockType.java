@@ -60,6 +60,10 @@ public class BlockType {
         return setup(Type.COLOR, block.defaultBlockState()).setColor(color);
     }
 
+    public static BlockType color(int color, BlockState state) {
+        return setup(Type.COLOR, state).setColor(color);
+    }
+
     public static BlockType stone() {
         return setup(Type.STONE, Blocks.STONE.defaultBlockState());
     }

@@ -31,6 +31,7 @@ public class Registration {
         helper.register(Names.Blocks.IB_SCHEMATIC, ModBlocks.INSTANT_SCHEMATIC);
         helper.register(Names.Blocks.IB_TREE, ModBlocks.INSTANT_TREE);
         helper.register(Names.Blocks.COLOR, ModBlocks.COLOR);
+        helper.register(Names.Blocks.COLOR_LAYER, ModBlocks.COLOR_LAYER);
         helper.register(Names.Blocks.SKYDIVE_TP, ModBlocks.SKYDIVE_TP);
     }
 
@@ -54,6 +55,7 @@ public class Registration {
         helper.register(Names.Blocks.IB_SCHEMATIC, new InstantBlockItem(ModBlocks.INSTANT_SCHEMATIC));
         helper.register(Names.Blocks.IB_TREE, new InstantBlockItem(ModBlocks.INSTANT_TREE));
         helper.register(Names.Blocks.COLOR, new InstantBlockItem(ModBlocks.COLOR));
+        helper.register(Names.Blocks.COLOR_LAYER, new InstantBlockItem(ModBlocks.COLOR_LAYER));
         helper.register(Names.Blocks.SKYDIVE_TP, new InstantBlockItem(ModBlocks.SKYDIVE_TP));
         helper.register(Names.Items.IB_WAND_WOOD, ModItems.WAND_WOOD);
         helper.register(Names.Items.IB_WAND_STONE, ModItems.WAND_STONE);

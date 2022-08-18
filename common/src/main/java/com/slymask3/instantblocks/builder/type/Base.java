@@ -51,7 +51,11 @@ public abstract class Base<T extends Base<T>> {
     }
 
     public T setImageColor(BufferedImage image, int x, int y, boolean useRGB) {
-        return useRGB ? setColor(image.getRGB(x, y)) : setBlock(ColorHelper.getWoolColor(ColorHelper.getColorAt(image, x, y)));
+        return useRGB ? setColor(image.getRGB(x,y)) : setBlock(ColorHelper.getWoolColor(ColorHelper.getColorAt(image, x, y)));
+    }
+
+    public T setImageColor(BufferedImage image, int x, int y, BlockState state) {
+        return setBlock(BlockType.color(image.getRGB(x,y),state));
     }
 
     public T setStone() {
