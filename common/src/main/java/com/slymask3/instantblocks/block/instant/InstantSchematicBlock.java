@@ -82,7 +82,7 @@ public class InstantSchematicBlock extends InstantBlock implements EntityBlock {
 					int index = y * width * length + z * width + x;
 					BlockState state = schematic.getBlockState(index);
 					BlockPos pos = new BlockPos(x+X-x_offset,y+Y,z+Z-z_offset);
-					if(!(ignoreAir && state.getBlock() == Blocks.AIR)) {
+					if(state != null && !(ignoreAir && state.getBlock() == Blocks.AIR)) {
 						Single.setup(builder,world,pos).setBlock(state).queue();
 						CompoundTag tag = schematic.getBlockEntityTag(x,y,z);
 						BlockEntity entity = world.getBlockEntity(pos);

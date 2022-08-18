@@ -26,14 +26,6 @@ public class Single extends Base<Single> {
         super(builder, world, x, y, z);
     }
 
-    public Single offset(Direction direction, int forwardBack, int leftRight) {
-        int forward = Helper.isPositive(forwardBack) ? 0 : Math.abs(forwardBack);
-        int back = Helper.isPositive(forwardBack) ? forwardBack : 0;
-        int left = Helper.isPositive(leftRight) ? leftRight : 0;
-        int right = Helper.isPositive(leftRight) ? 0 : Math.abs(leftRight);
-        return offset(direction, forward, back, left, right, 0, 0);
-    }
-
     public Single offset(Direction direction, int forward, int back, int left, int right) {
         return offset(direction, forward, back, left, right, 0, 0);
     }

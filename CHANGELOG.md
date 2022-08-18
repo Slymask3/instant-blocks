@@ -11,6 +11,7 @@
 - Prevent activating an instant block more than once
 - Instant light message
 - Concurrent instant liquid blocks
+- Instant statue skin mirroring ([#4](https://github.com/slymask3/instant-blocks/issues/4))
 
 ## [1.6.4](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.3...1.19.2-1.6.4) - 2022-08-09
 ### Added

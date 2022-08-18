@@ -77,6 +77,14 @@ public class Builder {
 		return this;
 	}
 
+	public Level getWorld() {
+		return this.world;
+	}
+
+	public BlockPos getOriginPos() {
+		return this.originPos;
+	}
+
 	public void tick() {
 		if(this.status.equals(Status.BUILD) && !queue.isEmpty()) {
 			this.ticks++;
@@ -104,13 +112,19 @@ public class Builder {
 	private void handle(List<BuildSound> buildSounds) {
 		if(queue.get(0).getBlockType().isConditionalTorch()) {
 			queue.get(0).build();
-			buildSounds.add(queue.get(0).getBuildSound(this.particles));
+			addToList(buildSounds);
 			queue.remove(0);
 			return;
 		}
-		buildSounds.add(queue.get(0).getBuildSound(this.particles));
+		addToList(buildSounds);
 		queue.get(0).build();
 		queue.remove(0);
+	}
+
+	private void addToList(List<BuildSound> buildSounds) {
+		if(buildSounds.size() < 1024) {
+			buildSounds.add(queue.get(0).getBuildSound(this.particles));
+		}
 	}
 
 	public void queue(Single single, boolean replace) {
