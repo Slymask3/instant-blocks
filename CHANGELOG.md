@@ -5,14 +5,12 @@
 - Clear wand for removing skydive and statue color blocks
 - Skin overlay support for instant statue
 
-### Changed
-- Instant grinder input to a bubble column
-
 ### Fixed
 - Prevent activating an instant block more than once
-- Instant light message
+- Instant light create message
 - Concurrent instant liquid blocks
 - Instant statue skin mirroring ([#4](https://github.com/slymask3/instant-blocks/issues/4))
+- Instant grinder input tube
 
 ## [1.6.4](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.3...1.19.2-1.6.4) - 2022-08-09
 ### Added

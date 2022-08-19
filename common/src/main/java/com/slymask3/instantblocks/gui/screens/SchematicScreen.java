@@ -87,12 +87,6 @@ public class SchematicScreen extends InstantScreen {
 		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.input"), this.width / 2 - 4 - 150, 37, 0xA0A0A0);
 
 		this.font.draw(poseStack, Component.translatable("ib.gui.schematic.found", this.schematics.size()), this.width / 2 - 2 - 150, 98, 0xFFFFFF);
-
-		if(this.schematics.size() == 0) {
-			this.font.draw(poseStack, Component.translatable("ib.gui.schematic.instructions.1"), this.width / 2 - 3 - 150, 120, 0xAA0000);
-			this.font.draw(poseStack, Component.translatable("ib.gui.schematic.instructions.2"), this.width / 2 - 3 - 150, 130, 0xAA0000);
-			this.font.draw(poseStack, Component.translatable("ib.gui.schematic.instructions.3"), this.width / 2 - 3 - 150, 140, 0xAA0000);
-		}
 	}
 	
 	public void sendInfo(boolean activate) {

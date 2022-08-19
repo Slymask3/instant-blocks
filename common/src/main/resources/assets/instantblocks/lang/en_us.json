@@ -70,7 +70,7 @@
   "ib.message.create.tree": "§aInstant %s§a created",
   "ib.message.create.escape_ladder": "§aInstant Escape Ladder created going %s§a blocks up",
 
-  "ib.message.clear": "§aCleared %s§a blocks",
+  "ib.message.clear": "§6Clearing %s§6 blocks",
 
   "ib.tooltip.wooden_house": "Creates a small wooden house.",
   "ib.tooltip.mining_ladder": "Creates a ladder down to layer %s.",
@@ -116,9 +116,6 @@
   "ib.gui.schematic.ignore": "Ignore generating air",
   "ib.gui.schematic.input": "Enter a Schematic File Name:",
   "ib.gui.schematic.found": "Found %s schematic files:",
-  "ib.gui.schematic.instructions.1": "Put .schem files into the 'schematics' folder in .minecraft.",
-  "ib.gui.schematic.instructions.2": "If the 'schematics' folder doesn't exit, create it.",
-  "ib.gui.schematic.instructions.3": "Files will update here right away, no need to restart.",
   "ib.gui.skydive.title": "Instant Skydive",
   "ib.gui.skydive.random": "Randomize",
   "ib.gui.skydive.teleport": "Teleport to top",

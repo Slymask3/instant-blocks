@@ -57,7 +57,7 @@ public class ClearWandItem extends TieredItem {
 			entity.broadcastBreakEvent(InteractionHand.MAIN_HAND);
 		});
 
-		Helper.sendMessage(player, Strings.CLEAR, ChatFormatting.GREEN + String.valueOf(holder.size()));
+		Helper.sendMessage(player, Strings.CLEAR, ChatFormatting.GOLD + String.valueOf(holder.size()));
 
 		return InteractionResult.PASS;
 	}
