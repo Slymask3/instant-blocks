@@ -104,6 +104,10 @@ public class ColorHelper {
 		return new Color(color);
 	}
 
+	public static boolean isTransparent(int color) {
+		return color >> 24 != 0x00;
+	}
+
 	public static class VanillaColor {
 		private float hue;
 		private float saturation;

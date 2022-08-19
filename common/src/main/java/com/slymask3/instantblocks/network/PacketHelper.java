@@ -2,6 +2,7 @@ package com.slymask3.instantblocks.network;
 
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.*;
+import com.slymask3.instantblocks.builder.BuildSound;
 import com.slymask3.instantblocks.network.packet.InstantPacket;
 import com.slymask3.instantblocks.network.packet.client.*;
 import com.slymask3.instantblocks.network.packet.server.*;
@@ -36,9 +37,9 @@ public class PacketHelper {
     }
 
     public static void handleSound(SoundPacket message, Player player) {
-        for(Helper.BuildSound buildSound : message.buildSounds) {
+        for(BuildSound buildSound : message.buildSounds) {
             if(buildSound.getBreakSound() != null || buildSound.getPlaceSound() != null) {
-                ClientHelper.showParticles(player, buildSound.getBlockPos(), ClientHelper.Particles.PLACE_BLOCK);
+                ClientHelper.showParticles(player, buildSound.getBlockPos(), buildSound.getParticles());
             }
             ClientHelper.playSound(player, buildSound.getBlockPos(), buildSound.getBreakSound(), buildSound.getVolume());
             ClientHelper.playSound(player, buildSound.getBlockPos(), buildSound.getPlaceSound(), buildSound.getVolume());

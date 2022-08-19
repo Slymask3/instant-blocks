@@ -1,5 +1,6 @@
 package com.slymask3.instantblocks.core;
 
+import com.slymask3.instantblocks.item.ClearWandItem;
 import com.slymask3.instantblocks.item.InstantWandItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
@@ -11,6 +12,7 @@ public class ModItems {
     public static Item WAND_GOLD;
     public static Item WAND_DIAMOND;
     public static Item WAND_NETHERITE;
+    public static Item WAND_CLEAR;
 
     public static void init() {
         WAND_WOOD = new InstantWandItem(Tiers.WOOD);
@@ -19,5 +21,6 @@ public class ModItems {
         WAND_GOLD = new InstantWandItem(Tiers.GOLD);
         WAND_DIAMOND = new InstantWandItem(Tiers.DIAMOND);
         WAND_NETHERITE = new InstantWandItem(Tiers.NETHERITE);
+        WAND_CLEAR = new ClearWandItem(Tiers.IRON);
     }
 }

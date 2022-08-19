@@ -133,6 +133,7 @@ public class InstantGrinderBlock extends InstantBlock {
 		Multiple.setup(builder,world,x+16,y-3,z-3,1,1,7).setStone().queue();
 
 		Single.setup(builder,world,x+5,y-3,z).setBlock(sign).setDirection(Direction.NORTH).queue(); //SIGN
+		Single.setup(builder,world,x+5,y-4,z).setBlock(sign).setDirection(Direction.NORTH).queue(); //SIGN
 		Single.setup(builder,world,x+8,y-3,z).setBlock(air).queue();
 		Single.setup(builder,world,x+6,y-3,z).setBlock(water).queue();
 
@@ -163,7 +164,6 @@ public class InstantGrinderBlock extends InstantBlock {
 		Single.setup(builder,world,x+12,y-2,z+2).setBlock(torch).setDirection(Direction.NORTH).queue(2);
 		Single.setup(builder,world,x+15,y-2,z-1).setBlock(torch).setDirection(Direction.WEST).queue(2);
 		Single.setup(builder,world,x+15,y-2,z+1).setBlock(torch).setDirection(Direction.WEST).queue(2);
-		Single.setup(builder,world,x+6,y-2,z).setBlock(sign).setDirection(Direction.NORTH).queue(); //SIGN
 
 		/************************ Layer 3 : Stone (Spawn Room Roof) ************************/
 		Multiple.setup(builder,world,x-5,y+3,z-5,11,1,11).setStone().queue();
@@ -206,27 +206,10 @@ public class InstantGrinderBlock extends InstantBlock {
 		Single.setup(builder,world,x+10,y+19,z+2).setBlock(sign).setDirection(Direction.NORTH).queue();
 
 		/************************ Layer -1 to 19 (Input Tube) ************************/
-		Single.setup(builder,world,x+6,y-1,z).setBlock(water).queue();
-		Single.setup(builder,world,x+6,y,z).setBlock(sign).setDirection(Direction.NORTH).queue();
-		Single.setup(builder,world,x+6,y+1,z).setBlock(water).queue();
-		Single.setup(builder,world,x+6,y+2,z).setBlock(sign).setDirection(Direction.NORTH).queue();
-		Single.setup(builder,world,x+6,y+3,z).setBlock(water).queue();
-		Single.setup(builder,world,x+6,y+4,z).setBlock(sign).setDirection(Direction.NORTH).queue();
-		Single.setup(builder,world,x+6,y+5,z).setBlock(water).queue();
-		Single.setup(builder,world,x+6,y+6,z).setBlock(sign).setDirection(Direction.NORTH).queue();
-		Single.setup(builder,world,x+6,y+7,z).setBlock(water).queue();
-		Single.setup(builder,world,x+6,y+8,z).setBlock(sign).setDirection(Direction.NORTH).queue();
-		Single.setup(builder,world,x+6,y+9,z).setBlock(water).queue();
-		Single.setup(builder,world,x+6,y+10,z).setBlock(sign).setDirection(Direction.NORTH).queue();
-		Single.setup(builder,world,x+6,y+11,z).setBlock(water).queue();
-		Single.setup(builder,world,x+6,y+12,z).setBlock(sign).setDirection(Direction.NORTH).queue();
-		Single.setup(builder,world,x+6,y+13,z).setBlock(water).queue();
-		Single.setup(builder,world,x+6,y+14,z).setBlock(sign).setDirection(Direction.NORTH).queue();
-		Single.setup(builder,world,x+6,y+15,z).setBlock(water).queue();
-		Single.setup(builder,world,x+6,y+16,z).setBlock(sign).setDirection(Direction.NORTH).queue();
-		Single.setup(builder,world,x+6,y+17,z).setBlock(water).queue();
-		Single.setup(builder,world,x+6,y+18,z).setBlock(sign).setDirection(Direction.NORTH).queue();
-		Single.setup(builder,world,x+6,y+19,z).setBlock(water).queue();
+		Single.setup(builder,world,x+6,y-5,z).setBlock(Blocks.SOUL_SAND).queue();
+		for(int i=-4; i<20; i++) {
+			Single.setup(builder,world,x+6,y+i,z).setBlock(water).queue();
+		}
 		
 		Single.setup(builder,world,x,y,z).setBlock(air).queue();
 		

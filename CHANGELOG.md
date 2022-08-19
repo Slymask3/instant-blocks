@@ -1,8 +1,18 @@
 # Minecraft 1.19.2 Changelog
 
-## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19-2-1.6.4...HEAD)
+## [Unreleased](https://github.com/slymask3/instant-blocks/compare/1.19.2-1.6.4...HEAD)
+### Added
+- Clear wand for removing skydive and statue color blocks
+- Skin overlay support for instant statue
 
-## [1.6.4](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.3...1.19-2-1.6.4) - 2022-08-09
+### Fixed
+- Prevent activating an instant block more than once
+- Instant light create message
+- Concurrent instant liquid blocks
+- Instant statue skin mirroring ([#4](https://github.com/slymask3/instant-blocks/issues/4))
+- Instant grinder input tube
+
+## [1.6.4](https://github.com/slymask3/instant-blocks/compare/1.19-1.6.3...1.19.2-1.6.4) - 2022-08-09
 ### Added
 - Generate through a priority queue system
 - Play block break/place sounds when generating
@@ -60,7 +70,7 @@
 
 # Minecraft 1.18.2 Changelog
 
-## [1.6.4](https://github.com/slymask3/instant-blocks/compare/1.18.2-1.6.3...1.18-2-1.6.4) - 2022-08-09
+## [1.6.4](https://github.com/slymask3/instant-blocks/compare/1.18.2-1.6.3...1.18.2-1.6.4) - 2022-08-09
 ### Added
 - Generate through a priority queue system
 - Play block break/place sounds when generating

@@ -39,9 +39,9 @@ public class Circle extends Base<Circle> {
             for(int col = 0; col <= 2 * radius; col++) {
                 distance = Math.sqrt((row - radius) * (row - radius) + (col - radius) * (col - radius));
                 if(distance > radius - 0.4 && distance < radius + 0.6) {
-                    Single.setup(builder, world, x + row - radius, y, z + col - radius).setBlock(outerBlockType).queue(this.priority);
+                    Single.setup(builder, world, x + row - radius, y, z + col - radius).setBlock(outerBlockType).queue(this.priority,this.replace);
                 } else if(distance < radius - 0.3) {
-                    Single.setup(builder, world, x + row - radius, y, z + col - radius).setBlock(innerBlockType).queue(this.priority);
+                    Single.setup(builder, world, x + row - radius, y, z + col - radius).setBlock(innerBlockType).queue(this.priority,this.replace);
                 }
             }
         }

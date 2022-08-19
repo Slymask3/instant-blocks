@@ -20,6 +20,7 @@
   "block.instantblocks.instant_schematic": "§3Instant Schematic§f",
   "block.instantblocks.instant_tree": "§3Instant Huge Tree§f",
   "block.instantblocks.color": "Color Block",
+  "block.instantblocks.color_layer": "Color Layer Block",
   "block.instantblocks.skydive_tp": "Skydive TP Block",
 
   "item.instantblocks.wand_wood": "Wooden Instant Wand",
@@ -28,6 +29,7 @@
   "item.instantblocks.wand_gold": "Golden Instant Wand",
   "item.instantblocks.wand_diamond": "Diamond Instant Wand",
   "item.instantblocks.wand_netherite": "Netherite Instant Wand",
+  "item.instantblocks.wand_clear": "Clear Wand",
 
   "ib.message.error.wand": "§cYou must use an Instant Wand",
   "ib.message.error.wand_durability": "§cYou don't have enough durability for this block",
@@ -45,6 +47,7 @@
   "ib.message.error.water_disabled": "§cGenerating water is not allowed in the nether",
   "ib.message.error.no_colors": "§cNo colors selected",
   "ib.message.error.tree": "§cError creating huge tree",
+  "ib.message.error.clear": "§cUse on skydive or statue color blocks",
 
   "ib.message.create.wooden_house": "§aInstant Wooden House created",
   "ib.message.create.skydive": "§aInstant §cR§6a§ei§an§2b§3o§bw§a Skydive created",
@@ -61,11 +64,13 @@
   "ib.message.create.suction_single": "§aFilled in 1 block",
   "ib.message.create.rail": "§aInstant Rail created",
   "ib.message.create.harvest": "§aHarvested all blocks around",
-  "ib.message.create.light": "§aLit up the area with %s§a torches",
+  "ib.message.create.light": "§aLit up the area with torches",
   "ib.message.create.schematic": "§aInstant Schematic created from the file '%s§a'",
   "ib.message.create.statue": "§aInstant Statue created of the player '%s§a'",
   "ib.message.create.tree": "§aInstant %s§a created",
   "ib.message.create.escape_ladder": "§aInstant Escape Ladder created going %s§a blocks up",
+
+  "ib.message.clear": "§6Clearing %s§6 blocks",
 
   "ib.tooltip.wooden_house": "Creates a small wooden house.",
   "ib.tooltip.mining_ladder": "Creates a ladder down to layer %s.",
@@ -110,11 +115,7 @@
   "ib.gui.schematic.center": "Generate from center",
   "ib.gui.schematic.ignore": "Ignore generating air",
   "ib.gui.schematic.input": "Enter a Schematic File Name:",
-  "ib.gui.schematic.file": "File: '.minecraft/schematics/%s'",
   "ib.gui.schematic.found": "Found %s schematic files:",
-  "ib.gui.schematic.instructions.1": "Put .schem files into the 'schematics' folder in .minecraft.",
-  "ib.gui.schematic.instructions.2": "If the 'schematics' folder doesn't exit, create it.",
-  "ib.gui.schematic.instructions.3": "Files will update here right away, no need to restart.",
   "ib.gui.skydive.title": "Instant Skydive",
   "ib.gui.skydive.random": "Randomize",
   "ib.gui.skydive.teleport": "Teleport to top",

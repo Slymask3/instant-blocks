@@ -1,6 +1,7 @@
 package com.slymask3.instantblocks.block;
 
 import com.slymask3.instantblocks.Common;
+import com.slymask3.instantblocks.builder.Builder;
 import com.slymask3.instantblocks.reference.Strings;
 import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
@@ -72,6 +73,9 @@ public abstract class InstantBlock extends Block {
 	}
 
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+		if(Builder.inProgress(world,pos)) {
+			return InteractionResult.SUCCESS;
+		}
 		Common.CONFIG.reload();
 		return screen == null ? onActivate(world,pos,player,hand) : onActivateGui(world,pos,player,hand);
 	}

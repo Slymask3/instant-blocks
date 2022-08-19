@@ -20,6 +20,7 @@ public class Names {
         public static final String IB_SCHEMATIC = "instant_schematic";
         public static final String IB_TREE = "instant_tree";
         public static final String COLOR = "color";
+        public static final String COLOR_LAYER = "color_layer";
         public static final String SKYDIVE_TP = "skydive_tp";
     }
 
@@ -30,5 +31,6 @@ public class Names {
         public static final String IB_WAND_GOLD = "wand_gold";
         public static final String IB_WAND_DIAMOND = "wand_diamond";
         public static final String IB_WAND_NETHERITE = "wand_netherite";
+        public static final String IB_WAND_CLEAR = "wand_clear";
     }
 }

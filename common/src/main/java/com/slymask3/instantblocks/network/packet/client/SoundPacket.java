@@ -1,8 +1,9 @@
 package com.slymask3.instantblocks.network.packet.client;
 
+import com.slymask3.instantblocks.builder.BuildSound;
 import com.slymask3.instantblocks.network.PacketHelper;
 import com.slymask3.instantblocks.network.packet.AbstractPacket;
-import com.slymask3.instantblocks.util.Helper;
+import com.slymask3.instantblocks.util.ClientHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -12,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SoundPacket extends AbstractPacket {
-	public final List<Helper.BuildSound> buildSounds;
+	public final List<BuildSound> buildSounds;
 
-	public SoundPacket(List<Helper.BuildSound> buildSounds) {
+	public SoundPacket(List<BuildSound> buildSounds) {
 		super(PacketHelper.PacketID.SOUND);
 		this.buildSounds = buildSounds;
 	}
@@ -22,17 +23,18 @@ public class SoundPacket extends AbstractPacket {
 	public <PKT extends AbstractPacket> FriendlyByteBuf write(PKT packet, FriendlyByteBuf buffer) {
 		SoundPacket message = (SoundPacket)packet;
 		buffer.writeInt(message.buildSounds.size());
-		for(Helper.BuildSound buildSound : message.buildSounds) {
+		for(BuildSound buildSound : message.buildSounds) {
 			buffer.writeBlockPos(buildSound.getBlockPos());
 			buffer.writeUtf(buildSound.getPlaceSoundString());
 			buffer.writeUtf(buildSound.getBreakSoundString());
 			buffer.writeFloat(buildSound.getVolume());
+			buffer.writeInt(buildSound.getParticles().ordinal());
 		}
 		return buffer;
 	}
 
 	public static SoundPacket decode(FriendlyByteBuf buffer) {
-		List<Helper.BuildSound> buildSounds = new ArrayList<>();
+		List<BuildSound> buildSounds = new ArrayList<>();
 		int size = buffer.readInt();
 		for(int i=0; i<size; i++) {
 			BlockPos pos = buffer.readBlockPos();
@@ -41,7 +43,8 @@ public class SoundPacket extends AbstractPacket {
 			SoundEvent placeSound = !placeSoundString.isEmpty() ? new SoundEvent(new ResourceLocation(placeSoundString)) : null;
 			SoundEvent breakSound = !breakSoundString.isEmpty() ? new SoundEvent(new ResourceLocation(breakSoundString)) : null;
 			float volume = buffer.readFloat();
-			buildSounds.add(new Helper.BuildSound(pos,placeSound,breakSound,volume));
+			int particles = buffer.readInt();
+			buildSounds.add(new BuildSound(pos,placeSound,breakSound,volume,ClientHelper.Particles.values()[particles]));
 		}
 		return new SoundPacket(buildSounds);
 	}

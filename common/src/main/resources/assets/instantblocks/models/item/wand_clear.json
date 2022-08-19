@@ -1,6 +1,6 @@
 {
   "parent": "instantblocks:item/wand",
   "textures": {
-    "layer0": "instantblocks:items/wand_stone"
+    "layer0": "instantblocks:items/wand_clear"
   }
 } 

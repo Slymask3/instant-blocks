@@ -5,7 +5,9 @@ import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.block.entity.ColorBlockEntity;
 import com.slymask3.instantblocks.block.instant.InstantLightBlock;
 import com.slymask3.instantblocks.builder.BlockType;
+import com.slymask3.instantblocks.builder.BuildSound;
 import com.slymask3.instantblocks.builder.Builder;
+import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,14 +24,6 @@ import net.minecraft.world.level.block.state.properties.*;
 public class Single extends Base<Single> {
     private Single(Builder builder, Level world, int x, int y, int z) {
         super(builder, world, x, y, z);
-    }
-
-    public Single offset(Direction direction, int forwardBack, int leftRight) {
-        int forward = Helper.isPositive(forwardBack) ? 0 : Math.abs(forwardBack);
-        int back = Helper.isPositive(forwardBack) ? forwardBack : 0;
-        int left = Helper.isPositive(leftRight) ? leftRight : 0;
-        int right = Helper.isPositive(leftRight) ? 0 : Math.abs(leftRight);
-        return offset(direction, forward, back, left, right, 0, 0);
     }
 
     public Single offset(Direction direction, int forward, int back, int left, int right) {
@@ -165,9 +159,9 @@ public class Single extends Base<Single> {
         return this.blockType;
     }
 
-    public Helper.BuildSound getBuildSound() {
+    public BuildSound getBuildSound(ClientHelper.Particles particles) {
         if(blockType.isConditionalTorch() && (this.getWorldBlock().equals(Blocks.TORCH) || this.getWorldBlock().equals(Blocks.WALL_TORCH))) {
-            return new Helper.BuildSound(getBlockPos(),Blocks.TORCH.getSoundType(Blocks.TORCH.defaultBlockState()).getPlaceSound(),null,0.1F);
+            return new BuildSound(getBlockPos(),Blocks.TORCH.getSoundType(Blocks.TORCH.defaultBlockState()).getPlaceSound(),null,0.1F,particles);
         }
         BlockState breakBlockState = this.getWorldBlockState();
         BlockState placeBlockState = this.blockType.getBlockState(); //this.blockType.getBlockState(world,y);
@@ -193,6 +187,6 @@ public class Single extends Base<Single> {
         //Common.LOG.info("place: " + (placeBlockState != null ? placeBlockState.getBlock() : "none") + " - " + (placeSound != null ? placeSound.getLocation() : "none"));
         //Common.LOG.info("break: " + (breakBlockState != null ? breakBlockState.getBlock() : "none") + " - " + (breakSound != null ? breakSound.getLocation() : "none"));
         //Common.LOG.info("------");
-        return new Helper.BuildSound(this.getBlockPos(),placeSound,breakSound,0.1F);
+        return new BuildSound(this.getBlockPos(),placeSound,breakSound,0.1F,particles);
     }
 }

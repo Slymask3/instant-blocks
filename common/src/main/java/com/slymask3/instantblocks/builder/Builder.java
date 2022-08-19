@@ -4,6 +4,7 @@ import com.slymask3.instantblocks.Common;
 import com.slymask3.instantblocks.block.InstantBlock;
 import com.slymask3.instantblocks.builder.type.Single;
 import com.slymask3.instantblocks.network.packet.client.SoundPacket;
+import com.slymask3.instantblocks.util.ClientHelper;
 import com.slymask3.instantblocks.util.Helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,6 +27,7 @@ public class Builder {
 	private Direction priorityDirection;
 	private Origin priorityOrigin;
 	private int distanceMultiplier;
+	private ClientHelper.Particles particles;
 
 	private Builder(Level world, BlockPos pos) {
 		this.queueMap = new HashMap<>();
@@ -38,6 +40,7 @@ public class Builder {
 		this.priorityDirection = null;
 		this.priorityOrigin = null;
 		this.distanceMultiplier = 1;
+		this.particles = ClientHelper.Particles.PLACE_BLOCK;
 	}
 
 	public static Builder setup(Level world, BlockPos pos) {
@@ -69,11 +72,24 @@ public class Builder {
 		return this;
 	}
 
+	public Builder setParticles(ClientHelper.Particles particles) {
+		this.particles = particles;
+		return this;
+	}
+
+	public Level getWorld() {
+		return this.world;
+	}
+
+	public BlockPos getOriginPos() {
+		return this.originPos;
+	}
+
 	public void tick() {
 		if(this.status.equals(Status.BUILD) && !queue.isEmpty()) {
 			this.ticks++;
 			if(this.ticks >= this.speed) {
-				List<Helper.BuildSound> buildSounds = new ArrayList<>();
+				List<BuildSound> buildSounds = new ArrayList<>();
 				Single first = queue.get(0);
 				Level world = first.getLevel();
 				BlockPos firstBlockPos = first.getBlockPos();
@@ -93,16 +109,22 @@ public class Builder {
 		}
 	}
 
-	private void handle(List<Helper.BuildSound> buildSounds) {
+	private void handle(List<BuildSound> buildSounds) {
 		if(queue.get(0).getBlockType().isConditionalTorch()) {
 			queue.get(0).build();
-			buildSounds.add(queue.get(0).getBuildSound());
+			addToList(buildSounds);
 			queue.remove(0);
 			return;
 		}
-		buildSounds.add(queue.get(0).getBuildSound());
+		addToList(buildSounds);
 		queue.get(0).build();
 		queue.remove(0);
+	}
+
+	private void addToList(List<BuildSound> buildSounds) {
+		if(buildSounds.size() < 1024) {
+			buildSounds.add(queue.get(0).getBuildSound(this.particles));
+		}
 	}
 
 	public void queue(Single single, boolean replace) {
