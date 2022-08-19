@@ -53,7 +53,7 @@ public class ClearWandItem extends TieredItem {
 		builder.build();
 
 		ItemStack itemStack = player.getItemInHand(context.getHand());
-		itemStack.hurtAndBreak(holder.size(), player, (entity) -> {
+		itemStack.hurtAndBreak((int)Math.floor(holder.size() / 100.0), player, (entity) -> {
 			entity.broadcastBreakEvent(InteractionHand.MAIN_HAND);
 		});
 

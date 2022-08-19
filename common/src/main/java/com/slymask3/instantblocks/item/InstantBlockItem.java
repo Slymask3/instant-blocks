@@ -67,7 +67,7 @@ public class InstantBlockItem extends BlockItem {
 			list.add(Component.translatable("ib.tooltip.schematic"));
 		} else if(block == ModBlocks.INSTANT_TREE) {
 			list.add(Component.translatable("ib.tooltip.tree"));
-		} else if(block == ModBlocks.COLOR) {
+		} else if(block == ModBlocks.COLOR || block == ModBlocks.COLOR_LAYER) {
 			list.add(Component.translatable("ib.tooltip.color.1"));
 			list.add(Component.translatable("ib.tooltip.color.2"));
 			list.add(Component.translatable("ib.tooltip.creative"));
